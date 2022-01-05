@@ -20,6 +20,7 @@
       </div>
 
     </form>
+    <div class="envolti-table" fxLayout="column" >
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
       <ng-container matColumnDef="data">
         <th mat-header-cell *matHeaderCellDef>Data de inclusão</th>
@@ -32,12 +33,13 @@
       </ng-container>
 
       <ng-container matColumnDef="value">
-        <th mat-header-cell *matHeaderCellDef>|  Tempo de experiencia(anos)</th>
+        <th mat-header-cell *matHeaderCellDef>Tempo de experiencia(anos)</th>
         <td mat-cell *matCellDef="let finans">{{ finans.value }}</td>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
+  </div>
   </div>
 </div>
