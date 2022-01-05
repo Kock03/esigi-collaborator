@@ -1,0 +1,88 @@
+<div id="customerCreate" class="page">
+  <h2 class="title">Cadastro de Collaborador</h2>
+
+  <div fxLayout="row" class="tab" fxLayoutGap="16px">
+    <div
+      fxLayout="column"
+      class="tab-group"
+      [ngClass]="{ done: step > 0, active: step == 1 }"
+    >
+      <p class="tab-item">Cadastro</p>
+      <span class="tab-border"></span>
+    </div>
+    <div
+      fxLayout="column"
+      class="tab-group"
+      [ngClass]="{ done: step > 1, active: step == 2 }"
+    >
+      <p class="tab-item">Dados Bancários</p>
+      <span class="tab-border"></span>
+    </div>
+    <div
+      fxLayout="column"
+      class="tab-group"
+      [ngClass]="{ done: step > 2, active: step == 3 }"
+    >
+      <p class="tab-item">Financeiro</p>
+      <span class="tab-border"></span>
+    </div>
+    <div
+      fxLayout="column"
+      class="tab-group"
+      [ngClass]="{ done: step > 3, active: step == 4 }"
+    >
+      <p class="tab-item">Skills</p>
+      <span class="tab-border"></span>
+    </div>
+    <div fxLayout="column" class="tab-group disabled">
+      <p class="tab-item disabled">Acompanhamento</p>
+      <span class="tab-border"></span>
+    </div>
+  </div>
+
+  <app-collaborator-register-tab
+    [hidden]="step != 1"
+    [form]="collaboratorForm"
+    (onChange)="handleChanges($event)"
+  ></app-collaborator-register-tab>
+  <app-collaborator-bank-tab
+    [hidden]="step != 2"
+    [form]="collaboratorForm"
+    (onChange)="handleChanges($event)"
+  ></app-collaborator-bank-tab>
+  <app-collaborator-finance-tab
+    [hidden]="step != 3"
+    [form]="collaboratorForm"
+    (onChange)="handleChanges($event)"
+  >
+  </app-collaborator-finance-tab>
+  <app-collaborator-skill-tab
+    [hidden]="step != 4"
+    [form]="collaboratorForm"
+    (onChange)="handleChanges($event)"
+  >
+  </app-collaborator-skill-tab>
+  <app-collaborator-panel-tab [hidden]="step != 5"></app-collaborator-panel-tab>
+
+  <div class="navigation-buttons" fxLayoutAlign="center end" fxLayoutGap="16px">
+    <button mat-button *ngIf="step != 1" (click)="navigate('back')">
+      Voltar
+    </button>
+    <button
+      mat-flat-button
+      *ngIf="step != 4"
+      (click)="navigate('next')"
+      color="primary"
+    >
+      Continuar
+    </button>
+    <button
+      mat-flat-button
+      *ngIf="step == 4"
+      (click)="saveCustomer()"
+      color="primary"
+    >
+      Salvar
+    </button>
+  </div>
+</div>

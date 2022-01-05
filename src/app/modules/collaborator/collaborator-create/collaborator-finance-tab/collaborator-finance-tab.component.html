@@ -1,0 +1,43 @@
+<div id="collaboratorfinancerTab" class="tab">
+  <div class="customer-form">
+    <form (submit)="next()" [formGroup]="collaboratorForm" fxLayout="column">
+      <div fxFlex="100" fxLayoutGap="16px">
+        <mat-form-field fxFlex="25" appearance="outline">
+          <mat-label>Tipo de Contrato</mat-label>
+          <mat-select matInput disableRipple formControlName="corporateName">
+            <mat-option value="1">CLT</mat-option>
+            <mat-option value="2">PJ</mat-option>
+            <mat-option value="3">Cooperado</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field fxFlex="35" appearance="outline"  formControlName="corporateName">
+          <mat-label>Valor</mat-label>
+          <input matInput placeholder="Valor" />
+        </mat-form-field>
+       
+          <button mat-flat-button color="primary">Alterar</button>
+    
+      </div>
+
+    </form>
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <ng-container matColumnDef="data">
+        <th mat-header-cell *matHeaderCellDef>Data de inclusão</th>
+        <td mat-cell *matCellDef="let finans">{{ finans.data }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="type">
+        <th mat-header-cell *matHeaderCellDef>Tipo</th>
+        <td mat-cell *matCellDef="let finans">{{ finans.type }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="value">
+        <th mat-header-cell *matHeaderCellDef>|  Tempo de experiencia(anos)</th>
+        <td mat-cell *matCellDef="let finans">{{ finans.value }}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+</div>

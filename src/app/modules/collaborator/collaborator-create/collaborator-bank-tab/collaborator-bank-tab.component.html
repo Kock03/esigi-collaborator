@@ -1,0 +1,39 @@
+<div id="collaboratorBankTab" class="tab">
+    <div class="customer-form">
+      <form (submit)="next()" [formGroup]="collaboratorForm" fxLayout="column">
+        <div fxFlex="100" fxLayoutGap="16px">
+          <mat-form-field fxFlex="25" appearance="outline">
+            <mat-label>Banco</mat-label>
+            <mat-select matInput disableRipple formControlName="corporateName">
+              <mat-option value="1">Banco do Brasil</mat-option>
+              <mat-option value="2">NuBank</mat-option>
+              <mat-option value="3">Itaú</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field fxFlex="35" appearance="outline">
+            <mat-label>Agencia</mat-label>
+            <input matInput placeholder="Nome" formControlName="corporateName" />
+          </mat-form-field>
+          <mat-form-field fxFlex="30" appearance="outline">
+            <mat-label>Conta Corrente</mat-label>
+            <mat-select matInput disableRipple>
+              <mat-option value="1">Conta Corrente</mat-option>
+              <mat-option value="2">Conta Corrente PJ</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+  
+        <div fxFlex="100" fxLayoutGap="16px">
+          <mat-form-field fxFlex="50" appearance="outline">
+            <mat-label>Numero da Conta</mat-label>
+            <input matInput placeholder="Nome" formControlName="corporateName" />
+          </mat-form-field>
+          <mat-form-field fxFlex="50" appearance="outline">
+            <mat-label>Digito</mat-label>
+            <input matInput placeholder="Nome" formControlName="corporateName" />
+          </mat-form-field>
+        </div>
+      </form>
+    </div>
+  </div>
+  
