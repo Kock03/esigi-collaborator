@@ -1,8 +1,8 @@
-<div id="collaboratorfinancerTab" class="tab">
+<div id="collaboratorFinanceTab" class="tab">
   <div class="customer-form">
     <form (submit)="next()" [formGroup]="collaboratorForm" fxLayout="column">
       <div fxFlex="100" fxLayoutGap="16px">
-        <mat-form-field fxFlex="25" appearance="outline">
+        <mat-form-field fxFlex="40" appearance="outline">
           <mat-label>Tipo de Contrato</mat-label>
           <mat-select matInput disableRipple formControlName="corporateName">
             <mat-option value="1">CLT</mat-option>
@@ -10,12 +10,12 @@
             <mat-option value="3">Cooperado</mat-option>
           </mat-select>
         </mat-form-field>
-        <mat-form-field fxFlex="35" appearance="outline"  formControlName="corporateName">
+        <mat-form-field fxFlex="40" appearance="outline"  formControlName="corporateName">
           <mat-label>Valor</mat-label>
           <input matInput placeholder="Valor" />
         </mat-form-field>
        
-          <button mat-flat-button color="primary">Alterar</button>
+          <button fxFlex="20" class="edit-button" mat-flat-button color="primary">Alterar</button>
     
       </div>
 

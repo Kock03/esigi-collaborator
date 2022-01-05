@@ -1,4 +1,4 @@
-<div id="collaboratorRegisterTab" class="tab">
+<div id="collaboratorSkillTab" class="tab">
   <div class="customer-form">
     <form [formGroup]="collaboratorForm" fxLayout="column">
       <div fxFlex="100" fxLayoutGap="16px">
@@ -23,7 +23,7 @@
       </div>
     </form>
 
-    <div fxLayout="column" >
+    <div class="envolti-table" fxLayout="column" >
      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
       <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef>Tecnologia</th>
