@@ -9,7 +9,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class CollaboratorCreateComponent implements OnInit {
   collaboratorForm!: FormGroup;
-  step: number = 3;
+  step: number = 4;
 
   constructor(private fb: FormBuilder) {}
 
@@ -19,13 +19,10 @@ export class CollaboratorCreateComponent implements OnInit {
 
   initForm() {
     this.collaboratorForm = this.fb.group({
-
       // register-form
       corporateName: ['', Validators.required],
 
       // bank-form
-     
-
     });
   }
 

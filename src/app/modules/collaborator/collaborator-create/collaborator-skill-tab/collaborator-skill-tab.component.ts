@@ -36,4 +36,3 @@ export class CollaboratorSkillTabComponent implements OnInit {
 
   ngOnInit(): void {}
 }
-1
