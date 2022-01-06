@@ -9,7 +9,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class CollaboratorCreateComponent implements OnInit {
   collaboratorForm!: FormGroup;
-  step: number = 1;
+  step: number = 4;
 
   constructor(private fb: FormBuilder) {}
 

@@ -1,9 +1,9 @@
 <div id="collaboratorSkillTab" class="tab">
-  <div>
+  <div class="content-scroll">
     <form [formGroup]="collaboratorForm" fxLayout="column">
-      <div fxFlex="100" fxLayoutGap="16px">
-        <mat-form-field appearance="outline" fxFlex="35">
-          <mat-label>tecnologia</mat-label>
+      <div fxFlex="70" fxLayoutGap="16px">
+        <mat-form-field appearance="outline" fxFlex="25">
+          <mat-label>Tecnologia</mat-label>
           <mat-select
             matInput
             disableRipple
@@ -15,7 +15,7 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field fxFlex="35" appearance="outline">
+        <mat-form-field fxFlex="25" appearance="outline">
           <mat-label>Tempo de experiencia</mat-label>
           <input
             matInput
@@ -27,10 +27,14 @@
         <mat-checkbox
           class="checkbox"
           color="primary"
-          fxFlex="30"
+          fxFlex="15"
           formControlName="collaboratorGroup"
           >Posição Atual</mat-checkbox
         >
+
+        <button fxFlex="5" class="edit-button" mat-flat-button color="primary">
+          <mat-icon>add</mat-icon>
+        </button>
       </div>
     </form>
 
@@ -46,7 +50,19 @@
           <td mat-cell *matCellDef="let skill">{{ skill.time }}</td>
         </ng-container>
 
-        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <ng-container matColumnDef="icon">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let skill">
+            <button class="table-button" mat-button>
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr
+          mat-header-row
+          *matHeaderRowDef="displayedColumns; sticky: true"
+        ></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
       </table>
     </div>

@@ -1,12 +1,19 @@
     #collaboratorCreate {
+
+
       .tab-group {
         width: 100%;
       }
 
       .tab-item {
-        text-align: center;
         white-space: nowrap;
         overflow: hidden;
+      }
+
+      .content-scroll {
+        overflow: auto;
+        height: calc(100vh - 280px);
 
       }
+
     }

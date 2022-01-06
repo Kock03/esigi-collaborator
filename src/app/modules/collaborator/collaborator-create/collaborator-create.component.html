@@ -63,26 +63,25 @@
   >
   </app-collaborator-skill-tab>
   <app-collaborator-panel-tab [hidden]="step != 5"></app-collaborator-panel-tab>
-
-  <div class="navigation-buttons" fxLayoutAlign="center end" fxLayoutGap="16px">
-    <button mat-button *ngIf="step != 1" (click)="navigate('back')">
-      Voltar
-    </button>
-    <button
-      mat-flat-button
-      *ngIf="step != 4"
-      (click)="navigate('next')"
-      color="primary"
-    >
-      Continuar
-    </button>
-    <button
-      mat-flat-button
-      *ngIf="step == 4"
-      (click)="saveCustomer()"
-      color="primary"
-    >
-      Salvar
-    </button>
-  </div>
+</div>
+<div class="navigation-buttons" fxLayoutAlign="center end" fxLayoutGap="16px">
+  <button mat-button *ngIf="step != 1" (click)="navigate('back')">
+    Voltar
+  </button>
+  <button
+    mat-flat-button
+    *ngIf="step != 4"
+    (click)="navigate('next')"
+    color="primary"
+  >
+    Continuar
+  </button>
+  <button
+    mat-flat-button
+    *ngIf="step == 4"
+    (click)="saveCustomer()"
+    color="primary"
+  >
+    Salvar
+  </button>
 </div>

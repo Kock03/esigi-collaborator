@@ -32,7 +32,7 @@ export class CollaboratorSkillTabComponent implements OnInit {
   @Input('form') collaboratorForm!: FormGroup;
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
 
-  displayedColumns: string[] = ['name', 'time'];
+  displayedColumns: string[] = ['name', 'time', 'icon'];
   dataSource = skills;
 
   constructor() {}

@@ -15,4 +15,16 @@
   .checkbox {
     margin-top: 15px;
   }
+
+  .edit-button {
+    height: 40px;
+    margin-top: 8px;
+  }
+
+  .table-button {
+    height: 30px;
+    mat-icon{
+      color: #673ab7;
+    }
+  }
 }

@@ -16,6 +16,7 @@ import { CollaboratorPanelTabComponent } from './collaborator-create/collaborato
 import { CollaboratorSkillTabComponent } from './collaborator-create/collaborator-skill-tab/collaborator-skill-tab.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatIconModule } from '@angular/material/icon';
 
 const routes: Routes = [
   {
@@ -45,6 +46,7 @@ const routes: Routes = [
     MatSelectModule,
     MatTableModule,
     MatCheckboxModule,
+    MatIconModule,
   ],
   entryComponents: [
     CollaboratorRegisterTabComponent,

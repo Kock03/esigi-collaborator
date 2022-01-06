@@ -1,8 +1,8 @@
 <div id="collaboratorFinanceTab" class="tab">
-  <div>
+  <div class="content-scroll">
     <form (submit)="next()" [formGroup]="collaboratorForm" fxLayout="column">
-      <div fxFlex="100" fxLayoutGap="16px">
-        <mat-form-field fxFlex="40" appearance="outline">
+      <div fxFlex="65" fxLayoutGap="16px">
+        <mat-form-field fxFlex="20" appearance="outline">
           <mat-label>Tipo de Contrato</mat-label>
           <mat-select
             matInput
@@ -15,7 +15,7 @@
           </mat-select>
         </mat-form-field>
         <mat-form-field
-          fxFlex="40"
+          fxFlex="20"
           appearance="outline"
           formControlName="collaboratorGroup"
         >
@@ -27,12 +27,25 @@
           />
         </mat-form-field>
 
-        <button fxFlex="20" class="edit-button" mat-flat-button color="primary">
-          Alterar
+        <mat-form-field
+        fxFlex="20"
+        appearance="outline"
+        formControlName="collaboratorGroup"
+      >
+        <mat-label>Data</mat-label>
+        <input
+          matInput
+          placeholder="Data"
+          formControlName="collaboratorGroup"
+        />
+      </mat-form-field>
+
+        <button fxFlex="5" class="edit-button" mat-flat-button color="primary">
+          <mat-icon>add</mat-icon>
         </button>
       </div>
     </form>
-    <div class="envolti-table mat-elevation-z8" fxLayout="column">
+    <div class="envolti-table mat-elevation-z4" fxLayout="column">
       <table mat-table [dataSource]="dataSource" >
         
 
