@@ -1,5 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
- @import "../src/app/layout/themes/table.scss";
+@import "../src/app/layout/themes/table.scss";
 
 html,
 body {
@@ -21,9 +21,12 @@ html {
   overflow: scroll;
   overflow-x: hidden;
 }
+
 ::-webkit-scrollbar {
-  width: 0; /* Remove scrollbar space */
-  background: transparent; /* Optional: just make scrollbar invisible */
+  width: 0;
+  /* Remove scrollbar space */
+  background: transparent;
+  /* Optional: just make scrollbar invisible */
 }
 
 .page {
@@ -32,21 +35,30 @@ html {
   margin: auto;
 }
 
+.mat-form-field-outline {
+
+  color: #673ab7 !important;
+}
+
 .tab {
   margin-top: 24px;
+
   &-group {
     width: 100%;
     max-width: 220px;
   }
+
   &-item {
     cursor: default;
     margin-bottom: 8px !important;
     color: black;
   }
+
   &-border {
     border-bottom: 4px solid #b8bdbf;
     border-radius: 4px;
   }
+
   // &-item:hover {
   //   color: #ff6a39;
   // }
@@ -56,15 +68,18 @@ html {
       border-color: #ff6a39 !important;
     }
   }
+
   .active {
     p {
       color: #ff6a39;
     }
   }
+
   .disabled {
     cursor: not-allowed !important;
     color: grey;
     opacity: 0.5;
+
     p {
       cursor: not-allowed !important;
     }
@@ -83,5 +98,12 @@ html {
 
 
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}

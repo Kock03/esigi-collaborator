@@ -1,10 +1,21 @@
 #collaboratorFinanceTab {
+  padding-bottom: 10px;
+
+  table {
+    width: 100%;
+
+  }
+
   .edit-button {
     height: 50px;
     margin-top: 5px;
   }
 
   .envolti-table {
-    padding-bottom: 10px;
+    overflow: auto;
+    max-height: 300px;
   }
+
+
+
 }

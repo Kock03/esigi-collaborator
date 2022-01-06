@@ -21,6 +21,12 @@ const ELEMENT_DATA: finans[] = [
   { data: '01/02/2022', type: 'Cooperado', value: '45,00' },
   { data: '01/02/2022', type: 'Cooperado', value: '45,00' },
   { data: '01/02/2022', type: 'Cooperado', value: '45,00' },
+  { data: '01/02/2022', type: 'Cooperado', value: '45,00' },
+  { data: '01/02/2022', type: 'Cooperado', value: '45,00' },
+  { data: '01/02/2022', type: 'Cooperado', value: '45,00' },
+  { data: '01/02/2022', type: 'Cooperado', value: '45,00' },
+  { data: '01/02/2022', type: 'Cooperado', value: '45,00' },
+  { data: '01/02/2022', type: 'Cooperado', value: '45,00' },
 ];
 
 @Component({

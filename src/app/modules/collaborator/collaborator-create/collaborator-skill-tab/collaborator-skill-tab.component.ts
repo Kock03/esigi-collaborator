@@ -17,6 +17,9 @@ const skills: skill[] = [
   { name: 'Java', time: '2' },
   { name: 'C#', time: '2' },
   { name: 'Python', time: '2' },
+  { name: 'Angular', time: '2' },
+  { name: 'React', time: '2' },
+  { name: 'NodeJS', time: '2' },
 ];
 
 @Component({
