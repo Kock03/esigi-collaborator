@@ -4,7 +4,11 @@
       <div fxFlex="100" fxLayoutGap="16px">
         <mat-form-field appearance="outline">
           <mat-label>tecnologia</mat-label>
-          <mat-select matInput disableRipple formControlName="collaboratorGroup">
+          <mat-select
+            matInput
+            disableRipple
+            formControlName="collaboratorGroup"
+          >
             <mat-option value="1">Java</mat-option>
             <mat-option value="2">C#</mat-option>
             <mat-option value="3">Python</mat-option>
@@ -38,9 +42,7 @@
         </ng-container>
 
         <ng-container matColumnDef="time">
-          <th mat-header-cell *matHeaderCellDef>
-            | Tempo de experiencia(anos)
-          </th>
+          <th mat-header-cell *matHeaderCellDef>Tempo de experiencia(anos)</th>
           <td mat-cell *matCellDef="let skill">{{ skill.time }}</td>
         </ng-container>
 

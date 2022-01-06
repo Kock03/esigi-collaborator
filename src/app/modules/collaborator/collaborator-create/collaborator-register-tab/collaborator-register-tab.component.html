@@ -2,7 +2,7 @@
   <div>
     <form (submit)="next()" [formGroup]="collaboratorForm" fxLayout="column">
       <div fxFlex="100" fxLayoutGap="16px">
-        <mat-form-field appearance="outline">
+        <mat-form-field fxFlex="35" appearance="outline">
           <mat-label>Tipo de Colaborador</mat-label>
           <mat-select matInput disableRipple formControlName="collaboratorGroup">
             <mat-option value="1">CLT</mat-option>
