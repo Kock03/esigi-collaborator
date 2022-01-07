@@ -34,11 +34,11 @@ html {
   height: calc(100% - 64px);
 }
 
-@media (min-width: 1201px) {
-  .page {
-    height: calc(100vh - 200px) !important;
-  }
-}
+// @media (min-width: 1201px) {
+//   .page {
+//     height: calc(100vh - 200px) !important;
+//   }
+// }
 
 .tab {
   margin-top: 24px;
