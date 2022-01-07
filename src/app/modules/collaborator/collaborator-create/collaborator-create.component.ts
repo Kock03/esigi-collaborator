@@ -19,10 +19,7 @@ export class CollaboratorCreateComponent implements OnInit {
 
   initForm() {
     this.collaboratorForm = this.fb.group({
-      // register-form
       collaboratorGroup: ['', Validators.required],
-
-      // bank-form
     });
   }
 

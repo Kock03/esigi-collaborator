@@ -1,8 +1,8 @@
-<div id="collaboratorSkillTab" class="tab">
+<div id="collaboratorSkillTab" class="tab" fxLayoutAlign="center">
   <div class="content-scroll">
     <form [formGroup]="collaboratorForm" fxLayout="column">
-      <div fxFlex="70" fxLayoutGap="16px">
-        <mat-form-field appearance="outline" fxFlex="25">
+      <div fxFlex="100" fxLayoutGap="16px">
+        <mat-form-field appearance="outline" fxFlex="35">
           <mat-label>Tecnologia</mat-label>
           <mat-select
             matInput
@@ -15,7 +15,7 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field fxFlex="25" appearance="outline">
+        <mat-form-field fxFlex="35" appearance="outline">
           <mat-label>Tempo de experiencia</mat-label>
           <input
             matInput
@@ -27,7 +27,7 @@
         <mat-checkbox
           class="checkbox"
           color="primary"
-          fxFlex="15"
+          fxFlex="25"
           formControlName="collaboratorGroup"
           >Posição Atual</mat-checkbox
         >

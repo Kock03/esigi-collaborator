@@ -24,9 +24,7 @@ html {
 
 ::-webkit-scrollbar {
   width: 0;
-  /* Remove scrollbar space */
   background: transparent;
-  /* Optional: just make scrollbar invisible */
 }
 
 .page {
@@ -40,12 +38,6 @@ html {
   .page {
     height: calc(100vh - 200px) !important;
   }
-}
-
-
-.mat-form-field-outline {
-
-  color: #673ab7 !important;
 }
 
 .tab {
@@ -67,9 +59,6 @@ html {
     border-radius: 4px;
   }
 
-  // &-item:hover {
-  //   color: #ff6a39;
-  // }
 
   .done {
     .tab-border {
@@ -106,8 +95,6 @@ html {
 .title {
   margin-bottom: 24px !important;
 }
-
-
 
 
 html,

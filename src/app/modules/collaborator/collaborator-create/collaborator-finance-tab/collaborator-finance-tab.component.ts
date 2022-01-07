@@ -39,7 +39,7 @@ export class CollaboratorFinanceTabComponent implements OnInit {
   @Input('form') collaboratorForm!: FormGroup;
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
 
-  displayedColumns: string[] = ['data', 'type', 'value'];
+  displayedColumns: string[] = ['data', 'type', 'value', 'icon'];
   dataSource = ELEMENT_DATA;
 
   constructor() {}
