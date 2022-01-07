@@ -15,7 +15,7 @@
       class="tab-group"
       [ngClass]="{ done: step > 1, active: step == 2 }"
     >
-      <p class="tab-item">Dados Bancários</p>
+      <p class="tab-item">Educação</p>
       <span class="tab-border"></span>
     </div>
     <div
@@ -23,7 +23,7 @@
       class="tab-group"
       [ngClass]="{ done: step > 2, active: step == 3 }"
     >
-      <p class="tab-item">Financeiro</p>
+      <p class="tab-item">Dados Bancarios</p>
       <span class="tab-border"></span>
     </div>
     <div
@@ -31,7 +31,23 @@
       class="tab-group"
       [ngClass]="{ done: step > 3, active: step == 4 }"
     >
+      <p class="tab-item">Financeiro</p>
+      <span class="tab-border"></span>
+    </div>
+    <div
+      fxLayout="column"
+      class="tab-group"
+      [ngClass]="{ done: step > 4, active: step == 5 }"
+    >
       <p class="tab-item">Skills</p>
+      <span class="tab-border"></span>
+    </div>
+    <div
+      fxLayout="column"
+      class="tab-group"
+      [ngClass]="{ done: step > 5, active: step == 6 }"
+    >
+      <p class="tab-item">Documentos</p>
       <span class="tab-border"></span>
     </div>
     <div fxLayout="column" class="tab-group disabled">
@@ -45,24 +61,36 @@
     [form]="collaboratorForm"
     (onChange)="handleChanges($event)"
   ></app-collaborator-register-tab>
-  <app-collaborator-bank-tab
+  <app-collaborator-education-tab
     [hidden]="step != 2"
+    [form]="collaboratorForm"
+    (onChange)="handleChanges($event)"
+  >
+  </app-collaborator-education-tab>
+  <app-collaborator-bank-tab
+    [hidden]="step != 3"
     [form]="collaboratorForm"
     (onChange)="handleChanges($event)"
   ></app-collaborator-bank-tab>
   <app-collaborator-finance-tab
-    [hidden]="step != 3"
+    [hidden]="step != 4"
     [form]="collaboratorForm"
     (onChange)="handleChanges($event)"
   >
   </app-collaborator-finance-tab>
   <app-collaborator-skill-tab
-    [hidden]="step != 4"
+    [hidden]="step != 5"
     [form]="collaboratorForm"
     (onChange)="handleChanges($event)"
   >
   </app-collaborator-skill-tab>
-  <app-collaborator-panel-tab [hidden]="step != 5"></app-collaborator-panel-tab>
+  <app-collaborator-document-tab 
+    [hidden]="step != 6"
+    [form]="collaboratorForm"
+    (onChange)="handleChanges($event)"
+  >
+  </app-collaborator-document-tab>
+  <app-collaborator-panel-tab [hidden]="step != 7"></app-collaborator-panel-tab>
 </div>
 <div class="navigation-buttons" fxLayoutAlign="center end" fxLayoutGap="16px">
   <button mat-button *ngIf="step != 1" (click)="navigate('back')">
@@ -70,7 +98,7 @@
   </button>
   <button
     mat-flat-button
-    *ngIf="step != 4"
+    *ngIf="step != 6"
     (click)="navigate('next')"
     color="primary"
   >
@@ -78,7 +106,7 @@
   </button>
   <button
     mat-flat-button
-    *ngIf="step == 4"
+    *ngIf="step == 6"
     (click)="saveCustomer()"
     color="primary"
   >

@@ -1,6 +1,6 @@
 <div id="collaboratorSkillTab" class="tab">
   <div class="content-scroll">
-    <form [formGroup]="collaboratorForm" fxLayout="column">
+    <form (submit)="next()" [formGroup]="collaboratorForm" fxLayout="column">
       <div fxFlex="100" fxLayoutGap="16px">
         <mat-form-field appearance="outline" fxFlex="35">
           <mat-label>Tecnologia</mat-label>

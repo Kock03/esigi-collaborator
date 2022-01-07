@@ -17,6 +17,8 @@ import { CollaboratorSkillTabComponent } from './collaborator-create/collaborato
 import { MatTableModule } from '@angular/material/table';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
+import { CollaboratorEducationTabComponent } from './collaborator-create/collaborator-education-tab/collaborator-education-tab.component';
+import { CollaboratorDocumentTabComponent } from './collaborator-create/collaborator-document-tab/collaborator-document-tab.component';
 
 const routes: Routes = [
   {
@@ -33,6 +35,8 @@ const routes: Routes = [
     CollaboratorFinanceTabComponent,
     CollaboratorPanelTabComponent,
     CollaboratorSkillTabComponent,
+    CollaboratorEducationTabComponent,
+    CollaboratorDocumentTabComponent,
   ],
   imports: [
     RouterModule.forChild(routes),
@@ -54,6 +58,8 @@ const routes: Routes = [
     CollaboratorFinanceTabComponent,
     CollaboratorPanelTabComponent,
     CollaboratorSkillTabComponent,
+    CollaboratorEducationTabComponent,
+    CollaboratorDocumentTabComponent,
   ],
 })
 export class CollaboratorModule {}

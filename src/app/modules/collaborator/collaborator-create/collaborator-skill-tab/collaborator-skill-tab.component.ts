@@ -38,4 +38,8 @@ export class CollaboratorSkillTabComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
+
+  next() {
+    this.onChange.next(true);
+  }
 }

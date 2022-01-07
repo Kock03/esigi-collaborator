@@ -46,7 +46,7 @@ export class CollaboratorCreateComponent implements OnInit {
   navigate(direction: string) {
     if (this.step > 1 && direction === 'back') {
       this.step -= 1;
-    } else if (this.step < 4 && direction === 'next') {
+    } else if (this.step < 6 && direction === 'next') {
       this.step += 1;
     }
   }
