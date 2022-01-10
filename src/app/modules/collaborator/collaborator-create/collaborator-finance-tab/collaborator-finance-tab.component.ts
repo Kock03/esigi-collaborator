@@ -11,22 +11,21 @@ import { FormGroup } from '@angular/forms';
 export interface finans {
   data: string;
   type: string;
+  reason: string;
   value: string;
+  monthlyValue: string;
 }
 
 const ELEMENT_DATA: finans[] = [
-  { data: '01/02/2022', type: 'Cooperado', value: '45,00' },
-  { data: '01/02/2022', type: 'Cooperado', value: '45,00' },
-  { data: '01/02/2022', type: 'Cooperado', value: '45,00' },
-  { data: '01/02/2022', type: 'Cooperado', value: '45,00' },
-  { data: '01/02/2022', type: 'Cooperado', value: '45,00' },
-  { data: '01/02/2022', type: 'Cooperado', value: '45,00' },
-  { data: '01/02/2022', type: 'Cooperado', value: '45,00' },
-  { data: '01/02/2022', type: 'Cooperado', value: '45,00' },
-  { data: '01/02/2022', type: 'Cooperado', value: '45,00' },
-  { data: '01/02/2022', type: 'Cooperado', value: '45,00' },
-  { data: '01/02/2022', type: 'Cooperado', value: '45,00' },
-  { data: '01/02/2022', type: 'Cooperado', value: '45,00' },
+  { data: '01/02/2022', type: 'Cooperado', reason: 'Contratação', value: '45,00', monthlyValue: '7.650,00'},
+  { data: '01/02/2022', type: 'Cooperado', reason: 'Contratação', value: '45,00', monthlyValue: '7.650,00'},
+  { data: '01/02/2022', type: 'Cooperado', reason: 'Contratação', value: '45,00', monthlyValue: '7.650,00'},
+  { data: '01/02/2022', type: 'Cooperado', reason: 'Contratação', value: '45,00', monthlyValue: '7.650,00'},
+  { data: '01/02/2022', type: 'Cooperado', reason: 'Contratação', value: '45,00', monthlyValue: '7.650,00'},
+  { data: '01/02/2022', type: 'Cooperado', reason: 'Contratação', value: '45,00', monthlyValue: '7.650,00'},
+  { data: '01/02/2022', type: 'Cooperado', reason: 'Contratação', value: '45,00', monthlyValue: '7.650,00'},
+  { data: '01/02/2022', type: 'Cooperado', reason: 'Contratação', value: '45,00', monthlyValue: '7.650,00'},
+  { data: '01/02/2022', type: 'Cooperado', reason: 'Contratação', value: '45,00', monthlyValue: '7.650,00'},
 ];
 
 @Component({
@@ -39,7 +38,7 @@ export class CollaboratorFinanceTabComponent implements OnInit {
   @Input('form') collaboratorForm!: FormGroup;
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
 
-  displayedColumns: string[] = ['data', 'type', 'value', 'icon'];
+  displayedColumns: string[] = ['data', 'type', 'reason', 'value', 'monthlyValue', 'icon'];
   dataSource = ELEMENT_DATA;
 
   constructor() {}

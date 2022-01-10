@@ -2,7 +2,19 @@
   <div class="content-scroll">
     <form (submit)="next()" [formGroup]="collaboratorForm" fxLayout="column">
       <div fxFlex="100" fxLayoutGap="16px">
-        <mat-form-field fxFlex="25" appearance="outline">
+        <mat-form-field
+        fxFlex="50"
+        appearance="outline"
+        formControlName="collaboratorGroup"
+      >
+        <mat-label>Data</mat-label>
+        <input
+          matInput
+          placeholder="Data de Inclusão"
+          formControlName="collaboratorGroup"
+        />
+      </mat-form-field>
+        <mat-form-field fxFlex="50" appearance="outline">
           <mat-label>Tipo de Contrato</mat-label>
           <mat-select
             matInput
@@ -14,8 +26,24 @@
             <mat-option value="3">Cooperado</mat-option>
           </mat-select>
         </mat-form-field>
+    
+      </div>
+      <div fxFlex="100" fxLayoutGap="16px">
+        <mat-form-field fxFlex="50" appearance="outline">
+          <mat-label>Motivo</mat-label>
+          <mat-select
+            matInput
+            disableRipple
+            formControlName="collaboratorGroup"
+          >
+            <mat-option value="1">Contratação</mat-option>
+            <mat-option value="2">Reconhecimento</mat-option>
+            <mat-option value="3">Tempo de Casa</mat-option>
+            <mat-option value="4">Retenção</mat-option>
+          </mat-select>
+        </mat-form-field>
         <mat-form-field
-          fxFlex="35"
+          fxFlex="45"
           appearance="outline"
           formControlName="collaboratorGroup"
         >
@@ -27,18 +55,7 @@
           />
         </mat-form-field>
 
-        <mat-form-field
-          fxFlex="35"
-          appearance="outline"
-          formControlName="collaboratorGroup"
-        >
-          <mat-label>Data</mat-label>
-          <input
-            matInput
-            placeholder="Data"
-            formControlName="collaboratorGroup"
-          />
-        </mat-form-field>
+      
 
         <button fxFlex="5" class="edit-button" mat-flat-button color="primary">
           <mat-icon>add</mat-icon>
@@ -57,10 +74,22 @@
           <td mat-cell *matCellDef="let finans">{{ finans.type }}</td>
         </ng-container>
 
+        <ng-container matColumnDef="reason">
+          <th mat-header-cell *matHeaderCellDef>Motivo</th>
+          <td mat-cell *matCellDef="let finans">{{ finans.reason }}</td>
+        </ng-container>
+
         <ng-container matColumnDef="value">
           <th mat-header-cell *matHeaderCellDef>Valor</th>
           <td mat-cell *matCellDef="let finans">{{ finans.value }}</td>
         </ng-container>
+
+        <ng-container matColumnDef="monthlyValue">
+          <th mat-header-cell *matHeaderCellDef>Valor Mensal</th>
+          <td mat-cell *matCellDef="let finans">{{ finans.monthlyValue }}</td>
+        </ng-container>
+
+       
 
         <ng-container matColumnDef="icon">
           <th mat-header-cell *matHeaderCellDef></th>

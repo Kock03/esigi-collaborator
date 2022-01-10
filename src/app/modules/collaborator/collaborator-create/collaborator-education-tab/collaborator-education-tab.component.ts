@@ -6,15 +6,26 @@ export interface education {
   situation: string;
   course: string;
   institution: string;
+ 
 }
 
-const ELEMENT_DATA: education[] = [
+export interface language {
+  language: string;
+  fluency: string;
+}
+
+const ELEMENT_EDUCATION: education[] = [
   { schooling: 'Ensino Superior', situation: 'Concluido', course: 'Engenharia de Software', institution: 'FURB'},
   { schooling: 'Ensino Superior', situation: 'Concluido', course: 'Engenharia de Software', institution: 'FURB'},
   { schooling: 'Ensino Superior', situation: 'Concluido', course: 'Engenharia de Software', institution: 'FURB'},
   { schooling: 'Ensino Superior', situation: 'Concluido', course: 'Engenharia de Software', institution: 'FURB'},
   { schooling: 'Ensino Superior', situation: 'Concluido', course: 'Engenharia de Software', institution: 'FURB'},
   { schooling: 'Ensino Superior', situation: 'Concluido', course: 'Engenharia de Software', institution: 'FURB'},
+];
+
+const ELEMENT_LANGUAGE: language[] = [
+  {language: 'Russo', fluency: 'Escrita e Leitura'}
+
 ];
 
 @Component({
@@ -26,8 +37,11 @@ export class CollaboratorEducationTabComponent implements OnInit {
   @Input('form') collaboratorForm!: FormGroup;
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
 
-  displayedColumns: string[] = ['schooling', 'situation', 'course', 'institution'];
-  dataSource = ELEMENT_DATA;
+  displayedEducation: string[] = ['schooling', 'situation', 'course', 'institution'];
+  dataEducation = ELEMENT_EDUCATION;
+
+  displayedLanguage: string[] = ['language', 'fluency']
+  dataLanguage = ELEMENT_LANGUAGE;
 
   constructor() {}
 
