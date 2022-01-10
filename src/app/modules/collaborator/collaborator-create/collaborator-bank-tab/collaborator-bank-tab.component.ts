@@ -29,7 +29,7 @@ export class CollaboratorBankTabComponent implements OnInit {
   @Input('form') collaboratorForm!: FormGroup;
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
 
-  displayedBank: string[] = ['bank', 'agency', 'accountType', 'account'];
+  displayedBank: string[] = ['bank', 'agency', 'accountType', 'account', 'icon'];
   dataBank = ELEMENT_BANK;
 
   constructor() {}

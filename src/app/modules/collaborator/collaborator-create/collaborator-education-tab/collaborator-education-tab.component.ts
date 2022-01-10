@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 
 export interface education {
   schooling: string;
@@ -37,10 +37,10 @@ export class CollaboratorEducationTabComponent implements OnInit {
   @Input('form') collaboratorForm!: FormGroup;
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
 
-  displayedEducation: string[] = ['schooling', 'situation', 'course', 'institution'];
+  displayedEducation: string[] = ['schooling', 'situation', 'course', 'institution', 'icon'];
   dataEducation = ELEMENT_EDUCATION;
 
-  displayedLanguage: string[] = ['language', 'fluency']
+  displayedLanguage: string[] = ['language', 'fluency', 'icon']
   dataLanguage = ELEMENT_LANGUAGE;
 
   constructor() {}

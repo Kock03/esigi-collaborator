@@ -1,9 +1,10 @@
 <div id="collaboratorEducationTab" class="tab">
   <div class="content-scroll">
     <mat-tab-group>
-      <mat-tab>
+      <mat-tab label="First">
         <ng-template mat-tab-label> Escolaridade </ng-template>
         <form
+          class="form-tab"
           (submit)="next()"
           [formGroup]="collaboratorForm"
           fxLayout="column"
@@ -92,6 +93,15 @@
               </td>
             </ng-container>
 
+            <ng-container matColumnDef="icon">
+              <th mat-header-cell *matHeaderCellDef></th>
+              <td class="button-tab" mat-cell *matCellDef="let education">
+                <button class="table-button" mat-button>
+                  <mat-icon>edit</mat-icon>
+                </button>
+              </td>
+            </ng-container>
+
             <tr
               mat-header-row
               *matHeaderRowDef="displayedEducation; sticky: true"
@@ -100,7 +110,7 @@
           </table>
         </div>
       </mat-tab>
-      <mat-tab>
+      <mat-tab label="Second">
         <ng-template mat-tab-label> Idiomas </ng-template>
         <form
           class="lenguange-form"
@@ -163,6 +173,15 @@
               <th mat-header-cell *matHeaderCellDef>Fluência</th>
               <td mat-cell *matCellDef="let language">
                 {{ language.fluency }}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="icon">
+              <th mat-header-cell *matHeaderCellDef></th>
+              <td class="button-tab" mat-cell *matCellDef="let language">
+                <button class="table-button" mat-button>
+                  <mat-icon>edit</mat-icon>
+                </button>
               </td>
             </ng-container>
 

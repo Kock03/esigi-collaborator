@@ -1,7 +1,14 @@
 <div id="collaboratorRegisterTab" class="tab">
   <div class="content-scroll">
     <form (submit)="next()" [formGroup]="collaboratorForm" fxLayout="column">
+  
+
       <div fxFlex="100" fxLayoutGap="16px">
+ 
+        <button fxFlex="30" class="img-collaborator-button" mat-flat-button disabled>
+          <img class="img-collaborator" src="https://st.depositphotos.com/1734074/4228/v/450/depositphotos_42286141-stock-illustration-vector-man-with-mustache-in.jpg" alt="">
+        </button>
+
         <mat-form-field fxFlex="20" appearance="outline">
           <mat-label>Tipo de Colaborador</mat-label>
           <mat-select
@@ -15,7 +22,7 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field fxFlex="40" appearance="outline">
+        <mat-form-field fxFlex="25" appearance="outline">
           <mat-label>Cargo</mat-label>
           <mat-select
             matInput
@@ -28,7 +35,7 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field fxFlex="40" appearance="outline">
+        <mat-form-field fxFlex="25" appearance="outline">
           <mat-label>Nome/Razão Social</mat-label>
           <input
             matInput
