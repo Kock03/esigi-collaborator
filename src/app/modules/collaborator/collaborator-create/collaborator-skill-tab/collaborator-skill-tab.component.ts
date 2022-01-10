@@ -11,15 +11,16 @@ import { FormGroup } from '@angular/forms';
 export interface skill {
   name: string;
   time: string;
+  level: string;
 }
 
 const skills: skill[] = [
-  { name: 'Java', time: '2' },
-  { name: 'C#', time: '2' },
-  { name: 'Python', time: '2' },
-  { name: 'Angular', time: '2' },
-  { name: 'React', time: '2' },
-  { name: 'NodeJS', time: '2' },
+  { name: 'Java', time: '2', level: 'senior' },
+  { name: 'C#', time: '2', level: 'senior' },
+  { name: 'Python', time: '2', level: 'senior' },
+  { name: 'Angular', time: '2', level: 'senior' },
+  { name: 'React', time: '2' , level: 'senior'},
+  { name: 'NodeJS', time: '2', level: 'senior' },
 ];
 
 @Component({
@@ -32,7 +33,7 @@ export class CollaboratorSkillTabComponent implements OnInit {
   @Input('form') collaboratorForm!: FormGroup;
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
 
-  displayedColumns: string[] = ['name', 'time', 'icon'];
+  displayedColumns: string[] = ['name', 'time', 'level' , 'icon'];
   dataSource = skills;
 
   constructor() {}
