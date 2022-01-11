@@ -1,28 +1,34 @@
-#collaboratorEducationTab{
-    padding-bottom: 10px;
-    max-width: 800px;
-    table {
-      width: 100%;
-  
-    }
-  
-    .edit-button {
-      height: 40px;
-      margin-top: 8px;
+#collaboratorEducationTab {
+  padding-bottom: 10px;
+  max-width: 800px;
+
+  table {
+    width: 100%;
+
+  }
+
+  .edit-button {
+    height: 40px;
+    margin-top: 8px;
+  }
+
+  .form-tab {
+    margin-top: 20px;
+  }
+
+  .envolti-table {
+    overflow: auto;
+    max-height: 150px;
+    width: 100%;
+
+
+    .mat-column-icon {
+      width: 50px;
     }
 
-    .form-tab{
-      margin-top: 20px;
-    }
-  
-    .envolti-table {
-      overflow: auto;
-      max-height: 150px;
-      width: 100%;
-  
-    }
+  }
 
-    .lenguange-form{
-      margin-top: 20px;
-    }
+  .lenguange-form {
+    margin-top: 20px;
+  }
 }

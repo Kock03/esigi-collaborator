@@ -11,6 +11,10 @@
     overflow: auto;
     max-height: 200px;
 
+
+    .mat-column-icon {
+      width: 50px;
+    }
   }
 
   .checkbox {
@@ -23,7 +27,7 @@
   }
 
 
-  .button-tab{
+  .button-tab {
     white-space: nowrap;
     overflow: hidden;
   }

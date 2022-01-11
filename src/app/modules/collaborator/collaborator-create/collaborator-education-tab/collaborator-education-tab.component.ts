@@ -43,6 +43,8 @@ export class CollaboratorEducationTabComponent implements OnInit {
   displayedLanguage: string[] = ['language', 'fluency', 'icon']
   dataLanguage = ELEMENT_LANGUAGE;
 
+  selectedIndex: number = 0;
+
   constructor() {}
 
   ngOnInit(): void {}
@@ -50,4 +52,5 @@ export class CollaboratorEducationTabComponent implements OnInit {
   next() {
     this.onChange.next(true);
   }
+
 }
