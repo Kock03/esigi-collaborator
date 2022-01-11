@@ -25,10 +25,19 @@ export class CollaboratorsEntity {
   id: string;
 
   @Column({ name: 'firstname_corporatename' })
-  firstName_corporateName: string;
+  firstNameCorporateName: string;
 
   @Column({ name: 'lastname_fantasyname' })
-  lastName_fantasyName: string;
+  lastNameFantasyName: string;
+
+  @Column({name:'login'})
+  login: string;
+
+  @Column({name:'gender', type:'int'})
+  gender: Gender;
+
+  @Column({name:'office'})
+  office: string;
 
   @Column({ name: 'collaborator_types' })
   collaboratorTypes: CollaboratorTypes;
@@ -78,7 +87,7 @@ export class CollaboratorsEntity {
   @OneToMany(() => PhonesEntity, (phone) => phone.collaborator)
   phone: PhonesEntity[];
 
-  @OneToMany(() => SkillsEntity, (skills) => skills.collaborator)
+  @OneToMany(() => SkillsEntity, skills => skills.collaborator)
   skill: SkillsEntity[];
 
   @OneToOne(() => FinancialsEntity)

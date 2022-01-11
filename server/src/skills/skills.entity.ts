@@ -6,6 +6,8 @@ import {
   UpdateDateColumn,
   DeleteDateColumn,
   PrimaryGeneratedColumn,
+  ManyToOne,
+  OneToMany,
 } from 'typeorm';
 
 @Entity({ name: 'skills' })
@@ -22,6 +24,9 @@ export class SkillsEntity {
   @Column({ name: 'current_position' })
   currentPosition: boolean;
 
+  @ManyToOne(() => CollaboratorsEntity, collaborators => collaborators.skill)
+  collaborator: CollaboratorsEntity[];
+
   @CreateDateColumn({ name: 'created_at', type: 'datetime' })
   createdAt: Date;
 
@@ -31,5 +36,4 @@ export class SkillsEntity {
   @DeleteDateColumn({ name: 'deleted_at', type: 'datetime' })
   deletedAt: Date;
 
-  collaborator: CollaboratorsEntity[];
 }

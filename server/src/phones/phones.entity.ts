@@ -6,6 +6,7 @@ import {
   UpdateDateColumn,
   DeleteDateColumn,
   PrimaryGeneratedColumn,
+  ManyToOne,
 } from 'typeorm';
 
 @Entity({ name: 'phones' })
@@ -22,6 +23,9 @@ export class PhonesEntity {
   @Column({ name: 'ddi', length: 2 })
   ddi: string;
 
+  @ManyToOne(() => CollaboratorsEntity, collaborators => collaborators.phone)
+  collaborator: CollaboratorsEntity;
+
   @CreateDateColumn({ name: 'created_at', type: 'datetime' })
   createdAt: Date;
 
@@ -31,5 +35,4 @@ export class PhonesEntity {
   @DeleteDateColumn({ name: 'deleted_at', type: 'datetime' })
   deletedAt: Date;
 
-  collaborator: CollaboratorsEntity;
 }
