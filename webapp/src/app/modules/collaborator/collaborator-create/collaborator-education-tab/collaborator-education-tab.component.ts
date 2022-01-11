@@ -1,12 +1,11 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormControl, FormGroup } from '@angular/forms';
 
 export interface education {
   schooling: string;
   situation: string;
   course: string;
   institution: string;
- 
 }
 
 export interface language {
@@ -15,17 +14,46 @@ export interface language {
 }
 
 const ELEMENT_EDUCATION: education[] = [
-  { schooling: 'Ensino Superior', situation: 'Concluido', course: 'Engenharia de Software', institution: 'FURB'},
-  { schooling: 'Ensino Superior', situation: 'Concluido', course: 'Engenharia de Software', institution: 'FURB'},
-  { schooling: 'Ensino Superior', situation: 'Concluido', course: 'Engenharia de Software', institution: 'FURB'},
-  { schooling: 'Ensino Superior', situation: 'Concluido', course: 'Engenharia de Software', institution: 'FURB'},
-  { schooling: 'Ensino Superior', situation: 'Concluido', course: 'Engenharia de Software', institution: 'FURB'},
-  { schooling: 'Ensino Superior', situation: 'Concluido', course: 'Engenharia de Software', institution: 'FURB'},
+  {
+    schooling: 'Ensino Superior',
+    situation: 'Concluido',
+    course: 'Engenharia de Software',
+    institution: 'FURB',
+  },
+  {
+    schooling: 'Ensino Superior',
+    situation: 'Concluido',
+    course: 'Engenharia de Software',
+    institution: 'FURB',
+  },
+  {
+    schooling: 'Ensino Superior',
+    situation: 'Concluido',
+    course: 'Engenharia de Software',
+    institution: 'FURB',
+  },
+  {
+    schooling: 'Ensino Superior',
+    situation: 'Concluido',
+    course: 'Engenharia de Software',
+    institution: 'FURB',
+  },
+  {
+    schooling: 'Ensino Superior',
+    situation: 'Concluido',
+    course: 'Engenharia de Software',
+    institution: 'FURB',
+  },
+  {
+    schooling: 'Ensino Superior',
+    situation: 'Concluido',
+    course: 'Engenharia de Software',
+    institution: 'FURB',
+  },
 ];
 
 const ELEMENT_LANGUAGE: language[] = [
-  {language: 'Russo', fluency: 'Escrita e Leitura'}
-
+  { language: 'Russo', fluency: 'Escrita e Leitura' },
 ];
 
 @Component({
@@ -37,10 +65,16 @@ export class CollaboratorEducationTabComponent implements OnInit {
   @Input('form') collaboratorForm!: FormGroup;
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
 
-  displayedEducation: string[] = ['schooling', 'situation', 'course', 'institution', 'icon'];
+  displayedEducation: string[] = [
+    'schooling',
+    'situation',
+    'course',
+    'institution',
+    'icon',
+  ];
   dataEducation = ELEMENT_EDUCATION;
 
-  displayedLanguage: string[] = ['language', 'fluency', 'icon']
+  displayedLanguage: string[] = ['language', 'fluency', 'icon'];
   dataLanguage = ELEMENT_LANGUAGE;
 
   selectedIndex: number = 0;
@@ -53,4 +87,11 @@ export class CollaboratorEducationTabComponent implements OnInit {
     this.onChange.next(true);
   }
 
+  save() {
+    const educationArray = this.collaboratorForm.controls[
+      'education'
+    ] as FormArray;
+    // const data = this.educationForm.getRawValue();
+    //  educationArray.push(data)
+  }
 }

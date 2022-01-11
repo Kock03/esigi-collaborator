@@ -23,6 +23,7 @@ export class CollaboratorCreateComponent implements OnInit {
       type: ['', Validators.required],
       office: ['', Validators.required],
       name: ['', Validators.required],
+      education: this.fb.array([]),
     });
   }
 
