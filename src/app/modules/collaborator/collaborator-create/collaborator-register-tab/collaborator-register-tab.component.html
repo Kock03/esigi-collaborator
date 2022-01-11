@@ -1,41 +1,46 @@
 <div id="collaboratorRegisterTab" class="tab">
   <div class="content-scroll">
     <form (submit)="next()" [formGroup]="collaboratorForm" fxLayout="column">
-  
-
-      <div fxFlex="100" fxLayoutGap="16px">
- 
-        <button fxFlex="30" class="img-collaborator-button" mat-flat-button disabled>
-          <img class="img-collaborator" src="https://st.depositphotos.com/1734074/4228/v/450/depositphotos_42286141-stock-illustration-vector-man-with-mustache-in.jpg" alt="">
+      <div fxLayout="row">
+        <button class="img-collaborator-button">
+          <img
+            class="img-collaborator"
+            src="https://st.depositphotos.com/1734074/4228/v/450/depositphotos_42286141-stock-illustration-vector-man-with-mustache-in.jpg"
+            alt=""
+          />
         </button>
 
-        <mat-form-field fxFlex="20" appearance="outline">
-          <mat-label>Tipo de Colaborador</mat-label>
-          <mat-select
-            matInput
-            disableRipple
-            formControlName="collaboratorGroup"
-          >
-            <mat-option value="1">CLT</mat-option>
-            <mat-option value="2">PJ</mat-option>
-            <mat-option value="3">Cooperado</mat-option>
-          </mat-select>
-        </mat-form-field>
+        <div fxFlex="100" fxLayoutGap="16px" fxFlexAlign="end">
+          <mat-form-field fxFlex="40" appearance="outline">
+            <mat-label>Tipo de Colaborador</mat-label>
+            <mat-select
+              matInput
+              disableRipple
+              formControlName="collaboratorGroup"
+            >
+              <mat-option value="1">CLT</mat-option>
+              <mat-option value="2">PJ</mat-option>
+              <mat-option value="3">Cooperado</mat-option>
+            </mat-select>
+          </mat-form-field>
 
-        <mat-form-field fxFlex="25" appearance="outline">
-          <mat-label>Cargo</mat-label>
-          <mat-select
-            matInput
-            disableRipple
-            formControlName="collaboratorGroup"
-          >
-            <mat-option value="1">Desenvolvedor Java</mat-option>
-            <mat-option value="2">Desenvolvedor Angular</mat-option>
-            <mat-option value="3">Desenvolvedor NodeJS</mat-option>
-          </mat-select>
-        </mat-form-field>
+          <mat-form-field fxFlex="60" appearance="outline">
+            <mat-label>Cargo</mat-label>
+            <mat-select
+              matInput
+              disableRipple
+              formControlName="collaboratorGroup"
+            >
+              <mat-option value="1">Desenvolvedor Java</mat-option>
+              <mat-option value="2">Desenvolvedor Angular</mat-option>
+              <mat-option value="3">Desenvolvedor NodeJS</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
 
-        <mat-form-field fxFlex="25" appearance="outline">
+      <div fxFlex="100" fxLayoutGap="16px">
+        <mat-form-field fxFlex="35" appearance="outline">
           <mat-label>Nome/Razão Social</mat-label>
           <input
             matInput
@@ -43,10 +48,8 @@
             formControlName="collaboratorGroup"
           />
         </mat-form-field>
-      </div>
 
-      <div fxFlex="100" fxLayoutGap="16px">
-        <mat-form-field fxFlex="40" appearance="outline">
+        <mat-form-field fxFlex="35" appearance="outline">
           <mat-label>Sobrenome/Nome Fantasia</mat-label>
           <input
             matInput
@@ -55,16 +58,7 @@
           />
         </mat-form-field>
 
-        <mat-form-field fxFlex="40" appearance="outline">
-          <mat-label>Login</mat-label>
-          <input
-            matInput
-            placeholder="Login"
-            formControlName="collaboratorGroup"
-          />
-        </mat-form-field>
-
-        <mat-form-field fxFlex="20" appearance="outline">
+        <mat-form-field fxFlex="30" appearance="outline">
           <mat-label>Sexo</mat-label>
           <mat-select
             matInput
@@ -183,7 +177,16 @@
       </div>
 
       <div fxFlex="100" fxLayoutGap="16px">
-        <mat-form-field fxFlex="50" appearance="outline">
+        <mat-form-field fxFlex="35" appearance="outline">
+          <mat-label>Login</mat-label>
+          <input
+            matInput
+            placeholder="Login"
+            formControlName="collaboratorGroup"
+          />
+        </mat-form-field>
+
+        <mat-form-field fxFlex="30" appearance="outline">
           <mat-label>Email</mat-label>
           <input
             matInput
@@ -192,7 +195,7 @@
           />
         </mat-form-field>
 
-        <mat-form-field fxFlex="50" appearance="outline">
+        <mat-form-field fxFlex="35" appearance="outline">
           <mat-label>Site</mat-label>
           <input
             matInput
