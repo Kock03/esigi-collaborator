@@ -33,7 +33,7 @@
             </mat-form-field>
           </div>
           <div fxFlex="100" fxLayoutGap="16px">
-            <mat-form-field fxFlex="65" appearance="outline">
+            <mat-form-field fxFlex="60" appearance="outline">
               <mat-label>Instituição</mat-label>
               <input
                 matInput
@@ -71,17 +71,17 @@
               (click)="editEducation()"
               *ngIf="index != null"
             >
-              <button
-                fxFlex="5"
-                class="edit-button"
-                mat-flat-button
-                color="primary"
-                (click)="cancelEdit()"
-                *ngIf="index != null"
-              >
-                <mat-icon>clear</mat-icon>
-              </button>
               <mat-icon>save</mat-icon>
+            </button>
+            <button
+              fxFlex="5"
+              class="edit-button"
+              mat-flat-button
+              color="primary"
+              (click)="cancelEdit()"
+              *ngIf="index != null"
+            >
+              <mat-icon>clear</mat-icon>
             </button>
           </div>
         </form>
@@ -121,7 +121,11 @@
 
             <ng-container matColumnDef="icon">
               <th mat-header-cell *matHeaderCellDef></th>
-              <td class="button-tab" mat-cell *matCellDef="let education">
+              <td
+                class="button-tab"
+                mat-cell
+                *matCellDef="let education; let index = index"
+              >
                 <button
                   class="table-button"
                   mat-button
