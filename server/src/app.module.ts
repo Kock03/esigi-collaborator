@@ -1,19 +1,22 @@
 import { Module } from '@nestjs/common';
-import { BankDataModule } from 'src/bank-data/bank-data.module';
-import { PhonesModule } from 'src/phones/phones.module';
-import { AddressesModule } from 'src/addresses/addresses.module';
-import { SkillsModule } from 'src/skills/skills.module';
+import { BankDataModule } from 'src/app/bank-data/bank-data.module';
+import { PhonesModule } from 'src/app/phones/phones.module';
+import { AddressesModule } from 'src/app/addresses/addresses.module';
+import { SkillsModule } from 'src/app/skills/skills.module';
 import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
-import { BankDataEntity } from './bank-data/bank-data.entity';
-import { PhonesEntity } from './phones/phones.entity';
-import { AddressesEntity } from './addresses/addresses.entity';
-import { CollaboratorsModule } from './collaborators/collaborators.module';
-import { CollaboratorsEntity } from './collaborators/collaborators.entity';
-import { FinancialsModule } from './financials/financials.module';
-import { FinancialsEntity } from './financials/financials.entity';
-import { SkillsEntity } from './skills/skills.entity';
+import { BankDataEntity } from './app/bank-data/bank-data.entity';
+import { PhonesEntity } from './app/phones/phones.entity';
+import { AddressesEntity } from './app/addresses/addresses.entity';
+import { CollaboratorsModule } from './app/collaborators/collaborators.module';
+import { CollaboratorsEntity } from './app/collaborators/collaborators.entity';
+import { FinancialsModule } from './app/financials/financials.module';
+import { FinancialsEntity } from './app/financials/financials.entity';
+import { SkillsEntity } from './app/skills/skills.entity';
 import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 import { ConfigModule } from '@nestjs/config';
+import { DocumentsModule } from './app/documents/documents.module';
+import { EducationsModule } from './app/educations/educations.module';
+import { LanguagesModule } from './app/languages/languages.module';
 
 @Module({
   imports: [
@@ -33,6 +36,9 @@ import { ConfigModule } from '@nestjs/config';
     SkillsModule,
     CollaboratorsModule,
     FinancialsModule,
+    DocumentsModule,
+    EducationsModule,
+    LanguagesModule
   ],
   controllers: [],
   providers: [],
