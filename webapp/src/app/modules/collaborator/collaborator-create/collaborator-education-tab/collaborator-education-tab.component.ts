@@ -9,7 +9,6 @@ import {
 import {
   FormArray,
   FormBuilder,
-  FormControl,
   FormGroup,
   Validators,
 } from '@angular/forms';
@@ -23,52 +22,9 @@ export interface education {
 }
 
 export interface language {
-  language: string;
-  fluency: string;
+  languageName: string;
+  degreeOfInfluence: string;
 }
-
-const ELEMENT_EDUCATION: education[] = [
-  {
-    schooling: 'Ensino Superior',
-    situation: 'Concluido',
-    course: 'Engenharia de Software',
-    institution: 'FURB',
-  },
-  {
-    schooling: 'Ensino Superior',
-    situation: 'Concluido',
-    course: 'Engenharia de Software',
-    institution: 'FURB',
-  },
-  {
-    schooling: 'Ensino Superior',
-    situation: 'Concluido',
-    course: 'Engenharia de Software',
-    institution: 'FURB',
-  },
-  {
-    schooling: 'Ensino Superior',
-    situation: 'Concluido',
-    course: 'Engenharia de Software',
-    institution: 'FURB',
-  },
-  {
-    schooling: 'Ensino Superior',
-    situation: 'Concluido',
-    course: 'Engenharia de Software',
-    institution: 'FURB',
-  },
-  {
-    schooling: 'Ensino Superior',
-    situation: 'Concluido',
-    course: 'Engenharia de Software',
-    institution: 'FURB',
-  },
-];
-
-const ELEMENT_LANGUAGE: language[] = [
-  { language: 'Russo', fluency: 'Escrita e Leitura' },
-];
 
 @Component({
   selector: 'app-collaborator-education-tab',
@@ -79,6 +35,19 @@ export class CollaboratorEducationTabComponent implements OnInit {
   @Input('form') collaboratorForm!: FormGroup;
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
   @ViewChild('languageTable') languageTable!: MatTable<any>;
+  @ViewChild('educationTable') educationTable!: MatTable<any>;
+
+
+  languages: language[] = [
+    { languageName: 'Russo', degreeOfInfluence: 'Escrita' },
+    { languageName: 'Inglês', degreeOfInfluence: 'Leitura' },
+    { languageName: 'Alemão', degreeOfInfluence: 'Conversação' },
+  ];
+
+  educations: education[] = [
+    {schooling: 'Ensino Superior', situation: 'completo', course: '', institution: ''},
+  ];
+
 
   displayedEducation: string[] = [
     'schooling',
@@ -87,10 +56,8 @@ export class CollaboratorEducationTabComponent implements OnInit {
     'institution',
     'icon',
   ];
-  dataEducation = ELEMENT_EDUCATION;
 
   displayedLanguage: string[] = ['language', 'fluency', 'icon'];
-  dataLanguage = ELEMENT_LANGUAGE;
 
   selectedIndex: number = 0;
 
@@ -98,9 +65,15 @@ export class CollaboratorEducationTabComponent implements OnInit {
   languageForm!: FormGroup;
 
   index: any = null;
+  Language: any;
+  Education: any;
 
   get languageArray() {
     return this.collaboratorForm.controls['language'] as FormArray;
+  }
+
+  get educationArray() {
+    return this.collaboratorForm.controls['education'] as FormArray;
   }
 
   constructor(private fb: FormBuilder) {}
@@ -111,16 +84,15 @@ export class CollaboratorEducationTabComponent implements OnInit {
 
   initForm(): void {
     this.languageForm = this.fb.group({
-      name: ['', Validators.required],
-      fluency: ['', Validators.required],
+      languageName: ['', Validators.required],
+      degreeOfInfluence: ['', Validators.required],
     });
-    // this.educationForm = this.fb.group({
-    //   email: ['', Validators.required],
-    //   cnpj: ['', Validators.required],
-    //   stateRegistration: ['', Validators.required],
-    //   municipalInscription: ['', Validators.required],
-    //   site: ['', Validators.required],
-    // });
+    this.educationForm = this.fb.group({
+      schooling: ['', Validators.required],
+      situation: ['', Validators.required],
+      course: ['', Validators.required],
+      institution: ['', Validators.required],
+    });
   }
 
   next() {
@@ -128,11 +100,11 @@ export class CollaboratorEducationTabComponent implements OnInit {
   }
 
   saveEducation() {
-    const educationArray = this.collaboratorForm.controls[
-      'education'
-    ] as FormArray;
     const data = this.educationForm.getRawValue();
-    educationArray.push(data);
+    this.educationArray.insert(0, this.fb.group(data));
+    this.educationTable.renderRows();
+    this.educationForm.reset();
+    
   }
 
   saveLanguage() {
@@ -154,4 +126,34 @@ export class CollaboratorEducationTabComponent implements OnInit {
     this.languageForm.reset();
     this.index = null;
   }
+
+  cancelEdit(){
+    this.index = null;
+  }
+
+  deleteLanguage(index: number){
+     this.languageArray.removeAt(index);
+  
+  }
+
+  
+ 
+
+  getEducation(educationSelected: any, index: number) {
+    this.index = index;
+    this.educationForm.patchValue(educationSelected);
+  }
+
+  editEducation() {
+    this.educationArray.at(this.index).setValue(this.educationForm.getRawValue());
+
+    this.educationTable.renderRows();
+    this.educationForm.reset();
+    this.index = null;
+  }
+
+  deleteEducation(index: number){
+    this.educationArray.removeAt(index);
+ 
+ }
 }

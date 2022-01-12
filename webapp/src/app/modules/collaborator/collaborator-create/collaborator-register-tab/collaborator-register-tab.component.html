@@ -51,10 +51,13 @@
 
       <div fxFlex="100" fxLayoutGap="16px">
         <mat-form-field fxFlex="35" appearance="outline">
-          <mat-label *ngIf="typeControl.value?.id != 2">Sobrenome</mat-label>
-          <mat-label *ngIf="typeControl.value?.id == 2"
-            >Nome Fantasia</mat-label
-          >
+          <mat-label>
+            {{
+              collaboratorForm.controls["collaboratorTypes"].value?.id !== 2
+                ? "Sobrenome"
+                : "Nome Fantasia"
+            }}
+          </mat-label>
           <input
             matInput
             placeholder="Nome"
@@ -73,7 +76,7 @@
         <mat-form-field
           fxFlex="35"
           appearance="outline"
-          *ngIf="typeControl.value?.id != 2"
+          *ngIf="collaboratorForm.controls['collaboratorTypes'].value?.id !== 2"
         >
           <mat-label>CPF</mat-label>
           <input matInput placeholder="Nome" formControlName="cpf" />
@@ -82,7 +85,7 @@
         <mat-form-field
           fxFlex="35"
           appearance="outline"
-          *ngIf="typeControl.value?.id == 2"
+          *ngIf="collaboratorForm.controls['collaboratorTypes'].value?.id == 2"
         >
           <mat-label>CNPJ</mat-label>
           <input matInput placeholder="Nome" formControlName="cnpj" />
@@ -93,7 +96,7 @@
         <mat-form-field
           fxFlex="20"
           appearance="outline"
-          *ngIf="typeControl.value?.id == 2"
+          *ngIf="collaboratorForm.controls['collaboratorTypes'].value?.id == 2"
         >
           <mat-label>Inscrição Estadual</mat-label>
           <input
@@ -106,7 +109,7 @@
         <mat-form-field
           fxFlex="20"
           appearance="outline"
-          *ngIf="typeControl.value?.id == 2"
+          *ngIf="collaboratorForm.controls['collaboratorTypes'].value?.id == 2"
         >
           <mat-label>Inscrição municipal</mat-label>
           <input
@@ -128,7 +131,7 @@
         <mat-form-field
           fxFlex="40"
           appearance="outline"
-          *ngIf="typeControl.value?.id != 2"
+          *ngIf="collaboratorForm.controls['collaboratorTypes'].value?.id !== 2"
         >
           <mat-label>Login</mat-label>
           <input matInput placeholder="Login" formControlName="login" />
@@ -173,7 +176,7 @@
         <mat-form-field
           fxFlex="35"
           appearance="outline"
-          *ngIf="typeControl.value?.id == 2"
+          *ngIf="collaboratorForm.controls['collaboratorTypes'].value?.id == 2"
         >
           <mat-label>Login</mat-label>
           <input matInput placeholder="Login" formControlName="login" />
