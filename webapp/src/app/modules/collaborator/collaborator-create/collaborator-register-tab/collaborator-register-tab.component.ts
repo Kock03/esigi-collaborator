@@ -6,13 +6,17 @@ import {
   Output,
   ViewEncapsulation,
 } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 
-export interface CollaboratorType {
+export interface collaboratorTypes {
   id: number;
   name: string;
 }
-
 
 @Component({
   selector: 'app-collaborator-register-tab',
@@ -24,20 +28,36 @@ export class CollaboratorRegisterTabComponent implements OnInit {
   @Input('form') collaboratorForm!: FormGroup;
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
 
-  CollaboratorType: any = [
-    {id: 1, name: 'CLT'},
-    {id: 2, name: 'PJ'},
-    {id: 3, name: 'Cooperado'}
+  typeControl = new FormControl();
+
+  types: collaboratorTypes[] = [
+    { id: 1, name: 'CLT' },
+    { id: 2, name: 'PJ' },
+    { id: 3, name: 'Cooperado' },
   ];
 
-  Office: any = ['Desenvolvedor NodeJS', 'Desenvolvedor Angular', 'Desenvolvedor React']
+  Office: any = [
+    'Desenvolvedor NodeJS',
+    'Desenvolvedor Angular',
+    'Desenvolvedor React',
+  ];
 
   constructor(private fb: FormBuilder) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if (this.collaboratorForm) {
+      this.collaboratorForm.controls[
+        'collaboratorTypes'
+      ].valueChanges.subscribe((res) => {
+        console.log(
+          '🚀 ~ file: collaborator-register-tab.component.ts ~ line 42 ~ CollaboratorRegisterTabComponent ~ ngOnInit ~ res',
+          res
+        );
+      });
+    }
+  }
 
   next() {
     this.onChange.next(true);
   }
-
 }

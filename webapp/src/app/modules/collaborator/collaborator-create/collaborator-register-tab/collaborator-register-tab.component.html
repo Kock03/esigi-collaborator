@@ -8,17 +8,20 @@
             src="https://st.depositphotos.com/1734074/4228/v/450/depositphotos_42286141-stock-illustration-vector-man-with-mustache-in.jpg"
             alt=""
           />
+          <!-- <input type="file"> -->
         </button>
 
         <div fxFlex="100" fxLayoutGap="16px" fxFlexAlign="end">
           <mat-form-field fxFlex="30" appearance="outline">
             <mat-label>Tipo de Colaborador</mat-label>
-            <mat-select matInput disableRipple formControlName="collaboratorTypes">
-              <mat-option
-                [value]="type.id"
-                *ngFor="let type of CollaboratorType"
-                >{{ type.name }}</mat-option
-              >
+            <mat-select
+              matInput
+              disableRipple
+              formControlName="collaboratorTypes"
+            >
+              <mat-option [value]="type" *ngFor="let type of types">{{
+                type.name
+              }}</mat-option>
             </mat-select>
           </mat-form-field>
 
@@ -32,15 +35,26 @@
           </mat-form-field>
 
           <mat-form-field fxFlex="35" appearance="outline">
-            <mat-label>Nome/Razão Social</mat-label>
-            <input matInput placeholder="Nome" formControlName="firstNameCorporateName" />
+            <mat-label>{{
+              collaboratorForm.controls["collaboratorTypes"].value?.id !== 2
+                ? "Nome"
+                : "Razão Social"
+            }}</mat-label>
+            <input
+              matInput
+              placeholder="Nome"
+              formControlName="firstNameCorporateName"
+            />
           </mat-form-field>
         </div>
       </div>
 
       <div fxFlex="100" fxLayoutGap="16px">
         <mat-form-field fxFlex="35" appearance="outline">
-          <mat-label>Sobrenome/Nome Fantasia</mat-label>
+          <mat-label *ngIf="typeControl.value?.id != 2">Sobrenome</mat-label>
+          <mat-label *ngIf="typeControl.value?.id == 2"
+            >Nome Fantasia</mat-label
+          >
           <input
             matInput
             placeholder="Nome"
@@ -50,37 +64,37 @@
 
         <mat-form-field fxFlex="30" appearance="outline">
           <mat-label>Sexo</mat-label>
-          <mat-select
-            matInput
-            disableRipple
-            formControlName="gender"
-          >
+          <mat-select matInput disableRipple formControlName="gender">
             <mat-option value="1">Masculino</mat-option>
             <mat-option value="2">Feminino</mat-option>
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field fxFlex="35" appearance="outline">
+        <mat-form-field
+          fxFlex="35"
+          appearance="outline"
+          *ngIf="typeControl.value?.id != 2"
+        >
           <mat-label>CPF</mat-label>
-          <input
-            matInput
-            placeholder="Nome"
-            formControlName="cpf"
-          />
+          <input matInput placeholder="Nome" formControlName="cpf" />
         </mat-form-field>
 
-        <!-- <mat-form-field fxFlex="35" appearance="outline">
+        <mat-form-field
+          fxFlex="35"
+          appearance="outline"
+          *ngIf="typeControl.value?.id == 2"
+        >
           <mat-label>CNPJ</mat-label>
-          <input
-            matInput
-            placeholder="Nome"
-            formControlName="cnpj"
-          />
-        </mat-form-field> -->
+          <input matInput placeholder="Nome" formControlName="cnpj" />
+        </mat-form-field>
       </div>
 
       <div fxFlex="100" fxLayoutGap="16px">
-        <mat-form-field fxFlex="20" appearance="outline">
+        <mat-form-field
+          fxFlex="20"
+          appearance="outline"
+          *ngIf="typeControl.value?.id == 2"
+        >
           <mat-label>Inscrição Estadual</mat-label>
           <input
             matInput
@@ -89,7 +103,11 @@
           />
         </mat-form-field>
 
-        <mat-form-field fxFlex="20" appearance="outline">
+        <mat-form-field
+          fxFlex="20"
+          appearance="outline"
+          *ngIf="typeControl.value?.id == 2"
+        >
           <mat-label>Inscrição municipal</mat-label>
           <input
             matInput
@@ -100,106 +118,75 @@
 
         <mat-form-field fxFlex="25" appearance="outline">
           <mat-label>Data Aniversário</mat-label>
-          <input
-            matInput
-            placeholder="Nome"
-            formControlName="birthDate"
-          />
+          <input matInput placeholder="Nome" formControlName="birthDate" />
         </mat-form-field>
         <mat-form-field fxFlex="35" appearance="outline">
           <mat-label>Telefone</mat-label>
-          <input
-            matInput
-            placeholder="Nome"
-            formControlName="phoneNumber"
-          />
+          <input matInput placeholder="Nome" formControlName="phoneNumber" />
+        </mat-form-field>
+
+        <mat-form-field
+          fxFlex="40"
+          appearance="outline"
+          *ngIf="typeControl.value?.id != 2"
+        >
+          <mat-label>Login</mat-label>
+          <input matInput placeholder="Login" formControlName="login" />
         </mat-form-field>
       </div>
 
       <div fxFlex="100" fxLayoutGap="16px">
         <mat-form-field fxFlex="40" appearance="outline">
           <mat-label>CEP </mat-label>
-          <input
-            matInput
-            placeholder="Nome"
-            formControlName="cep"
-          />
+          <input matInput placeholder="Nome" formControlName="cep" />
           <mat-icon matSuffix> search </mat-icon>
         </mat-form-field>
 
         <mat-form-field fxFlex="40" appearance="outline">
           <mat-label>Rua</mat-label>
-          <input
-            matInput
-            placeholder="Nome"
-            formControlName="street"
-          />
+          <input matInput placeholder="Nome" formControlName="street" />
         </mat-form-field>
 
         <mat-form-field fxFlex="20" appearance="outline">
           <mat-label>Número</mat-label>
-          <input
-            matInput
-            placeholder="Nome"
-            formControlName="number"
-          />
+          <input matInput placeholder="Nome" formControlName="number" />
         </mat-form-field>
       </div>
 
       <div fxFlex="100" fxLayoutGap="16px">
         <mat-form-field fxFlex="40" appearance="outline">
           <mat-label>Complemento</mat-label>
-          <input
-            matInput
-            placeholder="Nome"
-            formControlName="complement"
-          />
+          <input matInput placeholder="Nome" formControlName="complement" />
         </mat-form-field>
         <mat-form-field fxFlex="20" appearance="outline">
           <mat-label>Estado</mat-label>
-          <input
-            matInput
-            placeholder="Nome"
-            formControlName="state"
-          />
+          <input matInput placeholder="Nome" formControlName="state" />
         </mat-form-field>
 
         <mat-form-field fxFlex="40" appearance="outline">
           <mat-label>Cidade</mat-label>
-          <input
-            matInput
-            placeholder="Nome"
-            formControlName="city"
-          />
+          <input matInput placeholder="Nome" formControlName="city" />
         </mat-form-field>
       </div>
 
       <div fxFlex="100" fxLayoutGap="16px">
-        <mat-form-field fxFlex="35" appearance="outline">
+        <mat-form-field
+          fxFlex="35"
+          appearance="outline"
+          *ngIf="typeControl.value?.id == 2"
+        >
           <mat-label>Login</mat-label>
-          <input
-            matInput
-            placeholder="Login"
-            formControlName="login"
-          />
+          <input matInput placeholder="Login" formControlName="login" />
         </mat-form-field>
 
-        <mat-form-field fxFlex="30" appearance="outline">
+        <mat-form-field fxFlex="50" appearance="outline">
           <mat-label>Email</mat-label>
-          <input
-            matInput
-            placeholder="Nome"
-            formControlName="email"
-          />
+          <input matInput placeholder="Nome" formControlName="email" />
         </mat-form-field>
 
-        <mat-form-field fxFlex="35" appearance="outline">
+        <mat-form-field fxFlex="50" appearance="outline">
           <mat-label>Site</mat-label>
-          <input
-            matInput
-            placeholder="Nome"
-            formControlName="site"
-          />
+          <input matInput placeholder="Nome" formControlName="site" />
         </mat-form-field>
       </div>
     </form>

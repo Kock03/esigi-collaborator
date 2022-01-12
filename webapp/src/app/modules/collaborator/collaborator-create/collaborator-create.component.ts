@@ -15,10 +15,15 @@ export class CollaboratorCreateComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
+    this.collaboratorForm.valueChanges.subscribe(res => {
+    console.log("🚀 ~ file: collaborator-create.component.ts ~ line 19 ~ CollaboratorCreateComponent ~ ngOnInit ~ res", res)
+      
+    })
   }
 
   initForm() {
     this.collaboratorForm = this.fb.group({
+      collaboratorGroup: ['', Validators.required],
       firstNameCorporateName: ['', Validators.required],
       lastNameFantasyName: ['', Validators.required],
       login: ['', Validators.required],
@@ -50,16 +55,14 @@ export class CollaboratorCreateComponent implements OnInit {
 
 
       education: this.fb.array([]),
+      language: this.fb.array([]),
     });
   }
 
   saveCustomer() {
     if (this.collaboratorForm.valid) {
       const data = this.collaboratorForm.getRawValue();
-      console.log(
-        '🚀 ~ file: customer-create.component.ts ~ line 29 ~ CustomerCreateComponent ~ saveCustomer ~ data',
-        data
-      );
+      
     }
   }
   handleChanges(value: any): void {
