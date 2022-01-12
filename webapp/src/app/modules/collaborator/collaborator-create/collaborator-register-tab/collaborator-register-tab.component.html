@@ -13,11 +13,11 @@
         <div fxFlex="100" fxLayoutGap="16px" fxFlexAlign="end">
           <mat-form-field fxFlex="30" appearance="outline">
             <mat-label>Tipo de Colaborador</mat-label>
-            <mat-select matInput disableRipple formControlName="type">
+            <mat-select matInput disableRipple formControlName="collaboratorTypes">
               <mat-option
-                [value]="type"
+                [value]="type.id"
                 *ngFor="let type of CollaboratorType"
-                >{{ type }}</mat-option
+                >{{ type.name }}</mat-option
               >
             </mat-select>
           </mat-form-field>
@@ -33,7 +33,7 @@
 
           <mat-form-field fxFlex="35" appearance="outline">
             <mat-label>Nome/Razão Social</mat-label>
-            <input matInput placeholder="Nome" formControlName="name" />
+            <input matInput placeholder="Nome" formControlName="firstNameCorporateName" />
           </mat-form-field>
         </div>
       </div>
@@ -44,7 +44,7 @@
           <input
             matInput
             placeholder="Nome"
-            formControlName="collaboratorGroup"
+            formControlName="lastNameFantasyName"
           />
         </mat-form-field>
 
@@ -53,7 +53,7 @@
           <mat-select
             matInput
             disableRipple
-            formControlName="collaboratorGroup"
+            formControlName="gender"
           >
             <mat-option value="1">Masculino</mat-option>
             <mat-option value="2">Feminino</mat-option>
@@ -61,13 +61,22 @@
         </mat-form-field>
 
         <mat-form-field fxFlex="35" appearance="outline">
-          <mat-label>CPF/CNPJ</mat-label>
+          <mat-label>CPF</mat-label>
           <input
             matInput
             placeholder="Nome"
-            formControlName="collaboratorGroup"
+            formControlName="cpf"
           />
         </mat-form-field>
+
+        <!-- <mat-form-field fxFlex="35" appearance="outline">
+          <mat-label>CNPJ</mat-label>
+          <input
+            matInput
+            placeholder="Nome"
+            formControlName="cnpj"
+          />
+        </mat-form-field> -->
       </div>
 
       <div fxFlex="100" fxLayoutGap="16px">
@@ -76,7 +85,7 @@
           <input
             matInput
             placeholder="Nome"
-            formControlName="collaboratorGroup"
+            formControlName="stateRegistration"
           />
         </mat-form-field>
 
@@ -85,7 +94,7 @@
           <input
             matInput
             placeholder="Nome"
-            formControlName="collaboratorGroup"
+            formControlName="municipalInscription"
           />
         </mat-form-field>
 
@@ -94,7 +103,7 @@
           <input
             matInput
             placeholder="Nome"
-            formControlName="collaboratorGroup"
+            formControlName="birthDate"
           />
         </mat-form-field>
         <mat-form-field fxFlex="35" appearance="outline">
@@ -102,7 +111,7 @@
           <input
             matInput
             placeholder="Nome"
-            formControlName="collaboratorGroup"
+            formControlName="phoneNumber"
           />
         </mat-form-field>
       </div>
@@ -113,7 +122,7 @@
           <input
             matInput
             placeholder="Nome"
-            formControlName="collaboratorGroup"
+            formControlName="cep"
           />
           <mat-icon matSuffix> search </mat-icon>
         </mat-form-field>
@@ -123,7 +132,7 @@
           <input
             matInput
             placeholder="Nome"
-            formControlName="collaboratorGroup"
+            formControlName="street"
           />
         </mat-form-field>
 
@@ -132,7 +141,7 @@
           <input
             matInput
             placeholder="Nome"
-            formControlName="collaboratorGroup"
+            formControlName="number"
           />
         </mat-form-field>
       </div>
@@ -143,7 +152,7 @@
           <input
             matInput
             placeholder="Nome"
-            formControlName="collaboratorGroup"
+            formControlName="complement"
           />
         </mat-form-field>
         <mat-form-field fxFlex="20" appearance="outline">
@@ -151,7 +160,7 @@
           <input
             matInput
             placeholder="Nome"
-            formControlName="collaboratorGroup"
+            formControlName="state"
           />
         </mat-form-field>
 
@@ -160,7 +169,7 @@
           <input
             matInput
             placeholder="Nome"
-            formControlName="collaboratorGroup"
+            formControlName="city"
           />
         </mat-form-field>
       </div>
@@ -171,7 +180,7 @@
           <input
             matInput
             placeholder="Login"
-            formControlName="collaboratorGroup"
+            formControlName="login"
           />
         </mat-form-field>
 
@@ -180,7 +189,7 @@
           <input
             matInput
             placeholder="Nome"
-            formControlName="collaboratorGroup"
+            formControlName="email"
           />
         </mat-form-field>
 
@@ -189,7 +198,7 @@
           <input
             matInput
             placeholder="Nome"
-            formControlName="collaboratorGroup"
+            formControlName="site"
           />
         </mat-form-field>
       </div>

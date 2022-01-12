@@ -19,10 +19,36 @@ export class CollaboratorCreateComponent implements OnInit {
 
   initForm() {
     this.collaboratorForm = this.fb.group({
-      collaboratorGroup: ['', Validators.required],
-      type: ['', Validators.required],
+      firstNameCorporateName: ['', Validators.required],
+      lastNameFantasyName: ['', Validators.required],
+      login: ['', Validators.required],
+      gender: ['', Validators.required],
       office: ['', Validators.required],
-      name: ['', Validators.required],
+      collaboratorTypes: ['', Validators.required],
+      cpf: ['', Validators.required],
+      birthDate: ['', Validators.required],
+      email: ['', Validators.required],
+      cnpj: ['', Validators.required],
+      stateRegistration: ['', Validators.required],
+      municipalInscription: ['', Validators.required],
+      site: ['', Validators.required],
+      
+      //phone entity
+     
+      phoneNumber: ['', Validators.required],
+     
+      //adresses entity 
+
+      cep: ['', Validators.required],
+      number: ['', Validators.required],
+      complement: ['', Validators.required],
+      street: ['', Validators.required],
+      state: ['', Validators.required],
+      city: ['', Validators.required],
+
+
+
+
       education: this.fb.array([]),
     });
   }

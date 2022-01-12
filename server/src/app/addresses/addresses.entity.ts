@@ -20,6 +20,15 @@ export class AddressesEntity {
   @Column({ name: 'number' })
   number: string;
 
+  @Column({ name: 'street' })
+  street: string;
+
+  @Column({ name: 'state' })
+  state: string;
+
+  @Column({ name: 'city' })
+  city: string;
+
   @Column({ name: 'complement' })
   complement: string;
 

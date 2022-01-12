@@ -70,7 +70,7 @@ export class CollaboratorsEntity {
   addresses: AddressesEntity[];
 
   @OneToMany(() => PhonesEntity, phone => phone.collaborator)
-  phones: PhonesEntity[];
+  phoneNumber: PhonesEntity[];
 
   @OneToMany(() => SkillsEntity, skills => skills.collaborator)
   skills: SkillsEntity[];
