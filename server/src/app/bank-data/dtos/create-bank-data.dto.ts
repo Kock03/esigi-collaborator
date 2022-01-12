@@ -20,7 +20,7 @@ export class CreateBankDataDto {
   accountNumber: number;
 
   @IsNotEmpty()
-  AccountDigit: number;
+  bankAccountDigit:number;
 
   @IsNotEmpty()
   collaborator: CollaboratorsEntity;

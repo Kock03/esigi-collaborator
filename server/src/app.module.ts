@@ -20,7 +20,7 @@ import { LanguagesModule } from './app/languages/languages.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot(),TypeOrmModule.forRoot({
+    ConfigModule.forRoot(), TypeOrmModule.forRoot({
       type: process.env.TYPEORM_CONNECTION,
       host: process.env.TYPEORM_HOST,
       port: process.env.TYPEORM_PORT,
@@ -29,6 +29,7 @@ import { LanguagesModule } from './app/languages/languages.module';
       database: process.env.TYPEORM_DATABASE,
       entities: [__dirname + '/**/*.entity{.js,.ts}'],
       synchronize: true,
+      namingStrategy: new SnakeNamingStrategy()
     } as TypeOrmModuleOptions),
     BankDataModule,
     PhonesModule,
@@ -43,4 +44,4 @@ import { LanguagesModule } from './app/languages/languages.module';
   controllers: [],
   providers: [],
 })
-export class AppModule {}
+export class AppModule { }

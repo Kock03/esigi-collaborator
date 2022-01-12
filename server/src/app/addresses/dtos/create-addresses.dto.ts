@@ -10,6 +10,15 @@ export class CreateAddressesDto {
   number: string;
 
   @IsNotEmpty()
+  street: string;
+
+  @IsNotEmpty()
+  state: string;
+
+  @IsNotEmpty()
+  city: string;
+  
+  @IsNotEmpty()
   complement: string;
 
   @IsNotEmpty()

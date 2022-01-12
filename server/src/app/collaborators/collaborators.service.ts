@@ -9,20 +9,12 @@ export class CollaboratorsService {
   constructor(
     @InjectRepository(CollaboratorsEntity)
     private readonly collaboratorsRepository: Repository<CollaboratorsEntity>,
-  ) {}
+  ) { }
 
   async findAll() {
     const collaboratorsWhiteAll = await this.collaboratorsRepository
-    .createQueryBuilder('collaborators')
-    .leftJoinAndSelect('collaborators.bank', 'bank')
-    .leftJoinAndSelect('collaborators.addresses', 'addresses')
-    .leftJoinAndSelect('collaborators.phones', 'phones')
-    .leftJoinAndSelect('collaborators.skills','skills')
-    .leftJoinAndSelect('collaborators.documents','documents')
-    .leftJoinAndSelect('collaborators.languages','languages')
-    .leftJoinAndSelect('collaborators.educations','educations')
-    .getMany();
-  
+      .createQueryBuilder('collaborators')
+      .getMany();
 
     return collaboratorsWhiteAll;
   }
@@ -30,6 +22,7 @@ export class CollaboratorsService {
   async findOneOrFail(
     conditions: FindConditions<CollaboratorsEntity>,
     options?: FindOneOptions<CollaboratorsEntity>,) {
+    options = { relations: ['BankData'] }
     try {
       return await this.collaboratorsRepository.findOneOrFail(
         conditions,
@@ -46,13 +39,13 @@ export class CollaboratorsService {
   }
 
   async update(id: string, data: CreateCollaboratorsDto) {
-    const collaborator = await this.collaboratorsRepository.findOneOrFail({id});
+    const collaborator = await this.collaboratorsRepository.findOneOrFail({ id });
     this.collaboratorsRepository.merge(collaborator, data);
     return await this.collaboratorsRepository.save(collaborator);
   }
 
   async destroy(id: string) {
-   this.collaboratorsRepository.findOneOrFail({id});
+    this.collaboratorsRepository.findOneOrFail({ id });
     return await this.collaboratorsRepository.softDelete({ id });
   }
 }

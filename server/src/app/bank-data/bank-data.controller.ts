@@ -11,12 +11,11 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
-import { create } from 'domain';
 import { BankDataService } from './bank-data.service';
 import { CreateBankDataDto } from './dtos/create-bank-data.dto';
 import { UpdateBankDataDto } from './dtos/update-bank-data.dto';
 
-@Controller('bank')
+@Controller('/api/v1/bank')
 export class BankDataController {
   constructor(private readonly bankDataService: BankDataService) {}
 

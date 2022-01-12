@@ -26,7 +26,7 @@ export class BankDataService {
     options?: FindOneOptions<BankDataEntity>,
   ) {
     try {
-      return await this.bankDataRepository.findOneOrFail(conditions, options);
+      return await (await this.bankDataRepository.findOneOrFail(conditions, options));
     } catch (error) {
       throw new NotFoundException(error.message);
     }

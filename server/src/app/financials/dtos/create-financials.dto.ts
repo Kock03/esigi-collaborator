@@ -1,4 +1,5 @@
 import { IsNotEmpty } from 'class-validator';
+import { CollaboratorsEntity } from 'src/app/collaborators/collaborators.entity';
 import { ContractTypes } from './contract-types.enum';
 
 export class CreateFinancialsDto {
@@ -14,4 +15,7 @@ export class CreateFinancialsDto {
 
   @IsNotEmpty()
   dateInclusion: Date;
+
+  @IsNotEmpty()
+  collaborator: CollaboratorsEntity;
 }

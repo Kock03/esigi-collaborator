@@ -25,18 +25,18 @@ export class BankDataEntity {
   @Column({ name: 'account_typet' })
   accountType: AccountTypes;
 
-  @Column({ name: 'account_number', type:'int' })
+  @Column({ name: 'account_number', type: 'int' })
   accountNumber: number;
 
-  @Column({ name: 'digit', type:'int' })
+  @Column({ name: 'digit', type: 'int' })
   digit: number;
-  
-  @OneToOne(() => CollaboratorsEntity)
-    @JoinColumn()
-    collaborator: CollaboratorsEntity;
-    
-  @Column({name:'bank_account_digit', type:'int'})
+
+  @Column({ name: 'bank_account_digit', type: 'int' })
   bankAccountDigit: number;
+
+
+  @OneToOne(() => CollaboratorsEntity, collaborator => collaborator.BankData) // specify inverse side as a second parameter
+  collaborator: CollaboratorsEntity;
 
   @CreateDateColumn({ name: 'created_at', type: 'datetime' })
   createdAt: Date;

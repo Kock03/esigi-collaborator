@@ -14,7 +14,7 @@ import { CollaboratorsService } from './collaborators.service';
 import { CreateCollaboratorsDto } from './dtos/create-collaborators.dto';
 import { UpdateCollaboratorsDto } from './dtos/update-collaborators.dto';
 
-@Controller('collaborators')
+@Controller('/api/v1/collaborators')
 export class CollaboratorsController {
   constructor(private readonly collaboratorsRepository: CollaboratorsService) {}
 

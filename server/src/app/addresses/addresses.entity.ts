@@ -32,8 +32,8 @@ export class AddressesEntity {
   @Column({ name: 'complement' })
   complement: string;
 
-  @ManyToOne(() => CollaboratorsEntity, collaborator => collaborator.addresses)
-  collaborators: CollaboratorsEntity;
+  @ManyToOne(() => CollaboratorsEntity, collaborator => collaborator.Addresses)
+  Collaborator: CollaboratorsEntity;
 
   @CreateDateColumn({ name: 'created_at', type: 'datetime' })
   createdAt: Date;

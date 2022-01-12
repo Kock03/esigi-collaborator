@@ -16,7 +16,7 @@ import { UpdatePhonesDto } from './dtos/update-phones.dto';
 import { PhonesEntity } from './phones.entity';
 import { PhonesService } from './phones.service';
 
-@Controller('phones')
+@Controller('/api/v1/phones')
 export class PhonesController {
   constructor(private readonly phonesService: PhonesService) {}
 

@@ -1,8 +1,7 @@
 import { Injectable, NotFoundException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { FindConditions, FindOneOptions, Repository } from "typeorm";
-import { CreateDocumentsDto } from "../documents/dtos/create-documents.dto";
-import { CreateLanguagesDto } from "../languages/dtos/create-languages.dto";
+import { CreateEducationsDto } from "./dtos/create-educations.dto";
 import { UpdateEducationsDto } from "./dtos/update-educations.dto";
 import { EducationsEntity } from "./educations.entity";
 
@@ -32,7 +31,7 @@ export class EducationsService {
     }
   }
 
-  async store(data: CreateDocumentsDto) {
+  async store(data: CreateEducationsDto) {
     const financial = this.educationsRepository.create(data);
     return await this.educationsRepository.save(financial);
   }

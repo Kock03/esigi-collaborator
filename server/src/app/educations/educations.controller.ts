@@ -1,9 +1,9 @@
 import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseUUIDPipe, Post, Put } from "@nestjs/common";
-import { CreateDocumentsDto } from "../documents/dtos/create-documents.dto";
+import { CreateEducationsDto } from "./dtos/create-educations.dto";
 import { UpdateEducationsDto } from "./dtos/update-educations.dto";
 import { EducationsService } from "./educations.service";
 
-@Controller('educations')
+@Controller('/api/v1/educations')
 export class EducationsController {
   constructor(private readonly educationService: EducationsService) {}
 
@@ -18,7 +18,7 @@ export class EducationsController {
   }
 
   @Post()
-  async store(@Body() body: CreateDocumentsDto) {
+  async store(@Body() body: CreateEducationsDto) {
     return await this.educationService.store(body);
   }
 

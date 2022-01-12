@@ -33,13 +33,13 @@ export class CollaboratorsEntity {
   @Column({ name: 'lastname_fantasyname' })
   lastNameFantasyName: string;
 
-  @Column({name:'login'})
+  @Column({ name: 'login' })
   login: string;
 
-  @Column({name:'gender', type:'int'})
+  @Column({ name: 'gender', type: 'int' })
   gender: Gender;
 
-  @Column({name:'office'})
+  @Column({ name: 'office' })
   office: string;
 
   @Column({ name: 'collaborator_types' })
@@ -66,23 +66,31 @@ export class CollaboratorsEntity {
   @Column({ name: 'site' })
   site: string;
 
-  @OneToMany(() => AddressesEntity, addresses => addresses.collaborators)
-  addresses: AddressesEntity[];
+  @Column({ name: 'photo', type: 'blob' })
+  photo: string;
 
-  @OneToMany(() => PhonesEntity, phone => phone.collaborator)
-  phoneNumber: PhonesEntity[];
+  @OneToMany(() => AddressesEntity, addresses => addresses.Collaborator, { cascade: ['insert', 'update', 'remove'], orphanedRowAction: 'delete' })
+  @JoinColumn()
+  Addresses: AddressesEntity[];
 
-  @OneToMany(() => SkillsEntity, skills => skills.collaborator)
+  @OneToMany(() => PhonesEntity, phone => phone.collaborator, { cascade: ['insert', 'update', 'remove'], orphanedRowAction: 'delete' })
+  Phones: PhonesEntity[];
+
+  @OneToMany(() => SkillsEntity, skills => skills.collaborator, { cascade: ['insert', 'update', 'remove'], orphanedRowAction: 'delete' })
   skills: SkillsEntity[];
 
-  @OneToMany(() => DocumentsEntity, documents => documents.collaborator)
+  @OneToMany(() => DocumentsEntity, documents => documents.collaborator, { cascade: ['insert', 'update', 'remove'], orphanedRowAction: 'delete' })
   documents: DocumentsEntity[];
 
-  @OneToMany(() => LanguagesEntity, languages => languages.collaborator)
+  @OneToMany(() => LanguagesEntity, languages => languages.collaborator, { cascade: ['insert', 'update', 'remove'], orphanedRowAction: 'delete' })
   languages: LanguagesEntity[];
 
-  @OneToMany(() => EducationsEntity, educations => educations.collaborator)
+  @OneToMany(() => EducationsEntity, educations => educations.collaborator, { cascade: ['insert', 'update', 'remove'], orphanedRowAction: 'delete' })
   educations: EducationsEntity[];
+
+  @OneToOne(() => BankDataEntity, { cascade: ['insert', 'update', 'remove'], orphanedRowAction: 'delete' })
+  @JoinColumn()
+  BankData: BankDataEntity;
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
@@ -93,9 +101,9 @@ export class CollaboratorsEntity {
   @DeleteDateColumn({ name: 'deleted_at' })
   deletedAt: Date;
 
-  
 
-  
 
-  
+
+
+
 }

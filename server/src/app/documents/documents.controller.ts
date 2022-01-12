@@ -3,7 +3,7 @@ import { DocumentsService } from "./douments.service";
 import { CreateDocumentsDto } from "./dtos/create-documents.dto";
 import { UpdateDocumentsDto } from "./dtos/update-documents.dto";
 
-@Controller('documents')
+@Controller('/api/v1/documents')
 export class DocumentsController {
   constructor(private readonly documentsService: DocumentsService) {}
 

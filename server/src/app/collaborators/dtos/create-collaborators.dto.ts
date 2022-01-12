@@ -46,21 +46,9 @@ export class CreateCollaboratorsDto {
 
   @IsNotEmpty()
   site: string;
-
+  
   @IsNotEmpty()
-  addresses: AddressesEntity[];
-
-  @IsNotEmpty()
-  bankData: BankDataEntity[];
-
-  @IsNotEmpty()
-  phone: PhonesEntity[];
-
-  @IsNotEmpty()
-  skill: SkillsEntity[];
-
-  @IsNotEmpty()
-  financial: FinancialsEntity;
+  photo: string;
 }
 
 
