@@ -47,10 +47,10 @@ export class CollaboratorCreateComponent implements OnInit {
       municipalInscription: ['', Validators.required],
       site: ['site.davi', Validators.required],
 
-      phone: {
+      Phones: {
         phoneNumber: ['35343234', Validators.required],
-        ddd: ['47', Validators.required],
-        doDecode: ['55', Validators.required],
+        ddd: ['71', Validators.required],
+        doDecode: ['+55', Validators.required],
       },
 
       Addresses: this.fb.group({
