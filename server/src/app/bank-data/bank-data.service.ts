@@ -15,7 +15,6 @@ export class BankDataService {
   async findAll() {
     const banksWhiteCollaborator = await this.bankDataRepository
     .createQueryBuilder('bank_data')
-    .leftJoinAndSelect('bank_data.collaborator', 'collaborator')
     .getMany();
 
     return banksWhiteCollaborator;
@@ -25,6 +24,7 @@ export class BankDataService {
     conditions: FindConditions<BankDataEntity>,
     options?: FindOneOptions<BankDataEntity>,
   ) {
+    options = { relations: ['Collaborator']};
     try {
       return await (await this.bankDataRepository.findOneOrFail(conditions, options));
     } catch (error) {

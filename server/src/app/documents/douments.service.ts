@@ -15,7 +15,6 @@ export class DocumentsService {
   async findAll() {
     const documentsWhiteCollaborator = await this.documentsRepository
     .createQueryBuilder('documents')
-    .leftJoinAndSelect('documents.collaborator', 'collaborator')
     .getMany();
 
     return documentsWhiteCollaborator;
@@ -24,6 +23,7 @@ export class DocumentsService {
   async findOneOrfail(
     conditions: FindConditions<DocumentsEntity>,
     options?: FindOneOptions<DocumentsEntity>,) {
+      options = { relations: ['Collaborator']};
     try {
       return await this.documentsRepository.findOneOrFail(conditions, options);
     } catch (error) {

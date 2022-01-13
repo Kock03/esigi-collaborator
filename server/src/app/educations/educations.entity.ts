@@ -19,7 +19,7 @@ export class EducationsEntity{
     @Column({ name: 'situation', type:'int'})
     situation: Situation;
 
-    @ManyToOne(() => CollaboratorsEntity, collaborator => collaborator.educations)
-    collaborator: CollaboratorsEntity;
+    @ManyToOne(() => CollaboratorsEntity, collaborator => collaborator.Educations)
+    Collaborator: CollaboratorsEntity;
 
 }

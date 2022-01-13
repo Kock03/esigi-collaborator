@@ -13,7 +13,7 @@ export class DocumentsEntity {
     @Column({ name: 'file', type: 'blob' })
     file: string;
 
-    @ManyToOne(() => CollaboratorsEntity, collaborator => collaborator.documents)
-    collaborator: CollaboratorsEntity;
+    @ManyToOne(() => CollaboratorsEntity, collaborator => collaborator.Documents)
+    Collaborator: CollaboratorsEntity;
 
 }

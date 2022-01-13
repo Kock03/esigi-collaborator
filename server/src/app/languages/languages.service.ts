@@ -16,7 +16,6 @@ export class LanguagesService {
   async findAll() {
     const languagesWhiteCollaborator = await this.languagesRepository
     .createQueryBuilder('languages')
-    .leftJoinAndSelect('languages.collaborator', 'collaborator')
     .getMany();
 
     return languagesWhiteCollaborator;
@@ -25,6 +24,7 @@ export class LanguagesService {
   async findOneOrfail(
     conditions: FindConditions<LanguagesEntity>,
     options?: FindOneOptions<LanguagesEntity>,) {
+      options = { relations: ['Collaborator']};
     try {
       return await this.languagesRepository.findOneOrFail(conditions, options);
     } catch (error) {

@@ -25,9 +25,8 @@ export class FinancialsEntity {
   @Column({name:'reason', type:'int'})
   reason: Reasons;
 
-  @OneToOne(() => CollaboratorsEntity)
-  @JoinColumn()
-  collaborator: CollaboratorsEntity;
+  @OneToOne(() => CollaboratorsEntity, collaborator => collaborator.Financials) // specify inverse side as a second parameter
+  Collaborator: CollaboratorsEntity;
 
   @CreateDateColumn({ name: 'date_inclusion' })
   dateInclusion: Date;

@@ -15,7 +15,6 @@ export class SkillsService {
   async findAll() {
     const skillsWhiteCollaborator = await this.skillsRepository
     .createQueryBuilder('skills')
-    .leftJoinAndSelect('skills.collaborator', 'collaborator')
     .getMany();
 
     return skillsWhiteCollaborator;
@@ -25,6 +24,7 @@ export class SkillsService {
     conditions: FindConditions<SkillsEntity>,
     options?: FindOneOptions<SkillsEntity>,
   ) {
+    options = { relations: ['Collaborator']};
     try {
       return await this.skillsRepository.findOneOrFail(conditions, options);
     } catch (error) {
