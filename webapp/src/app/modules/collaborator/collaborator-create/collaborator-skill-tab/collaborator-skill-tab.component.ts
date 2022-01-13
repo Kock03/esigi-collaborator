@@ -64,6 +64,7 @@ export class CollaboratorSkillTabComponent implements OnInit {
       yearsExperience: ['5', Validators.required],
       currentPosition: ['', Validators.required],
     });
+    
   }
 
   next() {
