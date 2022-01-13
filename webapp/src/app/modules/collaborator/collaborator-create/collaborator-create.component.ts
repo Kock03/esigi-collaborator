@@ -13,80 +13,6 @@ export class CollaboratorCreateComponent implements OnInit {
   collaboratorForm!: FormGroup;
   step: number = 5;
 
-  obj = {
-    firstNameCorporateName: 'Denis',
-    lastNameFantasyName: 'Silva',
-    login: 'l5gado',
-    gender: '1',
-    office: 'back-end',
-    collaboratorTypes: '1',
-    cpf: '458123614745',
-    birthDate: '2005/02/11',
-    email: 'l5gado@gmail.com',
-    cnpj: '00',
-    stateRegistration: '2021/05/12',
-    municipalInscription: '???',
-    site: 'git.com/l5gado',
-    photo: '123',
-    Addresses: {
-      cep: '1234569',
-      number: '123',
-      street: 'rua bahia',
-      state: 'sc',
-      city: 'bnu',
-      complement: 'final da rua',
-    },
-    Phones: [
-      {
-        phoneNumber: '992175846',
-        ddd: '55',
-        ddi: '47',
-      },
-    ],
-    Skills: [
-      {
-        tecnology: 'node',
-        seniority: '1',
-        yearsExperience: '10',
-        currentPosition: false,
-      },
-    ],
-    Documents: [
-      {
-        name: 'rg',
-        file: '123',
-      },
-    ],
-    Languages: [
-      {
-        languageName: 'inlges',
-        degreeOfInfluence: '3',
-      },
-    ],
-    Educations: [
-      {
-        course: 'entra21',
-        schooling: '2',
-        institution: 'pedro segundo',
-        situation: '1',
-      },
-    ],
-    BankData: {
-      bank: 'viacredi',
-      agency: '1005',
-      accountType: '1',
-      accountNumber: '145698',
-      digit: '14',
-      bankAccountDigit: '02',
-    },
-    Financials: {
-      contractType: '1',
-      value: '2000',
-      reason: '1',
-      dateInclusion: '2021/05/03',
-    },
-  };
-
   constructor(
     private fb: FormBuilder,
     private collaboratorProvider: CollaboratorProvider,
@@ -127,16 +53,14 @@ export class CollaboratorCreateComponent implements OnInit {
         doDecode: ['', Validators.required],
       },
 
-      Addresses: this.fb.group(
-        {
-          cep: ['', Validators.required],
-          number: ['', Validators.required],
-          complement: ['', Validators.required],
-          street: ['', Validators.required],
-          state: ['', Validators.required],
-          city: ['', Validators.required],
-        },
-      ),
+      Addresses: this.fb.group({
+        cep: ['', Validators.required],
+        number: ['', Validators.required],
+        complement: ['', Validators.required],
+        street: ['', Validators.required],
+        state: ['', Validators.required],
+        city: ['', Validators.required],
+      }),
 
       education: this.fb.array([]),
       language: this.fb.array([]),
@@ -149,7 +73,7 @@ export class CollaboratorCreateComponent implements OnInit {
   async saveCustomer() {
     const data = this.collaboratorForm.getRawValue();
     try {
-      const collaborator = await this.collaboratorProvider.store(this.obj);
+      const collaborator = await this.collaboratorProvider.store(data);
       console.log(
         '🚀 ~ file: collaborator-create.component.ts ~ line 72 ~ CollaboratorCreateComponent ~ saveCustomer ~ collaborator',
         collaborator
