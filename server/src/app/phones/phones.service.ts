@@ -15,7 +15,6 @@ export class PhonesService {
   async findAll() {
     const phonesWhiteCollaborator = await this.phonesRepository
     .createQueryBuilder('phones')
-    .leftJoinAndSelect('phones.collaborator', 'collaborator')
     .getMany();
 
     return phonesWhiteCollaborator;
@@ -24,7 +23,9 @@ export class PhonesService {
   async findOneOrfail(
     conditions: FindConditions<PhonesEntity>,
     options?: FindOneOptions<PhonesEntity>,
+     
   ) {
+    options = { relations: ['Collaborator']};
     try {
       return await this.phonesRepository.findOneOrFail(conditions, options);
     } catch (error) {

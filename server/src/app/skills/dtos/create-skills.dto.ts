@@ -1,4 +1,5 @@
 import { IsNotEmpty } from "class-validator";
+import { CollaboratorsEntity } from "src/app/collaborators/collaborators.entity";
 
 export class CreateSkillsDto {
   
@@ -13,4 +14,7 @@ export class CreateSkillsDto {
 
   @IsNotEmpty()
   currentPosition: boolean;
+
+  @IsNotEmpty()
+  collaborator: CollaboratorsEntity;
 }

@@ -23,6 +23,7 @@ export class PhonesController {
   @Get()
   async index() {
     return await this.phonesService.findAll();
+
   }
 
   @Get(':id')

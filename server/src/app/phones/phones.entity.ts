@@ -23,8 +23,8 @@ export class PhonesEntity {
   @Column({ name: 'ddi', length: 2 })
   ddi: string;
 
-  @ManyToOne(() => CollaboratorsEntity, collaborators => collaborators.phoneNumber)
-  collaborator: CollaboratorsEntity;
+  @ManyToOne(() => CollaboratorsEntity, collaborators => collaborators.Phones)
+  Collaborator: CollaboratorsEntity;
 
   @CreateDateColumn({ name: 'created_at', type: 'datetime' })
   createdAt: Date;

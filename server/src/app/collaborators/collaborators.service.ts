@@ -22,7 +22,7 @@ export class CollaboratorsService {
   async findOneOrFail(
     conditions: FindConditions<CollaboratorsEntity>,
     options?: FindOneOptions<CollaboratorsEntity>,) {
-    options = { relations: ['BankData'] }
+    options = { relations: ['BankData','Educations','Languages','Documents','Skills','Phones','Addresses'] }
     try {
       return await this.collaboratorsRepository.findOneOrFail(
         conditions,

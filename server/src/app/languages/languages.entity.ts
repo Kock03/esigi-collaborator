@@ -13,7 +13,7 @@ export class LanguagesEntity {
     @Column({ name: 'degree_of_influence', type: 'int' })
     degreeOfInfluence: degreeOfInfluence;
 
-    @ManyToOne(() => CollaboratorsEntity, collaborator => collaborator.languages)
-    collaborator: CollaboratorsEntity;
+    @ManyToOne(() => CollaboratorsEntity, collaborator => collaborator.Languages)
+    Collaborator: CollaboratorsEntity;
 
 }

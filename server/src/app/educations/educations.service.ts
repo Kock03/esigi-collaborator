@@ -15,7 +15,6 @@ export class EducationsService {
   async findAll() {
     const educationsWhiteCollaborator = await this.educationsRepository
     .createQueryBuilder('educations')
-    .leftJoinAndSelect('educations.collaborator', 'collaborator')
     .getMany();
 
     return educationsWhiteCollaborator;
@@ -24,6 +23,7 @@ export class EducationsService {
   async findOneOrFail(
     conditions: FindConditions<EducationsEntity>,
     options?: FindOneOptions<EducationsEntity>) {
+      options = { relations: ['Collaborator']};
     try {
       return await this.educationsRepository.findOneOrFail(conditions, options);
     } catch (error) {
