@@ -16,16 +16,19 @@ export class FinancialsEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ name: 'contract_type' })
+  @Column()
   contractType: ContractTypes;
 
   @Column({ name: 'value' })
   value: number;
 
-  @Column({name:'reason', type:'int'})
+  @Column({ name: 'reason', type: 'int' })
   reason: Reasons;
 
-  @OneToOne(() => CollaboratorsEntity, collaborator => collaborator.Financials) // specify inverse side as a second parameter
+  @OneToOne(
+    () => CollaboratorsEntity,
+    (collaborator) => collaborator.Financials,
+  ) // specify inverse side as a second parameter
   Collaborator: CollaboratorsEntity;
 
   @CreateDateColumn({ name: 'date_inclusion' })

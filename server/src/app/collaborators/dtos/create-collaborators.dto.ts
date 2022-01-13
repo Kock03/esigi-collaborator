@@ -30,7 +30,7 @@ export class CreateCollaboratorsDto {
   @IsNotEmpty()
   collaboratorTypes: CollaboratorTypes;
   
-  @IsNotEmpty()
+  @IsOptional()
   cpf: string;
 
   @IsNotEmpty()
@@ -39,19 +39,19 @@ export class CreateCollaboratorsDto {
   @IsNotEmpty()
   email: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   cnpj: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   stateRegistration: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   municipalInscription: string;
 
   @IsNotEmpty()
   site: string;
   
-  @IsNotEmpty()
+  @IsOptional()
   photo: string;
 
   @IsOptional()

@@ -6,5 +6,8 @@
     "start:server": "cd server && npm run start:dev",
     "start:webapp": "cd webapp && npm run start"
   },
-  "private": true
+  "private": true,
+  "dependencies": {
+    "ngx-mask": "^13.1.1"
+  }
 }

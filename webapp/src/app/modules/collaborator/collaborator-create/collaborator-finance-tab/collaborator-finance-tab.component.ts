@@ -63,10 +63,10 @@ export class CollaboratorFinanceTabComponent implements OnInit {
 
   initForm(): void {
     this.financeForm = this.fb.group({
-      dateInclusion: ['08/11/2021', Validators.required],
-      contractType: ['CLT', Validators.required],
-      reason: ['Contratação', Validators.required],
-      value: ['340000', Validators.required],
+      dateInclusion: ['08/11/2021'],
+      contractType: ['CLT'],
+      reason: ['Contratação'],
+      value: ['340000'],
     });
   }
 

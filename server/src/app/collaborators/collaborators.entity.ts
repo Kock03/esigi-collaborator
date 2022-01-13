@@ -63,34 +63,58 @@ export class CollaboratorsEntity {
   @Column({ name: 'site' })
   site: string;
 
-  @Column({ name: 'photo', type: 'blob' })
+  @Column({ name: 'photo', type: 'blob', nullable: true })
   photo: string;
 
-  @OneToOne(() => AddressesEntity, { cascade: ['insert', 'update', 'remove'], orphanedRowAction: 'delete'})
+  @OneToOne(() => AddressesEntity, {
+    cascade: ['insert', 'update', 'remove'],
+    orphanedRowAction: 'delete',
+  })
   @JoinColumn()
   Addresses: AddressesEntity;
 
-  @OneToMany(() => SkillsEntity, skills => skills.Collaborator, { cascade: ['insert', 'update', 'remove'], orphanedRowAction: 'delete'})
+  @OneToMany(() => SkillsEntity, (skills) => skills.Collaborator, {
+    cascade: ['insert', 'update', 'remove'],
+    orphanedRowAction: 'delete',
+  })
   Skills: SkillsEntity[];
 
-  @OneToMany(() => DocumentsEntity, documents => documents.Collaborator, { cascade: ['insert', 'update', 'remove'], orphanedRowAction: 'delete'})
+  @OneToMany(() => DocumentsEntity, (documents) => documents.Collaborator, {
+    cascade: ['insert', 'update', 'remove'],
+    orphanedRowAction: 'delete',
+  })
   Documents: DocumentsEntity[];
 
-  @OneToMany(() => LanguagesEntity, languages => languages.Collaborator, { cascade: ['insert', 'update', 'remove'], orphanedRowAction: 'delete'})
+  @OneToMany(() => LanguagesEntity, (languages) => languages.Collaborator, {
+    cascade: ['insert', 'update', 'remove'],
+    orphanedRowAction: 'delete',
+  })
   Languages: LanguagesEntity[];
 
-  @OneToMany(() => EducationsEntity, educations => educations.Collaborator, { cascade: ['insert', 'update', 'remove'], orphanedRowAction: 'delete'})
+  @OneToMany(() => EducationsEntity, (educations) => educations.Collaborator, {
+    cascade: ['insert', 'update', 'remove'],
+    orphanedRowAction: 'delete',
+  })
   Educations: EducationsEntity[];
 
-  @OneToOne(() => PhonesEntity, { cascade: ['insert', 'update', 'remove'], orphanedRowAction: 'delete'})
+  @OneToOne(() => PhonesEntity, {
+    cascade: ['insert', 'update', 'remove'],
+    orphanedRowAction: 'delete',
+  })
   @JoinColumn()
   Phone: PhonesEntity;
 
-  @OneToOne(() => BankDataEntity, { cascade: ['insert', 'update', 'remove'], orphanedRowAction: 'delete'})
+  @OneToOne(() => BankDataEntity, {
+    cascade: ['insert', 'update', 'remove'],
+    orphanedRowAction: 'delete',
+  })
   @JoinColumn()
   BankData: BankDataEntity;
 
-  @OneToOne(() => FinancialsEntity, { cascade: ['insert', 'update', 'remove'], orphanedRowAction: 'delete'})
+  @OneToOne(() => FinancialsEntity, {
+    cascade: ['insert', 'update', 'remove'],
+    orphanedRowAction: 'delete',
+  })
   @JoinColumn()
   Financials: FinancialsEntity;
 
@@ -102,10 +126,4 @@ export class CollaboratorsEntity {
 
   @DeleteDateColumn({ name: 'deleted_at' })
   deletedAt: Date;
-
-
-
-
-
-
 }

@@ -34,7 +34,7 @@ export class CollaboratorSkillTabComponent implements OnInit {
     {
       tecnology: 'Java',
       yearsExperience: '',
-      seniority: 'senior',
+      seniority: 'Senior',
       currentPosition: false,
     },
   ];
@@ -48,7 +48,7 @@ export class CollaboratorSkillTabComponent implements OnInit {
   checked = false;
 
   get skillArray() {
-    return this.collaboratorForm.controls['skill'] as FormArray;
+    return this.collaboratorForm.controls['Skills'] as FormArray;
   }
 
   constructor(private fb: FormBuilder) {}
@@ -59,10 +59,10 @@ export class CollaboratorSkillTabComponent implements OnInit {
 
   initForm(): void {
     this.skillForm = this.fb.group({
-      tecnology: ['Java', Validators.required],
-      seniority: ['senior', Validators.required],
-      yearsExperience: ['5', Validators.required],
-      currentPosition: ['', Validators.required],
+      tecnology: ['Java'],
+      seniority: ['Senior'],
+      yearsExperience: ['5'],
+      currentPosition: [true],
     });
     
   }

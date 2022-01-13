@@ -13,6 +13,8 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { ApiGateway } from 'src/api-gateway';
+import { CepService } from 'src/services/cep.service';
 
 export interface collaboratorTypes {
   id: number;
@@ -43,22 +45,60 @@ export class CollaboratorRegisterTabComponent implements OnInit {
     'Desenvolvedor React',
   ];
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private cepService: CepService) {}
 
   ngOnInit(): void {
-    if (this.collaboratorForm) {
-      this.collaboratorForm.controls[
-        'collaboratorTypes'
-      ].valueChanges.subscribe((res) => {
+    this.collaboratorForm.valueChanges.subscribe((res) => {
+      const addressForm = this.collaboratorForm.controls[
+        'Addresses'
+      ] as FormGroup;
+      console.log(
+        '🚀 ~ file: collaborator-register-tab.component.ts ~ line 56 ~ CollaboratorRegisterTabComponent ~ ngAfterViewInit ~ addressForm',
+        addressForm
+      );
+      addressForm.controls['cep'].valueChanges.subscribe((res) => {
         console.log(
-          '🚀 ~ file: collaborator-register-tab.component.ts ~ line 42 ~ CollaboratorRegisterTabComponent ~ ngOnInit ~ res',
+          "🚀 ~ file: collaborator-register-tab.component.ts ~ line 57 ~ CollaboratorRegisterTabComponent ~ addressForm.controls['cep'].valueChanges.subscribe ~ res",
           res
         );
       });
-    }
+    });
   }
 
+  ngAfterViewInit(): void {}
+  
   next() {
     this.onChange.next(true);
+  }
+
+  compareSelect(o1: any, o2: any): boolean {
+    if (!o1 || !o2) {
+      return false;
+    }
+    return o1.id === o2.id;
+  }
+
+  async getAddress() {
+    const address = this.collaboratorForm.controls['Addresses'].value;
+    console.log(address.cep);
+    const district = await this.cepService.findDistrict(
+      address.cep.replace('-', '')
+    );
+    console.log(
+      '🚀 ~ file: collaborator-register-tab.component.ts ~ line 75 ~ CollaboratorRegisterTabComponent ~ getAddress ~ district',
+      district
+    );
+
+    if (district.erro) {
+      window.alert('Cep inválido');
+      this.collaboratorForm.controls['Addresses'].reset();
+    } else {
+      this.collaboratorForm.controls['Addresses'].patchValue({
+        cep: district.cep,
+        city: district.localidade,
+        street: district.logradouro,
+        state: district.uf,
+      });
+    }
   }
 }

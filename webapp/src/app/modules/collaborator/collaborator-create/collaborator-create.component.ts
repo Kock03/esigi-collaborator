@@ -22,66 +22,68 @@ export class CollaboratorCreateComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     console.log(await this.collaboratorProvider.findAll());
     this.initForm();
-    this.collaboratorForm.valueChanges.subscribe((res) => {
-      console.log(
-        '🚀 ~ file: collaborator-create.component.ts ~ line 19 ~ CollaboratorCreateComponent ~ ngOnInit ~ res',
-        res
-      );
-    });
   }
 
   initForm() {
     this.collaboratorForm = this.fb.group({
-      collaboratorGroup: ['', Validators.required],
       firstNameCorporateName: ['Davi', Validators.required],
       lastNameFantasyName: ['Luiz', Validators.required],
       login: ['davi.log', Validators.required],
-      gender: ['Masculino', Validators.required],
+      gender: [1, Validators.required],
       office: ['Desenvolvedor Angular', Validators.required],
-      collaboratorTypes: ['CLT', Validators.required],
+      collaboratorTypes: [1, Validators.required],
       cpf: ['25454678654', Validators.required],
       birthDate: ['06/12/2004', Validators.required],
-      email: ['DAVI@EMAIL', Validators.required],
+      email: ['davi@email', Validators.required],
       cnpj: ['', Validators.required],
       stateRegistration: ['', Validators.required],
       municipalInscription: ['', Validators.required],
       site: ['site.davi', Validators.required],
-
-      Phones: {
+      photo: null,
+      Phone: this.fb.group({
         phoneNumber: ['35343234', Validators.required],
         ddd: ['71', Validators.required],
-        doDecode: ['+55', Validators.required],
-      },
-
-      Addresses: this.fb.group({
-        cep: ['89040400', Validators.required],
-        number: ['44', Validators.required],
-        complement: ['casa', Validators.required],
-        street: ['caçadores', Validators.required],
-        state: ['sc', Validators.required],
-        city: ['blumenau', Validators.required],
+        ddi: ['+55', Validators.required],
       }),
 
-      education: this.fb.array([]),
-      language: this.fb.array([]),
-      bank: this.fb.array([]),
-      finance: this.fb.array([]),
-      skill: this.fb.array([]),
+      Addresses: this.fb.group({
+        cep: ['', Validators.required],
+        number: [''],
+        complement: [''],
+        street: ['', Validators.required],
+        state: ['', Validators.required],
+        city: ['', Validators.required],
+      }),
+
+      Educations: this.fb.array([]),
+      Languages: this.fb.array([]),
+      BankData: this.fb.array([]),
+      Financials: this.fb.array([]),
+      Skills: this.fb.array([]),
+      Documents: null,
     });
   }
 
   async saveCustomer() {
-    const data = this.collaboratorForm.getRawValue();
+    let data = this.collaboratorForm.getRawValue();
+
+    if (!data.Educations.length) {
+      data.Educations = null;
+    }
+    if (!data.Languages.length) {
+      data.Languages = null;
+    }
+    if (!data.BankData.length) {
+      data.BankData = null;
+    }
+    if (!data.Financials.length) {
+      data.Financials = null;
+    }
+    if (!data.Skills.length) {
+      data.Skills = null;
+    }
     try {
       const collaborator = await this.collaboratorProvider.store(data);
-      console.log(
-        '🚀 ~ file: collaborator-create.component.ts ~ line 72 ~ CollaboratorCreateComponent ~ saveCustomer ~ collaborator',
-        collaborator
-      );
-      console.log(
-        '🚀 ~ file: collaborator-create.component.ts ~ line 72 ~ CollaboratorCreateComponent ~ saveCustomer ~ data',
-        data
-      );
     } catch (error) {
       console.log('ERROR 132' + error);
     }

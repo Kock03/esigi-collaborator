@@ -69,11 +69,11 @@ export class CollaboratorEducationTabComponent implements OnInit {
   Education: any;
 
   get languageArray() {
-    return this.collaboratorForm.controls['language'] as FormArray;
+    return this.collaboratorForm.controls['Languages'] as FormArray;
   }
 
   get educationArray() {
-    return this.collaboratorForm.controls['education'] as FormArray;
+    return this.collaboratorForm.controls['Educations'] as FormArray;
   }
 
   constructor(private fb: FormBuilder) {}
@@ -84,14 +84,14 @@ export class CollaboratorEducationTabComponent implements OnInit {
 
   initForm(): void {
     this.languageForm = this.fb.group({
-      languageName: ['Russo', Validators.required],
-      degreeOfInfluence: ['Leitura', Validators.required],
+      languageName: ['Russo'],
+      degreeOfInfluence: ['Leitura'],
     });
     this.educationForm = this.fb.group({
-      schooling: ['Ensino Superior', Validators.required],
-      situation: ['completo', Validators.required],
-      course: ['curso', Validators.required],
-      institution: ['furb', Validators.required],
+      schooling: ['Ensino Superior'],
+      situation: ['completo'],
+      course: ['curso'],
+      institution: ['furb'],
     });
   }
 

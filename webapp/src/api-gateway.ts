@@ -54,9 +54,21 @@ export class ApiGateway {
     this.pendingCommands$ = this.pendingCommandsSubject.asObservable();
   }
 
-  get(url: string, params?: any, showLoading?: boolean): Observable<any> {
+  get(
+    url: string,
+    params?: any,
+    service?: string,
+    showLoading?: boolean
+  ): Observable<any> {
     let options = new ApiGatewayOptions();
-    options.baseUrl = environment.baseUrl;
+    switch (service) {
+      case 'ms-cep':
+        options.baseUrl = 'http://localhost:8000/';
+        break;
+      default:
+        options.baseUrl = environment.baseUrl;
+        break;
+    }
     options.method = RequestMethod.Get;
     options.url = url;
     options.params = params;
