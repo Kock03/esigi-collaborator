@@ -19,6 +19,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
 import { CollaboratorEducationTabComponent } from './collaborator-create/collaborator-education-tab/collaborator-education-tab.component';
 import { CollaboratorDocumentTabComponent } from './collaborator-create/collaborator-document-tab/collaborator-document-tab.component';
+import { HttpClientModule } from '@angular/common/http';
 
 const routes: Routes = [
   {
@@ -51,6 +52,7 @@ const routes: Routes = [
     MatTableModule,
     MatCheckboxModule,
     MatIconModule,
+    HttpClientModule
   ],
   entryComponents: [
     CollaboratorRegisterTabComponent,

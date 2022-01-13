@@ -42,7 +42,7 @@ export class CollaboratorsEntity {
   @Column({ name: 'collaborator_types' })
   collaboratorTypes: CollaboratorTypes;
 
-  @Column({ name: 'cpf' })
+  @Column({ name: 'cpf', unique: true })
   cpf: string;
 
   @Column({ name: 'birth_date' })
@@ -66,9 +66,9 @@ export class CollaboratorsEntity {
   @Column({ name: 'photo', type: 'blob' })
   photo: string;
 
-  @OneToMany(() => AddressesEntity, addresses => addresses.Collaborator, { cascade: ['insert', 'update', 'remove'], orphanedRowAction: 'delete'})
+  @OneToOne(() => AddressesEntity, { cascade: ['insert', 'update', 'remove'], orphanedRowAction: 'delete'})
   @JoinColumn()
-  Addresses: AddressesEntity[];
+  Addresses: AddressesEntity;
 
   @OneToMany(() => PhonesEntity, phone => phone.Collaborator, { cascade: ['insert', 'update', 'remove'], orphanedRowAction: 'delete'})
   Phones: PhonesEntity[];
