@@ -70,9 +70,6 @@ export class CollaboratorsEntity {
   @JoinColumn()
   Addresses: AddressesEntity;
 
-  @OneToMany(() => PhonesEntity, phone => phone.Collaborator, { cascade: ['insert', 'update', 'remove'], orphanedRowAction: 'delete'})
-  Phones: PhonesEntity[];
-
   @OneToMany(() => SkillsEntity, skills => skills.Collaborator, { cascade: ['insert', 'update', 'remove'], orphanedRowAction: 'delete'})
   Skills: SkillsEntity[];
 
@@ -84,6 +81,10 @@ export class CollaboratorsEntity {
 
   @OneToMany(() => EducationsEntity, educations => educations.Collaborator, { cascade: ['insert', 'update', 'remove'], orphanedRowAction: 'delete'})
   Educations: EducationsEntity[];
+
+  @OneToOne(() => PhonesEntity, { cascade: ['insert', 'update', 'remove'], orphanedRowAction: 'delete'})
+  @JoinColumn()
+  Phone: PhonesEntity;
 
   @OneToOne(() => BankDataEntity, { cascade: ['insert', 'update', 'remove'], orphanedRowAction: 'delete'})
   @JoinColumn()

@@ -6,7 +6,7 @@ import {
   UpdateDateColumn,
   DeleteDateColumn,
   PrimaryGeneratedColumn,
-  ManyToOne,
+  OneToOne,
 } from 'typeorm';
 
 @Entity({ name: 'phones' })
@@ -23,7 +23,7 @@ export class PhonesEntity {
   @Column({ name: 'ddi', length: 2 })
   ddi: string;
 
-  @ManyToOne(() => CollaboratorsEntity, collaborators => collaborators.Phones)
+  @OneToOne(() => CollaboratorsEntity, collaborator => collaborator.Phone) // specify inverse side as a second parameter
   Collaborator: CollaboratorsEntity;
 
   @CreateDateColumn({ name: 'created_at', type: 'datetime' })
