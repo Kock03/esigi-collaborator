@@ -58,7 +58,7 @@ export class CreateCollaboratorsDto {
   Addresses: AddressesEntity;
 
   @IsOptional()
-  Phones: PhonesEntity[];
+  Phone: PhonesEntity;
 
   @IsOptional()
   Skills: SkillsEntity[];
