@@ -84,14 +84,14 @@ export class CollaboratorEducationTabComponent implements OnInit {
 
   initForm(): void {
     this.languageForm = this.fb.group({
-      languageName: ['', Validators.required],
-      degreeOfInfluence: ['', Validators.required],
+      languageName: ['Russo', Validators.required],
+      degreeOfInfluence: ['Leitura', Validators.required],
     });
     this.educationForm = this.fb.group({
-      schooling: ['', Validators.required],
-      situation: ['', Validators.required],
-      course: ['', Validators.required],
-      institution: ['', Validators.required],
+      schooling: ['Ensino Superior', Validators.required],
+      situation: ['completo', Validators.required],
+      course: ['curso', Validators.required],
+      institution: ['furb', Validators.required],
     });
   }
 

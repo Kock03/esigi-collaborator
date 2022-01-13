@@ -11,7 +11,7 @@ import { CollaboratorProvider } from 'src/providers/collaborator.provider';
 })
 export class CollaboratorCreateComponent implements OnInit {
   collaboratorForm!: FormGroup;
-  step: number = 5;
+  step: number = 1;
 
   constructor(
     private fb: FormBuilder,
@@ -33,33 +33,33 @@ export class CollaboratorCreateComponent implements OnInit {
   initForm() {
     this.collaboratorForm = this.fb.group({
       collaboratorGroup: ['', Validators.required],
-      firstNameCorporateName: ['', Validators.required],
-      lastNameFantasyName: ['', Validators.required],
-      login: ['', Validators.required],
-      gender: ['', Validators.required],
-      office: ['', Validators.required],
-      collaboratorTypes: ['', Validators.required],
-      cpf: ['', Validators.required],
-      birthDate: ['', Validators.required],
-      email: ['', Validators.required],
+      firstNameCorporateName: ['Davi', Validators.required],
+      lastNameFantasyName: ['Luiz', Validators.required],
+      login: ['davi.log', Validators.required],
+      gender: ['Masculino', Validators.required],
+      office: ['Desenvolvedor Angular', Validators.required],
+      collaboratorTypes: ['CLT', Validators.required],
+      cpf: ['25454678654', Validators.required],
+      birthDate: ['06/12/2004', Validators.required],
+      email: ['DAVI@EMAIL', Validators.required],
       cnpj: ['', Validators.required],
       stateRegistration: ['', Validators.required],
       municipalInscription: ['', Validators.required],
-      site: ['', Validators.required],
+      site: ['site.davi', Validators.required],
 
       phone: {
-        phoneNumber: ['', Validators.required],
-        ddd: ['', Validators.required],
-        doDecode: ['', Validators.required],
+        phoneNumber: ['35343234', Validators.required],
+        ddd: ['47', Validators.required],
+        doDecode: ['55', Validators.required],
       },
 
       Addresses: this.fb.group({
-        cep: ['', Validators.required],
-        number: ['', Validators.required],
-        complement: ['', Validators.required],
-        street: ['', Validators.required],
-        state: ['', Validators.required],
-        city: ['', Validators.required],
+        cep: ['89040400', Validators.required],
+        number: ['44', Validators.required],
+        complement: ['casa', Validators.required],
+        street: ['caçadores', Validators.required],
+        state: ['sc', Validators.required],
+        city: ['blumenau', Validators.required],
       }),
 
       education: this.fb.array([]),

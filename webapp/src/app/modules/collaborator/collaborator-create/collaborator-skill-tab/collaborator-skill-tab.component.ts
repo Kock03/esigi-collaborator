@@ -59,9 +59,9 @@ export class CollaboratorSkillTabComponent implements OnInit {
 
   initForm(): void {
     this.skillForm = this.fb.group({
-      tecnology: ['', Validators.required],
-      seniority: ['', Validators.required],
-      yearsExperience: ['', Validators.required],
+      tecnology: ['Java', Validators.required],
+      seniority: ['senior', Validators.required],
+      yearsExperience: ['5', Validators.required],
       currentPosition: ['', Validators.required],
     });
   }

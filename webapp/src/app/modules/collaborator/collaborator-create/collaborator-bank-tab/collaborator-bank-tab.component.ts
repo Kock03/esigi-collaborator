@@ -68,12 +68,12 @@ export class CollaboratorBankTabComponent implements OnInit {
 
   initForm(): void {
     this.bankForm = this.fb.group({
-      bank: ['', Validators.required],
-      agency: ['', Validators.required],
-      accountType: ['', Validators.required],
-      accountNumber: ['', Validators.required],
-      digit: ['', Validators.required],
-      bankAccountDigit: ['', Validators.required],
+      bank: ['Banco do Brasil', Validators.required],
+      agency: ['5464645', Validators.required],
+      accountType: ['Conta Corrente', Validators.required],
+      accountNumber: ['4365634', Validators.required],
+      digit: ['4', Validators.required],
+      bankAccountDigit: ['4', Validators.required],
     });
   }
 
