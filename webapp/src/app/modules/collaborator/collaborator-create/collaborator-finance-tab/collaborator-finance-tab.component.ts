@@ -4,29 +4,19 @@ import {
   Input,
   OnInit,
   Output,
+  ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatTable } from '@angular/material/table';
 
-export interface finans {
-  data: string;
-  type: string;
+export interface finance {
+  dateInclusion: string;
+  contractType: string;
   reason: string;
   value: string;
-  monthlyValue: string;
 }
 
-const ELEMENT_DATA: finans[] = [
-  { data: '01/02/2022', type: 'Cooperado', reason: 'Contratação', value: '45,00', monthlyValue: '7.650,00'},
-  { data: '01/02/2022', type: 'Cooperado', reason: 'Contratação', value: '45,00', monthlyValue: '7.650,00'},
-  { data: '01/02/2022', type: 'Cooperado', reason: 'Contratação', value: '45,00', monthlyValue: '7.650,00'},
-  { data: '01/02/2022', type: 'Cooperado', reason: 'Contratação', value: '45,00', monthlyValue: '7.650,00'},
-  { data: '01/02/2022', type: 'Cooperado', reason: 'Contratação', value: '45,00', monthlyValue: '7.650,00'},
-  { data: '01/02/2022', type: 'Cooperado', reason: 'Contratação', value: '45,00', monthlyValue: '7.650,00'},
-  { data: '01/02/2022', type: 'Cooperado', reason: 'Contratação', value: '45,00', monthlyValue: '7.650,00'},
-  { data: '01/02/2022', type: 'Cooperado', reason: 'Contratação', value: '45,00', monthlyValue: '7.650,00'},
-  { data: '01/02/2022', type: 'Cooperado', reason: 'Contratação', value: '45,00', monthlyValue: '7.650,00'},
-];
 
 @Component({
   selector: 'app-collaborator-finance-tab',
@@ -37,15 +27,62 @@ const ELEMENT_DATA: finans[] = [
 export class CollaboratorFinanceTabComponent implements OnInit {
   @Input('form') collaboratorForm!: FormGroup;
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
+  @ViewChild('financeTable') financeTable!: MatTable<any>;
 
   displayedColumns: string[] = ['data', 'type', 'reason', 'value', 'monthlyValue', 'icon'];
-  dataSource = ELEMENT_DATA;
+ 
+  financials: finance[] = [
+    {
+      dateInclusion: '',
+      contractType: 'CLT',
+      reason: 'Contratação',
+      value: '',
+    },
+  ];
 
-  constructor() {}
+  selectedIndex = 0;
 
-  ngOnInit(): void {}
+  financeForm!: FormGroup;
+
+  index: any = null;
+  Finance: any;
+
+  get financeArray() {
+    return this.collaboratorForm.controls['finance'] as FormArray;
+  }
+
+  constructor(private fb: FormBuilder) {}
+
+  ngOnInit(): void {
+    this.initForm();
+  }
 
   next() {
     this.onChange.next(true);
+  }
+
+  initForm(): void {
+    this.financeForm = this.fb.group({
+      dateInclusion: ['', Validators.required],
+      contractType: ['', Validators.required],
+      reason: ['', Validators.required],
+      value: ['', Validators.required],
+    });
+  }
+
+  saveFinance() {
+    const data = this.financeForm.getRawValue();
+    this.financeArray.insert(0, this.fb.group(data));
+    this.financeTable.renderRows();
+    this.financeForm.reset();
+  }
+
+  getFinance(financeSelected: any, index: number) {
+    this.index = index;
+    this.financeForm.patchValue(financeSelected);
+  }
+
+  deleteFinance(index: number) {
+    this.financeArray.removeAt(index);
   }
 }

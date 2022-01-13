@@ -7,7 +7,7 @@ export class CreateSkillsDto {
   tecnology: string;
   
   @IsNotEmpty()
-  senioridade: Senioridade;
+  seniority: Senioridade;
 
   @IsNotEmpty()
   yearsExperience: number;

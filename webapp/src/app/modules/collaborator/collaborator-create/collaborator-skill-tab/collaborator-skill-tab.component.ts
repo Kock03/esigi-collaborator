@@ -4,24 +4,18 @@ import {
   Input,
   OnInit,
   Output,
+  ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatTable } from '@angular/material/table';
 
 export interface skill {
-  name: string;
-  time: string;
-  level: string;
+  tecnology: string;
+  seniority: string;
+  yearsExperience: string;
+  currentPosition: boolean;
 }
-
-const skills: skill[] = [
-  { name: 'Java', time: '2', level: 'senior' },
-  { name: 'C#', time: '2', level: 'senior' },
-  { name: 'Python', time: '2', level: 'senior' },
-  { name: 'Angular', time: '2', level: 'senior' },
-  { name: 'React', time: '2' , level: 'senior'},
-  { name: 'NodeJS', time: '2', level: 'senior' },
-];
 
 @Component({
   selector: 'app-collaborator-skill-tab',
@@ -32,15 +26,77 @@ const skills: skill[] = [
 export class CollaboratorSkillTabComponent implements OnInit {
   @Input('form') collaboratorForm!: FormGroup;
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
+  @ViewChild('skillTable') skillTable!: MatTable<any>;
 
-  displayedColumns: string[] = ['name', 'time', 'level' , 'icon'];
-  dataSource = skills;
+  displayedColumns: string[] = ['name', 'time', 'level', 'icon'];
 
-  constructor() {}
+  skills: skill[] = [
+    {
+      tecnology: 'Java',
+      yearsExperience: '',
+      seniority: 'senior',
+      currentPosition: false,
+    },
+  ];
 
-  ngOnInit(): void {}
+  selectedIndex: number = 0;
+
+  skillForm!: FormGroup;
+
+  index: any = null;
+  Skill: any;
+  checked = false;
+
+  get skillArray() {
+    return this.collaboratorForm.controls['skill'] as FormArray;
+  }
+
+  constructor(private fb: FormBuilder) {}
+
+  ngOnInit(): void {
+    this.initForm();
+  }
+
+  initForm(): void {
+    this.skillForm = this.fb.group({
+      tecnology: ['', Validators.required],
+      seniority: ['', Validators.required],
+      yearsExperience: ['', Validators.required],
+      currentPosition: ['', Validators.required],
+    });
+  }
 
   next() {
     this.onChange.next(true);
+  }
+
+  
+  saveSkill() {
+    const data = this.skillForm.getRawValue();
+    this.skillArray.insert(0, this.fb.group(data));
+    this.skillTable.renderRows();
+    this.skillForm.reset();
+  }
+
+  getSkill(skillSelected: any, index: number) {
+    this.index = index;
+    this.skillForm.patchValue(skillSelected);
+  }
+
+  editSkill() {
+    this.skillArray.at(this.index).setValue(this.skillForm.getRawValue());
+
+    this.skillTable.renderRows();
+    this.skillForm.reset();
+    this.index = null;
+  }
+
+  cancelEdit(){
+    this.index = null;
+  }
+
+  deleteSkill(index: number){
+     this.skillArray.removeAt(index);
+  
   }
 }

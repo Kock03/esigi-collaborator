@@ -4,20 +4,20 @@ import {
   Input,
   OnInit,
   Output,
+  ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatTable } from '@angular/material/table';
 
-export interface bank {
+export interface Bank {
   bank: string;
   agency: string;
   accountType: string;
-  account: string;
+  accountNumber: string;
+  digit: string;
+  bankAccountDigit: string;
 }
-
-const ELEMENT_BANK: bank[] = [
-  { bank: 'Banco do Brasil', agency: '525-1', accountType: 'Conta Corrente', account: '125125-9'},
-];
 
 @Component({
   selector: 'app-collaborator-bank-tab',
@@ -28,15 +28,72 @@ const ELEMENT_BANK: bank[] = [
 export class CollaboratorBankTabComponent implements OnInit {
   @Input('form') collaboratorForm!: FormGroup;
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
+  @ViewChild('bankTable') bankTable!: MatTable<any>;
 
-  displayedBank: string[] = ['bank', 'agency', 'accountType', 'account', 'icon'];
-  dataBank = ELEMENT_BANK;
+  displayedBank: string[] = [
+    'bank',
+    'agency',
+    'accountType',
+    'account',
+    'icon',
+  ];
 
-  constructor() {}
+  banks: Bank[] = [
+    {
+      bank: 'Banco do Brasil',
+      agency: '',
+      accountType: 'Conta Corrente',
+      accountNumber: '',
+      digit: '',
+      bankAccountDigit: '',
+    },
+  ];
 
-  ngOnInit(): void {}
+  selectedIndex = 0;
+
+  bankForm!: FormGroup;
+
+  index: any = null;
+  Bank: any;
+
+  get bankArray() {
+    return this.collaboratorForm.controls['bank'] as FormArray;
+  }
+
+  constructor(private fb: FormBuilder) {}
+
+  ngOnInit(): void {
+    this.initForm();
+  }
+
+  initForm(): void {
+    this.bankForm = this.fb.group({
+      bank: ['', Validators.required],
+      agency: ['', Validators.required],
+      accountType: ['', Validators.required],
+      accountNumber: ['', Validators.required],
+      digit: ['', Validators.required],
+      bankAccountDigit: ['', Validators.required],
+    });
+  }
 
   next() {
     this.onChange.next(true);
+  }
+
+  saveBank() {
+    const data = this.bankForm.getRawValue();
+    this.bankArray.insert(0, this.fb.group(data));
+    this.bankTable.renderRows();
+    this.bankForm.reset();
+  }
+
+  getBank(bankSelected: any, index: number) {
+    this.index = index;
+    this.bankForm.patchValue(bankSelected);
+  }
+
+  deleteBank(index: number) {
+    this.bankArray.removeAt(index);
   }
 }
