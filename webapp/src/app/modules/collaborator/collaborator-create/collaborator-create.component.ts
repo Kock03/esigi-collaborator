@@ -46,13 +46,14 @@ export class CollaboratorCreateComponent implements OnInit {
         ddi: ['+55', Validators.required],
       }),
 
-      Addresses: this.fb.group({
+      Address: this.fb.group({
         cep: ['', Validators.required],
         number: [''],
         complement: [''],
         street: ['', Validators.required],
         state: ['', Validators.required],
         city: ['', Validators.required],
+        district: ['', Validators.required],
       }),
 
       Educations: this.fb.array([]),

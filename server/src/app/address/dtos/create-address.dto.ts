@@ -1,7 +1,7 @@
 import { IsNotEmpty } from 'class-validator';
 import { CollaboratorsEntity } from 'src/app/collaborators/collaborators.entity';
 
-export class CreateAddressesDto {
+export class CreateAddressDto {
 
   @IsNotEmpty()
   cep: string;
@@ -11,6 +11,9 @@ export class CreateAddressesDto {
 
   @IsNotEmpty()
   street: string;
+
+  @IsNotEmpty()
+  district: string;
 
   @IsNotEmpty()
   state: string;

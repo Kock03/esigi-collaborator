@@ -9,7 +9,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { AddressesEntity } from 'src/app/addresses/addresses.entity';
+import { AddressEntity } from 'src/app/address/address.entity';
 import { PhonesEntity } from 'src/app/phones/phones.entity';
 import { BankDataEntity } from 'src/app/bank-data/bank-data.entity';
 import { SkillsEntity } from 'src/app/skills/skills.entity';
@@ -66,12 +66,12 @@ export class CollaboratorsEntity {
   @Column({ name: 'photo', type: 'blob', nullable: true })
   photo: string;
 
-  @OneToOne(() => AddressesEntity, {
+  @OneToOne(() => AddressEntity, {
     cascade: ['insert', 'update', 'remove'],
     orphanedRowAction: 'delete',
   })
   @JoinColumn()
-  Addresses: AddressesEntity;
+  Address: AddressEntity;
 
   @OneToMany(() => SkillsEntity, (skills) => skills.Collaborator, {
     cascade: ['insert', 'update', 'remove'],

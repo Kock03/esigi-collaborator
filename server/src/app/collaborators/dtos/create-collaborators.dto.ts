@@ -1,6 +1,6 @@
 import { Optional } from "@nestjs/common";
 import { IsNotEmpty, IsOptional } from "class-validator";
-import { AddressesEntity } from 'src/app/addresses/addresses.entity';
+import { AddressEntity } from 'src/app/address/address.entity';
 import { BankDataEntity } from 'src/app/bank-data/bank-data.entity';
 import { DocumentsEntity } from "src/app/documents/documents.entity";
 import { EducationsEntity } from "src/app/educations/educations.entity";
@@ -55,7 +55,7 @@ export class CreateCollaboratorsDto {
   photo: string;
 
   @IsOptional()
-  Addresses: AddressesEntity;
+  Address: AddressEntity;
 
   @IsOptional()
   Phone: PhonesEntity;

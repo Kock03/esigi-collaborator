@@ -10,8 +10,8 @@ import {
   OneToOne,
 } from 'typeorm';
 
-@Entity({ name: 'addresses' })
-export class AddressesEntity {
+@Entity({ name: 'address' })
+export class AddressEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -24,6 +24,9 @@ export class AddressesEntity {
   @Column({ name: 'street' })
   street: string;
 
+  @Column({ name: 'disstrict'})
+  district: string;
+
   @Column({ name: 'state' })
   state: string;
 
@@ -33,7 +36,7 @@ export class AddressesEntity {
   @Column({ name: 'complement' })
   complement: string;
 
-  @OneToOne(() => CollaboratorsEntity, collaborator => collaborator.Addresses)
+  @OneToOne(() => CollaboratorsEntity, collaborator => collaborator.Address)
   Collaborator: CollaboratorsEntity;
 
   @CreateDateColumn({ name: 'created_at', type: 'datetime' })

@@ -50,7 +50,7 @@ export class CollaboratorRegisterTabComponent implements OnInit {
   ngOnInit(): void {
     this.collaboratorForm.valueChanges.subscribe((res) => {
       const addressForm = this.collaboratorForm.controls[
-        'Addresses'
+        'Address'
       ] as FormGroup;
       console.log(
         '🚀 ~ file: collaborator-register-tab.component.ts ~ line 56 ~ CollaboratorRegisterTabComponent ~ ngAfterViewInit ~ addressForm',
@@ -79,7 +79,7 @@ export class CollaboratorRegisterTabComponent implements OnInit {
   }
 
   async getAddress() {
-    const address = this.collaboratorForm.controls['Addresses'].value;
+    const address = this.collaboratorForm.controls['Address'].value;
     console.log(address.cep);
     const district = await this.cepService.findDistrict(
       address.cep.replace('-', '')
@@ -91,13 +91,14 @@ export class CollaboratorRegisterTabComponent implements OnInit {
 
     if (district.erro) {
       window.alert('Cep inválido');
-      this.collaboratorForm.controls['Addresses'].reset();
+      this.collaboratorForm.controls['Address'].reset();
     } else {
-      this.collaboratorForm.controls['Addresses'].patchValue({
+      this.collaboratorForm.controls['Address'].patchValue({
         cep: district.cep,
         city: district.localidade,
         street: district.logradouro,
         state: district.uf,
+        district: district.bairro
       });
     }
   }
