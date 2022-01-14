@@ -15,7 +15,7 @@ export class PhoneProvider {
 
     findAll(): Promise<any> {
         return new Promise((resolve, reject) => {
-            this.apiGateway.get('phones').subscribe((response: HttpResponse<any>) => {
+            this.apiGateway.get('phone').subscribe((response: HttpResponse<any>) => {
                 resolve(response.body);
             }, reject);
         });
@@ -23,7 +23,7 @@ export class PhoneProvider {
 
     findOne(id: string): Promise<any> {
         return new Promise((resolve, reject) => {
-            this.apiGateway.get( 'phones', { id: id }).subscribe((response: HttpResponse<any>) => {
+            this.apiGateway.get( 'phone', { id: id }).subscribe((response: HttpResponse<any>) => {
                 resolve(response.body);
             }, reject);
         });
@@ -32,7 +32,7 @@ export class PhoneProvider {
 
     update(phone: any): Promise<any> {
         return new Promise((resolve, reject) => {
-            this.apiGateway.put('phones', phone).subscribe((response: HttpResponse<any>) => {
+            this.apiGateway.put('phone', phone).subscribe((response: HttpResponse<any>) => {
                 resolve(response.body);
             }, reject);
         });
@@ -40,7 +40,7 @@ export class PhoneProvider {
 
     store(phone: any): Promise<any> {
         return new Promise((resolve, reject) => {
-            this.apiGateway.post('phones', phone).subscribe((response: HttpResponse<any>) => {
+            this.apiGateway.post('phone', phone).subscribe((response: HttpResponse<any>) => {
                 resolve(response.body);
             }, reject);
         });
@@ -48,7 +48,7 @@ export class PhoneProvider {
 
     destroy(phone: any): Promise<any> {
       return new Promise((resolve, reject) => {
-          this.apiGateway.delete('phones', phone).subscribe((response: HttpResponse<any>) => {
+          this.apiGateway.delete('phone', phone).subscribe((response: HttpResponse<any>) => {
               resolve(response.body);
           }, reject);
       })

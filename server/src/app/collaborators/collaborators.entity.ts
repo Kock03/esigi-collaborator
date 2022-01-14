@@ -10,7 +10,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { AddressEntity } from 'src/app/address/address.entity';
-import { PhonesEntity } from 'src/app/phone/phone.entity';
+import { PhoneEntity } from 'src/app/phone/phone.entity';
 import { BankDataEntity } from 'src/app/bank-data/bank-data.entity';
 import { SkillsEntity } from 'src/app/skills/skills.entity';
 import { CollaboratorTypes } from './dtos/collaborator-types.enum';
@@ -97,12 +97,12 @@ export class CollaboratorsEntity {
   })
   Educations: EducationsEntity[];
 
-  @OneToOne(() => PhonesEntity, {
+  @OneToOne(() => PhoneEntity, {
     cascade: ['insert', 'update', 'remove'],
     orphanedRowAction: 'delete',
   })
   @JoinColumn()
-  Phone: PhonesEntity;
+  Phone: PhoneEntity;
 
   @OneToOne(() => BankDataEntity, {
     cascade: ['insert', 'update', 'remove'],

@@ -6,7 +6,7 @@ import { DocumentsEntity } from 'src/app/documents/documents.entity';
 import { EducationsEntity } from 'src/app/educations/educations.entity';
 import { FinancialsEntity } from 'src/app/financials/financials.entity';
 import { LanguagesEntity } from 'src/app/languages/languages.entity';
-import { PhonesEntity } from 'src/app/phone/phone.entity';
+import { PhoneEntity } from 'src/app/phone/phone.entity';
 import { SkillsEntity } from 'src/app/skills/skills.entity';
 import { CollaboratorTypes } from './collaborator-types.enum';
 
@@ -57,7 +57,7 @@ export class UpdateCollaboratorsDto {
   Address: AddressEntity;
 
   @IsOptional()
-  Phone: PhonesEntity;
+  Phone: PhoneEntity;
   
   @IsOptional()
   Skills: SkillsEntity[];
