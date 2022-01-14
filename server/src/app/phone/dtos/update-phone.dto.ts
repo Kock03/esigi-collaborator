@@ -1,6 +1,6 @@
 import { IsNotEmpty } from "class-validator";
 
-export class UpdatePhonesDto {
+export class UpdatePhoneDto {
   @IsNotEmpty()
   phoneNumber: string;
 

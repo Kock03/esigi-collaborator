@@ -1,7 +1,7 @@
 import { IsNotEmpty } from "class-validator";
 import { CollaboratorsEntity } from "src/app/collaborators/collaborators.entity";
 
-export class CreatePhonesDto {
+export class CreatePhoneDto {
 
   @IsNotEmpty()
   phoneNumber: string;

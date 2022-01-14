@@ -10,7 +10,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { AddressEntity } from 'src/app/address/address.entity';
-import { PhonesEntity } from 'src/app/phones/phones.entity';
+import { PhonesEntity } from 'src/app/phone/phone.entity';
 import { BankDataEntity } from 'src/app/bank-data/bank-data.entity';
 import { SkillsEntity } from 'src/app/skills/skills.entity';
 import { CollaboratorTypes } from './dtos/collaborator-types.enum';

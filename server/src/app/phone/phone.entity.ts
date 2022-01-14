@@ -9,8 +9,8 @@ import {
   OneToOne,
 } from 'typeorm';
 
-@Entity({ name: 'phones' })
-export class PhonesEntity {
+@Entity({ name: 'phone' })
+export class PhoneEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 

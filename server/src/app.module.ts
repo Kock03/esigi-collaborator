@@ -1,11 +1,11 @@
 import { Module } from '@nestjs/common';
 import { BankDataModule } from 'src/app/bank-data/bank-data.module';
-import { PhonesModule } from 'src/app/phones/phones.module';
+import { PhoneModule } from 'src/app/phone/phone.module';
 import { AddressModule } from 'src/app/address/address.module';
 import { SkillsModule } from 'src/app/skills/skills.module';
 import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { BankDataEntity } from './app/bank-data/bank-data.entity';
-import { PhonesEntity } from './app/phones/phones.entity';
+import { PhoneEntity } from './app/phone/phone.entity';
 import { AddressEntity } from './app/address/address.entity';
 import { CollaboratorsModule } from './app/collaborators/collaborators.module';
 import { CollaboratorsEntity } from './app/collaborators/collaborators.entity';
@@ -32,7 +32,7 @@ import { LanguagesModule } from './app/languages/languages.module';
       namingStrategy: new SnakeNamingStrategy()
     } as TypeOrmModuleOptions),
     BankDataModule,
-    PhonesModule,
+    PhoneModule,
     AddressModule,
     SkillsModule,
     CollaboratorsModule,
