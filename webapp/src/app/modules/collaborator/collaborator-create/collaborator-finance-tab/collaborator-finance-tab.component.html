@@ -15,11 +15,9 @@
         <mat-form-field fxFlex="50" appearance="outline">
           <mat-label>Tipo de Contrato</mat-label>
           <mat-select matInput disableRipple formControlName="contractType">
-            <mat-option
-              *ngFor="let finance of financials"
-              [value]="finance.contractType"
-              >{{ finance.contractType }}</mat-option
-            >
+            <mat-option [value]="1">CLT</mat-option>
+            <mat-option [value]="2">PJ</mat-option>
+            <mat-option [value]="3">Cooperado</mat-option>
           </mat-select>
         </mat-form-field>
       </div>

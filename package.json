@@ -2,12 +2,15 @@
   "name": "esigi-collaborator",
   "version": "0.0.0",
   "scripts": {
-    "start": "npm run start:webapp && npm run start:server",
+    "start": "concurrently --kill-others-on-fail \"npm run start:server\" \"npm run start:webapp\"",
     "start:server": "cd server && npm run start:dev",
     "start:webapp": "cd webapp && npm run start"
   },
   "private": true,
   "dependencies": {
     "ngx-mask": "^13.1.1"
+  },
+  "devDependencies": {
+    "concurrently": "^5.3.0"
   }
 }

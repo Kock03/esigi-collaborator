@@ -12,10 +12,11 @@ import { MatTable } from '@angular/material/table';
 
 export interface finance {
   dateInclusion: string;
-  contractType: string;
+  contractType: string,
   reason: string;
   value: string;
 }
+
 
 
 @Component({
@@ -34,11 +35,12 @@ export class CollaboratorFinanceTabComponent implements OnInit {
   financials: finance[] = [
     {
       dateInclusion: '',
-      contractType: 'CLT',
+      contractType: '',
       reason: 'Contratação',
       value: '',
     },
   ];
+
 
   selectedIndex = 0;
 
@@ -48,7 +50,7 @@ export class CollaboratorFinanceTabComponent implements OnInit {
   Finance: any;
 
   get financeArray() {
-    return this.collaboratorForm.controls['finance'] as FormArray;
+    return this.collaboratorForm.controls['Financials'] as FormArray;
   }
 
   constructor(private fb: FormBuilder) {}
@@ -64,11 +66,12 @@ export class CollaboratorFinanceTabComponent implements OnInit {
   initForm(): void {
     this.financeForm = this.fb.group({
       dateInclusion: ['08/11/2021'],
-      contractType: ['CLT'],
+      contractType: [1],
       reason: ['Contratação'],
       value: ['340000'],
     });
   }
+
 
   saveFinance() {
     const data = this.financeForm.getRawValue();

@@ -79,7 +79,7 @@
           *ngIf="collaboratorForm.controls['collaboratorTypes'].value !== 2"
         >
           <mat-label>CPF</mat-label>
-          <input matInput placeholder="Nome" formControlName="cpf" />
+          <input matInput placeholder="Nome" formControlName="cpf"  mask="000.000.000-00"/>
         </mat-form-field>
 
         <mat-form-field
@@ -143,7 +143,7 @@
           <mat-label>CEP </mat-label>
           <input
             matInput
-            placeholder="Nome"
+            placeholder="CEP"
             formControlName="cep"
             type="text"
             mask="99999-999"

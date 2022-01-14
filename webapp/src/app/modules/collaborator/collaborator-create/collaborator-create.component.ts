@@ -43,7 +43,7 @@ export class CollaboratorCreateComponent implements OnInit {
       Phone: this.fb.group({
         phoneNumber: ['35343234', Validators.required],
         ddd: ['71', Validators.required],
-        ddi: ['+55', Validators.required],
+        ddi: ['', Validators.required],
       }),
 
       Address: this.fb.group({

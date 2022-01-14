@@ -57,7 +57,7 @@ export class CollaboratorBankTabComponent implements OnInit {
   Bank: any;
 
   get bankArray() {
-    return this.collaboratorForm.controls['bank'] as FormArray;
+    return this.collaboratorForm.controls['BankData'] as FormArray;
   }
 
   constructor(private fb: FormBuilder) {}
