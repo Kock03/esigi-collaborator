@@ -42,7 +42,7 @@ export class CollaboratorsEntity {
   @Column({ name: 'collaborator_types' })
   collaboratorTypes: CollaboratorTypes;
 
-  @Column({ name: 'cpf', unique: true })
+  @Column({ name: 'cpf', unique: true, length: 11})
   cpf: string;
 
   @Column({ name: 'birth_date' })
@@ -51,7 +51,7 @@ export class CollaboratorsEntity {
   @Column({ name: 'email' })
   email: string;
 
-  @Column({ name: 'cnpj' })
+  @Column({ name: 'cnpj', length: 14 })
   cnpj: string;
 
   @Column({ name: 'state_registration' })
