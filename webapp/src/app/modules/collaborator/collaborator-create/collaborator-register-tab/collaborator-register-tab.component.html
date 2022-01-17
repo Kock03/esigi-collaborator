@@ -88,7 +88,7 @@
           *ngIf="collaboratorForm.controls['collaboratorTypes'].value == 2"
         >
           <mat-label>CNPJ</mat-label>
-          <input matInput placeholder="Nome" formControlName="cnpj" />
+          <input matInput placeholder="Nome" formControlName="cnpj" mask="00.000.000/0000-00" />
         </mat-form-field>
       </div>
 
@@ -125,7 +125,7 @@
         </mat-form-field>
         <mat-form-field fxFlex="35" appearance="outline" formGroupName="Phone">
           <mat-label>Telefone</mat-label>
-          <input matInput placeholder="Nome" formControlName="phoneNumber" />
+          <input matInput placeholder="Nome" formControlName="phoneNumber"  mask="(00) 00000-0000" />
         </mat-form-field>
 
         <mat-form-field
