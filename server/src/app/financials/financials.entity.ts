@@ -16,7 +16,7 @@ export class FinancialsEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column()
+  @Column({name: 'contract_type', type: 'int'})
   contractType: ContractTypes;
 
   @Column({ name: 'value' })

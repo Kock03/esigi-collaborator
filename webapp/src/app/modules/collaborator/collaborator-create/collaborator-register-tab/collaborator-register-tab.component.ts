@@ -16,6 +16,7 @@ import {
 import { ApiGateway } from 'src/api-gateway';
 import { CepService } from 'src/services/cep.service';
 
+
 export interface collaboratorTypes {
   id: number;
   name: string;
@@ -48,6 +49,7 @@ export class CollaboratorRegisterTabComponent implements OnInit {
   constructor(private fb: FormBuilder, private cepService: CepService) {}
 
   ngOnInit(): void {
+   
     this.collaboratorForm.valueChanges.subscribe((res) => {
       const addressForm = this.collaboratorForm.controls[
         'Address'
@@ -66,7 +68,7 @@ export class CollaboratorRegisterTabComponent implements OnInit {
   }
 
   ngAfterViewInit(): void {}
-  
+
   next() {
     this.onChange.next(true);
   }
@@ -98,7 +100,7 @@ export class CollaboratorRegisterTabComponent implements OnInit {
         city: district.localidade,
         street: district.logradouro,
         state: district.uf,
-        district: district.bairro
+        district: district.bairro,
       });
     }
   }

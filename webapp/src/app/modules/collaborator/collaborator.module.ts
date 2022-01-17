@@ -21,6 +21,8 @@ import { CollaboratorEducationTabComponent } from './collaborator-create/collabo
 import { CollaboratorDocumentTabComponent } from './collaborator-create/collaborator-document-tab/collaborator-document-tab.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxMaskModule } from 'ngx-mask';
+import { DocumentValidator } from 'src/app/validators/document.validator';
+
 
 const routes: Routes = [
   {
@@ -39,6 +41,7 @@ const routes: Routes = [
     CollaboratorSkillTabComponent,
     CollaboratorEducationTabComponent,
     CollaboratorDocumentTabComponent,
+
   ],
   imports: [
     RouterModule.forChild(routes),
@@ -65,5 +68,6 @@ const routes: Routes = [
     CollaboratorEducationTabComponent,
     CollaboratorDocumentTabComponent,
   ],
+
 })
 export class CollaboratorModule {}

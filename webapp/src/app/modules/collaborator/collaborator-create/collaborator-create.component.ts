@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { DocumentValidator } from 'src/app/validators/document.validator';
 import { CollaboratorProvider } from 'src/providers/collaborator.provider';
 
 @Component({
@@ -16,7 +17,7 @@ export class CollaboratorCreateComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private collaboratorProvider: CollaboratorProvider,
-    private http: HttpClient
+    private http: HttpClient,
   ) {}
 
   async ngOnInit(): Promise<void> {
@@ -32,7 +33,7 @@ export class CollaboratorCreateComponent implements OnInit {
       gender: [1, Validators.required],
       office: ['Desenvolvedor Angular', Validators.required],
       collaboratorTypes: [1, Validators.required],
-      cpf: ['25454678654', Validators.required],
+      cpf: this.fb.control({ value: null, disabled: false}, DocumentValidator.isValidCpf()),
       birthDate: ['06/12/2004', Validators.required],
       email: ['davi@email', Validators.required],
       cnpj: ['', Validators.required],
