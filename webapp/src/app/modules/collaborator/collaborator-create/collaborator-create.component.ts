@@ -40,9 +40,10 @@ export class CollaboratorCreateComponent implements OnInit {
       stateRegistration: ['', Validators.required],
       municipalInscription: ['', Validators.required],
       site: ['site.davi', Validators.required],
+      linkedin: ['linkedin.davi', Validators.required],
       photo: null,
       Phone: this.fb.group({
-        phoneNumber: ['35343234', Validators.required],
+        phoneNumber: ['35343234908', Validators.required],
         ddd: ['71', Validators.required],
         ddi: ['', Validators.required],
       }),

@@ -107,7 +107,7 @@
         </mat-form-field>
 
         <mat-form-field
-          fxFlex="20"
+          fxFlex="30"
           appearance="outline"
           *ngIf="collaboratorForm.controls['collaboratorTypes'].value == 2"
         >
@@ -119,23 +119,17 @@
           />
         </mat-form-field>
 
-        <mat-form-field fxFlex="25" appearance="outline">
+        <mat-form-field fxFlex="50" appearance="outline">
           <mat-label>Data Aniversário</mat-label>
           <input matInput placeholder="Nome" formControlName="birthDate" />
         </mat-form-field>
-        <mat-form-field fxFlex="35" appearance="outline" formGroupName="Phone">
+        <mat-form-field fxFlex="50" appearance="outline" formGroupName="Phone">
           <mat-label>Telefone</mat-label>
           <input matInput placeholder="Nome" formControlName="phoneNumber"  mask="(00) 00000-0000" />
         </mat-form-field>
 
-        <mat-form-field
-          fxFlex="40"
-          appearance="outline"
-          *ngIf="collaboratorForm.controls['collaboratorTypes'].value !== 2"
-        >
-          <mat-label>Login</mat-label>
-          <input matInput placeholder="Login" formControlName="login" />
-        </mat-form-field>
+  
+
       </div>
 
       <div fxFlex="100" fxLayoutGap="16px" formGroupName="Address">
@@ -162,7 +156,7 @@
           <mat-label>Número</mat-label>
           <input matInput placeholder="Nome" formControlName="number" />
         </mat-form-field>
-        <mat-form-field fxFlex="20" appearance="outline">
+        <mat-form-field fxFlex="45" appearance="outline">
           <mat-label>Estado</mat-label>
           <input matInput placeholder="Nome" formControlName="state" />
         </mat-form-field>
@@ -186,14 +180,6 @@
       </div>
 
       <div fxFlex="100" fxLayoutGap="16px">
-        <mat-form-field
-          fxFlex="35"
-          appearance="outline"
-          *ngIf="collaboratorForm.controls['collaboratorTypes'].value == 2"
-        >
-          <mat-label>Login</mat-label>
-          <input matInput placeholder="Login" formControlName="login" />
-        </mat-form-field>
 
         <mat-form-field fxFlex="50" appearance="outline">
           <mat-label>Email</mat-label>
@@ -204,6 +190,26 @@
           <mat-label>Site</mat-label>
           <input matInput placeholder="Nome" formControlName="site" />
         </mat-form-field>
+      </div>
+
+      <div fxFlex="100" fxLayoutGap="16px">
+        <mat-form-field
+          fxFlex="50"
+          appearance="outline"
+        >
+          <mat-label>Login</mat-label>
+          <input matInput placeholder="Login" formControlName="login" />
+        </mat-form-field>
+
+        <mat-form-field
+        fxFlex="50"
+        appearance="outline"
+      >
+        <mat-label>Linkedin</mat-label>
+        <input matInput placeholder="Linkedin" formControlName="linkedin" />
+      </mat-form-field>
+
+     
       </div>
     </form>
   </div>

@@ -63,6 +63,9 @@ export class CollaboratorsEntity {
   @Column({ name: 'site' })
   site: string;
 
+  @Column({ name: 'linkedin'})
+  linkedin: string;
+
   @Column({ name: 'photo', type: 'blob', nullable: true })
   photo: string;
 

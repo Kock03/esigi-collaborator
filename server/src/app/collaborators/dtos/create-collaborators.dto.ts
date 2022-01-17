@@ -58,6 +58,9 @@ export class CreateCollaboratorsDto {
   Address: AddressEntity;
 
   @IsOptional()
+  linkedin: string;
+
+  @IsOptional()
   Phone: PhoneEntity;
 
   @IsOptional()
