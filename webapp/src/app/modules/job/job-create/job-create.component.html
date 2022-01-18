@@ -1,0 +1,82 @@
+<div id="jobCreate" class="page">
+  <h2 class="title">Vagas</h2>
+
+  <div class="content-scroll" *ngIf="jobForm">
+    <form [formGroup]="jobForm" fxLayout="column">
+      <div fxFlex="100" fxLayoutGap="16px">
+        <mat-form-field fxFlex="30" appearance="outline">
+          <mat-label>Solicitante</mat-label>
+          <mat-select matInput disableRipple formControlName="test">
+            <mat-option [value]="1">Wellington</mat-option>
+            <mat-option [value]="2">Danilo</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field fxFlex="25" appearance="outline">
+          <mat-label>Data de Abertura</mat-label>
+          <input
+            matInput
+            placeholder="Data de Abertura"
+            formControlName="test"
+            type="date"
+          />
+        </mat-form-field>
+
+        <mat-form-field fxFlex="25" appearance="outline">
+          <mat-label>Status</mat-label>
+          <mat-select matInput disableRipple formControlName="test">
+            <mat-option [value]="1">Processada</mat-option>
+            <mat-option [value]="2">Em Revisão</mat-option>
+            <mat-option [value]="3">Fechada</mat-option>
+            <mat-option [value]="4">Perdida</mat-option>
+            <mat-option [value]="5">Concluida</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-checkbox
+        class="checkbox"
+        color="primary"
+        fxFlex="50"
+        formControlName="test"
+        >Publicar</mat-checkbox>
+
+      </div>
+
+      <div fxFlex="100" fxLayoutGap="16px">
+        <mat-form-field fxFlex="30" appearance="outline">
+          <mat-label>Cliente</mat-label>
+          <mat-select matInput disableRipple formControlName="test">
+            <mat-option [value]="1">Ambev</mat-option>
+            <mat-option [value]="2">Tuppy</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field fxFlex="25" appearance="outline">
+          <mat-label>Tipo de Vaga</mat-label>
+          <mat-select matInput disableRipple formControlName="test">
+            <mat-option [value]="1">Aumento de Quadro</mat-option>
+            <mat-option [value]="2">Promoção</mat-option>
+            <mat-option [value]="3">Fidelidade</mat-option>
+          </mat-select>
+        </mat-form-field>
+<!-- 
+        <mat-form-field fxFlex="25" appearance="outline">
+          <mat-label>Tipo de Vaga</mat-label>
+          <mat-select matInput disableRipple formControlName="test">
+            <mat-option [value]="1">Aumento de Quadro</mat-option>
+            <mat-option [value]="2">Promoção</mat-option>
+            <mat-option [value]="3">Fidelidade</mat-option>
+          </mat-select>
+        </mat-form-field> -->
+        <mat-form-field fxFlex="20" appearance="outline">
+          <mat-label>Tempo</mat-label>
+          <input
+            matInput
+            formControlName="test"
+            type="month"
+          />
+        </mat-form-field>
+      </div>
+    </form>
+  </div>
+</div>
