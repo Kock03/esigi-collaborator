@@ -28,6 +28,12 @@ export class AppComponent {
       selected: false,
       action: '/colaborador/novo',
     },
+    {
+      name: 'Vagas',
+      icon: 'work',
+      selected: false,
+      action: '/vaga/novo',
+    },
   ];
 
   constructor(private observer: BreakpointObserver, private router: Router) {}
