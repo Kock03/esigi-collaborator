@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 
-
 @Component({
   selector: 'app-job-create',
   templateUrl: './job-create.component.html',
@@ -12,6 +11,8 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 })
 export class JobCreateComponent implements OnInit {
   jobForm!: FormGroup;
+  step: number = 1;
+  selectedIndex: number = 0;
 
 
   constructor(private fb: FormBuilder, private dialog: MatDialog) {}
@@ -28,13 +29,28 @@ export class JobCreateComponent implements OnInit {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(JobDialogSkill, {
-      width: '250px',
+      width: '450px',
     });
      
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
       });
   }
+
+  
+
+ nextStep() {
+    if (this.selectedIndex != 2) {
+      this.selectedIndex = this.selectedIndex + 1;
+    }
+  }
+
+  previousStep() {
+    if (this.selectedIndex != 0) {
+      this.selectedIndex = this.selectedIndex - 1;
+    }
+  }
+
 }
 
 @Component({

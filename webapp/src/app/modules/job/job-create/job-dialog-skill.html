@@ -1,12 +1,13 @@
 <h1 mat-dialog-title>Conhecimentos</h1>
-<div mat-dialog-content>
+<div mat-dialog-content fxLayout="column" fxLayoutAlign="center center">
   <p>Adicionar Conhecimento</p>
   <mat-form-field appearance="outline">
     <mat-label>Habilidade</mat-label>
     <input matInput>
+    <mat-icon matSuffix>search</mat-icon>
   </mat-form-field>
 </div>
-<div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">No Thanks</button>
-  <button mat-button cdkFocusInitial>Ok</button>
+<div mat-dialog-actions  fxLayout="row" fxLayoutAlign="center center">
+  <button mat-flat-button (click)="onNoClick()">Cancelar</button>
+  <button mat-flat-button cdkFocusInitial color="primary">Ok</button>
 </div>
