@@ -2,212 +2,253 @@
   <h2 class="title">Vagas</h2>
 
   <div class="content-scroll" *ngIf="jobForm">
-    <form [formGroup]="jobForm" fxLayout="column">
-      <div fxFlex="100" fxLayoutGap="16px">
-        <mat-form-field fxFlex="30" appearance="outline">
-          <mat-label>Solicitante</mat-label>
-          <mat-select matInput disableRipple formControlName="test">
-            <mat-option [value]="1">Wellington</mat-option>
-            <mat-option [value]="2">Danilo</mat-option>
-          </mat-select>
-        </mat-form-field>
+    <mat-tab-group animationDuration="0ms">
+      <mat-tab label="cadastro">
+        <form [formGroup]="jobForm" fxLayout="column" class="form">
+          <div fxFlex="100" fxLayoutGap="16px">
+            <mat-form-field fxFlex="30" appearance="outline">
+              <mat-label>Solicitante</mat-label>
+              <mat-select matInput disableRipple formControlName="test">
+                <mat-option [value]="1">Wellington</mat-option>
+                <mat-option [value]="2">Danilo</mat-option>
+              </mat-select>
+            </mat-form-field>
 
-        <mat-form-field fxFlex="25" appearance="outline">
-          <mat-label>Data de Abertura</mat-label>
-          <input
-            matInput
-            placeholder="Data de Abertura"
-            formControlName="test"
-            type="date"
-          />
-        </mat-form-field>
+            <mat-form-field fxFlex="25" appearance="outline">
+              <mat-label>Data de Abertura</mat-label>
+              <input
+                matInput
+                placeholder="Data de Abertura"
+                formControlName="test"
+                type="date"
+              />
+            </mat-form-field>
 
-        <mat-form-field fxFlex="25" appearance="outline">
-          <mat-label>Status</mat-label>
-          <mat-select matInput disableRipple formControlName="test">
-            <mat-option [value]="1">Processada</mat-option>
-            <mat-option [value]="2">Em Revisão</mat-option>
-            <mat-option [value]="3">Fechada</mat-option>
-            <mat-option [value]="4">Perdida</mat-option>
-            <mat-option [value]="5">Concluida</mat-option>
-          </mat-select>
-        </mat-form-field>
+            <mat-form-field fxFlex="25" appearance="outline">
+              <mat-label>Status</mat-label>
+              <mat-select matInput disableRipple formControlName="test">
+                <mat-option [value]="1">Processada</mat-option>
+                <mat-option [value]="2">Em Revisão</mat-option>
+                <mat-option [value]="3">Fechada</mat-option>
+                <mat-option [value]="4">Perdida</mat-option>
+                <mat-option [value]="5">Concluida</mat-option>
+              </mat-select>
+            </mat-form-field>
 
-        <mat-checkbox
-          class="checkbox"
-          color="primary"
-          fxFlex="20"
-          formControlName="test"
-          >Publicar</mat-checkbox
-        >
-      </div>
-
-      <div fxFlex="100" fxLayoutGap="16px">
-        <mat-form-field fxFlex="35" appearance="outline">
-          <mat-label>Cliente</mat-label>
-          <mat-select matInput disableRipple formControlName="test">
-            <mat-option [value]="1">Ambev</mat-option>
-            <mat-option [value]="2">Tuppy</mat-option>
-          </mat-select>
-        </mat-form-field>
-
-        <mat-form-field fxFlex="35" appearance="outline">
-          <mat-label>Tipo de Vaga</mat-label>
-          <mat-select matInput disableRipple formControlName="test">
-            <mat-option [value]="1">Aumento de Quadro</mat-option>
-            <mat-option [value]="2">Promoção</mat-option>
-            <mat-option [value]="3">Fidelidade</mat-option>
-          </mat-select>
-        </mat-form-field>
-
-        <mat-checkbox
-          class="checkbox"
-          color="primary"
-          fxFlex="15"
-          formControlName="test"
-          >Temporario</mat-checkbox
-        >
-
-        <mat-form-field fxFlex="15" appearance="outline">
-          <mat-label>Tempo Contrato</mat-label>
-          <input
-            placeholder="Tempo de Contrato"
-            matInput
-            formControlName="test"
-            type="text"
-          />
-        </mat-form-field>
-      </div>
-      <div fxFlex="100" fxLayoutGap="16px">
-        <mat-form-field fxFlex="25" appearance="outline">
-          <mat-label>Nome da Vaga</mat-label>
-          <input
-            placeholder="Nome da Vaga"
-            matInput
-            formControlName="test"
-            type="text"
-          />
-        </mat-form-field>
-
-        <mat-form-field fxFlex="25" appearance="outline">
-          <mat-label>Previsão de Inicio</mat-label>
-          <input matInput formControlName="test" type="date" />
-        </mat-form-field>
-
-        <mat-form-field fxFlex="25" appearance="outline">
-          <mat-label>Nivel de Senioridade</mat-label>
-          <mat-select matInput disableRipple formControlName="test">
-            <mat-option [value]="1">Estágiario</mat-option>
-            <mat-option [value]="2">Junior</mat-option>
-            <mat-option [value]="3">Pleno</mat-option>
-            <mat-option [value]="4">Senior</mat-option>
-          </mat-select>
-        </mat-form-field>
-
-        <mat-form-field fxFlex="25" appearance="outline">
-          <mat-label>Número de Vagas</mat-label>
-          <input
-            placeholder="Número de Vagas"
-            matInput
-            formControlName="test"
-            type="number"
-          />
-        </mat-form-field>
-      </div>
-      <div fxFlex="100" fxLayoutGap="16px">
-        <mat-form-field fxFlex="15" appearance="outline">
-          <mat-label>Tipo de Contratação</mat-label>
-          <mat-select matInput disableRipple formControlName="test">
-            <mat-option [value]="1">CLT</mat-option>
-            <mat-option [value]="2">PJ</mat-option>
-            <mat-option [value]="3">Cooperado</mat-option>
-          </mat-select>
-        </mat-form-field>
-
-        <mat-form-field fxFlex="25" appearance="outline">
-          <mat-label>Local de Trabalho</mat-label>
-          <mat-select matInput disableRipple formControlName="test">
-            <mat-option [value]="1">In Loco</mat-option>
-            <mat-option [value]="2">Home Office</mat-option>
-            <mat-option [value]="3">Hibrido</mat-option>
-            <mat-option [value]="4">Envolti</mat-option>
-          </mat-select>
-        </mat-form-field>
-
-        <mat-form-field fxFlex="20" appearance="outline">
-          <mat-label>Jornada de Trabaho</mat-label>
-          <input
-            placeholder="Jornada de Trabaho"
-            matInput
-            formControlName="test"
-          />
-        </mat-form-field>
-
-        <mat-form-field fxFlex="20" appearance="outline">
-          <mat-label>Valor Minimo</mat-label>
-          <input placeholder="Valor Minimo" matInput formControlName="test" />
-        </mat-form-field>
-
-        <mat-form-field fxFlex="20" appearance="outline">
-          <mat-label>Valor Maximo</mat-label>
-          <input placeholder="Valor Maximo" matInput formControlName="test" />
-        </mat-form-field>
-      </div>
-      <h2 class="title">Habilidades e Conhecimentos</h2>
-
-      <div fxFlex="100" fxLayoutGap="16px">
-        <mat-form-field fxFlex="35" appearance="outline">
-          <mat-label>Escolaridade</mat-label>
-          <mat-select matInput disableRipple formControlName="test">
-            <mat-option [value]="1">Ensino Superior Completo</mat-option>
-            <mat-option [value]="2">Ensino Superior Incompleto</mat-option>
-            <mat-option [value]="3">Ensino Médio Completo</mat-option>
-          </mat-select>
-        </mat-form-field>
-
-        <mat-form-field fxFlex="35" appearance="outline">
-          <mat-label>Idioma</mat-label>
-          <mat-select matInput disableRipple formControlName="test">
-            <mat-option [value]="1">Inglês</mat-option>
-            <mat-option [value]="2">Russo</mat-option>
-            <mat-option [value]="3">Alemão</mat-option>
-          </mat-select>
-        </mat-form-field>
-
-        <mat-form-field fxFlex="30" appearance="outline">
-          <mat-label>Grau de Fluência</mat-label>
-          <mat-select matInput disableRipple formControlName="test">
-            <mat-option [value]="1">Leitura e Conversação</mat-option>
-            <mat-option [value]="2">Conversação e Escrita</mat-option>
-            <mat-option [value]="3">Escrita e Leitura</mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
-      <div fxFlex="100" fxLayoutGap="16px">
-        <mat-form-field fxFlex="50" appearance="outline">
-          <mat-label
-            >Quais são as principais atividades que ocolaborador irá
-            exercer?</mat-label
-          >
-          <textarea class="text-area" matInput placeholder="Atividades" formControlName="test"></textarea>
-        </mat-form-field>
-        <div fxFlex="50">
-          <div fxLayout="row" fxLayoutAlign="start center ">
-            <p class="skills-text">Conhecimentos</p>
-            <button mat-button color="primary">Adicionar</button>
+            <mat-checkbox
+              class="checkbox"
+              color="primary"
+              fxFlex="20"
+              formControlName="test"
+              >Publicar</mat-checkbox
+            >
           </div>
 
-          <mat-list role="list" class="skill-list">
-            <mat-list-item role="listitem">C</mat-list-item>
-            <mat-list-item role="listitem">C++</mat-list-item>
-            <mat-list-item role="listitem">C#</mat-list-item>
-            <mat-list-item role="listitem">Java</mat-list-item>
-            <mat-list-item role="listitem">Angular</mat-list-item>
-            <mat-list-item role="listitem">React</mat-list-item>
-          </mat-list>
+          <div fxFlex="100" fxLayoutGap="16px">
+            <mat-form-field fxFlex="35" appearance="outline">
+              <mat-label>Cliente</mat-label>
+              <mat-select matInput disableRipple formControlName="test">
+                <mat-option [value]="1">Ambev</mat-option>
+                <mat-option [value]="2">Tuppy</mat-option>
+              </mat-select>
+            </mat-form-field>
 
-        </div>
-      </div>
-    </form>
+            <mat-form-field fxFlex="35" appearance="outline">
+              <mat-label>Tipo de Vaga</mat-label>
+              <mat-select matInput disableRipple formControlName="test">
+                <mat-option [value]="1">Aumento de Quadro</mat-option>
+                <mat-option [value]="2">Promoção</mat-option>
+                <mat-option [value]="3">Fidelidade</mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-checkbox
+              class="checkbox"
+              color="primary"
+              fxFlex="15"
+              formControlName="test"
+              >Temporario</mat-checkbox
+            >
+
+            <mat-form-field fxFlex="15" appearance="outline">
+              <mat-label>Tempo Contrato</mat-label>
+              <input
+                placeholder="Tempo de Contrato"
+                matInput
+                formControlName="test"
+                type="text"
+              />
+            </mat-form-field>
+          </div>
+          <div fxFlex="100" fxLayoutGap="16px">
+            <mat-form-field fxFlex="25" appearance="outline">
+              <mat-label>Nome da Vaga</mat-label>
+              <input
+                placeholder="Nome da Vaga"
+                matInput
+                formControlName="test"
+                type="text"
+              />
+            </mat-form-field>
+
+            <mat-form-field fxFlex="25" appearance="outline">
+              <mat-label>Previsão de Inicio</mat-label>
+              <input matInput formControlName="test" type="date" />
+            </mat-form-field>
+
+            <mat-form-field fxFlex="25" appearance="outline">
+              <mat-label>Nivel de Senioridade</mat-label>
+              <mat-select matInput disableRipple formControlName="test">
+                <mat-option [value]="1">Estágiario</mat-option>
+                <mat-option [value]="2">Junior</mat-option>
+                <mat-option [value]="3">Pleno</mat-option>
+                <mat-option [value]="4">Senior</mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field fxFlex="25" appearance="outline">
+              <mat-label>Número de Vagas</mat-label>
+              <input
+                placeholder="Número de Vagas"
+                matInput
+                formControlName="test"
+                type="number"
+              />
+            </mat-form-field>
+          </div>
+          <div fxFlex="100" fxLayoutGap="16px">
+            <mat-form-field fxFlex="15" appearance="outline">
+              <mat-label>Tipo de Contratação</mat-label>
+              <mat-select matInput disableRipple formControlName="test">
+                <mat-option [value]="1">CLT</mat-option>
+                <mat-option [value]="2">PJ</mat-option>
+                <mat-option [value]="3">Cooperado</mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field fxFlex="25" appearance="outline">
+              <mat-label>Local de Trabalho</mat-label>
+              <mat-select matInput disableRipple formControlName="test">
+                <mat-option [value]="1">In Loco</mat-option>
+                <mat-option [value]="2">Home Office</mat-option>
+                <mat-option [value]="3">Hibrido</mat-option>
+                <mat-option [value]="4">Envolti</mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field fxFlex="20" appearance="outline">
+              <mat-label>Jornada de Trabaho</mat-label>
+              <input
+                placeholder="Jornada de Trabaho"
+                matInput
+                formControlName="test"
+              />
+            </mat-form-field>
+
+            <mat-form-field fxFlex="20" appearance="outline">
+              <mat-label>Valor Minimo</mat-label>
+              <input
+                placeholder="Valor Minimo"
+                matInput
+                formControlName="test"
+              />
+            </mat-form-field>
+
+            <mat-form-field fxFlex="20" appearance="outline">
+              <mat-label>Valor Maximo</mat-label>
+              <input
+                placeholder="Valor Maximo"
+                matInput
+                formControlName="test"
+              />
+            </mat-form-field>
+          </div>
+        </form>
+      </mat-tab>
+      <mat-tab label="Conhecimentos">
+        <form [formGroup]="jobForm" fxLayout="column" class="form">
+  
+          <div fxFlex="100" fxLayoutGap="16px">
+            <mat-form-field fxFlex="35" appearance="outline">
+              <mat-label>Escolaridade</mat-label>
+              <mat-select matInput disableRipple formControlName="test">
+                <mat-option [value]="1">Ensino Superior Completo</mat-option>
+                <mat-option [value]="2">Ensino Superior Incompleto</mat-option>
+                <mat-option [value]="3">Ensino Médio Completo</mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field fxFlex="35" appearance="outline">
+              <mat-label>Idioma</mat-label>
+              <mat-select matInput disableRipple formControlName="test">
+                <mat-option [value]="1">Inglês</mat-option>
+                <mat-option [value]="2">Russo</mat-option>
+                <mat-option [value]="3">Alemão</mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field fxFlex="30" appearance="outline">
+              <mat-label>Grau de Fluência</mat-label>
+              <mat-select matInput disableRipple formControlName="test">
+                <mat-option [value]="1">Leitura e Conversação</mat-option>
+                <mat-option [value]="2">Conversação e Escrita</mat-option>
+                <mat-option [value]="3">Escrita e Leitura</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div fxFlex="100" fxLayoutGap="16px">
+            <mat-form-field fxFlex="50" appearance="outline">
+              <mat-label
+                >Quais são as principais atividades que ocolaborador irá
+                exercer?</mat-label
+              >
+              <textarea
+                class="text-area"
+                matInput
+                placeholder="Atividades"
+                formControlName="test"
+              ></textarea>
+            </mat-form-field>
+            <div fxFlex="50">
+              <div fxLayout="row" fxLayoutAlign="start center ">
+                <p class="skills-text">Conhecimentos</p>
+                <button mat-button color="primary">Adicionar</button>
+              </div>
+
+              <mat-list role="list" class="skill-list">
+                <mat-list-item role="listitem">C</mat-list-item>
+                <mat-list-item role="listitem">C++</mat-list-item>
+                <mat-list-item role="listitem">C#</mat-list-item>
+                <mat-list-item role="listitem">Java</mat-list-item>
+                <mat-list-item role="listitem">Angular</mat-list-item>
+                <mat-list-item role="listitem">React</mat-list-item>
+              </mat-list>
+            </div>
+          </div>
+
+          <div fxFlex="100" fxLayoutGap="16px">
+            <mat-form-field fxFlex="50" appearance="outline">
+              <mat-label> Experiencia Desejada</mat-label>
+              <textarea
+                class="text-area"
+                matInput
+                placeholder="Habilidades"
+                formControlName="test"
+              ></textarea>
+            </mat-form-field>
+
+            <mat-form-field fxFlex="50" appearance="outline">
+              <mat-label>Comportamento e/ou competências necessárias</mat-label>
+              <textarea
+                class="text-area"
+                matInput
+                placeholder="Atitudes"
+                formControlName="test"
+              ></textarea>
+            </mat-form-field>
+          </div>
+        </form>
+      </mat-tab>
+    </mat-tab-group>
   </div>
 </div>
