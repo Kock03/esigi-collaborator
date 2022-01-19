@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { JobCreateComponent } from './job-create/job-create.component';
+import {
+  JobCreateComponent,
+  JobDialogSkill,
+} from './job-create/job-create.component';
 import { RouterModule, Routes } from '@angular/router';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -12,6 +15,9 @@ import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatListModule } from '@angular/material/list';
+import { MatDialogModule } from '@angular/material/dialog';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 const routes: Routes = [
   {
@@ -21,7 +27,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [JobCreateComponent],
+  declarations: [JobCreateComponent, JobDialogSkill],
   imports: [
     RouterModule.forChild(routes),
     CommonModule,
@@ -35,6 +41,12 @@ const routes: Routes = [
     MatTableModule,
     MatCheckboxModule,
     MatListModule,
+    MatDialogModule,
+    MatDatepickerModule,
+    MatNativeDateModule 
   ],
+  providers: [
+    MatDatepickerModule
+  ]
 })
 export class JobModule {}

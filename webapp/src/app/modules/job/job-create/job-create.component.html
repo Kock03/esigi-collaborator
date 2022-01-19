@@ -16,12 +16,9 @@
 
             <mat-form-field fxFlex="25" appearance="outline">
               <mat-label>Data de Abertura</mat-label>
-              <input
-                matInput
-                placeholder="Data de Abertura"
-                formControlName="test"
-                type="date"
-              />
+              <input matInput [matDatepicker]="picker" formControlName="test">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
 
             <mat-form-field fxFlex="25" appearance="outline">
@@ -93,7 +90,9 @@
 
             <mat-form-field fxFlex="25" appearance="outline">
               <mat-label>Previsão de Inicio</mat-label>
-              <input matInput formControlName="test" type="date" />
+              <input matInput [matDatepicker]="init" formControlName="test">
+              <mat-datepicker-toggle matSuffix [for]="init"></mat-datepicker-toggle>
+              <mat-datepicker #init></mat-datepicker>
             </mat-form-field>
 
             <mat-form-field fxFlex="25" appearance="outline">
@@ -212,7 +211,7 @@
             <div fxFlex="50">
               <div fxLayout="row" fxLayoutAlign="start center ">
                 <p class="skills-text">Conhecimentos</p>
-                <button mat-button color="primary">Adicionar</button>
+                <button mat-button color="primary" (click)="openDialog()">Adicionar</button>
               </div>
 
               <mat-list role="list" class="skill-list">
