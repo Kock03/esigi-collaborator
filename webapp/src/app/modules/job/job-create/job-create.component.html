@@ -145,21 +145,68 @@
 
         <mat-form-field fxFlex="20" appearance="outline">
           <mat-label>Valor Minimo</mat-label>
-          <input
-            placeholder="Valor Minimo"
-            matInput
-            formControlName="test"
-          />
+          <input placeholder="Valor Minimo" matInput formControlName="test" />
         </mat-form-field>
 
         <mat-form-field fxFlex="20" appearance="outline">
           <mat-label>Valor Maximo</mat-label>
-          <input
-            placeholder="Valor Maximo"
-            matInput
-            formControlName="test"
-          />
+          <input placeholder="Valor Maximo" matInput formControlName="test" />
         </mat-form-field>
+      </div>
+      <h2 class="title">Habilidades e Conhecimentos</h2>
+
+      <div fxFlex="100" fxLayoutGap="16px">
+        <mat-form-field fxFlex="35" appearance="outline">
+          <mat-label>Escolaridade</mat-label>
+          <mat-select matInput disableRipple formControlName="test">
+            <mat-option [value]="1">Ensino Superior Completo</mat-option>
+            <mat-option [value]="2">Ensino Superior Incompleto</mat-option>
+            <mat-option [value]="3">Ensino Médio Completo</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field fxFlex="35" appearance="outline">
+          <mat-label>Idioma</mat-label>
+          <mat-select matInput disableRipple formControlName="test">
+            <mat-option [value]="1">Inglês</mat-option>
+            <mat-option [value]="2">Russo</mat-option>
+            <mat-option [value]="3">Alemão</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field fxFlex="30" appearance="outline">
+          <mat-label>Grau de Fluência</mat-label>
+          <mat-select matInput disableRipple formControlName="test">
+            <mat-option [value]="1">Leitura e Conversação</mat-option>
+            <mat-option [value]="2">Conversação e Escrita</mat-option>
+            <mat-option [value]="3">Escrita e Leitura</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div fxFlex="100" fxLayoutGap="16px">
+        <mat-form-field fxFlex="50" appearance="outline">
+          <mat-label
+            >Quais são as principais atividades que ocolaborador irá
+            exercer?</mat-label
+          >
+          <textarea class="text-area" matInput placeholder="Atividades" formControlName="test"></textarea>
+        </mat-form-field>
+        <div fxFlex="50">
+          <div fxLayout="row" fxLayoutAlign="start center ">
+            <p class="skills-text">Conhecimentos</p>
+            <button mat-button color="primary">Adicionar</button>
+          </div>
+
+          <mat-list role="list" class="skill-list">
+            <mat-list-item role="listitem">C</mat-list-item>
+            <mat-list-item role="listitem">C++</mat-list-item>
+            <mat-list-item role="listitem">C#</mat-list-item>
+            <mat-list-item role="listitem">Java</mat-list-item>
+            <mat-list-item role="listitem">Angular</mat-list-item>
+            <mat-list-item role="listitem">React</mat-list-item>
+          </mat-list>
+
+        </div>
       </div>
     </form>
   </div>

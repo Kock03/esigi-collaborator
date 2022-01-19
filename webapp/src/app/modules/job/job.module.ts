@@ -11,6 +11,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatListModule } from '@angular/material/list';
 
 const routes: Routes = [
   {
@@ -33,6 +34,7 @@ const routes: Routes = [
     MatSelectModule,
     MatTableModule,
     MatCheckboxModule,
+    MatListModule,
   ],
 })
 export class JobModule {}
