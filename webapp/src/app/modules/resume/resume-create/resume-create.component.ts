@@ -15,7 +15,10 @@ export class ResumeCreateComponent implements OnInit {
 
   
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    // private resumeProvider: ResumeProvider,
+    ) {}
 
   ngOnInit(): void {
     this.initForm();
@@ -53,10 +56,36 @@ export class ResumeCreateComponent implements OnInit {
         Languages: this.fb.array([]),
         Educations: this.fb.array([]),
         Experiences: this.fb.array([]),
+        Skills: this.fb.array([]),
         Monitoring: this.fb.array([]),
         Register: this.fb.array([]),
         Documents: null,
       });
+    }
+
+    async saveResume() {
+      let data = this.resumeForm.getRawValue();
+  
+      if (!data.Educations.length) {
+        data.Educations = null;
+      }
+      if (!data.Languages.length) {
+        data.Languages = null;
+      }
+      if (!data.BankData.length) {
+        data.BankData = null;
+      }
+      if (!data.Financials.length) {
+        data.Financials = null;
+      }
+      if (!data.Skills.length) {
+        data.Skills = null;
+      }
+      // try {
+      //   const collaborator = await this.collaboratorProvider.store(data);
+      // } catch (error) {
+      //   console.log('ERROR 132' + error);
+      // }
     }
 
 

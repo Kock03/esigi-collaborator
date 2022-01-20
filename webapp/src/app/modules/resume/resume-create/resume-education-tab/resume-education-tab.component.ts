@@ -99,33 +99,33 @@ export interface language {
     this.onChange.next(true);
   }
 
-  // saveEducation() {
-  //   const data = this.educationForm.getRawValue();
-  //   this.educationArray.insert(0, this.fb.group(data));
-  //   this.educationTable.renderRows();
-  //   this.educationForm.reset();
+  saveEducation() {
+    const data = this.educationForm.getRawValue();
+    this.educationArray.insert(0, this.fb.group(data));
+    this.educationTable.renderRows();
+    this.educationForm.reset();
     
-  // }
+  }
 
-  // saveLanguage() {
-  //   const data = this.languageForm.getRawValue();
-  //   this.languageArray.insert(0, this.fb.group(data));
-  //   this.languageTable.renderRows();
-  //   this.languageForm.reset();
-  // }
+  saveLanguage() {
+    const data = this.languageForm.getRawValue();
+    this.languageArray.insert(0, this.fb.group(data));
+    this.languageTable.renderRows();
+    this.languageForm.reset();
+  }
 
   getLanguage(languageSelected: any, index: number) {
     this.index = index;
     this.languageForm.patchValue(languageSelected);
   }
 
-  // editLanguage() {
-  //   this.languageArray.at(this.index).setValue(this.languageForm.getRawValue());
+  editLanguage() {
+    this.languageArray.at(this.index).setValue(this.languageForm.getRawValue());
 
-  //   this.languageTable.renderRows();
-  //   this.languageForm.reset();
-  //   this.index = null;
-  // }
+    this.languageTable.renderRows();
+    this.languageForm.reset();
+    this.index = null;
+  }
 
   cancelEdit(){
     this.index = null;
@@ -144,13 +144,13 @@ export interface language {
     this.educationForm.patchValue(educationSelected);
   }
 
-  // editEducation() {
-  //   this.educationArray.at(this.index).setValue(this.educationForm.getRawValue());
+  editEducation() {
+    this.educationArray.at(this.index).setValue(this.educationForm.getRawValue());
 
-  //   this.educationTable.renderRows();
-  //   this.educationForm.reset();
-  //   this.index = null;
-  // }
+    this.educationTable.renderRows();
+    this.educationForm.reset();
+    this.index = null;
+  }
 
   deleteEducation(index: number){
     this.educationArray.removeAt(index);

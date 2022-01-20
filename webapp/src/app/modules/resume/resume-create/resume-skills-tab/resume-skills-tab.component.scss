@@ -1,0 +1,35 @@
+#resumeSkillTab {
+    padding-bottom: 10px;
+    max-width: 800px;
+  
+    table {
+      width: 100%;
+    }
+  
+    .envolti-table {
+      padding-bottom: 10px;
+      overflow: auto;
+      max-height: 200px;
+  
+  
+      .mat-column-icon {
+        width: 50px;
+      }
+    }
+  
+    .checkbox {
+      margin-top: 15px;
+    }
+  
+    .edit-button {
+      height: 40px;
+      margin-top: 8px;
+    }
+  
+  
+    .button-tab {
+      white-space: nowrap;
+      overflow: hidden;
+    }
+  }
+  

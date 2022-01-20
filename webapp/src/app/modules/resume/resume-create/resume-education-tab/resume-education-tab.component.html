@@ -58,7 +58,7 @@
               class="edit-button"
               mat-flat-button
               color="primary"
-              
+              (click)="saveEducation()"
               *ngIf="index == null"
             >
               <mat-icon>add</mat-icon>
@@ -68,7 +68,7 @@
               class="edit-button"
               mat-flat-button
               color="primary"
-              
+              (click)="editEducation()"
               *ngIf="index != null"
             >
               <mat-icon>save</mat-icon>
@@ -190,7 +190,7 @@
               class="edit-button"
               mat-flat-button
               color="primary"
-             
+              (click)="saveLanguage()"
               *ngIf="index == null"
             >
               <mat-icon>add</mat-icon>
@@ -201,7 +201,7 @@
               class="edit-button"
               mat-flat-button
               color="primary"
-              
+              (click)="editLanguage()"
               *ngIf="index != null"
             >
               <mat-icon>save</mat-icon>
