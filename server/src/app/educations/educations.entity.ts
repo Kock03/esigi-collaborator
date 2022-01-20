@@ -1,4 +1,4 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, DeleteDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { CollaboratorsEntity } from "../collaborators/collaborators.entity";
 
 @Entity({name:'educations'})
@@ -21,5 +21,14 @@ export class EducationsEntity{
 
     @ManyToOne(() => CollaboratorsEntity, collaborator => collaborator.Educations)
     Collaborator: CollaboratorsEntity;
+
+    @CreateDateColumn({ name: 'created_at' })
+    createdAt: Date;
+  
+    @UpdateDateColumn({ name: 'updated_at' })
+    updatedAt: Date;
+  
+    @DeleteDateColumn({ name: 'deleted_at' })
+    deletedAt: Date;
 
 }
