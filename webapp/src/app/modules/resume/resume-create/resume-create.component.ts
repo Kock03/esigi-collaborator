@@ -2,6 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 // import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  MatDialog,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+} from '@angular/material/dialog';
+import { ResumeDialogExperience } from './resume-experience-tab/resume-experience-tab.component';
 
 @Component({
   selector: 'app-resume-create',
@@ -17,6 +23,7 @@ export class ResumeCreateComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
+    
     // private resumeProvider: ResumeProvider,
     ) {}
 
@@ -63,6 +70,9 @@ export class ResumeCreateComponent implements OnInit {
       });
     }
 
+
+    
+  
     async saveResume() {
       let data = this.resumeForm.getRawValue();
   
@@ -104,3 +114,5 @@ export class ResumeCreateComponent implements OnInit {
     );
   }
 }
+
+
