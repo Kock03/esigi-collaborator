@@ -20,7 +20,7 @@ export class JobProvider {
             }, reject);
         });
     }
-
+ 
     findOne(id: string): Promise<any> {
         return new Promise((resolve, reject) => {
             this.apiGateway.get( 'jobs', { id: id }).subscribe((response: HttpResponse<any>) => {

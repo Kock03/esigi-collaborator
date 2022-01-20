@@ -35,7 +35,7 @@ export class CollaboratorCreateComponent implements OnInit {
       cpf: this.fb.control({ value: null, disabled: false}, DocumentValidator.isValidCpf()),
       birthDate: ['06/12/2004', Validators.required],
       email: ['davi@email', Validators.email],
-      cnpj:  this.fb.control({ value: null, disabled: false}, DocumentValidator.isValidCnpj()),
+      cnpj: ['', Validators.required],
       stateRegistration: ['', Validators.required],
       municipalInscription: ['', Validators.required],
       site: ['site.davi', Validators.required],
@@ -66,7 +66,7 @@ export class CollaboratorCreateComponent implements OnInit {
     });
   }
 
-  async saveCustomer() {
+  async saveCollaborator() {
     let data = this.collaboratorForm.getRawValue();
 
     if (!data.Educations.length) {

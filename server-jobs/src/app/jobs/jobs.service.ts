@@ -13,8 +13,7 @@ export class JobsService {
 
     constructor(
         @InjectRepository(JobsEntity)
-        private readonly jobsRepository: Repository<JobsEntity>,
-        private readonly languagesRepository: Repository<LanguagesEntity>) { }
+        private readonly jobsRepository: Repository<JobsEntity>) { }
 
     async findAll() {
         const jobsWhiteAll = await this.jobsRepository

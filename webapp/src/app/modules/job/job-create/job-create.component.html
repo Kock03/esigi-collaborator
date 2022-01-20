@@ -8,10 +8,12 @@
           <div fxFlex="100" fxLayoutGap="16px">
             <mat-form-field fxFlex="30" appearance="outline">
               <mat-label>Solicitante</mat-label>
-              <mat-select matInput disableRipple formControlName="requester">
-                <mat-option [value]="1">Wellington</mat-option>
-                <mat-option [value]="2">Danilo</mat-option>
-              </mat-select>
+              <input
+                placeholder="Solicitante"
+                matInput
+                formControlName="requester"
+                type="text"
+              />
             </mat-form-field>
 
             <mat-form-field fxFlex="35" appearance="outline">
@@ -43,10 +45,12 @@
           <div fxFlex="100" fxLayoutGap="16px">
             <mat-form-field fxFlex="40" appearance="outline">
               <mat-label>Cliente</mat-label>
-              <mat-select matInput disableRipple formControlName="client">
-                <mat-option [value]="1">Ambev</mat-option>
-                <mat-option [value]="2">Tuppy</mat-option>
-              </mat-select>
+              <input
+              placeholder="Cliente"
+              matInput
+              formControlName="client"
+              type="text"
+            />
             </mat-form-field>
 
             <mat-form-field fxFlex="40" appearance="outline">
@@ -201,11 +205,11 @@
 
             <mat-form-field fxFlex="35" appearance="outline"  formGroupName="Languages">
               <mat-label>Idioma</mat-label>
-              <mat-select matInput disableRipple formControlName="languageName">
-                <mat-option [value]="1">Inglês</mat-option>
-                <mat-option [value]="2">Russo</mat-option>
-                <mat-option [value]="3">Alemão</mat-option>
-              </mat-select>
+              <input
+              placeholder="Idioma"
+              matInput
+              formControlName="languageName"
+            />
             </mat-form-field>
 
             <mat-form-field fxFlex="30" appearance="outline"  formGroupName="Languages">
@@ -291,7 +295,7 @@
     >
       Continuar
     </button>
-    <button mat-flat-button *ngIf="selectedIndex == 1" color="primary">
+    <button mat-flat-button *ngIf="selectedIndex == 1" color="primary" (click)="saveJob()">
       Salvar
     </button>
   </div>
