@@ -1,9 +1,9 @@
 <div id="jobCreate" class="page">
-  <h2 class="title">Vagas</h2>
+  <h2>Vagas</h2>
 
   <div class="content-scroll" *ngIf="jobForm">
     <mat-tab-group animationDuration="0ms" [selectedIndex]="selectedIndex">
-      <mat-tab label="cadastro">
+      <mat-tab disabled label="Cadastro">
         <form [formGroup]="jobForm" fxLayout="column" class="form">
           <div fxFlex="100" fxLayoutGap="16px">
             <mat-form-field fxFlex="30" appearance="outline">
@@ -16,8 +16,11 @@
 
             <mat-form-field fxFlex="25" appearance="outline">
               <mat-label>Data de Abertura</mat-label>
-              <input matInput [matDatepicker]="picker" formControlName="test">
-              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <input matInput [matDatepicker]="picker" formControlName="test" />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="picker"
+              ></mat-datepicker-toggle>
               <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
 
@@ -90,8 +93,11 @@
 
             <mat-form-field fxFlex="25" appearance="outline">
               <mat-label>Previsão de Inicio</mat-label>
-              <input matInput [matDatepicker]="init" formControlName="test">
-              <mat-datepicker-toggle matSuffix [for]="init"></mat-datepicker-toggle>
+              <input matInput [matDatepicker]="init" formControlName="test" />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="init"
+              ></mat-datepicker-toggle>
               <mat-datepicker #init></mat-datepicker>
             </mat-form-field>
 
@@ -163,11 +169,9 @@
             </mat-form-field>
           </div>
         </form>
-         
       </mat-tab>
-      <mat-tab label="Conhecimentos">
+      <mat-tab disabled label="Conhecimentos">
         <form [formGroup]="jobForm" fxLayout="column" class="form">
-  
           <div fxFlex="100" fxLayoutGap="16px">
             <mat-form-field fxFlex="35" appearance="outline">
               <mat-label>Escolaridade</mat-label>
@@ -212,7 +216,9 @@
             <div fxFlex="50">
               <div fxLayout="row" fxLayoutAlign="start center ">
                 <p class="skills-text">Conhecimentos</p>
-                <button mat-button color="primary" (click)="openDialog()">Adicionar</button>
+                <button mat-button color="primary" (click)="openDialog()">
+                  Adicionar
+                </button>
               </div>
 
               <mat-list role="list" class="skill-list">
@@ -251,7 +257,7 @@
       </mat-tab>
     </mat-tab-group>
   </div>
-  
+
   <div class="navigation-buttons" fxLayoutAlign="center end" fxLayoutGap="16px">
     <button mat-button *ngIf="selectedIndex != 0" (click)="previousStep()">
       Voltar
@@ -264,13 +270,8 @@
     >
       Continuar
     </button>
-    <button
-      mat-flat-button
-      *ngIf="selectedIndex == 1"
-      color="primary"
-    >
+    <button mat-flat-button *ngIf="selectedIndex == 1" color="primary">
       Salvar
     </button>
   </div>
 </div>
-

@@ -13,6 +13,7 @@ export class JobCreateComponent implements OnInit {
   jobForm!: FormGroup;
   step: number = 1;
   selectedIndex: number = 0;
+  disable = false;
 
 
   constructor(private fb: FormBuilder, private dialog: MatDialog) {}
@@ -37,10 +38,9 @@ export class JobCreateComponent implements OnInit {
       });
   }
 
-  
 
  nextStep() {
-    if (this.selectedIndex != 2) {
+    if (this.selectedIndex != 1) {
       this.selectedIndex = this.selectedIndex + 1;
     }
   }
