@@ -3,7 +3,6 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { FindConditions } from "typeorm/find-options/FindConditions";
 import { FindOneOptions } from "typeorm/find-options/FindOneOptions";
 import { Repository } from "typeorm/repository/Repository";
-import { LanguagesEntity } from "../languages/languages.entity";
 import { CreateJobsDto } from "./dtos/create-jobs.dto";
 import { UpdateJobsDto } from "./dtos/update-jobs.dto";
 import { JobsEntity } from "./jobs.entity";
@@ -13,8 +12,7 @@ export class JobsService {
 
     constructor(
         @InjectRepository(JobsEntity)
-        private readonly jobsRepository: Repository<JobsEntity>,
-        private readonly languagesRepository: Repository<LanguagesEntity>) { }
+        private readonly jobsRepository: Repository<JobsEntity>,) { }
 
     async findAll() {
         const jobsWhiteAll = await this.jobsRepository

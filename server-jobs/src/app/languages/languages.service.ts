@@ -10,8 +10,7 @@ import { LanguagesEntity } from "./languages.entity";
 export class LanguagesService {
   constructor(
     @InjectRepository(LanguagesEntity)
-    private readonly languagesRepository: Repository<LanguagesEntity>,
-    private readonly jobsRepository: Repository<JobsEntity>
+    private readonly languagesRepository: Repository<LanguagesEntity>
   ) { }
 
   async findAll() {
