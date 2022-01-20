@@ -48,13 +48,12 @@ export class JobsService {
     }
 
     async destroy(id: string) {
-
         
-       /* try {
+        try {
             await this.jobsRepository.findOneOrFail({ id });
         } catch (error) {
             throw new HttpException('Registro não existe ou invalido', 404)
-        }*/
+        }
 
         return await this.jobsRepository.softRemove({ id });
     }
