@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/colaborador/novo',
+    redirectTo: '/curriculo/novo',
     pathMatch: 'full',
   },
 
@@ -15,7 +15,16 @@ const routes: Routes = [
         (m) => m.CollaboratorModule
       ),
   },
-];
+
+  {
+    path: 'curriculo',
+    loadChildren: () =>
+      import('./modules/resume/resume.module').then(
+        (m) => m.ResumeModule
+      ),
+  },
+
+   ]
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
