@@ -8,7 +8,7 @@
           <div fxFlex="100" fxLayoutGap="16px">
             <mat-form-field fxFlex="30" appearance="outline">
               <mat-label>Solicitante</mat-label>
-              <mat-select matInput disableRipple formControlName="test">
+              <mat-select matInput disableRipple formControlName="requester">
                 <mat-option [value]="1">Wellington</mat-option>
                 <mat-option [value]="2">Danilo</mat-option>
               </mat-select>
@@ -16,7 +16,11 @@
 
             <mat-form-field fxFlex="35" appearance="outline">
               <mat-label>Data de Abertura</mat-label>
-              <input matInput [matDatepicker]="picker" formControlName="test" />
+              <input
+                matInput
+                [matDatepicker]="picker"
+                formControlName="openingDate"
+              />
               <mat-datepicker-toggle
                 matSuffix
                 [for]="picker"
@@ -26,7 +30,7 @@
 
             <mat-form-field fxFlex="35" appearance="outline">
               <mat-label>Status</mat-label>
-              <mat-select matInput disableRipple formControlName="test">
+              <mat-select matInput disableRipple formControlName="status">
                 <mat-option [value]="1">Processada</mat-option>
                 <mat-option [value]="2">Em Revisão</mat-option>
                 <mat-option [value]="3">Fechada</mat-option>
@@ -34,14 +38,12 @@
                 <mat-option [value]="5">Concluida</mat-option>
               </mat-select>
             </mat-form-field>
-
-    
           </div>
 
           <div fxFlex="100" fxLayoutGap="16px">
             <mat-form-field fxFlex="40" appearance="outline">
               <mat-label>Cliente</mat-label>
-              <mat-select matInput disableRipple formControlName="test">
+              <mat-select matInput disableRipple formControlName="client">
                 <mat-option [value]="1">Ambev</mat-option>
                 <mat-option [value]="2">Tuppy</mat-option>
               </mat-select>
@@ -49,7 +51,7 @@
 
             <mat-form-field fxFlex="40" appearance="outline">
               <mat-label>Tipo de Vaga</mat-label>
-              <mat-select matInput disableRipple formControlName="test">
+              <mat-select matInput disableRipple formControlName="typeOfJob">
                 <mat-option [value]="1">Aumento de Quadro</mat-option>
                 <mat-option [value]="2">Promoção</mat-option>
                 <mat-option [value]="3">Fidelidade</mat-option>
@@ -60,19 +62,21 @@
               class="checkbox"
               color="primary"
               fxFlex="20"
-              formControlName="time"
+              formControlName="temporary"
               >Temporario</mat-checkbox
             >
           </div>
           <div fxFlex="100" fxLayoutGap="16px">
-            
-            <mat-form-field fxFlex="20" appearance="outline"  *ngIf="jobForm.controls['time'].value == true">
+            <mat-form-field
+              fxFlex="20"
+              appearance="outline"
+              *ngIf="jobForm.controls['temporary'].value == true"
+            >
               <mat-label>Tempo Contrato</mat-label>
               <input
-
                 placeholder="Tempo de Contrato"
                 matInput
-                formControlName="test"
+                formControlName="monthTime"
                 type="text"
               />
             </mat-form-field>
@@ -82,14 +86,18 @@
               <input
                 placeholder="Nome da Vaga"
                 matInput
-                formControlName="test"
+                formControlName="jobName"
                 type="text"
               />
             </mat-form-field>
 
             <mat-form-field fxFlex="35" appearance="outline">
               <mat-label>Previsão de Inicio</mat-label>
-              <input matInput [matDatepicker]="init" formControlName="test" />
+              <input
+                matInput
+                [matDatepicker]="init"
+                formControlName="startForecast"
+              />
               <mat-datepicker-toggle
                 matSuffix
                 [for]="init"
@@ -97,14 +105,12 @@
               <mat-datepicker #init></mat-datepicker>
             </mat-form-field>
 
-         
-
             <mat-form-field fxFlex="30" appearance="outline">
               <mat-label>Número de Vagas</mat-label>
               <input
                 placeholder="Número de Vagas"
                 matInput
-                formControlName="test"
+                formControlName="jobNumber"
                 type="number"
               />
             </mat-form-field>
@@ -112,7 +118,11 @@
           <div fxFlex="100" fxLayoutGap="16px">
             <mat-form-field fxFlex="30" appearance="outline">
               <mat-label>Tipo de Contratação</mat-label>
-              <mat-select matInput disableRipple formControlName="test">
+              <mat-select
+                matInput
+                disableRipple
+                formControlName="typeOfContract"
+              >
                 <mat-option [value]="1">CLT</mat-option>
                 <mat-option [value]="2">PJ</mat-option>
                 <mat-option [value]="3">Cooperado</mat-option>
@@ -121,7 +131,7 @@
 
             <mat-form-field fxFlex="35" appearance="outline">
               <mat-label>Local de Trabalho</mat-label>
-              <mat-select matInput disableRipple formControlName="test">
+              <mat-select matInput disableRipple formControlName="workplace">
                 <mat-option [value]="1">In Loco</mat-option>
                 <mat-option [value]="2">Home Office</mat-option>
                 <mat-option [value]="3">Hibrido</mat-option>
@@ -131,27 +141,21 @@
 
             <mat-form-field fxFlex="35" appearance="outline">
               <mat-label>Nivel de Senioridade</mat-label>
-              <mat-select matInput disableRipple formControlName="test">
+              <mat-select matInput disableRipple formControlName="seniority">
                 <mat-option [value]="1">Estágiario</mat-option>
                 <mat-option [value]="2">Junior</mat-option>
                 <mat-option [value]="3">Pleno</mat-option>
                 <mat-option [value]="4">Senior</mat-option>
               </mat-select>
             </mat-form-field>
-
-        
-
-  
           </div>
           <div fxFlex="100" fxLayoutGap="16px">
-      
-
             <mat-form-field fxFlex="30" appearance="outline">
               <mat-label>Jornada de Trabaho</mat-label>
               <input
                 placeholder="Jornada de Trabaho"
                 matInput
-                formControlName="test"
+                formControlName="workingDay"
               />
             </mat-form-field>
 
@@ -160,7 +164,7 @@
               <input
                 placeholder="Valor Minimo"
                 matInput
-                formControlName="test"
+                formControlName="minimumValue"
               />
             </mat-form-field>
 
@@ -169,18 +173,17 @@
               <input
                 placeholder="Valor Maximo"
                 matInput
-                formControlName="test"
+                formControlName="maximumValue"
               />
             </mat-form-field>
 
             <mat-checkbox
-            class="checkbox"
-            color="primary"
-            fxFlex="20"
-            formControlName="test"
-            >Publicar Vaga</mat-checkbox
-          >
-
+              class="checkbox"
+              color="primary"
+              fxFlex="20"
+              formControlName="publish"
+              >Publicar Vaga</mat-checkbox
+            >
           </div>
         </form>
       </mat-tab>
@@ -189,25 +192,29 @@
           <div fxFlex="100" fxLayoutGap="16px">
             <mat-form-field fxFlex="35" appearance="outline">
               <mat-label>Escolaridade</mat-label>
-              <mat-select matInput disableRipple formControlName="test">
+              <mat-select matInput disableRipple formControlName="schooling">
                 <mat-option [value]="1">Ensino Superior Completo</mat-option>
                 <mat-option [value]="2">Ensino Superior Incompleto</mat-option>
                 <mat-option [value]="3">Ensino Médio Completo</mat-option>
               </mat-select>
             </mat-form-field>
 
-            <mat-form-field fxFlex="35" appearance="outline">
+            <mat-form-field fxFlex="35" appearance="outline"  formGroupName="Languages">
               <mat-label>Idioma</mat-label>
-              <mat-select matInput disableRipple formControlName="test">
+              <mat-select matInput disableRipple formControlName="languageName">
                 <mat-option [value]="1">Inglês</mat-option>
                 <mat-option [value]="2">Russo</mat-option>
                 <mat-option [value]="3">Alemão</mat-option>
               </mat-select>
             </mat-form-field>
 
-            <mat-form-field fxFlex="30" appearance="outline">
+            <mat-form-field fxFlex="30" appearance="outline"  formGroupName="Languages">
               <mat-label>Grau de Fluência</mat-label>
-              <mat-select matInput disableRipple formControlName="test">
+              <mat-select
+                matInput
+                disableRipple
+                formControlName="degreeOfInfluence"
+              >
                 <mat-option [value]="1">Leitura e Conversação</mat-option>
                 <mat-option [value]="2">Conversação e Escrita</mat-option>
                 <mat-option [value]="3">Escrita e Leitura</mat-option>
@@ -224,7 +231,7 @@
                 class="text-area"
                 matInput
                 placeholder="Atividades"
-                formControlName="test"
+                formControlName="collaboratorActivities"
               ></textarea>
             </mat-form-field>
             <div fxFlex="50">
@@ -253,7 +260,7 @@
                 class="text-area"
                 matInput
                 placeholder="Habilidades"
-                formControlName="test"
+                formControlName="skills"
               ></textarea>
             </mat-form-field>
 
@@ -263,7 +270,7 @@
                 class="text-area"
                 matInput
                 placeholder="Atitudes"
-                formControlName="test"
+                formControlName="attitudes"
               ></textarea>
             </mat-form-field>
           </div>
