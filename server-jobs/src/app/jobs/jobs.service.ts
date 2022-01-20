@@ -3,7 +3,6 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { FindConditions } from "typeorm/find-options/FindConditions";
 import { FindOneOptions } from "typeorm/find-options/FindOneOptions";
 import { Repository } from "typeorm/repository/Repository";
-import { LanguagesEntity } from "../languages/languages.entity";
 import { CreateJobsDto } from "./dtos/create-jobs.dto";
 import { UpdateJobsDto } from "./dtos/update-jobs.dto";
 import { JobsEntity } from "./jobs.entity";
@@ -13,7 +12,11 @@ export class JobsService {
 
     constructor(
         @InjectRepository(JobsEntity)
+<<<<<<< HEAD
         private readonly jobsRepository: Repository<JobsEntity>) { }
+=======
+        private readonly jobsRepository: Repository<JobsEntity>,) { }
+>>>>>>> 08b7d6a92524d6530a06d2676d65f4b84950ff62
 
     async findAll() {
         const jobsWhiteAll = await this.jobsRepository
@@ -47,13 +50,12 @@ export class JobsService {
     }
 
     async destroy(id: string) {
-
         
-       /* try {
+        try {
             await this.jobsRepository.findOneOrFail({ id });
         } catch (error) {
             throw new HttpException('Registro não existe ou invalido', 404)
-        }*/
+        }
 
         return await this.jobsRepository.softRemove({ id });
     }
