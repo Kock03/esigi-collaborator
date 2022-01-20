@@ -14,6 +14,7 @@ export class JobCreateComponent implements OnInit {
   step: number = 1;
   selectedIndex: number = 0;
   disable = false;
+  checked = false;
 
 
   constructor(private fb: FormBuilder, private dialog: MatDialog) {}
@@ -25,6 +26,7 @@ export class JobCreateComponent implements OnInit {
   initForm() {
     this.jobForm = this.fb.group({
       test: ['', Validators.required],
+      time: [true],
     });
   }
 

@@ -21,7 +21,6 @@ export class CollaboratorCreateComponent implements OnInit {
   ) {}
 
   async ngOnInit(): Promise<void> {
-    console.log(await this.collaboratorProvider.findAll());
     this.initForm();
   }
 

@@ -1,12 +1,9 @@
 #jobCreate{
-
-   
-    
     max-width: 1200px;
     
     .content-scroll {
         overflow: auto;
-        height: calc(100vh - 280px);
+        height: calc(100vh - 210px);
 
       }
 
@@ -38,7 +35,10 @@
        .mat-tab-label.mat-tab-disabled {
          color: black!important;
        }
-
+       
+       .checkbox {
+         text-align: center;
+       }
      
 }
 
