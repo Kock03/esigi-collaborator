@@ -64,7 +64,7 @@ export class CreateJobsDto{
     @IsNotEmpty()
     collaboratorActivities: string;
 
-    // @IsNotEmpty()
+    @IsNotEmpty()
     knowledge: string;
 
     @IsNotEmpty()

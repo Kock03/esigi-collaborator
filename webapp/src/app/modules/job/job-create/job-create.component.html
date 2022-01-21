@@ -193,8 +193,8 @@
       </mat-tab>
       <mat-tab disabled label="Conhecimentos">
         <form [formGroup]="jobForm" fxLayout="column" class="form">
-          <div fxFlex="100" fxLayoutGap="16px">
-            <mat-form-field fxFlex="35" appearance="outline">
+          <div fxFlex="60" fxLayoutGap="16px">
+            <mat-form-field fxFlex="20" appearance="outline">
               <mat-label>Escolaridade</mat-label>
               <mat-select matInput disableRipple formControlName="schooling">
                 <mat-option [value]="1">Ensino Superior Completo</mat-option>
@@ -203,7 +203,7 @@
               </mat-select>
             </mat-form-field>
 
-            <mat-form-field fxFlex="35" appearance="outline"  formGroupName="Languages">
+            <mat-form-field fxFlex="20" appearance="outline"  formGroupName="Languages">
               <mat-label>Idioma</mat-label>
               <input
               placeholder="Idioma"
@@ -212,7 +212,7 @@
             />
             </mat-form-field>
 
-            <mat-form-field fxFlex="30" appearance="outline"  formGroupName="Languages">
+            <mat-form-field fxFlex="20" appearance="outline"  formGroupName="Languages">
               <mat-label>Grau de Fluência</mat-label>
               <mat-select
                 matInput
@@ -225,8 +225,8 @@
               </mat-select>
             </mat-form-field>
           </div>
-          <div fxFlex="100" fxLayoutGap="16px">
-            <mat-form-field fxFlex="50" appearance="outline">
+          <div fxFlex="63" fxLayoutGap="16px">
+            <mat-form-field fxFlex="63" appearance="outline">
               <mat-label
                 >Quais são as principais atividades que ocolaborador irá
                 exercer?</mat-label
@@ -238,7 +238,11 @@
                 formControlName="collaboratorActivities"
               ></textarea>
             </mat-form-field>
-            <div fxFlex="50">
+           
+          </div>
+
+          <div fxFlex="63" fxLayoutGap="16px">
+            <div fxFlex="63">
               <div fxLayout="row" fxLayoutAlign="start center ">
                 <p class="skills-text">Conhecimentos</p>
                 <button mat-button color="primary" (click)="openDialog()">
@@ -257,8 +261,8 @@
             </div>
           </div>
 
-          <div fxFlex="100" fxLayoutGap="16px">
-            <mat-form-field fxFlex="50" appearance="outline">
+          <div fxFlex="63" fxLayoutGap="16px">
+            <mat-form-field fxFlex="63" appearance="outline">
               <mat-label> Experiencia Desejada</mat-label>
               <textarea
                 class="text-area"
@@ -267,8 +271,11 @@
                 formControlName="skills"
               ></textarea>
             </mat-form-field>
+          </div>
 
-            <mat-form-field fxFlex="50" appearance="outline">
+          <div fxFlex="63" fxLayoutGap="16px">
+
+            <mat-form-field fxFlex="63" appearance="outline">
               <mat-label>Comportamento e/ou competências necessárias</mat-label>
               <textarea
                 class="text-area"

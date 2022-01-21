@@ -52,8 +52,9 @@ export class JobCreateComponent implements OnInit {
       maximumValue: [1, Validators.required],
       openingDate: ['', Validators.required],
       schooling: [1, Validators.required],
-      collaboratorActivities: ['', Validators.required],
-      knowledge: ['', Validators.required],
+      collaboratorActivities: ['a', Validators.required],
+      knowledge: ['a', Validators.required],
+      yearsExperience: [1, Validators.required],
       skills: ['a', Validators.required],
       attitudes: ['a', Validators.required],
       Languages: this.fb.group({

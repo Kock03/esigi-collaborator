@@ -1,4 +1,5 @@
 import { BeforeRemove, BeforeUpdate, Column, CreateDateColumn, DeleteDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { KnowledgesEntity } from "../knowledges/knowledges.entity";
 import { LanguagesEntity } from "../languages/languages.entity";
 import { Schooling } from "./dtos/schooling.enum";
 import { Seniority } from "./dtos/seniority.enum";
@@ -55,20 +56,26 @@ export class JobsEntity {
   @Column()
   workingDay: string;
 
+  @Column()
+  yearsExperience: number;
+
   @Column({ type: 'numeric' })
   minimumValue: number;
 
   @Column({ type: 'numeric' })
   maximumValue: number;
 
-  @Column({ type: 'datetime' })
+  @Column({ type: 'int' })
   schooling: Schooling;
 
   @Column()
   collaboratorActivities: string;
 
-  @Column()
-  knowledge: string;
+  @OneToMany(() => KnowledgesEntity, (knowledges) => knowledges.Job, {
+    cascade: ['insert', 'update', 'soft-remove']  ,
+    orphanedRowAction: 'delete',
+  })
+  knowledges: KnowledgesEntity[];
 
   @Column()
   skills: string;
@@ -97,7 +104,6 @@ export class JobsEntity {
   @BeforeRemove()
   setDate(event: any) {
     console.log(event)
-    this.knowledge = 'teste'
   }
 
 }

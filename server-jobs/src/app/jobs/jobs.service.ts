@@ -12,11 +12,11 @@ export class JobsService {
 
     constructor(
         @InjectRepository(JobsEntity)
-<<<<<<< HEAD
+
         private readonly jobsRepository: Repository<JobsEntity>) { }
-=======
-        private readonly jobsRepository: Repository<JobsEntity>,) { }
->>>>>>> 08b7d6a92524d6530a06d2676d65f4b84950ff62
+
+     
+
 
     async findAll() {
         const jobsWhiteAll = await this.jobsRepository

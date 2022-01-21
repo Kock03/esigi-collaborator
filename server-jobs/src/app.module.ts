@@ -5,7 +5,9 @@ import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { JobsModule } from './app/jobs/jobs.module';
+import { KnowledgesModule } from './app/knowledges/knowledges.module';
 import { LanguagesModule } from './app/languages/languages.module';
+
 
 @Module({
   imports: [ConfigModule.forRoot(), TypeOrmModule.forRoot({
@@ -18,7 +20,7 @@ import { LanguagesModule } from './app/languages/languages.module';
     entities: [__dirname + '/**/*.entity{.js,.ts}'],
     synchronize: true,
     namingStrategy: new SnakeNamingStrategy()
-  } as TypeOrmModuleOptions), JobsModule, LanguagesModule],
+  } as TypeOrmModuleOptions), JobsModule, LanguagesModule, KnowledgesModule],
   controllers: [AppController],
   providers: [AppService],
 })
