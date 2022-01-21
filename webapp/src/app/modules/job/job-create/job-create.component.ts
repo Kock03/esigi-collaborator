@@ -1,5 +1,14 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, EventEmitter, Inject, Input, OnInit, Output, ViewChild, ViewEncapsulation } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Inject,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+  ViewEncapsulation,
+} from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {
   MatDialog,
@@ -10,8 +19,8 @@ import { MatTable } from '@angular/material/table';
 import { JobProvider } from 'src/providers/job.provider';
 
 export interface Knowledge {
-  name: string,
-  yearsExperience: number,
+  name: string;
+  yearsExperience: number;
 }
 
 @Component({
@@ -21,22 +30,20 @@ export interface Knowledge {
   encapsulation: ViewEncapsulation.None,
 })
 export class JobCreateComponent implements OnInit {
-  @ViewChild('knowledgeForm') knowledgeForm!: any;
   @ViewChild('knowledgeTable') knowledgeTable!: MatTable<any>;
 
   displayedColumns: string[] = ['name', 'yearsExperience', 'icon'];
 
-
   get knowledgeArray() {
     return this.jobForm.controls['Knowledges'] as FormArray;
   }
-  
+
   jobForm!: FormGroup;
   step: number = 1;
   selectedIndex: number = 0;
   disable = false;
   checked = false;
- 
+
   index: any = null;
   Knowledge: any;
 
@@ -46,8 +53,6 @@ export class JobCreateComponent implements OnInit {
       yearsExperience: 1,
     },
   ];
-
-
 
   constructor(
     private fb: FormBuilder,
@@ -87,9 +92,8 @@ export class JobCreateComponent implements OnInit {
         languageName: ['Russo', Validators.required],
         degreeOfInfluence: [1, Validators.required],
       }),
-      Knowledges: this.fb.array([])
+      Knowledges: this.fb.array([]),
     });
-
   }
 
   openDialog(): void {
@@ -100,6 +104,7 @@ export class JobCreateComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       console.log('The dialog was closed');
+      this.Knowledge.name = result;
     });
   }
 
@@ -142,9 +147,8 @@ export class JobDialogSkill implements OnInit {
   @Input('form') jobForm!: FormGroup;
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
   @ViewChild('knowledgeTable') knowledgeTable!: MatTable<any>;
-  
 
-  knowledgeForm!: FormGroup;  
+  knowledgeForm!: FormGroup;
 
   knowledge: Knowledge[] = [
     {
@@ -157,8 +161,10 @@ export class JobDialogSkill implements OnInit {
     return this.jobForm.controls['Knowledges'] as FormArray;
   }
 
-
-  constructor(private dialogRef: MatDialogRef<JobDialogSkill>, private fb: FormBuilder) {}
+  constructor(
+    public dialogRef: MatDialogRef<JobDialogSkill>,
+    @Inject(MAT_DIALOG_DATA) public data: JobDialogSkill, private fb: FormBuilder
+  ) {}
 
   ngOnInit(): void {
     this.initForm();
@@ -168,11 +174,12 @@ export class JobDialogSkill implements OnInit {
     this.dialogRef.close();
   }
 
-initForm(): void {
-  this.knowledgeForm = this.fb.group({
-    name: ['', Validators.required],
-    yearsExperience: [1, Validators.required],
-  })}
+  initForm(): void {
+    this.knowledgeForm = this.fb.group({
+      name: ['aaaaaaa', Validators.required],
+      yearsExperience: [1, Validators.required],
+    });
+  }
 
   saveKnowledge() {
     const data = this.knowledgeForm.getRawValue();
