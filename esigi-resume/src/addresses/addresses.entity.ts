@@ -1,4 +1,5 @@
 import { ResumesEntity } from 'src/resumes/resumes.entity';
+import { ResumesModule } from 'src/resumes/resumes.module';
 import { ResumesService } from 'src/resumes/resumes.service';
 import {
   Column,

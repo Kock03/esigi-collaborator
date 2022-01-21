@@ -1,5 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { AddressesEntity } from 'src/addresses/addresses.entity';
+import { PhonesEntity } from 'src/phones/phones.entity';
 import { Repository, FindConditions, FindOneOptions } from 'typeorm';
 import { CreateResumesDto } from './dto/create-resumes-dto';
 import { UpdateResumesDto } from './dto/update-resumes-dto';
@@ -39,7 +41,7 @@ export class ResumesService {
   }
 
   async destroy(id: string) {
-    await this.resumesRepository.findOneOrFail({ id });
-    return await this.resumesRepository.softDelete({ id });
+    await this.resumesRepository.findOne({ id });
+    return await this.resumesRepository.softRemove({ id });
   }
 }

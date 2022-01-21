@@ -39,7 +39,7 @@ export class PhonesService {
   }
 
   async destroy(id: string) {
-    await this.phonesRepository.findOneOrFail({ id });
-    return await this.phonesRepository.softDelete({ id });
+    await this.phonesRepository.findOne({ id });
+    return await this.phonesRepository.softRemove({ id });
   }
 }

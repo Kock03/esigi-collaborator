@@ -12,7 +12,6 @@ export class AddressesService {
     private readonly addressesRepository: Repository<AddressesEntity>,
   ) {}
 
-  // DISPENSÁVEL?
   async findAll() {
     return await this.addressesRepository.find();
   }
@@ -39,14 +38,8 @@ export class AddressesService {
     return this.addressesRepository.save(address);
   }
 
-  /*
-    Qual implementação é mais correta?
-    async destroy(id: string) {
-        const address = await this.addressesRepository.findOneOrFail({ id })
-        return await this.addressesRepository.softDelete(address)
-    }*/
   async destroy(id: string) {
-    await this.addressesRepository.findOneOrFail({ id });
-    return await this.addressesRepository.softDelete({ id });
+    await this.addressesRepository.findOne({ id });
+    return await this.addressesRepository.softRemove({ id });
   }
 }

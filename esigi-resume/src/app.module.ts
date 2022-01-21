@@ -23,7 +23,7 @@ import { ExperiencesModule } from './experiences/experiences.module';
       port: 3306,
       username: 'root',
       password: '1234',
-      database: 'db',
+      database: 'new_schema',
       synchronize: true,
       entities: [
         EducationsEntity,

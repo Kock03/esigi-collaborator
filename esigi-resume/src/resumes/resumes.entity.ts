@@ -48,15 +48,17 @@ export class ResumesEntity {
   maritalStatus: MaritalStatus;
 
   @OneToOne(() => AddressesEntity, {
-    cascade: ['insert', 'update', 'soft-remove'],
-    eager: true,
+    /*eager: true,*/
+    cascade: true,
+    onDelete: 'CASCADE',
   })
   @JoinColumn()
   addresses: AddressesEntity;
 
   @OneToOne(() => PhonesEntity, {
-    cascade: ['insert', 'update', 'soft-remove'],
-    eager: true,
+    /*eager: true,*/
+    cascade: true,
+    onDelete: 'CASCADE',
   })
   @JoinColumn()
   phones: PhonesEntity;
