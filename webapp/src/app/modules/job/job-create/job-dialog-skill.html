@@ -1,13 +1,40 @@
-<h1  fxLayout="column" fxLayoutAlign="center center" mat-dialog-title>Conhecimentos</h1>
-<div mat-dialog-content fxLayout="column" fxLayoutAlign="center center">
-  <p>Adicionar Conhecimento</p>
-  <mat-form-field appearance="outline">
-    <mat-label>Habilidade</mat-label>
-    <input matInput>
-    <mat-icon matSuffix>search</mat-icon>
-  </mat-form-field>
-</div>
-<div mat-dialog-actions  fxLayout="row" fxLayoutAlign="center center">
-  <button mat-flat-button (click)="onNoClick()">Cancelar</button>
-  <button mat-flat-button cdkFocusInitial color="primary">Ok</button>
+<div id="jobSkillDialog" mat-dialog-content>
+  <form [formGroup]="knowledgeForm" fxLayout="column">
+    <div fxFlex="100" fxLayoutGap="16px" fxLayout="row">
+      <mat-form-field appearance="outline" fxFlex="70">
+        <mat-label>Habilidade</mat-label>
+        <input
+          matInput
+          placeholder="Habilidade"
+          formControlName="name"
+          *ngFor="let knowledge of knowledge"
+          [value]="knowledge.name"
+        />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" fxFlex="70">
+        <mat-label>Tempo de Experiencia</mat-label>
+        <input
+          matInput
+          type="number"
+          placeholder="Anos de Experiencia"
+          formControlName="yearsExperience"
+          *ngFor="let knowledge of knowledge"
+          [value]="knowledge.yearsExperience"
+        />
+      </mat-form-field>
+    </div>
+
+    <div mat-dialog-actions fxLayout="row" fxFlexAlign="center">
+      <button mat-flat-button (click)="onNoClick()">Cancelar</button>
+      <button
+        mat-flat-button
+        cdkFocusInitial
+        color="primary"
+        (click)="saveKnowledge()"
+      >
+        Salvar
+      </button>
+    </div>
+  </form>
 </div>
