@@ -6,7 +6,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { JobsModule } from './app/jobs/jobs.module';
 import { KnowledgesModule } from './app/knowledges/knowledges.module';
-import { LanguagesModule } from './app/languages/languages.module';
+import { SenioritiesModule } from './app/seniorities/seniorities.module';
 
 
 @Module({
@@ -20,7 +20,7 @@ import { LanguagesModule } from './app/languages/languages.module';
     entities: [__dirname + '/**/*.entity{.js,.ts}'],
     synchronize: true,
     namingStrategy: new SnakeNamingStrategy()
-  } as TypeOrmModuleOptions), JobsModule, LanguagesModule, KnowledgesModule],
+  } as TypeOrmModuleOptions), JobsModule, KnowledgesModule,SenioritiesModule],
   controllers: [AppController],
   providers: [AppService],
 })

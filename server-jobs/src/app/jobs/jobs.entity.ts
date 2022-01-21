@@ -1,12 +1,12 @@
-import { BeforeRemove, BeforeUpdate, Column, CreateDateColumn, DeleteDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { BeforeRemove, BeforeUpdate, Column, CreateDateColumn, DeleteDateColumn, Entity, OneToMany, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { KnowledgesEntity } from "../knowledges/knowledges.entity";
-import { LanguagesEntity } from "../languages/languages.entity";
+import {LanguagesEntity} from "../../../../server/src/app/languages/languages.entity";
 import { Schooling } from "./dtos/schooling.enum";
-import { Seniority } from "./dtos/seniority.enum";
 import { Status } from "./dtos/status.enum";
 import { Type } from "./dtos/type.enum";
 import { TypeOfContract } from "./dtos/typeOfContract.enum";
 import { Workplace } from "./dtos/workplace.enum";
+import { SenioritiesEntity } from "../seniorities/seniorities.entity";
 
 @Entity({ name: 'jobs' })
 export class JobsEntity {
@@ -42,9 +42,6 @@ export class JobsEntity {
   startForecast: Date;
 
   @Column({ type: 'int' })
-  seniority: Seniority;
-
-  @Column({ type: 'int' })
   jobNumber: number;
 
   @Column({ type: 'int' })
@@ -71,12 +68,6 @@ export class JobsEntity {
   @Column()
   collaboratorActivities: string;
 
-  @OneToMany(() => KnowledgesEntity, (knowledges) => knowledges.Job, {
-    cascade: ['insert', 'update', 'soft-remove']  ,
-    orphanedRowAction: 'delete',
-  })
-  knowledges: KnowledgesEntity[];
-
   @Column()
   skills: string;
 
@@ -86,11 +77,20 @@ export class JobsEntity {
   @Column()
   openingDate: Date;
 
+  @OneToMany(() => KnowledgesEntity, (knowledges) => knowledges.Job, {
+    cascade: ['insert', 'update', 'soft-remove']  ,
+    orphanedRowAction: 'delete',
+  })
+  Knowledges: KnowledgesEntity[];
+
   @OneToMany(() => LanguagesEntity, (languages) => languages.Job, {
     cascade: ['insert', 'update', 'soft-remove']  ,
     orphanedRowAction: 'delete',
   })
   Languages: LanguagesEntity[];
+
+  @OneToOne(() => SenioritiesEntity, seniority => seniority.Job) 
+  Senorities: SenioritiesEntity;
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;

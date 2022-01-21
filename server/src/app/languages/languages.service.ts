@@ -24,7 +24,7 @@ export class LanguagesService {
   async findOneOrfail(
     conditions: FindConditions<LanguagesEntity>,
     options?: FindOneOptions<LanguagesEntity>,) {
-      options = { relations: ['Collaborator']};
+      options = { relations: ['Collaborator','jobs'] };
     try {
       return await this.languagesRepository.findOneOrFail(conditions, options);
     } catch (error) {

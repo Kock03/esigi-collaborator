@@ -3,7 +3,7 @@ import { CreateKnowledgesDto } from './dtos/create-knowledges.dto';
 import { UpdateKnowledgesDto } from './dtos/update-knowledges.dto';
 import { KnowledgesService } from './knowledges.service';
 
-@Controller('knowledges')
+@Controller('/api/v1/knowledges')
 export class KnowledgesController {
     constructor(private readonly KnowledgesService: KnowledgesService){ }
 
@@ -19,7 +19,7 @@ export class KnowledgesController {
 
     @Post()
     async store(@Body() body: CreateKnowledgesDto){
-        console.log("🚀 ~ file: jobs.controller.ts ~ line 22 ~ JobsController ~ store ~ body", body)
+        console.log("🚀 ~ file: jobs.controller.ts ~ line 22 ~ KnowledgesController ~ store ~ body", body)
         return await this.KnowledgesService.store(body);
     }
 

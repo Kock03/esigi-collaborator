@@ -17,7 +17,7 @@ export class KnowledgesEntity {
   @Column({type:'int'})
   typeOfPeriod: TypeOfPeriod;
 
-  @ManyToOne(() => JobsEntity, job => job.knowledges,{ onDelete: "CASCADE" })
+  @ManyToOne(() => JobsEntity, job => job.Knowledges,{ onDelete: "CASCADE" })
   Job: JobsEntity;
 
 }

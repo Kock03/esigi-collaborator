@@ -1,5 +1,6 @@
-import { IsNotEmpty } from "class-validator";
+import { IsNotEmpty, IsOptional } from "class-validator";
 import { CollaboratorsEntity } from "src/app/collaborators/collaborators.entity";
+import { JobsEntity } from "../../../../../server-jobs/src/app/jobs/jobs.entity";
 
 export class CreateLanguagesDto{
      
@@ -10,6 +11,9 @@ export class CreateLanguagesDto{
     degreeOfInfluence: degreeOfInfluence;
 
     @IsNotEmpty()
-    collaborator: CollaboratorsEntity;
+    Collaborator: CollaboratorsEntity;
+
+    @IsOptional()
+    Job: JobsEntity;
 
 }

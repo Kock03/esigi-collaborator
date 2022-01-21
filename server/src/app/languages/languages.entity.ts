@@ -1,5 +1,6 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { CollaboratorsEntity } from "../collaborators/collaborators.entity";
+import {JobsEntity} from "../../../../server-jobs/src/app/jobs/jobs.entity";
 
 @Entity({ name: 'languages' })
 export class LanguagesEntity {
@@ -16,4 +17,6 @@ export class LanguagesEntity {
     @ManyToOne(() => CollaboratorsEntity, collaborator => collaborator.Languages)
     Collaborator: CollaboratorsEntity;
 
+    @ManyToOne(() => JobsEntity, job => job.Languages)
+    Job: JobsEntity;
 }
