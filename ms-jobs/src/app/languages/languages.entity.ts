@@ -13,6 +13,6 @@ export class LanguagesEntity {
     @Column({ name: 'degree_of_influence', type: 'int' })
     degreeOfInfluence: degreeOfInfluence;
 
-    @ManyToMany(() => JobsEntity, job => job.Languages)
-    jobs: JobsEntity[];
+    @ManyToOne(() => JobsEntity, job => job.Languages,{ onDelete: "CASCADE" })
+    Job: JobsEntity;
 }

@@ -74,11 +74,10 @@ export class JobsEntity {
   @Column()
   openingDate: Date;
 
-  @ManyToMany(() => LanguagesEntity, language => language.jobs,{
+  @OneToMany(() => LanguagesEntity, (languages) => languages.Job, {
     cascade: ['insert', 'update', 'soft-remove']  ,
     orphanedRowAction: 'delete',
   })
-  @JoinTable()
   Languages: LanguagesEntity[];
 
   @OneToMany(() => KnowledgesEntity, (Knowledges) => Knowledges.Job, {
