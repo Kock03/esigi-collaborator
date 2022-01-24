@@ -20,6 +20,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 import { HttpClientModule } from '@angular/common/http';
+import {MatTreeModule} from '@angular/material/tree';
 
 const routes: Routes = [
   {
@@ -47,6 +48,7 @@ const routes: Routes = [
     MatDatepickerModule,
     MatNativeDateModule,
     MatIconModule,
+    MatTreeModule,
     HttpClientModule,
   ],
   providers: [

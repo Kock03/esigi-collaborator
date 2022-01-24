@@ -13,7 +13,6 @@ export class LanguagesEntity {
     @Column({ name: 'degree_of_influence', type: 'int' })
     degreeOfInfluence: degreeOfInfluence;
 
-    @ManyToMany(() => JobsEntity)
-    @JoinTable()
-    Jobs: JobsEntity[];
+    @ManyToMany(() => JobsEntity, job => job.Languages)
+    jobs: JobsEntity[];
 }

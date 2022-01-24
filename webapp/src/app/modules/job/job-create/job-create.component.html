@@ -120,7 +120,7 @@
             </mat-form-field>
           </div>
           <div fxFlex="100" fxLayoutGap="16px">
-            <mat-form-field fxFlex="30" appearance="outline">
+            <mat-form-field fxFlex="25" appearance="outline">
               <mat-label>Tipo de Contratação</mat-label>
               <mat-select
                 matInput
@@ -133,7 +133,7 @@
               </mat-select>
             </mat-form-field>
 
-            <mat-form-field fxFlex="35" appearance="outline">
+            <mat-form-field fxFlex="25" appearance="outline">
               <mat-label>Local de Trabalho</mat-label>
               <mat-select matInput disableRipple formControlName="workplace">
                 <mat-option [value]="1">In Loco</mat-option>
@@ -143,23 +143,18 @@
               </mat-select>
             </mat-form-field>
 
-            <div class="checkbox-section" fxFlex="35">
-              <section formGroupName="Seniorities">
-                <h2 class="title">Senioridade</h2>
-                <p>
-                  <mat-checkbox formControlName="intern"
-                    >Estagiário</mat-checkbox
-                  >
-                </p>
-                <p>
-                  <mat-checkbox formControlName="junior">Junior</mat-checkbox>
-                </p>
-                <p>
-                  <mat-checkbox formControlName="pleno">Pleno</mat-checkbox>
-                </p>
-                <p>
-                  <mat-checkbox formControlName="senior">Senior</mat-checkbox>
-                </p>
+            <div class="checkbox-section" fxFlex="50" >
+              <section formGroupName="Seniority" fxLayout="column">
+                <span class="text"   fxLayoutAlign="center" >Senioridade</span>
+               <div  fxLayout="row" fxLayoutAlign="space-around"> 
+                <mat-checkbox color="primary"  formControlName="intern">Estagiário</mat-checkbox>
+
+                <mat-checkbox color="primary"  formControlName="junior">Junior</mat-checkbox>
+
+                <mat-checkbox color="primary"  formControlName="pleno">Pleno</mat-checkbox>
+
+                <mat-checkbox color="primary"  formControlName="senior">Senior</mat-checkbox>
+              </div>
               </section>
             </div>
           </div>
@@ -213,7 +208,7 @@
               </mat-select>
             </mat-form-field>
 
-            <mat-form-field
+            <!-- <mat-form-field
               fxFlex="20"
               appearance="outline"
               formGroupName="Languages"
@@ -241,7 +236,7 @@
                 <mat-option [value]="2">Conversação e Escrita</mat-option>
                 <mat-option [value]="3">Escrita e Leitura</mat-option>
               </mat-select>
-            </mat-form-field>
+            </mat-form-field> -->
           </div>
           <div fxFlex="63" fxLayoutGap="16px">
             <mat-form-field fxFlex="63" appearance="outline">

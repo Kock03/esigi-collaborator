@@ -1,4 +1,4 @@
-import { BeforeRemove, BeforeUpdate, Column, CreateDateColumn, DeleteDateColumn, Entity, OneToMany, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { BeforeRemove, BeforeUpdate, Column, CreateDateColumn, DeleteDateColumn, Entity, JoinTable, ManyToMany, OneToMany, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { KnowledgesEntity } from "../knowledges/knowledges.entity";
 import { Schooling } from "./dtos/schooling.enum";
 import { Status } from "./dtos/status.enum";
@@ -53,9 +53,6 @@ export class JobsEntity {
   @Column()
   workingDay: string;
 
-  @Column()
-  yearsExperience: number;
-
   @Column({ type: 'numeric' })
   minimumValue: number;
 
@@ -77,10 +74,14 @@ export class JobsEntity {
   @Column()
   openingDate: Date;
 
-  @Column()
-  languagesId: string;
+  @ManyToMany(() => LanguagesEntity, language => language.jobs,{
+    cascade: ['insert', 'update', 'soft-remove']  ,
+    orphanedRowAction: 'delete',
+  })
+  @JoinTable()
+  Languages: LanguagesEntity[];
 
-  @OneToMany(() => KnowledgesEntity, (knowledges) => knowledges.Job, {
+  @OneToMany(() => KnowledgesEntity, (Knowledges) => Knowledges.Job, {
     cascade: ['insert', 'update', 'soft-remove']  ,
     orphanedRowAction: 'delete',
   })
