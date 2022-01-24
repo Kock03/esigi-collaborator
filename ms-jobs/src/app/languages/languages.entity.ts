@@ -1,4 +1,4 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinTable, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { JobsEntity } from "../jobs/jobs.entity";
 
 @Entity({ name: 'languages' })
@@ -13,6 +13,7 @@ export class LanguagesEntity {
     @Column({ name: 'degree_of_influence', type: 'int' })
     degreeOfInfluence: degreeOfInfluence;
 
-    @ManyToOne(() => JobsEntity, job => job.Languages)
-    Job: JobsEntity;
+    @ManyToMany(() => JobsEntity)
+    @JoinTable()
+    Jobs: JobsEntity[];
 }

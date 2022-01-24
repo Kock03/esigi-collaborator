@@ -1,4 +1,5 @@
 import { IsNotEmpty, IsOptional } from "class-validator";
+import { KnowledgesEntity } from "src/app/knowledges/knowledges.entity";
 import { SenioritiesEntity } from "src/app/seniorities/seniorities.entity";
 import { Schooling } from "./schooling.enum";
 import { Status } from "./status.enum";
@@ -60,7 +61,7 @@ export class CreateJobsDto{
     collaboratorActivities: string;
 
     @IsNotEmpty()
-    knowledge: string;
+    Knowledge: KnowledgesEntity;
 
     @IsNotEmpty()
     skills: string;
@@ -72,6 +73,7 @@ export class CreateJobsDto{
     openingDate: Date;
 
     @IsNotEmpty()
-    Seniority: SenioritiesEntity;
+    Senorities: SenioritiesEntity;
+
 
 }

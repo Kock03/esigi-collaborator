@@ -89,12 +89,6 @@ export class JobsEntity {
   @OneToOne(() => SenioritiesEntity, seniority => seniority.Job) 
   Senorities: SenioritiesEntity;
 
-  @OneToMany(() => LanguagesEntity, (languages) => languages.Job,{
-    cascade: ['insert', 'update', 'remove'],
-    orphanedRowAction: 'delete',
-  })
-  Languages: LanguagesEntity[];
-
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
 
