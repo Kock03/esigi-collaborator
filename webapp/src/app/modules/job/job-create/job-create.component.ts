@@ -81,11 +81,11 @@ export class JobCreateComponent implements OnInit {
       collaboratorActivities: ['a', Validators.required],
       skills: ['a', Validators.required],
       attitudes: ['a', Validators.required],
-      Languages: this.fb.group({
-        languageName: ['Russo', Validators.required],
-        degreeOfInfluence: [1, Validators.required],
-      }),
-      Seniorities: this.fb.group({ 
+      // Languages: this.fb.group({
+      //   languageName: ['Russo', Validators.required],
+      //   degreeOfInfluence: [1, Validators.required],
+      // }),
+      Seniority: this.fb.group({ 
         intern: [false],
         junior: [false],
         pleno: [false],
@@ -101,8 +101,7 @@ export class JobCreateComponent implements OnInit {
       height: '200px',
     });
 
-    dialogRef.afterClosed().subscribe((data) => {
-      const knowledge = data;
+    dialogRef.afterClosed().subscribe((knowledge) => {
       this.knowledgeArray.insert(0, this.fb.group(knowledge)),
         this.knowledgeTable.renderRows();
     });

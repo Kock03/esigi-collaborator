@@ -52,9 +52,6 @@ export class JobsEntity {
   @Column()
   workingDay: string;
 
-  @Column()
-  yearsExperience: number;
-
   @Column({ type: 'numeric' })
   minimumValue: number;
 
@@ -76,10 +73,8 @@ export class JobsEntity {
   @Column()
   openingDate: Date;
 
-  @Column()
-  languagesId: string;
 
-  @OneToMany(() => KnowledgesEntity, (knowledges) => knowledges.Job, {
+  @OneToMany(() => KnowledgesEntity, (Knowledges) => Knowledges.Job, {
     cascade: ['insert', 'update', 'soft-remove']  ,
     orphanedRowAction: 'delete',
   })
