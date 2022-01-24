@@ -74,7 +74,7 @@ export class CreateJobsDto{
     openingDate: Date;
 
     @IsNotEmpty()
-    Senorities: SenioritiesEntity;
+    Seniorities: SenioritiesEntity;
 
     @IsNotEmpty()
     Languages: LanguagesEntity[];

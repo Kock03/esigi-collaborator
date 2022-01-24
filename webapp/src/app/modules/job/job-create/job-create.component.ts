@@ -81,11 +81,11 @@ export class JobCreateComponent implements OnInit {
       collaboratorActivities: ['a', Validators.required],
       skills: ['a', Validators.required],
       attitudes: ['a', Validators.required],
-      // Languages: this.fb.group({
-      //   languageName: ['Russo', Validators.required],
-      //   degreeOfInfluence: [1, Validators.required],
-      // }),
-      Seniority: this.fb.group({ 
+      Languages: this.fb.group({
+        languageName: ['Russo', Validators.required],
+        degreeOfInfluence: [1, Validators.required],
+      }),
+      Seniorities: this.fb.group({ 
         intern: [false],
         junior: [false],
         pleno: [false],
