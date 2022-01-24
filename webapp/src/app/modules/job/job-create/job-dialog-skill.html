@@ -1,28 +1,37 @@
 <div id="jobSkillDialog" mat-dialog-content>
   <form [formGroup]="knowledgeForm" fxLayout="column">
     <div fxFlex="100" fxLayoutGap="16px" fxLayout="row">
-      <mat-form-field appearance="outline" fxFlex="70">
+      <mat-form-field appearance="outline" fxFlex="40">
         <mat-label>Habilidade</mat-label>
         <input
           matInput
           placeholder="Habilidade"
           formControlName="name"
-          *ngFor="let knowledge of knowledge"
-          [value]="knowledge.name"
         />
       </mat-form-field>
 
-      <mat-form-field appearance="outline" fxFlex="70">
+      <mat-form-field appearance="outline" fxFlex="40">
         <mat-label>Tempo de Experiencia</mat-label>
         <input
           matInput
           type="number"
           placeholder="Anos de Experiencia"
           formControlName="yearsExperience"
-          *ngFor="let knowledge of knowledge"
-          [value]="knowledge.yearsExperience"
         />
       </mat-form-field>
+
+      <mat-form-field fxFlex="20" appearance="outline">
+        <mat-label>Periodo</mat-label>
+        <mat-select
+          matInput
+          disableRipple
+          formControlName="typeOfPeriod"
+        >
+          <mat-option [value]="1">Mês</mat-option>
+          <mat-option [value]="2">Ano</mat-option>
+        </mat-select>
+      </mat-form-field>
+
     </div>
 
     <div mat-dialog-actions fxLayout="row" fxFlexAlign="center">

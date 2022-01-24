@@ -51,6 +51,9 @@ const routes: Routes = [
   ],
   providers: [
     MatDatepickerModule
+  ],
+  entryComponents: [
+    JobDialogSkill
   ]
 })
 export class JobModule {}

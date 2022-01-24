@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import {
   Component,
   EventEmitter,
-  Inject,
   Input,
   OnInit,
   Output,
@@ -10,17 +9,14 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import {
-  MatDialog,
-  MatDialogRef,
-  MAT_DIALOG_DATA,
-} from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
 import { JobProvider } from 'src/providers/job.provider';
 
 export interface Knowledge {
   name: string;
   yearsExperience: number;
+  typeOfPeriod: number;
 }
 
 @Component({
@@ -32,7 +28,12 @@ export interface Knowledge {
 export class JobCreateComponent implements OnInit {
   @ViewChild('knowledgeTable') knowledgeTable!: MatTable<any>;
 
-  displayedColumns: string[] = ['name', 'yearsExperience', 'icon'];
+  displayedColumns: string[] = [
+    'name',
+    'yearsExperience',
+    'typeOfPeriod',
+    'icon',
+  ];
 
   get knowledgeArray() {
     return this.jobForm.controls['Knowledges'] as FormArray;
@@ -47,16 +48,9 @@ export class JobCreateComponent implements OnInit {
   index: any = null;
   Knowledge: any;
 
-  knowledge: Knowledge[] = [
-    {
-      name: 'Java',
-      yearsExperience: 1,
-    },
-  ];
-
   constructor(
     private fb: FormBuilder,
-    private dialog: MatDialog,
+    public dialog: MatDialog,
     private jobProvider: JobProvider,
     private http: HttpClient
   ) {}
@@ -76,7 +70,6 @@ export class JobCreateComponent implements OnInit {
       monthTime: ['', Validators.required],
       jobName: ['Programador React', Validators.required],
       startForecast: ['', Validators.required],
-      seniority: [1, Validators.required],
       jobNumber: [23232, Validators.required],
       typeOfContract: [1, Validators.required],
       workplace: [1, Validators.required],
@@ -92,19 +85,26 @@ export class JobCreateComponent implements OnInit {
         languageName: ['Russo', Validators.required],
         degreeOfInfluence: [1, Validators.required],
       }),
+      Seniorities: this.fb.group({ 
+        intern: [false],
+        junior: [false],
+        pleno: [false],
+        senior: [false],
+      }),
       Knowledges: this.fb.array([]),
     });
   }
 
-  openDialog(): void {
+  openDialog() {
     const dialogRef = this.dialog.open(JobDialogSkill, {
       width: '450px',
       height: '200px',
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log('The dialog was closed');
-      this.Knowledge.name = result;
+    dialogRef.afterClosed().subscribe((data) => {
+      const knowledge = data;
+      this.knowledgeArray.insert(0, this.fb.group(knowledge)),
+        this.knowledgeTable.renderRows();
     });
   }
 
@@ -146,24 +146,12 @@ export class JobCreateComponent implements OnInit {
 export class JobDialogSkill implements OnInit {
   @Input('form') jobForm!: FormGroup;
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
-  @ViewChild('knowledgeTable') knowledgeTable!: MatTable<any>;
 
   knowledgeForm!: FormGroup;
 
-  knowledge: Knowledge[] = [
-    {
-      name: 'Java',
-      yearsExperience: 1,
-    },
-  ];
-
-  get knowledgeArray() {
-    return this.jobForm.controls['Knowledges'] as FormArray;
-  }
-
   constructor(
     public dialogRef: MatDialogRef<JobDialogSkill>,
-    @Inject(MAT_DIALOG_DATA) public data: JobDialogSkill, private fb: FormBuilder
+    private fb: FormBuilder
   ) {}
 
   ngOnInit(): void {
@@ -176,15 +164,13 @@ export class JobDialogSkill implements OnInit {
 
   initForm(): void {
     this.knowledgeForm = this.fb.group({
-      name: ['aaaaaaa', Validators.required],
+      name: ['', Validators.required],
       yearsExperience: [1, Validators.required],
+      typeOfPeriod: [1, Validators.required],
     });
   }
 
   saveKnowledge() {
-    const data = this.knowledgeForm.getRawValue();
-    this.knowledgeArray.insert(0, this.fb.group(data));
-    this.knowledgeTable.renderRows();
-    this.knowledgeForm.reset();
+    this.dialogRef.close(this.knowledgeForm.value);
   }
 }
