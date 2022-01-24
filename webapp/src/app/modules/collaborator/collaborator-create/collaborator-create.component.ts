@@ -18,10 +18,18 @@ export class CollaboratorCreateComponent implements OnInit {
     private fb: FormBuilder,
     private collaboratorProvider: CollaboratorProvider,
     private http: HttpClient,
-  ) {}
+  ) {
+   
+  }
 
   async ngOnInit(): Promise<void> {
     this.initForm();
+    this.step = 1;
+  }
+  
+  ngAfterViewInit(): void {
+    console.log(this.step);
+    
   }
 
   initForm() {
