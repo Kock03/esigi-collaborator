@@ -1,8 +1,6 @@
 import { IsNotEmpty, IsOptional } from "class-validator";
-import { LanguagesEntity } from "src/app/languages/languages.entity";
-import { Double } from "typeorm";
+import { SenioritiesEntity } from "src/app/seniorities/seniorities.entity";
 import { Schooling } from "./schooling.enum";
-import { Seniority } from "./seniority.enum";
 import { Status } from "./status.enum";
 import { Type } from "./type.enum";
 import { TypeOfContract } from "./typeOfContract.enum";
@@ -37,7 +35,7 @@ export class UpdateJobsDto{
     startForecast: Date;
 
     @IsNotEmpty()
-    seniority: Seniority;
+    Seniority: SenioritiesEntity;
 
     @IsNotEmpty()
     jobNumber: number;
@@ -71,7 +69,4 @@ export class UpdateJobsDto{
 
     @IsNotEmpty()
     attitudes: string;
-
-    @IsNotEmpty()
-    Languages: LanguagesEntity[];
 }

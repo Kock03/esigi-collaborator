@@ -15,7 +15,7 @@ export class JobsService {
 
         private readonly jobsRepository: Repository<JobsEntity>) { }
 
-     
+
 
 
     async findAll() {
@@ -29,7 +29,7 @@ export class JobsService {
     async findOneOrFail(
         conditions: FindConditions<JobsEntity>,
         options?: FindOneOptions<JobsEntity>) {
-        options = { relations: ['Languages'] }
+        options = { relations: ['Knowledges', 'Senorities'] }
 
         try {
             return await this.jobsRepository.findOneOrFail(conditions, options);
@@ -50,7 +50,7 @@ export class JobsService {
     }
 
     async destroy(id: string) {
-        
+
         try {
             await this.jobsRepository.findOneOrFail({ id });
         } catch (error) {

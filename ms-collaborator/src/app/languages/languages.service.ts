@@ -11,12 +11,12 @@ export class LanguagesService {
   constructor(
     @InjectRepository(LanguagesEntity)
     private readonly languagesRepository: Repository<LanguagesEntity>,
-  ) {}
+  ) { }
 
   async findAll() {
     const languagesWhiteCollaborator = await this.languagesRepository
-    .createQueryBuilder('languages')
-    .getMany();
+      .createQueryBuilder('languages')
+      .getMany();
 
     return languagesWhiteCollaborator;
   }
@@ -24,7 +24,7 @@ export class LanguagesService {
   async findOneOrfail(
     conditions: FindConditions<LanguagesEntity>,
     options?: FindOneOptions<LanguagesEntity>,) {
-      options = { relations: ['Collaborator','jobs'] };
+    options = { relations: ['Collaborator'] };
     try {
       return await this.languagesRepository.findOneOrFail(conditions, options);
     } catch (error) {
@@ -38,7 +38,7 @@ export class LanguagesService {
   }
 
   async update(id: string, data: UpdateLanguagesDto) {
-    const language = await this.languagesRepository.findOneOrFail({id});
+    const language = await this.languagesRepository.findOneOrFail({ id });
     this.languagesRepository.merge(language, data);
     return await this.languagesRepository.save(language);
   }

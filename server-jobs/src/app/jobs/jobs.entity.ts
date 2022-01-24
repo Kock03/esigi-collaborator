@@ -1,6 +1,5 @@
 import { BeforeRemove, BeforeUpdate, Column, CreateDateColumn, DeleteDateColumn, Entity, OneToMany, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { KnowledgesEntity } from "../knowledges/knowledges.entity";
-import {LanguagesEntity} from "../../../../server/src/app/languages/languages.entity";
 import { Schooling } from "./dtos/schooling.enum";
 import { Status } from "./dtos/status.enum";
 import { Type } from "./dtos/type.enum";
@@ -77,17 +76,14 @@ export class JobsEntity {
   @Column()
   openingDate: Date;
 
+  @Column()
+  languagesId: string;
+
   @OneToMany(() => KnowledgesEntity, (knowledges) => knowledges.Job, {
     cascade: ['insert', 'update', 'soft-remove']  ,
     orphanedRowAction: 'delete',
   })
   Knowledges: KnowledgesEntity[];
-
-  @OneToMany(() => LanguagesEntity, (languages) => languages.Job, {
-    cascade: ['insert', 'update', 'soft-remove']  ,
-    orphanedRowAction: 'delete',
-  })
-  Languages: LanguagesEntity[];
 
   @OneToOne(() => SenioritiesEntity, seniority => seniority.Job) 
   Senorities: SenioritiesEntity;
