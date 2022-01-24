@@ -40,6 +40,6 @@ export class AddressesService {
 
   async destroy(id: string) {
     await this.addressesRepository.findOne({ id });
-    return await this.addressesRepository.softRemove({ id });
+    return await this.addressesRepository.softDelete({ id });
   }
 }

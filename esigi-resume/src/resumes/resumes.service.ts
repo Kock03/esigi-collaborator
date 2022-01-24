@@ -42,6 +42,6 @@ export class ResumesService {
 
   async destroy(id: string) {
     await this.resumesRepository.findOne({ id });
-    return await this.resumesRepository.softRemove({ id });
+    return await this.resumesRepository.softDelete({ id });
   }
 }
