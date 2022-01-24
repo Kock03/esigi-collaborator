@@ -6,6 +6,7 @@ import { Type } from "./dtos/type.enum";
 import { TypeOfContract } from "./dtos/typeOfContract.enum";
 import { Workplace } from "./dtos/workplace.enum";
 import { SenioritiesEntity } from "../seniorities/seniorities.entity";
+import { LanguagesEntity } from "../languages/languages.entity";
 
 @Entity({ name: 'jobs' })
 export class JobsEntity {
@@ -87,6 +88,12 @@ export class JobsEntity {
 
   @OneToOne(() => SenioritiesEntity, seniority => seniority.Job) 
   Senorities: SenioritiesEntity;
+
+  @OneToMany(() => LanguagesEntity, (languages) => languages.Job,{
+    cascade: ['insert', 'update', 'remove'],
+    orphanedRowAction: 'delete',
+  })
+  Languages: LanguagesEntity[];
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;

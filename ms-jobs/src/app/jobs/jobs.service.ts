@@ -29,7 +29,7 @@ export class JobsService {
     async findOneOrFail(
         conditions: FindConditions<JobsEntity>,
         options?: FindOneOptions<JobsEntity>) {
-        options = { relations: ['Knowledges', 'Senorities'] }
+        options = { relations: ['Knowledges', 'Senorities','Languages'] }
 
         try {
             return await this.jobsRepository.findOneOrFail(conditions, options);
