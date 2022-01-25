@@ -28,20 +28,20 @@ export interface Job {
   encapsulation: ViewEncapsulation.None,
 })
 export class JobListComponent implements OnInit {
-  // @ViewChild('filter', { static: true }) filter!: ElementRef;
-  // private _unsubscribeAll: Subject<any>;
+  @ViewChild('filter', { static: true }) filter!: ElementRef;
+  private _unsubscribeAll: Subject<any>;
   displayedJob: string[] = ['jobName', 'client', 'requester'];
   jobs!: Job[];
-  // filteredJobList!: Job[];
+  filteredJobList!: any[];
 
   constructor(private router: Router, private jobProvider: JobProvider) {
-    // this._unsubscribeAll = new Subject();
+    this._unsubscribeAll = new Subject();
   }
 
   ngOnInit(): void {
     this.getJobList();
-    // this.initFilter();
-    // this.filteredJobList = this.jobs;
+    this.initFilter();
+    this.filteredJobList = this.jobs;
   }
 
   createJob() {
@@ -56,32 +56,21 @@ export class JobListComponent implements OnInit {
     }
   }
 
-  // initFilter() {
-  //   fromEvent(this.filter.nativeElement, 'keyup')
-  //     .pipe(
-  //       takeUntil(this._unsubscribeAll),
+  initFilter() {
+    fromEvent(this.filter.nativeElement, 'keyup')
+      .pipe(
+        takeUntil(this._unsubscribeAll),
 
-  //       debounceTime(200),
+        debounceTime(200),
 
-  //       distinctUntilChanged()
-  //     )
+        distinctUntilChanged()
+      )
 
-  //     .subscribe((res) => {
-  //       this.filteredJobList = this.jobs.filter(
-  //         (job) =>
-  //           job.jobName
-
-  //             .toLowerCase()
-
-  //             .startsWith(this.filter.nativeElement.value) ||
-  //           job.jobName
-
-  //             .toUpperCase()
-
-  //             .startsWith(this.filter.nativeElement.value) ||
-  //           job.jobName.endsWith(this.filter.nativeElement.value) ||
-  //           job.jobName.toUpperCase().endsWith(this.filter.nativeElement.value)
-  //       );
-  //     });
-  // }
+      .subscribe((res) => {
+        this.filteredJobList = this.jobs.filter(
+          (job) =>
+          job.jobName.startsWith(this.filter.nativeElement.value)
+          );
+      });
+  }
 }
