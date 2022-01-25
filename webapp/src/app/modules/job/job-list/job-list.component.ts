@@ -38,10 +38,11 @@ export class JobListComponent implements OnInit {
     this._unsubscribeAll = new Subject();
   }
 
-  ngOnInit(): void {
+  async ngOnInit() {
     this.getJobList();
-    this.initFilter();
+
     this.filteredJobList = this.jobs;
+    this.initFilter();
   }
 
   createJob() {
@@ -50,7 +51,7 @@ export class JobListComponent implements OnInit {
 
   async getJobList() {
     try {
-      this.jobs = await this.jobProvider.findAll();
+      this.filteredJobList = this.jobs = await this.jobProvider.findAll();
     } catch (error) {
       console.error(error);
     }
@@ -58,19 +59,12 @@ export class JobListComponent implements OnInit {
 
   initFilter() {
     fromEvent(this.filter.nativeElement, 'keyup')
-      .pipe(
-        takeUntil(this._unsubscribeAll),
-
-        debounceTime(200),
-
-        distinctUntilChanged()
-      )
+      .pipe(debounceTime(200), distinctUntilChanged())
 
       .subscribe((res) => {
-        this.filteredJobList = this.jobs.filter(
-          (job) =>
-          job.jobName.startsWith(this.filter.nativeElement.value)
-          );
+        this.filteredJobList = this.jobs.filter((job) =>
+          job.jobName.toLocaleLowerCase().includes(this.filter.nativeElement.value.toLocaleLowerCase())
+        );
       });
   }
 }
