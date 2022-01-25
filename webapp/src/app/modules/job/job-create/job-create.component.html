@@ -143,18 +143,26 @@
               </mat-select>
             </mat-form-field>
 
-            <div class="checkbox-section" fxFlex="50" >
+            <div class="checkbox-section" fxFlex="50">
               <section formGroupName="Seniorities" fxLayout="column">
-                <span class="text"   fxLayoutAlign="start" >Senioridade</span>
-               <div  fxLayout="row" fxLayoutAlign="space-around"> 
-                <mat-checkbox color="primary"  formControlName="intern">Estagiário</mat-checkbox>
+                <span class="text" fxLayoutAlign="start">Senioridade</span>
+                <div fxLayout="row" fxLayoutAlign="space-around">
+                  <mat-checkbox color="primary" formControlName="intern"
+                    >Estagiário</mat-checkbox
+                  >
 
-                <mat-checkbox color="primary"  formControlName="junior">Junior</mat-checkbox>
+                  <mat-checkbox color="primary" formControlName="junior"
+                    >Junior</mat-checkbox
+                  >
 
-                <mat-checkbox color="primary"  formControlName="pleno">Pleno</mat-checkbox>
+                  <mat-checkbox color="primary" formControlName="pleno"
+                    >Pleno</mat-checkbox
+                  >
 
-                <mat-checkbox color="primary"  formControlName="senior">Senior</mat-checkbox>
-              </div>
+                  <mat-checkbox color="primary" formControlName="senior"
+                    >Senior</mat-checkbox
+                  >
+                </div>
               </section>
             </div>
           </div>
@@ -171,6 +179,7 @@
             <mat-form-field fxFlex="25" appearance="outline">
               <mat-label>Valor Minimo</mat-label>
               <input
+                type="number"
                 placeholder="Valor Minimo"
                 matInput
                 formControlName="minimumValue"
@@ -180,6 +189,7 @@
             <mat-form-field fxFlex="25" appearance="outline">
               <mat-label>Valor Maximo</mat-label>
               <input
+                type="number"
                 placeholder="Valor Maximo"
                 matInput
                 formControlName="maximumValue"
@@ -310,7 +320,7 @@
               <ng-container matColumnDef="typeOfPeriod">
                 <th mat-header-cell *matHeaderCellDef>Periodo</th>
                 <td mat-cell *matCellDef="let Knowledge">
-                  {{ Knowledge.typeOfPeriod }}
+                  {{ Knowledge.typeOfPeriod !== 2 ? "Mês" : "Ano" }}
                 </td>
               </ng-container>
 

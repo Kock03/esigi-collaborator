@@ -61,31 +61,55 @@ export class JobCreateComponent implements OnInit {
 
   initForm() {
     this.jobForm = this.fb.group({
-      requester: ['Wellington', Validators.required],
+      requester: [
+        'Wellington',
+        [
+          Validators.required,
+          Validators.minLength(4),
+          Validators.maxLength(100),
+        ],
+      ],
       status: [1, Validators.required],
       publish: [false],
-      client: ['Ambev', Validators.required],
+      client: [
+        'Ambev',
+        [
+          Validators.required,
+          Validators.minLength(1),
+          Validators.maxLength(100),
+        ],
+      ],
       typeOfJob: [1, Validators.required],
       temporary: [false],
       monthTime: ['', Validators.required],
-      jobName: ['Programador React', Validators.required],
-      startForecast: ['', Validators.required],
-      jobNumber: [23232, Validators.required],
+      jobName: [
+        'Programador React',
+        [
+          Validators.required,
+          Validators.minLength(8),
+          Validators.maxLength(50),
+        ],
+      ],
+      startForecast: [new Date(), Validators.required],
+      jobNumber: [
+        1,
+        [Validators.required, Validators.max(10), Validators.min(1)],
+      ],
       typeOfContract: [1, Validators.required],
       workplace: [1, Validators.required],
-      workingDay: ['2 horas', Validators.required],
+      workingDay: ['2 horas', [Validators.required, Validators.maxLength(50), Validators.minLength(5)]],
       minimumValue: [1, Validators.required],
       maximumValue: [1, Validators.required],
-      openingDate: ['', Validators.required],
+      openingDate: [new Date(), Validators.required],
       schooling: [1, Validators.required],
       collaboratorActivities: ['a', Validators.required],
       skills: ['a', Validators.required],
       attitudes: ['a', Validators.required],
       Languages: this.fb.group({
-        languageName: ['Russo', Validators.required],
+        languageName: ['Russo',[Validators.required, Validators.maxLength(20)]],
         degreeOfInfluence: [1, Validators.required],
       }),
-      Seniorities: this.fb.group({ 
+      Seniorities: this.fb.group({
         intern: [false],
         junior: [false],
         pleno: [false],
@@ -163,7 +187,7 @@ export class JobDialogSkill implements OnInit {
 
   initForm(): void {
     this.knowledgeForm = this.fb.group({
-      name: ['', Validators.required],
+      name: ['', [Validators.required, Validators.maxLength(20)]],
       yearsExperience: [1, Validators.required],
       typeOfPeriod: [1, Validators.required],
     });
