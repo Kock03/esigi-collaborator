@@ -27,10 +27,6 @@ export class CollaboratorCreateComponent implements OnInit {
     this.step = 1;
   }
   
-  ngAfterViewInit(): void {
-    console.log(this.step);
-    
-  }
 
   initForm() {
     this.collaboratorForm = this.fb.group({
