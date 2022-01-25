@@ -32,7 +32,7 @@ export class AppComponent {
       name: 'Vagas',
       icon: 'work',
       selected: false,
-      action: '/vaga/novo',
+      action: '/vaga/lista',
     },
   ];
 

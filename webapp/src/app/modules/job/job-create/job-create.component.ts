@@ -11,6 +11,7 @@ import {
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { JobProvider } from 'src/providers/job.provider';
 
 export interface Knowledge {
@@ -52,7 +53,8 @@ export class JobCreateComponent implements OnInit {
     private fb: FormBuilder,
     public dialog: MatDialog,
     private jobProvider: JobProvider,
-    private http: HttpClient
+    private http: HttpClient,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -159,6 +161,10 @@ export class JobCreateComponent implements OnInit {
 
   deleteKnowledge(index: number) {
     this.knowledgeArray.removeAt(index);
+  }
+
+  listJob(){
+    this.router.navigate(['vaga/lista'])
   }
 }
 

@@ -21,8 +21,14 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 import { HttpClientModule } from '@angular/common/http';
 import {MatTreeModule} from '@angular/material/tree';
+import { JobListComponent } from './job-list/job-list.component';
 
 const routes: Routes = [
+  {
+    path: 'lista',
+    component: JobListComponent
+
+  },
   {
     path: 'novo',
     component: JobCreateComponent,
@@ -30,7 +36,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [JobCreateComponent, JobDialogSkill],
+  declarations: [JobCreateComponent, JobDialogSkill, JobListComponent],
   imports: [
     RouterModule.forChild(routes),
     CommonModule,

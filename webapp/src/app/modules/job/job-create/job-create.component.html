@@ -1,5 +1,12 @@
 <div id="jobCreate" class="page">
-  <h2>Vagas</h2>
+  
+
+  <div  fxLayout="row" fxLayoutAlign="space-between center">
+    <h2>Vagas</h2>
+
+    <button mat-flat-button color="primary" (click)="listJob()">Voltar</button>
+    
+    </div>
 
   <div class="content-scroll" *ngIf="jobForm">
     <mat-tab-group animationDuration="0ms" [selectedIndex]="selectedIndex">
