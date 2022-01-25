@@ -4,7 +4,7 @@
     <form >
       <mat-form-field appearance="outline">
         <mat-label>Buscar Vaga</mat-label>
-        <input matInput placeholder="Vaga" />
+        <input matInput placeholder="Vaga"  #filter matInput/>
         <mat-icon matSuffix style="cursor: pointer" (click)="getJobList()">
             search
           </mat-icon>
