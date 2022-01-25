@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 // import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { DocumentValidator } from 'src/app/validators/document.validator';
 import {
   MatDialog,
   MatDialogRef,
@@ -18,6 +19,8 @@ export class ResumeCreateComponent implements OnInit {
   resumeForm!: FormGroup;
   step: number = 1;
 
+  Experience: any;
+
 
   
 
@@ -33,11 +36,11 @@ export class ResumeCreateComponent implements OnInit {
 
   initForm() {
       this.resumeForm = this.fb.group({
-        name: ['Davi', Validators.required],
-        lastName: ['Luiz', Validators.required],
-        login: ['davi.log', Validators.required],
-        cpf: ['Luiz', Validators.required],
-        birthDate: ['06/12/2004', Validators.required],
+        name: ['', Validators.required],
+        lastName: ['', Validators.required],
+        login: ['', Validators.required],
+        cpf: this.fb.control({ value: null, disabled: false}, DocumentValidator.isValidCpf()),
+        birthDate: ['', Validators.required],
         gender: [1, Validators.required],
         maritalStatus: [1, Validators.required],
   
@@ -51,13 +54,25 @@ export class ResumeCreateComponent implements OnInit {
           district: ['', Validators.required],
         }),
   
-          phoneNumber: ['35343234908', Validators.required],
-          ddd: ['71', Validators.required],
+          phoneNumber: ['', Validators.required],
+          ddd: ['', Validators.required],
           ddi: ['', Validators.required],
       
-        email: ['davi@email', Validators.email],
-        site: ['site.davi', Validators.required],
-        linkedin: ['linkedin.davi', Validators.required],
+        email: ['', Validators.email],
+        site: ['', Validators.required],
+        linkedin: ['', Validators.required],
+
+        // office: ['', Validators.required],
+        // companyName: ['', Validators.required],
+        // locality: [''],
+        // startMonth:['', Validators.required],
+        // startYear:['', Validators.required],
+        // terminusMonth:['', Validators.required],
+        // terminusYear:['', Validators.required],
+        // sector: ['', Validators.required],
+        // description: ['', Validators.required],
+
+
 
 
         Languages: this.fb.array([]),

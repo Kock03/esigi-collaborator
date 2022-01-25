@@ -29,7 +29,7 @@
       <div fxFlex="100" fxLayoutGap="16px">
         <mat-form-field fxFlex="25" appearance="outline">
           <mat-label>CPF</mat-label>
-          <input matInput placeholder="Nome" formControlName="cpf" />
+          <input matInput placeholder="Nome" formControlName="cpf"mask="000.000.000-00" />
         </mat-form-field>
         <mat-form-field fxFlex="25" appearance="outline">
           <mat-label>Data de aniversário</mat-label>
@@ -117,17 +117,17 @@
       <div fxFlex="100" fxLayoutGap="16px">
         <mat-form-field fxFlex="10" appearance="outline">
           <mat-label>DDI</mat-label>
-          <input matInput placeholder="DDI" formControlName="ddi" />
+          <input matInput placeholder="DDI" formControlName="ddi"  mask="+00" />
         </mat-form-field>
 
         <mat-form-field fxFlex="10" appearance="outline">
           <mat-label>DDD</mat-label>
-          <input matInput placeholder="Login" formControlName="ddd" />
+          <input matInput placeholder="Login" formControlName="ddd" mask="(00)" />
         </mat-form-field>
 
         <mat-form-field fxFlex="30" appearance="outline">
           <mat-label>Telefone</mat-label>
-          <input matInput placeholder="Login" formControlName="phoneNumber" />
+          <input matInput placeholder="Login" formControlName="phoneNumber"   mask="00000-0000"/>
         </mat-form-field>
 
         <mat-form-field fxFlex="50" appearance="outline">

@@ -7,6 +7,24 @@
     border-width: 3px;
 }
 
+.example-full-width {
+    width: 100%;
+  }
+
+}
+
+#resumeExperiencDialog{
+  height: 150px;
+
+  // .checkbox {
+  //   margin-top: 15px;
+  //   text-align: center;
+  // }
+
+  .content-scroll {
+    overflow: auto;
+    height: calc(100vh - 210px);
+  }
 
 
 

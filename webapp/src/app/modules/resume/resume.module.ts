@@ -22,6 +22,7 @@ import { MatInputModule } from '@angular/material/input'
 import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ResumeCreateComponent } from './resume-create/resume-create.component';
+import {ScrollingModule} from '@angular/cdk/scrolling';
 ;
 
 const routes: Routes = [
@@ -57,6 +58,7 @@ const routes: Routes = [
     MatInputModule,
     MatTableModule,
     MatDialogModule,
+    ScrollingModule,
   ],
 
   entryComponents: [
