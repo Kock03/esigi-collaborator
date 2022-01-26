@@ -11,6 +11,11 @@
     width: 100%;
   }
 
+  .content-scroll {
+    overflow: auto;
+    height: calc(100vh - 210px);
+  }
+
 }
 
 #resumeExperiencDialog{

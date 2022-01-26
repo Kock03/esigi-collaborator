@@ -23,6 +23,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ResumeCreateComponent } from './resume-create/resume-create.component';
 import {ScrollingModule} from '@angular/cdk/scrolling';
+import {MatListModule} from '@angular/material/list';
 ;
 
 const routes: Routes = [
@@ -59,6 +60,7 @@ const routes: Routes = [
     MatTableModule,
     MatDialogModule,
     ScrollingModule,
+    MatListModule,
   ],
 
   entryComponents: [

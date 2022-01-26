@@ -1,5 +1,40 @@
 <div id="resumeExperienceTab" class="tab">
-  <button  class="add-button" mat-button color="white" (click)="openDialog()">
+  <div class="content-scroll" *ngIf="resumeForm">
+    <h2 mat-dialog-title>Cadastro de experiência</h2>
+    <button class="add-button" mat-button color="white" (click)="openDialog()">
       Adicionar experiênca
     </button>
+    <mat-list role="list">
+      <mat-list-item role="listitem" *matCellDef="let Experience">
+        {{ Experience.office }}
+      </mat-list-item>
+      <mat-list-item role="listitem" *matCellDef="let Experience">
+        {{ Experience.companyName }}
+      </mat-list-item>
+      <mat-list-item role="listitem" *matCellDef="let Experience">
+        {{ Experience.locality }}</mat-list-item
+      >
+      <mat-list-item role="listitem" *matCellDef="let Experience">
+        {{ Experience.active }}</mat-list-item
+      >
+      <mat-list-item role="listitem" *matCellDef="let Experience">
+        {{ Experience.startMonth }}</mat-list-item
+      >
+      <mat-list-item role="listitem" *matCellDef="let Experience">
+        {{ Experience.startYear }}</mat-list-item
+      >
+      <mat-list-item role="listitem" *matCellDef="let Experience">
+        {{ Experience.terminusMonth }}</mat-list-item
+      >
+      <mat-list-item role="listitem" *matCellDef="let Experience">
+        {{ Experience.terminusYear }}</mat-list-item
+      >
+      <mat-list-item role="listitem" *matCellDef="let Experience">
+        {{ Experience.sector }}</mat-list-item
+      >
+      <mat-list-item role="listitem" *matCellDef="let Experience">
+        {{ Experience.description }}</mat-list-item
+      >
+    </mat-list>
   </div>
+</div>
