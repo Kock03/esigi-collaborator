@@ -17,11 +17,12 @@ import { CollaboratorSkillTabComponent } from './collaborator-create/collaborato
 import { MatTableModule } from '@angular/material/table';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
-import { CollaboratorEducationTabComponent } from './collaborator-create/collaborator-education-tab/collaborator-education-tab.component';
+import { CollaboratorEducationTabComponent, CollaboratorLanguageDialog } from './collaborator-create/collaborator-education-tab/collaborator-education-tab.component';
 import { CollaboratorDocumentTabComponent } from './collaborator-create/collaborator-document-tab/collaborator-document-tab.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxMaskModule } from 'ngx-mask';
 import { DocumentValidator } from 'src/app/validators/document.validator';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 const routes: Routes = [
@@ -41,6 +42,7 @@ const routes: Routes = [
     CollaboratorSkillTabComponent,
     CollaboratorEducationTabComponent,
     CollaboratorDocumentTabComponent,
+    CollaboratorLanguageDialog
 
   ],
   imports: [
@@ -58,6 +60,7 @@ const routes: Routes = [
     MatIconModule,
     HttpClientModule,
     NgxMaskModule,
+    MatDialogModule
   ],
   entryComponents: [
     CollaboratorRegisterTabComponent,
@@ -67,6 +70,7 @@ const routes: Routes = [
     CollaboratorSkillTabComponent,
     CollaboratorEducationTabComponent,
     CollaboratorDocumentTabComponent,
+    CollaboratorLanguageDialog
   ],
 
 })

@@ -12,6 +12,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
 
 export interface education {
@@ -76,16 +77,29 @@ export class CollaboratorEducationTabComponent implements OnInit {
     return this.collaboratorForm.controls['Educations'] as FormArray;
   }
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, public dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.initForm();
   }
 
+  openDialog() {
+    const dialogRef = this.dialog.open(CollaboratorLanguageDialog, {
+      width: '500px',
+      height: '620px',
+    });
+
+    dialogRef.afterClosed().subscribe((language) => {
+      this.languageArray.insert(0, this.fb.group(language));
+      this.languageTable.renderRows();
+    });
+  }
+
+
   initForm(): void {
     this.languageForm = this.fb.group({
-      languageName: ['Russo'],
-      degreeOfInfluence: ['Leitura'],
+      languageName: ['', Validators.required],
+      degreeOfInfluence: [1 , Validators.required],
     });
     this.educationForm = this.fb.group({
       schooling: ['Ensino Superior'],
@@ -121,7 +135,6 @@ export class CollaboratorEducationTabComponent implements OnInit {
 
   editLanguage() {
     this.languageArray.at(this.index).setValue(this.languageForm.getRawValue());
-
     this.languageTable.renderRows();
     this.languageForm.reset();
     this.index = null;
@@ -154,6 +167,43 @@ export class CollaboratorEducationTabComponent implements OnInit {
 
   deleteEducation(index: number){
     this.educationArray.removeAt(index);
+
  
  }
+}
+
+@Component({
+  selector: 'collaborator-language-dialog',
+  templateUrl: 'collaborator-language-dialog.html',
+})
+export class CollaboratorLanguageDialog {
+  @Input('form') collaboratorForm!: FormGroup;
+  @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
+
+  languageForm!: FormGroup;
+
+
+  constructor(
+    public dialogRef: MatDialogRef<CollaboratorLanguageDialog>,
+    private fb: FormBuilder
+  ) {}
+
+  ngOnInit(): void {
+    this.initForm();
+  }
+
+  initForm(): void {
+    this.languageForm = this.fb.group({
+      languageName: ['', Validators.required],
+      degreeOfInfluence: [1 , Validators.required],
+    });
+  }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
+  save() {
+    this.dialogRef.close(this.languageForm.value);
+  }
 }

@@ -72,7 +72,7 @@ export class CollaboratorCreateComponent implements OnInit {
 
   async saveCollaborator() {
     let data = this.collaboratorForm.getRawValue();
-
+    console.log(data);
     if (!data.Educations.length) {
       data.Educations = null;
     }
