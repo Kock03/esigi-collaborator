@@ -8,6 +8,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
 
 export interface skill {
@@ -51,11 +52,25 @@ export class CollaboratorSkillTabComponent implements OnInit {
     return this.collaboratorForm.controls['Skills'] as FormArray;
   }
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder,public dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.initForm();
   }
+
+  openDialog() {
+    const dialogRef = this.dialog.open(CollaboratorSkillDialog, {
+      width: '500px',
+      height: '470px',
+    });
+
+    dialogRef.afterClosed().subscribe((skill) => {
+      this.skillArray.insert(0, this.fb.group(skill));
+      this.skillTable.renderRows();
+    });
+  }
+
+
 
   initForm(): void {
     this.skillForm = this.fb.group({
@@ -99,5 +114,44 @@ export class CollaboratorSkillTabComponent implements OnInit {
   deleteSkill(index: number){
      this.skillArray.removeAt(index);
   
+  }
+}
+
+@Component({
+  selector: 'collaborator-skill-dialog',
+  templateUrl: 'collaborator-skill-dialog.html',
+})
+export class CollaboratorSkillDialog{
+
+  @Input('form') collaboratorForm!: FormGroup;
+  @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
+
+  skillForm!: FormGroup;
+
+
+  constructor(
+    public dialogRef: MatDialogRef<CollaboratorSkillDialog>,
+    private fb: FormBuilder
+  ) {}
+
+  ngOnInit(): void {
+    this.initForm();
+  }
+
+  initForm(): void {
+    this.skillForm = this.fb.group({
+      tecnology:['', Validators.required],
+      seniority: [1, Validators.required],
+      yearsExperience: ['', Validators.required],
+      currentPosition: [Validators.required]
+    });
+  }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
+  save() {
+    this.dialogRef.close(this.skillForm.value);
   }
 }

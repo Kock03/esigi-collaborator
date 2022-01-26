@@ -46,7 +46,9 @@ export class CollaboratorEducationTabComponent implements OnInit {
   ];
 
   educations: education[] = [
-    {schooling: 'Ensino Superior', situation: 'completo', course: '', institution: ''},
+    {schooling: 'Ensino Fundamental', situation: 'completo', course: '', institution: ''},
+    {schooling: 'Ensino Médio', situation: 'Incompleto', course: '', institution: ''},
+    {schooling: 'Ensino Superior', situation: 'Em andamento', course: '', institution: ''},
   ];
 
 
@@ -83,7 +85,7 @@ export class CollaboratorEducationTabComponent implements OnInit {
     this.initForm();
   }
 
-  openDialog() {
+  openDialogLanguage() {
     const dialogRef = this.dialog.open(CollaboratorLanguageDialog, {
       width: '500px',
       height: '620px',
@@ -95,6 +97,18 @@ export class CollaboratorEducationTabComponent implements OnInit {
     });
   }
 
+  openDialogEducation() {
+    const dialogRef = this.dialog.open(CollaboratorEducationDialog, {
+      width: '500px',
+      height: '470px',
+    });
+
+    dialogRef.afterClosed().subscribe((education) => {
+      this.educationArray.insert(0, this.fb.group(education));
+      this.educationTable.renderRows();
+    });
+  }
+
 
   initForm(): void {
     this.languageForm = this.fb.group({
@@ -102,10 +116,10 @@ export class CollaboratorEducationTabComponent implements OnInit {
       degreeOfInfluence: [1 , Validators.required],
     });
     this.educationForm = this.fb.group({
-      schooling: ['Ensino Superior'],
-      situation: ['completo'],
-      course: ['curso'],
-      institution: ['furb'],
+      schooling: [1 , Validators.required],
+      situation: [1 , Validators.required],
+      course: ['', Validators.required],
+      institution: ['', Validators.required],
     });
   }
 
@@ -206,4 +220,43 @@ export class CollaboratorLanguageDialog {
   save() {
     this.dialogRef.close(this.languageForm.value);
   }
+}
+
+@Component({
+  selector: 'collaborator-education-dialog',
+  templateUrl: 'collaborator-education-dialog.html',
+})
+export class CollaboratorEducationDialog{
+  @Input('form') collaboratorForm!: FormGroup;
+  @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
+
+  educationForm!: FormGroup;
+
+
+  constructor(
+    public dialogRef: MatDialogRef<CollaboratorEducationDialog>,
+    private fb: FormBuilder
+  ) {}
+
+  ngOnInit(): void {
+    this.initForm();
+  }
+
+  initForm(): void {
+    this.educationForm = this.fb.group({
+      schooling: [1 , Validators.required],
+      situation: [1 , Validators.required],
+      course: ['', Validators.required],
+      institution: ['', Validators.required],
+    });
+  }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
+  save() {
+    this.dialogRef.close(this.educationForm.value);
+  }
+
 }

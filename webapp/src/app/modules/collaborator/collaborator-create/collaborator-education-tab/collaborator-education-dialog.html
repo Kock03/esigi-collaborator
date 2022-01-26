@@ -1,0 +1,48 @@
+<div id="collaboratorEducationDialog" class="dialog">
+    <div class="content-scroll" *ngIf="educationForm">
+      <h2 mat-dialog-title>Cadastro de experiência</h2>
+      <mat-dialog-content class="mat-typography">
+        <form [formGroup]="educationForm"  fxLayout="column">
+
+            <mat-form-field fxFlex="50" appearance="outline">
+                <mat-label>Escolariedade</mat-label>
+                <mat-select
+                  formControlName="schooling"
+                >
+                <mat-option [value]="1">Ensino Fundamental</mat-option>
+                <mat-option [value]="2">Ensino Médio</mat-option>
+                <mat-option [value]="3">Ensino Superior</mat-option>
+                </mat-select>
+              </mat-form-field>
+          
+            <mat-form-field fxFlex="45" appearance="outline">
+                <mat-label>Curso</mat-label>
+                <input matInput disableRipple formControlName="course"/>
+              </mat-form-field>
+
+              <mat-form-field fxFlex="45" appearance="outline">
+                <mat-label>Instituição</mat-label>
+                <input matInput disableRipple formControlName="institution"/>
+              </mat-form-field>
+  
+              <mat-form-field fxFlex="50" appearance="outline">
+                <mat-label>Situação</mat-label>
+                <mat-select
+                  formControlName="situation"
+                >
+                <mat-option [value]="1">Parado</mat-option>
+                <mat-option [value]="2">Completo</mat-option>
+                <mat-option [value]="3">Em andamento</mat-option>
+                </mat-select>
+              </mat-form-field>
+              
+        </form>
+      </mat-dialog-content>
+      <mat-dialog-actions>
+        <button mat-flat-button mat-dialog-close>Cancelar</button>
+        <button mat-flat-button [mat-dialog-close]="true" cdkFocusInitial (click)="save()">
+          Salvar
+        </button>
+      </mat-dialog-actions>
+    </div>
+  </div>
