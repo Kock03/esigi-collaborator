@@ -60,7 +60,7 @@
               />
             </mat-form-field>
 
-            <mat-form-field fxFlex="40" appearance="outline">
+            <mat-form-field fxFlex="35" appearance="outline">
               <mat-label>Tipo de Vaga</mat-label>
               <mat-select matInput disableRipple formControlName="typeOfJob">
                 <mat-option [value]="1">Aumento de Quadro</mat-option>
@@ -72,25 +72,28 @@
             <mat-checkbox
               class="checkbox"
               color="primary"
-              fxFlex="20"
+              fxFlex="25"
               formControlName="temporary"
               >Temporario</mat-checkbox
             >
+
+            <mat-form-field
+            fxFlex="25"
+            appearance="outline"
+            *ngIf="jobForm.controls['temporary'].value == true"
+          >
+            <mat-label>Tempo Contrato</mat-label>
+            <input
+              placeholder="Tempo de Contrato"
+              matInput
+              formControlName="monthTime"
+              type="text"
+            />
+          </mat-form-field>
+
           </div>
           <div fxFlex="100" fxLayoutGap="16px">
-            <mat-form-field
-              fxFlex="20"
-              appearance="outline"
-              *ngIf="jobForm.controls['temporary'].value == true"
-            >
-              <mat-label>Tempo Contrato</mat-label>
-              <input
-                placeholder="Tempo de Contrato"
-                matInput
-                formControlName="monthTime"
-                type="text"
-              />
-            </mat-form-field>
+         
 
             <mat-form-field fxFlex="35" appearance="outline">
               <mat-label>Nome da Vaga</mat-label>
