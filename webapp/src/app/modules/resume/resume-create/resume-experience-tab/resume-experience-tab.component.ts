@@ -2,6 +2,20 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
+export interface Experience {
+  office: string;
+  companyName: string;
+  locality: string;
+  active: boolean;
+  startMonth: number;
+  startYear:number;
+  terminusMonth:number;
+  terminusYear: number;
+  sector: string;
+  description:string;
+}
+
+
 @Component({
   selector: 'app-resume-experience-tab',
   templateUrl: './resume-experience-tab.component.html',
@@ -11,13 +25,34 @@ export class ResumeExperienceTabComponent implements OnInit {
   @Input('form') resumeForm!: FormGroup;
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
 
+  Experience: any;
+  experienceForm!: FormGroup;
+
   // constructor(private dialog: MatDialog,) { }
 
   constructor(private fb: FormBuilder, public dialog: MatDialog) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.initForm();
+  }
+
   get experiencesArray() {
     return this.resumeForm.controls['Experiences'] as FormArray;
+  }
+
+  initForm(): void {
+    this.experienceForm = this.fb.group({
+      office: ['', Validators.required],
+      companyName: ['', Validators.required],
+      locality: [''],
+      active: [false],
+      startMonth:['', Validators.required],
+      startYear:['', Validators.required],
+      terminusMonth:['', Validators.required],
+      terminusYear:['', Validators.required],
+      sector: ['', Validators.required],
+      description: ['', Validators.required],
+    });
   }
 
   openDialog() {
@@ -33,6 +68,10 @@ export class ResumeExperienceTabComponent implements OnInit {
 
   next() {
     this.onChange.next(true);
+  }
+
+  deleteKnowledge(index: number) {
+    this.experiencesArray.removeAt(index);
   }
 }
 
@@ -77,4 +116,12 @@ export class ResumeDialogExperience {
   save() {
     this.dialogRef.close(this.experienceForm.value);
   }
+
+  async saveExperience() {
+    let data = this.experienceForm.getRawValue();
+    console.log(
+      '🚀 ~ file: job-create.component.ts ~ line 84 ~ JobCreateComponent ~ saveCustomer ~ data',
+      data
+    );
+    }
 }
