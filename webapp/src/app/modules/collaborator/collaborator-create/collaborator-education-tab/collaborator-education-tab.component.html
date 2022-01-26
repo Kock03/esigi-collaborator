@@ -153,7 +153,7 @@
       </mat-tab>
       <mat-tab label="Idiomas">
         <ng-template mat-tab-label> Idiomas </ng-template>
-        <form
+        <!-- <form
           class="lenguange-form"
           [formGroup]="languageForm"
           fxLayout="column"
@@ -161,16 +161,7 @@
           <div fxFlex="100" fxLayoutGap="16px">
             
 
-            <button
-              fxFlex="5"
-              class="edit-button"
-              mat-flat-button
-              color="primary"
-              (click)="openDialog()"
-              *ngIf="index == null"
-            >
-              <mat-icon>add</mat-icon>
-            </button>
+     
 
             <button
               fxFlex="5"
@@ -194,57 +185,69 @@
               <mat-icon>clear</mat-icon>
             </button>
           </div>
-        </form>
-        <div class="envolti-table mat-elevation-z8" fxLayout="column">
-          <table
-            #languageTable
-            mat-table
-            [dataSource]="collaboratorForm.controls['Languages'].value"
+        </form> -->
+        <div fxLayout="row">
+          <div class="envolti-table mat-elevation-z8" fxLayout="column">
+            <table
+              #languageTable
+              mat-table
+              [dataSource]="collaboratorForm.controls['Languages'].value"
+            >
+              <ng-container matColumnDef="language">
+                <th mat-header-cell *matHeaderCellDef>Idioma</th>
+                <td mat-cell *matCellDef="let language">
+                  {{ language.languageName }}
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="fluency">
+                <th mat-header-cell *matHeaderCellDef>Fluência</th>
+                <td mat-cell *matCellDef="let language">
+                  {{ language.degreeOfInfluence }}
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="icon">
+                <th mat-header-cell *matHeaderCellDef></th>
+                <td
+                  class="button-tab"
+                  mat-cell
+                  *matCellDef="let language; let index = index"
+                >
+                  <button
+                    class="table-button"
+                    mat-button
+                    (click)="getLanguage(language, index)"
+                  >
+                    <mat-icon>edit</mat-icon>
+                  </button>
+                  <button
+                    (click)="deleteLanguage(index)"
+                    class="table-button"
+                    mat-button
+                  >
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </td>
+              </ng-container>
+
+              <tr
+                mat-header-row
+                *matHeaderRowDef="displayedLanguage; sticky: true"
+              ></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedLanguage"></tr>
+            </table>
+          </div>
+          <button
+            fxFlex="5"
+            class="edit-button"
+            mat-flat-button
+            color="primary"
+            (click)="openDialog()"
+            *ngIf="index == null"
           >
-            <ng-container matColumnDef="language">
-              <th mat-header-cell *matHeaderCellDef>Idioma</th>
-              <td mat-cell *matCellDef="let language">
-                {{ language.languageName }}
-              </td>
-            </ng-container>
-
-            <ng-container matColumnDef="fluency">
-              <th mat-header-cell *matHeaderCellDef>Fluência</th>
-              <td mat-cell *matCellDef="let language">
-                {{ language.degreeOfInfluence }}
-              </td>
-            </ng-container>
-
-            <ng-container matColumnDef="icon">
-              <th mat-header-cell *matHeaderCellDef></th>
-              <td
-                class="button-tab"
-                mat-cell
-                *matCellDef="let language; let index = index"
-              >
-                <button
-                  class="table-button"
-                  mat-button
-                  (click)="getLanguage(language, index)"
-                >
-                  <mat-icon>edit</mat-icon>
-                </button>
-                <button
-                  (click)="deleteLanguage(index)"
-                  class="table-button"
-                  mat-button
-                >
-                  <mat-icon>delete</mat-icon>
-                </button>
-              </td>
-            </ng-container>
-
-            <tr
-              mat-header-row
-              *matHeaderRowDef="displayedLanguage; sticky: true"
-            ></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedLanguage"></tr>
-          </table>
+            <mat-icon>add</mat-icon>
+          </button>
         </div>
       </mat-tab>
     </mat-tab-group>
