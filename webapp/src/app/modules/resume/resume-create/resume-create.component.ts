@@ -17,7 +17,7 @@ import { ResumeDialogExperience } from './resume-experience-tab/resume-experienc
 })
 export class ResumeCreateComponent implements OnInit {
   resumeForm!: FormGroup;
-  step: number = 1;
+  step: number = 3;
 
   Experience: any;
 
@@ -83,6 +83,10 @@ export class ResumeCreateComponent implements OnInit {
         Register: this.fb.array([]),
         Documents: null,
       });
+
+      this.resumeForm.valueChanges.subscribe(res => {
+        console.log("🚀 ~ file: resume-create.component.ts ~ line 90 ~ ResumeCreateComponent ~ initForm ~ res", res)
+      })
     }
 
 

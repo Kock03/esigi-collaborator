@@ -14,24 +14,42 @@
   .content-scroll {
     overflow: auto;
     height: calc(100vh - 210px);
+    margin-right:10px !important;
   }
 
-}
+  .list-group {
+    margin-top: 110px;
+  }
+
+  .label-office{
+    font-style: bold;
+    font-size: 20px;
+    
+  }
+
+  .label-gray{
+    color: rgb(125, 123, 123);
+    font-size: 15px;
+  }
+
+  .list-group-item{
+    border-style: groove;
+    border-radius:10px;
+    border-color: #ff6a39 ;
+    width: auto !important;
+    padding: 15px;
+    // margin-right:10px !important;
+  }
+
+
 
 #resumeExperiencDialog{
   height: 150px;
-
-  // .checkbox {
-  //   margin-top: 15px;
-  //   text-align: center;
-  // }
 
   .content-scroll {
     overflow: auto;
     height: calc(100vh - 210px);
   }
-
-
-
+  }
 }
 

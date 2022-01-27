@@ -1,6 +1,8 @@
+import { Expression } from '@angular/compiler';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatList } from '@angular/material/list';
 
 export interface Experience {
   office: string;
@@ -96,16 +98,16 @@ export class ResumeDialogExperience {
 
   initForm(): void {
     this.experienceForm = this.fb.group({
-      office: ['', Validators.required],
-      companyName: ['', Validators.required],
-      locality: [''],
+      office: ['Gerente de operações', Validators.required],
+      companyName: ['ENVOLTI Sistemas de Comunicação', Validators.required],
+      locality: ['Blumenau'],
       active: [false],
-      startMonth:['', Validators.required],
-      startYear:['', Validators.required],
-      terminusMonth:['', Validators.required],
-      terminusYear:['', Validators.required],
-      sector: ['', Validators.required],
-      description: ['', Validators.required],
+      startMonth:['11', Validators.required],
+      startYear:['2016', Validators.required],
+      terminusMonth:['01', Validators.required],
+      terminusYear:['2021', Validators.required],
+      sector: ['Comercial', Validators.required],
+      description: ['Define o direcionamento estratégico com o cliente, acompanha os KPIs do programa de reposição e informações mercadológicas. Implementa planos de ação, coleta. Faz negociação de prazos e entregas, traduz as estratégias e informações para a equipe de campo, através  dos coordenadores.rastrear resultados comerciais, executar análises de custo-benefício e monitorar KPIs de produção. O Gerente de Operações Comerciais ideal deve ter experiência em função idêntica ou semelhante, gerenciando todas as operações comerciais e definindo metas em toda a organização. Também deve demonstrar grandes habilidades de liderança e ser capaz de comunicar a visão da empresa em todos os níveis', Validators.required],
     });
   }
 
@@ -118,10 +120,6 @@ export class ResumeDialogExperience {
   }
 
   async saveExperience() {
-    let data = this.experienceForm.getRawValue();
-    console.log(
-      '🚀 ~ file: job-create.component.ts ~ line 84 ~ JobCreateComponent ~ saveCustomer ~ data',
-      data
-    );
+   this.dialogRef.close(this.experienceForm.getRawValue())
     }
 }
