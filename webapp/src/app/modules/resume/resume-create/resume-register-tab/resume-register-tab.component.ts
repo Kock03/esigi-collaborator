@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup,FormBuilder,  Validators,  } from '@angular/forms';
 import { DocumentValidator } from 'src/app/validators/document.validator';
+import { CepService } from 'src/services/cep.service';
 
 @Component({
   selector: 'app-resume-register-tab',
@@ -25,7 +26,7 @@ export class ResumeRegisterTabComponent implements OnInit {
     'União Estável',
   ];
   
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private cepService: CepService) { }
 
   ngOnInit(): void {
 
@@ -34,12 +35,12 @@ export class ResumeRegisterTabComponent implements OnInit {
         'Address'
       ] as FormGroup;
       console.log(
-        '🚀 ~ file: collaborator-register-tab.component.ts ~ line 56 ~ CollaboratorRegisterTabComponent ~ ngAfterViewInit ~ addressForm',
+        '🚀 ~ file: resume-register-tab.component.ts ~ line 56 ~ ResumeRegisterTabComponent ~ ngAfterViewInit ~ addressForm',
         addressForm
       );
       addressForm.controls['cep'].valueChanges.subscribe((res) => {
         console.log(
-          "🚀 ~ file: collaborator-register-tab.component.ts ~ line 57 ~ CollaboratorRegisterTabComponent ~ addressForm.controls['cep'].valueChanges.subscribe ~ res",
+          "🚀 ~ file: resume-register-tab.component.ts ~ line 57 ~ ResumeRegisterTabComponent ~ addressForm.controls['cep'].valueChanges.subscribe ~ res",
           res
         );
       });
@@ -58,5 +59,30 @@ export class ResumeRegisterTabComponent implements OnInit {
       return false;
     }
     return o1.id === o2.id;
+  }
+
+  async getAddress() {
+    const address = this.resumeForm.controls['Address'].value;
+    console.log(address.cep);
+    const district = await this.cepService.findDistrict(
+      address.cep.replace('-', '')
+    );
+    console.log(
+      '🚀 ~ file: resume-register-tab.component.ts ~ line 75 ~ ResumeRegisterTabComponent ~ getAddress ~ district',
+      district
+    );
+
+    if (district.erro) {
+      window.alert('Cep inválido');
+      this.resumeForm.controls['Address'].reset();
+    } else {
+      this.resumeForm.controls['Address'].patchValue({
+        cep: district.cep,
+        city: district.localidade,
+        street: district.logradouro,
+        state: district.uf,
+        district: district.bairro,
+      });
+    }
   }
 }

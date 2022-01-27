@@ -1,0 +1,38 @@
+import { AddressEntity } from 'src/app/address/address.entity';
+import { PhoneEntity } from 'src/app/phone/phone.entity';
+import { BankDataEntity } from 'src/app/bank-data/bank-data.entity';
+import { SkillsEntity } from 'src/app/skills/skills.entity';
+import { CollaboratorTypes } from './dtos/collaborator-types.enum';
+import { FinancialsEntity } from 'src/app/financials/financials.entity';
+import { DocumentsEntity } from '../documents/documents.entity';
+import { LanguagesEntity } from '../languages/languages.entity';
+import { EducationsEntity } from '../educations/educations.entity';
+export declare class CollaboratorsEntity {
+    id: string;
+    firstNameCorporateName: string;
+    lastNameFantasyName: string;
+    login: string;
+    gender: Gender;
+    office: string;
+    collaboratorTypes: CollaboratorTypes;
+    cpf: string;
+    birthDate: Date;
+    email: string;
+    cnpj: string;
+    stateRegistration: string;
+    municipalInscription: string;
+    site: string;
+    linkedin: string;
+    photo: string;
+    Address: AddressEntity;
+    Skills: SkillsEntity[];
+    Documents: DocumentsEntity[];
+    Languages: LanguagesEntity[];
+    Educations: EducationsEntity[];
+    Phone: PhoneEntity;
+    BankData: BankDataEntity;
+    Financials: FinancialsEntity;
+    createdAt: Date;
+    updatedAt: Date;
+    deletedAt: Date;
+}
