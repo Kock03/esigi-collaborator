@@ -1,4 +1,11 @@
-import { IsNotEmpty, Length, Min, Max } from 'class-validator';
+import {
+  IsNotEmpty,
+  Length,
+  Min,
+  Max,
+  MaxLength,
+  MinLength,
+} from 'class-validator';
 
 export class UpdateAddressesDto {
   @IsNotEmpty()
@@ -6,31 +13,31 @@ export class UpdateAddressesDto {
   cep: string;
 
   @IsNotEmpty()
-  @Min(3)
-  @Max(60)
+  @MinLength(3)
+  @MaxLength(60)
   street: string;
 
   @IsNotEmpty()
-  @Min(1)
-  @Max(10)
+  @MinLength(1)
+  @MaxLength(10)
   number: string;
 
   @IsNotEmpty()
-  @Min(3)
-  @Max(60)
+  @MinLength(3)
+  @MaxLength(60)
   neighborhood: string;
 
   @IsNotEmpty()
-  @Min(3)
-  @Max(60)
+  @MinLength(3)
+  @MaxLength(60)
   city: string;
 
   @IsNotEmpty()
-  @Min(3)
-  @Max(60)
+  @MinLength(3)
+  @MaxLength(60)
   state: string;
 
-  @Min(3)
-  @Max(60)
+  @MinLength(3)
+  @MaxLength(60)
   complement: string;
 }

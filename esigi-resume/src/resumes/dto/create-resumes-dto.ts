@@ -1,6 +1,15 @@
-import { IsEmail, IsNotEmpty, IsUrl, Length, Max, Min } from 'class-validator';
+import {
+  IsEmail,
+  IsNotEmpty,
+  Length,
+  Max,
+  MaxLength,
+  Min,
+  MinLength,
+} from 'class-validator';
 import { AddressesEntity } from 'src/addresses/addresses.entity';
 import { PhonesEntity } from 'src/phones/phones.entity';
+import { Unique } from 'typeorm';
 import { MaritalStatus } from './marital-status.enum';
 import { SexTypes } from './sex-types.enum';
 
@@ -8,18 +17,18 @@ export class CreateResumesDto {
   photo: string;
 
   @IsNotEmpty()
-  @Min(3)
-  @Max(70)
+  @MinLength(3)
+  @MaxLength(70)
   firstName: string;
 
   @IsNotEmpty()
-  @Min(3)
-  @Max(70)
+  @MinLength(3)
+  @MaxLength(70)
   lastName: string;
 
   @IsNotEmpty()
-  @Min(3)
-  @Max(70)
+  @MinLength(3)
+  @MaxLength(70)
   login: string;
 
   @IsNotEmpty()

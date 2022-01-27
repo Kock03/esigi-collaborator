@@ -1,4 +1,4 @@
-import { IsNotEmpty, Max, Min } from 'class-validator';
+import { IsNotEmpty, Max, MaxLength, Min, MinLength } from 'class-validator';
 import { ResumesEntity } from 'src/resumes/resumes.entity';
 import { EducationLevel } from './education-level.enum';
 import { Situation } from './situation.enum';
@@ -11,13 +11,13 @@ export class CreateEducationsDto {
   situation: Situation;
 
   @IsNotEmpty()
-  @Min(3)
-  @Max(70)
+  @MinLength(3)
+  @MaxLength(70)
   institution: string;
 
   @IsNotEmpty()
-  @Min(3)
-  @Max(70)
+  @MinLength(3)
+  @MaxLength(70)
   course: string;
 
   @IsNotEmpty()

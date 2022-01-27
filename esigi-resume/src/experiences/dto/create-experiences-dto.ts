@@ -1,20 +1,20 @@
-import { IsNotEmpty, Max, Min } from 'class-validator';
+import { IsNotEmpty, Max, MaxLength, Min, MinLength } from 'class-validator';
 import { ResumesEntity } from 'src/resumes/resumes.entity';
 
 export class CreateExperiencesDto {
   @IsNotEmpty()
-  @Min(2)
-  @Max(40)
+  @MinLength(2)
+  @MaxLength(40)
   position: string;
 
   @IsNotEmpty()
-  @Min(3)
-  @Max(70)
+  @MinLength(3)
+  @MaxLength(70)
   companyName: string;
 
   @IsNotEmpty()
-  @Min(2)
-  @Max(40)
+  @MinLength(2)
+  @MaxLength(40)
   location: string;
 
   currentPosition: boolean;
@@ -26,13 +26,13 @@ export class CreateExperiencesDto {
   endDate: Date;
 
   @IsNotEmpty()
-  @Min(2)
-  @Max(40)
+  @MinLength(2)
+  @MaxLength(40)
   sector: string;
 
   @IsNotEmpty()
-  @Min(2)
-  @Max(10)
+  @MinLength(2)
+  @MaxLength(10)
   description: string;
 
   @IsNotEmpty()

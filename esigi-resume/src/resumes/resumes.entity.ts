@@ -87,7 +87,7 @@ export class ResumesEntity {
   @JoinColumn()
   idioms: IdiomsEntity[];
 
-  @Column({ name: 'email', length: 100 })
+  @Column({ name: 'email', length: 100, unique: true })
   email: string;
 
   @Column({ name: 'site', length: 100 })
