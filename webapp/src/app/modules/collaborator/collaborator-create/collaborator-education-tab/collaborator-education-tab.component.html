@@ -3,6 +3,7 @@
     <mat-tab-group animationDuration="0">
       <mat-tab label="Escolaridade">
         <ng-template mat-tab-label> Escolaridade </ng-template>
+        <div fxLayout="row">
         <div class="envolti-table mat-elevation-z8" fxLayout="column">
           <table mat-table [dataSource]="collaboratorForm.controls['Educations'].value" #educationTable>
             <ng-container matColumnDef="schooling">
@@ -53,6 +54,7 @@
           *ngIf="index == null">
           <mat-icon>add</mat-icon>
         </button>
+      </div>
       </mat-tab>
 
       <mat-tab label="Idiomas">
