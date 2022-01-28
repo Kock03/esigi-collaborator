@@ -1,7 +1,19 @@
 import { Expression } from '@angular/compiler';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Inject,
+  Input,
+  OnInit,
+  Output,
+  ViewEncapsulation,
+} from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import {
+  MatDialog,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+} from '@angular/material/dialog';
 import { MatList } from '@angular/material/list';
 
 export interface Experience {
@@ -10,18 +22,18 @@ export interface Experience {
   locality: string;
   active: boolean;
   startMonth: number;
-  startYear:number;
-  terminusMonth:number;
+  startYear: number;
+  terminusMonth: number;
   terminusYear: number;
   sector: string;
-  description:string;
+  description: string;
 }
-
 
 @Component({
   selector: 'app-resume-experience-tab',
   templateUrl: './resume-experience-tab.component.html',
-  styleUrls:  ['./resume-experience-tab.component.scss'],
+  styleUrls: ['./resume-experience-tab.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class ResumeExperienceTabComponent implements OnInit {
   @Input('form') resumeForm!: FormGroup;
@@ -49,10 +61,10 @@ export class ResumeExperienceTabComponent implements OnInit {
       companyName: ['', Validators.required],
       locality: [''],
       active: [false],
-      startMonth:['', Validators.required],
-      startYear:['', Validators.required],
-      terminusMonth:['', Validators.required],
-      terminusYear:['', Validators.required],
+      startMonth: ['', Validators.required],
+      startYear: ['', Validators.required],
+      terminusMonth: ['', Validators.required],
+      terminusYear: ['', Validators.required],
       sector: ['', Validators.required],
       description: ['', Validators.required],
     });
@@ -78,12 +90,17 @@ export class ResumeExperienceTabComponent implements OnInit {
   }
 
   getExperience(experienceSelected: any, index: number) {
-    this.openDialog();
-    this.index = index;
-    this.experienceForm.patchValue(experienceSelected);
-  }
+    const dialogRef = this.dialog.open(ResumeDialogExperience, {
+      width: '500px',
+      height: '620px',
+      data: { experienceSelected },
+    });
 
-  
+    this.index = index;
+    dialogRef.afterClosed().subscribe((experience) => {
+      this.experiencesArray.controls[this.index].setValue(experience);
+    });
+  }
 }
 
 @Component({
@@ -97,6 +114,7 @@ export class ResumeDialogExperience {
   experienceForm!: FormGroup;
 
   constructor(
+    @Inject(MAT_DIALOG_DATA) public data: { experienceSelected: any },
     public dialogRef: MatDialogRef<ResumeDialogExperience>,
     private fb: FormBuilder
   ) {}
@@ -111,13 +129,20 @@ export class ResumeDialogExperience {
       companyName: ['ENVOLTI Sistemas de Comunicação', Validators.required],
       locality: ['Blumenau'],
       active: [false],
-      startMonth:['11', Validators.required],
-      startYear:['2016', Validators.required],
-      terminusMonth:['01', Validators.required],
-      terminusYear:['2021', Validators.required],
+      startMonth: ['11', Validators.required],
+      startYear: ['2016', Validators.required],
+      terminusMonth: ['01', Validators.required],
+      terminusYear: ['2021', Validators.required],
       sector: ['Comercial', Validators.required],
-      description: ['Define o direcionamento estratégico com o cliente, acompanha os KPIs do programa de reposição e informações mercadológicas. Implementa planos de ação, coleta. Faz negociação de prazos e entregas, traduz as estratégias e informações para a equipe de campo, através  dos coordenadores.rastrear resultados comerciais, executar análises de custo-benefício e monitorar KPIs de produção. O Gerente de Operações Comerciais ideal deve ter experiência em função idêntica ou semelhante, gerenciando todas as operações comerciais e definindo metas em toda a organização. Também deve demonstrar grandes habilidades de liderança e ser capaz de comunicar a visão da empresa em todos os níveis', Validators.required],
+      description: [
+        'Define o direcionamento estratégico com o cliente, acompanha os KPIs do programa de reposição e informações mercadológicas. Implementa planos de ação, coleta. Faz negociação de prazos e entregas, traduz as estratégias e informações para a equipe de campo, através  dos coordenadores.rastrear resultados comerciais, executar análises de custo-benefício e monitorar KPIs de produção. O Gerente de Operações Comerciais ideal deve ter experiência em função idêntica ou semelhante, gerenciando todas as operações comerciais e definindo metas em toda a organização. Também deve demonstrar grandes habilidades de liderança e ser capaz de comunicar a visão da empresa em todos os níveis',
+        Validators.required,
+      ],
     });
+
+    if (this.data.experienceSelected) {
+      this.experienceForm.patchValue(this.data.experienceSelected);
+    }
   }
 
   onNoClick(): void {
@@ -129,8 +154,6 @@ export class ResumeDialogExperience {
   }
 
   async saveExperience() {
-   this.dialogRef.close(this.experienceForm.getRawValue())
+    this.dialogRef.close(this.experienceForm.getRawValue());
   }
 }
-
-  

@@ -57,6 +57,8 @@ export class ResumeRegisterTabComponent implements OnInit {
 
         street: district.logradouro,
 
+        district: district.bairro,
+
         state: district.uf,
 
       });
