@@ -12,19 +12,27 @@
             >
               <ng-container matColumnDef="schooling">
                 <th mat-header-cell *matHeaderCellDef>Escolaridade</th>
-                <td  mat-cell *matCellDef="let education">
-                  {{ education.schooling == 1 ? "Ensino Fundamental" :  
-                    education.schooling == 2 ? "Ensino Médio" : "Ensino Superior"  }}
-                  
+                <td mat-cell *matCellDef="let education">
+                  {{
+                    education.schooling == 1
+                      ? "Ensino Fundamental"
+                      : education.schooling == 2
+                      ? "Ensino Médio"
+                      : "Ensino Superior"
+                  }}
                 </td>
               </ng-container>
 
               <ng-container matColumnDef="situation">
                 <th mat-header-cell *matHeaderCellDef>Situação</th>
                 <td mat-cell *matCellDef="let education">
-                  {{ education.situation == 1 ? "Parado" :  
-                  education.situation == 2 ? "Completo" : "Em andamento"  }}
-                
+                  {{
+                    education.situation == 1
+                      ? "Parado"
+                      : education.situation == 2
+                      ? "Completo"
+                      : "Em andamento"
+                  }}
                 </td>
               </ng-container>
 
@@ -141,7 +149,19 @@
               <ng-container matColumnDef="fluency">
                 <th mat-header-cell *matHeaderCellDef>Fluência</th>
                 <td mat-cell *matCellDef="let language">
-                  {{ language.degreeOfInfluence }}
+                  {{
+                    language.degreeOfInfluence == 1
+                      ? "Leitura, Escrita e Conversação"
+                      : language.degreeOfInfluence == 2
+                      ? "Escrita"
+                      : language.degreeOfInfluence == 3
+                      ? "Leitura"
+                      : language.degreeOfInfluence == 4
+                      ? "Conversação"
+                      : language.degreeOfInfluence == 5
+                      ? "Escrita e Leitura"
+                      : "Escrita e Conversação"
+                  }}
                 </td>
               </ng-container>
 

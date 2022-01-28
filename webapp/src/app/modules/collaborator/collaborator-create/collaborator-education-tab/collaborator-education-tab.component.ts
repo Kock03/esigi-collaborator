@@ -92,8 +92,9 @@ export class CollaboratorEducationTabComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((language) => {
+      if(language){
       this.languageArray.insert(0, this.fb.group(language));
-      this.languageTable.renderRows();
+      this.languageTable.renderRows();}
     });
   }
 
