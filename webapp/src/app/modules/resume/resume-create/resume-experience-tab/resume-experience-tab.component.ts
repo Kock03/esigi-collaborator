@@ -21,7 +21,7 @@ export interface Experience {
 @Component({
   selector: 'app-resume-experience-tab',
   templateUrl: './resume-experience-tab.component.html',
-  styleUrls: ['./resume-experience-tab.component.scss'],
+  styleUrls:  ['./resume-experience-tab.component.scss'],
 })
 export class ResumeExperienceTabComponent implements OnInit {
   @Input('form') resumeForm!: FormGroup;
@@ -29,6 +29,7 @@ export class ResumeExperienceTabComponent implements OnInit {
 
   Experience: any;
   experienceForm!: FormGroup;
+  index: any = null;
 
   // constructor(private dialog: MatDialog,) { }
 
@@ -72,9 +73,17 @@ export class ResumeExperienceTabComponent implements OnInit {
     this.onChange.next(true);
   }
 
-  deleteKnowledge(index: number) {
+  deleteExperience(index: number) {
     this.experiencesArray.removeAt(index);
   }
+
+  getExperience(experienceSelected: any, index: number) {
+    this.openDialog();
+    this.index = index;
+    this.experienceForm.patchValue(experienceSelected);
+  }
+
+  
 }
 
 @Component({
@@ -121,5 +130,7 @@ export class ResumeDialogExperience {
 
   async saveExperience() {
    this.dialogRef.close(this.experienceForm.getRawValue())
-    }
+  }
 }
+
+  

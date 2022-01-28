@@ -1,21 +1,15 @@
 <div id="resumeExperienceTab" class="tab">
   <div class="content-scroll" *ngIf="resumeForm" fxLayout="column">
-    <h2 mat-dialog-title>Cadastro de experiência</h2>
-    <div class="add-experience-button">
-      <button
-        class="add-button"
-        mat-button
-        color="white"
-        (click)="openDialog()"
-      >
-        Adicionar experiênca
+    <h2 mat-dialog-title class="label">Cadastro de experiência</h2>
+    <div>
+      <button class="edit-button" mat-flat-button color="primary"  (click)="openDialog()">
+        <mat-icon>add</mat-icon>
       </button>
     </div>
-
     <div class="list-group">
       <mat-list role="list" #experiencesList *ngIf="experiencesArray">
         <mat-list-item *ngFor="let experience of experiencesArray.value">
-          <div class="list-group-item" fxLayout="column" fxLayoutAlign="space-around start" >
+          <div class="list-group-item" fxLayout="column" fxLayoutAlign="space-around" >
             <span class="label-office">
               {{ experience.office }}
             </span>
@@ -33,13 +27,26 @@
               ><b>Término:</b> {{ experience.terminusMonth
               }}<span> / {{ experience.terminusYear }}</span>
             </span>
-            <span class="label-gray" >
-              {{ experience.active }}
-            </span>
             <p></p>
             <span>
               {{ experience.description }}
             </span>
+            <div class="add-experience-button" fxLayout="row" fxLayoutAlign="end end">
+              <button 
+                 class="table-button"
+                 mat-button
+                 (click)="getExperience(experience, index)"
+               >
+                 <mat-icon>edit</mat-icon>
+               </button>
+               <button fxLayout="row" fxLayoutAlign="end start"
+                 (click)="deleteExperience(index)"
+                 class="table-button"
+                 mat-button
+               >
+                 <mat-icon>delete</mat-icon>
+               </button>
+             </div>
           </div>
         </mat-list-item>
       </mat-list>
