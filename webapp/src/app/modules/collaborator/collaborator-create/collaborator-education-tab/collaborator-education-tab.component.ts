@@ -145,11 +145,11 @@ export class CollaboratorEducationTabComponent implements OnInit {
     this.languageForm.reset();
   }
 
-  getLanguage(languagesSelected: any, index: number) {
+  getLanguage(languageSelected: any, index: number) {
     const dialogRef = this.dialog.open(CollaboratorLanguageDialog, {
       width: '500px',
       height: '620px',
-      data: { languagesSelected },
+      data: { languageSelected },
 
     });
 
