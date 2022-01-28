@@ -27,7 +27,7 @@ export interface skill {
 export class CollaboratorSkillTabComponent implements OnInit {
   @Input('form') collaboratorForm!: FormGroup;
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
-  @ViewChild('skillTable') skillTable!: MatTable<any>;
+  //@ViewChild('skillTable') skillTable!: MatTable<any>;
 
   displayedColumns: string[] = ['name', 'time', 'level', 'icon'];
 
@@ -41,7 +41,6 @@ export class CollaboratorSkillTabComponent implements OnInit {
   ];
 
   selectedIndex: number = 0;
-
   skillForm!: FormGroup;
 
   index: any = null;
@@ -65,8 +64,10 @@ export class CollaboratorSkillTabComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((skill) => {
-      this.skillArray.insert(0, this.fb.group(skill));
-      this.skillTable.renderRows();
+      if(skill){
+        this.skillArray.insert(0, this.fb.group(skill));
+        //this.skillTable.renderRows();
+      }
     });
   }
 
@@ -90,11 +91,12 @@ export class CollaboratorSkillTabComponent implements OnInit {
   saveSkill() {
     const data = this.skillForm.getRawValue();
     this.skillArray.insert(0, this.fb.group(data));
-    this.skillTable.renderRows();
+    //this.skillTable.renderRows();
     this.skillForm.reset();
   }
 
-  getSkill(skillSelected: any, index: number) {
+  getSkill(skillSelected: any, index: null) {
+    this.openDialog();
     this.index = index;
     this.skillForm.patchValue(skillSelected);
   }
@@ -102,7 +104,7 @@ export class CollaboratorSkillTabComponent implements OnInit {
   editSkill() {
     this.skillArray.at(this.index).setValue(this.skillForm.getRawValue());
 
-    this.skillTable.renderRows();
+    //this.skillTable.renderRows();
     this.skillForm.reset();
     this.index = null;
   }
@@ -151,7 +153,7 @@ export class CollaboratorSkillDialog{
     this.dialogRef.close();
   }
 
-  save() {
+  async save() {
     this.dialogRef.close(this.skillForm.value);
   }
 }
