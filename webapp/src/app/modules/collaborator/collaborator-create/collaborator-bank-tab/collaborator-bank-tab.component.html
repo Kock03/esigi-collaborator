@@ -24,7 +24,13 @@
           <ng-container matColumnDef="accountType">
             <th mat-header-cell *matHeaderCellDef>Tipo de Conta</th>
             <td mat-cell *matCellDef="let bank">
-              {{ bank.accountType }}
+              {{
+                bank.accountType == 1
+                ? "Conta Corrente"
+                : bank.accountType == 2
+                ? "Conta Salário"
+                : "Conta Poupança"
+              }}
             </td>
           </ng-container>
 
@@ -42,6 +48,14 @@
               mat-cell
               *matCellDef="let bank; let index = index"
             >
+              <button
+                class="table-button"
+                mat-button
+                (click)="getBank(bank, index)"
+               >
+                <mat-icon>edit</mat-icon>
+              </button>
+
               <button
                 class="table-button"
                 mat-button
@@ -66,7 +80,6 @@
         mat-flat-button
         color="primary"
         (click)="openDialog()"
-        *ngIf="index == null"
       >
         <mat-icon>add</mat-icon>
       </button>

@@ -19,7 +19,21 @@
 
         <ng-container matColumnDef="level">
           <th mat-header-cell *matHeaderCellDef>Senioridade</th>
-          <td mat-cell *matCellDef="let skill">{{ skill.seniority }}</td>
+          <td mat-cell *matCellDef="let skill">
+            {{ 
+              skill.seniority== 1
+              ? "Senior"
+              : skill.seniority == 2
+              ? "Pleno"
+              : skill.seniority == 3
+              ? "Junior" 
+              : skill.seniority == 4
+              ? "Aprendiz"
+              : skill.seniority == 5
+              ?"Especialista"
+              :"Arquiteto"
+            
+            }}</td>
         </ng-container>
 
         <ng-container matColumnDef="icon">
@@ -53,9 +67,7 @@
         <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
       </table>
     </div>
-    
-      <button fxFlex="5" class="edit-button" mat-flat-button color="primary" (click)="openDialog()"
-        *ngIf="index == null">
+      <button fxFlex="5" class="edit-button" mat-flat-button color="primary" (click)="openDialog()">
         <mat-icon>add</mat-icon>
       </button>
     </div>

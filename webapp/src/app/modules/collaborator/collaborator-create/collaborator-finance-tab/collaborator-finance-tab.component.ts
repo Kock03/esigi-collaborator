@@ -1,6 +1,7 @@
 import {
   Component,
   EventEmitter,
+  Inject,
   Input,
   OnInit,
   Output,
@@ -8,7 +9,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
 
 export interface finance {
@@ -67,8 +68,10 @@ export class CollaboratorFinanceTabComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((finance) => {
-      this.financeArray.insert(0, this.fb.group(finance));
-      this.financeTable.renderRows();
+      if(finance){
+        this.financeArray.insert(0, this.fb.group(finance));
+        this.financeTable.renderRows();
+      }
     });
   }
 
@@ -94,15 +97,18 @@ export class CollaboratorFinanceTabComponent implements OnInit {
   }
 
   getFinance(financeSelected: any, index: number) {
-    this.index = index;
-    this.financeForm.patchValue(financeSelected);
-  }
+    const dialogRef = this.dialog.open(CollaboratorFinanceDialog, {
+      width: '500px',
+      height: '620px',
+      data: { financeSelected },
 
-  editFinance() {
-    this.financeArray.at(this.index).setValue(this.financeForm.getRawValue());
-    this.financeTable.renderRows();
-    this.financeForm.reset();
-    this.index = null;
+    });
+
+    this.index = index;
+    dialogRef.afterClosed().subscribe((finance) => {
+      this.financeArray.controls[this.index].setValue(finance);
+    });
+
   }
 
   deleteFinance(index: number) {
@@ -123,7 +129,8 @@ export class CollaboratorFinanceDialog{
 
   constructor(
     public dialogRef: MatDialogRef<CollaboratorFinanceDialog>,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    @Inject(MAT_DIALOG_DATA) public data: { financeSelected: any}
   ) {}
 
   ngOnInit(): void {
@@ -137,6 +144,9 @@ export class CollaboratorFinanceDialog{
       reason: ['Contratação'],
       value: ['340000'],
     });
+    if (this.data.financeSelected) {
+      this.financeForm.patchValue(this.data.financeSelected)
+    }
   }
 
   onNoClick(): void {

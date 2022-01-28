@@ -1,6 +1,7 @@
 import {
   Component,
   EventEmitter,
+  Inject,
   Input,
   OnInit,
   Output,
@@ -8,7 +9,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
 
 export interface Bank {
@@ -73,8 +74,10 @@ export class CollaboratorBankTabComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((bank) => {
-      this.bankArray.insert(0, this.fb.group(bank));
-      this.bankTable.renderRows();
+      if(bank){
+        this.bankArray.insert(0, this.fb.group(bank));
+        this.bankTable.renderRows();
+      }
     });
   }
 
@@ -102,8 +105,17 @@ export class CollaboratorBankTabComponent implements OnInit {
   }
 
   getBank(bankSelected: any, index: number) {
+    const dialogRef = this.dialog.open(CollaboratorBankDialog, {
+      width: '500px',
+      height: '620px',
+      data: { bankSelected },
+
+    });
     this.index = index;
-    this.bankForm.patchValue(bankSelected);
+    dialogRef.afterClosed().subscribe((bank) => {
+      this.bankArray.controls[this.index].setValue(bank);
+    });
+
   }
 
   editbank() {
@@ -131,7 +143,8 @@ export class CollaboratorBankDialog{
 
   constructor(
     public dialogRef: MatDialogRef<CollaboratorBankDialog>,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    @Inject(MAT_DIALOG_DATA) public data: { bankSelected: any}
   ) {}
 
   ngOnInit(): void {
@@ -147,6 +160,9 @@ export class CollaboratorBankDialog{
       digit: ['', Validators.required],
       bankAccountDigit: ['', Validators.required],
     });
+    if (this.data.bankSelected) {
+      this.bankForm.patchValue(this.data.bankSelected)
+    }
   }
 
   onNoClick(): void {

@@ -1,6 +1,7 @@
 import {
   Component,
   EventEmitter,
+  Inject,
   Input,
   OnInit,
   Output,
@@ -12,7 +13,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
 
 export interface education {
@@ -144,20 +145,18 @@ export class CollaboratorEducationTabComponent implements OnInit {
     this.languageForm.reset();
   }
 
-  getLanguage(languageSelected: any, index: number) {
+  getLanguage(languagesSelected: any, index: number) {
+    const dialogRef = this.dialog.open(CollaboratorLanguageDialog, {
+      width: '500px',
+      height: '620px',
+      data: { languagesSelected },
+
+    });
+
     this.index = index;
-    this.languageForm.patchValue(languageSelected);
-  }
-
-  editLanguage() {
-    this.languageArray.at(this.index).setValue(this.languageForm.getRawValue());
-    this.languageTable.renderRows();
-    this.languageForm.reset();
-    this.index = null;
-  }
-
-  cancelEdit(){
-    this.index = null;
+    dialogRef.afterClosed().subscribe((language) => {
+      this.languageArray.controls[this.index].setValue(language);
+    });
   }
 
   deleteLanguage(index: number){
@@ -165,20 +164,19 @@ export class CollaboratorEducationTabComponent implements OnInit {
   
   }
 
-  
- 
+ getEducation(educationSelected: any, index: number) {
+    const dialogRef = this.dialog.open(CollaboratorEducationDialog, {
+      width: '500px',
+      height: '620px',
+      data: { educationSelected },
 
-  getEducation(educationSelected: any, index: number) {
+    });
+
     this.index = index;
-    this.educationForm.patchValue(educationSelected);
-  }
+    dialogRef.afterClosed().subscribe((education) => {
+      this.educationArray.controls[this.index].setValue(education);
+    });
 
-  editEducation() {
-    this.educationArray.at(this.index).setValue(this.educationForm.getRawValue());
-
-    this.educationTable.renderRows();
-    this.educationForm.reset();
-    this.index = null;
   }
 
   deleteEducation(index: number){
@@ -201,7 +199,8 @@ export class CollaboratorLanguageDialog {
 
   constructor(
     public dialogRef: MatDialogRef<CollaboratorLanguageDialog>,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    @Inject(MAT_DIALOG_DATA) public data: { languageSelected: any}
   ) {}
 
   ngOnInit(): void {
@@ -213,6 +212,9 @@ export class CollaboratorLanguageDialog {
       languageName: ['', Validators.required],
       degreeOfInfluence: [1 , Validators.required],
     });
+    if (this.data.languageSelected) {
+      this.languageForm.patchValue(this.data.languageSelected)
+    }
   }
 
   onNoClick(): void {
@@ -237,7 +239,8 @@ export class CollaboratorEducationDialog{
 
   constructor(
     public dialogRef: MatDialogRef<CollaboratorEducationDialog>,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    @Inject(MAT_DIALOG_DATA) public data: { educationSelected: any}
   ) {}
 
   ngOnInit(): void {
@@ -251,6 +254,9 @@ export class CollaboratorEducationDialog{
       course: ['', Validators.required],
       institution: ['', Validators.required],
     });
+    if (this.data.educationSelected) {
+      this.educationForm.patchValue(this.data.educationSelected)
+    }
   }
 
   onNoClick(): void {

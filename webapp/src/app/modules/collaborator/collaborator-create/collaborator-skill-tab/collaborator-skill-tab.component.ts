@@ -1,6 +1,7 @@
 import {
   Component,
   EventEmitter,
+  Inject,
   Input,
   OnInit,
   Output,
@@ -8,9 +9,8 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
-
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 export interface skill {
   tecnology: string;
   seniority: string;
@@ -27,7 +27,7 @@ export interface skill {
 export class CollaboratorSkillTabComponent implements OnInit {
   @Input('form') collaboratorForm!: FormGroup;
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
-  //@ViewChild('skillTable') skillTable!: MatTable<any>;
+  @ViewChild('skillTable') skillTable!: MatTable<any>;
 
   displayedColumns: string[] = ['name', 'time', 'level', 'icon'];
 
@@ -42,7 +42,6 @@ export class CollaboratorSkillTabComponent implements OnInit {
 
   selectedIndex: number = 0;
   skillForm!: FormGroup;
-
   index: any = null;
   Skill: any;
   checked = false;
@@ -51,7 +50,7 @@ export class CollaboratorSkillTabComponent implements OnInit {
     return this.collaboratorForm.controls['Skills'] as FormArray;
   }
 
-  constructor(private fb: FormBuilder,public dialog: MatDialog) {}
+  constructor(private fb: FormBuilder,public dialog: MatDialog,) {}
 
   ngOnInit(): void {
     this.initForm();
@@ -66,7 +65,7 @@ export class CollaboratorSkillTabComponent implements OnInit {
     dialogRef.afterClosed().subscribe((skill) => {
       if(skill){
         this.skillArray.insert(0, this.fb.group(skill));
-        //this.skillTable.renderRows();
+        this.skillTable.renderRows();
       }
     });
   }
@@ -91,26 +90,23 @@ export class CollaboratorSkillTabComponent implements OnInit {
   saveSkill() {
     const data = this.skillForm.getRawValue();
     this.skillArray.insert(0, this.fb.group(data));
-    //this.skillTable.renderRows();
+    this.skillTable.renderRows();
     this.skillForm.reset();
   }
 
-  getSkill(skillSelected: any, index: null) {
-    this.openDialog();
+  getSkill(skillSelected: any, index: number) {
+    const dialogRef = this.dialog.open(CollaboratorSkillDialog, {
+      width: '500px',
+      height: '620px',
+      data: { skillSelected },
+
+    });
+
     this.index = index;
-    this.skillForm.patchValue(skillSelected);
-  }
+    dialogRef.afterClosed().subscribe((skill) => {
+      this.skillArray.controls[this.index].setValue(skill);
+    });
 
-  editSkill() {
-    this.skillArray.at(this.index).setValue(this.skillForm.getRawValue());
-
-    //this.skillTable.renderRows();
-    this.skillForm.reset();
-    this.index = null;
-  }
-
-  cancelEdit(){
-    this.index = null;
   }
 
   deleteSkill(index: number){
@@ -133,7 +129,8 @@ export class CollaboratorSkillDialog{
 
   constructor(
     public dialogRef: MatDialogRef<CollaboratorSkillDialog>,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    @Inject(MAT_DIALOG_DATA) public data: { skillSelected: any}
   ) {}
 
   ngOnInit(): void {
@@ -147,13 +144,16 @@ export class CollaboratorSkillDialog{
       yearsExperience: ['', Validators.required],
       currentPosition: [Validators.required]
     });
+    if (this.data.skillSelected) {
+      this.skillForm.patchValue(this.data.skillSelected)
+    }
   }
 
   onNoClick(): void {
     this.dialogRef.close();
   }
 
-  async save() {
+  save() {
     this.dialogRef.close(this.skillForm.value);
   }
 }
