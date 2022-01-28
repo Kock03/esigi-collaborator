@@ -104,8 +104,9 @@ export class CollaboratorEducationTabComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((education) => {
+      if (education){
       this.educationArray.insert(0, this.fb.group(education));
-      this.educationTable.renderRows();
+      this.educationTable.renderRows();}
     });
   }
 
