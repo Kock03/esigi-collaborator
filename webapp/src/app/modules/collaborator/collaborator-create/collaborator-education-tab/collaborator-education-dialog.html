@@ -38,11 +38,13 @@
               
         </form>
       </mat-dialog-content>
-      <mat-dialog-actions>
-        <button mat-flat-button mat-dialog-close (click)="onNoClick()">Cancelar</button>
-        <button mat-flat-button [mat-dialog-close]="true" cdkFocusInitial (click)="save()">
+      <mat-dialog-actions >
+        <div fxLayout="row" >
+        <button fxFlexAlign="center center" mat-flat-button mat-dialog-close (click)="onNoClick()">Cancelar</button>
+        <button mat-flat-button color="primary" [mat-dialog-close]="true" cdkFocusInitial (click)="save()">
           Salvar
         </button>
+      </div>
       </mat-dialog-actions>
     </div>
   </div>

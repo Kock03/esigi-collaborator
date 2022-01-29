@@ -8,6 +8,8 @@ import {
   DeleteDateColumn,
   OneToOne,
   JoinColumn,
+  
+  ManyToOne,
 } from 'typeorm';
 import { ContractTypes } from './dtos/contract-types.enum';
 
@@ -25,9 +27,9 @@ export class FinancialsEntity {
   @Column({ name: 'reason', type: 'int' })
   reason: Reasons;
 
-  @OneToOne(
+  @ManyToOne(
     () => CollaboratorsEntity,
-    (collaborator) => collaborator.Financials,
+    (collaborator) => collaborator.Financials,{ onDelete: "CASCADE" }
   ) // specify inverse side as a second parameter
   Collaborator: CollaboratorsEntity;
 

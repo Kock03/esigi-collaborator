@@ -76,7 +76,7 @@ export class CreateCollaboratorsDto {
   Educations: EducationsEntity[];
 
   @IsOptional()
-  BankData: BankDataEntity[];
+  BankData: BankDataEntity;
 
   @IsOptional()
   Financials: FinancialsEntity[];

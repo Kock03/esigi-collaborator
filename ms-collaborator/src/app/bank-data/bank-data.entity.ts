@@ -7,6 +7,7 @@ import {
   DeleteDateColumn,
   PrimaryGeneratedColumn,
   OneToOne,
+  JoinColumn,
 } from 'typeorm';
 import { AccountTypes } from './dtos/account-types.enum';
 
@@ -34,7 +35,8 @@ export class BankDataEntity {
   bankAccountDigit: number;
 
 
-  @OneToOne(() => CollaboratorsEntity, collaborator => collaborator.BankData) // specify inverse side as a second parameter
+  @OneToOne(() => CollaboratorsEntity)
+  @JoinColumn()
   Collaborator: CollaboratorsEntity;
 
   @CreateDateColumn({ name: 'created_at', type: 'datetime' })

@@ -27,7 +27,7 @@ export class SkillsEntity {
   currentPosition: boolean;
 
   @ManyToOne(() => CollaboratorsEntity, collaborators => collaborators.Skills)
-  Collaborator: CollaboratorsEntity[];
+  Collaborator: CollaboratorsEntity;
 
 
   @CreateDateColumn({ name: 'created_at', type: 'datetime' })

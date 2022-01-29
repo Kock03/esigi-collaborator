@@ -142,7 +142,7 @@ export class CollaboratorSkillDialog{
       tecnology:['', Validators.required],
       seniority: [1, Validators.required],
       yearsExperience: ['', Validators.required],
-      currentPosition: [Validators.required]
+      currentPosition: [true, Validators.required]
     });
     if (this.data.skillSelected) {
       this.skillForm.patchValue(this.data.skillSelected)
