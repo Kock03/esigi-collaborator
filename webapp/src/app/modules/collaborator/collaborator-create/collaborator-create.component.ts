@@ -24,7 +24,7 @@ export class CollaboratorCreateComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.initForm();
-    this.step = 4;
+    this.step = 1;
   }
   
 
@@ -36,9 +36,9 @@ export class CollaboratorCreateComponent implements OnInit {
       gender: [1, Validators.required],
       office: ['Desenvolvedor Angular', Validators.required],
       collaboratorTypes: [1, Validators.required],
-      cpf: this.fb.control({ value: null, disabled: false}, DocumentValidator.isValidCpf()),
+      cpf: this.fb.control({ value: null, disabled: false}, [DocumentValidator.isValidCpf(), Validators.required]),
       birthDate: ['06/12/2004', Validators.required],
-      email: ['davi@email', Validators.email],
+      email: ['davi@email', [Validators.email, Validators.required]],
       cnpj: ['', Validators.required],
       stateRegistration: ['', Validators.required],
       municipalInscription: ['', Validators.required],
@@ -46,9 +46,9 @@ export class CollaboratorCreateComponent implements OnInit {
       linkedin: ['linkedin.davi', Validators.required],
       photo: null,
       Phone: this.fb.group({
-        phoneNumber: ['35343234908', Validators.required],
-        ddd: ['71', Validators.required],
-        ddi: ['', Validators.required],
+        phoneNumber: ['343234908', [Validators.required, Validators.maxLength(9)]],
+        ddd: ['71', [Validators.required, Validators.maxLength(2)]],
+        ddi: ['55', Validators.required],
       }),
 
       Address: this.fb.group({

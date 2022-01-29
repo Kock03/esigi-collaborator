@@ -112,14 +112,14 @@ export class CollaboratorsEntity {
     orphanedRowAction: 'delete',
   })
   @JoinColumn()
-  BankData: BankDataEntity;
+  BankData: BankDataEntity[];
 
   @OneToOne(() => FinancialsEntity, {
     cascade: ['insert', 'update', 'remove'],
     orphanedRowAction: 'delete',
   })
   @JoinColumn()
-  Financials: FinancialsEntity;
+  Financials: FinancialsEntity[];
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;

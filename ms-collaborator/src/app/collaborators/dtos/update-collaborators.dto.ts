@@ -75,8 +75,8 @@ export class UpdateCollaboratorsDto {
   Educations: EducationsEntity[];
 
   @IsOptional()
-  BankData: BankDataEntity;
+  BankData: BankDataEntity[];
 
   @IsOptional()
-  Financials: FinancialsEntity;
+  Financials: FinancialsEntity[];
 }
