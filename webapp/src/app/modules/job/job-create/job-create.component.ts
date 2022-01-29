@@ -199,7 +199,7 @@ export class JobDialogSkill implements OnInit {
     });
   }
 
-  saveKnowledge() {
-    this.dialogRef.close(this.knowledgeForm.value);
+ async saveKnowledge() {
+    this.dialogRef.close(this.knowledgeForm.getRawValue());
   }
 }

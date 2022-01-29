@@ -64,7 +64,7 @@ export class CollaboratorFinanceTabComponent implements OnInit {
   openDialog() {
     const dialogRef = this.dialog.open(CollaboratorFinanceDialog, {
       width: '500px',
-      height: '620px',
+      height: '500px',
     });
 
     dialogRef.afterClosed().subscribe((finance) => {
@@ -81,19 +81,11 @@ export class CollaboratorFinanceTabComponent implements OnInit {
 
   initForm(): void {
     this.financeForm = this.fb.group({
-      dateInclusion: ['08/11/2021'],
-      contractType: [1],
-      reason: ['Contratação'],
-      value: ['340000'],
+      dateInclusion: [''],
+      contractType: [],
+      reason: [],
+      value: [''],
     });
-  }
-
-
-  saveFinance() {
-    const data = this.financeForm.getRawValue();
-    this.financeArray.insert(0, this.fb.group(data));
-    this.financeTable.renderRows();
-    this.financeForm.reset();
   }
 
   getFinance(financeSelected: any, index: number) {
@@ -101,7 +93,7 @@ export class CollaboratorFinanceTabComponent implements OnInit {
       width: '500px',
       height: '620px',
       data: { financeSelected },
-
+         
     });
 
     this.index = index;
@@ -141,11 +133,13 @@ export class CollaboratorFinanceDialog{
     this.financeForm = this.fb.group({
       dateInclusion: ['08/11/2021'],
       contractType: [1],
-      reason: ['Contratação'],
+      reason: [1],
       value: ['340000'],
     });
     if (this.data.financeSelected) {
+     
       this.financeForm.patchValue(this.data.financeSelected)
+      
     }
   }
 
@@ -153,7 +147,7 @@ export class CollaboratorFinanceDialog{
     this.dialogRef.close();
   }
 
-  save() {
-    this.dialogRef.close(this.financeForm.value);
+ async save() {
+    this.dialogRef.close(this.financeForm.getRawValue());
   }
 }
