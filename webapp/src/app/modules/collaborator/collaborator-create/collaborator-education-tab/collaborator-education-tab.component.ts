@@ -89,7 +89,7 @@ export class CollaboratorEducationTabComponent implements OnInit {
   openDialogLanguage() {
     const dialogRef = this.dialog.open(CollaboratorLanguageDialog, {
       width: '500px',
-      height: '620px',
+      height: '300px',
     });
 
     dialogRef.afterClosed().subscribe((language) => {
@@ -148,7 +148,7 @@ export class CollaboratorEducationTabComponent implements OnInit {
   getLanguage(languageSelected: any, index: number) {
     const dialogRef = this.dialog.open(CollaboratorLanguageDialog, {
       width: '500px',
-      height: '620px',
+      height: '300px',
       data: { languageSelected },
 
     });
@@ -167,7 +167,7 @@ export class CollaboratorEducationTabComponent implements OnInit {
  getEducation(educationSelected: any, index: number) {
     const dialogRef = this.dialog.open(CollaboratorEducationDialog, {
       width: '500px',
-      height: '620px',
+      height: '470px',
       data: { educationSelected },
 
     });
@@ -189,6 +189,8 @@ export class CollaboratorEducationTabComponent implements OnInit {
 @Component({
   selector: 'collaborator-language-dialog',
   templateUrl: 'collaborator-language-dialog.html',
+  styleUrls: ['./collaborator-education-tab.component.scss'],
+
 })
 export class CollaboratorLanguageDialog {
   @Input('form') collaboratorForm!: FormGroup;
@@ -222,13 +224,14 @@ export class CollaboratorLanguageDialog {
   }
 
   save() {
-    this.dialogRef.close(this.languageForm.value);
+    this.dialogRef.close(this.languageForm.getRawValue());
   }
 }
 
 @Component({
   selector: 'collaborator-education-dialog',
   templateUrl: 'collaborator-education-dialog.html',
+  styleUrls: ['./collaborator-education-tab.component.scss'],
 })
 export class CollaboratorEducationDialog{
   @Input('form') collaboratorForm!: FormGroup;
@@ -264,7 +267,7 @@ export class CollaboratorEducationDialog{
   }
 
   save() {
-    this.dialogRef.close(this.educationForm.value);
+    this.dialogRef.close(this.educationForm.getRawValue());
   }
 
 }

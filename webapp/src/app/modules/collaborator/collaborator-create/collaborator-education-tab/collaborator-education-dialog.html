@@ -1,11 +1,11 @@
 <div id="collaboratorEducationDialog" class="dialog">
     <div class="content-scroll" *ngIf="educationForm">
-      <h2 mat-dialog-title>Cadastro de experiência</h2>
+      <h2 mat-dialog-title class="title-dialog">Escolaridade</h2>
       <mat-dialog-content class="mat-typography">
         <form [formGroup]="educationForm"  fxLayout="column">
 
             <mat-form-field fxFlex="50" appearance="outline">
-                <mat-label>Escolariedade</mat-label>
+                <mat-label>Escolaridade</mat-label>
                 <mat-select
                   formControlName="schooling"
                 >
@@ -39,7 +39,7 @@
         </form>
       </mat-dialog-content>
       <mat-dialog-actions >
-        <div fxLayout="row" >
+        <div class="button-dialog">
         <button fxFlexAlign="center center" mat-flat-button mat-dialog-close (click)="onNoClick()">Cancelar</button>
         <button mat-flat-button color="primary" [mat-dialog-close]="true" cdkFocusInitial (click)="save()">
           Salvar
