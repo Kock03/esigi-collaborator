@@ -107,7 +107,7 @@ export class CollaboratorBankTabComponent implements OnInit {
   getBank(bankSelected: any, index: number) {
     const dialogRef = this.dialog.open(CollaboratorBankDialog, {
       width: '500px',
-      height: '620px',
+      height: '700px',
       data: { bankSelected },
 
     });
@@ -157,8 +157,8 @@ export class CollaboratorBankDialog{
       agency: ['', Validators.required],
       accountType: ['', Validators.required],
       accountNumber: ['', Validators.required],
-      digit: ['', Validators.required],
-      bankAccountDigit: ['', Validators.required],
+      digit: ['', [Validators.required, Validators.maxLength(1)]],
+      bankAccountDigit: ['',  [Validators.required, Validators.maxLength(1)]],
     });
     if (this.data.bankSelected) {
       this.bankForm.patchValue(this.data.bankSelected)
@@ -170,7 +170,7 @@ export class CollaboratorBankDialog{
   }
 
   save() {
-    this.dialogRef.close(this.bankForm.value);
+    this.dialogRef.close(this.bankForm.getRawValue());
   }
 
 }
