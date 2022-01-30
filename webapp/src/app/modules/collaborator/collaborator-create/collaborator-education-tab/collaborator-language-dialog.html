@@ -30,6 +30,7 @@
         color="primary"
         cdkFocusInitial
         (click)="save()"
+        [disabled]="languageForm.invalid"
       >
         Salvar
       </button>

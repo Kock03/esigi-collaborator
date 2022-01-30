@@ -41,7 +41,7 @@
       <mat-dialog-actions >
         <div class="button-dialog">
         <button fxFlexAlign="center center" mat-flat-button mat-dialog-close (click)="onNoClick()">Cancelar</button>
-        <button mat-flat-button color="primary" [mat-dialog-close]="true" cdkFocusInitial (click)="save()">
+        <button [disabled]="educationForm.invalid" mat-flat-button color="primary" [mat-dialog-close]="true" cdkFocusInitial (click)="save()">
           Salvar
         </button>
       </div>
