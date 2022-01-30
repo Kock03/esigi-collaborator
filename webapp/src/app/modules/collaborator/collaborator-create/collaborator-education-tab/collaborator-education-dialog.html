@@ -4,7 +4,7 @@
       <mat-dialog-content class="mat-typography">
         <form [formGroup]="educationForm"  fxLayout="column">
 
-            <mat-form-field fxFlex="50" appearance="outline">
+            <mat-form-field appearance="outline">
                 <mat-label>Escolaridade</mat-label>
                 <mat-select
                   formControlName="schooling"
@@ -15,17 +15,17 @@
                 </mat-select>
               </mat-form-field>
           
-            <mat-form-field fxFlex="45" appearance="outline">
+            <mat-form-field appearance="outline">
                 <mat-label>Curso</mat-label>
                 <input matInput disableRipple formControlName="course"/>
               </mat-form-field>
 
-              <mat-form-field fxFlex="45" appearance="outline">
+              <mat-form-field  appearance="outline">
                 <mat-label>Instituição</mat-label>
                 <input matInput disableRipple formControlName="institution"/>
               </mat-form-field>
   
-              <mat-form-field fxFlex="50" appearance="outline">
+              <mat-form-field appearance="outline">
                 <mat-label>Situação</mat-label>
                 <mat-select
                   formControlName="situation"

@@ -3,12 +3,12 @@
     <h2 mat-dialog-title class="title-dialog">Idioma</h2>
     <mat-dialog-content class="mat-typography">
       <form [formGroup]="languageForm" fxLayout="column">
-        <mat-form-field fxFlex="45" appearance="outline">
+        <mat-form-field  appearance="outline">
           <mat-label>Idioma</mat-label>
           <input matInput disableRipple formControlName="languageName" />
         </mat-form-field>
 
-        <mat-form-field fxFlex="50" appearance="outline">
+        <mat-form-field appearance="outline">
           <mat-label>Grau de Fluência</mat-label>
           <mat-select formControlName="degreeOfInfluence">
             <mat-option [value]="1">Leitura, Escrita e Conversação</mat-option>

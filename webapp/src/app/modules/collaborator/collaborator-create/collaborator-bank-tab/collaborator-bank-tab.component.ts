@@ -107,7 +107,7 @@ export class CollaboratorBankTabComponent implements OnInit {
   getBank(bankSelected: any, index: number) {
     const dialogRef = this.dialog.open(CollaboratorBankDialog, {
       width: '500px',
-      height: '700px',
+      height: '470px',
       data: { bankSelected },
 
     });
@@ -153,12 +153,12 @@ export class CollaboratorBankDialog{
 
   initForm(): void {
     this.bankForm = this.fb.group({
-      bank: ['', Validators.required],
-      agency: ['', Validators.required],
-      accountType: ['', Validators.required],
-      accountNumber: ['', Validators.required],
-      digit: ['', [Validators.required, Validators.maxLength(1)]],
-      bankAccountDigit: ['',  [Validators.required, Validators.maxLength(1)]],
+      bank: ['Bradesco', [Validators.required, Validators.maxLength(50)]],
+      agency: ['1111', [Validators.required, Validators.maxLength(4)]],
+      accountType: [1, Validators.required],
+      accountNumber: ['11111', [Validators.required, Validators.maxLength(5)]],
+      digit: ['1', [Validators.required, Validators.maxLength(1)]],
+      bankAccountDigit: ['1',  [Validators.required, Validators.maxLength(1)]],
     });
     if (this.data.bankSelected) {
       this.bankForm.patchValue(this.data.bankSelected)

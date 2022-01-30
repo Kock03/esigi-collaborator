@@ -211,7 +211,7 @@ export class CollaboratorLanguageDialog {
 
   initForm(): void {
     this.languageForm = this.fb.group({
-      languageName: ['', Validators.required],
+      languageName: ['Inglês', [Validators.required, Validators.maxLength(40)]],
       degreeOfInfluence: [1 , Validators.required],
     });
     if (this.data.languageSelected) {
@@ -254,8 +254,8 @@ export class CollaboratorEducationDialog{
     this.educationForm = this.fb.group({
       schooling: [1 , Validators.required],
       situation: [1 , Validators.required],
-      course: ['', Validators.required],
-      institution: ['', Validators.required],
+      course: ['Engenharia de Software', [Validators.required, Validators.maxLength(100)]],
+      institution: ['FURB', [Validators.required, Validators.maxLength(100)]],
     });
     if (this.data.educationSelected) {
       this.educationForm.patchValue(this.data.educationSelected)
