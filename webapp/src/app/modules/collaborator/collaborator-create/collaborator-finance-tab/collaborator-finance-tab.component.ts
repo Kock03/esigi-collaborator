@@ -131,10 +131,10 @@ export class CollaboratorFinanceDialog{
 
   initForm(): void {
     this.financeForm = this.fb.group({
-      dateInclusion: ['08/11/2021'],
-      contractType: [1],
-      reason: [1],
-      value: ['340000'],
+      dateInclusion: ['2022-01-01', Validators.required],
+      contractType: [1, Validators.required],
+      reason: [1 , Validators.required],
+      value: ['3400000', Validators.required],
     });
     if (this.data.financeSelected) {
      

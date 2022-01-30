@@ -139,9 +139,9 @@ export class CollaboratorSkillDialog{
 
   initForm(): void {
     this.skillForm = this.fb.group({
-      tecnology:['', Validators.required],
+      tecnology:['Angular', [Validators.required, Validators.maxLength(50)]],
       seniority: [1, Validators.required],
-      yearsExperience: ['', Validators.required],
+      yearsExperience: ['2', [Validators.required, Validators.maxLength(2)]],
       currentPosition: [true, Validators.required]
     });
     if (this.data.skillSelected) {
@@ -154,6 +154,6 @@ export class CollaboratorSkillDialog{
   }
 
   save() {
-    this.dialogRef.close(this.skillForm.value);
+    this.dialogRef.close(this.skillForm.getRawValue());
   }
 }

@@ -1,15 +1,15 @@
 <div id="collaboratorSkillDialog" class="dialog">
     <div class="content-scroll" *ngIf="skillForm">
-      <h2 mat-dialog-title>Cadastro Skills </h2>
+      <h2 class="title-dialog" mat-dialog-title>Cadastro Skills </h2>
       <mat-dialog-content class="mat-typography">
         <form [formGroup]="skillForm"  fxLayout="column">
           
-            <mat-form-field fxFlex="45" appearance="outline">
+            <mat-form-field appearance="outline">
                 <mat-label>Tecnologia</mat-label>
                 <input matInput disableRipple formControlName="tecnology"/>
               </mat-form-field>
 
-              <mat-form-field fxFlex="50" appearance="outline">
+              <mat-form-field appearance="outline">
                 <mat-label>Senerioridade</mat-label>
                 <mat-select
                   formControlName="seniority"
@@ -23,7 +23,7 @@
                 </mat-select>
               </mat-form-field>
 
-              <mat-form-field fxFlex="45" appearance="outline">
+              <mat-form-field appearance="outline">
                 <mat-label>Tempo de Experiência</mat-label>
                 <input matInput disableRipple formControlName="yearsExperience"/>
               </mat-form-field>
@@ -39,10 +39,12 @@
         </form>
       </mat-dialog-content>
       <mat-dialog-actions>
+        <div class="button-dialog">
         <button mat-flat-button mat-dialog-close (click)="onNoClick()">Cancelar</button>
-        <button mat-flat-button [mat-dialog-close]="true" cdkFocusInitial (click)="save()">
+        <button color="primary" [disabled]="skillForm.invalid" mat-flat-button [mat-dialog-close]="true" cdkFocusInitial (click)="save()">
           Salvar
         </button>
+      </div>
       </mat-dialog-actions>
     </div>
   </div>

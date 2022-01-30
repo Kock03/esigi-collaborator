@@ -23,6 +23,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgxMaskModule } from 'ngx-mask';
 import { DocumentValidator } from 'src/app/validators/document.validator';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+
 
 
 const routes: Routes = [
@@ -59,8 +62,10 @@ const routes: Routes = [
     FlexLayoutModule,
     MatButtonModule,
     MatSelectModule,
+    MatDatepickerModule,
     MatTableModule,
     MatCheckboxModule,
+    MatNativeDateModule,
     MatIconModule,
     HttpClientModule,
     NgxMaskModule,
@@ -79,6 +84,9 @@ const routes: Routes = [
     CollaboratorBankDialog,
     CollaboratorFinanceDialog,
     CollaboratorSkillDialog
+  ],
+  providers: [
+    MatDatepickerModule
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 

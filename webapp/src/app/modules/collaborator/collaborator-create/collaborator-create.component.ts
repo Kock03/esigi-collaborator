@@ -24,7 +24,7 @@ export class CollaboratorCreateComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.initForm();
-    this.step = 3;
+    this.step = 4;
   }
   
 

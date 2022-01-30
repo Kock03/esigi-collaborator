@@ -1,15 +1,19 @@
 <div id="collaboratorFinanceDialog" class="dialog">
     <div class="content-scroll" *ngIf="financeForm">
-      <h2 mat-dialog-title>Cadastro Financeiro</h2>
+      <h2 mat-dialog-title class="title-dialog">Cadastro Financeiro</h2>
       <mat-dialog-content class="mat-typography">
         <form [formGroup]="financeForm"  fxLayout="column">
 
-            <mat-form-field fxFlex="45" appearance="outline">
-                <mat-label>Data</mat-label>
-                <input matInput disableRipple formControlName="dateInclusion"/>
+              <mat-form-field fxFlex="35" appearance="outline">
+                <mat-label>Data de Inclusão</mat-label>
+                <input
+                  matInput
+                  formControlName="dateInclusion"
+                  type="date"
+                />
               </mat-form-field>
           
-              <mat-form-field fxFlex="50" appearance="outline">
+              <mat-form-field appearance="outline">
                 <mat-label>Tipo de Contrato</mat-label>
                 <mat-select
                   formControlName="contractType"
@@ -21,29 +25,31 @@
                 </mat-select>
               </mat-form-field>
 
-              <mat-form-field fxFlex="50" appearance="outline">
+              <mat-form-field appearance="outline">
                 <mat-label>Motivo</mat-label>
                 <mat-select
                   formControlName="reason"
                 >
                 <mat-option [value]="1">Contratação</mat-option>
                 <mat-option [value]="2">Reconhecimento</mat-option>
-                <mat-option [value]="3">TempoDeCasa</mat-option>
+                <mat-option [value]="3">Tempo De Casa</mat-option>
                 <mat-option [value]="4">Retenção</mat-option>
                 </mat-select>
               </mat-form-field>
 
-            <mat-form-field fxFlex="45" appearance="outline">
+            <mat-form-field appearance="outline">
                 <mat-label>Valor</mat-label>
-                <input matInput disableRipple formControlName="value"/>
+                <input mask="00.000,00" matInput disableRipple formControlName="value"/>
             </mat-form-field>              
         </form>
       </mat-dialog-content>
       <mat-dialog-actions>
+        <div class="button-dialog">
         <button mat-flat-button mat-dialog-close (click)="onNoClick()">Cancelar</button>
-        <button mat-flat-button [mat-dialog-close]="true" cdkFocusInitial (click)="save()">
+        <button color="primary" [disabled]="financeForm.invalid" mat-flat-button [mat-dialog-close]="true" cdkFocusInitial (click)="save()">
           Salvar
         </button>
+      </div>
       </mat-dialog-actions>
     </div>
   </div>
