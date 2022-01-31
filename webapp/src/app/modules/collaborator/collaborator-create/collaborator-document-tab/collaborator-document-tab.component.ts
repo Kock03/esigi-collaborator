@@ -14,7 +14,7 @@ import { MatTable } from '@angular/material/table';
 
 export interface document {
   name: string;
-  link: string;
+  file: string;
 }
 
 @Component({
@@ -27,11 +27,11 @@ export class CollaboratorDocumentTabComponent implements OnInit {
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
   @ViewChild('documentTable') documentTable!: MatTable<any>;
 
-  displayedColumns: string[] = ['name', 'link', 'icon'];
+  displayedColumns: string[] = ['name', 'file', 'icon'];
   documents: document[] = [
     {
       name: 'RG',
-      link: '',
+      file: '',
     },
   ];
 
@@ -46,6 +46,9 @@ export class CollaboratorDocumentTabComponent implements OnInit {
 
   constructor(private fb: FormBuilder, public dialog: MatDialog) {}
 
+  
+
+
   ngOnInit(): void {
     this.initForm();
   }
@@ -57,6 +60,7 @@ export class CollaboratorDocumentTabComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((document) => {
+      console.log("🚀 ~ file: collaborator-document-tab.component.ts ~ line 60 ~ CollaboratorDocumentTabComponent ~ dialogRef.afterClosed ~ document", document)
       if(document){
         this.documentArray.insert(0, this.fb.group(document));
         this.documentTable.renderRows();
@@ -67,7 +71,7 @@ export class CollaboratorDocumentTabComponent implements OnInit {
   initForm(): void {
     this.documentForm = this.fb.group({
       name: [''],
-      link: [''],
+      file: [''],
     
     });
   }
@@ -95,6 +99,7 @@ export class CollaboratorDocumentTabComponent implements OnInit {
 @Component({
   selector: 'collaborator-document-dialog',
   templateUrl: 'collaborator-document-dialog.html',
+  styleUrls: ['./collaborator-document-tab.component.scss'],
 })
 export class CollaboratorDocumentDialog{
   @Input('form') collaboratorForm!: FormGroup;
@@ -109,6 +114,11 @@ export class CollaboratorDocumentDialog{
     @Inject(MAT_DIALOG_DATA) public data: { documentSelected: any}
   ) {}
 
+  onFileSelected(event: any) {
+
+    const file:File = event.target.files[0];
+  }
+
   ngOnInit(): void {
     this.initForm();
   }
@@ -116,7 +126,7 @@ export class CollaboratorDocumentDialog{
   initForm(): void {
     this.documentForm = this.fb.group({
       name: ['RG', Validators.required],
-      link: [''],
+      file: [''],
     
     });
 

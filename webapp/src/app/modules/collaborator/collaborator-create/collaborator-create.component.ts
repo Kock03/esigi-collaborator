@@ -66,7 +66,7 @@ export class CollaboratorCreateComponent implements OnInit {
       BankData: this.fb.array([]),
       Financials: this.fb.array([]),
       Skills: this.fb.array([]),
-      Documents: null,
+      Documents: this.fb.array([]),
     });
   }
 
