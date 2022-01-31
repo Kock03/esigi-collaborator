@@ -12,7 +12,7 @@ export class CreateExperiencesDto {
   @IsNotEmpty()
   @MinLength(2)
   @MaxLength(40)
-  position: string;
+  office: string;
 
   @IsNotEmpty()
   @MinLength(3)
@@ -22,10 +22,10 @@ export class CreateExperiencesDto {
   @IsNotEmpty()
   @MinLength(2)
   @MaxLength(40)
-  location: string;
+  locality: string;
 
   @IsOptional()
-  currentPosition: boolean;
+  active: boolean;
 
   @IsNotEmpty()
   startDate: Date;
@@ -39,8 +39,6 @@ export class CreateExperiencesDto {
   sector: string;
 
   @IsNotEmpty()
-  @MinLength(2)
-  @MaxLength(10)
   description: string;
 
   @IsNotEmpty()

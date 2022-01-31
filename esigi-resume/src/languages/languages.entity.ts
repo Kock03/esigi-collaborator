@@ -10,18 +10,16 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { Fluency } from './dto/fluency-level.enum';
-import { Idiom } from './dto/idioms.enum';
-
 @Entity({ name: 'languages' })
 export class LanguagesEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ name: 'idiom', type: 'int' })
-  idiom: Idiom;
+  @Column()
+  languageName: string;
 
-  @Column({ name: 'fluency', type: 'int' })
-  fluency: Fluency;
+  @Column({ type: 'int' })
+  degreeOfInfluence: Fluency;
 
   @ManyToOne(() => ResumesEntity, (resumes) => resumes.Languages, {
     eager: true,

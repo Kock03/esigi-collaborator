@@ -9,21 +9,24 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { Level } from './dto/level.enum';
-import { TechnologyType } from './dto/technology -type. enum';
+
 
 @Entity({ name: 'skills' })
 export class SkillsEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ name: 'technology', type: 'int' })
-  technology: TechnologyType;
+  @Column()
+  tecnology: string;
 
   @Column({ name: 'period_experience', length: 15 })
-  periodExperience: string;
+  yearsExperience: string;
 
   @Column({ name: 'level', type: 'int' })
-  level: Level;
+  seniority: Level;
+
+  @Column()
+  currentPosition: boolean;
 
   @ManyToOne(() => ResumesEntity, (resumes) => resumes.Skills, {
     eager: true,

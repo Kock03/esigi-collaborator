@@ -16,6 +16,7 @@ import { GenderTypes } from './gender-types.enum';
 import { EducationsEntity } from 'src/educations/educations.entity';
 import { LanguagesEntity } from 'src/languages/languages.entity';
 import { ExperiencesEntity } from 'src/experiences/experiences.entity';
+import { SkillsEntity } from 'src/skills/skills.entity';
 
 export class CreateResumesDto {
   @IsOptional()
@@ -63,7 +64,10 @@ export class CreateResumesDto {
 
   
   @IsNotEmpty()
-  Experiencies: ExperiencesEntity[];
+  Experiences: ExperiencesEntity[];
+
+  @IsNotEmpty()
+  Skills: SkillsEntity[];
 
   @IsNotEmpty()
   @IsEmail()

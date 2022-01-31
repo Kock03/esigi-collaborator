@@ -5,7 +5,7 @@ import { Situation } from './situation.enum';
 
 export class CreateEducationsDto {
   @IsNotEmpty()
-  educationLevel: EducationLevel;
+  schooling: EducationLevel;
 
   @IsNotEmpty()
   situation: Situation;

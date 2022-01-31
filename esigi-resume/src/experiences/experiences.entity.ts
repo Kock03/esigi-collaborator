@@ -14,17 +14,17 @@ export class ExperiencesEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ name: 'position', length: 40 })
-  position: string;
+  @Column()
+  office: string;
 
   @Column({ name: 'company_name', length: 70 })
   companyName: string;
 
-  @Column({ name: 'location', length: 40 })
-  location: string;
+  @Column()
+  locality: string;
 
-  @Column({ name: 'current_position', type: 'boolean' })
-  currentPosition: boolean;
+  @Column()
+  active: boolean;
 
   @CreateDateColumn({ name: 'start_date', type: 'datetime' })
   startDate: Date;
@@ -35,7 +35,7 @@ export class ExperiencesEntity {
   @Column({ name: 'sector', length: 40 })
   sector: string;
 
-  @Column({ name: 'description', length: 100 })
+  @Column()
   description: string;
 
   @ManyToOne(() => ResumesEntity, (resumes) => resumes.Experiences, {

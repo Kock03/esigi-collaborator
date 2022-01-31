@@ -19,7 +19,7 @@ export class EducationsEntity {
 
   // mudar 'schooling' por uma tradução melhor
   @Column({ name: 'education_level', type: 'int' })
-  educationLevel: EducationLevel;
+  schooling: EducationLevel;
 
   @Column({ name: 'situation', type: 'int' })
   situation: Situation;
