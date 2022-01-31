@@ -9,7 +9,11 @@ import {
   ViewChild,
 } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import {
+  MatDialog,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+} from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
 
 export interface document {
@@ -46,9 +50,6 @@ export class CollaboratorDocumentTabComponent implements OnInit {
 
   constructor(private fb: FormBuilder, public dialog: MatDialog) {}
 
-  
-
-
   ngOnInit(): void {
     this.initForm();
   }
@@ -60,8 +61,11 @@ export class CollaboratorDocumentTabComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((document) => {
-      console.log("🚀 ~ file: collaborator-document-tab.component.ts ~ line 60 ~ CollaboratorDocumentTabComponent ~ dialogRef.afterClosed ~ document", document)
-      if(document){
+      console.log(
+        '🚀 ~ file: collaborator-document-tab.component.ts ~ line 60 ~ CollaboratorDocumentTabComponent ~ dialogRef.afterClosed ~ document',
+        document
+      );
+      if (document) {
         this.documentArray.insert(0, this.fb.group(document));
         this.documentTable.renderRows();
       }
@@ -72,7 +76,6 @@ export class CollaboratorDocumentTabComponent implements OnInit {
     this.documentForm = this.fb.group({
       name: [''],
       file: [''],
-    
     });
   }
 
@@ -81,14 +84,12 @@ export class CollaboratorDocumentTabComponent implements OnInit {
       width: '500px',
       height: '300px',
       data: { documentSelected },
-         
     });
 
     this.index = index;
     dialogRef.afterClosed().subscribe((document) => {
       this.documentArray.controls[this.index].setValue(document);
     });
-
   }
 
   deleteDocument(index: number) {
@@ -101,23 +102,19 @@ export class CollaboratorDocumentTabComponent implements OnInit {
   templateUrl: 'collaborator-document-dialog.html',
   styleUrls: ['./collaborator-document-tab.component.scss'],
 })
-export class CollaboratorDocumentDialog{
+export class CollaboratorDocumentDialog {
   @Input('form') collaboratorForm!: FormGroup;
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
 
   documentForm!: FormGroup;
 
-
   constructor(
     public dialogRef: MatDialogRef<CollaboratorDocumentDialog>,
     private fb: FormBuilder,
-    @Inject(MAT_DIALOG_DATA) public data: { documentSelected: any}
+    @Inject(MAT_DIALOG_DATA) public data: { documentSelected: any }
   ) {}
 
-  onFileSelected(event: any) {
 
-    const file:File = event.target.files[0];
-  }
 
   ngOnInit(): void {
     this.initForm();
@@ -127,23 +124,25 @@ export class CollaboratorDocumentDialog{
     this.documentForm = this.fb.group({
       name: ['RG', Validators.required],
       file: [''],
-    
     });
 
     if (this.data.documentSelected) {
-     
-      this.documentForm.patchValue(this.data.documentSelected)
-      
+      this.documentForm.patchValue(this.data.documentSelected);
     }
   }
- 
-  
+
+  onFileSelected(event: any) {
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+
+    }
+  }
 
   onNoClick(): void {
     this.dialogRef.close();
   }
 
- async save() {
+  async save() {
     this.dialogRef.close(this.documentForm.getRawValue());
   }
 }
