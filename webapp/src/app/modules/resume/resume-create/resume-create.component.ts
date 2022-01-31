@@ -19,7 +19,7 @@ import { ResumeProvider } from 'src/providers/resume.provider';
 })
 export class ResumeCreateComponent implements OnInit {
   resumeForm!: FormGroup;
-  step: number = 4;
+  step: number = 1;
 
   Experience: any;
 
@@ -48,7 +48,7 @@ export class ResumeCreateComponent implements OnInit {
         photo: ['', Validators.required],
   
         Address: this.fb.group({
-          zipCode: ['89040400', Validators.required],
+          cep: ['89040400', Validators.required],
           number: ['43'],
           complement: ['casa'],
           street: ['rua', Validators.required],
@@ -84,9 +84,9 @@ export class ResumeCreateComponent implements OnInit {
         Educations: this.fb.array([]),
         Experiences: this.fb.array([]),
         Skills: this.fb.array([]),
-        Monitoring: this.fb.array([]),
-        Register: this.fb.array([]),
-        Documents: null,
+        // Monitoring: this.fb.array([]),
+        // Register: this.fb.array([]),
+        // Documents: null,
       });
 
       this.resumeForm.valueChanges.subscribe(res => {

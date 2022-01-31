@@ -136,7 +136,7 @@ export class ResumeDialogExperience {
       terminusYear: ['2021', Validators.required],
       sector: ['Comercial', Validators.required],
       description: [
-        'Define o direcionamento estratégico com o cliente, acompanha os KPIs do programa de reposição e informações mercadológicas. Implementa planos de ação, coleta. Faz negociação de prazos e entregas, traduz as estratégias e informações para a equipe de campo, através  dos coordenadores.rastrear resultados comerciais, executar análises de custo-benefício e monitorar KPIs de produção. O Gerente de Operações Comerciais ideal deve ter experiência em função idêntica ou semelhante, gerenciando todas as operações comerciais e definindo metas em toda a organização. Também deve demonstrar grandes habilidades de liderança e ser capaz de comunicar a visão da empresa em todos os níveis',
+        'Define o direcionamento estratégico com o cliente',
         Validators.required,
       ],
     });
