@@ -1,6 +1,7 @@
 import { HttpResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { ApiGateway } from "src/api-gateway";
+import { environment } from "src/environments/environment";
 
 @Injectable({
     providedIn: 'root'
@@ -15,7 +16,7 @@ export class ResumeProvider {
 
     findAll(): Promise<any> {
         return new Promise((resolve, reject) => {
-            this.apiGateway.get('resumes').subscribe((response: HttpResponse<any>) => {
+            this.apiGateway.get(environment.RESUME_MS + 'resumes').subscribe((response: HttpResponse<any>) => {
                 resolve(response.body);
             }, reject);
         });
@@ -23,7 +24,7 @@ export class ResumeProvider {
 
     findOne(id: string): Promise<any> {
         return new Promise((resolve, reject) => {
-            this.apiGateway.get( 'resumes', { id: id }).subscribe((response: HttpResponse<any>) => {
+            this.apiGateway.get(environment.RESUME_MS + 'resumes', { id: id }).subscribe((response: HttpResponse<any>) => {
                 resolve(response.body);
             }, reject);
         });
@@ -32,7 +33,7 @@ export class ResumeProvider {
 
     update(resume: any): Promise<any> {
         return new Promise((resolve, reject) => {
-            this.apiGateway.put('resumes', resume).subscribe((response: HttpResponse<any>) => {
+            this.apiGateway.put(environment.RESUME_MS +'resumes', resume).subscribe((response: HttpResponse<any>) => {
                 resolve(response.body);
             }, reject);
         });
@@ -40,7 +41,7 @@ export class ResumeProvider {
 
     store(resume: any): Promise<any> {
         return new Promise((resolve, reject) => {
-            this.apiGateway.post('resumes', resume).subscribe((response: HttpResponse<any>) => {
+            this.apiGateway.post(environment.RESUME_MS +'resumes', resume).subscribe((response: HttpResponse<any>) => {
                 resolve(response.body);
             }, reject);
         });
@@ -48,7 +49,7 @@ export class ResumeProvider {
 
     destroy(resume: any): Promise<any> {
       return new Promise((resolve, reject) => {
-          this.apiGateway.delete('resumes', resume).subscribe((response: HttpResponse<any>) => {
+          this.apiGateway.delete(environment.RESUME_MS + 'resumes', resume).subscribe((response: HttpResponse<any>) => {
               resolve(response.body);
           }, reject);
       })
