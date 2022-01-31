@@ -18,7 +18,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
 import { CollaboratorEducationDialog, CollaboratorEducationTabComponent, CollaboratorLanguageDialog } from './collaborator-create/collaborator-education-tab/collaborator-education-tab.component';
-import { CollaboratorDocumentTabComponent } from './collaborator-create/collaborator-document-tab/collaborator-document-tab.component';
+import { CollaboratorDocumentDialog, CollaboratorDocumentTabComponent } from './collaborator-create/collaborator-document-tab/collaborator-document-tab.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxMaskModule } from 'ngx-mask';
 import { DocumentValidator } from 'src/app/validators/document.validator';
@@ -50,6 +50,7 @@ const routes: Routes = [
     CollaboratorBankDialog,
     CollaboratorFinanceDialog,
     CollaboratorSkillDialog,
+    CollaboratorDocumentDialog
 
   ],
   imports: [
@@ -83,7 +84,8 @@ const routes: Routes = [
     CollaboratorEducationDialog,
     CollaboratorBankDialog,
     CollaboratorFinanceDialog,
-    CollaboratorSkillDialog
+    CollaboratorSkillDialog,
+    CollaboratorDocumentDialog
   ],
   providers: [
     MatDatepickerModule
