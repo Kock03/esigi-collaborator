@@ -1,7 +1,7 @@
 import { AddressesEntity } from 'src/addresses/addresses.entity';
 import { EducationsEntity } from 'src/educations/educations.entity';
 import { ExperiencesEntity } from 'src/experiences/experiences.entity';
-import { IdiomsEntity } from 'src/idioms/idioms.entity';
+import { LanguagesEntity } from 'src/languages/languages.entity';
 import { PhonesEntity } from 'src/phones/phones.entity';
 import { SkillsEntity } from 'src/skills/skills.entity';
 import {
@@ -16,7 +16,7 @@ import {
   OneToMany,
 } from 'typeorm';
 import { MaritalStatus } from './dto/marital-status.enum';
-import { SexTypes } from './dto/sex-types.enum';
+import { GenderTypes } from './dto/gender-types.enum';
 
 @Entity({ name: 'resumes' })
 export class ResumesEntity {
@@ -42,26 +42,24 @@ export class ResumesEntity {
   birthDate: Date;
 
   @Column({ name: 'sex', type: 'int' })
-  sex: SexTypes;
+  gender: GenderTypes;
 
   @Column({ name: 'marital_status', type: 'int' })
   maritalStatus: MaritalStatus;
 
   @OneToOne(() => AddressesEntity, {
-    /*eager: true,*/
-    cascade: true,
-    onDelete: 'CASCADE',
+    eager: true,
+    cascade: ['insert', 'update', 'soft-remove'],
   })
   @JoinColumn()
-  addresses: AddressesEntity;
+  address: AddressesEntity;
 
   @OneToOne(() => PhonesEntity, {
-    /*eager: true,*/
-    cascade: true,
-    onDelete: 'CASCADE',
+    eager: true,
+    cascade: ['insert', 'update', 'soft-remove'],
   })
   @JoinColumn()
-  phones: PhonesEntity;
+  phone: PhonesEntity;
 
   @OneToMany(() => EducationsEntity, (educations) => educations.resume, {
     cascade: ['insert', 'update', 'soft-remove'],
@@ -81,11 +79,11 @@ export class ResumesEntity {
   @JoinColumn()
   skills: SkillsEntity[];
 
-  @OneToMany(() => IdiomsEntity, (idioms) => idioms.resume, {
+  @OneToMany(() => LanguagesEntity, (languages) => languages.resume, {
     cascade: ['insert', 'update', 'soft-remove'],
   })
   @JoinColumn()
-  idioms: IdiomsEntity[];
+  languages: LanguagesEntity[];
 
   @Column({ name: 'email', length: 100, unique: true })
   email: string;

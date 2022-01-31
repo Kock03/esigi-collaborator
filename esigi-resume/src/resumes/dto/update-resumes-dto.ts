@@ -5,7 +5,7 @@ import { ExperiencesEntity } from 'src/experiences/experiences.entity';
 import { PhonesEntity } from 'src/phones/phones.entity';
 import { SkillsEntity } from 'src/skills/skills.entity';
 import { MaritalStatus } from './marital-status.enum';
-import { SexTypes } from './sex-types.enum';
+import { GenderTypes } from './gender-types.enum';
 
 export class UpdateResumesDto {
   photo: string;
@@ -33,24 +33,22 @@ export class UpdateResumesDto {
   birthDate: Date;
 
   @IsNotEmpty()
-  sex: SexTypes;
+  gender: GenderTypes;
 
   @IsNotEmpty()
   maritalStatus: MaritalStatus;
 
   @IsNotEmpty()
-  addresses: AddressesEntity;
+  address: AddressesEntity;
 
   @IsNotEmpty()
-  phones: PhonesEntity;
+  phone: PhonesEntity;
 
   @IsNotEmpty()
   @IsEmail()
   email: string;
 
-  @IsNotEmpty()
   site: string;
 
-  @IsNotEmpty()
   linkedin: string;
 }

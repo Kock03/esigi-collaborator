@@ -12,7 +12,7 @@ import { CreateResumesDto } from './dto/create-resumes-dto';
 import { UpdateResumesDto } from './dto/update-resumes-dto';
 import { ResumesService } from './resumes.service';
 
-@Controller('resumes')
+@Controller('api/v1/resumes')
 export class ResumesController {
   constructor(private readonly resumesService: ResumesService) {}
 

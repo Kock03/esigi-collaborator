@@ -12,7 +12,7 @@ import { AddressesService } from './addresses.service';
 import { CreateAddressesDto } from './dto/create-addresses-dto';
 import { UpdateAddressesDto } from './dto/update-addresses-dto';
 
-@Controller('addresses')
+@Controller('api/v1/addresses')
 export class AddressesController {
   constructor(private readonly addressesService: AddressesService) {}
 

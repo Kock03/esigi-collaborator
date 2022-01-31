@@ -12,7 +12,7 @@ import { CreateExperiencesDto } from './dto/create-experiences-dto';
 import { UpdateExperiencesDto } from './dto/update-experiences-dto';
 import { ExperiencesService } from './experiences.service';
 
-@Controller('experiences')
+@Controller('api/v1/experiences')
 export class ExperiencesController {
   constructor(private readonly experiencesService: ExperiencesService) {}
 

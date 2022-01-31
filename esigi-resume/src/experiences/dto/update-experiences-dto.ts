@@ -1,4 +1,4 @@
-import { IsNotEmpty, Min, Max } from 'class-validator';
+import { IsNotEmpty, Min, Max, IsOptional } from 'class-validator';
 import { ResumesEntity } from 'src/resumes/resumes.entity';
 
 export class UpdateExperiencesDto {
@@ -17,6 +17,7 @@ export class UpdateExperiencesDto {
   @Max(40)
   location: string;
 
+  @IsOptional()
   currentPosition: boolean;
 
   @IsNotEmpty()

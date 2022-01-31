@@ -12,8 +12,8 @@ import {
 import { Fluency } from './dto/fluency-level.enum';
 import { Idiom } from './dto/idioms.enum';
 
-@Entity({ name: 'idioms' })
-export class IdiomsEntity {
+@Entity({ name: 'languages' })
+export class LanguagesEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -23,7 +23,9 @@ export class IdiomsEntity {
   @Column({ name: 'fluency', type: 'int' })
   fluency: Fluency;
 
-  @ManyToOne(() => ResumesEntity, (resumes) => resumes.idioms)
+  @ManyToOne(() => ResumesEntity, (resumes) => resumes.languages, {
+    eager: true,
+  })
   resume: ResumesEntity;
 
   @CreateDateColumn({ name: 'created_at', type: 'datetime' })

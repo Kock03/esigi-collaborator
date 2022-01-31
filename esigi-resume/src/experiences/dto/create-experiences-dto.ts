@@ -1,4 +1,11 @@
-import { IsNotEmpty, Max, MaxLength, Min, MinLength } from 'class-validator';
+import {
+  IsNotEmpty,
+  IsOptional,
+  Max,
+  MaxLength,
+  Min,
+  MinLength,
+} from 'class-validator';
 import { ResumesEntity } from 'src/resumes/resumes.entity';
 
 export class CreateExperiencesDto {
@@ -17,6 +24,7 @@ export class CreateExperiencesDto {
   @MaxLength(40)
   location: string;
 
+  @IsOptional()
   currentPosition: boolean;
 
   @IsNotEmpty()

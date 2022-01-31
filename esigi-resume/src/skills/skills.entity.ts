@@ -25,7 +25,9 @@ export class SkillsEntity {
   @Column({ name: 'level', type: 'int' })
   level: Level;
 
-  @ManyToOne(() => ResumesEntity, (resumes) => resumes.skills)
+  @ManyToOne(() => ResumesEntity, (resumes) => resumes.skills, {
+    eager: true,
+  })
   resume: ResumesEntity;
 
   @CreateDateColumn({ name: 'date_inclusion' })

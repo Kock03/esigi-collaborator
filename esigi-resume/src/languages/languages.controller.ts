@@ -10,10 +10,10 @@ import {
 } from '@nestjs/common';
 import { CreateIdiomsDto } from './dto/create-idioms-dto';
 import { UpdateIdiomsDto } from './dto/update-idioms-dto';
-import { IdiomsService } from './idioms.service';
+import { IdiomsService } from './languages.service';
 
-@Controller('idioms')
-export class IdiomsController {
+@Controller('api/v1/languages')
+export class LanguagesController {
   constructor(private readonly idiomsService: IdiomsService) {}
 
   @Get()

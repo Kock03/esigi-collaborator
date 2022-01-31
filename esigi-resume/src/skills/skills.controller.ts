@@ -12,7 +12,7 @@ import { CreateSkillsDto } from './dto/create-skills-dto';
 import { UpdateSkillsDto } from './dto/update-skills-dto';
 import { SkillsService } from './skills.service';
 
-@Controller('skills')
+@Controller('api/v1/skills')
 export class SkillsController {
   constructor(private readonly skillsService: SkillsService) {}
 

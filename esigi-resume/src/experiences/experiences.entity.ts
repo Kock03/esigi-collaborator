@@ -38,7 +38,9 @@ export class ExperiencesEntity {
   @Column({ name: 'description', length: 100 })
   description: string;
 
-  @ManyToOne(() => ResumesEntity, (resumes) => resumes.experience)
+  @ManyToOne(() => ResumesEntity, (resumes) => resumes.experience, {
+    eager: true,
+  })
   resume: ResumesEntity;
 
   @CreateDateColumn({ name: 'created_at' })

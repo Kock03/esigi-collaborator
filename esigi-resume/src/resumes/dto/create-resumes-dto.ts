@@ -1,6 +1,8 @@
 import {
   IsEmail,
+  IsEmpty,
   IsNotEmpty,
+  IsOptional,
   Length,
   Max,
   MaxLength,
@@ -9,11 +11,11 @@ import {
 } from 'class-validator';
 import { AddressesEntity } from 'src/addresses/addresses.entity';
 import { PhonesEntity } from 'src/phones/phones.entity';
-import { Unique } from 'typeorm';
 import { MaritalStatus } from './marital-status.enum';
-import { SexTypes } from './sex-types.enum';
+import { GenderTypes } from './gender-types.enum';
 
 export class CreateResumesDto {
+  @IsOptional()
   photo: string;
 
   @IsNotEmpty()
@@ -39,24 +41,24 @@ export class CreateResumesDto {
   birthDate: Date;
 
   @IsNotEmpty()
-  sex: SexTypes;
+  gender: GenderTypes;
 
   @IsNotEmpty()
   maritalStatus: MaritalStatus;
 
   @IsNotEmpty()
-  addresses: AddressesEntity;
+  address: AddressesEntity;
 
   @IsNotEmpty()
-  phones: PhonesEntity;
+  phone: PhonesEntity;
 
   @IsNotEmpty()
   @IsEmail()
   email: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   site: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   linkedin: string;
 }
