@@ -56,7 +56,7 @@ export class CollaboratorDocumentTabComponent implements OnInit {
   openDialog() {
     const dialogRef = this.dialog.open(CollaboratorDocumentDialog, {
       width: '500px',
-      height: '500px',
+      height: '300px',
     });
 
     dialogRef.afterClosed().subscribe((document) => {
@@ -79,7 +79,7 @@ export class CollaboratorDocumentTabComponent implements OnInit {
   getDocument(documentSelected: any, index: number) {
     const dialogRef = this.dialog.open(CollaboratorDocumentDialog, {
       width: '500px',
-      height: '620px',
+      height: '300px',
       data: { documentSelected },
          
     });
