@@ -60,15 +60,8 @@ export class CollaboratorRegisterTabComponent implements OnInit {
       const addressForm = this.collaboratorForm.controls[
         'Address'
       ] as FormGroup;
-      console.log(
-        '🚀 ~ file: collaborator-register-tab.component.ts ~ line 56 ~ CollaboratorRegisterTabComponent ~ ngAfterViewInit ~ addressForm',
-        addressForm
-      );
+
       addressForm.controls['cep'].valueChanges.subscribe((res) => {
-        console.log(
-          "🚀 ~ file: collaborator-register-tab.component.ts ~ line 57 ~ CollaboratorRegisterTabComponent ~ addressForm.controls['cep'].valueChanges.subscribe ~ res",
-          res
-        );
       });
     });
   }
