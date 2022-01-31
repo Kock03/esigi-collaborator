@@ -32,6 +32,12 @@ export class CollaboratorRegisterTabComponent implements OnInit {
   @Input('form') collaboratorForm!: FormGroup;
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
 
+  selectedFile: any;
+
+  onFileSelected(changes: any): void{
+    this.selectedFile = changes.target.files[0]
+  }
+
   typeControl = new FormControl();
 
   types: collaboratorTypes[] = [

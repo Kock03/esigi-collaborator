@@ -24,7 +24,7 @@ export class CollaboratorCreateComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.initForm();
-    this.step = 4;
+    this.step = 6;
   }
   
 
@@ -44,7 +44,7 @@ export class CollaboratorCreateComponent implements OnInit {
       municipalInscription: ['', Validators.required],
       site: ['site.davi', Validators.required],
       linkedin: ['linkedin.davi', Validators.required],
-      photo: null,
+      photo: [''],
       Phone: this.fb.group({
         phoneNumber: ['343234908', [Validators.required, Validators.maxLength(9)]],
         ddd: ['71', [Validators.required, Validators.maxLength(2)]],
