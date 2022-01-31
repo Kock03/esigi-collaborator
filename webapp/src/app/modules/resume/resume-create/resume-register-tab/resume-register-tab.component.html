@@ -14,7 +14,7 @@
         <div fxFlex="100" fxLayoutGap="16px" fxFlexAlign="end">
           <mat-form-field fxFlex="33" appearance="outline">
             <mat-label>Nome</mat-label>
-            <input matInput placeholder="Nome" formControlName="name" />
+            <input matInput placeholder="Nome" formControlName="firstName" />
           </mat-form-field>
           <mat-form-field fxFlex="33" appearance="outline">
             <mat-label>Sobrenome</mat-label>
@@ -115,7 +115,7 @@
         </mat-form-field>
       </div>
 
-      <div fxFlex="100" fxLayoutGap="16px">
+      <div fxFlex="100" fxLayoutGap="16px" formGroupName="Phone">
         <mat-form-field fxFlex="10" appearance="outline">
           <mat-label>DDI</mat-label>
           <input matInput placeholder="DDI" formControlName="ddi"  mask="+00" />

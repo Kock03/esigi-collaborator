@@ -38,7 +38,7 @@ export class ResumeCreateComponent implements OnInit {
 
   initForm() {
       this.resumeForm = this.fb.group({
-        name: ['joao', Validators.required],
+        firstName: ['joao', Validators.required],
         lastName: ['silva', Validators.required],
         login: ['joao.silva', Validators.required],
         cpf: this.fb.control({ value: null, disabled: false}, DocumentValidator.isValidCpf()),
@@ -56,11 +56,13 @@ export class ResumeCreateComponent implements OnInit {
           city: ['cidade', Validators.required],
           district: ['bairro', Validators.required],
         }),
-  
+        Phone: this.fb.group({
           phoneNumber: ['42334324', Validators.required],
           ddd: ['44', Validators.required],
           ddi: ['44', Validators.required],
       
+        }),
+
         email: ['joao@silva.com', Validators.email],
         site: ['', Validators.required],
         linkedin: ['', Validators.required],
