@@ -2,13 +2,14 @@
   <div class="content-scroll" *ngIf="resumeForm">
     <form (submit)="next()" [formGroup]="resumeForm" fxLayout="column">
       <div fxLayout="row">
-        <button class="img-collaborator-button">
-          <img
-            class="img-collaborator"
-            src="https://st.depositphotos.com/1734074/4228/v/450/depositphotos_42286141-stock-illustration-vector-man-with-mustache-in.jpg"
-            alt=""
-          />
-        </button>
+        <div class="image-upload">
+          <label for="fileInput">
+            <img src="https://st.depositphotos.com/1734074/4228/v/450/depositphotos_42286141-stock-illustration-vector-man-with-mustache-in.jpg" alt="">
+          </label>
+          <input
+            type="file" 
+            id="fileInput" formControlName="photo">
+          </div>
 
         <div fxFlex="100" fxLayoutGap="16px" fxFlexAlign="end">
           <mat-form-field fxFlex="33" appearance="outline">
@@ -33,7 +34,7 @@
         </mat-form-field>
         <mat-form-field fxFlex="25" appearance="outline">
           <mat-label>Data de aniversário</mat-label>
-          <input matInput placeholder="Nome" formControlName="birthDate" />
+          <input type="date" matInput placeholder="data" formControlName="birthDate" />
         </mat-form-field>
         <mat-form-field fxFlex="25" appearance="outline">
           <mat-label>Sexo</mat-label>

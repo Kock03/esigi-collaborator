@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { DocumentValidator } from 'src/app/validators/document.validator';
 import { CepService } from 'src/services/cep.service';
@@ -8,6 +8,7 @@ import { CepService } from 'src/services/cep.service';
   selector: 'app-resume-register-tab',
   templateUrl: './resume-register-tab.component.html',
   styleUrls: ['./resume-register-tab.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class ResumeRegisterTabComponent implements OnInit {
   @Input('form') resumeForm!: FormGroup;

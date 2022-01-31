@@ -1,5 +1,5 @@
 <div id="resumeCreate" class="page">
-  <h2 class="title">Cadastro de Candidato</h2>
+  <h2 >Cadastro de Candidato</h2>
 
   <div fxLayout="row" class="tab" fxLayoutGap="16px">
     <div
@@ -68,29 +68,29 @@
   </app-resume-skills-tab>
   <app-resume-monitoring-tab
     [hidden]="step != 5"
-    [form]="resumeForm"
-    (onChange)="handleChanges($event)"
+   
   >
   </app-resume-monitoring-tab>
-</div>
-<div class="navigation-buttons" fxLayoutAlign="center end" fxLayoutGap="16px">
-  <button mat-button *ngIf="step != 1" (click)="navigate('back')">
-    Voltar
-  </button>
-  <button
-    mat-flat-button
-    *ngIf="step != 6"
-    (click)="navigate('next')"
-    color="primary"
-  >
-    Continuar
-  </button>
-  <button
-    mat-flat-button
-    *ngIf="step == 6"
-    (click)="saveResume()"
-    color="primary"
-  >
-    Salvar
-  </button>
+
+  <div class="navigation-buttons" fxLayoutAlign="center end" fxLayoutGap="16px">
+    <button mat-button *ngIf="step != 1" (click)="navigate('back')">
+      Voltar
+    </button>
+    <button
+      mat-flat-button
+      *ngIf="step != 4"
+      (click)="navigate('next')"
+      color="primary"
+    >
+      Continuar
+    </button>
+    <button
+      mat-flat-button
+      *ngIf="step == 4"
+      (click)="saveResume()"
+      color="primary"
+    >
+      Salvar
+    </button>
+  </div>
 </div>

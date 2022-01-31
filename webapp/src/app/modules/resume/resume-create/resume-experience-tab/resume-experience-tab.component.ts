@@ -106,6 +106,7 @@ export class ResumeExperienceTabComponent implements OnInit {
 @Component({
   selector: 'resume-dialog-experience',
   templateUrl: 'resume-dialog-experience.html',
+  styleUrls: ['./resume-experience-tab.component.scss'],
 })
 export class ResumeDialogExperience {
   @Input('form') resumeForm!: FormGroup;

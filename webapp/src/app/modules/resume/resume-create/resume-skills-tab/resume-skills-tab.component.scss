@@ -1,35 +1,52 @@
 #resumeSkillTab {
-    padding-bottom: 10px;
-    max-width: 800px;
-  
-    table {
-      width: 100%;
+  padding-bottom: 10px;
+  max-width: 800px;
+
+  table {
+    width: 100%;
+  }
+
+  .edit-button {
+    height: 40px;
+    margin-top: 25px;
+    margin-left: 10px;
+  }
+
+  .envolti-table {
+    margin-top: 20px;
+    overflow: auto;
+    max-height: 150px;
+    width: 100%;
+
+
+    .mat-column-icon {
+      width: 50px;
     }
-  
-    .envolti-table {
-      padding-bottom: 10px;
-      overflow: auto;
-      max-height: 200px;
-  
-  
-      .mat-column-icon {
-        width: 50px;
-      }
-    }
-  
-    .checkbox {
-      margin-top: 15px;
-    }
-  
-    .edit-button {
-      height: 40px;
-      margin-top: 8px;
-    }
-  
-  
+
     .button-tab {
       white-space: nowrap;
       overflow: hidden;
     }
+
   }
+
+  .checkbox {
+    margin-top: 15px;
+  }
+
+
+
+  .button-tab {
+    white-space: nowrap;
+    overflow: hidden;
+  }
+}
+
+.button-dialog{
+  margin-left: 140px;
   
+}
+
+.title-dialog{
+  text-align: center;
+}

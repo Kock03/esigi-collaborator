@@ -1,6 +1,7 @@
 import {
   Component,
   EventEmitter,
+  Inject,
   Input,
   OnInit,
   Output,
@@ -8,6 +9,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
 
 export interface skill {
@@ -40,9 +42,7 @@ export class ResumeSkillsTabComponent implements OnInit {
   ];
 
   selectedIndex: number = 0;
-
   skillForm!: FormGroup;
-
   index: any = null;
   Skill: any;
   checked = false;
@@ -51,11 +51,27 @@ export class ResumeSkillsTabComponent implements OnInit {
     return this.resumeForm.controls['Skills'] as FormArray;
   }
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder,public dialog: MatDialog,) {}
 
   ngOnInit(): void {
     this.initForm();
   }
+
+  openDialog() {
+    const dialogRef = this.dialog.open(ResumeSkillDialog, {
+      width: '500px',
+      height: '470px',
+    });
+
+    dialogRef.afterClosed().subscribe((skill) => {
+      if(skill){
+        this.skillArray.insert(0, this.fb.group(skill));
+        this.skillTable.renderRows();
+      }
+    });
+  }
+
+
 
   initForm(): void {
     this.skillForm = this.fb.group({
@@ -80,24 +96,66 @@ export class ResumeSkillsTabComponent implements OnInit {
   }
 
   getSkill(skillSelected: any, index: number) {
+    const dialogRef = this.dialog.open(ResumeSkillDialog, {
+      width: '500px',
+      height: '620px',
+      data: { skillSelected },
+
+    });
+
     this.index = index;
-    this.skillForm.patchValue(skillSelected);
-  }
+    dialogRef.afterClosed().subscribe((skill) => {
+      this.skillArray.controls[this.index].setValue(skill);
+    });
 
-  editSkill() {
-    this.skillArray.at(this.index).setValue(this.skillForm.getRawValue());
-
-    this.skillTable.renderRows();
-    this.skillForm.reset();
-    this.index = null;
-  }
-
-  cancelEdit(){
-    this.index = null;
   }
 
   deleteSkill(index: number){
      this.skillArray.removeAt(index);
   
+  }
+}
+
+@Component({
+  selector: 'resume-skill-dialog',
+  templateUrl: 'resume-skill-dialog.html',
+  styleUrls: ['./resume-skills-tab.component.scss'],
+})
+export class ResumeSkillDialog{
+
+  @Input('form') collaboratorForm!: FormGroup;
+  @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
+
+  skillForm!: FormGroup;
+
+
+  constructor(
+    public dialogRef: MatDialogRef<ResumeSkillDialog>,
+    private fb: FormBuilder,
+    @Inject(MAT_DIALOG_DATA) public data: { skillSelected: any}
+  ) {}
+
+  ngOnInit(): void {
+    this.initForm();
+  }
+
+  initForm(): void {
+    this.skillForm = this.fb.group({
+      tecnology:['Angular', [Validators.required, Validators.maxLength(50)]],
+      seniority: [1, Validators.required],
+      yearsExperience: ['2', [Validators.required, Validators.maxLength(2)]],
+      currentPosition: [true, Validators.required]
+    });
+    if (this.data.skillSelected) {
+      this.skillForm.patchValue(this.data.skillSelected)
+    }
+  }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
+  save() {
+    this.dialogRef.close(this.skillForm.getRawValue());
   }
 }

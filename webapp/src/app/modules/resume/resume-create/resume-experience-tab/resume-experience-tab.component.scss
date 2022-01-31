@@ -54,12 +54,19 @@
     margin-top: 100px;
   }
 
-  #resumeExperiencDialog {
-    height: 150px;
 
-    .content-scroll {
-      overflow: auto;
-      height: calc(100vh - 210px);
-    }
+}
+
+#resumeExperiencDialog {
+ 
+
+  .title {
+    text-align: center;
   }
+
+  .button-dialog {
+    margin-left: 140px;
+
+  }
+
 }

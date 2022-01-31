@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 // import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -15,10 +15,11 @@ import { ResumeProvider } from 'src/providers/resume.provider';
   selector: 'app-resume-create',
   templateUrl: './resume-create.component.html',
   styleUrls: ['./resume-create.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class ResumeCreateComponent implements OnInit {
   resumeForm!: FormGroup;
-  step: number = 3;
+  step: number = 4;
 
   Experience: any;
 
@@ -41,9 +42,10 @@ export class ResumeCreateComponent implements OnInit {
         lastName: ['silva', Validators.required],
         login: ['joao.silva', Validators.required],
         cpf: this.fb.control({ value: null, disabled: false}, DocumentValidator.isValidCpf()),
-        birthDate: ['', Validators.required],
+        birthDate: ['2022-01-01', Validators.required],
         gender: [1, Validators.required],
         maritalStatus: [1, Validators.required],
+        photo: ['', Validators.required],
   
         Address: this.fb.group({
           zipCode: ['89040400', Validators.required],
@@ -107,7 +109,7 @@ export class ResumeCreateComponent implements OnInit {
   navigate(direction: string) {
     if (this.step > 1 && direction === 'back') {
       this.step -= 1;
-    } else if (this.step < 6 && direction === 'next') {
+    } else if (this.step < 4 && direction === 'next') {
       this.step += 1;
     }
   }
