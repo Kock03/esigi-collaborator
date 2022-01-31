@@ -5,7 +5,7 @@ import { ApiGateway } from "src/api-gateway";
 @Injectable({
     providedIn: 'root'
 })
-export class ExperiencesProvider {
+export class ResumeProvider {
     constructor(private apiGateway: ApiGateway){
     }
 

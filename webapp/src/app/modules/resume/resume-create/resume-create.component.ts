@@ -9,6 +9,7 @@ import {
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
 import { ResumeDialogExperience } from './resume-experience-tab/resume-experience-tab.component';
+import { ResumeProvider } from 'src/providers/resume.provider';
 
 @Component({
   selector: 'app-resume-create',
@@ -27,7 +28,7 @@ export class ResumeCreateComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     
-    // private resumeProvider: ResumeProvider,
+    private resumeProvider: ResumeProvider,
     ) {}
 
   ngOnInit(): void {
@@ -36,29 +37,29 @@ export class ResumeCreateComponent implements OnInit {
 
   initForm() {
       this.resumeForm = this.fb.group({
-        name: ['', Validators.required],
-        lastName: ['', Validators.required],
-        login: ['', Validators.required],
+        name: ['joao', Validators.required],
+        lastName: ['silva', Validators.required],
+        login: ['joao.silva', Validators.required],
         cpf: this.fb.control({ value: null, disabled: false}, DocumentValidator.isValidCpf()),
         birthDate: ['', Validators.required],
         gender: [1, Validators.required],
         maritalStatus: [1, Validators.required],
   
         Address: this.fb.group({
-          zipCode: ['', Validators.required],
-          number: [''],
-          complement: [''],
-          street: ['', Validators.required],
-          state: ['', Validators.required],
-          city: ['', Validators.required],
-          district: ['', Validators.required],
+          zipCode: ['89040400', Validators.required],
+          number: ['43'],
+          complement: ['casa'],
+          street: ['rua', Validators.required],
+          state: ['estado', Validators.required],
+          city: ['cidade', Validators.required],
+          district: ['bairro', Validators.required],
         }),
   
-          phoneNumber: ['', Validators.required],
-          ddd: ['', Validators.required],
-          ddi: ['', Validators.required],
+          phoneNumber: ['42334324', Validators.required],
+          ddd: ['44', Validators.required],
+          ddi: ['44', Validators.required],
       
-        email: ['', Validators.email],
+        email: ['joao@silva.com', Validators.email],
         site: ['', Validators.required],
         linkedin: ['', Validators.required],
 
@@ -95,26 +96,11 @@ export class ResumeCreateComponent implements OnInit {
     async saveResume() {
       let data = this.resumeForm.getRawValue();
   
-      if (!data.Educations.length) {
-        data.Educations = null;
+      try {
+        const resume = await this.resumeProvider.store(data);
+      } catch (error) {
+        console.log('ERROR 132' + error);
       }
-      if (!data.Languages.length) {
-        data.Languages = null;
-      }
-      if (!data.BankData.length) {
-        data.BankData = null;
-      }
-      if (!data.Financials.length) {
-        data.Financials = null;
-      }
-      if (!data.Skills.length) {
-        data.Skills = null;
-      }
-      // try {
-      //   const collaborator = await this.collaboratorProvider.store(data);
-      // } catch (error) {
-      //   console.log('ERROR 132' + error);
-      // }
     }
 
 
