@@ -1,8 +1,8 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, FindConditions, FindOneOptions } from 'typeorm';
-import { CreateIdiomsDto } from './dto/create-idioms-dto';
-import { UpdateIdiomsDto } from './dto/update-idioms-dto';
+import { CreateLanguagesDto } from './dto/create-languages-dto';
+import { UpdateLanguagesDto } from './dto/update-languages-dto';
 import { LanguagesEntity } from './languages.entity';
 
 @Injectable()
@@ -27,12 +27,12 @@ export class IdiomsService {
     }
   }
 
-  async store(createDto: CreateIdiomsDto) {
+  async store(createDto: CreateLanguagesDto) {
     const languages = this.languagesRepository.create(createDto);
     return await this.languagesRepository.save(languages);
   }
 
-  async update(id: string, updateDto: UpdateIdiomsDto) {
+  async update(id: string, updateDto: UpdateLanguagesDto) {
     const languages = await this.languagesRepository.findOneOrFail({ id });
     this.languagesRepository.merge(languages, updateDto);
     return this.languagesRepository.save(languages);

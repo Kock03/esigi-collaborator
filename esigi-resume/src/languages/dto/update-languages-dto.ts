@@ -1,14 +1,13 @@
 import { IsNotEmpty } from 'class-validator';
 import { ResumesEntity } from 'src/resumes/resumes.entity';
-import { Fluency } from './fluency-level.enum';
+import { Fluency } from './fluency.enum';
 
-
-export class UpdateIdiomsDto {
+export class UpdateLanguagesDto {
   @IsNotEmpty()
-  idiom: string;
+  languageName: string;
 
   @IsNotEmpty()
-  fluency: Fluency;
+  degreeOfInfluence: Fluency;
 
   @IsNotEmpty()
   resume: ResumesEntity;

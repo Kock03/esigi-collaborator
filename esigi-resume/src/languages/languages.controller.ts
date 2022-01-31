@@ -8,8 +8,8 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
-import { CreateIdiomsDto } from './dto/create-idioms-dto';
-import { UpdateIdiomsDto } from './dto/update-idioms-dto';
+import { CreateLanguagesDto } from './dto/create-languages-dto';
+import { UpdateLanguagesDto } from './dto/update-languages-dto';
 import { IdiomsService } from './languages.service';
 
 @Controller('api/v1/languages')
@@ -27,14 +27,14 @@ export class LanguagesController {
   }
 
   @Post()
-  async store(@Body() body: CreateIdiomsDto) {
+  async store(@Body() body: CreateLanguagesDto) {
     return await this.idiomsService.store(body);
   }
 
   @Put(':id')
   async update(
     @Param('id', new ParseUUIDPipe()) id: string,
-    @Body() body: UpdateIdiomsDto,
+    @Body() body: UpdateLanguagesDto,
   ) {
     return await this.idiomsService.update(id, body);
   }

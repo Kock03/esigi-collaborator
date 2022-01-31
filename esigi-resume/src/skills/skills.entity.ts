@@ -8,8 +8,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { Level } from './dto/level.enum';
-
+import { Seniority } from './dto/seniority.enum';
 
 @Entity({ name: 'skills' })
 export class SkillsEntity {
@@ -17,13 +16,13 @@ export class SkillsEntity {
   id: string;
 
   @Column()
-  tecnology: string;
+  technology: string;
 
   @Column({ name: 'period_experience', length: 15 })
   yearsExperience: string;
 
   @Column({ name: 'level', type: 'int' })
-  seniority: Level;
+  seniority: Seniority;
 
   @Column()
   currentPosition: boolean;

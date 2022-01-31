@@ -9,7 +9,7 @@ import {
   ManyToOne,
   JoinColumn,
 } from 'typeorm';
-import { EducationLevel } from './dto/education-level.enum';
+import { Schooling } from './dto/schooling.enum';
 import { Situation } from './dto/situation.enum';
 
 @Entity({ name: 'educations' })
@@ -17,9 +17,8 @@ export class EducationsEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  // mudar 'schooling' por uma tradução melhor
   @Column({ name: 'education_level', type: 'int' })
-  schooling: EducationLevel;
+  schooling: Schooling;
 
   @Column({ name: 'situation', type: 'int' })
   situation: Situation;

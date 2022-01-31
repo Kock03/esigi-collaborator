@@ -1,8 +1,8 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { FindConditions, FindOneOptions, Repository } from 'typeorm';
-import { CreateEducationsDto } from './dto/create-educations-dto';
-import { UpdateEducationsDto } from './dto/update-educations-dto';
+import { CreateSchoolingDto } from './dto/create-schooling-dto';
+import { UpdateSchoolingDto } from './dto/update-schooling-dto';
 import { EducationsEntity } from './educations.entity';
 
 @Injectable()
@@ -27,12 +27,12 @@ export class EducationsService {
     }
   }
 
-  async store(createDto: CreateEducationsDto) {
+  async store(createDto: CreateSchoolingDto) {
     const education = this.educationsRepository.create(createDto);
     return await this.educationsRepository.save(education);
   }
 
-  async update(id: string, updateDto: UpdateEducationsDto) {
+  async update(id: string, updateDto: UpdateSchoolingDto) {
     const education = await this.educationsRepository.findOneOrFail({ id });
     this.educationsRepository.merge(education, updateDto);
     return this.educationsRepository.save(education);

@@ -9,7 +9,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { Fluency } from './dto/fluency-level.enum';
+import { Fluency } from './dto/fluency.enum';
 @Entity({ name: 'languages' })
 export class LanguagesEntity {
   @PrimaryGeneratedColumn('uuid')

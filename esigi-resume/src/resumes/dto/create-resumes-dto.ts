@@ -55,14 +55,13 @@ export class CreateResumesDto {
 
   @IsNotEmpty()
   Phone: PhoneEntity;
-  
+
   @IsNotEmpty()
   Educations: EducationsEntity[];
-  
+
   @IsNotEmpty()
   Languages: LanguagesEntity[];
 
-  
   @IsNotEmpty()
   Experiences: ExperiencesEntity[];
 

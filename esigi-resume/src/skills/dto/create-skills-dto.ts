@@ -1,7 +1,6 @@
 import { IsNotEmpty } from 'class-validator';
 import { ResumesEntity } from 'src/resumes/resumes.entity';
-import { Level } from './level.enum';
-
+import { Seniority } from './seniority.enum';
 
 export class CreateSkillsDto {
   @IsNotEmpty()
@@ -11,7 +10,7 @@ export class CreateSkillsDto {
   yearsExperience: string;
 
   @IsNotEmpty()
-  seniority: Level;
+  seniority: Seniority;
 
   @IsNotEmpty()
   currentPosition: boolean;

@@ -26,7 +26,7 @@ export class CreateAddressDto {
   @IsNotEmpty()
   @MinLength(3)
   @MaxLength(60)
-  neighborhood: string;
+  district: string;
 
   @IsNotEmpty()
   @MinLength(3)

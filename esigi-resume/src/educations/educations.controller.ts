@@ -8,8 +8,8 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
-import { CreateEducationsDto } from './dto/create-educations-dto';
-import { UpdateEducationsDto } from './dto/update-educations-dto';
+import { CreateSchoolingDto } from './dto/create-schooling-dto';
+import { UpdateSchoolingDto } from './dto/update-schooling-dto';
 import { EducationsService } from './educations.service';
 
 @Controller('api/v1/educations')
@@ -27,14 +27,14 @@ export class EducationsController {
   }
 
   @Post()
-  async store(@Body() body: CreateEducationsDto) {
+  async store(@Body() body: CreateSchoolingDto) {
     return await this.educationsService.store(body);
   }
 
   @Put(':id')
   async update(
     @Param('id', new ParseUUIDPipe()) id: string,
-    @Body() body: UpdateEducationsDto,
+    @Body() body: UpdateSchoolingDto,
   ) {
     return await this.educationsService.update(id, body);
   }

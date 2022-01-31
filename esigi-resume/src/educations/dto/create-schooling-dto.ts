@@ -1,11 +1,11 @@
-import { IsNotEmpty, Min, Max, MaxLength, MinLength } from 'class-validator';
+import { IsNotEmpty, Max, MaxLength, Min, MinLength } from 'class-validator';
 import { ResumesEntity } from 'src/resumes/resumes.entity';
-import { EducationLevel } from './education-level.enum';
+import { Schooling } from './schooling.enum';
 import { Situation } from './situation.enum';
 
-export class UpdateEducationsDto {
+export class CreateSchoolingDto {
   @IsNotEmpty()
-  educationLevel: EducationLevel;
+  schooling: Schooling;
 
   @IsNotEmpty()
   situation: Situation;

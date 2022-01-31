@@ -5,7 +5,7 @@ export class UpdateExperiencesDto {
   @IsNotEmpty()
   @Min(2)
   @Max(40)
-  position: string;
+  office: string;
 
   @IsNotEmpty()
   @Min(3)
@@ -15,10 +15,10 @@ export class UpdateExperiencesDto {
   @IsNotEmpty()
   @Min(2)
   @Max(40)
-  location: string;
+  locality: string;
 
   @IsOptional()
-  currentPosition: boolean;
+  active: boolean;
 
   @IsNotEmpty()
   startDate: Date;

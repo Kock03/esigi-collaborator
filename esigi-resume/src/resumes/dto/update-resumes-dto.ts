@@ -6,6 +6,7 @@ import { PhoneEntity } from 'src/phone/phone.entity';
 import { SkillsEntity } from 'src/skills/skills.entity';
 import { MaritalStatus } from './marital-status.enum';
 import { GenderTypes } from './gender-types.enum';
+import { LanguagesEntity } from 'src/languages/languages.entity';
 
 export class UpdateResumesDto {
   photo: string;
@@ -43,6 +44,18 @@ export class UpdateResumesDto {
 
   @IsNotEmpty()
   phone: PhoneEntity;
+
+  @IsNotEmpty()
+  Educations: EducationsEntity[];
+
+  @IsNotEmpty()
+  Languages: LanguagesEntity[];
+
+  @IsNotEmpty()
+  Experiences: ExperiencesEntity[];
+
+  @IsNotEmpty()
+  Skills: SkillsEntity[];
 
   @IsNotEmpty()
   @IsEmail()
