@@ -1,14 +1,13 @@
 import {
   IsNotEmpty,
-  IsString,
   Length,
+  Min,
   Max,
   MaxLength,
-  Min,
   MinLength,
 } from 'class-validator';
 
-export class CreateAddressesDto {
+export class UpdateAddressDto {
   @IsNotEmpty()
   @Length(8)
   cep: string;

@@ -1,6 +1,7 @@
 import { IsNotEmpty, Length } from 'class-validator';
+import { ResumesEntity } from 'src/resumes/resumes.entity';
 
-export class UpdatePhonesDto {
+export class CreatePhoneDto {
   @IsNotEmpty()
   @Length(9)
   phoneNumber: string;

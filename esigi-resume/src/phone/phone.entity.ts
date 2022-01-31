@@ -9,8 +9,8 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-@Entity({ name: 'phones' })
-export class PhonesEntity {
+@Entity({ name: 'phone' })
+export class PhoneEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -20,7 +20,7 @@ export class PhonesEntity {
   @Column({ name: 'ddd', length: 2 })
   ddd: string;
 
-  @Column({ name: 'ddi', length: 2 })
+  @Column({ name: 'ddi', length: 3 })
   ddi: string;
 
   @CreateDateColumn({ name: 'created_at', type: 'datetime' })

@@ -9,10 +9,13 @@ import {
   Min,
   MinLength,
 } from 'class-validator';
-import { AddressesEntity } from 'src/addresses/addresses.entity';
-import { PhonesEntity } from 'src/phones/phones.entity';
+import { AddressEntity } from 'src/address/address.entity';
+import { PhoneEntity } from 'src/phone/phone.entity';
 import { MaritalStatus } from './marital-status.enum';
 import { GenderTypes } from './gender-types.enum';
+import { EducationsEntity } from 'src/educations/educations.entity';
+import { LanguagesEntity } from 'src/languages/languages.entity';
+import { ExperiencesEntity } from 'src/experiences/experiences.entity';
 
 export class CreateResumesDto {
   @IsOptional()
@@ -47,10 +50,20 @@ export class CreateResumesDto {
   maritalStatus: MaritalStatus;
 
   @IsNotEmpty()
-  address: AddressesEntity;
+  Address: AddressEntity;
 
   @IsNotEmpty()
-  phone: PhonesEntity;
+  Phone: PhoneEntity;
+  
+  @IsNotEmpty()
+  Educations: EducationsEntity[];
+  
+  @IsNotEmpty()
+  Languages: LanguagesEntity[];
+
+  
+  @IsNotEmpty()
+  Experiencies: ExperiencesEntity[];
 
   @IsNotEmpty()
   @IsEmail()

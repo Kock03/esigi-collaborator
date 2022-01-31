@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { AddressesEntity } from 'src/addresses/addresses.entity';
-import { PhonesEntity } from 'src/phones/phones.entity';
+import { AddressEntity } from 'src/address/address.entity';
+import { PhoneEntity } from 'src/phone/phone.entity';
 import { Repository, FindConditions, FindOneOptions } from 'typeorm';
 import { CreateResumesDto } from './dto/create-resumes-dto';
 import { UpdateResumesDto } from './dto/update-resumes-dto';

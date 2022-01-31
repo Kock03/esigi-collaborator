@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
+import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { ResumesModule } from './resumes/resumes.module';
 import { ResumesEntity } from './resumes/resumes.entity';
 import { EducationsModule } from './educations/educations.module';
@@ -7,41 +7,36 @@ import { EducationsEntity } from './educations/educations.entity';
 import { ExperiencesEntity } from './experiences/experiences.entity';
 import { LanguagesEntity } from './languages/languages.entity';
 import { LanguagesModule } from './languages/languages.module';
-import { PhonesEntity } from './phones/phones.entity';
+import { PhoneEntity } from './phone/phone.entity';
 import { SkillsEntity } from './skills/skills.entity';
-import { PhonesModule } from './phones/phones.module';
+import { PhoneModule } from './phone/phone.module';
 import { SkillsModule } from './skills/skills.module';
-import { AddressesModule } from './addresses/addresses.module';
-import { AddressesEntity } from './addresses/addresses.entity';
+import { AddressModule } from './address/address.module';
+import { AddressEntity } from './address/address.entity';
 import { ExperiencesModule } from './experiences/experiences.module';
+import { ConfigModule } from '@nestjs/config';
+import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: 'localhost',
-      port: 3306,
-      username: 'root',
-      password: '1234',
-      database: 'resume',
+    ConfigModule.forRoot(), TypeOrmModule.forRoot({
+      type: process.env.TYPEORM_CONNECTION,
+      host: process.env.TYPEORM_HOST,
+      port: process.env.TYPEORM_PORT,
+      username: process.env.TYPEORM_USERNAME,
+      password: process.env.TYPEORM_PASSWORD,
+      database: process.env.TYPEORM_DATABASE,
+      entities: [__dirname + '/**/*.entity{.js,.ts}'],
       synchronize: true,
-      entities: [
-        EducationsEntity,
-        ExperiencesEntity,
-        LanguagesEntity,
-        PhonesEntity,
-        ResumesEntity,
-        SkillsEntity,
-        AddressesEntity,
-      ],
-    }),
+      namingStrategy: new SnakeNamingStrategy()
+    } as TypeOrmModuleOptions),
     EducationsModule,
     ExperiencesModule,
     LanguagesModule,
-    PhonesModule,
+    PhoneModule,
     ResumesModule,
     SkillsModule,
-    AddressesModule,
+    AddressModule,
   ],
   controllers: [],
   providers: [],

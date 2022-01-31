@@ -1,8 +1,8 @@
 import { IsNotEmpty, Min, Max, Length, IsEmail } from 'class-validator';
-import { AddressesEntity } from 'src/addresses/addresses.entity';
+import { AddressEntity } from 'src/address/address.entity';
 import { EducationsEntity } from 'src/educations/educations.entity';
 import { ExperiencesEntity } from 'src/experiences/experiences.entity';
-import { PhonesEntity } from 'src/phones/phones.entity';
+import { PhoneEntity } from 'src/phone/phone.entity';
 import { SkillsEntity } from 'src/skills/skills.entity';
 import { MaritalStatus } from './marital-status.enum';
 import { GenderTypes } from './gender-types.enum';
@@ -39,10 +39,10 @@ export class UpdateResumesDto {
   maritalStatus: MaritalStatus;
 
   @IsNotEmpty()
-  address: AddressesEntity;
+  address: AddressEntity;
 
   @IsNotEmpty()
-  phone: PhonesEntity;
+  phone: PhoneEntity;
 
   @IsNotEmpty()
   @IsEmail()

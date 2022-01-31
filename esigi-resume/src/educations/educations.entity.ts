@@ -30,7 +30,7 @@ export class EducationsEntity {
   @Column({ name: 'course', length: 50 })
   course: string;
 
-  @ManyToOne(() => ResumesEntity, (resumes) => resumes.educations, {
+  @ManyToOne(() => ResumesEntity, (resumes) => resumes.Educations, {
     eager: true,
   })
   resume: ResumesEntity;

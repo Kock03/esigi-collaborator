@@ -11,8 +11,8 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-@Entity({ name: 'addresses' })
-export class AddressesEntity {
+@Entity({ name: 'address' })
+export class AddressEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 

@@ -23,7 +23,7 @@ export class LanguagesEntity {
   @Column({ name: 'fluency', type: 'int' })
   fluency: Fluency;
 
-  @ManyToOne(() => ResumesEntity, (resumes) => resumes.languages, {
+  @ManyToOne(() => ResumesEntity, (resumes) => resumes.Languages, {
     eager: true,
   })
   resume: ResumesEntity;

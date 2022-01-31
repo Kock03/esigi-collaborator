@@ -1,8 +1,8 @@
-import { AddressesEntity } from 'src/addresses/addresses.entity';
+import { AddressEntity } from 'src/address/address.entity';
 import { EducationsEntity } from 'src/educations/educations.entity';
 import { ExperiencesEntity } from 'src/experiences/experiences.entity';
 import { LanguagesEntity } from 'src/languages/languages.entity';
-import { PhonesEntity } from 'src/phones/phones.entity';
+import { PhoneEntity } from 'src/phone/phone.entity';
 import { SkillsEntity } from 'src/skills/skills.entity';
 import {
   Entity,
@@ -47,43 +47,43 @@ export class ResumesEntity {
   @Column({ name: 'marital_status', type: 'int' })
   maritalStatus: MaritalStatus;
 
-  @OneToOne(() => AddressesEntity, {
+  @OneToOne(() => AddressEntity, {
     eager: true,
     cascade: ['insert', 'update', 'soft-remove'],
   })
   @JoinColumn()
-  address: AddressesEntity;
+  Address: AddressEntity;
 
-  @OneToOne(() => PhonesEntity, {
+  @OneToOne(() => PhoneEntity, {
     eager: true,
     cascade: ['insert', 'update', 'soft-remove'],
   })
   @JoinColumn()
-  phone: PhonesEntity;
+  Phone: PhoneEntity;
 
   @OneToMany(() => EducationsEntity, (educations) => educations.resume, {
     cascade: ['insert', 'update', 'soft-remove'],
   })
   @JoinColumn()
-  educations: EducationsEntity[];
+  Educations: EducationsEntity[];
 
   @OneToMany(() => ExperiencesEntity, (experiences) => experiences.resume, {
     cascade: ['insert', 'update', 'soft-remove'],
   })
   @JoinColumn()
-  experience: ExperiencesEntity[];
+  Experiences: ExperiencesEntity[];
 
   @OneToMany(() => SkillsEntity, (skills) => skills.resume, {
     cascade: ['insert', 'update', 'soft-remove'],
   })
   @JoinColumn()
-  skills: SkillsEntity[];
+  Skills: SkillsEntity[];
 
   @OneToMany(() => LanguagesEntity, (languages) => languages.resume, {
     cascade: ['insert', 'update', 'soft-remove'],
   })
   @JoinColumn()
-  languages: LanguagesEntity[];
+  Languages: LanguagesEntity[];
 
   @Column({ name: 'email', length: 100, unique: true })
   email: string;
