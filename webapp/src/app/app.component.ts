@@ -28,19 +28,6 @@ export class AppComponent {
       selected: false,
       action: '/colaborador/novo',
     },
-    {
-      name: 'Vagas',
-      icon: 'work',
-      selected: false,
-      action: '/vaga/lista',
-    },
-
-    {
-      name: 'Curriculo',
-      icon: 'description',
-      selected: false,
-      action: '/curriculo/novo',
-    },
   ];
 
   constructor(private observer: BreakpointObserver, private router: Router) {}
@@ -54,17 +41,15 @@ export class AppComponent {
   }
 
   ngAfterViewInit() {
-    setTimeout(() => {
-      this.observer.observe(['(max-width: 800px)']).subscribe((res: any) => {
-        if (res.matches) {
-          this.sidenav.mode = 'over';
-          this.sidenav.close();
-        } else {
-          this.sidenav.mode = 'side';
-          this.sidenav.open();
-        }
-      });
-    }, 50);
+    this.observer.observe(['(max-width: 800px)']).subscribe((res: any) => {
+      if (res.matches) {
+        this.sidenav.mode = 'over';
+        this.sidenav.close();
+      } else {
+        this.sidenav.mode = 'side';
+        this.sidenav.open();
+      }
+    });
   }
 
   navigate(route: string) {

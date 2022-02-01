@@ -1,37 +1,15 @@
 #collaboratorBankTab {
-  padding-bottom: 10px;
-  max-width: 800px;
+    max-width: 800px;
+      
+    .edit-button {
+        height: 40px;
+        margin-top: 8px;
+      }
 
-  .edit-button {
-    height: 40px;
-    margin-top: 25px;
-    margin-left: 10px;
-  }
-
-  .envolti-table {
-    margin-top: 20px;
-    overflow: auto;
-    max-height: 150px;
-    width: 100%;
-
-
-    .mat-column-icon {
+      .envolti-table {
+        
+    .mat-column-icon{
       width: 50px;
     }
-
-    .button-tab {
-      white-space: nowrap;
-      overflow: hidden;
-    }
-
-  }
-}
-
-.button-dialog{
-  margin-left: 140px;
-  
-}
-
-.title-dialog{
-  text-align: center;
+      }
 }

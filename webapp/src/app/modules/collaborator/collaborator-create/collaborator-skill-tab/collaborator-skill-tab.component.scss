@@ -6,47 +6,29 @@
     width: 100%;
   }
 
-  .edit-button {
-    height: 40px;
-    margin-top: 25px;
-    margin-left: 10px;
-  }
-
   .envolti-table {
-    margin-top: 20px;
+    padding-bottom: 10px;
     overflow: auto;
-    max-height: 150px;
-    width: 100%;
+    max-height: 200px;
 
 
     .mat-column-icon {
       width: 50px;
     }
-
-    .button-tab {
-      white-space: nowrap;
-      overflow: hidden;
-    }
-
   }
 
   .checkbox {
     margin-top: 15px;
   }
 
+  .edit-button {
+    height: 40px;
+    margin-top: 8px;
+  }
 
 
   .button-tab {
     white-space: nowrap;
     overflow: hidden;
   }
-}
-
-.button-dialog{
-  margin-left: 140px;
-  
-}
-
-.title-dialog{
-  text-align: center;
 }

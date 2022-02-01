@@ -12,8 +12,6 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { HttpClientModule } from '@angular/common/http';
-import {MatListModule} from '@angular/material/list';
-
 
 import { NgxMaskModule, IConfig } from 'ngx-mask';
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
@@ -33,7 +31,6 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
     MatButtonModule,
     MatDividerModule,
     HttpClientModule,
-    MatListModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

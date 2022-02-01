@@ -1,5 +1,5 @@
 <div id="collaboratorCreate" class="page">
-  <h2 class="title">Colaborador</h2>
+  <h2 class="title">Cadastro de Colaborador</h2>
 
   <div fxLayout="row" class="tab" fxLayoutGap="16px">
     <div
@@ -84,33 +84,32 @@
     (onChange)="handleChanges($event)"
   >
   </app-collaborator-skill-tab>
-  <app-collaborator-document-tab
+  <app-collaborator-document-tab 
     [hidden]="step != 6"
     [form]="collaboratorForm"
     (onChange)="handleChanges($event)"
   >
   </app-collaborator-document-tab>
   <app-collaborator-panel-tab [hidden]="step != 7"></app-collaborator-panel-tab>
-
-  <div class="navigation-buttons" fxLayoutAlign="center end" fxLayoutGap="16px">
-    <button mat-button *ngIf="step != 1" (click)="navigate('back')">
-      Voltar
-    </button>
-    <button
-      mat-flat-button
-      *ngIf="step != 6"
-      (click)="navigate('next')"
-      color="primary"
-    >
-      Continuar
-    </button>
-    <button
-      mat-flat-button
-      *ngIf="step == 6"
-      (click)="saveCollaborator()"
-      color="primary"
-    >
-      Salvar
-    </button>
-  </div>
+</div>
+<div class="navigation-buttons" fxLayoutAlign="center end" fxLayoutGap="16px">
+  <button mat-button *ngIf="step != 1" (click)="navigate('back')">
+    Voltar
+  </button>
+  <button
+    mat-flat-button
+    *ngIf="step != 6"
+    (click)="navigate('next')"
+    color="primary"
+  >
+    Continuar
+  </button>
+  <button
+    mat-flat-button
+    *ngIf="step == 6"
+    (click)="saveCustomer()"
+    color="primary"
+  >
+    Salvar
+  </button>
 </div>

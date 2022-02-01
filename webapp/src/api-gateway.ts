@@ -61,6 +61,14 @@ export class ApiGateway {
     showLoading?: boolean
   ): Observable<any> {
     let options = new ApiGatewayOptions();
+    switch (service) {
+      case 'ms-cep':
+        options.baseUrl = 'http://localhost:8000/';
+        break;
+      default:
+        options.baseUrl = environment.baseUrl;
+        break;
+    }
     options.method = RequestMethod.Get;
     options.url = url;
     options.params = params;
@@ -75,7 +83,7 @@ export class ApiGateway {
       params = {};
     }
     let options = new ApiGatewayOptions();
-    // options.baseUrl = environment.baseUrl;
+    options.baseUrl = environment.baseUrl;
     options.method = RequestMethod.Post;
     options.url = url;
     options.params = params;
@@ -89,7 +97,7 @@ export class ApiGateway {
       params = {};
     }
     let options = new ApiGatewayOptions();
-    // options.baseUrl = environment.baseUrl;
+    options.baseUrl = environment.baseUrl;
     options.method = RequestMethod.Put;
     options.url = url;
     options.params = params;
@@ -104,7 +112,7 @@ export class ApiGateway {
       params = {};
     }
     let options = new ApiGatewayOptions();
-    // options.baseUrl = environment.baseUrl;
+    options.baseUrl = environment.baseUrl;
     options.method = RequestMethod.Delete;
     options.url = url;
     options.params = params;
@@ -119,7 +127,7 @@ export class ApiGateway {
       params = {};
     }
     let options = new ApiGatewayOptions();
-    // options.baseUrl = environment.baseUrl;
+    options.baseUrl = environment.baseUrl;
     options.method = RequestMethod.Patch;
     options.url = url;
     options.params = params;
@@ -134,7 +142,7 @@ export class ApiGateway {
       params = {};
     }
     let options = new ApiGatewayOptions();
-    // options.baseUrl = environment.baseUrl;
+    options.baseUrl = environment.baseUrl;
     options.method = RequestMethod.Head;
     options.url = url;
     options.params = params;
@@ -148,7 +156,6 @@ export class ApiGateway {
   ): Observable<any> {
     options.method = options.method || RequestMethod.Get;
     options.url = options.url || '';
-    console.log("🚀 ~ file: api-gateway.ts ~ line 151 ~ ApiGateway ~  options.url",  options.url)
     options.headers = options.headers || new HttpHeaders();
     options.params = options.params || {};
     options.data = options.data || {};
@@ -163,14 +170,13 @@ export class ApiGateway {
 
     let requestOptions = {
       method: options.method,
-      url: `${environment.protocol}://${options.url}`,
+      url: options.baseUrl + options.url,
       headers: options.headers,
       search: this.buildUrlSearchParams(options.params),
       body: JSON.stringify(options.data),
 
       observe: 'response' as 'response',
     };
-    console.log("🚀 ~ file: api-gateway.ts ~ line 172 ~ ApiGateway ~ requestOptions", requestOptions)
 
     let isCommand =
       showLoading === true || options.method !== RequestMethod.Get;

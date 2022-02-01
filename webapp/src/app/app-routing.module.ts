@@ -4,9 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-
-    redirectTo: '/vaga/lista',
-
+    redirectTo: '/colaborador/novo',
     pathMatch: 'full',
   },
 
@@ -17,26 +15,7 @@ const routes: Routes = [
         (m) => m.CollaboratorModule
       ),
   },
-
-  {
-
-    path: 'vaga',
-    loadChildren: () =>
-    import('./modules/job/job.module').then(
-      (m) => m.JobModule
-    ),
-  },
-
-   {
-    path: 'curriculo',
-    loadChildren: () =>
-      import('./modules/resume/resume.module').then(
-        (m) => m.ResumeModule
-      ),
-  },
-
-   ]
-
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

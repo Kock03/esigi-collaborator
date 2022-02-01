@@ -1,7 +1,6 @@
 import { HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ApiGateway } from 'src/api-gateway';
-import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +15,7 @@ export class CollaboratorProvider {
   findAll(): Promise<any> {
     return new Promise((resolve, reject) => {
       this.apiGateway
-        .get(environment.COLLABORATOR_MS +'collaborators')
+        .get('collaborators')
         .subscribe((response: HttpResponse<any>) => {
           resolve(response.body);
         }, reject);
@@ -36,7 +35,7 @@ export class CollaboratorProvider {
   update(collaborator: any): Promise<any> {
     return new Promise((resolve, reject) => {
       this.apiGateway
-        .put(environment.COLLABORATOR_MS + 'collaborators', collaborator)
+        .put('collaborators', collaborator)
         .subscribe((response: HttpResponse<any>) => {
           resolve(response.body);
         }, reject);
@@ -46,7 +45,7 @@ export class CollaboratorProvider {
   store(collaborator: any): Promise<any> {
     return new Promise((resolve, reject) => {
       this.apiGateway
-        .post(environment.COLLABORATOR_MS + 'collaborators', collaborator)
+        .post('collaborators', collaborator)
         .subscribe((response: HttpResponse<any>) => {
           resolve(response.body);
         }, reject);
@@ -56,7 +55,7 @@ export class CollaboratorProvider {
   destroy(collaborator: any): Promise<any> {
     return new Promise((resolve, reject) => {
       this.apiGateway
-        .delete(environment.COLLABORATOR_MS + 'collaborators', collaborator)
+        .delete('collaborators', collaborator)
         .subscribe((response: HttpResponse<any>) => {
           resolve(response.body);
         }, reject);

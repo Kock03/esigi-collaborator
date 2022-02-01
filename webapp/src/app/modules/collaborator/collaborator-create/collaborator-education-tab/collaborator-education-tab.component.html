@@ -3,174 +3,272 @@
     <mat-tab-group animationDuration="0">
       <mat-tab label="Escolaridade">
         <ng-template mat-tab-label> Escolaridade </ng-template>
-        <div fxLayout="row">
-          <div class="envolti-table mat-elevation-z8" fxLayout="column">
-            <table
-              mat-table
-              [dataSource]="collaboratorForm.controls['Educations'].value"
-              #educationTable
-            >
-              <ng-container matColumnDef="schooling">
-                <th mat-header-cell *matHeaderCellDef>Escolaridade</th>
-                <td mat-cell *matCellDef="let education">
-                  {{
-                    education.schooling == 1
-                      ? "Ensino Fundamental"
-                      : education.schooling == 2
-                      ? "Ensino Médio"
-                      : "Ensino Superior"
-                  }}
-                </td>
-              </ng-container>
-
-              <ng-container matColumnDef="situation">
-                <th mat-header-cell *matHeaderCellDef>Situação</th>
-                <td mat-cell *matCellDef="let education">
-                  {{
-                    education.situation == 1
-                      ? "Parado"
-                      : education.situation == 2
-                      ? "Completo"
-                      : "Em andamento"
-                  }}
-                </td>
-              </ng-container>
-
-              <ng-container matColumnDef="course">
-                <th mat-header-cell *matHeaderCellDef>Curso</th>
-                <td mat-cell *matCellDef="let education">
-                  {{ education.course }}
-                </td>
-              </ng-container>
-
-              <ng-container matColumnDef="institution">
-                <th mat-header-cell *matHeaderCellDef>Instituição</th>
-                <td mat-cell *matCellDef="let education">
-                  {{ education.institution }}
-                </td>
-              </ng-container>
-
-              <ng-container matColumnDef="icon">
-                <th mat-header-cell *matHeaderCellDef></th>
-                <td
-                  class="button-tab"
-                  mat-cell
-                  *matCellDef="let education; let index = index"
+        <form
+          class="form-tab"
+          (submit)="next()"
+          [formGroup]="educationForm"
+          fxLayout="column"
+        >
+          <div fxFlex="100" fxLayoutGap="16px">
+            <mat-form-field fxFlex="35" appearance="outline">
+              <mat-label>Escolaridade</mat-label>
+              <mat-select matInput disableRipple formControlName="schooling">
+                <mat-option
+                  *ngFor="let education of educations"
+                  [value]="education.schooling"
+                  >{{ education.schooling }}</mat-option
                 >
-                  <button
-                    class="table-button"
-                    mat-button
-                    (click)="getEducation(education, index)"
-                  >
-                    <mat-icon>edit</mat-icon>
-                  </button>
-                  <button
-                    (click)="deleteEducation(index)"
-                    class="table-button"
-                    mat-button
-                  >
-                    <mat-icon>delete</mat-icon>
-                  </button>
-                </td>
-              </ng-container>
+              </mat-select>
+            </mat-form-field>
 
-              <tr
-                mat-header-row
-                *matHeaderRowDef="displayedEducation; sticky: true"
-              ></tr>
-              <tr
-                mat-row
-                *matRowDef="let row; columns: displayedEducation"
-              ></tr>
-            </table>
+            <mat-form-field fxFlex="65" appearance="outline">
+              <mat-label>Curso</mat-label>
+              <input
+                matInput
+                placeholder="Curso"
+                formControlName="course"
+                *ngFor="let education of educations"
+                [value]="education.course"
+              />
+            </mat-form-field>
           </div>
-          <button
-            fxFlex="5"
-            class="edit-button"
-            mat-flat-button
-            color="primary"
-            (click)="openDialogEducation()"
+          <div fxFlex="100" fxLayoutGap="16px">
+            <mat-form-field fxFlex="60" appearance="outline">
+              <mat-label>Instituição</mat-label>
+              <input
+                matInput
+                placeholder="Instituição"
+                formControlName="institution"
+                *ngFor="let education of educations"
+                [value]="education.institution"
+              />
+            </mat-form-field>
+            <mat-form-field fxFlex="30" appearance="outline">
+              <mat-label>Situação</mat-label>
+              <mat-select matInput disableRipple formControlName="situation">
+                <mat-option
+                  *ngFor="let education of educations"
+                  [value]="education.situation"
+                  >{{ education.situation }}</mat-option
+                >
+              </mat-select>
+            </mat-form-field>
+            <button
+              fxFlex="5"
+              class="edit-button"
+              mat-flat-button
+              color="primary"
+              (click)="saveEducation()"
+              *ngIf="index == null"
+            >
+              <mat-icon>add</mat-icon>
+            </button>
+            <button
+              fxFlex="5"
+              class="edit-button"
+              mat-flat-button
+              color="primary"
+              (click)="editEducation()"
+              *ngIf="index != null"
+            >
+              <mat-icon>save</mat-icon>
+            </button>
+            <button
+              fxFlex="5"
+              class="edit-button"
+              mat-flat-button
+              color="primary"
+              (click)="cancelEdit()"
+              *ngIf="index != null"
+            >
+              <mat-icon>clear</mat-icon>
+            </button>
+          </div>
+        </form>
+        <div class="envolti-table mat-elevation-z8" fxLayout="column">
+          <table
+            mat-table
+            [dataSource]="collaboratorForm.controls['Educations'].value"
+            #educationTable
           >
-            <mat-icon>add</mat-icon>
-          </button>
+            <ng-container matColumnDef="schooling">
+              <th mat-header-cell *matHeaderCellDef>Escolaridade</th>
+              <td mat-cell *matCellDef="let education">
+                {{ education.schooling }}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="situation">
+              <th mat-header-cell *matHeaderCellDef>Situação</th>
+              <td mat-cell *matCellDef="let education">
+                {{ education.situation }}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="course">
+              <th mat-header-cell *matHeaderCellDef>Curso</th>
+              <td mat-cell *matCellDef="let education">
+                {{ education.course }}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="institution">
+              <th mat-header-cell *matHeaderCellDef>Instituição</th>
+              <td mat-cell *matCellDef="let education">
+                {{ education.institution }}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="icon">
+              <th mat-header-cell *matHeaderCellDef></th>
+              <td
+                class="button-tab"
+                mat-cell
+                *matCellDef="let education; let index = index"
+              >
+                <button
+                  class="table-button"
+                  mat-button
+                  (click)="getEducation(education, index)"
+                >
+                  <mat-icon>edit</mat-icon>
+                </button>
+                <button
+                  (click)="deleteEducation(index)"
+                  class="table-button"
+                  mat-button
+                >
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </td>
+            </ng-container>
+
+            <tr
+              mat-header-row
+              *matHeaderRowDef="displayedEducation; sticky: true"
+            ></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedEducation"></tr>
+          </table>
         </div>
       </mat-tab>
-
       <mat-tab label="Idiomas">
         <ng-template mat-tab-label> Idiomas </ng-template>
-        <div fxLayout="row">
-          <div class="envolti-table mat-elevation-z8" fxLayout="column">
-            <table
-              #languageTable
-              mat-table
-              [dataSource]="collaboratorForm.controls['Languages'].value"
-            >
-              <ng-container matColumnDef="language">
-                <th mat-header-cell *matHeaderCellDef>Idioma</th>
-                <td mat-cell *matCellDef="let language">
-                  {{ language.languageName }}
-                </td>
-              </ng-container>
-
-              <ng-container matColumnDef="fluency">
-                <th mat-header-cell *matHeaderCellDef>Fluência</th>
-                <td mat-cell *matCellDef="let language">
-                  {{
-                    language.degreeOfInfluence == 1
-                      ? "Leitura, Escrita e Conversação"
-                      : language.degreeOfInfluence == 2
-                      ? "Escrita"
-                      : language.degreeOfInfluence == 3
-                      ? "Leitura"
-                      : language.degreeOfInfluence == 4
-                      ? "Conversação"
-                      : language.degreeOfInfluence == 5
-                      ? "Escrita e Leitura"
-                      : "Escrita e Conversação"
-                  }}
-                </td>
-              </ng-container>
-
-              <ng-container matColumnDef="icon">
-                <th mat-header-cell *matHeaderCellDef></th>
-                <td
-                  class="button-tab"
-                  mat-cell
-                  *matCellDef="let language; let index = index"
+        <form
+          class="lenguange-form"
+          [formGroup]="languageForm"
+          fxLayout="column"
+        >
+          <div fxFlex="100" fxLayoutGap="16px">
+            <mat-form-field fxFlex="45" appearance="outline">
+              <mat-label>Idioma</mat-label>
+              <mat-select matInput disableRipple formControlName="languageName">
+                <mat-option
+                  *ngFor="let language of languages"
+                  [value]="language.languageName"
+                  >{{ language.languageName }}</mat-option
                 >
-                  <button
-                    class="table-button"
-                    mat-button
-                    (click)="getLanguage(language, index)"
-                  >
-                    <mat-icon>edit</mat-icon>
-                  </button>
-                  <button
-                    (click)="deleteLanguage(index)"
-                    class="table-button"
-                    mat-button
-                  >
-                    <mat-icon>delete</mat-icon>
-                  </button>
-                </td>
-              </ng-container>
+              </mat-select>
+            </mat-form-field>
 
-              <tr
-                mat-header-row
-                *matHeaderRowDef="displayedLanguage; sticky: true"
-              ></tr>
-              <tr mat-row *matRowDef="let row; columns: displayedLanguage"></tr>
-            </table>
+            <mat-form-field fxFlex="50" appearance="outline">
+              <mat-label>Grau de Fluência</mat-label>
+              <mat-select
+                matInput
+                disableRipple
+                formControlName="degreeOfInfluence"
+              >
+                <mat-option
+                  *ngFor="let language of languages"
+                  [value]="language.degreeOfInfluence"
+                  >{{ language.degreeOfInfluence }}</mat-option
+                >
+              </mat-select>
+            </mat-form-field>
+
+            <button
+              fxFlex="5"
+              class="edit-button"
+              mat-flat-button
+              color="primary"
+              (click)="saveLanguage()"
+              *ngIf="index == null"
+            >
+              <mat-icon>add</mat-icon>
+            </button>
+
+            <button
+              fxFlex="5"
+              class="edit-button"
+              mat-flat-button
+              color="primary"
+              (click)="editLanguage()"
+              *ngIf="index != null"
+            >
+              <mat-icon>save</mat-icon>
+            </button>
+
+            <button
+              fxFlex="5"
+              class="edit-button"
+              mat-flat-button
+              color="primary"
+              (click)="cancelEdit()"
+              *ngIf="index != null"
+            >
+              <mat-icon>clear</mat-icon>
+            </button>
           </div>
-          <button
-            fxFlex="5"
-            class="edit-button"
-            mat-flat-button
-            color="primary"
-            (click)="openDialogLanguage()"
+        </form>
+        <div class="envolti-table mat-elevation-z8" fxLayout="column">
+          <table
+            #languageTable
+            mat-table
+            [dataSource]="collaboratorForm.controls['Languages'].value"
           >
-            <mat-icon>add</mat-icon>
-          </button>
+            <ng-container matColumnDef="language">
+              <th mat-header-cell *matHeaderCellDef>Idioma</th>
+              <td mat-cell *matCellDef="let language">
+                {{ language.languageName }}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="fluency">
+              <th mat-header-cell *matHeaderCellDef>Fluência</th>
+              <td mat-cell *matCellDef="let language">
+                {{ language.degreeOfInfluence }}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="icon">
+              <th mat-header-cell *matHeaderCellDef></th>
+              <td
+                class="button-tab"
+                mat-cell
+                *matCellDef="let language; let index = index"
+              >
+                <button
+                  class="table-button"
+                  mat-button
+                  (click)="getLanguage(language, index)"
+                >
+                  <mat-icon>edit</mat-icon>
+                </button>
+                <button
+                  (click)="deleteLanguage(index)"
+                  class="table-button"
+                  mat-button
+                >
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </td>
+            </ng-container>
+
+            <tr
+              mat-header-row
+              *matHeaderRowDef="displayedLanguage; sticky: true"
+            ></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedLanguage"></tr>
+          </table>
         </div>
       </mat-tab>
     </mat-tab-group>
