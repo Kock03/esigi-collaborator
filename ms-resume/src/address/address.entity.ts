@@ -14,7 +14,7 @@ export class AddressEntity {
   @Column({ name: 'number', length: 10 })
   number: string;
 
-  @Column({ name: 'nighborhood', length: 60 })
+  @Column({ name: 'district', length: 60 })
   district: string;
 
   @Column({ name: 'city', length: 60 })

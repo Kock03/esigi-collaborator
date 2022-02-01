@@ -13,7 +13,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { MatTable } from '@angular/material/table';
 
 export interface skill {
-  tecnology: string;
+  technology: string;
   seniority: string;
   yearsExperience: string;
   currentPosition: boolean;
@@ -34,7 +34,7 @@ export class ResumeSkillsTabComponent implements OnInit {
 
   skills: skill[] = [
     {
-      tecnology: 'Java',
+      technology: 'Java',
       yearsExperience: '',
       seniority: 'Senior',
       currentPosition: false,
@@ -75,7 +75,7 @@ export class ResumeSkillsTabComponent implements OnInit {
 
   initForm(): void {
     this.skillForm = this.fb.group({
-      tecnology: ['Java'],
+      technology: ['Java'],
       seniority: ['Senior'],
       yearsExperience: ['5'],
       currentPosition: [true],
@@ -141,7 +141,7 @@ export class ResumeSkillDialog{
 
   initForm(): void {
     this.skillForm = this.fb.group({
-      tecnology:['Angular', [Validators.required, Validators.maxLength(50)]],
+      technology:['Angular', [Validators.required, Validators.maxLength(50)]],
       seniority: [1, Validators.required],
       yearsExperience: ['2', [Validators.required, Validators.maxLength(2)]],
       currentPosition: [true, Validators.required]

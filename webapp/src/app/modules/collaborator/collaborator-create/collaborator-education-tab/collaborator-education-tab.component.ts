@@ -6,6 +6,7 @@ import {
   OnInit,
   Output,
   ViewChild,
+  ViewEncapsulation,
 } from '@angular/core';
 import {
   FormArray,
@@ -32,6 +33,7 @@ export interface language {
   selector: 'app-collaborator-education-tab',
   templateUrl: './collaborator-education-tab.component.html',
   styleUrls: ['./collaborator-education-tab.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class CollaboratorEducationTabComponent implements OnInit {
   @Input('form') collaboratorForm!: FormGroup;
@@ -257,7 +259,11 @@ export class CollaboratorEducationDialog{
       course: ['Engenharia de Software', [Validators.required, Validators.maxLength(100)]],
       institution: ['FURB', [Validators.required, Validators.maxLength(100)]],
     });
-    if (this.data.educationSelected) {
+   
+  }
+
+  ngAfterViewInit(): void {
+    if ( this.data && this.data.educationSelected ) {
       this.educationForm.patchValue(this.data.educationSelected)
     }
   }

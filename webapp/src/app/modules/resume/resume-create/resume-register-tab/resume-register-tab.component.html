@@ -4,12 +4,13 @@
       <div fxLayout="row">
         <div class="image-upload">
           <label for="fileInput">
-            <img src="https://st.depositphotos.com/1734074/4228/v/450/depositphotos_42286141-stock-illustration-vector-man-with-mustache-in.jpg" alt="">
+            <img
+              src="https://st.depositphotos.com/1734074/4228/v/450/depositphotos_42286141-stock-illustration-vector-man-with-mustache-in.jpg"
+              alt=""
+            />
           </label>
-          <input
-            type="file" 
-            id="fileInput" formControlName="photo">
-          </div>
+          <input type="file" id="fileInput" formControlName="photo" />
+        </div>
 
         <div fxFlex="100" fxLayoutGap="16px" fxFlexAlign="end">
           <mat-form-field fxFlex="33" appearance="outline">
@@ -30,11 +31,21 @@
       <div fxFlex="100" fxLayoutGap="16px">
         <mat-form-field fxFlex="25" appearance="outline">
           <mat-label>CPF</mat-label>
-          <input matInput placeholder="Nome" formControlName="cpf"mask="000.000.000-00" />
+          <input
+            matInput
+            placeholder="Nome"
+            formControlName="cpf"
+            mask="000.000.000-00"
+          />
         </mat-form-field>
         <mat-form-field fxFlex="25" appearance="outline">
           <mat-label>Data de aniversário</mat-label>
-          <input type="date" matInput placeholder="data" formControlName="birthDate" />
+          <input
+            type="date"
+            matInput
+            placeholder="data"
+            formControlName="birthDate"
+          />
         </mat-form-field>
         <mat-form-field fxFlex="25" appearance="outline">
           <mat-label>Sexo</mat-label>
@@ -60,11 +71,13 @@
           <input
             matInput
             placeholder="CEP"
-            formControlName="zipCode"
+            formControlName="cep"
             type="text"
             mask="99999-999"
           />
-          <mat-icon matSuffix style="cursor: pointer" (click)="getAddress()"> search </mat-icon>
+          <mat-icon matSuffix style="cursor: pointer" (click)="getAddress()">
+            search
+          </mat-icon>
         </mat-form-field>
 
         <mat-form-field fxFlex="40" appearance="outline">
@@ -115,22 +128,38 @@
         </mat-form-field>
       </div>
 
-      <div fxFlex="100" fxLayoutGap="16px" formGroupName="Phone">
-        <mat-form-field fxFlex="10" appearance="outline">
-          <mat-label>DDI</mat-label>
-          <input matInput placeholder="DDI" formControlName="ddi"  mask="+00" />
-        </mat-form-field>
+      <div fxFlex="100" fxLayoutGap="16px">
+        <div formGroupName="Phone" fxFlex="100" fxLayoutGap="16px" >
+          <mat-form-field fxFlex="30" appearance="outline">
+            <mat-label>DDI</mat-label>
+            <input
+              matInput
+              placeholder="DDI"
+              formControlName="ddi"
+              mask="+00"
+            />
+          </mat-form-field>
 
-        <mat-form-field fxFlex="10" appearance="outline">
-          <mat-label>DDD</mat-label>
-          <input matInput placeholder="Login" formControlName="ddd" mask="(00)" />
-        </mat-form-field>
+          <mat-form-field fxFlex="35" appearance="outline">
+            <mat-label>DDD</mat-label>
+            <input
+              matInput
+              placeholder="Login"
+              formControlName="ddd"
+              mask="(00)"
+            />
+          </mat-form-field>
 
-        <mat-form-field fxFlex="30" appearance="outline">
-          <mat-label>Telefone</mat-label>
-          <input matInput placeholder="Login" formControlName="phoneNumber"   mask="00000-0000"/>
-        </mat-form-field>
-
+          <mat-form-field fxFlex="35" appearance="outline">
+            <mat-label>Telefone</mat-label>
+            <input
+              matInput
+              placeholder="Login"
+              formControlName="phoneNumber"
+              mask="00000-0000"
+            />
+          </mat-form-field>
+        </div>
         <mat-form-field fxFlex="50" appearance="outline">
           <mat-label>Linkedin</mat-label>
           <input matInput placeholder="Linkedin" formControlName="linkedin" />

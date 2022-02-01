@@ -22,51 +22,52 @@
         class="list-group-item"
         fxLayoutAlign="start start"
       >
-        <div fxLayout="column">
-          <span class="label-office">
-            {{ experience.office }}
-          </span>
-          <span>
-            {{ experience.companyName }}
-          </span>
-          <span class="label-gray">
-            {{ experience.locality }}
-          </span>
-          <span class="label-gray"
-            ><b>Início:</b> {{ experience.startMonth
-            }}<span> / {{ experience.startYear }}</span>
-          </span>
-          <span class="label-gray"
-            ><b>Término:</b> {{ experience.terminusMonth
-            }}<span> / {{ experience.terminusYear }}</span>
-          </span>
-          <p></p>
-          <span>
-            {{ experience.description }}
-          </span>
-          <div
-            class="add-experience-button"
-            fxLayout="row"
-            fxLayoutAlign="start start"
-          >
-            <button
-              class="table-button"
-              mat-button
-              (click)="getExperience(experience, i)"
-            >
-              <mat-icon class="mat-icon-list">edit</mat-icon>
-            </button>
-            <button
-              fxLayout="row"
-              fxLayoutAlign="end start"
-              (click)="deleteExperience(i)"
-              class="table-button"
-              mat-button
-            >
-              <mat-icon class="mat-icon-list">delete</mat-icon>
-            </button>
+      
+          <div fxLayout="column">
+            <span class="label-office">
+              {{ experience.office }}
+            </span>
+            <span>
+              {{ experience.companyName }}
+            </span>
+            <span class="label-gray">
+              {{ experience.locality }}
+            </span>
+            <span class="label-gray"
+              ><b>Início:</b> {{ experience.startMonth
+              }}<span> / {{ experience.startYear }}</span>
+            </span>
+            <span class="label-gray"
+              ><b>Término:</b> {{ experience.terminusMonth
+              }}<span> / {{ experience.terminusYear }}</span>
+            </span>
+            <p></p>
+            <span>
+              {{ experience.description }}
+            </span>
           </div>
-        </div>
+ 
+        
+        <div
+        class="buttons-experience"
+        fxLayout="row"
+        fxLayoutAlign="end end"
+      >
+        <button
+          class="table-button"
+          mat-button
+          (click)="getExperience(experience, i)"
+        >
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button
+          (click)="deleteExperience(i)"
+          class="table-button"
+          mat-button
+        >
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
       </mat-list-item>
     </mat-list>
   </div>

@@ -23,7 +23,7 @@ export class AddressEntity {
   @Column({ name: 'street' })
   street: string;
 
-  @Column({ name: 'disstrict'})
+  @Column({ name: 'district'})
   district: string;
 
   @Column({ name: 'state' })

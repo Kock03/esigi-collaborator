@@ -23,7 +23,7 @@ export class ResumeRegisterTabComponent implements OnInit {
   ngOnInit(): void {
     this.resumeForm.valueChanges.subscribe((res) => {
       const addressForm = this.resumeForm.controls['Address'] as FormGroup;
-      addressForm.controls['zipCode'].valueChanges.subscribe((res) => {});
+      addressForm.controls['cep'].valueChanges.subscribe((res) => {});
     });
   }
 
@@ -40,10 +40,10 @@ export class ResumeRegisterTabComponent implements OnInit {
   async getAddress() {
     const address = this.resumeForm.controls['Address'].value;
 
-    console.log(address.zipCode);
+    console.log(address.cep);
 
     const district = await this.cepService.findDistrict(
-      address.zipCode.replace('-', '')
+      address.cep.replace('-', '')
     );
 
     if (district.erro) {
@@ -52,7 +52,7 @@ export class ResumeRegisterTabComponent implements OnInit {
       this.resumeForm.controls['Address'].reset();
     } else {
       this.resumeForm.controls['Address'].patchValue({
-        zipCode: district.cep,
+        cep: district.cep,
 
         city: district.localidade,
 
