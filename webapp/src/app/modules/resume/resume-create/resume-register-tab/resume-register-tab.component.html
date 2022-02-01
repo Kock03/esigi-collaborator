@@ -1,0 +1,141 @@
+<div id="resumeRegisterTab" class="tab">
+  <div class="content-scroll" *ngIf="resumeForm">
+    <form (submit)="next()" [formGroup]="resumeForm" fxLayout="column">
+      <div fxLayout="row">
+        <div class="image-upload">
+          <label for="fileInput">
+            <img src="https://st.depositphotos.com/1734074/4228/v/450/depositphotos_42286141-stock-illustration-vector-man-with-mustache-in.jpg" alt="">
+          </label>
+          <input
+            type="file" 
+            id="fileInput" formControlName="photo">
+          </div>
+
+        <div fxFlex="100" fxLayoutGap="16px" fxFlexAlign="end">
+          <mat-form-field fxFlex="33" appearance="outline">
+            <mat-label>Nome</mat-label>
+            <input matInput placeholder="Nome" formControlName="firstName" />
+          </mat-form-field>
+          <mat-form-field fxFlex="33" appearance="outline">
+            <mat-label>Sobrenome</mat-label>
+            <input matInput placeholder="Nome" formControlName="lastName" />
+          </mat-form-field>
+          <mat-form-field fxFlex="34" appearance="outline">
+            <mat-label>Login</mat-label>
+            <input matInput placeholder="Nome" formControlName="login" />
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div fxFlex="100" fxLayoutGap="16px">
+        <mat-form-field fxFlex="25" appearance="outline">
+          <mat-label>CPF</mat-label>
+          <input matInput placeholder="Nome" formControlName="cpf"mask="000.000.000-00" />
+        </mat-form-field>
+        <mat-form-field fxFlex="25" appearance="outline">
+          <mat-label>Data de aniversário</mat-label>
+          <input type="date" matInput placeholder="data" formControlName="birthDate" />
+        </mat-form-field>
+        <mat-form-field fxFlex="25" appearance="outline">
+          <mat-label>Sexo</mat-label>
+          <mat-select matInput disableRipple formControlName="gender">
+            <mat-option [value]="1">Masculino</mat-option>
+            <mat-option [value]="2">Feminino</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field fxFlex="25" appearance="outline">
+          <mat-label>Estado Civil</mat-label>
+          <mat-select matInput disableRipple formControlName="maritalStatus">
+            <mat-option [value]="1">Solteiro</mat-option>
+            <mat-option [value]="2">Casado</mat-option>
+            <mat-option [value]="2">Viúvo</mat-option>
+            <mat-option [value]="2">União estável</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div fxFlex="100" fxLayoutGap="16px" formGroupName="Address">
+        <mat-form-field fxFlex="25" appearance="outline">
+          <mat-label>CEP </mat-label>
+          <input
+            matInput
+            placeholder="CEP"
+            formControlName="zipCode"
+            type="text"
+            mask="99999-999"
+          />
+          <mat-icon matSuffix style="cursor: pointer" (click)="getAddress()"> search </mat-icon>
+        </mat-form-field>
+
+        <mat-form-field fxFlex="40" appearance="outline">
+          <mat-label>Rua</mat-label>
+          <input matInput placeholder="Nome" formControlName="street" />
+        </mat-form-field>
+
+        <mat-form-field fxFlex="15" appearance="outline">
+          <mat-label>Número</mat-label>
+          <input matInput placeholder="Nome" formControlName="number" />
+        </mat-form-field>
+        <mat-form-field fxFlex="45" appearance="outline">
+          <mat-label>Estado</mat-label>
+          <input matInput placeholder="Nome" formControlName="state" />
+        </mat-form-field>
+      </div>
+
+      <div fxFlex="100" fxLayoutGap="16px" formGroupName="Address">
+        <mat-form-field fxFlex="40" appearance="outline">
+          <mat-label>Complemento</mat-label>
+          <input
+            matInput
+            placeholder="Complemento"
+            formControlName="complement"
+          />
+        </mat-form-field>
+
+        <mat-form-field fxFlex="20" appearance="outline">
+          <mat-label>Bairro</mat-label>
+          <input matInput placeholder="Bairro" formControlName="district" />
+        </mat-form-field>
+
+        <mat-form-field fxFlex="40" appearance="outline">
+          <mat-label>Cidade</mat-label>
+          <input matInput placeholder="Nome" formControlName="city" />
+        </mat-form-field>
+      </div>
+
+      <div fxFlex="100" fxLayoutGap="16px">
+        <mat-form-field fxFlex="50" appearance="outline">
+          <mat-label>Email</mat-label>
+          <input matInput placeholder="Nome" formControlName="email" />
+        </mat-form-field>
+
+        <mat-form-field fxFlex="50" appearance="outline">
+          <mat-label>Site</mat-label>
+          <input matInput placeholder="Nome" formControlName="site" />
+        </mat-form-field>
+      </div>
+
+      <div fxFlex="100" fxLayoutGap="16px" formGroupName="Phone">
+        <mat-form-field fxFlex="10" appearance="outline">
+          <mat-label>DDI</mat-label>
+          <input matInput placeholder="DDI" formControlName="ddi"  mask="+00" />
+        </mat-form-field>
+
+        <mat-form-field fxFlex="10" appearance="outline">
+          <mat-label>DDD</mat-label>
+          <input matInput placeholder="Login" formControlName="ddd" mask="(00)" />
+        </mat-form-field>
+
+        <mat-form-field fxFlex="30" appearance="outline">
+          <mat-label>Telefone</mat-label>
+          <input matInput placeholder="Login" formControlName="phoneNumber"   mask="00000-0000"/>
+        </mat-form-field>
+
+        <mat-form-field fxFlex="50" appearance="outline">
+          <mat-label>Linkedin</mat-label>
+          <input matInput placeholder="Linkedin" formControlName="linkedin" />
+        </mat-form-field>
+      </div>
+    </form>
+  </div>
+</div>

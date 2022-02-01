@@ -1,0 +1,105 @@
+<div id="resumeExperiencDialog" class="dialog">
+  <div class="content-scroll" *ngIf="experienceForm">
+    <h2 class="title" mat-dialog-title>Cadastro de experiência</h2>
+    <mat-dialog-content class="mat-typography">
+      <form [formGroup]="experienceForm"  fxLayout="column">
+        <div fxFlex="100" fxLayoutGap="16px" >
+          <mat-form-field fxFlex="50" appearance="outline">
+            <mat-label>Cargo</mat-label>
+            <input matInput placeholder="Cargo" formControlName="office" />
+          </mat-form-field>
+          <mat-form-field fxFlex="50" appearance="outline">
+            <mat-label>Nome da empresa </mat-label>
+            <input
+              matInput
+              placeholder="Nome da empresa"
+              formControlName="companyName"
+            />
+          </mat-form-field>
+        </div>
+        <div fxFlex="100" fxLayoutGap="16px">
+          <mat-form-field fxFlex="50" appearance="outline">
+            <mat-label>Localidade</mat-label>
+            <input
+              matInput
+              placeholder="Localidade"
+              formControlName="locality"
+            />
+          </mat-form-field>
+          <mat-checkbox  fxLayoutAlign="left center" 
+            class="checkbox"
+            color="primary"
+            fxFlex="50"
+            formControlName="active"
+            >Trabalho atual</mat-checkbox
+          >
+        </div>
+        <div fxFlex="100" fxLayoutGap="16px">
+          <mat-form-field fxFlex="50" appearance="outline">
+            <mat-label>Data de início: mês</mat-label>
+            <input
+              matInput
+              placeholder="Data de início: mês"
+              formControlName="startMonth"
+            />
+          </mat-form-field>
+          <mat-form-field fxFlex="50" appearance="outline">
+            <mat-label>Data de início: ano</mat-label>
+            <input
+              matInput
+              placeholder="Data de início: ano"
+              formControlName="startYear"
+            />
+          </mat-form-field>
+        </div>
+
+        <div fxFlex="100" fxLayoutGap="16px" >
+          <mat-form-field fxFlex="50" appearance="outline">
+            <mat-label>Data de término: mês</mat-label>
+            <input
+              matInput
+              placeholder="Data de término: mês"
+              formControlName="terminusMonth"
+            />
+          </mat-form-field>
+          <mat-form-field fxFlex="50" appearance="outline">
+            <mat-label>Data de término: ano</mat-label>
+            <input
+              matInput
+              placeholder="Data de término: ano"
+              formControlName="terminusYear"
+            />
+          </mat-form-field>
+        </div>
+        <div fxFlex="100" fxLayoutGap="16px" >
+          <mat-form-field fxFlex="100" appearance="outline">
+            <mat-label>Setor</mat-label>
+            <input matInput placeholder="Setor" formControlName="sector" />
+          </mat-form-field>
+        </div>
+        <div fxFlex="100" fxLayoutGap="16px" >
+          <mat-form-field
+            fxFlex="100"
+            class="example-full-width"
+            appearance="outline"
+          >
+            <mat-label>Descrição</mat-label>
+            <textarea
+              matInput
+              placeholder="Ex: contribuir para a melhoria contínua do serviço..."
+              formControlName="description"
+            ></textarea>
+          </mat-form-field>
+        </div>
+      </form>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+      <div class="button-dialog">
+      <button class="cancel-button" mat-flat-button mat-dialog-close (click)="onNoClick()">Cancelar</button>
+      <button class="save-button" color="primary" mat-flat-button [mat-dialog-close]="true"(click)="saveExperience()" [disabled]="experienceForm.invalid">
+        Salvar
+      </button>
+    </div>
+    </mat-dialog-actions>
+  </div>
+</div>
