@@ -144,7 +144,7 @@ export class CollaboratorSkillDialog{
       yearsExperience: ['2', [Validators.required, Validators.maxLength(2)]],
       currentPosition: [true, Validators.required]
     });
-    if (this.data.skillSelected) {
+    if (this.data && this.data.skillSelected) {
       this.skillForm.patchValue(this.data.skillSelected)
     }
   }

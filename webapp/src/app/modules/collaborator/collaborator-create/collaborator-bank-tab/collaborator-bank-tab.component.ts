@@ -160,7 +160,7 @@ export class CollaboratorBankDialog{
       digit: ['1', [Validators.required, Validators.maxLength(1)]],
       bankAccountDigit: ['1',  [Validators.required, Validators.maxLength(1)]],
     });
-    if (this.data.bankSelected) {
+    if (this.data && this.data.bankSelected) {
       this.bankForm.patchValue(this.data.bankSelected)
     }
   }

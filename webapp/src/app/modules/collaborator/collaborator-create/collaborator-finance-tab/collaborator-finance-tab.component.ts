@@ -136,7 +136,7 @@ export class CollaboratorFinanceDialog{
       reason: [1 , Validators.required],
       value: ['3400000', Validators.required],
     });
-    if (this.data.financeSelected) {
+    if (this.data && this.data.financeSelected) {
      
       this.financeForm.patchValue(this.data.financeSelected)
       

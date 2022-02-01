@@ -7,6 +7,7 @@ import {
   OnInit,
   Output,
   ViewChild,
+  ViewEncapsulation,
 } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {
@@ -25,6 +26,7 @@ export interface document {
   selector: 'app-collaborator-document-tab',
   templateUrl: './collaborator-document-tab.component.html',
   styleUrls: ['./collaborator-document-tab.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class CollaboratorDocumentTabComponent implements OnInit {
   @Input('form') collaboratorForm!: FormGroup;
@@ -126,7 +128,7 @@ export class CollaboratorDocumentDialog {
       file: [''],
     });
 
-    if (this.data.documentSelected) {
+    if (this.data && this.data.documentSelected) {
       this.documentForm.patchValue(this.data.documentSelected);
     }
   }

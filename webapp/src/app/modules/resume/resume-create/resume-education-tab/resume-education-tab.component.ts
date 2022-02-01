@@ -221,7 +221,7 @@ export class ResumeLanguageDialog {
       languageName: ['Inglês', [Validators.required, Validators.maxLength(40)]],
       degreeOfInfluence: [1, Validators.required],
     });
-    if (this.data.languageSelected) {
+    if (this.data && this.data.languageSelected) {
       this.languageForm.patchValue(this.data.languageSelected);
     }
   }
@@ -266,7 +266,7 @@ export class ResumeEducationDialog {
       ],
       institution: ['FURB', [Validators.required, Validators.maxLength(100)]],
     });
-    if (this.data.educationSelected) {
+    if (this.data && this.data.educationSelected) {
       this.educationForm.patchValue(this.data.educationSelected);
     }
   }

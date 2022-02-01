@@ -141,7 +141,7 @@ export class ResumeDialogExperience {
       ],
     });
 
-    if (this.data.experienceSelected) {
+    if (this.data && this.data.experienceSelected) {
       this.experienceForm.patchValue(this.data.experienceSelected);
     }
   }
