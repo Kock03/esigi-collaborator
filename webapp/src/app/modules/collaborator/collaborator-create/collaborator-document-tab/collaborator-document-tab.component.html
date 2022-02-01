@@ -1,25 +1,11 @@
 <div id="collaboratorDocumentTab" class="tab">
   <div class="content-scroll" *ngIf="collaboratorForm">
-    <div fxLayout="column">
-      <div fxFlex="100" fxLayoutGap="16px">
-        <mat-form-field fxFlex="50" appearance="outline">
-          <mat-label>Documento</mat-label>
-          <input matInput placeholder="Nome do Documento" />
-        </mat-form-field>
-
-        <mat-form-field fxFlex="45" appearance="outline">
-          <mat-label>Arquivo</mat-label>
-          <input matInput />
-        </mat-form-field>
-
-        <button fxFlex="5" class="edit-button" mat-flat-button color="primary">
-          <mat-icon>add</mat-icon>
-        </button>
-      </div>
-    </div>
+    <div fxLayout="row">
+    
+   
 
     <div class="envolti-table mat-elevation-z8" fxLayout="column">
-      <table mat-table [dataSource]="dataSource">
+      <table mat-table [dataSource]="collaboratorForm.controls['Documents'].value" #documentTable>
         <ng-container matColumnDef="name">
           <th mat-header-cell *matHeaderCellDef>Documento</th>
           <td mat-cell *matCellDef="let document">
@@ -27,19 +13,21 @@
           </td>
         </ng-container>
 
-        <ng-container matColumnDef="link">
-          <th mat-header-cell *matHeaderCellDef></th>
+        <ng-container matColumnDef="file">
+          <th mat-header-cell *matHeaderCellDef>Ler</th>
           <td mat-cell *matCellDef="let document">
-            <button class="table-button" mat-button>
-              <mat-icon>visibility</mat-icon>
-            </button>
+            {{document.file}}
           </td>
         </ng-container>
 
         <ng-container matColumnDef="icon">
           <th mat-header-cell *matHeaderCellDef></th>
-          <td class="button-tab" mat-cell *matCellDef="let document">
-            <button class="table-button" mat-button>
+          <td class="button-tab " mat-cell *matCellDef="let document; let index = index">
+            <button class="table-button" mat-button (click)="getDocument(document, index)">
+              <mat-icon>edit</mat-icon>
+            </button>
+
+            <button class="table-button" mat-button (click)="deleteDocument(index)">
               <mat-icon>delete</mat-icon>
             </button>
           </td>
@@ -52,5 +40,9 @@
         <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
       </table>
     </div>
+    <button fxFlex="5" class="edit-button" mat-flat-button color="primary" (click)="openDialog()">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
   </div>
 </div>

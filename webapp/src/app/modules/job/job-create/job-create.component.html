@@ -1,0 +1,383 @@
+<div id="jobCreate" class="page">
+  
+
+  <div  fxLayout="row" fxLayoutAlign="space-between center">
+    <h2>Vagas</h2>
+
+    <button mat-flat-button color="primary" (click)="listJob()">Voltar</button>
+    
+    </div>
+
+  <div class="content-scroll" *ngIf="jobForm">
+    <mat-tab-group animationDuration="0ms" [selectedIndex]="selectedIndex">
+      <mat-tab disabled label="Cadastro">
+        <form [formGroup]="jobForm" fxLayout="column" class="form">
+          <div fxFlex="100" fxLayoutGap="16px">
+            <mat-form-field fxFlex="30" appearance="outline">
+              <mat-label>Solicitante</mat-label>
+              <input
+                placeholder="Solicitante"
+                matInput
+                formControlName="requester"
+                type="text"
+              />
+            </mat-form-field>
+
+            <mat-form-field fxFlex="35" appearance="outline">
+              <mat-label>Data de Abertura</mat-label>
+              <input
+                matInput
+                [matDatepicker]="picker"
+                formControlName="openingDate"
+              />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="picker"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field fxFlex="35" appearance="outline">
+              <mat-label>Status</mat-label>
+              <mat-select matInput disableRipple formControlName="status">
+                <mat-option [value]="1">Processada</mat-option>
+                <mat-option [value]="2">Em Revisão</mat-option>
+                <mat-option [value]="3">Fechada</mat-option>
+                <mat-option [value]="4">Perdida</mat-option>
+                <mat-option [value]="5">Concluida</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div fxFlex="100" fxLayoutGap="16px">
+            <mat-form-field fxFlex="40" appearance="outline">
+              <mat-label>Cliente</mat-label>
+              <input
+                placeholder="Cliente"
+                matInput
+                formControlName="client"
+                type="text"
+              />
+            </mat-form-field>
+
+            <mat-form-field fxFlex="35" appearance="outline">
+              <mat-label>Tipo de Vaga</mat-label>
+              <mat-select matInput disableRipple formControlName="typeOfJob">
+                <mat-option [value]="1">Aumento de Quadro</mat-option>
+                <mat-option [value]="2">Promoção</mat-option>
+                <mat-option [value]="3">Fidelidade</mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-checkbox
+              class="checkbox"
+              color="primary"
+              fxFlex="25"
+              formControlName="temporary"
+              >Temporario</mat-checkbox
+            >
+
+            <mat-form-field
+            fxFlex="25"
+            appearance="outline"
+            *ngIf="jobForm.controls['temporary'].value == true"
+          >
+            <mat-label>Tempo Contrato</mat-label>
+            <input
+              placeholder="Tempo de Contrato"
+              matInput
+              formControlName="monthTime"
+              type="text"
+            />
+          </mat-form-field>
+
+          </div>
+          <div fxFlex="100" fxLayoutGap="16px">
+         
+
+            <mat-form-field fxFlex="35" appearance="outline">
+              <mat-label>Nome da Vaga</mat-label>
+              <input
+                placeholder="Nome da Vaga"
+                matInput
+                formControlName="jobName"
+                type="text"
+              />
+            </mat-form-field>
+
+            <mat-form-field fxFlex="35" appearance="outline">
+              <mat-label>Previsão de Inicio</mat-label>
+              <input
+                matInput
+                [matDatepicker]="init"
+                formControlName="startForecast"
+              />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="init"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #init></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field fxFlex="30" appearance="outline">
+              <mat-label>Número de Vagas</mat-label>
+              <input
+                placeholder="Número de Vagas"
+                matInput
+                formControlName="jobNumber"
+                type="number"
+              />
+            </mat-form-field>
+          </div>
+          <div fxFlex="100" fxLayoutGap="16px">
+            <mat-form-field fxFlex="25" appearance="outline">
+              <mat-label>Tipo de Contratação</mat-label>
+              <mat-select
+                matInput
+                disableRipple
+                formControlName="typeOfContract"
+              >
+                <mat-option [value]="1">CLT</mat-option>
+                <mat-option [value]="2">PJ</mat-option>
+                <mat-option [value]="3">Cooperado</mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field fxFlex="25" appearance="outline">
+              <mat-label>Local de Trabalho</mat-label>
+              <mat-select matInput disableRipple formControlName="workplace">
+                <mat-option [value]="1">In Loco</mat-option>
+                <mat-option [value]="2">Home Office</mat-option>
+                <mat-option [value]="3">Hibrido</mat-option>
+                <mat-option [value]="4">Envolti</mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <div class="checkbox-section" fxFlex="50">
+              <section formGroupName="Seniorities" fxLayout="column">
+                <span class="text" fxLayoutAlign="start">Senioridade</span>
+                <div fxLayout="row" fxLayoutAlign="space-around">
+                  <mat-checkbox color="primary" formControlName="intern"
+                    >Estagiário</mat-checkbox
+                  >
+
+                  <mat-checkbox color="primary" formControlName="junior"
+                    >Junior</mat-checkbox
+                  >
+
+                  <mat-checkbox color="primary" formControlName="pleno"
+                    >Pleno</mat-checkbox
+                  >
+
+                  <mat-checkbox color="primary" formControlName="senior"
+                    >Senior</mat-checkbox
+                  >
+                </div>
+              </section>
+            </div>
+          </div>
+          <div fxFlex="100" fxLayoutGap="16px">
+            <mat-form-field fxFlex="30" appearance="outline">
+              <mat-label>Jornada de Trabaho</mat-label>
+              <input
+                placeholder="Jornada de Trabaho"
+                matInput
+                formControlName="workingDay"
+              />
+            </mat-form-field>
+
+            <mat-form-field fxFlex="25" appearance="outline">
+              <mat-label>Valor Minimo</mat-label>
+              <input
+                type="number"
+                placeholder="Valor Minimo"
+                matInput
+                formControlName="minimumValue"
+              />
+            </mat-form-field>
+
+            <mat-form-field fxFlex="25" appearance="outline">
+              <mat-label>Valor Maximo</mat-label>
+              <input
+                type="number"
+                placeholder="Valor Maximo"
+                matInput
+                formControlName="maximumValue"
+              />
+            </mat-form-field>
+
+            <mat-checkbox
+              class="checkbox"
+              color="primary"
+              fxFlex="20"
+              formControlName="publish"
+              >Publicar Vaga</mat-checkbox
+            >
+          </div>
+        </form>
+      </mat-tab>
+      <mat-tab disabled label="Conhecimentos">
+        <form [formGroup]="jobForm" fxLayout="column" class="form">
+          <div fxFlex="60" fxLayoutGap="16px">
+            <mat-form-field fxFlex="20" appearance="outline">
+              <mat-label>Escolaridade</mat-label>
+              <mat-select matInput disableRipple formControlName="schooling">
+                <mat-option [value]="1">Ensino Superior Completo</mat-option>
+                <mat-option [value]="2">Ensino Superior Incompleto</mat-option>
+                <mat-option [value]="3">Ensino Médio Completo</mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field
+              fxFlex="20"
+              appearance="outline"
+              formGroupName="Languages"
+            >
+              <mat-label>Idioma</mat-label>
+              <input
+                placeholder="Idioma"
+                matInput
+                formControlName="languageName"
+              />
+            </mat-form-field>
+
+            <mat-form-field
+              fxFlex="20"
+              appearance="outline"
+              formGroupName="Languages"
+            >
+              <mat-label>Grau de Fluência</mat-label>
+              <mat-select
+                matInput
+                disableRipple
+                formControlName="degreeOfInfluence"
+              >
+                <mat-option [value]="1">Leitura e Conversação</mat-option>
+                <mat-option [value]="2">Conversação e Escrita</mat-option>
+                <mat-option [value]="3">Escrita e Leitura</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div fxFlex="63" fxLayoutGap="16px">
+            <mat-form-field fxFlex="63" appearance="outline">
+              <mat-label
+                >Quais são as principais atividades que ocolaborador irá
+                exercer?</mat-label
+              >
+              <textarea
+                class="text-area"
+                matInput
+                placeholder="Atividades"
+                formControlName="collaboratorActivities"
+              ></textarea>
+            </mat-form-field>
+          </div>
+
+          <div fxFlex="63" fxLayoutGap="16px">
+            <mat-form-field fxFlex="63" appearance="outline">
+              <mat-label> Experiencia Desejada</mat-label>
+              <textarea
+                class="text-area"
+                matInput
+                placeholder="Habilidades"
+                formControlName="skills"
+              ></textarea>
+            </mat-form-field>
+          </div>
+
+          <div fxFlex="63" fxLayoutGap="16px">
+            <mat-form-field fxFlex="63" appearance="outline">
+              <mat-label>Comportamento e/ou competências necessárias</mat-label>
+              <textarea
+                class="text-area"
+                matInput
+                placeholder="Atitudes"
+                formControlName="attitudes"
+              ></textarea>
+            </mat-form-field>
+          </div>
+        </form>
+
+        <div fxLayoutGap="16px" fxLayout="column" fxFlex="63">
+          <div fxFlex="63">
+            <div fxLayout="row" fxLayoutAlign="start center ">
+              <p class="skills-text">Conhecimentos</p>
+              <button mat-button color="primary" (click)="openDialog()">
+                Adicionar
+              </button>
+            </div>
+          </div>
+          <div class="envolti-table mat-elevation-z8" fxLayout="column">
+            <table
+              mat-table
+              [dataSource]="jobForm.controls['Knowledges'].value"
+              #knowledgeTable
+            >
+              <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef>Tecnologia</th>
+                <td mat-cell *matCellDef="let Knowledge">
+                  {{ Knowledge.name }}
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="yearsExperience">
+                <th mat-header-cell *matHeaderCellDef>Tempo de experiencia</th>
+                <td mat-cell *matCellDef="let Knowledge">
+                  {{ Knowledge.yearsExperience }}
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="typeOfPeriod">
+                <th mat-header-cell *matHeaderCellDef>Periodo</th>
+                <td mat-cell *matCellDef="let Knowledge">
+                  {{ Knowledge.typeOfPeriod !== 2 ? "Mês" : "Ano" }}
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="icon">
+                <th mat-header-cell *matHeaderCellDef></th>
+                <td class="button-tab" mat-cell *matCellDef="let Knowledge">
+                  <button
+                    class="table-button"
+                    mat-button
+                    (click)="deleteKnowledge(index)"
+                  >
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </td>
+              </ng-container>
+
+              <tr
+                mat-header-row
+                *matHeaderRowDef="displayedColumns; sticky: true"
+              ></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+            </table>
+          </div>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+
+  <div class="navigation-buttons" fxLayoutAlign="center end" fxLayoutGap="16px">
+    <button mat-button *ngIf="selectedIndex != 0" (click)="previousStep()">
+      Voltar
+    </button>
+    <button
+      mat-flat-button
+      *ngIf="selectedIndex != 1"
+      (click)="nextStep()"
+      color="primary"
+    >
+      Continuar
+    </button>
+    <button
+      mat-flat-button
+      *ngIf="selectedIndex == 1"
+      color="primary"
+      (click)="saveJob()"
+    >
+      Salvar
+    </button>
+  </div>
+</div>

@@ -18,12 +18,15 @@ export class CollaboratorCreateComponent implements OnInit {
     private fb: FormBuilder,
     private collaboratorProvider: CollaboratorProvider,
     private http: HttpClient,
-  ) {}
+  ) {
+   
+  }
 
   async ngOnInit(): Promise<void> {
-    console.log(await this.collaboratorProvider.findAll());
     this.initForm();
+    this.step = 1;
   }
+  
 
   initForm() {
     this.collaboratorForm = this.fb.group({
@@ -33,19 +36,19 @@ export class CollaboratorCreateComponent implements OnInit {
       gender: [1, Validators.required],
       office: ['Desenvolvedor Angular', Validators.required],
       collaboratorTypes: [1, Validators.required],
-      cpf: this.fb.control({ value: null, disabled: false}, DocumentValidator.isValidCpf()),
+      cpf: this.fb.control({ value: null, disabled: false}, [DocumentValidator.isValidCpf(), Validators.required]),
       birthDate: ['06/12/2004', Validators.required],
-      email: ['davi@email', Validators.email],
-      cnpj:  this.fb.control({ value: null, disabled: false}, DocumentValidator.isValidCnpj()),
+      email: ['davi@email', [Validators.email, Validators.required]],
+      cnpj: ['', Validators.required],
       stateRegistration: ['', Validators.required],
       municipalInscription: ['', Validators.required],
       site: ['site.davi', Validators.required],
       linkedin: ['linkedin.davi', Validators.required],
-      photo: null,
+      photo: [''],
       Phone: this.fb.group({
-        phoneNumber: ['35343234908', Validators.required],
-        ddd: ['71', Validators.required],
-        ddi: ['', Validators.required],
+        phoneNumber: ['343234908', [Validators.required, Validators.maxLength(9)]],
+        ddd: ['71', [Validators.required, Validators.maxLength(2)]],
+        ddi: ['55', Validators.required],
       }),
 
       Address: this.fb.group({
@@ -63,13 +66,13 @@ export class CollaboratorCreateComponent implements OnInit {
       BankData: this.fb.array([]),
       Financials: this.fb.array([]),
       Skills: this.fb.array([]),
-      Documents: null,
+      Documents: this.fb.array([]),
     });
   }
 
-  async saveCustomer() {
+  async saveCollaborator() {
     let data = this.collaboratorForm.getRawValue();
-
+    console.log(data);
     if (!data.Educations.length) {
       data.Educations = null;
     }
