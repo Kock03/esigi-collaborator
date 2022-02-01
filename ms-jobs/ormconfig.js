@@ -5,6 +5,6 @@ module.exports = {
   port: '3306',
   username: 'root',
   password: '',
-  database: 'esigi_collaborator',
+  database: 'esigi_jobs',
   entities: ['dist/**/*.entity.js'],
 };

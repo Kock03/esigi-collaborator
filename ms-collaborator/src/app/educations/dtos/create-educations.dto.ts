@@ -1,5 +1,6 @@
 import { IsNotEmpty } from "class-validator";
 import { CollaboratorsEntity } from "src/app/collaborators/collaborators.entity";
+import { Schooling } from "./schooling.enum";
 
 export class CreateEducationsDto{
      

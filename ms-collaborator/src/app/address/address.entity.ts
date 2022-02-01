@@ -1,4 +1,3 @@
-import { CollaboratorsEntity } from 'src/app/collaborators/collaborators.entity';
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -6,9 +5,9 @@ import {
   UpdateDateColumn,
   DeleteDateColumn,
   Column,
-  ManyToOne,
   OneToOne,
 } from 'typeorm';
+import { CollaboratorsEntity } from '../collaborators/collaborators.entity';
 
 @Entity({ name: 'address' })
 export class AddressEntity {

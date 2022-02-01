@@ -2,8 +2,15 @@
   "name": "esigi-collaborator",
   "version": "0.0.0",
   "scripts": {
-    "start": "concurrently --kill-others-on-fail \"npm run start:server\" \"npm run start:webapp\"",
-    "start:server": "cd server && npm run start:dev",
+    "install": "concurrently --kill-others-on-fail \"npm run install:collaborator\" \"npm run install:jobs\"  \"npm run install:resume\"  \"npm run install:webapp\"",
+    "install:collaborator": "cd ms-collaborator && npm install",
+    "install:jobs": "cd ms-jobs && npm install",
+    "install:resume": "cd ms-resume && npm install",
+    "install:webapp": "cd webapp && npm install",
+    "start": "concurrently --kill-others-on-fail \"npm run start:collaborator\" \"npm run start:jobs\"  \"npm run start:resume\"  \"npm run start:webapp\"",
+    "start:collaborator": "cd ms-collaborator && npm run start:dev",
+    "start:jobs": "cd ms-jobs && npm run start:dev",
+    "start:resume": "cd ms-resume && npm run start:dev",
     "start:webapp": "cd webapp && npm run start"
   },
   "private": true,

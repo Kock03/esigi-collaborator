@@ -1,4 +1,5 @@
 import { IsNotEmpty } from "class-validator";
+import { Schooling } from "./schooling.enum";
 
 export class UpdateEducationsDto{
      

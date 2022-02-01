@@ -1,15 +1,4 @@
-import { ResumesEntity } from 'src/resumes/resumes.entity';
-import { ResumesModule } from 'src/resumes/resumes.module';
-import { ResumesService } from 'src/resumes/resumes.service';
-import {
-  Column,
-  CreateDateColumn,
-  DeleteDateColumn,
-  Entity,
-  OneToOne,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-} from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, DeleteDateColumn } from "typeorm";
 
 @Entity({ name: 'address' })
 export class AddressEntity {

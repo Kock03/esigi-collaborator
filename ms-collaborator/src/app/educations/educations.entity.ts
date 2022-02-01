@@ -1,5 +1,6 @@
 import { Column, CreateDateColumn, DeleteDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { CollaboratorsEntity } from "../collaborators/collaborators.entity";
+import { Schooling } from "./dtos/schooling.enum";
 
 @Entity({name:'educations'})
 export class EducationsEntity{
