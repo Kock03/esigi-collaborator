@@ -1,0 +1,38 @@
+import { KnowledgesEntity } from "../knowledges/knowledges.entity";
+import { Schooling } from "./dtos/schooling.enum";
+import { Status } from "./dtos/status.enum";
+import { Type } from "./dtos/type.enum";
+import { TypeOfContract } from "./dtos/typeOfContract.enum";
+import { Workplace } from "./dtos/workplace.enum";
+import { SenioritiesEntity } from "../seniorities/seniorities.entity";
+import { LanguagesEntity } from "../languages/languages.entity";
+export declare class JobsEntity {
+    id: string;
+    requester: string;
+    status: Status;
+    publish: boolean;
+    client: string;
+    typeOfJob: Type;
+    temporary: boolean;
+    monthTime: string;
+    jobName: string;
+    startForecast: Date;
+    jobNumber: number;
+    typeOfContract: TypeOfContract;
+    workplace: Workplace;
+    workingDay: string;
+    minimumValue: number;
+    maximumValue: number;
+    schooling: Schooling;
+    collaboratorActivities: string;
+    skills: string;
+    attitudes: string;
+    openingDate: Date;
+    Languages: LanguagesEntity[];
+    Knowledges: KnowledgesEntity[];
+    Senorities: SenioritiesEntity;
+    createdAt: Date;
+    updatedAt: Date;
+    deletedAt: Date;
+    setDate(event: any): void;
+}
