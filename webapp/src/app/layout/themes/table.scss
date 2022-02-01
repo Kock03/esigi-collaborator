@@ -1,0 +1,20 @@
+.envolti-table {
+  table {
+    width: 100%;
+    background: white;
+  }
+
+  table th {
+    color: white;
+    border: 1px solid #673ab7;
+  }
+
+  tr.mat-header-row {
+    background: #673ab7;
+  }
+
+  table td {
+    height: 48px;
+    color: black;
+  }
+}
