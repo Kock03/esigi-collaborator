@@ -1,0 +1,38 @@
+#applicationTable {
+  padding-bottom: 10px;
+  max-width: 1200px;
+
+  table {
+    width: 100%;
+  }
+
+  .envolti-table {
+    margin-top: 30px;
+    overflow: auto;
+    max-height: 150px;
+    width: 100%;
+    .mat-column-jobName {
+      width: 100%;
+    }
+
+    .mat-column-client {
+      width: 100%;
+    }
+
+    .mat-column-applicationDate {
+      width: 100%;
+    }
+
+    .mat-column-returnDate {
+      width: 100%;
+    }
+
+    .mat-column-status {
+      width: 100%;
+    }
+
+    .mat-column-responsible {
+      width: 100%;
+    }
+  }
+}
