@@ -17,6 +17,7 @@ export class JobProvider {
     findAll(): Promise<any> {
         return new Promise((resolve, reject) => {
             this.apiGateway.get(environment.JOBS_MS + 'jobs').subscribe((response: HttpResponse<any>) => {
+                console.log("🚀 ~ file: job.provider.ts ~ line 20 ~ JobProvider ~ this.apiGateway.get ~ response", response)
                 resolve(response.body);
             }, reject);
         });

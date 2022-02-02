@@ -5,7 +5,7 @@ import {
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 import {
   fromEvent,
   takeUntil,
@@ -16,9 +16,12 @@ import {
 import { JobProvider } from 'src/providers/job.provider';
 
 export interface Job {
+  id: string;
   jobName: string;
   client: string;
   requester: string;
+  openingDate: string;
+  status: number;
 }
 
 @Component({
@@ -30,7 +33,7 @@ export interface Job {
 export class JobListComponent implements OnInit {
   @ViewChild('filter', { static: true }) filter!: ElementRef;
   private _unsubscribeAll: Subject<any>;
-  displayedJob: string[] = ['jobName', 'client', 'requester'];
+  displayedJob: string[] = ['jobName', 'client', 'requester', 'openingDate', 'status'];
   jobs!: Job[];
   filteredJobList!: any[];
 
@@ -55,6 +58,14 @@ export class JobListComponent implements OnInit {
     } catch (error) {
       console.error(error);
     }
+  }
+
+  editJob(job: any) {
+    const navigationExtras: NavigationExtras = {
+      state: { job },
+    };
+    this.router.navigate([`vaga/detalhe/${job.id}`], navigationExtras);
+    console.log("🚀 ~ file: job-list.component.ts ~ line 68 ~ JobListComponent ~ editJob ~ job", job)
   }
 
   initFilter() {

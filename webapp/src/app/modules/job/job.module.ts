@@ -22,6 +22,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { HttpClientModule } from '@angular/common/http';
 import {MatTreeModule} from '@angular/material/tree';
 import { JobListComponent } from './job-list/job-list.component';
+import { JobDetailComponent } from './job-detail/job-detail.component';
 
 const routes: Routes = [
   {
@@ -33,10 +34,14 @@ const routes: Routes = [
     path: 'novo',
     component: JobCreateComponent,
   },
+  {
+    path: 'detalhe/:id',
+    component: JobDetailComponent,
+  },
 ];
 
 @NgModule({
-  declarations: [JobCreateComponent, JobDialogSkill, JobListComponent],
+  declarations: [JobCreateComponent, JobDialogSkill, JobListComponent, JobDetailComponent],
   imports: [
     RouterModule.forChild(routes),
     CommonModule,

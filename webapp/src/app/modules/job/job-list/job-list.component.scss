@@ -1,28 +1,39 @@
-#jobList{
-    max-width: 1200px;
+#jobList {
+  max-width: 1200px;
 
-    
+
   .envolti-table {
     padding-bottom: 10px;
     overflow: auto;
     max-height: 350px;
   }
 
-  .new-btn{
-      height: 40px;
-      width: 100%;
-      max-width: 100px;
-      margin-top: 8px;
+  .new-btn {
+    height: 40px;
+    width: 100%;
+    max-width: 100px;
+    margin-top: 8px;
   }
 
   .search {
     width: 100%;
     max-width: 1000px;
     margin-right: 5px;
-    mat-form-field{
+
+    mat-form-field {
       width: 100%;
     }
   }
 
-  
+  .job-button {
+    background: none !important;
+    border: none;
+    padding: 0 !important;
+    font-size: 14px;
+    color: #673ab7;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+
 }
