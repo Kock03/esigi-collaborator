@@ -26,7 +26,7 @@ export class AppComponent {
       name: 'Colaborador',
       icon: 'person',
       selected: false,
-      action: '/colaborador/novo',
+      action: '/colaborador/lista',
     },
     {
       name: 'Vagas',

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { DocumentValidator } from 'src/app/validators/document.validator';
 import { CollaboratorProvider } from 'src/providers/collaborator.provider';
 
@@ -17,12 +18,17 @@ export class CollaboratorCreateComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private collaboratorProvider: CollaboratorProvider,
-    private http: HttpClient
+    private http: HttpClient,
+    private router: Router
   ) {}
 
   async ngOnInit(): Promise<void> {
     this.initForm();
     this.step = 1;
+  }
+
+  listCollaborator() {
+    this.router.navigate(['colaborador/lista']);
   }
 
   initForm() {

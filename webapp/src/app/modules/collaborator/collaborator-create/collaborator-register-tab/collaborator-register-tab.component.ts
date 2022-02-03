@@ -13,9 +13,9 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ApiGateway } from 'src/api-gateway';
 import { CepService } from 'src/services/cep.service';
-
 
 export interface collaboratorTypes {
   id: number;
@@ -34,8 +34,8 @@ export class CollaboratorRegisterTabComponent implements OnInit {
 
   selectedFile: any;
 
-  onFileSelected(changes: any): void{
-    this.selectedFile = changes.target.files[0]
+  onFileSelected(changes: any): void {
+    this.selectedFile = changes.target.files[0];
   }
 
   typeControl = new FormControl();
@@ -55,14 +55,12 @@ export class CollaboratorRegisterTabComponent implements OnInit {
   constructor(private fb: FormBuilder, private cepService: CepService) {}
 
   ngOnInit(): void {
-   
     this.collaboratorForm.valueChanges.subscribe((res) => {
       const addressForm = this.collaboratorForm.controls[
         'Address'
       ] as FormGroup;
 
-      addressForm.controls['cep'].valueChanges.subscribe((res) => {
-      });
+      addressForm.controls['cep'].valueChanges.subscribe((res) => {});
     });
   }
 

@@ -1,10 +1,11 @@
-#jobList {
+#collaboratorList {
   max-width: 1200px;
 
   .envolti-table {
     padding-bottom: 10px;
     overflow: auto;
     max-height: 350px;
+    margin-top: 22px;
   }
 
   .new-btn {

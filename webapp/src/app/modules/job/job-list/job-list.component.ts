@@ -63,7 +63,9 @@ export class JobListComponent implements OnInit {
 
       .subscribe((res) => {
         this.filteredJobList = this.jobs.filter((job) =>
-          job.jobName.toLocaleLowerCase().includes(this.filter.nativeElement.value.toLocaleLowerCase())
+          job.jobName
+            .toLocaleLowerCase()
+            .includes(this.filter.nativeElement.value.toLocaleLowerCase())
         );
       });
   }
