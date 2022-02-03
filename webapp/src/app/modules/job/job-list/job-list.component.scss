@@ -6,6 +6,20 @@
     padding-bottom: 10px;
     overflow: auto;
     max-height: 350px;
+
+
+
+
+    .mat-column-icon {
+      width: 50px;
+    }
+
+    .button-tab {
+      white-space: nowrap;
+      overflow: hidden;
+    }
+
+
   }
 
   .new-btn {

@@ -33,7 +33,7 @@ export interface Job {
 export class JobListComponent implements OnInit {
   @ViewChild('filter', { static: true }) filter!: ElementRef;
   private _unsubscribeAll: Subject<any>;
-  displayedJob: string[] = ['jobName', 'client', 'requester', 'openingDate', 'status'];
+  displayedJob: string[] = ['jobName', 'client', 'requester', 'openingDate', 'status', 'icon'];
   jobs!: Job[];
   filteredJobList!: any[];
 
