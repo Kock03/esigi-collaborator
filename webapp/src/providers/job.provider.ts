@@ -1,6 +1,7 @@
 import { HttpResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { ApiGateway } from "src/api-gateway";
+import { Job } from "src/app/modules/job/job-list/job-list.component";
 import { environment } from "src/environments/environment";
 
 @Injectable({
@@ -18,14 +19,15 @@ export class JobProvider {
         return new Promise((resolve, reject) => {
             this.apiGateway.get(environment.JOBS_MS + 'jobs').subscribe((response: HttpResponse<any>) => {
                 console.log("🚀 ~ file: job.provider.ts ~ line 20 ~ JobProvider ~ this.apiGateway.get ~ response", response)
-                resolve(response.body);
+                const jobs: Job[] = response.body
+                resolve(jobs);
             }, reject);
         });
     }
  
-    findOne(id: string): Promise<any> {
+    findOne(id: string | null): Promise<any> {
         return new Promise((resolve, reject) => {
-            this.apiGateway.get(environment.JOBS_MS +  'jobs', { id: id }).subscribe((response: HttpResponse<any>) => {
+            this.apiGateway.get(environment.JOBS_MS +  'jobs/:id', { id: id }).subscribe((response: HttpResponse<Job>) => {
                 resolve(response.body);
             }, reject);
         });

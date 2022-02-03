@@ -59,6 +59,7 @@ export class JobCreateComponent implements OnInit {
     private router: Router
   ) {}
 
+
   ngOnInit(): void {
     this.initForm();
   }
@@ -85,7 +86,7 @@ export class JobCreateComponent implements OnInit {
       ],
       typeOfJob: [1, Validators.required],
       temporary: [false],
-      monthTime: ['', Validators.required],
+      monthTime: [''],
       jobName: [
         'Programador React',
         [
@@ -123,6 +124,8 @@ export class JobCreateComponent implements OnInit {
     });
   }
 
+  
+
   openDialog() {
     const dialogRef = this.dialog.open(JobDialogSkill, {
       width: '450px',
@@ -146,6 +149,7 @@ export class JobCreateComponent implements OnInit {
       this.selectedIndex = this.selectedIndex - 1;
     }
   }
+
 
   async saveJob() {
     let data = this.jobForm.getRawValue();

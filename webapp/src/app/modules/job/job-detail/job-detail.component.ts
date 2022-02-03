@@ -1,31 +1,48 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { JobProvider } from 'src/providers/job.provider';
-import { Location } from "@angular/common";
+import { Location } from '@angular/common';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-export interface Job {
-  jobName: string;
-}
 
 @Component({
   selector: 'app-job-detail',
   templateUrl: './job-detail.component.html',
   styleUrls: ['./job-detail.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class JobDetailComponent implements OnInit {
-  job: any;
+
+  step: number = 1;
+  interviewForm!: FormGroup;
 
   constructor(
-    private router: Router,
-    private route: ActivatedRoute,
-    private _location: Location
+  
+
+    private fb: FormBuilder
   ) {}
 
   ngOnInit(): void {
-    const state: any = this._location.getState();
-    this.job = state["job"]
-    console.log("🚀 ~ file: job-detail.component.ts ~ line 25 ~ JobDetailComponent ~ ngOnInit ~ state", this.job)
+
   }
 
- 
+  initForm() {
+    this.interviewForm = this.fb.group({
+      form: ['', Validators.required],
+    });
+  }
+
+  handleChanges(value: any): void {
+  }
+
+
+
+  
+  navigate(direction: string) {
+    if (this.step > 1 && direction === 'back') {
+      this.step -= 1;
+    } else if (this.step < 2 && direction === 'next') {
+      this.step += 1;
+    }
+  }
 }

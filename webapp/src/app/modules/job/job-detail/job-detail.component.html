@@ -1,4 +1,60 @@
-<div id="jobList" class="page" ngFor="let job">
-
-    {{job.jobName }}
-</div>
+<div id="jobDetail" class="page">
+  <h2 class="title">Descrição da Vaga</h2>
+    
+    <div fxLayout="row" class="tab" fxLayoutGap="16px">
+      <div
+        fxLayout="column"
+        class="tab-group"
+        [ngClass]="{ done: step > 0, active: step == 1 }"
+      >
+        <p class="tab-item">Vaga</p>
+        <span class="tab-border"></span>
+      </div>
+      <div
+        fxLayout="column"
+        class="tab-group"
+        [ngClass]="{ done: step > 1, active: step == 2 }"
+      >
+        <p class="tab-item">Entrevistas</p>
+        <span class="tab-border"></span>
+      </div>
+     
+    </div>
+  
+    <app-job-detail-list-tab
+      [hidden]="step != 1"
+    
+      (onChange)="handleChanges($event)"
+    >
+ 
+</app-job-detail-list-tab>
+    <app-job-interview-tab
+      [hidden]="step != 2"
+     
+      (onChange)="handleChanges($event)"
+    >
+    </app-job-interview-tab>
+  
+  
+    <div class="navigation-buttons" fxLayoutAlign="center end" fxLayoutGap="16px">
+      <button mat-button *ngIf="step != 1" (click)="navigate('back')">
+        Voltar
+      </button>
+      <button
+        mat-flat-button
+        *ngIf="step != 2"
+        (click)="navigate('next')"
+        color="primary"
+      >
+        Continuar
+      </button>
+      <button
+        mat-flat-button
+        *ngIf="step == 2"
+        color="primary"
+      >
+        Salvar
+      </button>
+    </div>
+  </div>
+  

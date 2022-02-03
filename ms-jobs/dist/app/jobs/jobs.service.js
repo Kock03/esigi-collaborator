@@ -33,6 +33,7 @@ let JobsService = class JobsService {
             return await this.jobsRepository.findOneOrFail(conditions, options);
         }
         catch (error) {
+            console.log('🚀 ~ file: jobs.service.ts ~ line 37 ~ JobsService ~ error', error);
             throw new common_1.NotFoundException(error.Message);
         }
     }

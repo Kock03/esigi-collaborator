@@ -1,0 +1,20 @@
+#jobDetail {
+  .tab-group {
+    width: 100%;
+  }
+
+  .tab-item {
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  .content-scroll {
+    overflow: auto;
+    height: calc(100vh - 280px);
+
+  }
+
+  .navigation-buttons {
+    margin-top: 8px;
+  }
+}

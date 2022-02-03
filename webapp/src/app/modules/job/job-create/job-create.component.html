@@ -376,6 +376,7 @@
       *ngIf="selectedIndex == 1"
       color="primary"
       (click)="saveJob()"
+      [disabled]="jobForm.invalid"
     >
       Salvar
     </button>

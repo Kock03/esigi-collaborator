@@ -23,6 +23,8 @@ import { HttpClientModule } from '@angular/common/http';
 import {MatTreeModule} from '@angular/material/tree';
 import { JobListComponent } from './job-list/job-list.component';
 import { JobDetailComponent } from './job-detail/job-detail.component';
+import { JobDetailListTabComponent } from './job-detail/job-detail-list-tab/job-detail-list-tab.component';
+import { JobInterviewTabComponent } from './job-detail/job-interview-tab/job-interview-tab.component';
 
 const routes: Routes = [
   {
@@ -41,7 +43,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [JobCreateComponent, JobDialogSkill, JobListComponent, JobDetailComponent],
+  declarations: [JobCreateComponent, JobDialogSkill, JobListComponent, JobDetailComponent, JobDetailListTabComponent, JobInterviewTabComponent],
   imports: [
     RouterModule.forChild(routes),
     CommonModule,

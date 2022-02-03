@@ -1,9 +1,9 @@
-import { FindConditions } from "typeorm/find-options/FindConditions";
-import { FindOneOptions } from "typeorm/find-options/FindOneOptions";
-import { Repository } from "typeorm/repository/Repository";
-import { CreateJobsDto } from "./dtos/create-jobs.dto";
-import { UpdateJobsDto } from "./dtos/update-jobs.dto";
-import { JobsEntity } from "./jobs.entity";
+import { FindConditions } from 'typeorm/find-options/FindConditions';
+import { FindOneOptions } from 'typeorm/find-options/FindOneOptions';
+import { Repository } from 'typeorm/repository/Repository';
+import { CreateJobsDto } from './dtos/create-jobs.dto';
+import { UpdateJobsDto } from './dtos/update-jobs.dto';
+import { JobsEntity } from './jobs.entity';
 export declare class JobsService {
     private readonly jobsRepository;
     constructor(jobsRepository: Repository<JobsEntity>);
