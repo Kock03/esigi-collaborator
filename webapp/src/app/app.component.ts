@@ -41,6 +41,12 @@ export class AppComponent {
       selected: false,
       action: '/curriculo/novo',
     },
+    {
+      name: 'Configurações',
+      icon: 'manage_accounts',
+      selected: false,
+      action: '/setting/novo',
+    },
   ];
 
   constructor(private observer: BreakpointObserver, private router: Router) {}

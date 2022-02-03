@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { SettingActiveDirectoryComponent } from './modules/setting/setting-create/setting-active-directory/setting-active-directory.component';
+import { SettingEmailComponent } from './modules/setting/setting-create/setting-email/setting-email.component';
 
 const routes: Routes = [
   {
@@ -34,7 +36,15 @@ const routes: Routes = [
         (m) => m.ResumeModule
       ),
   },
-
+  {
+    path: 'setting',
+    loadChildren: () =>
+      import('./modules/setting/setting.module').then(
+        (m) => m.SettingModule
+      ),
+  },
+  { path: 'active-directory', component: SettingActiveDirectoryComponent },
+  { path: 'email', component: SettingEmailComponent },
    ]
 
 

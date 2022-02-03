@@ -1,0 +1,42 @@
+#settingPortal {
+    .portal-content {
+      margin: auto;
+      width: 100%;
+      display: flex;
+      // margin-left: 300px;
+      margin-top: 220px;
+    }
+  }
+
+  .rocket-button{
+    max-width: 180px;
+    padding: 20px;
+    width: 100%;
+    box-align: center;
+    width:100%;
+    margin-left: 55px;
+  }
+  a{
+    font-size: 18px !important;
+    font-family: "Branding";
+    text-align: center !important;
+    margin-left: 70px;
+  }
+  
+  .box-management-blue,
+  .box-management-purple {
+    border-style: groove;
+    border-width: 3px;
+    border-radius: 10px;
+    border-color: #6935AB;
+    background-color: white;
+    text-align: justify;
+    text-align: center !important;
+    max-width: 300px;
+    width: 100%;
+    margin: 16px;
+    cursor: pointer;
+  }
+  
+
+  

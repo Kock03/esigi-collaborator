@@ -1,0 +1,46 @@
+<div id="activeDirectory" class="page">
+  <div class="content-scroll" fxLayout="column">
+    <form [formGroup]="settingForm">
+        <h2 mat-dialog-title class="label">Configuração SMTP</h2>
+        <div fxFlex="100" fxLayoutGap="16px" fxFlexAlign="start">
+        
+        <mat-form-field fxFlex="100" appearance="outline">
+            <mat-label>Tipo de Servidor</mat-label>
+            <mat-select matInput disableRipple [compareWith]="compareSelect">
+            <mat-option [value]="type.id" *ngFor="let type of types">{{
+                type.name
+            }}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        </div>
+        <h2>Servidor de entrada</h2>
+        <div fxFlex="100" fxLayoutGap="16px" fxFlexAlign="start" fxLayout="row">
+        <mat-form-field class="form-control" appearance="outline">
+            <mat-label>Servidor</mat-label>
+            <input matInput placeholder="Servidor" formControlName="serverType"/>
+        </mat-form-field>
+        <mat-form-field class="form-control" appearance="outline">
+            <mat-label>Porta</mat-label>
+            <input matInput placeholder="Porta" formControlName="door" />
+        </mat-form-field>
+        </div>
+        <div  fxFlexAlign="start" fxLayout="column">
+        <mat-form-field  appearance="outline">
+            <mat-checkbox
+            class="checkbox"
+            color="primary"
+            >Este servidor requer uma conexão criptografada(SSL/TLS)</mat-checkbox formControlName="checkServer"
+            >
+            <mat-checkbox
+            class="checkbox"
+            color="primary"
+            >Este login usando Autenticação de Senha de Segurança(SPA)</mat-checkbox formControlName="checkLogin"
+            >
+        </mat-form-field>
+        </div>
+        <div class="navigation-buttons" fxLayoutAlign="center end" fxLayoutGap="16px">
+            <button mat-flat-button color="primary">Conectar</button>
+        </div>
+    </form>
+  </div>
+</div>
