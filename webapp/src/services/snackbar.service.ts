@@ -33,7 +33,7 @@ export class SnackBarService {
                 "OK",
                 {
                     panelClass: "success-message",
-                    verticalPosition: 'top',
+                    verticalPosition: 'bottom',
                     duration: 5000
                 });
             snackBar.onAction().subscribe(() => {
