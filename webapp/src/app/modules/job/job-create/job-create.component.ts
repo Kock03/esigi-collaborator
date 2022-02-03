@@ -13,6 +13,7 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { JobProvider } from 'src/providers/job.provider';
+import { SnackBarService } from 'src/services/snackbar.service';
 
 export interface Knowledge {
   name: string;
@@ -54,6 +55,7 @@ export class JobCreateComponent implements OnInit {
     public dialog: MatDialog,
     private jobProvider: JobProvider,
     private http: HttpClient,
+    private snackbarService: SnackBarService,
     private router: Router
   ) {}
 
@@ -154,8 +156,11 @@ export class JobCreateComponent implements OnInit {
 
     try {
       const jobs = await this.jobProvider.store(data);
+      this.snackbarService.successMessage("Vaga Cadastrada Com Sucesso");
+      this.router.navigate(["vaga/lista"]);
     } catch (error) {
       console.log('ERROR 132' + error);
+      this.snackbarService.showError("Falha ao Cadastrar");
     }
   }
 

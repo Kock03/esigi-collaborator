@@ -12,14 +12,16 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { HttpClientModule } from '@angular/common/http';
-import {MatListModule} from '@angular/material/list';
-
+import { MatListModule } from '@angular/material/list';
 
 import { NgxMaskModule, IConfig } from 'ngx-mask';
+import { SnackBarComponent } from './components/snack-bar/snack-bar.component';
+import { SnackBarService } from 'src/services/snackbar.service';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, SnackBarComponent],
   imports: [
     NgxMaskModule.forRoot(),
     BrowserModule,
@@ -34,8 +36,9 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
     MatDividerModule,
     HttpClientModule,
     MatListModule,
+    MatSnackBarModule,
   ],
-  providers: [],
+  providers: [SnackBarService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
