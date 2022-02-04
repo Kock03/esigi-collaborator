@@ -9,6 +9,7 @@ export interface Job {
   requester: string;
   openingDate: string;
   status: number;
+  typeOfJob: number;
 }
 
 @Component({
@@ -37,10 +38,7 @@ export class JobDetailListTabComponent implements OnInit {
   async getJob() {
     try {
       this.job = await this.jobProvider.findOne(this.jobId);
-      console.log(
-        '🚀 ~ file: job-detail.component.ts ~ line 38 ~ JobDetailComponent ~ getJob ~ this.job',
-        this.job
-      );
+      console.log(this.job)
     } catch (error) {
       console.error(error);
     }

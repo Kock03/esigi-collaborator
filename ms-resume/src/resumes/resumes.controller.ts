@@ -29,7 +29,6 @@ export class ResumesController {
   @Post()
   async store(@Body() body: CreateResumesDto) {
     return await this.resumesService.store(body);
-    console.log("🚀 ~ file: resumes.controller.ts ~ line 32 ~ ResumesController ~ store ~ body", body)
   }
 
   @Put(':id')

@@ -1,0 +1,32 @@
+#jobInterview {
+  max-width: 900px;
+
+  .mat-tab-label-active {
+    border-bottom: 2px solid #673ab7;
+    opacity: 1 !important;
+  }
+
+  .mat-ink-bar {
+    height: 0px !important;
+  }
+
+  .form {
+    margin-top: 20px;
+  }
+
+  .checkbox-section {
+    .text {
+      margin-bottom: 5px;
+    }
+  }
+
+  .text-area {
+    height: 150px;
+  }
+
+  .save-button {
+    height: 40px;
+    margin-top: 7px;
+  }
+
+}

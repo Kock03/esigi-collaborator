@@ -21,7 +21,6 @@ const seniorities_entity_1 = require("../seniorities/seniorities.entity");
 const languages_entity_1 = require("../languages/languages.entity");
 let JobsEntity = class JobsEntity {
     setDate(event) {
-        console.log(event);
     }
 };
 __decorate([

@@ -40,7 +40,7 @@ export class ResumeRegisterTabComponent implements OnInit {
   async getAddress() {
     const address = this.resumeForm.controls['Address'].value;
 
-    console.log(address.cep);
+
 
     const district = await this.cepService.findDistrict(
       address.cep.replace('-', '')

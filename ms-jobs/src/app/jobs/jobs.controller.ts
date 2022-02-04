@@ -15,11 +15,11 @@ export class JobsController{
     @Get(':id')
     async show(@Param('id', new ParseUUIDPipe()) id: string){
         return await this.jobsService.findOneOrFail({id});
+        console.log("🚀 ~ file: jobs.controller.ts ~ line 18 ~ JobsController ~ show ~ id", id)
     }
 
     @Post()
     async store(@Body() body: CreateJobsDto){
-        console.log("🚀 ~ file: jobs.controller.ts ~ line 22 ~ JobsController ~ store ~ body", body)
         return await this.jobsService.store(body);
     }
 

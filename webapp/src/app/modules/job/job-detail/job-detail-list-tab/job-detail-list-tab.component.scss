@@ -1,0 +1,39 @@
+#jobList {
+  .mat-list-item {
+    height: auto !important;
+  }
+
+  .list-group {
+    margin-top: 16px;
+
+  }
+
+  .label-office {
+    font-style: bold;
+    font-size: 20px;
+  }
+
+  .label-gray {
+    color: rgb(125, 123, 123);
+    font-size: 15px;
+  }
+
+  .list-group-item {
+    border-style: groove;
+    border-radius: 10px;
+    border-color: #ff6a39;
+    width: 45% !important;
+    padding: 15px;
+    margin-bottom: 16px;
+  }
+
+  .mat.list.item {
+    padding: 0 !important;
+    height: 100% !important;
+    max-height: 600px;
+  }
+
+  .mat-icon-list {
+    margin-top: 100px;
+  }
+}

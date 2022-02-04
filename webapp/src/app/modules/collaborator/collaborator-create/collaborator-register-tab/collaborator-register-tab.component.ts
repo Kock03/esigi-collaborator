@@ -81,13 +81,8 @@ export class CollaboratorRegisterTabComponent implements OnInit {
 
   async getAddress() {
     const address = this.collaboratorForm.controls['Address'].value;
-    console.log(address.cep);
     const district = await this.cepService.findDistrict(
       address.cep.replace('-', '')
-    );
-    console.log(
-      '🚀 ~ file: collaborator-register-tab.component.ts ~ line 75 ~ CollaboratorRegisterTabComponent ~ getAddress ~ district',
-      district
     );
 
     if (district.erro) {

@@ -44,7 +44,7 @@ export class JobCreateComponent implements OnInit {
   jobForm!: FormGroup;
   step: number = 1;
   selectedIndex: number = 0;
-  disable = false;
+
   checked = false;
 
   index: any = null;
@@ -153,10 +153,7 @@ export class JobCreateComponent implements OnInit {
 
   async saveJob() {
     let data = this.jobForm.getRawValue();
-    console.log(
-      '🚀 ~ file: job-create.component.ts ~ line 84 ~ JobCreateComponent ~ saveCustomer ~ data',
-      data
-    );
+
 
     try {
       const jobs = await this.jobProvider.store(data);

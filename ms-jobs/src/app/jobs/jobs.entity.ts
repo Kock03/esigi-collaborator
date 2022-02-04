@@ -100,7 +100,6 @@ export class JobsEntity {
 
   @BeforeRemove()
   setDate(event: any) {
-    console.log(event)
   }
 
 }

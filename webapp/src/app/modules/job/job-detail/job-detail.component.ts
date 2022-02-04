@@ -4,7 +4,6 @@ import { JobProvider } from 'src/providers/job.provider';
 import { Location } from '@angular/common';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-
 @Component({
   selector: 'app-job-detail',
   templateUrl: './job-detail.component.html',
@@ -12,37 +11,25 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   encapsulation: ViewEncapsulation.None,
 })
 export class JobDetailComponent implements OnInit {
-
   step: number = 1;
-  interviewForm!: FormGroup;
 
-  constructor(
-  
-
-    private fb: FormBuilder
-  ) {}
+  constructor(private router: Router, private fb: FormBuilder) {}
 
   ngOnInit(): void {
-
+    this.step = 1;
   }
 
-  initForm() {
-    this.interviewForm = this.fb.group({
-      form: ['', Validators.required],
-    });
-  }
+  handleChanges(value: any): void {}
 
-  handleChanges(value: any): void {
-  }
-
-
-
-  
   navigate(direction: string) {
     if (this.step > 1 && direction === 'back') {
       this.step -= 1;
     } else if (this.step < 2 && direction === 'next') {
       this.step += 1;
     }
+  }
+
+  backToList() {
+    this.router.navigate(['vaga/lista']);
   }
 }

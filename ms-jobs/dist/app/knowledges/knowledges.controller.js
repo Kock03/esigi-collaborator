@@ -28,7 +28,6 @@ let KnowledgesController = class KnowledgesController {
         return await this.KnowledgesService.findOneOrfail({ id });
     }
     async store(body) {
-        console.log("🚀 ~ file: jobs.controller.ts ~ line 22 ~ KnowledgesController ~ store ~ body", body);
         return await this.KnowledgesService.store(body);
     }
     async update(id, body) {

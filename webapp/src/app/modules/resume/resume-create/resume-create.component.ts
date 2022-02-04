@@ -90,7 +90,7 @@ export class ResumeCreateComponent implements OnInit {
       });
 
       this.resumeForm.valueChanges.subscribe(res => {
-        console.log("🚀 ~ file: resume-create.component.ts ~ line 90 ~ ResumeCreateComponent ~ initForm ~ res", res)
+
       })
     }
 
@@ -117,10 +117,8 @@ export class ResumeCreateComponent implements OnInit {
   }
 
   handleChanges(value: any): void {
-    console.log(
-      '🚀 ~ file: customer-create.component.ts ~ line 36 ~ CustomerCreateComponent ~ handleChanges ~ value',
-      value
-    );
+   
+    
   }
 }
 

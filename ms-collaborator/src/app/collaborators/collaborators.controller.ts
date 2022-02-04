@@ -25,7 +25,6 @@ export class CollaboratorsController {
 
   @Post()
   async store(@Body() body: CreateCollaboratorsDto) {
-    console.log("🚀 ~ file: collaborators.controller.ts ~ line 28 ~ CollaboratorsController ~ store ~ body", body)
     return await this.collaboratorsRepository.store(body);
   }
 

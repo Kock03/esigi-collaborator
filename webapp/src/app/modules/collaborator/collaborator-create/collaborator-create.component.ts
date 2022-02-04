@@ -72,7 +72,6 @@ export class CollaboratorCreateComponent implements OnInit {
 
   async saveCollaborator() {
     let data = this.collaboratorForm.getRawValue();
-    console.log(data);
     if (!data.Educations.length) {
       data.Educations = null;
     }
@@ -95,10 +94,6 @@ export class CollaboratorCreateComponent implements OnInit {
     }
   }
   handleChanges(value: any): void {
-    console.log(
-      '🚀 ~ file: customer-create.component.ts ~ line 36 ~ CustomerCreateComponent ~ handleChanges ~ value',
-      value
-    );
   }
 
   handleStep(number: number): void {

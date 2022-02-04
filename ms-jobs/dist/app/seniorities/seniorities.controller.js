@@ -28,7 +28,6 @@ let SenioritiesController = class SenioritiesController {
         return await this.senioritiesService.findOneOrfail({ id });
     }
     async store(body) {
-        console.log("🚀 ~ file: jobs.controller.ts ~ line 22 ~ SenioritiesController ~ store ~ body", body);
         return await this.senioritiesService.store(body);
     }
     async update(id, body) {
