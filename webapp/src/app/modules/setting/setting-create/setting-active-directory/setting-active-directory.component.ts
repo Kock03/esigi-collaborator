@@ -1,5 +1,5 @@
 import { Component, OnInit, Input,ViewEncapsulation } from '@angular/core';
-import {  FormGroup } from '@angular/forms';
+import {  FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 
 @Component({
@@ -12,9 +12,25 @@ export class SettingActiveDirectoryComponent implements OnInit {
   @Input('form') settingForm!: FormGroup;
   
 
-  constructor() { }
+  constructor(private fb: FormBuilder,) { }
 
   ngOnInit(): void {
+    this.initForm();
+  }
+
+  initForm(): void {
+    this.settingForm = this.fb.group({
+      adAdress : ['', Validators.required],
+      user: ['', Validators.required],
+      password: [
+        '',
+        [
+          Validators.required,
+          Validators.maxLength(20),
+          Validators.minLength(6),
+        ],
+      ],
+    }); 
   }
 
 }

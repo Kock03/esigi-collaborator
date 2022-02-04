@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SettingCreateComponent } from './setting-create/setting-create.component';
 import { RouterModule, Routes } from '@angular/router';
@@ -11,6 +11,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ReactiveFormsModule } from '@angular/forms';
+
+
 
 const routes: Routes = [
   {
@@ -44,6 +46,10 @@ const routes: Routes = [
     MatCheckboxModule,
     MatFormFieldModule,
     ReactiveFormsModule,
-  ]
+
+  ],
+  entryComponents: [
+    SettingEmailComponent
+  ],
 })
 export class SettingModule {}

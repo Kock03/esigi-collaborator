@@ -8,7 +8,12 @@
         width: 100%;
     }
     
-    .navigation-buttons{
-        margin-top: 500px;
+    .navigation-buttons {
+        margin: auto;
+        width: 100%;
+        position: relative;
+        display: flex;
+        bottom: 0;
+        margin-top: 12px;
       }
 }
