@@ -1,14 +1,17 @@
 import {
   Component,
+  ElementRef,
   EventEmitter,
   Input,
   OnInit,
   Output,
+  ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Subject } from 'rxjs';
+import { debounceTime, distinctUntilChanged, fromEvent, Subject } from 'rxjs';
+import { JobProvider } from 'src/providers/job.provider';
 
 export interface Application {
   jobName: string;
@@ -28,18 +31,21 @@ export interface Application {
 export class ResumeApplicationTabComponent implements OnInit {
   @Input('form') resumeForm!: FormGroup;
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
+  @ViewChild('filter', { static: true }) filter!: ElementRef;
+
   private _unsubscribeAll: Subject<any>;
 
-  dataSource: Application[] = [
-    {
-      jobName: 'C#',
-      client: 'Ambev',
-      applicationDate: '03/01/2020',
-      returnDate: '22/02/2020',
-      status: 'Reprovado',
-      responsible: 'Wellington Almeida',
-    },
-  ];
+  // dataSource: Application[] = [
+  //   {
+  //     jobName: 'C#',
+  //     client: 'Ambev',
+  //     applicationDate: '03/01/2020',
+  //     returnDate: '22/02/2020',
+  //     status: 'Reprovado',
+  //     responsible: 'Wellington Almeida',
+  //   },
+  // ];
+
   displayedApplication: string[] = [
     'jobName',
     'client',
@@ -48,12 +54,41 @@ export class ResumeApplicationTabComponent implements OnInit {
     'status',
     'responsible',
   ];
+
   applications!: Application[];
+
   filteredApplicationList!: any[];
 
-  constructor(private router: Router /*, private jobProvider: JobProvider*/) {
+  applicationForm!: FormGroup;
+
+  constructor(private jobProvider: JobProvider) {
     this._unsubscribeAll = new Subject();
   }
 
-  ngOnInit(): void {}
+  ngOnInit() {
+    this.getApplications();
+  }
+
+  async getApplications() {
+    try {
+      this.filteredApplicationList = this.applications =
+        await this.jobProvider.findAll();
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  initFilter() {
+    fromEvent(this.filter.nativeElement, 'keyup')
+      .pipe(debounceTime(200), distinctUntilChanged())
+
+      .subscribe((res) => {
+        this.filteredApplicationList = this.applications.filter(
+          (collaborator) =>
+            collaborator.jobName
+              .toLocaleLowerCase()
+              .includes(this.filter.nativeElement.value.toLocaleLowerCase())
+        );
+      });
+  }
 }
