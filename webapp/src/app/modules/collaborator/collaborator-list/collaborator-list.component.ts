@@ -1,10 +1,14 @@
 import {
   Component,
   ElementRef,
+  Input,
   OnInit,
+  Output,
   ViewChild,
   ViewEncapsulation,
+  EventEmitter,
 } from '@angular/core';
+import { FormArray, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import {
   debounce,
@@ -14,7 +18,6 @@ import {
   Subject,
 } from 'rxjs';
 import { CollaboratorProvider } from 'src/providers/collaborator.provider';
-import { JobCreateComponent } from '../../job/job-create/job-create.component';
 
 export interface Collaborator {
   collaborator: string;
@@ -31,9 +34,13 @@ export interface Collaborator {
   encapsulation: ViewEncapsulation.None,
 })
 export class CollaboratorListComponent implements OnInit {
+  @Input('form') collaboratorFrom!: FormGroup;
+  @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
   @ViewChild('filter', { static: true }) filter!: ElementRef;
+
   private _unsubscribeAll: Subject<any>;
-  displayed: string[] = [
+
+  displayedCollaborator: string[] = [
     'collaborator',
     'admissionDate',
     'office',
@@ -41,8 +48,18 @@ export class CollaboratorListComponent implements OnInit {
     'status',
     'icon',
   ];
+
   collaborators!: Collaborator[];
+
   filteredCollaboratorList!: any[];
+
+  collaboratorForm!: FormGroup;
+
+  index: any = null;
+
+  get collaboratorArray() {
+    return this.collaboratorForm.controls['Collaborator'] as FormArray;
+  }
 
   constructor(
     private router: Router,
@@ -60,6 +77,10 @@ export class CollaboratorListComponent implements OnInit {
 
   createCollaborator() {
     this.router.navigate(['colaborador/novo']);
+  }
+
+  deleteCollaborator(index: number) {
+    this.collaboratorArray.removeAt(index);
   }
 
   async getCollaboratorList() {
