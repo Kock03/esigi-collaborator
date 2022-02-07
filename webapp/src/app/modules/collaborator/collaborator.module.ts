@@ -52,6 +52,10 @@ const routes: Routes = [
     path: 'lista',
     component: CollaboratorListComponent,
   },
+  {
+    path: ':id',
+    component: CollaboratorCreateComponent,
+  },
 ];
 
 @NgModule({

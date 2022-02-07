@@ -99,7 +99,7 @@
   </app-collaborator-document-tab>
   <app-collaborator-panel-tab [hidden]="step != 7"></app-collaborator-panel-tab>
 
-  <div class="navigation-buttons" fxLayoutAlign="center end" fxLayoutGap="16px">
+  <div class="navigation-buttons" fxLayoutAlign="center end" fxLayoutGap="16px" *ngIf="collaboratorId == 'novo'">
     <button mat-button *ngIf="step != 1" (click)="navigate('back')">
       Voltar
     </button>
@@ -120,4 +120,19 @@
       Salvar
     </button>
   </div>
+
+  <div
+  class="navigation-buttons"
+  fxLayoutAlign="center end"
+  fxLayoutGap="16px"
+  *ngIf="collaboratorId !== 'novo'"
+>
+  <button
+    mat-flat-button
+    color="primary"
+    (click)="saveEditJob()"
+  >
+    Salvar
+  </button>
+</div>
 </div>

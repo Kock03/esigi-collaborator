@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DocumentValidator } from 'src/app/validators/document.validator';
 import { CollaboratorProvider } from 'src/providers/collaborator.provider';
 
@@ -14,21 +14,50 @@ import { CollaboratorProvider } from 'src/providers/collaborator.provider';
 export class CollaboratorCreateComponent implements OnInit {
   collaboratorForm!: FormGroup;
   step: number = 1;
+  collaboratorId!: string | null;
+  collaborator!: any;
 
   constructor(
     private fb: FormBuilder,
     private collaboratorProvider: CollaboratorProvider,
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   async ngOnInit(): Promise<void> {
     this.initForm();
+    this.collaboratorId = this.route.snapshot.paramMap.get('id');
     this.step = 1;
+    await this.getCollaborator();
+    this.collaboratorForm.patchValue(this.collaborator);
+  }
+
+  async getCollaborator() {
+    try {
+      this.collaborator = await this.collaboratorProvider.findOne(
+        this.collaboratorId
+      );
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   listCollaborator() {
     this.router.navigate(['colaborador/lista']);
+  }
+
+  async saveEditJob() {
+    let data = this.collaboratorForm.getRawValue();
+    try {
+      const job = await this.collaboratorProvider.update(
+        this.collaboratorId,
+        data
+      );
+      this.router.navigate(['colaborador/lista']);
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   initForm() {

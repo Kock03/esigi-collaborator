@@ -9,6 +9,7 @@ import {
   EventEmitter,
 } from '@angular/core';
 import { FormArray, FormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import {
   debounce,
@@ -18,9 +19,11 @@ import {
   Subject,
 } from 'rxjs';
 import { CollaboratorProvider } from 'src/providers/collaborator.provider';
+import { CollaboratorCreateComponent } from '../collaborator-create/collaborator-create.component';
+import { CollaboratorRegisterTabComponent } from '../collaborator-create/collaborator-register-tab/collaborator-register-tab.component';
 
 export interface Collaborator {
-  collaborator: string;
+  firstNameCorporateName: string;
   admissionDate: Date;
   office: number;
   currentClient: string;
@@ -50,20 +53,19 @@ export class CollaboratorListComponent implements OnInit {
   ];
 
   collaborators!: Collaborator[];
-
   filteredCollaboratorList!: any[];
-
   collaboratorForm!: FormGroup;
-
   index: any = null;
+  Collaborator: any;
 
   get collaboratorArray() {
-    return this.collaboratorForm.controls['Collaborator'] as FormArray;
+    return this.collaboratorForm.controls['Collaborators'] as FormArray;
   }
 
   constructor(
     private router: Router,
-    private collaboratorProvider: CollaboratorProvider
+    private collaboratorProvider: CollaboratorProvider,
+    private dialog: MatDialog
   ) {
     this._unsubscribeAll = new Subject();
   }
@@ -71,7 +73,6 @@ export class CollaboratorListComponent implements OnInit {
   async ngOnInit() {
     this.getCollaboratorList();
 
-    this.filteredCollaboratorList = this.collaborators;
     this.initFilter();
   }
 
@@ -79,8 +80,27 @@ export class CollaboratorListComponent implements OnInit {
     this.router.navigate(['colaborador/novo']);
   }
 
-  deleteCollaborator(index: number) {
-    this.collaboratorArray.removeAt(index);
+  getCollaborator(collaboratorSelected: any, index: number) {
+    const dialogRef = this.dialog.open(CollaboratorCreateComponent, {
+      data: { collaboratorSelected },
+    });
+
+    this.index = index;
+    dialogRef.afterClosed().subscribe((collaborator) => {
+      this.collaboratorArray.controls[this.index].setValue(collaborator);
+    });
+  }
+
+  async deleteCollaborator(index: number) {
+    const collaborator = this.filteredCollaboratorList[index];
+    try {
+      await this.collaboratorProvider.destroy(collaborator.id);
+      this.getCollaboratorList();
+    } catch (error) {
+      console.log(error);
+    }
+
+    // this.collaboratorArray.removeAt(index);
   }
 
   async getCollaboratorList() {
@@ -99,10 +119,14 @@ export class CollaboratorListComponent implements OnInit {
       .subscribe((res) => {
         this.filteredCollaboratorList = this.collaborators.filter(
           (collaborator) =>
-            collaborator.collaborator
+            collaborator.firstNameCorporateName
               .toLocaleLowerCase()
               .includes(this.filter.nativeElement.value.toLocaleLowerCase())
         );
       });
+  }
+
+  editCollaborator(collaboratorId: any) {
+    this.router.navigate([`colaborador/${collaboratorId}`]);
   }
 }
