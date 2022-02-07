@@ -1,9 +1,5 @@
 <div id="jobList" class="tab">
   <div class="content-scroll">
-    <!-- <div *ngIf="job">
-      {{ job.jobName }}
-    </div> -->
-
     <mat-list role="list" #experiencesList *ngIf="job" class="list-group">
       <mat-list-item class="list-group-item" fxLayoutAlign="start start">
         <div fxLayout="column">
@@ -44,6 +40,50 @@
                 : job.typeOfJob == 2
                 ? "Promoção"
                 : "Fidelidade"
+            }}
+          </span>
+          <span class="label-gray">
+            <b>Temporario:</b>
+            {{ job.temporary == true ? "Sim" : "Não" }}
+          </span>
+          <span *ngIf="job.temporary == true" class="label-gray">
+            <b>Tempo de Contrato:</b>
+            {{ job.monthTime }}
+          </span>
+          <span class="label-gray">
+            <b>Previsão de Inicio:</b>
+            {{ job.startForecast | date: "dd/MM/yyyy" }}
+          </span>
+          <span class="label-gray">
+            <b>Número de Vagas:</b>
+            {{ job.jobNumber }}
+          </span>
+          <span class="label-gray">
+            <b>Tipo de Contratação:</b>
+            {{
+              job.typeOfContract == 1
+                ? "CLT"
+                : job.typeOfContract == 2
+                ? "PJ"
+                : "Cooperado"
+            }}
+          </span>
+          <span class="label-gray">
+            <b>Local de Trabalho:</b>
+            {{
+              job.workplace == 1
+                ? "In Loco"
+                : job.workplace == 2
+                ? "Home Office"
+                : job.workplace == 3
+                ? "Hibrido"
+                : "Envolti"
+            }}
+          </span>
+          <span class="label-gray">
+            <b>Jornada de Trabalho:</b>
+            {{
+              job.workingDay
             }}
           </span>
         </div>

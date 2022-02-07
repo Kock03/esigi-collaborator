@@ -35,8 +35,7 @@ __decorate([
     __metadata("design:type", Boolean)
 ], SenioritiesEntity.prototype, "senior", void 0);
 __decorate([
-    (0, typeorm_1.OneToOne)(() => jobs_entity_1.JobsEntity),
-    (0, typeorm_1.JoinColumn)(),
+    (0, typeorm_1.OneToOne)(() => jobs_entity_1.JobsEntity, job => job.Senorities),
     __metadata("design:type", jobs_entity_1.JobsEntity)
 ], SenioritiesEntity.prototype, "Job", void 0);
 SenioritiesEntity = __decorate([

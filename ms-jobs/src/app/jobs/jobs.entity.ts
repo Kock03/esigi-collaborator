@@ -1,4 +1,4 @@
-import { BeforeRemove, BeforeUpdate, Column, CreateDateColumn, DeleteDateColumn, Entity, JoinTable, ManyToMany, OneToMany, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { BeforeRemove, BeforeUpdate, Column, CreateDateColumn, DeleteDateColumn, Entity, JoinColumn, JoinTable, ManyToMany, OneToMany, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { KnowledgesEntity } from "../knowledges/knowledges.entity";
 import { Schooling } from "./dtos/schooling.enum";
 import { Status } from "./dtos/status.enum";
@@ -86,7 +86,11 @@ export class JobsEntity {
   })
   Knowledges: KnowledgesEntity[];
 
-  @OneToOne(() => SenioritiesEntity, seniority => seniority.Job) 
+  @OneToOne(() => SenioritiesEntity, seniority => seniority.Job, {
+    cascade: ['insert', 'update', 'remove'],
+    orphanedRowAction: 'delete',
+  } ) 
+  @JoinColumn()
   Senorities: SenioritiesEntity;
 
   @CreateDateColumn({ name: 'created_at' })

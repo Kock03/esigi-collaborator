@@ -122,7 +122,11 @@ __decorate([
     __metadata("design:type", Array)
 ], JobsEntity.prototype, "Knowledges", void 0);
 __decorate([
-    (0, typeorm_1.OneToOne)(() => seniorities_entity_1.SenioritiesEntity, seniority => seniority.Job),
+    (0, typeorm_1.OneToOne)(() => seniorities_entity_1.SenioritiesEntity, seniority => seniority.Job, {
+        cascade: ['insert', 'update', 'remove'],
+        orphanedRowAction: 'delete',
+    }),
+    (0, typeorm_1.JoinColumn)(),
     __metadata("design:type", seniorities_entity_1.SenioritiesEntity)
 ], JobsEntity.prototype, "Senorities", void 0);
 __decorate([

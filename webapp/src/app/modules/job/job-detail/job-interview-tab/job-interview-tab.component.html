@@ -2,26 +2,34 @@
   <div class="content-scroll">
     <mat-tab-group animationDuration="0ms" [selectedIndex]="selectedIndex">
       <mat-tab label="Entevista Comportamental">
-        <form [formGroup]="interviewForm" fxLayout="column" class="form">
+        <form
+          [formGroup]="behavioralInterviewForm"
+          fxLayout="column"
+          class="form"
+        >
           <div fxFlex="100" fxLayoutGap="16px">
             <mat-form-field fxFlex="35" appearance="outline">
               <mat-label>Nome do Candidato</mat-label>
               <input
                 placeholder="Nome do Candidato"
                 matInput
-                formControlName="form"
+                formControlName="nameCandidate"
                 type="text"
               />
             </mat-form-field>
 
             <mat-form-field fxFlex="35" appearance="outline">
               <mat-label>TechRecruter</mat-label>
-              <input matInput formControlName="form" />
+              <input matInput formControlName="techRecruter" />
             </mat-form-field>
 
             <mat-form-field fxFlex="30" appearance="outline">
               <mat-label>Data da Entrevista</mat-label>
-              <input matInput [matDatepicker]="picker" formControlName="form" />
+              <input
+                matInput
+                [matDatepicker]="picker"
+                formControlName="interviewDate"
+              />
               <mat-datepicker-toggle
                 matSuffix
                 [for]="picker"
@@ -32,12 +40,12 @@
           <div fxFlex="100" fxLayoutGap="16px">
             <mat-form-field fxFlex="20" appearance="outline">
               <mat-label>Horário da Entrevista</mat-label>
-              <input matInput formControlName="form" />
+              <input matInput formControlName="hourInterview" />
             </mat-form-field>
 
             <mat-form-field fxFlex="40" appearance="outline">
               <mat-label>Pontualidade</mat-label>
-              <mat-select matInput disableRipple formControlName="form">
+              <mat-select matInput disableRipple formControlName="punctuality">
                 <mat-option [value]="1">Pontual</mat-option>
                 <mat-option [value]="2">Atrasado 5 minutos</mat-option>
                 <mat-option [value]="3">Atrasado mais de 5 minutos</mat-option>
@@ -47,7 +55,7 @@
 
             <mat-form-field fxFlex="40" appearance="outline">
               <mat-label>Apresentação</mat-label>
-              <mat-select matInput disableRipple formControlName="form">
+              <mat-select matInput disableRipple formControlName="presentation">
                 <mat-option [value]="1">Apresentavel</mat-option>
                 <mat-option [value]="2">Não Apresentavel</mat-option>
               </mat-select>
@@ -57,7 +65,7 @@
           <div fxFlex="100" fxLayoutGap="16px">
             <mat-form-field fxFlex="30" appearance="outline">
               <mat-label>Pretenção Salarial</mat-label>
-              <input matInput formControlName="form" />
+              <input matInput formControlName="salaryExpectation" />
             </mat-form-field>
 
             <div class="checkbox-section" fxFlex="70">
@@ -65,20 +73,24 @@
                 <span class="text" fxLayoutAlign="start"
                   >Preferência de Contratação</span
                 >
-                <div fxLayout="row" fxLayoutAlign="space-around">
-                  <mat-checkbox color="primary" formControlName="form"
+                <div
+                  fxLayout="row"
+                  fxLayoutAlign="space-around"
+                  formGroupName="hiringPreference"
+                >
+                  <mat-checkbox color="primary" formControlName="intern"
                     >Estagiário(a)</mat-checkbox
                   >
 
-                  <mat-checkbox color="primary" formControlName="form"
+                  <mat-checkbox color="primary" formControlName="naturalPerson"
                     >CLT</mat-checkbox
                   >
 
-                  <mat-checkbox color="primary" formControlName="form"
+                  <mat-checkbox color="primary" formControlName="legalPerson"
                     >Pessoa Juridica</mat-checkbox
                   >
 
-                  <mat-checkbox color="primary" formControlName="form"
+                  <mat-checkbox color="primary" formControlName="cooperative"
                     >Cooperado</mat-checkbox
                   >
                 </div>
@@ -92,7 +104,7 @@
                 class="text-area"
                 matInput
                 placeholder="Avaliação Comportamental"
-                formControlName="form"
+                formControlName="behavioralAssessment"
               ></textarea>
             </mat-form-field>
             <mat-form-field fxFlex="50" appearance="outline">
@@ -101,14 +113,14 @@
                 class="text-area"
                 matInput
                 placeholder="Observações"
-                formControlName="form"
+                formControlName="comments"
               ></textarea>
             </mat-form-field>
           </div>
           <div fxFlex="100" fxLayoutGap="16px">
             <mat-form-field fxFlex="40" appearance="outline">
               <mat-label>Situação</mat-label>
-              <mat-select matInput disableRipple formControlName="form">
+              <mat-select matInput disableRipple formControlName="situational">
                 <mat-option [value]="1">Aprovado</mat-option>
                 <mat-option [value]="2">Aprovado com Resalvas</mat-option>
                 <mat-option [value]="3">Reprovado</mat-option>
@@ -118,17 +130,121 @@
 
             <mat-form-field fxFlex="40" appearance="outline">
               <mat-label>Disponibilidade de Inicio</mat-label>
-              <input matInput formControlName="form" />
+              <input matInput formControlName="availabilityOfInitialize" />
             </mat-form-field>
             <div fxLayoutAlign="center" fxFlex="20">
-              <button mat-flat-button color="primary" class="save-button" [disabled]="interviewForm.invalid">
+              <button
+                mat-flat-button
+                color="primary"
+                class="save-button"
+                [disabled]="behavioralInterviewForm.invalid"
+              >
                 Salvar
               </button>
             </div>
           </div>
         </form>
       </mat-tab>
-      <mat-tab label="Entevista Técnica"> </mat-tab>
+
+      <mat-tab label="Entevista Técnica">
+        <form [formGroup]="technicalInterview" fxLayout="column" class="form">
+          <div fxFlex="100" fxLayoutGap="16px">
+            <mat-form-field fxFlex="35" appearance="outline">
+              <mat-label>Nome do Candidato</mat-label>
+              <input
+                placeholder="Nome do Candidato"
+                matInput
+                formControlName="nameCandidate"
+                type="text"
+              />
+            </mat-form-field>
+
+            <mat-form-field fxFlex="35" appearance="outline">
+              <mat-label>Avaliador</mat-label>
+              <input matInput formControlName="evaluator" />
+            </mat-form-field>
+
+            <mat-form-field fxFlex="30" appearance="outline">
+              <mat-label>Data da Entrevista</mat-label>
+              <input
+                matInput
+                [matDatepicker]="interviewDate"
+                formControlName="interviewDate"
+              />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="interviewDate"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #interviewDate></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div fxFlex="100" fxLayoutGap="16px">
+            <mat-form-field fxFlex="50" appearance="outline">
+              <mat-label>Horário da Entrevista</mat-label>
+              <input matInput formControlName="hourInterview" />
+            </mat-form-field>
+
+            <mat-form-field fxFlex="50" appearance="outline">
+              <mat-label>Pontualidade</mat-label>
+              <mat-select matInput disableRipple formControlName="punctuality">
+                <mat-option [value]="1">Pontual</mat-option>
+                <mat-option [value]="2">Atrasado 5 minutos</mat-option>
+                <mat-option [value]="3">Atrasado mais de 5 minutos</mat-option>
+                <mat-option [value]="4">Não Compareceu</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div fxFlex="100" fxLayoutGap="16px">
+            <mat-form-field fxFlex="50" appearance="outline">
+              <mat-label>Avaliação Técnica</mat-label>
+              <textarea
+                class="text-area"
+                matInput
+                placeholder="Avaliação Técnica"
+                formControlName="technicalEvaluation"
+              ></textarea>
+            </mat-form-field>
+            <mat-form-field fxFlex="50" appearance="outline">
+              <mat-label>Observações</mat-label>
+              <textarea
+                class="text-area"
+                matInput
+                placeholder="Observações"
+                formControlName="comments"
+              ></textarea>
+            </mat-form-field>
+          </div>
+          <div fxFlex="100" fxLayoutGap="16px">
+            <mat-form-field fxFlex="40" appearance="outline">
+              <mat-label>Situação</mat-label>
+              <mat-select matInput disableRipple formControlName="situational">
+                <mat-option [value]="1">Aprovado</mat-option>
+                <mat-option [value]="2">Aprovado com Resalvas</mat-option>
+                <mat-option [value]="3">Reprovado</mat-option>
+                <mat-option [value]="4">Reprovado com Resalvas</mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <div class="job-checkbox" fxFlex="40" fxLayoutAlign="center">
+              <mat-checkbox color="primary" formControlName="jobProfile"
+                >Perfil da Vaga</mat-checkbox
+              >
+            </div>
+
+            <div fxLayoutAlign="center" fxFlex="20">
+              <button
+                mat-flat-button
+                color="primary"
+                class="save-button"
+                [disabled]="technicalInterview.invalid"
+              >
+                Salvar
+              </button>
+            </div>
+          </div>
+        </form>
+      </mat-tab>
       <mat-tab label="Entevista Cliente"> </mat-tab>
     </mat-tab-group>
   </div>

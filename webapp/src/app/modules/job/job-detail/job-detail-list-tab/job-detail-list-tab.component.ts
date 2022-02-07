@@ -10,6 +10,13 @@ export interface Job {
   openingDate: string;
   status: number;
   typeOfJob: number;
+  temporary: boolean;
+  monthTime: string;
+  startForecast: string;
+  jobNumber: number;
+  typeOfContract: number;
+  workplace: number;
+  workingDay: string;
 }
 
 @Component({
@@ -38,7 +45,7 @@ export class JobDetailListTabComponent implements OnInit {
   async getJob() {
     try {
       this.job = await this.jobProvider.findOne(this.jobId);
-      console.log(this.job)
+      console.log(this.job);
     } catch (error) {
       console.error(error);
     }
