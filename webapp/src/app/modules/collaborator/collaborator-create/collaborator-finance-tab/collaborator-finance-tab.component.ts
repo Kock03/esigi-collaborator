@@ -64,7 +64,7 @@ export class CollaboratorFinanceTabComponent implements OnInit {
   openDialog() {
     const dialogRef = this.dialog.open(CollaboratorFinanceDialog, {
       width: '500px',
-      height: '500px',
+      height: '550px',
     });
 
     dialogRef.afterClosed().subscribe((finance) => {
@@ -91,7 +91,7 @@ export class CollaboratorFinanceTabComponent implements OnInit {
   getFinance(financeSelected: any, index: number) {
     const dialogRef = this.dialog.open(CollaboratorFinanceDialog, {
       width: '500px',
-      height: '620px',
+      height: '550px',
       data: { financeSelected },
          
     });
@@ -135,6 +135,7 @@ export class CollaboratorFinanceDialog{
       contractType: [1, Validators.required],
       reason: [1 , Validators.required],
       value: ['3400000', Validators.required],
+      payday: ['2004-06-12', Validators.required],
     });
     if (this.data && this.data.financeSelected) {
      

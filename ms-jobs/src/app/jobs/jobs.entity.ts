@@ -75,18 +75,18 @@ export class JobsEntity {
   openingDate: Date;
 
   @OneToMany(() => LanguagesEntity, (languages) => languages.Job, {
-    cascade: ['insert', 'update', 'soft-remove']  ,
+    cascade: ['insert', 'update', 'soft-remove'],
     orphanedRowAction: 'delete',
   })
   Languages: LanguagesEntity[];
 
   @OneToMany(() => KnowledgesEntity, (Knowledges) => Knowledges.Job, {
-    cascade: ['insert', 'update', 'soft-remove']  ,
+    cascade: ['insert', 'update', 'soft-remove'],
     orphanedRowAction: 'delete',
   })
   Knowledges: KnowledgesEntity[];
 
-  @OneToOne(() => SenioritiesEntity, seniority => seniority.Job) 
+  @OneToOne(() => SenioritiesEntity, seniority => seniority.Job)
   Senorities: SenioritiesEntity;
 
   @CreateDateColumn({ name: 'created_at' })
@@ -97,10 +97,5 @@ export class JobsEntity {
 
   @DeleteDateColumn({ name: 'deleted_at' })
   deletedAt: Date;
-
-  @BeforeRemove()
-  setDate(event: any) {
-    console.log(event)
-  }
 
 }
