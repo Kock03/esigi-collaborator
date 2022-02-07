@@ -22,6 +22,7 @@ import {
 export class JobInterviewTabComponent implements OnInit {
   behavioralInterviewForm!: FormGroup;
   technicalInterview!: FormGroup;
+  clientInterview!: FormGroup;
 
   step: number = 1;
   selectedIndex: number = 0;
@@ -59,13 +60,23 @@ export class JobInterviewTabComponent implements OnInit {
       interviewDate: ['', Validators.required],
       hourInterview: ['', Validators.required],
       punctuality: [1, Validators.required],
-      jobProfile: [true , Validators.required],
+      jobProfile: [true, Validators.required],
       technicalEvaluation: ['', Validators.required],
       comments: ['', Validators.required],
-      situational: [1 , Validators.required]
+      situational: [1, Validators.required],
+    });
 
-    })
-    
+    this.clientInterview = this.fb.group({
+      nameCandidate: ['', Validators.required],
+      evaluator: ['', Validators.required],
+      interviewDate: ['', Validators.required],
+      hourInterview: ['', Validators.required],
+      punctuality: [1, Validators.required],
+      jobProfile: [true, Validators.required],
+      technicalEvaluation: ['', Validators.required],
+      comments: ['', Validators.required],
+      situational: [1, Validators.required],
+    });
   }
 
   nextStep() {
