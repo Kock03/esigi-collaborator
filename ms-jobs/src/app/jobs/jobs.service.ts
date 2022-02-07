@@ -15,9 +15,8 @@ export class JobsService {
   ) {}
 
   async findAll() {
-    const jobsWhiteAll = await this.jobsRepository
-      .createQueryBuilder('jobs')
-      .getMany();
+    const jobsWhiteAll = await this.jobsRepository.find();
+
 
     return jobsWhiteAll;
   }

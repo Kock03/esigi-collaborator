@@ -77,6 +77,7 @@ export class JobsEntity {
   @OneToMany(() => LanguagesEntity, (languages) => languages.Job, {
     cascade: ['insert', 'update', 'soft-remove']  ,
     orphanedRowAction: 'delete',
+    eager: true
   })
   Languages: LanguagesEntity[];
 
@@ -89,6 +90,7 @@ export class JobsEntity {
   @OneToOne(() => SenioritiesEntity, seniority => seniority.Job, {
     cascade: ['insert', 'update', 'remove'],
     orphanedRowAction: 'delete',
+    eager: true
   } ) 
   @JoinColumn()
   Senorities: SenioritiesEntity;

@@ -8,13 +8,12 @@ import {
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {
-  FormArray,
-  FormBuilder,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+  MatDialog,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+} from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
 
 export interface education {
@@ -41,7 +40,6 @@ export class CollaboratorEducationTabComponent implements OnInit {
   @ViewChild('languageTable') languageTable!: MatTable<any>;
   @ViewChild('educationTable') educationTable!: MatTable<any>;
 
-
   languages: language[] = [
     { languageName: 'Russo', degreeOfInfluence: 'Escrita' },
     { languageName: 'Inglês', degreeOfInfluence: 'Leitura' },
@@ -49,11 +47,25 @@ export class CollaboratorEducationTabComponent implements OnInit {
   ];
 
   educations: education[] = [
-    {schooling: 'Ensino Fundamental', situation: 'completo', course: '', institution: ''},
-    {schooling: 'Ensino Médio', situation: 'Incompleto', course: '', institution: ''},
-    {schooling: 'Ensino Superior', situation: 'Em andamento', course: '', institution: ''},
+    {
+      schooling: 'Ensino Fundamental',
+      situation: 'completo',
+      course: '',
+      institution: '',
+    },
+    {
+      schooling: 'Ensino Médio',
+      situation: 'Incompleto',
+      course: '',
+      institution: '',
+    },
+    {
+      schooling: 'Ensino Superior',
+      situation: 'Em andamento',
+      course: '',
+      institution: '',
+    },
   ];
-
 
   displayedEducation: string[] = [
     'schooling',
@@ -95,9 +107,10 @@ export class CollaboratorEducationTabComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((language) => {
-      if(language){
-      this.languageArray.insert(0, this.fb.group(language));
-      this.languageTable.renderRows();}
+      if (language) {
+        this.languageArray.insert(0, this.fb.group(language));
+        this.languageTable.renderRows();
+      }
     });
   }
 
@@ -108,21 +121,21 @@ export class CollaboratorEducationTabComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((education) => {
-      if (education){
-      this.educationArray.insert(0, this.fb.group(education));
-      this.educationTable.renderRows();}
+      if (education) {
+        this.educationArray.insert(0, this.fb.group(education));
+        this.educationTable.renderRows();
+      }
     });
   }
-
 
   initForm(): void {
     this.languageForm = this.fb.group({
       languageName: ['', Validators.required],
-      degreeOfInfluence: [1 , Validators.required],
+      degreeOfInfluence: [1, Validators.required],
     });
     this.educationForm = this.fb.group({
-      schooling: [1 , Validators.required],
-      situation: [1 , Validators.required],
+      schooling: [1, Validators.required],
+      situation: [1, Validators.required],
       course: ['', Validators.required],
       institution: ['', Validators.required],
     });
@@ -137,7 +150,6 @@ export class CollaboratorEducationTabComponent implements OnInit {
     this.educationArray.insert(0, this.fb.group(data));
     this.educationTable.renderRows();
     this.educationForm.reset();
-    
   }
 
   saveLanguage() {
@@ -152,7 +164,6 @@ export class CollaboratorEducationTabComponent implements OnInit {
       width: '500px',
       height: '300px',
       data: { languageSelected },
-
     });
 
     this.index = index;
@@ -161,38 +172,34 @@ export class CollaboratorEducationTabComponent implements OnInit {
     });
   }
 
-  deleteLanguage(index: number){
-     this.languageArray.removeAt(index);
-  
+  deleteLanguage(index: number) {
+    this.languageArray.removeAt(index);
   }
 
- getEducation(educationSelected: any, index: number) {
+  getEducation(educationSelected: any, index: number) {
     const dialogRef = this.dialog.open(CollaboratorEducationDialog, {
       width: '500px',
       height: '470px',
       data: { educationSelected },
-
     });
 
     this.index = index;
     dialogRef.afterClosed().subscribe((education) => {
-      this.educationArray.controls[this.index].setValue(education);
+      if (education){
+        this.educationArray.controls[this.index].setValue(education);
+      }
     });
-
   }
 
-  deleteEducation(index: number){
+  deleteEducation(index: number) {
     this.educationArray.removeAt(index);
-
- 
- }
+  }
 }
 
 @Component({
   selector: 'collaborator-language-dialog',
   templateUrl: 'collaborator-language-dialog.html',
   styleUrls: ['./collaborator-education-tab.component.scss'],
-
 })
 export class CollaboratorLanguageDialog {
   @Input('form') collaboratorForm!: FormGroup;
@@ -200,11 +207,10 @@ export class CollaboratorLanguageDialog {
 
   languageForm!: FormGroup;
 
-
   constructor(
     public dialogRef: MatDialogRef<CollaboratorLanguageDialog>,
     private fb: FormBuilder,
-    @Inject(MAT_DIALOG_DATA) public data: { languageSelected: any}
+    @Inject(MAT_DIALOG_DATA) public data: { languageSelected: any }
   ) {}
 
   ngOnInit(): void {
@@ -214,7 +220,7 @@ export class CollaboratorLanguageDialog {
   initForm(): void {
     this.languageForm = this.fb.group({
       languageName: ['Inglês', [Validators.required, Validators.maxLength(40)]],
-      degreeOfInfluence: [1 , Validators.required],
+      degreeOfInfluence: [1, Validators.required],
     });
     if (this.data && this.data.languageSelected) {
       this.languageForm.patchValue(this.data.languageSelected);
@@ -235,17 +241,16 @@ export class CollaboratorLanguageDialog {
   templateUrl: 'collaborator-education-dialog.html',
   styleUrls: ['./collaborator-education-tab.component.scss'],
 })
-export class CollaboratorEducationDialog{
+export class CollaboratorEducationDialog {
   @Input('form') collaboratorForm!: FormGroup;
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
 
   educationForm!: FormGroup;
 
-
   constructor(
     public dialogRef: MatDialogRef<CollaboratorEducationDialog>,
     private fb: FormBuilder,
-    @Inject(MAT_DIALOG_DATA) public data: { educationSelected: any}
+    @Inject(MAT_DIALOG_DATA) public data: { educationSelected: any }
   ) {}
 
   ngOnInit(): void {
@@ -254,9 +259,12 @@ export class CollaboratorEducationDialog{
 
   initForm(): void {
     this.educationForm = this.fb.group({
-      schooling: [1 , Validators.required],
-      situation: [1 , Validators.required],
-      course: ['Engenharia de Software', [Validators.required, Validators.maxLength(100)]],
+      schooling: [1, Validators.required],
+      situation: [1, Validators.required],
+      course: [
+        'Engenharia de Software',
+        [Validators.required, Validators.maxLength(100)],
+      ],
       institution: ['FURB', [Validators.required, Validators.maxLength(100)]],
     });
     if (this.data && this.data.educationSelected) {
@@ -266,6 +274,8 @@ export class CollaboratorEducationDialog{
   }
 
 
+  ngAfterViewInit(): void {}
+
   onNoClick(): void {
     this.dialogRef.close();
   }
@@ -273,5 +283,4 @@ export class CollaboratorEducationDialog{
   save() {
     this.dialogRef.close(this.educationForm.getRawValue());
   }
-
 }
