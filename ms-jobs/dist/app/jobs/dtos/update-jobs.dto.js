@@ -58,7 +58,7 @@ __decorate([
 __decorate([
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", seniorities_entity_1.SenioritiesEntity)
-], UpdateJobsDto.prototype, "Seniority", void 0);
+], UpdateJobsDto.prototype, "Seniorities", void 0);
 __decorate([
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", Number)
@@ -79,6 +79,10 @@ __decorate([
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", Number)
 ], UpdateJobsDto.prototype, "minimumValue", void 0);
+__decorate([
+    (0, class_validator_1.IsNotEmpty)(),
+    __metadata("design:type", Date)
+], UpdateJobsDto.prototype, "openingDate", void 0);
 __decorate([
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", Number)

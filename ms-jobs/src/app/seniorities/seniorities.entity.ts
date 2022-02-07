@@ -19,7 +19,7 @@ export class SenioritiesEntity{
     @Column()
     senior: boolean;
 
-    @OneToOne(() => JobsEntity, job => job.Senorities)
+    @OneToOne(() => JobsEntity, job => job.Seniorities)
     Job: JobsEntity;
 
 }

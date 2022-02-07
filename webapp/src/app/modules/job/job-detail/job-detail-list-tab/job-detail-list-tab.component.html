@@ -1,7 +1,7 @@
 <div id="jobList" class="tab">
   <div class="content-scroll">
     <mat-list role="list" #experiencesList *ngIf="job" class="list-group">
-      <mat-list-item class="list-group-item" fxLayoutAlign="start start">
+      <mat-list-item class="list-group-item" fxLayout="row">
         <div fxLayout="column">
           <span class="label-office">
             {{ job.jobName }}
@@ -86,6 +86,9 @@
               job.workingDay
             }}
           </span>
+        </div>
+        <div  fxLayout="column">
+          asdsdsasdas
         </div>
       </mat-list-item>
     </mat-list>

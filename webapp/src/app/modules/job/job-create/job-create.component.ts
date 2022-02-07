@@ -8,10 +8,16 @@ import {
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { JobProvider } from 'src/providers/job.provider';
 import { SnackBarService } from 'src/services/snackbar.service';
 
@@ -50,24 +56,40 @@ export class JobCreateComponent implements OnInit {
   index: any = null;
   Knowledge: any;
 
+  jobId!: string | null;
+  job!: any;
+
   constructor(
     private fb: FormBuilder,
     public dialog: MatDialog,
     private jobProvider: JobProvider,
     private http: HttpClient,
     private snackbarService: SnackBarService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
-
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+    this.jobId = this.route.snapshot.paramMap.get('id');
     this.initForm();
+    await this.getJob();
+
+    this.setFormValue();
+  }
+
+  async getJob() {
+    try {
+      this.job = await this.jobProvider.findOne(this.jobId);
+      console.log(this.job);
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   initForm() {
     this.jobForm = this.fb.group({
       requester: [
-        'Wellington',
+        '',
         [
           Validators.required,
           Validators.minLength(4),
@@ -77,7 +99,7 @@ export class JobCreateComponent implements OnInit {
       status: [1, Validators.required],
       publish: [false],
       client: [
-        'Ambev',
+        '',
         [
           Validators.required,
           Validators.minLength(1),
@@ -88,7 +110,7 @@ export class JobCreateComponent implements OnInit {
       temporary: [false],
       monthTime: [''],
       jobName: [
-        'Programador React',
+        '',
         [
           Validators.required,
           Validators.minLength(8),
@@ -102,16 +124,23 @@ export class JobCreateComponent implements OnInit {
       ],
       typeOfContract: [1, Validators.required],
       workplace: [1, Validators.required],
-      workingDay: ['2 horas', [Validators.required, Validators.maxLength(50), Validators.minLength(5)]],
+      workingDay: [
+        '',
+        [
+          Validators.required,
+          Validators.maxLength(50),
+          Validators.minLength(5),
+        ],
+      ],
       minimumValue: [1, Validators.required],
       maximumValue: [1, Validators.required],
       openingDate: [new Date(), Validators.required],
       schooling: [1, Validators.required],
-      collaboratorActivities: ['a', Validators.required],
-      skills: ['a', Validators.required],
-      attitudes: ['a', Validators.required],
+      collaboratorActivities: ['', Validators.required],
+      skills: ['', Validators.required],
+      attitudes: ['', Validators.required],
       Languages: this.fb.group({
-        languageName: ['Russo',[Validators.required, Validators.maxLength(20)]],
+        languageName: ['', [Validators.required, Validators.maxLength(20)]],
         degreeOfInfluence: [1, Validators.required],
       }),
       Seniorities: this.fb.group({
@@ -124,7 +153,14 @@ export class JobCreateComponent implements OnInit {
     });
   }
 
-  
+  setFormValue() {
+    this.jobForm.patchValue(this.job);
+    if (this.job.Languages[0]) {
+      const languages = this.jobForm.controls['Languages'] as FormGroup;
+      languages.addControl('id', new FormControl());
+      languages.patchValue(this.job.Languages[0]);
+    }
+  }
 
   openDialog() {
     const dialogRef = this.dialog.open(JobDialogSkill, {
@@ -150,18 +186,31 @@ export class JobCreateComponent implements OnInit {
     }
   }
 
-
   async saveJob() {
     let data = this.jobForm.getRawValue();
 
-
     try {
+      data.Languages = new Array(data.Languages);
       const jobs = await this.jobProvider.store(data);
-      this.snackbarService.successMessage("Vaga Cadastrada Com Sucesso");
-      this.router.navigate(["vaga/lista"]);
+
+      this.snackbarService.successMessage('Vaga Cadastrada Com Sucesso');
+      this.router.navigate(['vaga/lista']);
     } catch (error) {
       console.log('ERROR 132' + error);
-      this.snackbarService.showError("Falha ao Cadastrar");
+      this.snackbarService.showError('Falha ao Cadastrar');
+    }
+  }
+
+  async saveEditJob() {
+    let data = this.jobForm.getRawValue();
+    try {
+      data.Languages = new Array(data.Languages);
+      const job = await this.jobProvider.update(this.jobId, data);
+      this.snackbarService.successMessage('Vaga Atualizada com Sucesso');
+      this.router.navigate(['vaga/lista']);
+      console.log(this.job);
+    } catch (error) {
+      console.error(error);
     }
   }
 
@@ -169,8 +218,8 @@ export class JobCreateComponent implements OnInit {
     this.knowledgeArray.removeAt(index);
   }
 
-  listJob(){
-    this.router.navigate(['vaga/lista'])
+  listJob() {
+    this.router.navigate(['vaga/lista']);
   }
 }
 
@@ -205,7 +254,7 @@ export class JobDialogSkill implements OnInit {
     });
   }
 
- async saveKnowledge() {
+  async saveKnowledge() {
     this.dialogRef.close(this.knowledgeForm.getRawValue());
   }
 }

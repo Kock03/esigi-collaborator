@@ -33,7 +33,7 @@ const routes: Routes = [
 
   },
   {
-    path: 'novo',
+    path: ':id',
     component: JobCreateComponent,
   },
   {

@@ -21,7 +21,9 @@ let AppModule = class AppModule {
 };
 AppModule = __decorate([
     (0, common_1.Module)({
-        imports: [config_1.ConfigModule.forRoot(), typeorm_1.TypeOrmModule.forRoot({
+        imports: [
+            config_1.ConfigModule.forRoot(),
+            typeorm_1.TypeOrmModule.forRoot({
                 type: process.env.TYPEORM_CONNECTION,
                 host: process.env.TYPEORM_HOST,
                 port: process.env.TYPEORM_PORT,
@@ -30,8 +32,13 @@ AppModule = __decorate([
                 database: process.env.TYPEORM_DATABASE,
                 entities: [__dirname + '/**/*.entity{.js,.ts}'],
                 synchronize: true,
-                namingStrategy: new typeorm_naming_strategies_1.SnakeNamingStrategy()
-            }), jobs_module_1.JobsModule, knowledges_module_1.KnowledgesModule, seniorities_module_1.SenioritiesModule, languages_module_1.LanguagesModule],
+                namingStrategy: new typeorm_naming_strategies_1.SnakeNamingStrategy(),
+            }),
+            jobs_module_1.JobsModule,
+            knowledges_module_1.KnowledgesModule,
+            seniorities_module_1.SenioritiesModule,
+            languages_module_1.LanguagesModule,
+        ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],
     })

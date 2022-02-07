@@ -26,7 +26,6 @@ let JobsController = class JobsController {
     }
     async show(id) {
         return await this.jobsService.findOneOrFail({ id });
-        console.log("🚀 ~ file: jobs.controller.ts ~ line 18 ~ JobsController ~ show ~ id", id);
     }
     async store(body) {
         return await this.jobsService.store(body);
@@ -75,7 +74,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], JobsController.prototype, "destroy", null);
 JobsController = __decorate([
-    (0, common_1.Controller)('/api/v1/jobs'),
+    (0, common_1.Controller)('/api/v1/jobs/'),
     __metadata("design:paramtypes", [jobs_service_1.JobsService])
 ], JobsController);
 exports.JobsController = JobsController;

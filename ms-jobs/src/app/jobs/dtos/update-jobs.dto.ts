@@ -37,7 +37,7 @@ export class UpdateJobsDto{
     startForecast: Date;
 
     @IsNotEmpty()
-    Seniority: SenioritiesEntity;
+    Seniorities: SenioritiesEntity;
 
     @IsNotEmpty()
     jobNumber: number;
@@ -53,6 +53,9 @@ export class UpdateJobsDto{
     
     @IsNotEmpty()
     minimumValue: number;
+
+    @IsNotEmpty()
+    openingDate: Date;
 
     @IsNotEmpty()
     maximumValue: number;

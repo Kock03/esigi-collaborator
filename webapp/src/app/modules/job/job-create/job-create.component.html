@@ -1,16 +1,13 @@
 <div id="jobCreate" class="page">
-  
-
-  <div  fxLayout="row" fxLayoutAlign="space-between center">
+  <div fxLayout="row" fxLayoutAlign="space-between center">
     <h2>Vagas</h2>
 
     <button mat-flat-button color="primary" (click)="listJob()">Voltar</button>
-    
-    </div>
+  </div>
 
   <div class="content-scroll" *ngIf="jobForm">
     <mat-tab-group animationDuration="0ms" [selectedIndex]="selectedIndex">
-      <mat-tab disabled label="Cadastro">
+      <mat-tab [disabled]="jobId == 'novo'" label="Cadastro">
         <form [formGroup]="jobForm" fxLayout="column" class="form">
           <div fxFlex="100" fxLayoutGap="16px">
             <mat-form-field fxFlex="30" appearance="outline">
@@ -78,23 +75,20 @@
             >
 
             <mat-form-field
-            fxFlex="25"
-            appearance="outline"
-            *ngIf="jobForm.controls['temporary'].value == true"
-          >
-            <mat-label>Tempo Contrato</mat-label>
-            <input
-              placeholder="Tempo de Contrato"
-              matInput
-              formControlName="monthTime"
-              type="text"
-            />
-          </mat-form-field>
-
+              fxFlex="25"
+              appearance="outline"
+              *ngIf="jobForm.controls['temporary'].value == true"
+            >
+              <mat-label>Tempo Contrato</mat-label>
+              <input
+                placeholder="Tempo de Contrato"
+                matInput
+                formControlName="monthTime"
+                type="text"
+              />
+            </mat-form-field>
           </div>
           <div fxFlex="100" fxLayoutGap="16px">
-         
-
             <mat-form-field fxFlex="35" appearance="outline">
               <mat-label>Nome da Vaga</mat-label>
               <input
@@ -153,8 +147,12 @@
               </mat-select>
             </mat-form-field>
 
-            <div class="checkbox-section" fxFlex="50">
-              <section formGroupName="Seniorities" fxLayout="column">
+            <div
+              class="checkbox-section"
+              fxFlex="50"
+              formGroupName="Seniorities"
+            >
+              <section fxLayout="column">
                 <span class="text" fxLayoutAlign="start">Senioridade</span>
                 <div fxLayout="row" fxLayoutAlign="space-around">
                   <mat-checkbox color="primary" formControlName="intern"
@@ -216,7 +214,7 @@
           </div>
         </form>
       </mat-tab>
-      <mat-tab disabled label="Conhecimentos">
+      <mat-tab [disabled]="jobId == 'novo'" label="Conhecimentos">
         <form [formGroup]="jobForm" fxLayout="column" class="form">
           <div fxFlex="60" fxLayoutGap="16px">
             <mat-form-field fxFlex="20" appearance="outline">
@@ -359,7 +357,12 @@
     </mat-tab-group>
   </div>
 
-  <div class="navigation-buttons" fxLayoutAlign="center end" fxLayoutGap="16px">
+  <div
+    class="navigation-buttons"
+    fxLayoutAlign="center end"
+    fxLayoutGap="16px"
+    *ngIf="jobId == 'novo'"
+  >
     <button mat-button *ngIf="selectedIndex != 0" (click)="previousStep()">
       Voltar
     </button>
@@ -376,6 +379,21 @@
       *ngIf="selectedIndex == 1"
       color="primary"
       (click)="saveJob()"
+      [disabled]="jobForm.invalid"
+    >
+      Salvar
+    </button>
+  </div>
+  <div
+    class="navigation-buttons"
+    fxLayoutAlign="center end"
+    fxLayoutGap="16px"
+    *ngIf="jobId !== 'novo'"
+  >
+    <button
+      mat-flat-button
+      color="primary"
+      (click)="saveEditJob()"
       [disabled]="jobForm.invalid"
     >
       Salvar

@@ -87,13 +87,13 @@ export class JobsEntity {
   })
   Knowledges: KnowledgesEntity[];
 
-  @OneToOne(() => SenioritiesEntity, seniority => seniority.Job, {
+  @OneToOne(() => SenioritiesEntity, {
     cascade: ['insert', 'update', 'remove'],
     orphanedRowAction: 'delete',
     eager: true
   } ) 
   @JoinColumn()
-  Senorities: SenioritiesEntity;
+  Seniorities: SenioritiesEntity;
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;

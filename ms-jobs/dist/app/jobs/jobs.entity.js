@@ -111,6 +111,7 @@ __decorate([
     (0, typeorm_1.OneToMany)(() => languages_entity_1.LanguagesEntity, (languages) => languages.Job, {
         cascade: ['insert', 'update', 'soft-remove'],
         orphanedRowAction: 'delete',
+        eager: true
     }),
     __metadata("design:type", Array)
 ], JobsEntity.prototype, "Languages", void 0);
@@ -122,13 +123,14 @@ __decorate([
     __metadata("design:type", Array)
 ], JobsEntity.prototype, "Knowledges", void 0);
 __decorate([
-    (0, typeorm_1.OneToOne)(() => seniorities_entity_1.SenioritiesEntity, seniority => seniority.Job, {
+    (0, typeorm_1.OneToOne)(() => seniorities_entity_1.SenioritiesEntity, {
         cascade: ['insert', 'update', 'remove'],
         orphanedRowAction: 'delete',
+        eager: true
     }),
     (0, typeorm_1.JoinColumn)(),
     __metadata("design:type", seniorities_entity_1.SenioritiesEntity)
-], JobsEntity.prototype, "Senorities", void 0);
+], JobsEntity.prototype, "Seniorities", void 0);
 __decorate([
     (0, typeorm_1.CreateDateColumn)({ name: 'created_at' }),
     __metadata("design:type", Date)

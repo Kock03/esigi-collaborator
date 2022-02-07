@@ -16,12 +16,13 @@ export declare class UpdateJobsDto {
     monthTime: string;
     jobName: string;
     startForecast: Date;
-    Seniority: SenioritiesEntity;
+    Seniorities: SenioritiesEntity;
     jobNumber: number;
     typeOfContract: TypeOfContract;
     workplace: Workplace;
     workingDay: string;
     minimumValue: number;
+    openingDate: Date;
     maximumValue: number;
     schooling: Schooling;
     collaboratorActivities: string;

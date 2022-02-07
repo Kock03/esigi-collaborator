@@ -7,9 +7,9 @@
     "install:jobs": "cd ms-jobs && npm install",
     "install:resume": "cd ms-resume && npm install",
     "install:webapp": "cd webapp && npm install",
-    "start": "concurrently --kill-others-on-fail \"npm run start:collaborator\" \"npm run start:jobs\"  \"npm run start:resume\"  \"npm run start:webapp\"",
-    "start:collaborator": "cd ms-collaborator && npm run start:dev",
+    "start": "concurrently --kill-others-on-fail \"npm run start:jobs\" \"npm run start:collaborator\"  \"npm run start:resume\"  \"npm run start:webapp\"",
     "start:jobs": "cd ms-jobs && npm run start:dev",
+    "start:collaborator": "cd ms-collaborator && npm run start:dev",
     "start:resume": "cd ms-resume && npm run start:dev",
     "start:webapp": "cd webapp && npm run start"
   },

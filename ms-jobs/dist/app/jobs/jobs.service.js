@@ -22,13 +22,11 @@ let JobsService = class JobsService {
         this.jobsRepository = jobsRepository;
     }
     async findAll() {
-        const jobsWhiteAll = await this.jobsRepository
-            .createQueryBuilder('jobs')
-            .getMany();
+        const jobsWhiteAll = await this.jobsRepository.find();
         return jobsWhiteAll;
     }
     async findOneOrFail(conditions, options) {
-        options = { relations: ['Knowledges', 'Senorities', 'Languages'] };
+        options = { relations: ['Knowledges', 'Seniorities', 'Languages'] };
         try {
             return await this.jobsRepository.findOneOrFail(conditions, options);
         }
@@ -38,12 +36,16 @@ let JobsService = class JobsService {
     }
     async store(data) {
         const job = this.jobsRepository.create(data);
+        console.log("🚀 ~ file: jobs.service.ts ~ line 39 ~ JobsService ~ store ~ job", job);
         return await this.jobsRepository.save(job);
     }
     async update(id, data) {
+        console.log("🚀 ~ file: jobs.service.ts ~ line 43 ~ JobsService ~ update ~ data", data);
         const job = await this.jobsRepository.findOneOrFail({ id });
-        this.jobsRepository.merge(job, data);
-        return await this.jobsRepository.save(job);
+        if (!job) {
+            throw new common_1.HttpException('Not found', 404);
+        }
+        return await this.jobsRepository.save(Object.assign({ id: id }, data));
     }
     async destroy(id) {
         try {

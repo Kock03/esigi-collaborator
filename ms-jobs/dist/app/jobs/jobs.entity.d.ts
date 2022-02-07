@@ -30,7 +30,7 @@ export declare class JobsEntity {
     openingDate: Date;
     Languages: LanguagesEntity[];
     Knowledges: KnowledgesEntity[];
-    Senorities: SenioritiesEntity;
+    Seniorities: SenioritiesEntity;
     createdAt: Date;
     updatedAt: Date;
     deletedAt: Date;

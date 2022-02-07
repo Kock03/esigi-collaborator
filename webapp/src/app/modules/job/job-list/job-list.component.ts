@@ -5,7 +5,7 @@ import {
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
-import { NavigationExtras, Router } from '@angular/router';
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import {
   fromEvent,
   takeUntil,
@@ -14,16 +14,16 @@ import {
   Subject,
 } from 'rxjs';
 import { JobProvider } from 'src/providers/job.provider';
+import { SnackBarService } from 'src/services/snackbar.service';
 
 export interface Job {
+  id: string;
   jobName: string;
   client: string;
   requester: string;
   openingDate: string;
   status: number;
 }
-
-
 
 @Component({
   selector: 'app-job-list',
@@ -34,18 +34,29 @@ export interface Job {
 export class JobListComponent implements OnInit {
   @ViewChild('filter', { static: true }) filter!: ElementRef;
   private _unsubscribeAll: Subject<any>;
-  displayedJob: string[] = ['jobName', 'client', 'requester', 'openingDate', 'status', 'icon'];
+  displayedJob: string[] = [
+    'jobName',
+    'client',
+    'requester',
+    'openingDate',
+    'status',
+    'icon',
+  ];
   jobs!: Job[];
   filteredJobList!: any[];
-  
 
-  constructor(private router: Router, private jobProvider: JobProvider) {
+
+  constructor(
+    private snackbarService: SnackBarService,
+    private router: Router,
+    private jobProvider: JobProvider,
+    private route: ActivatedRoute
+  ) {
     this._unsubscribeAll = new Subject();
   }
 
   async ngOnInit() {
     this.getJobList();
-
     this.filteredJobList = this.jobs;
     this.initFilter();
   }
@@ -62,11 +73,12 @@ export class JobListComponent implements OnInit {
     }
   }
 
-  editJob(job: any) {
-    const navigationExtras: NavigationExtras = {
-      state: { job },
-    };
-    this.router.navigate([`vaga/detalhe/${job.id}`], navigationExtras);
+  viewDetail(jobId: any) {
+    this.router.navigate([`vaga/detalhe/${jobId}`]);
+  }
+
+  editJob(jobId: any) {
+    this.router.navigate([`vaga/${jobId}`]);
   }
 
   initFilter() {
@@ -75,8 +87,22 @@ export class JobListComponent implements OnInit {
 
       .subscribe((res) => {
         this.filteredJobList = this.jobs.filter((job) =>
-          job.jobName.toLocaleLowerCase().includes(this.filter.nativeElement.value.toLocaleLowerCase())
+          job.jobName
+            .toLocaleLowerCase()
+            .includes(this.filter.nativeElement.value.toLocaleLowerCase())
         );
       });
+  }
+
+  async deleteJob(jobId: any) {
+    try {
+      const jobs = await this.jobProvider.destroy(jobId);
+      this.getJobList();
+
+      this.snackbarService.successMessage('Vaga Apagada Com Sucesso');
+    } catch (error) {
+      console.log('ERROR 132' + error);
+      this.snackbarService.showError('Falha ao Deletar');
+    }
   }
 }

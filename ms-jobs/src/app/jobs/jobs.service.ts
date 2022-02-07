@@ -25,7 +25,7 @@ export class JobsService {
     conditions: FindConditions<JobsEntity>,
     options?: FindOneOptions<JobsEntity>,
   ) {
-    options = { relations: ['Knowledges', 'Senorities', 'Languages'] };
+    options = { relations: ['Knowledges', 'Seniorities', 'Languages'] };
 
     try {
       return await this.jobsRepository.findOneOrFail(conditions, options);
@@ -36,13 +36,17 @@ export class JobsService {
 
   async store(data: CreateJobsDto) {
     const job = this.jobsRepository.create(data);
+    console.log("🚀 ~ file: jobs.service.ts ~ line 39 ~ JobsService ~ store ~ job", job)
     return await this.jobsRepository.save(job);
   }
 
   async update(id: string, data: UpdateJobsDto) {
+    console.log("🚀 ~ file: jobs.service.ts ~ line 43 ~ JobsService ~ update ~ data", data)
     const job = await this.jobsRepository.findOneOrFail({ id });
-    this.jobsRepository.merge(job, data);
-    return await this.jobsRepository.save(job);
+    if (!job){
+       throw new HttpException('Not found', 404)
+    }
+    return await this.jobsRepository.save({id: id, ...data});
   }
 
   async destroy(id: string) {

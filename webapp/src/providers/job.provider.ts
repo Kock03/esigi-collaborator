@@ -1,7 +1,7 @@
 import { HttpResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { ApiGateway } from "src/api-gateway";
-import { Job } from "src/app/modules/job/job-list/job-list.component";
+import { Job } from "src/app/modules/job/job-detail/job-detail-list-tab/job-detail-list-tab.component";
 import { environment } from "src/environments/environment";
 
 @Injectable({
@@ -33,9 +33,9 @@ export class JobProvider {
     }
 
 
-    update(job: any): Promise<any> {
+    update(id: string | null, job: any): Promise<any> {
         return new Promise((resolve, reject) => {
-            this.apiGateway.put(environment.JOBS_MS + 'jobs', job).subscribe((response: HttpResponse<any>) => {
+            this.apiGateway.put(environment.JOBS_MS + 'jobs/:id',{id: id},  job ).subscribe((response: HttpResponse<any>) => {
                 resolve(response.body);
             }, reject);
         });
@@ -49,9 +49,9 @@ export class JobProvider {
         });
     };
 
-    destroy(job: any): Promise<any> {
+    destroy(id: string | null): Promise<any> {
       return new Promise((resolve, reject) => {
-          this.apiGateway.delete(environment.JOBS_MS + 'jobs', job).subscribe((response: HttpResponse<any>) => {
+          this.apiGateway.delete(environment.JOBS_MS + 'jobs/:id', {id: id}).subscribe((response: HttpResponse<any>) => {
               resolve(response.body);
           }, reject);
       })

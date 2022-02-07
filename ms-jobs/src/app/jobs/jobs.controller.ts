@@ -3,7 +3,7 @@ import { CreateJobsDto } from "./dtos/create-jobs.dto";
 import { UpdateJobsDto } from "./dtos/update-jobs.dto";
 import { JobsService } from "./jobs.service";
 
-@Controller('/api/v1/jobs')
+@Controller('/api/v1/jobs/') 
 export class JobsController{
     constructor(private readonly jobsService: JobsService){ }
 
@@ -15,7 +15,6 @@ export class JobsController{
     @Get(':id')
     async show(@Param('id', new ParseUUIDPipe()) id: string){
         return await this.jobsService.findOneOrFail({id});
-        console.log("🚀 ~ file: jobs.controller.ts ~ line 18 ~ JobsController ~ show ~ id", id)
     }
 
     @Post()
