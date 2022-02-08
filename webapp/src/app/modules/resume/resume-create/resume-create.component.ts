@@ -67,26 +67,13 @@ export class ResumeCreateComponent implements OnInit {
         site: ['', Validators.required],
         linkedin: ['', Validators.required],
 
-        // office: ['', Validators.required],
-        // companyName: ['', Validators.required],
-        // locality: [''],
-        // startMonth:['', Validators.required],
-        // startYear:['', Validators.required],
-        // terminusMonth:['', Validators.required],
-        // terminusYear:['', Validators.required],
-        // sector: ['', Validators.required],
-        // description: ['', Validators.required],
-
-
+      
 
 
         Languages: this.fb.array([]),
         Educations: this.fb.array([]),
         Experiences: this.fb.array([]),
         Skills: this.fb.array([]),
-        // Monitoring: this.fb.array([]),
-        // Register: this.fb.array([]),
-        // Documents: null,
       });
 
       this.resumeForm.valueChanges.subscribe(res => {
