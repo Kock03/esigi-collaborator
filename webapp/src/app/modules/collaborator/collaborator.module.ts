@@ -44,10 +44,10 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { CollaboratorListComponent } from './collaborator-list/collaborator-list.component';
 
 const routes: Routes = [
-  {
-    path: 'novo',
-    component: CollaboratorCreateComponent,
-  },
+  // {
+  //   path: 'novo',
+  //   component: CollaboratorCreateComponent,
+  // },
   {
     path: 'lista',
     component: CollaboratorListComponent,

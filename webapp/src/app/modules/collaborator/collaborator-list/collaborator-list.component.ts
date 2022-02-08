@@ -1,3 +1,4 @@
+import { coerceStringArray } from '@angular/cdk/coercion';
 import {
   Component,
   ElementRef,
@@ -23,6 +24,7 @@ import { CollaboratorCreateComponent } from '../collaborator-create/collaborator
 import { CollaboratorRegisterTabComponent } from '../collaborator-create/collaborator-register-tab/collaborator-register-tab.component';
 
 export interface Collaborator {
+  id: string;
   firstNameCorporateName: string;
   admissionDate: Date;
   office: number;
@@ -64,8 +66,7 @@ export class CollaboratorListComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private collaboratorProvider: CollaboratorProvider,
-    private dialog: MatDialog
+    private collaboratorProvider: CollaboratorProvider
   ) {
     this._unsubscribeAll = new Subject();
   }
@@ -80,16 +81,16 @@ export class CollaboratorListComponent implements OnInit {
     this.router.navigate(['colaborador/novo']);
   }
 
-  getCollaborator(collaboratorSelected: any, index: number) {
-    const dialogRef = this.dialog.open(CollaboratorCreateComponent, {
-      data: { collaboratorSelected },
-    });
+  // getCollaborator(collaboratorSelected: any, index: number) {
+  //   const dialogRef = this.dialog.open(CollaboratorCreateComponent, {
+  //     data: { collaboratorSelected },
+  //   });
 
-    this.index = index;
-    dialogRef.afterClosed().subscribe((collaborator) => {
-      this.collaboratorArray.controls[this.index].setValue(collaborator);
-    });
-  }
+  //   this.index = index;
+  //   dialogRef.afterClosed().subscribe((collaborator) => {
+  //     this.collaboratorArray.controls[this.index].setValue(collaborator);
+  //   });
+  // }
 
   async deleteCollaborator(index: number) {
     const collaborator = this.filteredCollaboratorList[index];
@@ -99,8 +100,6 @@ export class CollaboratorListComponent implements OnInit {
     } catch (error) {
       console.log(error);
     }
-
-    // this.collaboratorArray.removeAt(index);
   }
 
   async getCollaboratorList() {

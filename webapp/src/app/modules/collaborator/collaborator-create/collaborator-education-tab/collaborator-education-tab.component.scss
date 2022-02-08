@@ -4,7 +4,6 @@
 
   table {
     width: 100%;
-
   }
 
   .edit-button {
@@ -20,9 +19,8 @@
   .envolti-table {
     margin-top: 20px;
     overflow: auto;
-    max-height: 150px;
+    max-height: calc(100% - 200px);
     width: 100%;
-
 
     .mat-column-icon {
       width: 50px;
@@ -32,29 +30,26 @@
       white-space: nowrap;
       overflow: hidden;
     }
-
   }
 
-  .mat-tab-label-active{
+  .mat-tab-label-active {
     border-bottom: 2px solid #673ab7;
     opacity: 1 !important;
   }
 
   .mat-ink-bar {
-    height: 0px!important;
-   }
+    height: 0px !important;
+  }
 
   .lenguange-form {
     margin-top: 20px;
   }
-
 }
 
-.button-dialog{
+.button-dialog {
   margin-left: 140px;
-  
 }
 
-.title-dialog{
+.title-dialog {
   text-align: center;
 }

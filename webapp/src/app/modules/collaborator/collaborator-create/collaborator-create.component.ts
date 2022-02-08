@@ -26,11 +26,12 @@ export class CollaboratorCreateComponent implements OnInit {
   ) {}
 
   async ngOnInit(): Promise<void> {
-    this.initForm();
     this.collaboratorId = this.route.snapshot.paramMap.get('id');
+    this.initForm();
     this.step = 1;
     await this.getCollaborator();
-    this.collaboratorForm.patchValue(this.collaborator);
+
+    this.setFormValue();
   }
 
   async getCollaborator() {
@@ -106,6 +107,10 @@ export class CollaboratorCreateComponent implements OnInit {
       Skills: this.fb.array([]),
       Documents: this.fb.array([]),
     });
+  }
+
+  async setFormValue() {
+    this.collaborator.patchValue(this.collaborator);
   }
 
   async saveCollaborator() {
