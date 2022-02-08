@@ -1,8 +1,9 @@
 <div id="jobCreate" class="page">
-  <div fxLayout="row" fxLayoutAlign="space-between center">
-    <h2>Vagas</h2>
-
-    <button mat-flat-button color="primary" (click)="listJob()">Voltar</button>
+  <div fxLayout="row" fxLayoutAlign="start start">
+    <button (click)="listJob()" color="primary" mat-button>
+      <mat-icon> chevron_left </mat-icon>
+    </button>
+    <h2 class="title">Vagas</h2>
   </div>
 
   <div class="content-scroll" *ngIf="jobForm">

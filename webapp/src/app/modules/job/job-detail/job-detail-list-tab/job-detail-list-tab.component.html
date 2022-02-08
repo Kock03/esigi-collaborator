@@ -2,7 +2,7 @@
   <div class="content-scroll">
     <mat-list role="list" #experiencesList *ngIf="job" class="list-group">
       <mat-list-item class="list-group-item" fxLayout="row" fxFlex="100">
-        <div class="text-div"  fxLayout="column" fxFlex="20">
+        <div class="text-div" fxLayout="column" fxFlex="40">
           <span class="label-office">
             {{ job.jobName }}
           </span>
@@ -84,8 +84,6 @@
             <b>Jornada de Trabalho:</b>
             {{ job.workingDay }}
           </span>
-        </div>
-        <div class="text-div-two" fxLayout="column" fxFlex="20">
           <span class="label-gray">
             <b>Senioridade:</b>
             {{ job.Seniorities.intern == true ? "Estagiário," : "" }}
@@ -139,19 +137,28 @@
             {{ knowledge.typeOfPeriod == 1 ? "Mês" : "Anos" }}
           </span>
         </div>
-        <div class="text-div" fxLayout="column" fxFlex="60">
-          <span class="label-text">
-            Quais são as principais atividades que ocolaborador irá exercer?
-          </span>
-          <span class="span-text"> {{ job.collaboratorActivities }}</span>
-
-          <span class="label-text"> Experiencia Desejada:</span>
-          <span class="span-text">{{ job.skills }}</span>
-
-          <span class="label-text">
-            Comportamento e/ou competências necessárias:
-          </span>
-          <span class="span-text"> {{ job.attitudes }}</span>
+        <div
+          class="job-text"
+          fxLayout="column"
+          fxFlex="60"
+          fxLayoutAlign="space-around center" 
+        >
+          <div fxLayout="column">
+            <span class="label-text">
+              Quais são as principais atividades que ocolaborador irá exercer?
+            </span>
+            <span class="span-text"> {{ job.collaboratorActivities }}</span>
+          </div>
+          <div fxLayout="column">
+            <span class="label-text"> Experiencia Desejada:</span>
+            <span class="span-text">{{ job.skills }}</span>
+          </div>
+          <div fxLayout="column">
+            <span class="label-text">
+              Comportamento e/ou competências necessárias:
+            </span>
+            <span class="span-text"> {{ job.attitudes }}</span>
+          </div>
         </div>
       </mat-list-item>
     </mat-list>
