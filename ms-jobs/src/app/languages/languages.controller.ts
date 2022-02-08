@@ -5,7 +5,7 @@ import { LanguagesService } from "./languages.service";
 
 @Controller('/api/v1/languages')
 export class LanguagesController {
-  constructor(private readonly languagesService: LanguagesService) {}
+  constructor(private readonly languagesService: LanguagesService) { }
 
   @Get()
   async index() {
