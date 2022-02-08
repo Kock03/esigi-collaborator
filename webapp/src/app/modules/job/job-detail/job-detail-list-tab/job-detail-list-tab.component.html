@@ -1,8 +1,8 @@
 <div id="jobList" class="tab">
   <div class="content-scroll">
     <mat-list role="list" #experiencesList *ngIf="job" class="list-group">
-      <mat-list-item class="list-group-item" fxLayout="row">
-        <div fxLayout="column">
+      <mat-list-item class="list-group-item" fxLayout="row" fxFlex="100">
+        <div class="text-div"  fxLayout="column" fxFlex="20">
           <span class="label-office">
             {{ job.jobName }}
           </span>
@@ -82,13 +82,76 @@
           </span>
           <span class="label-gray">
             <b>Jornada de Trabalho:</b>
-            {{
-              job.workingDay
-            }}
+            {{ job.workingDay }}
           </span>
         </div>
-        <div  fxLayout="column">
-          asdsdsasdas
+        <div class="text-div-two" fxLayout="column" fxFlex="20">
+          <span class="label-gray">
+            <b>Senioridade:</b>
+            {{ job.Seniorities.intern == true ? "Estagiário," : "" }}
+            {{ job.Seniorities.junior == true ? "Junior," : "" }}
+            {{ job.Seniorities.pleno == true ? "Pleno," : "" }}
+            {{ job.Seniorities.senior == true ? "Senior." : "" }}
+          </span>
+          <span class="label-gray">
+            <b>Valor Minimo:</b>
+            {{ job.minimumValue }}
+          </span>
+          <span class="label-gray">
+            <b>Valor Maximo:</b>
+            {{ job.maximumValue }}
+          </span>
+          <span class="label-gray">
+            <b>Vaga:</b>
+            {{ job.publish == true ? "Publicada" : "Não Publicada" }}
+          </span>
+          <span class="label-gray">
+            <b>Escolaridade:</b>
+            {{
+              job.schooling == 1
+                ? "Ensino Superior Completo"
+                : job.schooling == 2
+                ? "Ensino Superior Incompleto"
+                : "Ensino Médio Completo"
+            }}
+          </span>
+          <span class="label-gray" *ngFor="let language of job?.Languages">
+            <b>Idioma:</b>
+            {{ language.languageName }}
+          </span>
+          <span class="label-gray" *ngFor="let language of job?.Languages">
+            <b>Nivel de Fluência:</b>
+            {{
+              language.degreeOfInfluence == 1
+                ? "Leitura e Conversação"
+                : language.degreeOfInfluence
+                ? "Conversação e Escrita"
+                : "Escrita e Leitura"
+            }}
+          </span>
+          <span class="label-gray" *ngFor="let knowledge of job?.Knowledges">
+            <b>Skill:</b>
+            {{ knowledge.name }}
+          </span>
+          <span class="label-gray" *ngFor="let knowledge of job?.Knowledges">
+            <b>Tempo de Experiência:</b>
+            {{ knowledge.yearsExperience }}
+            {{ knowledge.typeOfPeriod == 1 ? "Mês" : "Anos" }}
+          </span>
+        </div>
+        <div class="text-div" fxLayout="column" fxFlex="60">
+          <span class="label-text">
+            Quais são as principais atividades que ocolaborador irá exercer?
+          </span>
+          <span class="span-text"> {{ job.collaboratorActivities }}</span>
+
+          <span class="label-text"> Experiencia Desejada:</span>
+          <span class="span-text">{{ job.skills }}</span>
+
+          <span class="label-text">
+            Comportamento e/ou competências necessárias:
+          </span>
+          <span class="span-text"> {{ job.attitudes }}</span>
         </div>
       </mat-list-item>
     </mat-list>

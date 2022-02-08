@@ -17,6 +17,32 @@ export interface Job {
   typeOfContract: number;
   workplace: number;
   workingDay: string;
+  Seniorities: {
+    intern: boolean;
+    junior: boolean;
+    pleno: boolean;
+    senior: boolean;
+  };
+  minimumValue: number;
+  maximumValue: number;
+  publish: boolean;
+  schooling: number;
+  Languages: Languanges[];
+  Knowledges: Knowledges[];
+  collaboratorActivities: string;
+  skills: string;
+  attitudes: string;
+}
+
+export interface Languanges {
+  languageName: string;
+  degreeOfInfluence: number;
+}
+
+export interface Knowledges {
+  name: string;
+  yearsExperience: number;
+  typeOfPeriod: number;
 }
 
 @Component({
