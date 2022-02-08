@@ -38,7 +38,7 @@ export class JobInterviewTabComponent implements OnInit {
     this.behavioralInterviewForm = this.fb.group({
       nameCandidate: ['', Validators.required],
       techRecruter: ['', Validators.required],
-      interviewDate: ['', Validators.required],
+      behavioralInterviewDate: ['', Validators.required],
       hourInterview: ['', Validators.required],
       punctuality: [1, Validators.required],
       presentation: [1, Validators.required],
@@ -57,7 +57,7 @@ export class JobInterviewTabComponent implements OnInit {
     this.technicalInterview = this.fb.group({
       nameCandidate: ['', Validators.required],
       evaluator: ['', Validators.required],
-      interviewDate: ['', Validators.required],
+      technicalInterviewDate: ['', Validators.required],
       hourInterview: ['', Validators.required],
       punctuality: [1, Validators.required],
       jobProfile: [true, Validators.required],
@@ -69,7 +69,7 @@ export class JobInterviewTabComponent implements OnInit {
     this.clientInterview = this.fb.group({
       nameCandidate: ['', Validators.required],
       evaluator: ['', Validators.required],
-      interviewDate: ['', Validators.required],
+      clientInterviewDate: ['', Validators.required],
       hourInterview: ['', Validators.required],
       punctuality: [1, Validators.required],
       jobProfile: [true, Validators.required],
