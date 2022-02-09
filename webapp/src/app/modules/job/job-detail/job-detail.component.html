@@ -12,6 +12,7 @@
     <div
       fxLayout="column"
       class="tab-group"
+      (click)="this.step = 1"
       [ngClass]="{ done: step > 0, active: step == 1 }"
     >
       <p class="tab-item">Vaga</p>
@@ -19,6 +20,7 @@
     </div>
     <div
       fxLayout="column"
+      (click)="this.step = 2"
       class="tab-group"
       [ngClass]="{ done: step > 1, active: step == 2 }"
     >
@@ -28,6 +30,7 @@
     <div
       fxLayout="column"
       class="tab-group"
+      (click)="this.step = 3"
       [ngClass]="{ done: step > 2, active: step == 3 }"
     >
       <p class="tab-item">Acompanhamento</p>

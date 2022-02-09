@@ -1,11 +1,13 @@
 #jobDetail {
   .tab-group {
     width: 100%;
+    cursor: pointer;
   }
 
   .tab-item {
     white-space: nowrap;
     overflow: hidden;
+
   }
 
   .content-scroll {
