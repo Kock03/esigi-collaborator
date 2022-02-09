@@ -158,11 +158,6 @@ export class JobCreateComponent implements OnInit {
 
   setFormValue() {
     this.jobForm.patchValue(this.job);
-    // if (this.job.Languages[0]) {
-    //   const languages = this.jobForm.controls['Languages'] as FormGroup;
-    //   languages.addControl('id', new FormControl());
-    //   languages.patchValue(this.job.Languages[0]);
-    // }
   }
 
   handleStep(number: number): void {
