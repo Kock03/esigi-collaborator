@@ -12,6 +12,7 @@
     <div
       fxLayout="column"
       class="tab-group"
+      (click)="step = 1"
       [ngClass]="{ done: step > 0, active: step == 1 }"
     >
       <p class="tab-item">Cadastro</p>
@@ -20,6 +21,7 @@
     <div
       fxLayout="column"
       class="tab-group"
+      (click)="step = 2"
       [ngClass]="{ done: step > 1, active: step == 2 }"
     >
       <p class="tab-item">Educação</p>
@@ -28,6 +30,7 @@
     <div
       fxLayout="column"
       class="tab-group"
+      (click)="step = 3"
       [ngClass]="{ done: step > 2, active: step == 3 }"
     >
       <p class="tab-item">Dados Bancarios</p>
@@ -36,6 +39,7 @@
     <div
       fxLayout="column"
       class="tab-group"
+      (click)="step = 4"
       [ngClass]="{ done: step > 3, active: step == 4 }"
     >
       <p class="tab-item">Financeiro</p>
@@ -44,6 +48,7 @@
     <div
       fxLayout="column"
       class="tab-group"
+      (click)="step = 5"
       [ngClass]="{ done: step > 4, active: step == 5 }"
     >
       <p class="tab-item">Skills</p>
@@ -52,6 +57,7 @@
     <div
       fxLayout="column"
       class="tab-group"
+      (click)="step = 6"
       [ngClass]="{ done: step > 5, active: step == 6 }"
     >
       <p class="tab-item">Documentos</p>
@@ -69,7 +75,7 @@
     (onChange)="handleChanges($event)"
   ></app-collaborator-register-tab>
   <app-collaborator-education-tab
-    [hidden]="step != 2"
+    [hidden]="this.step != 2"
     [form]="collaboratorForm"
     (onChange)="handleChanges($event)"
   >
@@ -122,17 +128,16 @@
   </div>
 
   <div
-  class="navigation-buttons"
-  fxLayoutAlign="center end"
-  fxLayoutGap="16px"
-  *ngIf="collaboratorId !== 'novo'"
->
-  <button
+    class="navigation-buttons"
+    fxLayoutAlign="center end"
+    fxLayoutGap="16px"
+    *ngIf="collaboratorId !== 'novo'">
+    <button
     mat-flat-button
     color="primary"
-    (click)="saveEditJob()"
-  >
+    (click)="saveEditCollaborator()"
+    >
     Salvar
-  </button>
-</div>
+    </button>
+  </div>
 </div>

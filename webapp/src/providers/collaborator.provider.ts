@@ -24,7 +24,7 @@ export class CollaboratorProvider {
   findOne(id: string | null): Promise<any> {
     return new Promise((resolve, reject) => {
       this.apiGateway
-        .get('collaborators/:id', { id: id })
+        .get(environment.COLLABORATOR_MS + 'collaborators/:id', { id: id })
         .subscribe((response: HttpResponse<any>) => {
           resolve(response.body);
         }, reject);

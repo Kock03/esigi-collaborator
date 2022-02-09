@@ -29,7 +29,7 @@ export class UpdateCollaboratorsDto {
   @IsNotEmpty()
   collaboratorTypes: CollaboratorTypes;
 
-  @IsNotEmpty()
+  @IsOptional()
   cpf: string;
 
   @IsNotEmpty()
@@ -38,13 +38,13 @@ export class UpdateCollaboratorsDto {
   @IsNotEmpty()
   email: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   cnpj: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   stateRegistration: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   municipalInscription: string;
 
   @IsNotEmpty()
@@ -61,10 +61,10 @@ export class UpdateCollaboratorsDto {
 
   @IsOptional()
   Phone: PhoneEntity;
-  
+
   @IsOptional()
   Skills: SkillsEntity[];
-  
+
   @IsOptional()
   Documents: DocumentsEntity[];
 

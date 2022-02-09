@@ -48,7 +48,7 @@ export class CollaboratorCreateComponent implements OnInit {
     this.router.navigate(['colaborador/lista']);
   }
 
-  async saveEditJob() {
+  async saveEditCollaborator() {
     let data = this.collaboratorForm.getRawValue();
     try {
       const job = await this.collaboratorProvider.update(
@@ -109,8 +109,8 @@ export class CollaboratorCreateComponent implements OnInit {
     });
   }
 
-  async setFormValue() {
-    this.collaborator.patchValue(this.collaborator);
+  setFormValue() {
+    this.collaboratorForm.patchValue(this.collaborator);
   }
 
   async saveCollaborator() {
