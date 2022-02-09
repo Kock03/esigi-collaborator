@@ -1,4 +1,4 @@
-import { DatePipe } from '@angular/common';
+import { DatePipe, formatDate } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import {
   Component,
@@ -16,6 +16,11 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import {
+  DateAdapter,
+  MAT_DATE_FORMATS,
+  NativeDateAdapter,
+} from '@angular/material/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -28,10 +33,34 @@ export interface Knowledge {
   typeOfPeriod: number;
 }
 
+export const PICK_FORMATS = {
+  parse: { dateInput: { month: 'numeric', year: 'numeric', day: 'numeric' } },
+  display: {
+    dateInput: 'input',
+    monthYearLabel: { year: 'numeric', month: 'numeric' },
+    dateA11yLabel: { year: 'numeric', month: 'numeric', day: 'numeric' },
+    monthYearA11yLabel: { year: 'numeric', month: 'numeric' },
+  },
+};
+
+class PickDateAdapter extends NativeDateAdapter {
+  override format(date: Date, displayFormat: Object): string {
+    if (displayFormat === 'input') {
+      return formatDate(date, 'dd-MM-yyyy', this.locale);
+    } else {
+      return date.toDateString();
+    }
+  }
+}
+
 @Component({
   selector: 'app-job-create',
   templateUrl: './job-create.component.html',
   styleUrls: ['./job-create.component.scss'],
+  providers: [
+    { provide: DateAdapter, useClass: PickDateAdapter },
+    { provide: MAT_DATE_FORMATS, useValue: PICK_FORMATS },
+  ],
   encapsulation: ViewEncapsulation.None,
 })
 export class JobCreateComponent implements OnInit {
@@ -52,6 +81,8 @@ export class JobCreateComponent implements OnInit {
   step: number = 1;
   selectedIndex: number = 0;
 
+  date: any;
+
   checked = false;
 
   index: any = null;
@@ -67,7 +98,7 @@ export class JobCreateComponent implements OnInit {
     private http: HttpClient,
     private snackbarService: SnackBarService,
     private router: Router,
-    private route: ActivatedRoute,
+    private route: ActivatedRoute
   ) {}
 
   async ngOnInit(): Promise<void> {

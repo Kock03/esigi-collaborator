@@ -24,7 +24,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { ResumeCreateComponent } from './resume-create/resume-create.component';
 import {ScrollingModule} from '@angular/cdk/scrolling';
 import {MatListModule} from '@angular/material/list';
-;
+
 
 const routes: Routes = [
   {
