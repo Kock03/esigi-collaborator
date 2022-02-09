@@ -27,6 +27,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { JobProvider } from 'src/providers/job.provider';
 import { SnackBarService } from 'src/services/snackbar.service';
 
+
 @Component({
   selector: 'app-job-create',
   templateUrl: './job-create.component.html',
@@ -50,6 +51,7 @@ export class JobCreateComponent implements OnInit {
   jobForm!: FormGroup;
   step: number = 1;
 
+
   checked = false;
 
   index: any = null;
@@ -71,7 +73,18 @@ export class JobCreateComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     this.jobId = this.route.snapshot.paramMap.get('id');
     this.initForm();
+    await this.getJob();
     this.step = 1;
+    this.setFormValue();
+  }
+
+  async getJob() {
+    try {
+      this.job = await this.jobProvider.findOne(this.jobId);
+      console.log(this.job);
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   handleChanges(value: any): void {}
@@ -141,6 +154,15 @@ export class JobCreateComponent implements OnInit {
       }),
       Knowledges: this.fb.array([]),
     });
+  }
+
+  setFormValue() {
+    this.jobForm.patchValue(this.job);
+    // if (this.job.Languages[0]) {
+    //   const languages = this.jobForm.controls['Languages'] as FormGroup;
+    //   languages.addControl('id', new FormControl());
+    //   languages.patchValue(this.job.Languages[0]);
+    // }
   }
 
   handleStep(number: number): void {
