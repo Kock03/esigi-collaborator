@@ -1,0 +1,209 @@
+<div id="jobRegisterTab" class="tab">
+  <div class="content-scroll" *ngIf="jobForm">
+    <form [formGroup]="jobForm" fxLayout="column" class="form">
+        <div fxFlex="100" fxLayoutGap="16px">
+          <mat-form-field fxFlex="30" appearance="outline">
+            <mat-label>Solicitante</mat-label>
+            <input
+              placeholder="Solicitante"
+              matInput
+              formControlName="requester"
+              type="text"
+            />
+          </mat-form-field>
+
+          <mat-form-field fxFlex="35" appearance="outline">
+            <mat-label>Data de Abertura</mat-label>
+            <input
+              matInput
+              [matDatepicker]="picker"
+              formControlName="openingDate"
+            />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="picker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field fxFlex="35" appearance="outline">
+            <mat-label>Status</mat-label>
+            <mat-select matInput disableRipple formControlName="status">
+              <mat-option [value]="1">Processada</mat-option>
+              <mat-option [value]="2">Em Revisão</mat-option>
+              <mat-option [value]="3">Fechada</mat-option>
+              <mat-option [value]="4">Perdida</mat-option>
+              <mat-option [value]="5">Concluida</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div fxFlex="100" fxLayoutGap="16px">
+          <mat-form-field fxFlex="40" appearance="outline">
+            <mat-label>Cliente</mat-label>
+            <input
+              placeholder="Cliente"
+              matInput
+              formControlName="client"
+              type="text"
+            />
+          </mat-form-field>
+
+          <mat-form-field fxFlex="35" appearance="outline">
+            <mat-label>Tipo de Vaga</mat-label>
+            <mat-select matInput disableRipple formControlName="typeOfJob">
+              <mat-option [value]="1">Aumento de Quadro</mat-option>
+              <mat-option [value]="2">Promoção</mat-option>
+              <mat-option [value]="3">Fidelidade</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-checkbox
+            class="checkbox"
+            color="primary"
+            fxFlex="25"
+            formControlName="temporary"
+            >Temporario</mat-checkbox
+          >
+
+          <mat-form-field
+            fxFlex="25"
+            appearance="outline"
+            *ngIf="jobForm.controls['temporary'].value == true"
+          >
+            <mat-label>Tempo Contrato</mat-label>
+            <input
+              placeholder="Tempo de Contrato"
+              matInput
+              formControlName="monthTime"
+              type="text"
+            />
+          </mat-form-field>
+        </div>
+        <div fxFlex="100" fxLayoutGap="16px">
+          <mat-form-field fxFlex="35" appearance="outline">
+            <mat-label>Nome da Vaga</mat-label>
+            <input
+              placeholder="Nome da Vaga"
+              matInput
+              formControlName="jobName"
+              type="text"
+            />
+          </mat-form-field>
+
+          <mat-form-field fxFlex="35" appearance="outline">
+            <mat-label>Previsão de Inicio</mat-label>
+            <input
+              matInput
+              [matDatepicker]="init"
+              formControlName="startForecast"
+            />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="init"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #init></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field fxFlex="30" appearance="outline">
+            <mat-label>Número de Vagas</mat-label>
+            <input
+              placeholder="Número de Vagas"
+              matInput
+              formControlName="jobNumber"
+              type="number"
+            />
+          </mat-form-field>
+        </div>
+        <div fxFlex="100" fxLayoutGap="16px">
+          <mat-form-field fxFlex="25" appearance="outline">
+            <mat-label>Tipo de Contratação</mat-label>
+            <mat-select
+              matInput
+              disableRipple
+              formControlName="typeOfContract"
+            >
+              <mat-option [value]="1">CLT</mat-option>
+              <mat-option [value]="2">PJ</mat-option>
+              <mat-option [value]="3">Cooperado</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field fxFlex="25" appearance="outline">
+            <mat-label>Local de Trabalho</mat-label>
+            <mat-select matInput disableRipple formControlName="workplace">
+              <mat-option [value]="1">In Loco</mat-option>
+              <mat-option [value]="2">Home Office</mat-option>
+              <mat-option [value]="3">Hibrido</mat-option>
+              <mat-option [value]="4">Envolti</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <div
+            class="checkbox-section"
+            fxFlex="50"
+            formGroupName="Seniorities"
+          >
+            <section fxLayout="column">
+              <span class="text" fxLayoutAlign="start">Senioridade</span>
+              <div fxLayout="row" fxLayoutAlign="space-around">
+                <mat-checkbox color="primary" formControlName="intern"
+                  >Estagiário</mat-checkbox
+                >
+
+                <mat-checkbox color="primary" formControlName="junior"
+                  >Junior</mat-checkbox
+                >
+
+                <mat-checkbox color="primary" formControlName="pleno"
+                  >Pleno</mat-checkbox
+                >
+
+                <mat-checkbox color="primary" formControlName="senior"
+                  >Senior</mat-checkbox
+                >
+              </div>
+            </section>
+          </div>
+        </div>
+        <div fxFlex="100" fxLayoutGap="16px">
+          <mat-form-field fxFlex="30" appearance="outline">
+            <mat-label>Jornada de Trabaho</mat-label>
+            <input
+              placeholder="Jornada de Trabaho"
+              matInput
+              formControlName="workingDay"
+            />
+          </mat-form-field>
+
+          <mat-form-field fxFlex="25" appearance="outline">
+            <mat-label>Valor Minimo</mat-label>
+            <input
+              type="number"
+              placeholder="Valor Minimo"
+              matInput
+              formControlName="minimumValue"
+            />
+          </mat-form-field>
+
+          <mat-form-field fxFlex="25" appearance="outline">
+            <mat-label>Valor Maximo</mat-label>
+            <input
+              type="number"
+              placeholder="Valor Maximo"
+              matInput
+              formControlName="maximumValue"
+            />
+          </mat-form-field>
+
+          <mat-checkbox
+            class="checkbox"
+            color="primary"
+            fxFlex="20"
+            formControlName="publish"
+            >Publicar Vaga</mat-checkbox
+          >
+        </div>
+      </form>
+  </div>
+</div>

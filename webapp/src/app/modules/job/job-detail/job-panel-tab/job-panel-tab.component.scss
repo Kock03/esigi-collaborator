@@ -1,23 +1,34 @@
-#jobPanel{
-    max-width: 900px;
+#jobPanel {
+  max-width: 900px;
 
-    .envolti-table {
-        padding-bottom: 10px;
-        overflow: auto;
-        max-height: 350px;
-    
-    
-    
-    
-        .mat-column-icon {
-          width: 50px;
-        }
-    
-        .button-tab {
-          white-space: nowrap;
-          overflow: hidden;
-        }
-    
-    
-      }
+  .envolti-table {
+    padding-bottom: 10px;
+    overflow: auto;
+    max-height: 350px;
+
+
+
+
+    .mat-column-icon {
+      width: 50px;
+    }
+
+    .button-tab {
+      white-space: nowrap;
+      overflow: hidden;
+    }
+
+
+  }
+
+  .search {
+    width: 100%;
+    max-width: 1000px;
+    margin-right: 5px;
+
+    mat-form-field {
+      width: 100%;
+    }
+  }
+
 }

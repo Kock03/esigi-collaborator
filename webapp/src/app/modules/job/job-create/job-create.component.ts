@@ -27,40 +27,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { JobProvider } from 'src/providers/job.provider';
 import { SnackBarService } from 'src/services/snackbar.service';
 
-export interface Knowledge {
-  name: string;
-  yearsExperience: number;
-  typeOfPeriod: number;
-}
-
-export const PICK_FORMATS = {
-  parse: { dateInput: { month: 'numeric', year: 'numeric', day: 'numeric' } },
-  display: {
-    dateInput: 'input',
-    monthYearLabel: { year: 'numeric', month: 'numeric' },
-    dateA11yLabel: { year: 'numeric', month: 'numeric', day: 'numeric' },
-    monthYearA11yLabel: { year: 'numeric', month: 'numeric' },
-  },
-};
-
-class PickDateAdapter extends NativeDateAdapter {
-  override format(date: Date, displayFormat: Object): string {
-    if (displayFormat === 'input') {
-      return formatDate(date, 'dd-MM-yyyy', this.locale);
-    } else {
-      return date.toDateString();
-    }
-  }
-}
-
 @Component({
   selector: 'app-job-create',
   templateUrl: './job-create.component.html',
   styleUrls: ['./job-create.component.scss'],
-  providers: [
-    { provide: DateAdapter, useClass: PickDateAdapter },
-    { provide: MAT_DATE_FORMATS, useValue: PICK_FORMATS },
-  ],
   encapsulation: ViewEncapsulation.None,
 })
 export class JobCreateComponent implements OnInit {
@@ -79,9 +49,6 @@ export class JobCreateComponent implements OnInit {
 
   jobForm!: FormGroup;
   step: number = 1;
-  selectedIndex: number = 0;
-
-  date: any;
 
   checked = false;
 
@@ -104,19 +71,10 @@ export class JobCreateComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     this.jobId = this.route.snapshot.paramMap.get('id');
     this.initForm();
-    await this.getJob();
-
-    this.setFormValue();
+    this.step = 1;
   }
 
-  async getJob() {
-    try {
-      this.job = await this.jobProvider.findOne(this.jobId);
-      console.log(this.job);
-    } catch (error) {
-      console.error(error);
-    }
-  }
+  handleChanges(value: any): void {}
 
   initForm() {
     this.jobForm = this.fb.group({
@@ -185,37 +143,8 @@ export class JobCreateComponent implements OnInit {
     });
   }
 
-  setFormValue() {
-    this.jobForm.patchValue(this.job);
-    if (this.job.Languages[0]) {
-      const languages = this.jobForm.controls['Languages'] as FormGroup;
-      languages.addControl('id', new FormControl());
-      languages.patchValue(this.job.Languages[0]);
-    }
-  }
-
-  openDialog() {
-    const dialogRef = this.dialog.open(JobDialogSkill, {
-      width: '450px',
-      height: '200px',
-    });
-
-    dialogRef.afterClosed().subscribe((knowledge) => {
-      this.knowledgeArray.insert(0, this.fb.group(knowledge)),
-        this.knowledgeTable.renderRows();
-    });
-  }
-
-  nextStep() {
-    if (this.selectedIndex != 1) {
-      this.selectedIndex = this.selectedIndex + 1;
-    }
-  }
-
-  previousStep() {
-    if (this.selectedIndex != 0) {
-      this.selectedIndex = this.selectedIndex - 1;
-    }
+  handleStep(number: number): void {
+    this.step = number;
   }
 
   async saveJob() {
@@ -246,12 +175,16 @@ export class JobCreateComponent implements OnInit {
     }
   }
 
-  deleteKnowledge(index: number) {
-    this.knowledgeArray.removeAt(index);
-  }
-
   listJob() {
     this.router.navigate(['vaga/lista']);
+  }
+
+  navigate(direction: string) {
+    if (this.step > 1 && direction === 'back') {
+      this.step -= 1;
+    } else if (this.step < 6 && direction === 'next') {
+      this.step += 1;
+    }
   }
 }
 

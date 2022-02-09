@@ -1,0 +1,144 @@
+<div id="jobSkillTab" class="tab">
+  <div class="content-scroll" *ngIf="jobForm">
+    <div fxLayout="column">
+      <form [formGroup]="jobForm" fxLayout="column" class="form">
+        <div fxFlex="60" fxLayoutGap="16px">
+          <mat-form-field fxFlex="20" appearance="outline">
+            <mat-label>Escolaridade</mat-label>
+            <mat-select matInput disableRipple formControlName="schooling">
+              <mat-option [value]="1">Ensino Superior Completo</mat-option>
+              <mat-option [value]="2">Ensino Superior Incompleto</mat-option>
+              <mat-option [value]="3">Ensino Médio Completo</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field
+            fxFlex="20"
+            appearance="outline"
+            formGroupName="Languages"
+          >
+            <mat-label>Idioma</mat-label>
+            <input
+              placeholder="Idioma"
+              matInput
+              formControlName="languageName"
+            />
+          </mat-form-field>
+
+          <mat-form-field
+            fxFlex="20"
+            appearance="outline"
+            formGroupName="Languages"
+          >
+            <mat-label>Grau de Fluência</mat-label>
+            <mat-select
+              matInput
+              disableRipple
+              formControlName="degreeOfInfluence"
+            >
+              <mat-option [value]="1">Leitura e Conversação</mat-option>
+              <mat-option [value]="2">Conversação e Escrita</mat-option>
+              <mat-option [value]="3">Escrita e Leitura</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div fxFlex="63" fxLayoutGap="16px">
+          <mat-form-field fxFlex="63" appearance="outline">
+            <mat-label
+              >Quais são as principais atividades que ocolaborador irá
+              exercer?</mat-label
+            >
+            <textarea
+              class="text-area"
+              matInput
+              placeholder="Atividades"
+              formControlName="collaboratorActivities"
+            ></textarea>
+          </mat-form-field>
+        </div>
+
+        <div fxFlex="63" fxLayoutGap="16px">
+          <mat-form-field fxFlex="63" appearance="outline">
+            <mat-label> Experiencia Desejada</mat-label>
+            <textarea
+              class="text-area"
+              matInput
+              placeholder="Habilidades"
+              formControlName="skills"
+            ></textarea>
+          </mat-form-field>
+        </div>
+
+        <div fxFlex="63" fxLayoutGap="16px">
+          <mat-form-field fxFlex="63" appearance="outline">
+            <mat-label>Comportamento e/ou competências necessárias</mat-label>
+            <textarea
+              class="text-area"
+              matInput
+              placeholder="Atitudes"
+              formControlName="attitudes"
+            ></textarea>
+          </mat-form-field>
+        </div>
+      </form>
+
+      <div fxLayoutGap="16px" fxLayout="column">
+        <div>
+          <div fxLayout="row" fxLayoutAlign="start center ">
+            <p class="skills-text">Conhecimentos</p>
+            <button mat-button color="primary" (click)="openDialog()">
+              Adicionar
+            </button>
+          </div>
+        </div>
+        <div class="envolti-table mat-elevation-z8" fxLayout="column">
+          <table
+            mat-table
+            [dataSource]="jobForm.controls['Knowledges'].value"
+            #knowledgeTable
+          >
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef>Tecnologia</th>
+              <td mat-cell *matCellDef="let Knowledge">
+                {{ Knowledge.name }}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="yearsExperience">
+              <th mat-header-cell *matHeaderCellDef>Tempo de experiencia</th>
+              <td mat-cell *matCellDef="let Knowledge">
+                {{ Knowledge.yearsExperience }}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="typeOfPeriod">
+              <th mat-header-cell *matHeaderCellDef>Periodo</th>
+              <td mat-cell *matCellDef="let Knowledge">
+                {{ Knowledge.typeOfPeriod !== 2 ? "Mês" : "Ano" }}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="icon">
+              <th mat-header-cell *matHeaderCellDef></th>
+              <td class="button-tab" mat-cell *matCellDef="let Knowledge">
+                <button
+                  class="table-button"
+                  mat-button
+                  (click)="deleteKnowledge(index)"
+                >
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </td>
+            </ng-container>
+
+            <tr
+              mat-header-row
+              *matHeaderRowDef="displayedColumns; sticky: true"
+            ></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

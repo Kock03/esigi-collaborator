@@ -16,22 +16,23 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatListModule } from '@angular/material/list';
 import { MatDialogModule } from '@angular/material/dialog';
-import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 import { HttpClientModule } from '@angular/common/http';
-import {MatTreeModule} from '@angular/material/tree';
+import { MatTreeModule } from '@angular/material/tree';
 import { JobListComponent } from './job-list/job-list.component';
 import { JobDetailComponent } from './job-detail/job-detail.component';
 import { JobDetailListTabComponent } from './job-detail/job-detail-list-tab/job-detail-list-tab.component';
 import { JobInterviewTabComponent } from './job-detail/job-interview-tab/job-interview-tab.component';
 import { JobPanelTabComponent } from './job-detail/job-panel-tab/job-panel-tab.component';
+import { JobRegisterTabComponent, PickDateAdapter } from './job-create/job-register-tab/job-register-tab.component';
+import { JobSkillTabComponent } from './job-create/job-skill-tab/job-skill-tab.component';
 
 const routes: Routes = [
   {
     path: 'lista',
-    component: JobListComponent
-
+    component: JobListComponent,
   },
   {
     path: ':id',
@@ -44,7 +45,17 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [JobCreateComponent, JobDialogSkill, JobListComponent, JobDetailComponent, JobDetailListTabComponent, JobInterviewTabComponent, JobPanelTabComponent],
+  declarations: [
+    JobCreateComponent,
+    JobDialogSkill,
+    JobListComponent,
+    JobDetailComponent,
+    JobDetailListTabComponent,
+    JobInterviewTabComponent,
+    JobPanelTabComponent,
+    JobRegisterTabComponent,
+    JobSkillTabComponent,
+  ],
   imports: [
     RouterModule.forChild(routes),
     CommonModule,
@@ -65,11 +76,11 @@ const routes: Routes = [
     MatTreeModule,
     HttpClientModule,
   ],
-  providers: [
-    MatDatepickerModule
-  ],
+  providers: [MatDatepickerModule],
   entryComponents: [
     JobDialogSkill,
-  ]
+    JobRegisterTabComponent,
+    JobSkillTabComponent,
+  ],
 })
 export class JobModule {}
