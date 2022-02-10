@@ -147,7 +147,11 @@
       </mat-tab>
 
       <mat-tab label="Entevista Técnica">
-        <form [formGroup]="technicalInterview" fxLayout="column" class="form">
+        <form
+          [formGroup]="technicalInterviewForm"
+          fxLayout="column"
+          class="form"
+        >
           <div fxFlex="100" fxLayoutGap="16px">
             <mat-form-field fxFlex="35" appearance="outline">
               <mat-label>Nome do Candidato</mat-label>
@@ -237,7 +241,7 @@
                 mat-flat-button
                 color="primary"
                 class="save-button"
-                [disabled]="technicalInterview.invalid"
+                [disabled]="technicalInterviewForm.invalid"
               >
                 Salvar
               </button>
@@ -246,7 +250,7 @@
         </form>
       </mat-tab>
       <mat-tab label="Entevista Cliente">
-        <form [formGroup]="clientInterview" fxLayout="column" class="form">
+        <form [formGroup]="clientInterviewForm" fxLayout="column" class="form">
           <div fxFlex="100" fxLayoutGap="16px">
             <mat-form-field fxFlex="35" appearance="outline">
               <mat-label>Nome do Candidato</mat-label>
@@ -336,7 +340,152 @@
                 mat-flat-button
                 color="primary"
                 class="save-button"
-                [disabled]="clientInterview.invalid"
+                [disabled]="clientInterviewForm.invalid"
+              >
+                Salvar
+              </button>
+            </div>
+          </div>
+        </form>
+      </mat-tab>
+      <mat-tab label="Devolutiva">
+        <form [formGroup]="returnForm" fxLayout="column" class="form">
+          <div fxFlex="100" fxLayoutGap="16px">
+            <mat-form-field fxFlex="50" appearance="outline">
+              <mat-label>Nome do Candidato</mat-label>
+              <input
+                placeholder="Nome do Candidato"
+                matInput
+                formControlName="nameCandidate"
+                type="text"
+              />
+            </mat-form-field>
+            <mat-form-field fxFlex="50" appearance="outline">
+              <mat-label>Data da Devolutiva</mat-label>
+              <input
+                matInput
+                [matDatepicker]="dateOfReturn"
+                formControlName="dateOfReturn"
+              />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="dateOfReturn"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #dateOfReturn></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div fxFlex="100" fxLayoutGap="16px">
+            <mat-form-field fxFlex="50" appearance="outline">
+              <mat-label>Avaliação Comportamental</mat-label>
+              <mat-select
+                matInput
+                disableRipple
+                formControlName="behavioralEvaluation"
+              >
+                <mat-option [value]="1">Aprovado</mat-option>
+                <mat-option [value]="2">Aprovado com Resalvas</mat-option>
+                <mat-option [value]="3">Reprovado</mat-option>
+                <mat-option [value]="4">Reprovado com Resalvas</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field fxFlex="50" appearance="outline">
+              <mat-label>Avaliação Técnica</mat-label>
+              <mat-select
+                matInput
+                disableRipple
+                formControlName="technicalEvaluation"
+              >
+                <mat-option [value]="1">Aprovado</mat-option>
+                <mat-option [value]="2">Aprovado com Resalvas</mat-option>
+                <mat-option [value]="3">Reprovado</mat-option>
+                <mat-option [value]="4">Reprovado com Resalvas</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div fxFlex="100" fxLayoutGap="16px">
+            <mat-form-field fxFlex="50" appearance="outline">
+              <mat-label>Avaliação Comportamental</mat-label>
+              <textarea
+                class="text-area"
+                matInput
+                placeholder="Avaliação Comportamental"
+                formControlName="behavioralEvaluationComent"
+              ></textarea>
+            </mat-form-field>
+            <mat-form-field fxFlex="50" appearance="outline">
+              <mat-label>Avaliação Técnica</mat-label>
+              <textarea
+                class="text-area"
+                matInput
+                placeholder="Avaliação Técnica"
+                formControlName="technicalEvaluationComent"
+              ></textarea>
+            </mat-form-field>
+          </div>
+          <div fxFlex="100" fxLayoutGap="16px">
+            <mat-form-field fxFlex="35" appearance="outline">
+              <mat-label>Retorno do Candidato</mat-label>
+              <mat-select
+                matInput
+                disableRipple
+                formControlName="returnOfCandidate"
+              >
+                <mat-option [value]="1">Aceitou</mat-option>
+                <mat-option [value]="2">Declinou</mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field fxFlex="35" appearance="outline">
+              <mat-label>Motivo</mat-label>
+              <mat-select matInput disableRipple formControlName="reason">
+                <mat-option [value]="1">Salario</mat-option>
+                <mat-option [value]="2">Modelo de Contratação</mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field fxFlex="30" appearance="outline">
+              <mat-label>Tipo de Contratação</mat-label>
+              <mat-select
+                matInput
+                disableRipple
+                formControlName="typeOdContract"
+              >
+                <mat-option [value]="1">CLT</mat-option>
+                <mat-option [value]="2">PJ</mat-option>
+                <mat-option [value]="3">Cooperado</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field fxFlex="40" appearance="outline">
+              <mat-label>Valor Fechado</mat-label>
+              <input
+                placeholder="Valor"
+                matInput
+                formControlName="combinedValue"
+                type="text"
+              />
+            </mat-form-field>
+            <mat-form-field fxFlex="40" appearance="outline">
+              <mat-label>Data de Inicio</mat-label>
+              <input
+                matInput
+                [matDatepicker]="initialData"
+                formControlName="initialData"
+              />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="initialData"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #initialData></mat-datepicker>
+            </mat-form-field>
+
+            <div fxLayoutAlign="center" fxFlex="20">
+              <button
+                mat-flat-button
+                color="primary"
+                class="save-button"
+                [disabled]="returnForm.invalid"
               >
                 Salvar
               </button>

@@ -92,35 +92,42 @@
           </div>
         </div>
         <div class="envolti-table mat-elevation-z8" fxLayout="column">
-          <table
+          <table 
             mat-table
-            [dataSource]="jobForm.controls['Knowledges'].value"
+            [dataSource]="data"
             #knowledgeTable
           >
             <ng-container matColumnDef="name">
               <th mat-header-cell *matHeaderCellDef>Tecnologia</th>
-              <td mat-cell *matCellDef="let Knowledge">
-                {{ Knowledge.name }}
+              <td mat-cell *matCellDef="let knowledge">
+                {{ knowledge.name }} 
               </td>
             </ng-container>
 
             <ng-container matColumnDef="yearsExperience">
               <th mat-header-cell *matHeaderCellDef>Tempo de experiencia</th>
-              <td mat-cell *matCellDef="let Knowledge">
-                {{ Knowledge.yearsExperience }}
+              <td mat-cell *matCellDef="let knowledge">
+                {{ knowledge.yearsExperience }}
               </td>
             </ng-container>
 
             <ng-container matColumnDef="typeOfPeriod">
               <th mat-header-cell *matHeaderCellDef>Periodo</th>
-              <td mat-cell *matCellDef="let Knowledge">
-                {{ Knowledge.typeOfPeriod !== 2 ? "Mês" : "Ano" }}
+              <td mat-cell *matCellDef="let knowledge">
+                {{ knowledge.typeOfPeriod !== 2 ? "Mês" : "Ano" }}
               </td>
             </ng-container>
 
             <ng-container matColumnDef="icon">
               <th mat-header-cell *matHeaderCellDef></th>
-              <td class="button-tab" mat-cell *matCellDef="let Knowledge">
+              <td class="button-tab" mat-cell *matCellDef="let Knowledge;  let index = index">
+                <button
+                class="table-button"
+                mat-button
+                (click)="getKnowledge(Knowledge, index)"
+              >
+                <mat-icon>edit</mat-icon>
+              </button>
                 <button
                   class="table-button"
                   mat-button

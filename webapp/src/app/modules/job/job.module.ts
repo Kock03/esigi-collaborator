@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   JobCreateComponent,
-  JobDialogSkill,
 } from './job-create/job-create.component';
 import { RouterModule, Routes } from '@angular/router';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -27,7 +26,7 @@ import { JobDetailListTabComponent } from './job-detail/job-detail-list-tab/job-
 import { JobInterviewTabComponent } from './job-detail/job-interview-tab/job-interview-tab.component';
 import { JobPanelTabComponent } from './job-detail/job-panel-tab/job-panel-tab.component';
 import { JobRegisterTabComponent, PickDateAdapter } from './job-create/job-register-tab/job-register-tab.component';
-import { JobSkillTabComponent } from './job-create/job-skill-tab/job-skill-tab.component';
+import { JobDialogSkill, JobSkillTabComponent } from './job-create/job-skill-tab/job-skill-tab.component';
 
 const routes: Routes = [
   {

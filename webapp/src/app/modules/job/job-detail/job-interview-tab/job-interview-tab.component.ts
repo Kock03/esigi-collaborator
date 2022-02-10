@@ -21,8 +21,9 @@ import {
 })
 export class JobInterviewTabComponent implements OnInit {
   behavioralInterviewForm!: FormGroup;
-  technicalInterview!: FormGroup;
-  clientInterview!: FormGroup;
+  technicalInterviewForm!: FormGroup;
+  clientInterviewForm!: FormGroup;
+  returnForm!: FormGroup;
 
   step: number = 1;
   selectedIndex: number = 0;
@@ -54,7 +55,7 @@ export class JobInterviewTabComponent implements OnInit {
       situational: [1, Validators.required],
       availabilityOfInitialize: ['', Validators.required],
     });
-    this.technicalInterview = this.fb.group({
+    this.technicalInterviewForm = this.fb.group({
       nameCandidate: ['', Validators.required],
       evaluator: ['', Validators.required],
       technicalInterviewDate: ['', Validators.required],
@@ -66,7 +67,7 @@ export class JobInterviewTabComponent implements OnInit {
       situational: [1, Validators.required],
     });
 
-    this.clientInterview = this.fb.group({
+    this.clientInterviewForm = this.fb.group({
       nameCandidate: ['', Validators.required],
       evaluator: ['', Validators.required],
       clientInterviewDate: ['', Validators.required],
@@ -76,6 +77,20 @@ export class JobInterviewTabComponent implements OnInit {
       technicalEvaluation: ['', Validators.required],
       comments: ['', Validators.required],
       situational: [1, Validators.required],
+    });
+
+    this.returnForm = this.fb.group({
+      nameCandidate: ['', Validators.required],
+      dateOfReturn: ['', Validators.required],
+      technicalEvaluation: [1, Validators.required],
+      behavioralEvaluation: [1, Validators.required],
+      technicalEvaluationComent: ['', Validators.required],
+      behavioralEvaluationComent: ['', Validators.required],
+      returnOfCandidate: [1, Validators.required],
+      reason: [1, Validators.required],
+      typeOdContract: [1, Validators.required],
+      combinedValue: ['', Validators.required],
+      initialData: ['', Validators.required],
     });
   }
 

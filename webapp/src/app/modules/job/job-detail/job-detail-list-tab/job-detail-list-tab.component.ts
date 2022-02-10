@@ -71,7 +71,6 @@ export class JobDetailListTabComponent implements OnInit {
   async getJob() {
     try {
       this.job = await this.jobProvider.findOne(this.jobId);
-      console.log(this.job);
     } catch (error) {
       console.error(error);
     }

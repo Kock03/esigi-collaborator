@@ -63,10 +63,6 @@ export class CollaboratorDocumentTabComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((document) => {
-      console.log(
-        '🚀 ~ file: collaborator-document-tab.component.ts ~ line 60 ~ CollaboratorDocumentTabComponent ~ dialogRef.afterClosed ~ document',
-        document
-      );
       if (document) {
         this.documentArray.insert(0, this.fb.group(document));
         this.documentTable.renderRows();

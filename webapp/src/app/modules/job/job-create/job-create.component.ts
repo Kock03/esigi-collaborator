@@ -73,16 +73,15 @@ export class JobCreateComponent implements OnInit {
     this.initForm();
     if (this.jobId !== 'novo') {
       await this.getJob();
+      this.setFormValue();
     }
 
     this.step = 1;
-    this.setFormValue();
   }
 
   async getJob() {
     try {
       this.job = await this.jobProvider.findOne(this.jobId);
-      console.log(this.job);
     } catch (error) {
       console.error(error);
     }
@@ -153,7 +152,7 @@ export class JobCreateComponent implements OnInit {
         pleno: [false],
         senior: [false],
       }),
-      Knowledges: this.fb.array([]),
+      Knowledges: this.fb.array([new Array()]),
     });
   }
 
@@ -163,8 +162,10 @@ export class JobCreateComponent implements OnInit {
       const languages = this.jobForm.controls['Languages'] as FormGroup;
       languages.patchValue(this.job.Languages[0]);
     }
-
-
+    if (!this.job.Knowledges[0]) {
+      const knowledge = this.jobForm.controls['Knowledges'] as FormArray;
+      knowledge.value.splice(0, 1)
+    }
   }
 
   handleStep(number: number): void {
@@ -193,7 +194,6 @@ export class JobCreateComponent implements OnInit {
       const job = await this.jobProvider.update(this.jobId, data);
       this.snackbarService.successMessage('Vaga Atualizada com Sucesso');
       this.router.navigate(['vaga/lista']);
-      console.log(this.job);
     } catch (error) {
       console.error(error);
     }
@@ -212,38 +212,4 @@ export class JobCreateComponent implements OnInit {
   }
 }
 
-@Component({
-  selector: 'job-dialog-skill',
-  templateUrl: 'job-dialog-skill.html',
-})
-export class JobDialogSkill implements OnInit {
-  @Input('form') jobForm!: FormGroup;
-  @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
 
-  knowledgeForm!: FormGroup;
-
-  constructor(
-    public dialogRef: MatDialogRef<JobDialogSkill>,
-    private fb: FormBuilder
-  ) {}
-
-  ngOnInit(): void {
-    this.initForm();
-  }
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-
-  initForm(): void {
-    this.knowledgeForm = this.fb.group({
-      name: ['', [Validators.required, Validators.maxLength(20)]],
-      yearsExperience: [1, Validators.required],
-      typeOfPeriod: [1, Validators.required],
-    });
-  }
-
-  async saveKnowledge() {
-    this.dialogRef.close(this.knowledgeForm.getRawValue());
-  }
-}
