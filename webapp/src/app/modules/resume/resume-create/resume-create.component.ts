@@ -24,88 +24,72 @@ export class ResumeCreateComponent implements OnInit {
   Experience: any;
 
 
-  
+
 
   constructor(
     private fb: FormBuilder,
-    
+
     private resumeProvider: ResumeProvider,
-    ) {}
+  ) { }
 
   ngOnInit(): void {
     this.initForm();
   }
 
   initForm() {
-      this.resumeForm = this.fb.group({
-        firstName: ['joao', Validators.required],
-        lastName: ['silva', Validators.required],
-        login: ['joao.silva', Validators.required],
-        cpf: this.fb.control({ value: null, disabled: false}, DocumentValidator.isValidCpf()),
-        birthDate: ['2022-01-01', Validators.required],
-        gender: [1, Validators.required],
-        maritalStatus: [1, Validators.required],
-        photo: ['', Validators.required],
-  
-        Address: this.fb.group({
-          cep: ['89040400', Validators.required],
-          number: ['43'],
-          complement: ['casa'],
-          street: ['rua', Validators.required],
-          state: ['estado', Validators.required],
-          city: ['cidade', Validators.required],
-          district: ['bairro', Validators.required],
-        }),
-        Phone: this.fb.group({
-          phoneNumber: ['42334324', Validators.required],
-          ddd: ['44', Validators.required],
-          ddi: ['44', Validators.required],
-      
-        }),
+    this.resumeForm = this.fb.group({
+      firstName: ['joao', Validators.required],
+      lastName: ['silva', Validators.required],
+      login: ['joao.silva', Validators.required],
+      cpf: this.fb.control({ value: null, disabled: false }, DocumentValidator.isValidCpf()),
+      birthDate: ['2022-01-01', Validators.required],
+      gender: [1, Validators.required],
+      maritalStatus: [1, Validators.required],
+      photo: ['', Validators.required],
 
-        email: ['joao@silva.com', Validators.email],
-        site: ['', Validators.required],
-        linkedin: ['', Validators.required],
+      Address: this.fb.group({
+        cep: ['89040400', Validators.required],
+        number: ['43'],
+        complement: ['casa'],
+        street: ['rua', Validators.required],
+        state: ['estado', Validators.required],
+        city: ['cidade', Validators.required],
+        district: ['bairro', Validators.required],
+      }),
+      Phone: this.fb.group({
+        phoneNumber: ['42334324', Validators.required],
+        ddd: ['44', Validators.required],
+        ddi: ['44', Validators.required],
 
-        // office: ['', Validators.required],
-        // companyName: ['', Validators.required],
-        // locality: [''],
-        // startMonth:['', Validators.required],
-        // startYear:['', Validators.required],
-        // terminusMonth:['', Validators.required],
-        // terminusYear:['', Validators.required],
-        // sector: ['', Validators.required],
-        // description: ['', Validators.required],
+      }),
+
+      email: ['joao@silva.com', Validators.email],
+      site: ['', Validators.required],
+      linkedin: ['', Validators.required],
+
+      Languages: this.fb.array([]),
+      Educations: this.fb.array([]),
+      Experiences: this.fb.array([]),
+      Skills: this.fb.array([]),
+    });
+
+    this.resumeForm.valueChanges.subscribe(res => {
+      console.log("🚀 ~ file: resume-create.component.ts ~ line 90 ~ ResumeCreateComponent ~ initForm ~ res", res)
+    })
+  }
 
 
 
 
-        Languages: this.fb.array([]),
-        Educations: this.fb.array([]),
-        Experiences: this.fb.array([]),
-        Skills: this.fb.array([]),
-        // Monitoring: this.fb.array([]),
-        // Register: this.fb.array([]),
-        // Documents: null,
-      });
+  async saveResume() {
+    let data = this.resumeForm.getRawValue();
 
-      this.resumeForm.valueChanges.subscribe(res => {
-        console.log("🚀 ~ file: resume-create.component.ts ~ line 90 ~ ResumeCreateComponent ~ initForm ~ res", res)
-      })
+    try {
+      const resume = await this.resumeProvider.store(data);
+    } catch (error) {
+      console.log('ERROR 132' + error);
     }
-
-
-    
-  
-    async saveResume() {
-      let data = this.resumeForm.getRawValue();
-  
-      try {
-        const resume = await this.resumeProvider.store(data);
-      } catch (error) {
-        console.log('ERROR 132' + error);
-      }
-    }
+  }
 
 
   navigate(direction: string) {

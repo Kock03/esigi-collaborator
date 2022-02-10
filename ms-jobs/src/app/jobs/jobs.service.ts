@@ -15,9 +15,6 @@ export class JobsService {
 
         private readonly jobsRepository: Repository<JobsEntity>) { }
 
-
-
-
     async findAll() {
         const jobsWhiteAll = await this.jobsRepository
             .createQueryBuilder('jobs')
@@ -29,7 +26,7 @@ export class JobsService {
     async findOneOrFail(
         conditions: FindConditions<JobsEntity>,
         options?: FindOneOptions<JobsEntity>) {
-        options = { relations: ['Knowledges', 'Senorities','Languages'] }
+        options = { relations: ['Knowledges', 'Senorities', 'Languages'] }
 
         try {
             return await this.jobsRepository.findOneOrFail(conditions, options);

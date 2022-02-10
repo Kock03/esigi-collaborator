@@ -8,10 +8,10 @@ import { Type } from "./type.enum";
 import { TypeOfContract } from "./typeOfContract.enum";
 import { Workplace } from "./workplace.enum";
 
-export class UpdateJobsDto{
+export class UpdateJobsDto {
     @IsNotEmpty()
     requester: string;
-  
+
     @IsNotEmpty()
     status: Status;
 
@@ -49,8 +49,8 @@ export class UpdateJobsDto{
     workplace: Workplace;
 
     @IsNotEmpty()
-    workingDay:string;
-    
+    workingDay: string;
+
     @IsNotEmpty()
     minimumValue: number;
 
@@ -58,10 +58,7 @@ export class UpdateJobsDto{
     maximumValue: number;
 
     @IsNotEmpty()
-    schooling: Schooling; 
-
-    @IsNotEmpty()
-    collaboratorActivities: string;
+    schooling: Schooling;
 
     @IsNotEmpty()
     Knowledges: KnowledgesEntity[];

@@ -21,7 +21,11 @@
         </ng-container>
 
         <ng-container matColumnDef="icon">
-          <th mat-header-cell *matHeaderCellDef></th>
+          <th mat-header-cell *matHeaderCellDef>
+            <button class="edit-button" mat-flat-button color="primary" (click)="openDialog()">
+              <mat-icon>add</mat-icon>
+            </button>
+          </th>
           <td class="button-tab " mat-cell *matCellDef="let document; let index = index">
             <button class="table-button" mat-button (click)="getDocument(document, index)">
               <mat-icon>edit</mat-icon>
@@ -40,9 +44,6 @@
         <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
       </table>
     </div>
-    <button fxFlex="5" class="edit-button" mat-flat-button color="primary" (click)="openDialog()">
-      <mat-icon>add</mat-icon>
-    </button>
   </div>
   </div>
 </div>

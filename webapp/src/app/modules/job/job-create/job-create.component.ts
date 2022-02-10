@@ -1,7 +1,9 @@
+import { formatDate } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import {
   Component,
   EventEmitter,
+  Injectable,
   Input,
   OnInit,
   Output,
@@ -9,6 +11,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NativeDateAdapter, DateAdapter, MAT_DATE_FORMATS } from '@angular/material/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
 import { Router } from '@angular/router';
@@ -20,11 +23,37 @@ export interface Knowledge {
   typeOfPeriod: number;
 }
 
+export const PICK_FORMATS = {
+  parse: { dateInput: { month: 'numeric', year: 'numeric', day: 'numeric' } },
+  display: {
+    dateInput: 'input',
+    monthYearLabel: { year: 'numeric', month: 'numeric' },
+    dateA11yLabel: { year: 'numeric', month: 'numeric', day: 'numeric' },
+    monthYearA11yLabel: { year: 'numeric', month: 'numeric' }
+  }
+};
+
+@Injectable()
+export class PickDateAdapter extends NativeDateAdapter {
+  override format(date: Date, displayFormat: Object): string {
+    if (displayFormat === 'input') {
+      return formatDate(date, 'dd-MM-yyyy', this.locale);;
+    } else {
+      return date.toDateString();
+    }
+  }
+}
+
 @Component({
   selector: 'app-job-create',
   templateUrl: './job-create.component.html',
   styleUrls: ['./job-create.component.scss'],
   encapsulation: ViewEncapsulation.None,
+  providers: [
+    { provide: DateAdapter, useClass: PickDateAdapter },
+    { provide: MAT_DATE_FORMATS, useValue: PICK_FORMATS }
+  ]
+
 })
 export class JobCreateComponent implements OnInit {
   @ViewChild('knowledgeTable') knowledgeTable!: MatTable<any>;
@@ -39,7 +68,7 @@ export class JobCreateComponent implements OnInit {
   get knowledgeArray() {
     return this.jobForm.controls['Knowledges'] as FormArray;
   }
-
+  Date: any;
   jobForm!: FormGroup;
   step: number = 1;
   selectedIndex: number = 0;
@@ -55,7 +84,7 @@ export class JobCreateComponent implements OnInit {
     private jobProvider: JobProvider,
     private http: HttpClient,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.initForm();
@@ -108,7 +137,7 @@ export class JobCreateComponent implements OnInit {
       skills: ['a', Validators.required],
       attitudes: ['a', Validators.required],
       Languages: this.fb.group({
-        languageName: ['Russo',[Validators.required, Validators.maxLength(20)]],
+        languageName: ['Russo', [Validators.required, Validators.maxLength(20)]],
         degreeOfInfluence: [1, Validators.required],
       }),
       Seniorities: this.fb.group({
@@ -163,7 +192,7 @@ export class JobCreateComponent implements OnInit {
     this.knowledgeArray.removeAt(index);
   }
 
-  listJob(){
+  listJob() {
     this.router.navigate(['vaga/lista'])
   }
 }
@@ -181,7 +210,7 @@ export class JobDialogSkill implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<JobDialogSkill>,
     private fb: FormBuilder
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.initForm();
@@ -199,7 +228,7 @@ export class JobDialogSkill implements OnInit {
     });
   }
 
- async saveKnowledge() {
+  async saveKnowledge() {
     this.dialogRef.close(this.knowledgeForm.getRawValue());
   }
 }

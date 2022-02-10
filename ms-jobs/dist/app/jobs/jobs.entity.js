@@ -20,9 +20,6 @@ const workplace_enum_1 = require("./dtos/workplace.enum");
 const seniorities_entity_1 = require("../seniorities/seniorities.entity");
 const languages_entity_1 = require("../languages/languages.entity");
 let JobsEntity = class JobsEntity {
-    setDate(event) {
-        console.log(event);
-    }
 };
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)('uuid'),
@@ -138,12 +135,6 @@ __decorate([
     (0, typeorm_1.DeleteDateColumn)({ name: 'deleted_at' }),
     __metadata("design:type", Date)
 ], JobsEntity.prototype, "deletedAt", void 0);
-__decorate([
-    (0, typeorm_1.BeforeRemove)(),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", void 0)
-], JobsEntity.prototype, "setDate", null);
 JobsEntity = __decorate([
     (0, typeorm_1.Entity)({ name: 'jobs' })
 ], JobsEntity);

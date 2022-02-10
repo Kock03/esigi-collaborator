@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { FindConditions, FindOneOptions, Repository } from 'typeorm';
 import { CollaboratorsEntity } from './collaborators.entity';
 import { CreateCollaboratorsDto } from './dtos/create-collaborators.dto';
+import { UpdateCollaboratorsDto } from './dtos/update-collaborators.dto';
 
 @Injectable()
 export class CollaboratorsService {
@@ -22,7 +23,7 @@ export class CollaboratorsService {
   async findOneOrFail(
     conditions: FindConditions<CollaboratorsEntity>,
     options?: FindOneOptions<CollaboratorsEntity>,) {
-    options = { relations: ['BankData','Educations','Languages','Documents','Skills','Phone','Address', 'Financials'] }
+    options = { relations: ['BankData', 'Educations', 'Languages', 'Documents', 'Skills', 'Phone', 'Address', 'Financials', 'Dependents'] }
     try {
       return await this.collaboratorsRepository.findOneOrFail(
         conditions,
@@ -38,7 +39,7 @@ export class CollaboratorsService {
     return await this.collaboratorsRepository.save(collaborator);
   }
 
-  async update(id: string, data: CreateCollaboratorsDto) {
+  async update(id: string, data: UpdateCollaboratorsDto) {
     const collaborator = await this.collaboratorsRepository.findOneOrFail({ id });
     this.collaboratorsRepository.merge(collaborator, data);
     return await this.collaboratorsRepository.save(collaborator);

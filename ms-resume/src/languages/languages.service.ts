@@ -10,7 +10,7 @@ export class IdiomsService {
   constructor(
     @InjectRepository(LanguagesEntity)
     private readonly languagesRepository: Repository<LanguagesEntity>,
-  ) {}
+  ) { }
 
   async findAll() {
     return await this.languagesRepository.find();
@@ -35,7 +35,7 @@ export class IdiomsService {
   async update(id: string, updateDto: UpdateLanguagesDto) {
     const languages = await this.languagesRepository.findOneOrFail({ id });
     this.languagesRepository.merge(languages, updateDto);
-    return this.languagesRepository.save(languages);
+    return await this.languagesRepository.save(languages);
   }
 
   async destroy(id: string) {

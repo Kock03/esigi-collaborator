@@ -25,6 +25,8 @@ import { DocumentValidator } from 'src/app/validators/document.validator';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { CollaboratorFeedbackTabComponent } from './collaborator-create/collaborator-feedback-tab/collaborator-feedback-tab.component';
+import { CollaboradorDependentsDialog, CollaboratorDependentsTabComponent } from './collaborator-create/collaborator-dependents-tab/collaborator-dependents-tab.component';
 
 
 
@@ -50,7 +52,10 @@ const routes: Routes = [
     CollaboratorBankDialog,
     CollaboratorFinanceDialog,
     CollaboratorSkillDialog,
-    CollaboratorDocumentDialog
+    CollaboratorDocumentDialog,
+    CollaboratorFeedbackTabComponent,
+    CollaboratorDependentsTabComponent,
+    CollaboradorDependentsDialog
 
   ],
   imports: [
@@ -85,7 +90,10 @@ const routes: Routes = [
     CollaboratorBankDialog,
     CollaboratorFinanceDialog,
     CollaboratorSkillDialog,
-    CollaboratorDocumentDialog
+    CollaboratorDocumentDialog,
+    CollaboratorFeedbackTabComponent,
+    CollaboratorDependentsTabComponent,
+    CollaboradorDependentsDialog
   ],
   providers: [
     MatDatepickerModule

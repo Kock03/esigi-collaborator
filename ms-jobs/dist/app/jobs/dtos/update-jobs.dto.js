@@ -89,10 +89,6 @@ __decorate([
 ], UpdateJobsDto.prototype, "schooling", void 0);
 __decorate([
     (0, class_validator_1.IsNotEmpty)(),
-    __metadata("design:type", String)
-], UpdateJobsDto.prototype, "collaboratorActivities", void 0);
-__decorate([
-    (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", Array)
 ], UpdateJobsDto.prototype, "Knowledges", void 0);
 __decorate([

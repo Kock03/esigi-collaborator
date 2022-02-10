@@ -14,7 +14,7 @@ import { SkillsService } from './skills.service';
 
 @Controller('api/v1/skills')
 export class SkillsController {
-  constructor(private readonly skillsService: SkillsService) {}
+  constructor(private readonly skillsService: SkillsService) { }
 
   @Get()
   async index() {

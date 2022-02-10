@@ -4,21 +4,21 @@ import { UpdateJobsDto } from "./dtos/update-jobs.dto";
 import { JobsService } from "./jobs.service";
 
 @Controller('/api/v1/jobs')
-export class JobsController{
-    constructor(private readonly jobsService: JobsService){ }
+export class JobsController {
+    constructor(private readonly jobsService: JobsService) { }
 
     @Get()
-    async index(){
+    async index() {
         return await this.jobsService.findAll();
     }
 
     @Get(':id')
-    async show(@Param('id', new ParseUUIDPipe()) id: string){
-        return await this.jobsService.findOneOrFail({id});
+    async show(@Param('id', new ParseUUIDPipe()) id: string) {
+        return await this.jobsService.findOneOrFail({ id });
     }
 
     @Post()
-    async store(@Body() body: CreateJobsDto){
+    async store(@Body() body: CreateJobsDto) {
         console.log("🚀 ~ file: jobs.controller.ts ~ line 22 ~ JobsController ~ store ~ body", body)
         return await this.jobsService.store(body);
     }
@@ -26,13 +26,13 @@ export class JobsController{
     @Put(':id')
     async update(
         @Param('id', new ParseUUIDPipe()) id: string,
-        @Body() body: UpdateJobsDto){
+        @Body() body: UpdateJobsDto) {
         return await this.jobsService.update(id, body);
     }
 
     @Delete(':id')
     @HttpCode(HttpStatus.NO_CONTENT)
-    async destroy(@Param('id', new ParseUUIDPipe()) id: string){
+    async destroy(@Param('id', new ParseUUIDPipe()) id: string) {
         return await this.jobsService.destroy(id);
     }
 } 

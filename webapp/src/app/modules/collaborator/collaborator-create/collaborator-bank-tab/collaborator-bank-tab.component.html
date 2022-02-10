@@ -2,11 +2,7 @@
   <div class="content-scroll" *ngIf="collaboratorForm">
     <div fxLayout="row">
       <div class="envolti-table mat-elevation-z8" fxLayout="column">
-        <table
-          mat-table
-          [dataSource]="collaboratorForm.controls['BankData'].value"
-          #bankTable
-        >
+        <table mat-table [dataSource]="collaboratorForm.controls['BankData'].value" #bankTable>
           <ng-container matColumnDef="bank">
             <th mat-header-cell *matHeaderCellDef>Banco</th>
             <td mat-cell *matCellDef="let bank">
@@ -25,11 +21,11 @@
             <th mat-header-cell *matHeaderCellDef>Tipo de Conta</th>
             <td mat-cell *matCellDef="let bank">
               {{
-                bank.accountType == 1
-                ? "Conta Corrente"
-                : bank.accountType == 2
-                ? "Conta Salário"
-                : "Conta Poupança"
+              bank.accountType == 1
+              ? "Conta Corrente"
+              : bank.accountType == 2
+              ? "Conta Salário"
+              : "Conta Poupança"
               }}
             </td>
           </ng-container>
@@ -42,47 +38,28 @@
           </ng-container>
 
           <ng-container matColumnDef="icon">
-            <th mat-header-cell *matHeaderCellDef></th>
-            <td
-              class="button-tab"
-              mat-cell
-              *matCellDef="let bank; let index = index"
-            >
-              <button
-                class="table-button"
-                mat-button
-                (click)="getBank(bank, index)"
-               >
+            <th mat-header-cell *matHeaderCellDef>
+              <button class="edit-button" mat-flat-button color="primary" (click)="openDialog()">
+                <mat-icon>add</mat-icon>
+              </button>
+            </th>
+            <td class="button-tab" mat-cell *matCellDef="let bank; let index = index">
+              <button class="table-button" mat-button (click)="getBank(bank, index)">
                 <mat-icon>edit</mat-icon>
               </button>
 
-              <button
-                class="table-button"
-                mat-button
-                (click)="deleteBank(index)"
-              >
+              <button class="table-button" mat-button (click)="deleteBank(index)">
                 <mat-icon>delete</mat-icon>
               </button>
             </td>
           </ng-container>
 
-          <tr
-            mat-header-row
-            *matHeaderRowDef="displayedBank; sticky: true"
-          ></tr>
+          <tr mat-header-row *matHeaderRowDef="displayedBank; sticky: true"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedBank"></tr>
         </table>
       </div>
 
-      <button
-        fxFlex="5"
-        class="edit-button"
-        mat-flat-button
-        color="primary"
-        (click)="openDialog()"
-      >
-        <mat-icon>add</mat-icon>
-      </button>
+
     </div>
   </div>
 </div>

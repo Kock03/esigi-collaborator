@@ -12,7 +12,7 @@ import { ResumeSkillDialog, ResumeSkillsTabComponent } from './resume-create/res
 import { ResumeMonitoringTabComponent } from './resume-create/resume-monitoring-tab/resume-monitoring-tab.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxMaskModule } from 'ngx-mask';
@@ -22,8 +22,11 @@ import { MatInputModule } from '@angular/material/input'
 import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ResumeCreateComponent } from './resume-create/resume-create.component';
-import {ScrollingModule} from '@angular/cdk/scrolling';
-import {MatListModule} from '@angular/material/list';
+import { ScrollingModule } from '@angular/cdk/scrolling';
+import { MatListModule } from '@angular/material/list';
+import { NgxMatDatetimePickerModule } from '@angular-material-components/datetime-picker';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 ;
 
 const routes: Routes = [
@@ -62,8 +65,13 @@ const routes: Routes = [
     MatInputModule,
     MatTableModule,
     MatDialogModule,
+    MatNativeDateModule,
     ScrollingModule,
     MatListModule,
+    MatDatepickerModule
+  ],
+  providers: [
+    MatDatepickerModule
   ],
 
   entryComponents: [
@@ -76,7 +84,7 @@ const routes: Routes = [
     ResumeLanguageDialog,
     ResumeEducationDialog,
     ResumeSkillDialog
-    
+
   ],
 })
-export class ResumeModule {}
+export class ResumeModule { }

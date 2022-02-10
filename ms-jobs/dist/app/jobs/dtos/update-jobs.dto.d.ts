@@ -24,7 +24,6 @@ export declare class UpdateJobsDto {
     minimumValue: number;
     maximumValue: number;
     schooling: Schooling;
-    collaboratorActivities: string;
     Knowledges: KnowledgesEntity[];
     skills: string;
     attitudes: string;

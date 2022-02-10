@@ -10,6 +10,7 @@ import { NgxMaskModule } from 'ngx-mask';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 
 const routes: Routes = [
@@ -33,6 +34,10 @@ const routes: Routes = [
     FlexLayoutModule,
     MatButtonModule,
     ReactiveFormsModule,
-  ]
+    MatDatepickerModule
+  ],
+  providers: [
+    MatDatepickerModule
+  ],
 })
 export class FeedbackModule { }

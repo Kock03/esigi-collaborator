@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DocumentValidator } from 'src/app/validators/document.validator';
 import { CollaboratorProvider } from 'src/providers/collaborator.provider';
 
@@ -19,14 +19,14 @@ export class CollaboratorCreateComponent implements OnInit {
     private collaboratorProvider: CollaboratorProvider,
     private http: HttpClient,
   ) {
-   
+
   }
 
   async ngOnInit(): Promise<void> {
     this.initForm();
     this.step = 1;
   }
-  
+
 
   initForm() {
     this.collaboratorForm = this.fb.group({
@@ -34,10 +34,13 @@ export class CollaboratorCreateComponent implements OnInit {
       lastNameFantasyName: ['Luiz', Validators.required],
       login: ['davi.log', Validators.required],
       gender: [1, Validators.required],
+      maritalStatus: [1, Validators.required],
       office: ['Desenvolvedor Angular', Validators.required],
       collaboratorTypes: [1, Validators.required],
-      cpf: this.fb.control({ value: null, disabled: false}, [DocumentValidator.isValidCpf(), Validators.required]),
-      birthDate: ['06/12/2004', Validators.required],
+      active: [true, Validators.required],
+      cpf: this.fb.control({ value: null, disabled: false }, [DocumentValidator.isValidCpf(), Validators.required]),
+      birthDate: ['2004-06-12', Validators.required],
+      admissionDate: ['', Validators.required],
       email: ['davi@email', [Validators.email, Validators.required]],
       cnpj: ['', Validators.required],
       stateRegistration: ['', Validators.required],
@@ -61,6 +64,7 @@ export class CollaboratorCreateComponent implements OnInit {
         district: ['', Validators.required],
       }),
 
+      Dependents: this.fb.array([]),
       Educations: this.fb.array([]),
       Languages: this.fb.array([]),
       BankData: this.fb.array([]),
@@ -73,6 +77,9 @@ export class CollaboratorCreateComponent implements OnInit {
   async saveCollaborator() {
     let data = this.collaboratorForm.getRawValue();
     console.log(data);
+    if (!data.Dependents.length) {
+      data.Dependents = null;
+    }
     if (!data.Educations.length) {
       data.Educations = null;
     }
@@ -108,7 +115,7 @@ export class CollaboratorCreateComponent implements OnInit {
   navigate(direction: string) {
     if (this.step > 1 && direction === 'back') {
       this.step -= 1;
-    } else if (this.step < 6 && direction === 'next') {
+    } else if (this.step < 9 && direction === 'next') {
       this.step += 1;
     }
   }
