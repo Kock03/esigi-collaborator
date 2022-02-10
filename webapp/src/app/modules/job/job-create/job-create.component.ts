@@ -235,7 +235,7 @@ export class JobCreateComponent implements OnInit {
   navigate(direction: string) {
     if (this.step > 1 && direction === 'back') {
       this.step -= 1;
-    } else if (this.step < 6 && direction === 'next') {
+    } else if (this.step < 2 && direction === 'next') {
       this.step += 1;
     }
 

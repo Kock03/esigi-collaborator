@@ -29,7 +29,6 @@ export class ResumeCreateComponent implements OnInit {
     private resumeProvider: ResumeProvider
   ) {}
 
-
   ngOnInit(): void {
     this.initForm();
   }
@@ -63,7 +62,6 @@ export class ResumeCreateComponent implements OnInit {
         phoneNumber: ['42334324', Validators.required],
         ddd: ['44', Validators.required],
         ddi: ['44', Validators.required],
-
       }),
 
       email: ['joao@silva.com', Validators.email],
@@ -76,13 +74,13 @@ export class ResumeCreateComponent implements OnInit {
       Skills: this.fb.array([]),
     });
 
-    this.resumeForm.valueChanges.subscribe(res => {
-      console.log("🚀 ~ file: resume-create.component.ts ~ line 90 ~ ResumeCreateComponent ~ initForm ~ res", res)
-    })
+    this.resumeForm.valueChanges.subscribe((res) => {
+      console.log(
+        '🚀 ~ file: resume-create.component.ts ~ line 90 ~ ResumeCreateComponent ~ initForm ~ res',
+        res
+      );
+    });
   }
-
-
-  
 
   async saveResume() {
     let data = this.resumeForm.getRawValue();
@@ -94,9 +92,6 @@ export class ResumeCreateComponent implements OnInit {
     }
   }
 
-
-
-
   navigate(direction: string) {
     if (this.step > 1 && direction === 'back') {
       this.step -= 1;
@@ -106,5 +101,4 @@ export class ResumeCreateComponent implements OnInit {
   }
 
   handleChanges(value: any): void {}
-
 }

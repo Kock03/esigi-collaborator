@@ -27,6 +27,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { CollaboratorFeedbackTabComponent } from './collaborator-create/collaborator-feedback-tab/collaborator-feedback-tab.component';
 import { CollaboradorDependentsDialog, CollaboratorDependentsTabComponent } from './collaborator-create/collaborator-dependents-tab/collaborator-dependents-tab.component';
+import { FeedbackCreateComponent } from './feedback-create/feedback-create.component';
 
 
 
@@ -34,6 +35,10 @@ const routes: Routes = [
   {
     path: 'novo',
     component: CollaboratorCreateComponent,
+  },
+  {
+    path: 'feedback',
+    component: FeedbackCreateComponent,
   },
 ];
 
@@ -55,7 +60,8 @@ const routes: Routes = [
     CollaboratorDocumentDialog,
     CollaboratorFeedbackTabComponent,
     CollaboratorDependentsTabComponent,
-    CollaboradorDependentsDialog
+    CollaboradorDependentsDialog,
+    FeedbackCreateComponent
 
   ],
   imports: [

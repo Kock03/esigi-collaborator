@@ -41,12 +41,11 @@ export class AppComponent {
       selected: false,
       action: '/curriculo/novo',
     },
-
     {
-      name: 'Feedback',
-      icon: 'rate_review',
+      name: 'Configurações',
+      icon: 'manage_accounts',
       selected: false,
-      action: '/feedback/novo',
+      action: '/setting/novo',
     },
   ];
 

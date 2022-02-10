@@ -37,7 +37,8 @@ export class CollaboratorFeedbackTabComponent implements OnInit {
   ];
   filteredFeedbackList!: any[];
 
-  // constructor(private router: Router, private feedbackProvider: any) { }
+
+  constructor(private router: Router) { }
 
   async ngOnInit() {
     //this.getFeedbackList();
@@ -49,5 +50,10 @@ export class CollaboratorFeedbackTabComponent implements OnInit {
   //   } catch (error) {
   //     console.error(error);
   //   }
+
+  
+  navigateFeedback(){
+    this.router.navigate(['colaborador/feedback'])
+  }
 }
 

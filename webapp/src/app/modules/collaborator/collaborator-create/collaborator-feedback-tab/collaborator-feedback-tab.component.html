@@ -1,4 +1,15 @@
 <div id="" class="tab">
+  <div fxLayout="row">
+    <button
+      mat-flat-button
+      class="new-btn"
+      color="primary"
+      (click)="navigateFeedback()"
+    >
+      Novo
+    </button>
+  </div>
+
   <div class="content-scroll">
     <h2>Feedback</h2>
     <div class="envolti-table mat-elevation-z8" fxLayout="column">
@@ -31,7 +42,10 @@
           </td>
         </ng-container>
 
-        <tr mat-header-row *matHeaderRowDef="displayedFeedback; sticky: true"></tr>
+        <tr
+          mat-header-row
+          *matHeaderRowDef="displayedFeedback; sticky: true"
+        ></tr>
         <tr mat-row *matRowDef="let row; columns: displayedFeedback"></tr>
       </table>
     </div>
