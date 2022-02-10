@@ -35,6 +35,16 @@ const routes: Routes = [
       ),
   },
 
+  {
+
+    path: 'feedback',
+    loadChildren: ()=>
+      import('./modules/feedback/feedback.module').then(
+        (m) => m.FeedbackModule
+      ),
+
+  }
+
    ]
 
 

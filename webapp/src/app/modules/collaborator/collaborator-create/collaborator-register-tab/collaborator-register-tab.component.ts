@@ -1,6 +1,8 @@
+import { formatDate } from '@angular/common';
 import {
   Component,
   EventEmitter,
+  Injectable,
   Input,
   OnInit,
   Output,
@@ -13,6 +15,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { DateAdapter, MAT_DATE_FORMATS, NativeDateAdapter } from '@angular/material/core';
 import { ApiGateway } from 'src/api-gateway';
 import { CepService } from 'src/services/cep.service';
 
@@ -22,19 +25,45 @@ export interface collaboratorTypes {
   name: string;
 }
 
+export const PICK_FORMATS = {
+  parse: { dateInput: { month: 'numeric', year: 'numeric', day: 'numeric' } },
+  display: {
+    dateInput: 'input',
+    monthYearLabel: { year: 'numeric', month: 'numeric' },
+    dateA11yLabel: { year: 'numeric', month: 'numeric', day: 'numeric' },
+    monthYearA11yLabel: { year: 'numeric', month: 'numeric' }
+  }
+};
+
+@Injectable()
+export class PickDateAdapter extends NativeDateAdapter {
+  override format(date: Date, displayFormat: Object): string {
+    if (displayFormat === 'input') {
+      return formatDate(date, 'dd-MM-yyyy', this.locale);;
+    } else {
+      return date.toDateString();
+    }
+  }
+}
+
 @Component({
   selector: 'app-collaborator-register-tab',
   templateUrl: './collaborator-register-tab.component.html',
   styleUrls: ['./collaborator-register-tab.component.scss'],
   encapsulation: ViewEncapsulation.None,
+  providers: [
+    { provide: DateAdapter, useClass: PickDateAdapter },
+    { provide: MAT_DATE_FORMATS, useValue: PICK_FORMATS }
+  ]
 })
 export class CollaboratorRegisterTabComponent implements OnInit {
   @Input('form') collaboratorForm!: FormGroup;
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
 
   selectedFile: any;
+  date: any;
 
-  onFileSelected(changes: any): void{
+  onFileSelected(changes: any): void {
     this.selectedFile = changes.target.files[0]
   }
 
@@ -52,10 +81,10 @@ export class CollaboratorRegisterTabComponent implements OnInit {
     'Desenvolvedor React',
   ];
 
-  constructor(private fb: FormBuilder, private cepService: CepService) {}
+  constructor(private fb: FormBuilder, private cepService: CepService) { }
 
   ngOnInit(): void {
-   
+
     this.collaboratorForm.valueChanges.subscribe((res) => {
       const addressForm = this.collaboratorForm.controls[
         'Address'
@@ -66,7 +95,7 @@ export class CollaboratorRegisterTabComponent implements OnInit {
     });
   }
 
-  ngAfterViewInit(): void {}
+  ngAfterViewInit(): void { }
 
   next() {
     this.onChange.next(true);

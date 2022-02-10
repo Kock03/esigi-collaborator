@@ -8,7 +8,9 @@ import { FinancialsEntity } from 'src/app/financials/financials.entity';
 import { LanguagesEntity } from 'src/app/languages/languages.entity';
 import { PhoneEntity } from 'src/app/phone/phone.entity';
 import { SkillsEntity } from 'src/app/skills/skills.entity';
-import { CollaboratorTypes } from './collaborator-types.enum';
+import { CollaboratorTypes } from './types.enum';
+import { MaritalStatus } from './MaritalStatus.enum';
+import { DependentsEntity } from 'src/app/dependents/dependents.entity';
 
 export class UpdateCollaboratorsDto {
   @IsNotEmpty()
@@ -31,6 +33,9 @@ export class UpdateCollaboratorsDto {
 
   @IsNotEmpty()
   cpf: string;
+
+  @IsNotEmpty()
+  maritalStatus: MaritalStatus;
 
   @IsNotEmpty()
   birthDate: Date;
@@ -61,10 +66,10 @@ export class UpdateCollaboratorsDto {
 
   @IsOptional()
   Phone: PhoneEntity;
-  
+
   @IsOptional()
   Skills: SkillsEntity[];
-  
+
   @IsOptional()
   Documents: DocumentsEntity[];
 
@@ -76,6 +81,9 @@ export class UpdateCollaboratorsDto {
 
   @IsOptional()
   BankData: BankDataEntity;
+
+  @IsOptional()
+  Dependents: DependentsEntity[];
 
   @IsOptional()
   Financials: FinancialsEntity[];

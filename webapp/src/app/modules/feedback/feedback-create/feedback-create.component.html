@@ -1,0 +1,126 @@
+<div class="page" id="feedbackTab">
+
+
+    <h2>Feedback</h2>
+    <div fxLayout="column" class="content-scroll">
+        <form [formGroup]="feedbackForm" fxLayout="column">
+            <div class="formGroup1" fxFlex="100" fxLayoutGap="16px">
+                <mat-form-field appearance="outline" fxFlex="33">
+                    <mat-label>Tipo de Feedback</mat-label>
+                    <mat-select formControlName="feedbackType">
+                        <mat-option [value]="1">Profissional Desmotivado</mat-option>
+                        <mat-option [value]="2">Mudança de Cargo</mat-option>
+                        <mat-option [value]="3">Aumento de Salário</mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" fxFlex="33">
+                    <mat-label>Motivo</mat-label>
+                    <mat-select formControlName="reason">
+                        <mat-option [value]="1">Solicitação Gestão</mat-option>
+                        <mat-option [value]="2">Solicitação Cliente</mat-option>
+                        <mat-option [value]="3">Solicitação Colaborador</mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" fxFlex="33">
+                    <mat-label>Projeto</mat-label>
+                    <mat-select formControlName="project">
+                        <mat-option [value]="1">Ptojeto RH - Benner</mat-option>
+                        <mat-option [value]="2">Ptojeto Canabalização Ambev</mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" fxFlex="33">
+                    <mat-label>Gestor</mat-label>
+                    <mat-select formControlName="manager">
+                        <mat-option [value]="1">Wellington</mat-option>
+                        <mat-option [value]="2">Danilo</mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" fxFlex="33">
+                    <mat-label>Colaborador</mat-label>
+                    <mat-select formControlName="collaborator">
+                        <mat-option [value]="1">Bianca</mat-option>
+                        <mat-option [value]="2">Victor</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+
+            <div class="formGroup1" fxFlex="200" fxLayoutGap="20px">
+                <h2 class="h2G" appearance="outline" fxFlex="1''0">Gestão</h2>
+                <mat-form-field appearance="outline" fxFlex="20">
+                    <mat-label>Status</mat-label>
+                    <mat-select formControlName="status">
+                        <mat-option [value]="1">Agendada</mat-option>
+                        <mat-option [value]="2">Concluída</mat-option>
+                        <mat-option [value]="3">Retorno de Feedback</mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" fxFlex="20">
+                    <mat-label>Data Feedback</mat-label>
+                    <input matInput [matDatepicker]="picker" formControlName="feedbackDate" />
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" fxFlex="10">
+                    <mat-label>Hora</mat-label>
+                    <input matInput disableRipple formControlName="hourDate" mask="00:00" />
+                </mat-form-field>
+
+
+                <mat-form-field appearance="outline" fxFlex="30">
+                    <mat-label>Data Retorno Feedback</mat-label>
+                    <input matInput [matDatepicker]="pickerReturn" formControlName="feedbackDateRetorn" />
+                    <mat-datepicker-toggle matSuffix [for]="pickerReturn"></mat-datepicker-toggle>
+                    <mat-datepicker #pickerReturn></mat-datepicker>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" fxFlex="10">
+                    <mat-label>Hora</mat-label>
+                    <input matInput disableRipple formControlName="hourDateRetorn" mask="00:00" />
+                </mat-form-field>
+
+            </div>
+
+
+            <div fxFlex="100" fxLayoutGap="20px">
+                <mat-form-field appearance="outline" fxFlex="50">
+                    <mat-label>Descrição</mat-label>
+                    <textarea class="text-area" matInput placeholder="Atividades" formControlName="managerDescription"
+                        rows="5"></textarea>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" fxFlex="50">
+                    <mat-label>Pontos de Melhoria</mat-label>
+                    <textarea class="text-area" matInput placeholder="Atividades" formControlName="improvementPoints"
+                        rows="5"></textarea>
+                </mat-form-field>
+
+            </div>
+
+            <h2>Colaborador</h2>
+            <div fxFlex="100" fxLayoutGap="20px">
+                <mat-form-field appearance="outline" fxFlex="50">
+                    <mat-label>Descrição</mat-label>
+                    <textarea class="text-area" matInput placeholder="Atividades"
+                        formControlName="collaboratorDescription" rows="5"></textarea>
+                </mat-form-field>
+                <mat-form-field appearance="outline" fxFlex="50">
+                    <mat-label>Compromissos</mat-label>
+                    <textarea class="text-area" matInput placeholder="Atividades" formControlName="commitment"
+                        rows="5"></textarea>
+                </mat-form-field>
+            </div>
+        </form>
+    </div>
+    <div class="navigation-buttons" fxLayoutAlign="center end" class="saveButton" fxLayoutGap="16px">
+        <button mat-flat-button color="primary" (click)="saveFeedback()">
+            Salvar
+        </button>
+    </div>
+</div>

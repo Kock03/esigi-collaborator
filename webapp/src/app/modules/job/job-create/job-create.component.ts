@@ -1,14 +1,17 @@
 import { DatePipe, formatDate } from '@angular/common';
+
 import { HttpClient } from '@angular/common/http';
 import {
   Component,
   EventEmitter,
+  Injectable,
   Input,
   OnInit,
   Output,
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
+
 import {
   FormArray,
   FormBuilder,
@@ -21,17 +24,43 @@ import {
   MAT_DATE_FORMATS,
   NativeDateAdapter,
 } from '@angular/material/core';
+
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { JobProvider } from 'src/providers/job.provider';
 import { SnackBarService } from 'src/services/snackbar.service';
 
+export const PICK_FORMATS = {
+  parse: { dateInput: { month: 'numeric', year: 'numeric', day: 'numeric' } },
+  display: {
+    dateInput: 'input',
+    monthYearLabel: { year: 'numeric', month: 'numeric' },
+    dateA11yLabel: { year: 'numeric', month: 'numeric', day: 'numeric' },
+    monthYearA11yLabel: { year: 'numeric', month: 'numeric' },
+  },
+};
+
+@Injectable()
+export class PickDateAdapter extends NativeDateAdapter {
+  override format(date: Date, displayFormat: Object): string {
+    if (displayFormat === 'input') {
+      return formatDate(date, 'dd-MM-yyyy', this.locale);
+    } else {
+      return date.toDateString();
+    }
+  }
+}
+
 @Component({
   selector: 'app-job-create',
   templateUrl: './job-create.component.html',
   styleUrls: ['./job-create.component.scss'],
   encapsulation: ViewEncapsulation.None,
+  providers: [
+    { provide: DateAdapter, useClass: PickDateAdapter },
+    { provide: MAT_DATE_FORMATS, useValue: PICK_FORMATS },
+  ],
 })
 export class JobCreateComponent implements OnInit {
   @ViewChild('knowledgeTable') knowledgeTable!: MatTable<any>;
@@ -46,7 +75,7 @@ export class JobCreateComponent implements OnInit {
   get knowledgeArray() {
     return this.jobForm.controls['Knowledges'] as FormArray;
   }
-
+  Date: any;
   jobForm!: FormGroup;
   step: number = 1;
 
@@ -164,7 +193,7 @@ export class JobCreateComponent implements OnInit {
     }
     if (!this.job.Knowledges[0]) {
       const knowledge = this.jobForm.controls['Knowledges'] as FormArray;
-      knowledge.value.splice(0, 1)
+      knowledge.value.splice(0, 1);
     }
   }
 
@@ -209,7 +238,7 @@ export class JobCreateComponent implements OnInit {
     } else if (this.step < 6 && direction === 'next') {
       this.step += 1;
     }
+
+    this.router.navigate(['vaga/lista']);
   }
 }
-
-

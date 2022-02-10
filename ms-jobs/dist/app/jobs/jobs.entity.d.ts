@@ -34,5 +34,4 @@ export declare class JobsEntity {
     createdAt: Date;
     updatedAt: Date;
     deletedAt: Date;
-    setDate(event: any): void;
 }

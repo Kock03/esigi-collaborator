@@ -25,7 +25,6 @@ export declare class UpdateJobsDto {
     openingDate: Date;
     maximumValue: number;
     schooling: Schooling;
-    collaboratorActivities: string;
     Knowledges: KnowledgesEntity[];
     skills: string;
     attitudes: string;

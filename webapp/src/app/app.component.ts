@@ -41,6 +41,13 @@ export class AppComponent {
       selected: false,
       action: '/curriculo/novo',
     },
+
+    {
+      name: 'Feedback',
+      icon: 'rate_review',
+      selected: false,
+      action: '/feedback/novo',
+    },
   ];
 
   constructor(private observer: BreakpointObserver, private router: Router) {}

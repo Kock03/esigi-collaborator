@@ -29,6 +29,7 @@ export class ResumeCreateComponent implements OnInit {
     private resumeProvider: ResumeProvider
   ) {}
 
+
   ngOnInit(): void {
     this.initForm();
   }
@@ -38,10 +39,12 @@ export class ResumeCreateComponent implements OnInit {
       firstName: ['joao', Validators.required],
       lastName: ['silva', Validators.required],
       login: ['joao.silva', Validators.required],
+
       cpf: this.fb.control(
         { value: null, disabled: false },
         DocumentValidator.isValidCpf()
       ),
+
       birthDate: ['2022-01-01', Validators.required],
       gender: [1, Validators.required],
       maritalStatus: [1, Validators.required],
@@ -60,19 +63,26 @@ export class ResumeCreateComponent implements OnInit {
         phoneNumber: ['42334324', Validators.required],
         ddd: ['44', Validators.required],
         ddi: ['44', Validators.required],
+
       }),
 
       email: ['joao@silva.com', Validators.email],
       site: ['', Validators.required],
       linkedin: ['', Validators.required],
+
       Languages: this.fb.array([]),
       Educations: this.fb.array([]),
       Experiences: this.fb.array([]),
       Skills: this.fb.array([]),
     });
 
-    this.resumeForm.valueChanges.subscribe((res) => {});
+    this.resumeForm.valueChanges.subscribe(res => {
+      console.log("🚀 ~ file: resume-create.component.ts ~ line 90 ~ ResumeCreateComponent ~ initForm ~ res", res)
+    })
   }
+
+
+  
 
   async saveResume() {
     let data = this.resumeForm.getRawValue();
@@ -84,6 +94,9 @@ export class ResumeCreateComponent implements OnInit {
     }
   }
 
+
+
+
   navigate(direction: string) {
     if (this.step > 1 && direction === 'back') {
       this.step -= 1;
@@ -93,4 +106,5 @@ export class ResumeCreateComponent implements OnInit {
   }
 
   handleChanges(value: any): void {}
+
 }

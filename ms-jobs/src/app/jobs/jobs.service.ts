@@ -17,7 +17,6 @@ export class JobsService {
   async findAll() {
     const jobsWhiteAll = await this.jobsRepository.find();
 
-
     return jobsWhiteAll;
   }
 
@@ -41,10 +40,10 @@ export class JobsService {
 
   async update(id: string, data: UpdateJobsDto) {
     const job = await this.jobsRepository.findOneOrFail({ id });
-    if (!job){
-       throw new HttpException('Not found', 404)
+    if (!job) {
+      throw new HttpException('Not found', 404);
     }
-    return await this.jobsRepository.save({id: id, ...data});
+    return await this.jobsRepository.save({ id: id, ...data });
   }
 
   async destroy(id: string) {

@@ -5,20 +5,20 @@
         <table mat-table [dataSource]="collaboratorForm.controls['Financials'].value" #financeTable>
           <ng-container matColumnDef="data">
             <th mat-header-cell *matHeaderCellDef>Data de inclusão</th>
-            <td mat-cell *matCellDef="let finance">{{ finance.dateInclusion }}</td>
+            <td mat-cell *matCellDef="let finance">{{ finance.dateInclusion | date : 'dd/MM/yyyy'}}</td>
           </ng-container>
 
           <ng-container matColumnDef="type">
             <th mat-header-cell *matHeaderCellDef>Tipo</th>
             <td mat-cell *matCellDef="let finance">
               {{
-                finance.contractType == 1
-                  ? "CLT"
-                  : finance.contractType == 2
-                  ? "PJ"
-                  :  finance.contractType == 3
-                  ? "Cooperado"
-                  : "Estagiário"
+              finance.contractType == 1
+              ? "CLT"
+              : finance.contractType == 2
+              ? "PJ"
+              : finance.contractType == 3
+              ? "Cooperado"
+              : "Estagiário"
               }}
             </td>
           </ng-container>
@@ -27,20 +27,20 @@
             <th mat-header-cell *matHeaderCellDef>Motivo</th>
             <td mat-cell *matCellDef="let finance">
               {{
-                finance.reason == 1
-                  ? "Contratação"
-                  : finance.reason == 2
-                  ? "Reconhecimento"
-                  :  finance.reason == 3
-                  ? "Tempo de Casa"
-                  : "Retenção"
+              finance.reason == 1
+              ? "Contratação"
+              : finance.reason == 2
+              ? "Reconhecimento"
+              : finance.reason == 3
+              ? "Tempo de Casa"
+              : "Retenção"
               }}
             </td>
           </ng-container>
 
           <ng-container matColumnDef="value">
             <th mat-header-cell *matHeaderCellDef>Valor</th>
-            <td mat-cell *matCellDef="let finance">{{ finance.value }}</td>
+            <td mat-cell *matCellDef="let finance">{{ finance.value | currency: 'BRL' }}</td>
           </ng-container>
 
           <ng-container matColumnDef="monthlyValue">
@@ -49,7 +49,11 @@
           </ng-container>
 
           <ng-container matColumnDef="icon">
-            <th mat-header-cell *matHeaderCellDef></th>
+            <th mat-header-cell *matHeaderCellDef>
+              <button class="edit-button" mat-flat-button color="primary" (click)="openDialog()">
+                <mat-icon>add</mat-icon>
+              </button>
+            </th>
             <td class="button-tab " mat-cell *matCellDef="let finance; let index = index">
               <button class="table-button" mat-button (click)="getFinance(finance, index)">
                 <mat-icon>edit</mat-icon>
@@ -65,10 +69,6 @@
           <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
         </table>
       </div>
-
-      <button fxFlex="5" class="edit-button" mat-flat-button color="primary" (click)="openDialog()">
-        <mat-icon>add</mat-icon>
-      </button>
     </div>
   </div>
 </div>

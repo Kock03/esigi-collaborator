@@ -28,6 +28,7 @@ let JobsController = class JobsController {
         return await this.jobsService.findOneOrFail({ id });
     }
     async store(body) {
+        console.log("🚀 ~ file: jobs.controller.ts ~ line 22 ~ JobsController ~ store ~ body", body);
         return await this.jobsService.store(body);
     }
     async update(id, body) {

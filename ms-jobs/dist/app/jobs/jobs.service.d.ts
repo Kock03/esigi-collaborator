@@ -29,7 +29,6 @@ export declare class JobsService {
         openingDate: Date;
         maximumValue: number;
         schooling: import("./dtos/schooling.enum").Schooling;
-        collaboratorActivities: string;
         Knowledges: import("../knowledges/knowledges.entity").KnowledgesEntity[];
         skills: string;
         attitudes: string;

@@ -1,7 +1,9 @@
+import { formatDate } from '@angular/common';
 import {
   Component,
   EventEmitter,
   Inject,
+  Injectable,
   Input,
   OnInit,
   Output,
@@ -9,6 +11,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { DateAdapter, MAT_DATE_FORMATS, NativeDateAdapter } from '@angular/material/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
 
@@ -33,7 +36,7 @@ export class CollaboratorFinanceTabComponent implements OnInit {
   @ViewChild('financeTable') financeTable!: MatTable<any>;
 
   displayedColumns: string[] = ['data', 'type', 'reason', 'value', 'monthlyValue', 'icon'];
- 
+
   financials: finance[] = [
     {
       dateInclusion: '',
@@ -55,7 +58,7 @@ export class CollaboratorFinanceTabComponent implements OnInit {
     return this.collaboratorForm.controls['Financials'] as FormArray;
   }
 
-  constructor(private fb: FormBuilder, public dialog: MatDialog) {}
+  constructor(private fb: FormBuilder, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.initForm();
@@ -64,11 +67,11 @@ export class CollaboratorFinanceTabComponent implements OnInit {
   openDialog() {
     const dialogRef = this.dialog.open(CollaboratorFinanceDialog, {
       width: '500px',
-      height: '500px',
+      height: '550px',
     });
 
     dialogRef.afterClosed().subscribe((finance) => {
-      if(finance){
+      if (finance) {
         this.financeArray.insert(0, this.fb.group(finance));
         this.financeTable.renderRows();
       }
@@ -91,9 +94,9 @@ export class CollaboratorFinanceTabComponent implements OnInit {
   getFinance(financeSelected: any, index: number) {
     const dialogRef = this.dialog.open(CollaboratorFinanceDialog, {
       width: '500px',
-      height: '620px',
+      height: '550px',
       data: { financeSelected },
-         
+
     });
 
     this.index = index;
@@ -108,22 +111,46 @@ export class CollaboratorFinanceTabComponent implements OnInit {
   }
 }
 
+export const PICK_FORMATS = {
+  parse: { dateInput: { month: 'numeric', year: 'numeric', day: 'numeric' } },
+  display: {
+    dateInput: 'input',
+    monthYearLabel: { year: 'numeric', month: 'numeric' },
+    dateA11yLabel: { year: 'numeric', month: 'numeric', day: 'numeric' },
+    monthYearA11yLabel: { year: 'numeric', month: 'numeric' }
+  }
+};
+
+@Injectable()
+export class PickDateAdapter extends NativeDateAdapter {
+  override format(date: Date, displayFormat: Object): string {
+    if (displayFormat === 'input') {
+      return formatDate(date, 'dd-MM-yyyy', this.locale);;
+    } else {
+      return date.toDateString();
+    }
+  }
+}
 @Component({
   selector: 'collaborator-finance-dialog',
   templateUrl: 'collaborator-finance-dialog.html',
+  providers: [
+    { provide: DateAdapter, useClass: PickDateAdapter },
+    { provide: MAT_DATE_FORMATS, useValue: PICK_FORMATS }
+  ]
 })
-export class CollaboratorFinanceDialog{
+export class CollaboratorFinanceDialog {
   @Input('form') collaboratorForm!: FormGroup;
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
 
   financeForm!: FormGroup;
-
+  Date: any;
 
   constructor(
     public dialogRef: MatDialogRef<CollaboratorFinanceDialog>,
     private fb: FormBuilder,
-    @Inject(MAT_DIALOG_DATA) public data: { financeSelected: any}
-  ) {}
+    @Inject(MAT_DIALOG_DATA) public data: { financeSelected: any }
+  ) { }
 
   ngOnInit(): void {
     this.initForm();
@@ -131,15 +158,16 @@ export class CollaboratorFinanceDialog{
 
   initForm(): void {
     this.financeForm = this.fb.group({
-      dateInclusion: ['2022-01-01', Validators.required],
+      dateInclusion: ['', Validators.required],
       contractType: [1, Validators.required],
-      reason: [1 , Validators.required],
+      reason: [1, Validators.required],
       value: ['3400000', Validators.required],
+      payday: ['2004-06-12', Validators.required],
     });
     if (this.data && this.data.financeSelected) {
-     
+
       this.financeForm.patchValue(this.data.financeSelected)
-      
+
     }
   }
 
@@ -147,7 +175,7 @@ export class CollaboratorFinanceDialog{
     this.dialogRef.close();
   }
 
- async save() {
+  async save() {
     this.dialogRef.close(this.financeForm.getRawValue());
   }
 }
