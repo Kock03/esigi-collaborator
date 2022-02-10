@@ -9,7 +9,7 @@ export class CollaboratorsService {
   constructor(
     @InjectRepository(CollaboratorsEntity)
     private readonly collaboratorsRepository: Repository<CollaboratorsEntity>,
-  ) { }
+  ) {}
 
   async findAll() {
     const collaboratorsWhiteAll = await this.collaboratorsRepository
@@ -21,8 +21,20 @@ export class CollaboratorsService {
 
   async findOneOrFail(
     conditions: FindConditions<CollaboratorsEntity>,
-    options?: FindOneOptions<CollaboratorsEntity>,) {
-    options = { relations: ['BankData','Educations','Languages','Documents','Skills','Phone','Address', 'Financials'] }
+    options?: FindOneOptions<CollaboratorsEntity>,
+  ) {
+    options = {
+      relations: [
+        'BankData',
+        'Educations',
+        'Languages',
+        'Documents',
+        'Skills',
+        'Phone',
+        'Address',
+        'Financials',
+      ],
+    };
     try {
       return await this.collaboratorsRepository.findOneOrFail(
         conditions,
@@ -39,7 +51,9 @@ export class CollaboratorsService {
   }
 
   async update(id: string, data: CreateCollaboratorsDto) {
-    const collaborator = await this.collaboratorsRepository.findOneOrFail({ id });
+    const collaborator = await this.collaboratorsRepository.findOneOrFail({
+      id,
+    });
     this.collaboratorsRepository.merge(collaborator, data);
     return await this.collaboratorsRepository.save(collaborator);
   }

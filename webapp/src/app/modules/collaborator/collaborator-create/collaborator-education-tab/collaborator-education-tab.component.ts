@@ -67,6 +67,8 @@ export class CollaboratorEducationTabComponent implements OnInit {
     },
   ];
 
+  data: [] = [];
+
   displayedEducation: string[] = [
     'schooling',
     'situation',
@@ -84,7 +86,9 @@ export class CollaboratorEducationTabComponent implements OnInit {
 
   index: any = null;
   Language: any;
+  languageList: any = [];
   Education: any;
+  educationList: any = [];
 
   get languageArray() {
     return this.collaboratorForm.controls['Languages'] as FormArray;
@@ -98,6 +102,12 @@ export class CollaboratorEducationTabComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
+    this.collaboratorForm.valueChanges.subscribe((res) => {
+      console.log(res);
+      this.educationList = this.educationArray.value;
+
+      this.languageList = this.languageArray.value;
+    });
   }
 
   openDialogLanguage() {
@@ -191,6 +201,29 @@ export class CollaboratorEducationTabComponent implements OnInit {
 
   deleteEducation(index: number) {
     this.educationArray.removeAt(index);
+  }
+
+  getLabel(label: string, element: any) {
+    if (!element) {
+      return;
+    }
+    switch (label) {
+      case 'schooling':
+        return element.schooling == 1
+          ? 'Ensino Fundamental'
+          : element.schooling == 2
+          ? 'Ensino Médio'
+          : 'Ensino Superior';
+      case 'situation': {
+        return element.situation == 1
+          ? 'Parado'
+          : element.situation == 2
+          ? 'Completo'
+          : 'Em andamento';
+      }
+      default:
+        return;
+    }
   }
 }
 

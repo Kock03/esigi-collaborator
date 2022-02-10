@@ -12,13 +12,13 @@
             <th mat-header-cell *matHeaderCellDef>Tipo</th>
             <td mat-cell *matCellDef="let finance">
               {{
-                finance.contractType == 1
-                  ? "CLT"
-                  : finance.contractType == 2
-                  ? "PJ"
-                  :  finance.contractType == 3
-                  ? "Cooperado"
-                  : "Estagiário"
+              finance.contractType == 1
+              ? "CLT"
+              : finance.contractType == 2
+              ? "PJ"
+              : finance.contractType == 3
+              ? "Cooperado"
+              : "Estagiário"
               }}
             </td>
           </ng-container>
@@ -27,13 +27,13 @@
             <th mat-header-cell *matHeaderCellDef>Motivo</th>
             <td mat-cell *matCellDef="let finance">
               {{
-                finance.reason == 1
-                  ? "Contratação"
-                  : finance.reason == 2
-                  ? "Reconhecimento"
-                  :  finance.reason == 3
-                  ? "Tempo de Casa"
-                  : "Retenção"
+              finance.reason == 1
+              ? "Contratação"
+              : finance.reason == 2
+              ? "Reconhecimento"
+              : finance.reason == 3
+              ? "Tempo de Casa"
+              : "Retenção"
               }}
             </td>
           </ng-container>
@@ -43,10 +43,10 @@
             <td mat-cell *matCellDef="let finance">{{ finance.value }}</td>
           </ng-container>
 
-          <ng-container matColumnDef="monthlyValue">
+          <!-- <ng-container matColumnDef="monthlyValue">
             <th mat-header-cell *matHeaderCellDef>Valor Mensal</th>
             <td mat-cell *matCellDef="let finance">{{ finance.monthlyValue }}</td>
-          </ng-container>
+          </ng-container> -->
 
           <ng-container matColumnDef="icon">
             <th mat-header-cell *matHeaderCellDef></th>

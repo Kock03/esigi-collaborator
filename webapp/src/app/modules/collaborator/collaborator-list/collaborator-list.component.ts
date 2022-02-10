@@ -39,8 +39,6 @@ export interface Collaborator {
   encapsulation: ViewEncapsulation.None,
 })
 export class CollaboratorListComponent implements OnInit {
-  @Input('form') collaboratorFrom!: FormGroup;
-  @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
   @ViewChild('filter', { static: true }) filter!: ElementRef;
 
   private _unsubscribeAll: Subject<any>;
@@ -56,13 +54,12 @@ export class CollaboratorListComponent implements OnInit {
 
   collaborators!: Collaborator[];
   filteredCollaboratorList!: any[];
-  collaboratorForm!: FormGroup;
   index: any = null;
   Collaborator: any;
 
-  get collaboratorArray() {
-    return this.collaboratorForm.controls['Collaborators'] as FormArray;
-  }
+  // get collaboratorArray() {
+  //   return this.collaboratorForm.controls['Collaborators'] as FormArray;
+  // }
 
   constructor(
     private router: Router,

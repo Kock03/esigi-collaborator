@@ -5,20 +5,12 @@
         <ng-template mat-tab-label> Escolaridade </ng-template>
         <div fxLayout="row">
           <div class="envolti-table mat-elevation-z8" fxLayout="column">
-            <table
-              mat-table
-              [dataSource]="collaboratorForm.controls['Educations'].value"
-              #educationTable
-            >
+            <table mat-table [dataSource]="educationList" #educationTable>
               <ng-container matColumnDef="schooling">
                 <th mat-header-cell *matHeaderCellDef>Escolaridade</th>
                 <td mat-cell *matCellDef="let education">
                   {{
-                    education.schooling == 1
-                      ? "Ensino Fundamental"
-                      : education.schooling == 2
-                      ? "Ensino Médio"
-                      : "Ensino Superior"
+                  getLabel('schooling', education)
                   }}
                 </td>
               </ng-container>
@@ -27,11 +19,7 @@
                 <th mat-header-cell *matHeaderCellDef>Situação</th>
                 <td mat-cell *matCellDef="let education">
                   {{
-                    education.situation == 1
-                      ? "Parado"
-                      : education.situation == 2
-                      ? "Completo"
-                      : "Em andamento"
+                  getLabel('situation', education)
                   }}
                 </td>
               </ng-container>
@@ -52,45 +40,21 @@
 
               <ng-container matColumnDef="icon">
                 <th mat-header-cell *matHeaderCellDef></th>
-                <td
-                  class="button-tab"
-                  mat-cell
-                  *matCellDef="let education; let index = index"
-                >
-                  <button
-                    class="table-button"
-                    mat-button
-                    (click)="getEducation(education, index)"
-                  >
+                <td class="button-tab" mat-cell *matCellDef="let education; let index = index">
+                  <button class="table-button" mat-button (click)="getEducation(education, index)">
                     <mat-icon>edit</mat-icon>
                   </button>
-                  <button
-                    (click)="deleteEducation(index)"
-                    class="table-button"
-                    mat-button
-                  >
+                  <button (click)="deleteEducation(index)" class="table-button" mat-button>
                     <mat-icon>delete</mat-icon>
                   </button>
                 </td>
               </ng-container>
 
-              <tr
-                mat-header-row
-                *matHeaderRowDef="displayedEducation; sticky: true"
-              ></tr>
-              <tr
-                mat-row
-                *matRowDef="let row; columns: displayedEducation"
-              ></tr>
+              <tr mat-header-row *matHeaderRowDef="displayedEducation; sticky: true"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedEducation"></tr>
             </table>
           </div>
-          <button
-            fxFlex="5"
-            class="edit-button"
-            mat-flat-button
-            color="primary"
-            (click)="openDialogEducation()"
-          >
+          <button fxFlex="5" class="edit-button" mat-flat-button color="primary" (click)="openDialogEducation()">
             <mat-icon>add</mat-icon>
           </button>
         </div>
@@ -100,11 +64,7 @@
         <ng-template mat-tab-label> Idiomas </ng-template>
         <div fxLayout="row">
           <div class="envolti-table mat-elevation-z8" fxLayout="column">
-            <table
-              #languageTable
-              mat-table
-              [dataSource]="collaboratorForm.controls['Languages'].value"
-            >
+            <table #languageTable mat-table [dataSource]="languageList">
               <ng-container matColumnDef="language">
                 <th mat-header-cell *matHeaderCellDef>Idioma</th>
                 <td mat-cell *matCellDef="let language">
@@ -116,59 +76,38 @@
                 <th mat-header-cell *matHeaderCellDef>Fluência</th>
                 <td mat-cell *matCellDef="let language">
                   {{
-                    language.degreeOfInfluence == 1
-                      ? "Leitura, Escrita e Conversação"
-                      : language.degreeOfInfluence == 2
-                      ? "Escrita"
-                      : language.degreeOfInfluence == 3
-                      ? "Leitura"
-                      : language.degreeOfInfluence == 4
-                      ? "Conversação"
-                      : language.degreeOfInfluence == 5
-                      ? "Escrita e Leitura"
-                      : "Escrita e Conversação"
+                  language.degreeOfInfluence == 1
+                  ? "Leitura, Escrita e Conversação"
+                  : language.degreeOfInfluence == 2
+                  ? "Escrita"
+                  : language.degreeOfInfluence == 3
+                  ? "Leitura"
+                  : language.degreeOfInfluence == 4
+                  ? "Conversação"
+                  : language.degreeOfInfluence == 5
+                  ? "Escrita e Leitura"
+                  : "Escrita e Conversação"
                   }}
                 </td>
               </ng-container>
 
               <ng-container matColumnDef="icon">
                 <th mat-header-cell *matHeaderCellDef></th>
-                <td
-                  class="button-tab"
-                  mat-cell
-                  *matCellDef="let language; let index = index"
-                >
-                  <button
-                    class="table-button"
-                    mat-button
-                    (click)="getLanguage(language, index)"
-                  >
+                <td class="button-tab" mat-cell *matCellDef="let language; let index = index">
+                  <button class="table-button" mat-button (click)="getLanguage(language, index)">
                     <mat-icon>edit</mat-icon>
                   </button>
-                  <button
-                    (click)="deleteLanguage(index)"
-                    class="table-button"
-                    mat-button
-                  >
+                  <button (click)="deleteLanguage(index)" class="table-button" mat-button>
                     <mat-icon>delete</mat-icon>
                   </button>
                 </td>
               </ng-container>
 
-              <tr
-                mat-header-row
-                *matHeaderRowDef="displayedLanguage; sticky: true"
-              ></tr>
+              <tr mat-header-row *matHeaderRowDef="displayedLanguage; sticky: true"></tr>
               <tr mat-row *matRowDef="let row; columns: displayedLanguage"></tr>
             </table>
           </div>
-          <button
-            fxFlex="5"
-            class="edit-button"
-            mat-flat-button
-            color="primary"
-            (click)="openDialogLanguage()"
-          >
+          <button fxFlex="5" class="edit-button" mat-flat-button color="primary" (click)="openDialogLanguage()">
             <mat-icon>add</mat-icon>
           </button>
         </div>

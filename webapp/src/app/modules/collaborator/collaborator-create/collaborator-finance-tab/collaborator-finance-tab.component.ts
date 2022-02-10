@@ -9,17 +9,19 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import {
+  MatDialog,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+} from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
 
 export interface finance {
   dateInclusion: string;
-  contractType: string,
+  contractType: string;
   reason: string;
   value: string;
 }
-
-
 
 @Component({
   selector: 'app-collaborator-finance-tab',
@@ -32,8 +34,17 @@ export class CollaboratorFinanceTabComponent implements OnInit {
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
   @ViewChild('financeTable') financeTable!: MatTable<any>;
 
-  displayedColumns: string[] = ['data', 'type', 'reason', 'value', 'monthlyValue', 'icon'];
- 
+  data: [] = [];
+
+  displayedColumns: string[] = [
+    'data',
+    'type',
+    'reason',
+    'value',
+    // 'monthlyValue',
+    'icon',
+  ];
+
   financials: finance[] = [
     {
       dateInclusion: '',
@@ -42,7 +53,6 @@ export class CollaboratorFinanceTabComponent implements OnInit {
       value: '',
     },
   ];
-
 
   selectedIndex = 0;
 
@@ -59,6 +69,7 @@ export class CollaboratorFinanceTabComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
+    this.data = this.financeArray.value;
   }
 
   openDialog() {
@@ -68,7 +79,7 @@ export class CollaboratorFinanceTabComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((finance) => {
-      if(finance){
+      if (finance) {
         this.financeArray.insert(0, this.fb.group(finance));
         this.financeTable.renderRows();
       }
@@ -93,14 +104,12 @@ export class CollaboratorFinanceTabComponent implements OnInit {
       width: '500px',
       height: '620px',
       data: { financeSelected },
-         
     });
 
     this.index = index;
     dialogRef.afterClosed().subscribe((finance) => {
       this.financeArray.controls[this.index].setValue(finance);
     });
-
   }
 
   deleteFinance(index: number) {
@@ -112,17 +121,16 @@ export class CollaboratorFinanceTabComponent implements OnInit {
   selector: 'collaborator-finance-dialog',
   templateUrl: 'collaborator-finance-dialog.html',
 })
-export class CollaboratorFinanceDialog{
+export class CollaboratorFinanceDialog {
   @Input('form') collaboratorForm!: FormGroup;
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
 
   financeForm!: FormGroup;
 
-
   constructor(
     public dialogRef: MatDialogRef<CollaboratorFinanceDialog>,
     private fb: FormBuilder,
-    @Inject(MAT_DIALOG_DATA) public data: { financeSelected: any}
+    @Inject(MAT_DIALOG_DATA) public data: { financeSelected: any }
   ) {}
 
   ngOnInit(): void {
@@ -133,13 +141,11 @@ export class CollaboratorFinanceDialog{
     this.financeForm = this.fb.group({
       dateInclusion: ['2022-01-01', Validators.required],
       contractType: [1, Validators.required],
-      reason: [1 , Validators.required],
+      reason: [1, Validators.required],
       value: ['3400000', Validators.required],
     });
     if (this.data && this.data.financeSelected) {
-     
-      this.financeForm.patchValue(this.data.financeSelected)
-      
+      this.financeForm.patchValue(this.data.financeSelected);
     }
   }
 
@@ -147,7 +153,7 @@ export class CollaboratorFinanceDialog{
     this.dialogRef.close();
   }
 
- async save() {
+  async save() {
     this.dialogRef.close(this.financeForm.getRawValue());
   }
 }
