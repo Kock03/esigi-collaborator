@@ -16,6 +16,7 @@ export declare class UpdateJobsDto {
     monthTime: string;
     jobName: string;
     startForecast: Date;
+    collaboratorActivities: string;
     Seniorities: SenioritiesEntity;
     jobNumber: number;
     typeOfContract: TypeOfContract;

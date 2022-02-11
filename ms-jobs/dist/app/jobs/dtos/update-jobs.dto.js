@@ -57,6 +57,10 @@ __decorate([
 ], UpdateJobsDto.prototype, "startForecast", void 0);
 __decorate([
     (0, class_validator_1.IsNotEmpty)(),
+    __metadata("design:type", String)
+], UpdateJobsDto.prototype, "collaboratorActivities", void 0);
+__decorate([
+    (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", seniorities_entity_1.SenioritiesEntity)
 ], UpdateJobsDto.prototype, "Seniorities", void 0);
 __decorate([

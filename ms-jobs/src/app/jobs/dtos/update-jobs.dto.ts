@@ -37,6 +37,9 @@ export class UpdateJobsDto {
     startForecast: Date;
 
     @IsNotEmpty()
+    collaboratorActivities: string;
+
+    @IsNotEmpty()
     Seniorities: SenioritiesEntity;
 
     @IsNotEmpty()

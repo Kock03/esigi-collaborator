@@ -20,6 +20,7 @@ export declare class JobsService {
         monthTime: string;
         jobName: string;
         startForecast: Date;
+        collaboratorActivities: string;
         Seniorities: import("../seniorities/seniorities.entity").SenioritiesEntity;
         jobNumber: number;
         typeOfContract: import("./dtos/typeOfContract.enum").TypeOfContract;
