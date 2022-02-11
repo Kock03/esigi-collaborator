@@ -20,6 +20,7 @@ export class FeedbacksService {
     conditions: FindConditions<FeedbacksEntity>,
     options?: FindOneOptions<FeedbacksEntity>,
   ) {
+    options = { relations: ['Collaborator'] };
     try {
       return await this.feedbacksRepository.findOneOrFail(conditions, options);
     } catch (error) {

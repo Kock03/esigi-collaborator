@@ -1,10 +1,11 @@
 
 import { IsNotEmpty, IsOptional } from 'class-validator';
+import { CollaboratorsEntity } from 'src/app/collaborators/collaborators.entity';
 import { FeedbackTypes } from '../enums/feedback-types.enum';
 import { Reason } from '../enums/reason.enum';
 import { Status } from '../enums/status.enum';
 
-export class CreateFeedbacksDto {
+export class UpdateFeedbacksDto {
 
   @IsNotEmpty()
   feedbackType: FeedbackTypes;
@@ -14,9 +15,6 @@ export class CreateFeedbacksDto {
 
   @IsNotEmpty()
   project: string;
-
-  @IsNotEmpty()
-  collaborator: string;
 
   @IsNotEmpty()
   status: Status;
@@ -48,4 +46,6 @@ export class CreateFeedbacksDto {
   @IsNotEmpty()
   commitment: string;
 
+  @IsOptional()
+  Collaborator: CollaboratorsEntity;
 }

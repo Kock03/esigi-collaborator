@@ -20,6 +20,7 @@ import { LanguagesEntity } from '../languages/languages.entity';
 import { EducationsEntity } from '../educations/educations.entity';
 import { MaritalStatus } from './dtos/MaritalStatus.enum';
 import { DependentsEntity } from '../dependents/dependents.entity';
+import { FeedbacksEntity } from '../feedbacks/feedbacks.entity';
 
 @Entity({ name: 'collaborators' })
 export class CollaboratorsEntity {
@@ -92,6 +93,12 @@ export class CollaboratorsEntity {
     orphanedRowAction: 'delete',
   })
   Skills: SkillsEntity[];
+
+  @OneToMany(() => FeedbacksEntity, (feed) => feed.Collaborator, {
+    cascade: ['insert', 'update', 'remove'],
+    orphanedRowAction: 'delete',
+  })
+  Feedbacks: FeedbacksEntity[];
 
   @OneToMany(() => DocumentsEntity, (documents) => documents.Collaborator, {
     cascade: ['insert', 'update', 'remove'],

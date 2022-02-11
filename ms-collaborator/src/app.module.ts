@@ -12,6 +12,7 @@ import { EducationsModule } from './app/educations/educations.module';
 import { LanguagesModule } from './app/languages/languages.module';
 import { CollaboratorsModule } from './app/collaborators/collaborators.module';
 import { DependentsModule } from './app/dependents/dependents.module';
+import { FeedbacksModule } from './app/feedbacks/feedbacks.module';
 
 @Module({
   imports: [
@@ -35,7 +36,8 @@ import { DependentsModule } from './app/dependents/dependents.module';
     DocumentsModule,
     EducationsModule,
     LanguagesModule,
-    DependentsModule
+    DependentsModule,
+    FeedbacksModule,
   ],
   controllers: [],
   providers: [],
