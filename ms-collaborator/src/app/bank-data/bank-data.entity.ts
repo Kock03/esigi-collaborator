@@ -8,6 +8,7 @@ import {
   PrimaryGeneratedColumn,
   OneToOne,
   JoinColumn,
+  ManyToOne,
 } from 'typeorm';
 import { AccountTypes } from './dtos/account-types.enum';
 
@@ -34,10 +35,8 @@ export class BankDataEntity {
   @Column({ name: 'bank_account_digit', type: 'int' })
   bankAccountDigit: number;
 
-
-  @OneToOne(() => CollaboratorsEntity)
-  @JoinColumn()
-  Collaborator: CollaboratorsEntity;
+  @ManyToOne(() => CollaboratorsEntity, collaborators => collaborators.BankData)
+  Collaborator: CollaboratorsEntity; 
 
   @CreateDateColumn({ name: 'created_at', type: 'datetime' })
   createdAt: Date;

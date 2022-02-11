@@ -25,11 +25,11 @@ export class CreateFeedbacksDto {
   @IsNotEmpty()
   hourDate: string;
 
-  //@IsOptional()
-  //feedbackDateRetorn: Date;
+  @IsOptional()
+  feedbackDateRetorn: Date;
 
-  //@IsOptional()
-  //hourDateRetorn: string;
+  @IsOptional()
+  hourDateRetorn: string;
 
   @IsNotEmpty()
   manager: string;

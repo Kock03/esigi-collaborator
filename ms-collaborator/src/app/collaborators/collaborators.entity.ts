@@ -125,8 +125,12 @@ export class CollaboratorsEntity {
   @JoinColumn()
   Phone: PhoneEntity;
 
-  @OneToOne(() => BankDataEntity, bank => bank.Collaborator)
-  BankData: BankDataEntity;
+  @OneToMany(() => BankDataEntity, (BankData) => BankData.Collaborator, {
+    cascade: ['insert', 'update', 'remove'],
+    orphanedRowAction: 'delete',
+  })
+  @JoinColumn()
+  BankData: BankDataEntity[];
 
   @OneToMany(() => FinancialsEntity, (Financials) => Financials.Collaborator, {
     cascade: ['insert', 'update', 'remove'],
