@@ -42,7 +42,7 @@ export class CollaboratorsEntity {
   @Column({ name: 'collaborator_types' })
   collaboratorTypes: CollaboratorTypes;
 
-  @Column({ name: 'cpf', unique: true, length: 11})
+  @Column({ name: 'cpf', unique: true, length: 11 })
   cpf: string;
 
   @Column({ name: 'birth_date' })
@@ -63,7 +63,7 @@ export class CollaboratorsEntity {
   @Column({ name: 'site' })
   site: string;
 
-  @Column({ name: 'linkedin'})
+  @Column({ name: 'linkedin' })
   linkedin: string;
 
   @Column({ name: 'photo', type: 'blob', nullable: true })
@@ -107,7 +107,7 @@ export class CollaboratorsEntity {
   @JoinColumn()
   Phone: PhoneEntity;
 
-  @OneToOne(() => BankDataEntity, bank => bank.Collaborator)
+  @OneToOne(() => BankDataEntity, (bank) => bank.Collaborator)
   BankData: BankDataEntity;
 
   @OneToMany(() => FinancialsEntity, (Financials) => Financials.Collaborator, {
