@@ -4,9 +4,11 @@ import {
   CreateDateColumn,
   Entity,
   JoinColumn,
+  ManyToOne,
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { CollaboratorsEntity } from '../collaborators/collaborators.entity';
 import { FeedbackTypes } from './enums/feedback-types.enum';
 import { Reason } from './enums/reason.enum';
 import { Status } from './enums/status.enum';
@@ -24,9 +26,6 @@ export class FeedbacksEntity {
 
   @Column()
   project: string;
-
-  @Column()
-  collaborator: string;
 
   @Column({ type: 'int' })
   status: Status;
@@ -57,6 +56,9 @@ export class FeedbacksEntity {
 
   @Column()
   commitment: string;
+
+  @ManyToOne(() => CollaboratorsEntity, collaborators => collaborators.Feedbacks)
+  Collaborator: CollaboratorsEntity;
 
 
 

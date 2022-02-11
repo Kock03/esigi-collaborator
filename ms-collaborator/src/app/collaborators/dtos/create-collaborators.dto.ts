@@ -11,6 +11,7 @@ import { SkillsEntity } from 'src/app/skills/skills.entity';
 import { CollaboratorTypes } from './types.enum';
 import { MaritalStatus } from "./MaritalStatus.enum";
 import { DependentsEntity } from "src/app/dependents/dependents.entity";
+import { FeedbacksEntity } from "src/app/feedbacks/feedbacks.entity";
 
 export class CreateCollaboratorsDto {
 
@@ -94,6 +95,9 @@ export class CreateCollaboratorsDto {
 
   @IsOptional()
   Dependents: DependentsEntity[];
+
+  @IsOptional()
+  Feedbacks: FeedbacksEntity[];
 }
 
 
