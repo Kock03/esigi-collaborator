@@ -33,7 +33,6 @@ export class AppComponent {
       icon: 'work',
       selected: false,
       action: '/vaga/lista',
-      selectedList: '/vaga/lista',
       selectedNew: '/vaga/novo',
     },
 
@@ -48,6 +47,7 @@ export class AppComponent {
       icon: 'manage_accounts',
       selected: false,
       action: '/setting/novo',
+      selectedAd: '/setting/conexao'
     },
   ];
 

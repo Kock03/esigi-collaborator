@@ -29,8 +29,9 @@
       <button
         [ngClass]="{
           active:
-            this.activeMenu == menu.selectedList ||
-            this.activeMenu == menu.selectedNew
+            this.activeMenu == menu.action ||
+            this.activeMenu == menu.selectedNew ||
+            this.activeMenu == menu.selectedAd
         }"
         mat-button
         class="menu-button"
