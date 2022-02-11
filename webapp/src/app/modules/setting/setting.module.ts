@@ -4,15 +4,14 @@ import { SettingCreateComponent } from './setting-create/setting-create.componen
 import { RouterModule, Routes } from '@angular/router';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { SettingActiveDirectoryComponent } from './setting-create/setting-active-directory/setting-active-directory.component';
-import { MatInputModule } from '@angular/material/input'
-import {MatButtonModule} from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 import { SettingEmailComponent } from './setting-create/setting-email/setting-email.component';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ReactiveFormsModule } from '@angular/forms';
-
-
+import { MatIconModule } from '@angular/material/icon';
 
 const routes: Routes = [
   {
@@ -31,13 +30,14 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-  SettingCreateComponent,
-  SettingActiveDirectoryComponent,
-  SettingEmailComponent,
-],
+    SettingCreateComponent,
+    SettingActiveDirectoryComponent,
+    SettingEmailComponent,
+  ],
 
   imports: [
-    CommonModule, RouterModule.forChild(routes),
+    CommonModule,
+    RouterModule.forChild(routes),
     FlexLayoutModule,
     RouterModule,
     MatInputModule,
@@ -46,10 +46,8 @@ const routes: Routes = [
     MatCheckboxModule,
     MatFormFieldModule,
     ReactiveFormsModule,
-
+    MatIconModule,
   ],
-  entryComponents: [
-    SettingEmailComponent
-  ],
+  entryComponents: [SettingEmailComponent],
 })
 export class SettingModule {}

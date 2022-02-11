@@ -1,6 +1,6 @@
-import { Component, OnInit, Input,ViewEncapsulation } from '@angular/core';
-import {  FormBuilder, FormGroup, Validators } from '@angular/forms';
-
+import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-setting-active-directory',
@@ -10,9 +10,8 @@ import {  FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class SettingActiveDirectoryComponent implements OnInit {
   @Input('form') settingForm!: FormGroup;
-  
 
-  constructor(private fb: FormBuilder,) { }
+  constructor(private fb: FormBuilder, private router: Router) {}
 
   ngOnInit(): void {
     this.initForm();
@@ -20,7 +19,7 @@ export class SettingActiveDirectoryComponent implements OnInit {
 
   initForm(): void {
     this.settingForm = this.fb.group({
-      adAdress : ['', Validators.required],
+      adAdress: ['', Validators.required],
       user: ['', Validators.required],
       password: [
         '',
@@ -30,7 +29,10 @@ export class SettingActiveDirectoryComponent implements OnInit {
           Validators.minLength(6),
         ],
       ],
-    }); 
+    });
   }
 
+  back() {
+    this.router.navigate(['setting/novo']);
+  }
 }

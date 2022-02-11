@@ -1,11 +1,16 @@
 <div id="activeDirectory" class="page">
+  <div fxLayout="row" fxLayoutAlign="start start">
+    <button (click)="back()" color="primary" mat-button>
+      <mat-icon> chevron_left </mat-icon>
+    </button>
+    <h2 mat-dialog-title class="title">Conexão Avtive Directory</h2>
+  </div>
   <div
     class="content-scroll"
     fxLayout="column"
     fxLayoutAlign="space-around start"
   >
     <form [formGroup]="settingForm">
-      <h2 mat-dialog-title class="label">Conexão Avtive Directory</h2>
       <mat-form-field class="form-control" appearance="outline">
         <mat-label>Endereço AD</mat-label>
         <input matInput placeholder="Endereço AD" formControlName="adAdress" />

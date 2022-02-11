@@ -27,7 +27,11 @@
 
     <div *ngFor="let menu of menuList">
       <button
-        [ngClass]="{ active: menu.action == activeMenu }"
+        [ngClass]="{
+          active:
+            this.activeMenu == menu.selectedList ||
+            this.activeMenu == menu.selectedNew
+        }"
         mat-button
         class="menu-button"
         (click)="navigate(menu.action)"
@@ -37,7 +41,6 @@
       </button>
     </div>
 
-    
     <button mat-button class="menu-button logout">
       <mat-icon>exit_to_app</mat-icon>
       <span>Logout</span>

@@ -1,7 +1,13 @@
-<div id="activeDirectory" class="page">
+<div id="activeEmail" class="page">
+  <div fxLayout="row" fxLayoutAlign="start start">
+    <button (click)="back()" color="primary" mat-button>
+      <mat-icon> chevron_left </mat-icon>
+    </button>
+    <h2 mat-dialog-title class="title">Configuração SMTP</h2>
+  </div>
   <div class="content-scroll" fxLayout="column">
     <form [formGroup]="settingForm">
-      <h2 mat-dialog-title class="label">Configuração SMTP</h2>
+     
       <div fxLayout="column" fxLayoutGap="16px" fxFlexAlign="start">
         <mat-form-field appearance="outline">
           <mat-label>Tipo de Servidor</mat-label>
@@ -34,14 +40,17 @@
       </div>
       <div fxLayout="column">
         <mat-checkbox
-        *ngIf="settingForm.controls['serverType'].value !== 3"
+          *ngIf="settingForm.controls['serverType'].value !== 3"
           class="checkbox"
           color="primary"
           formControlName="checkServer"
           >Este servidor requer uma conexão criptografada(SSL/TLS)</mat-checkbox
         >
 
-        <mat-form-field appearance="outline" *ngIf="settingForm.controls['serverType'].value !== 1">
+        <mat-form-field
+          appearance="outline"
+          *ngIf="settingForm.controls['serverType'].value !== 1"
+        >
           <mat-label>Método de Criptografia</mat-label>
           <mat-select
             matInput
@@ -61,7 +70,8 @@
           Segurança(SPA)</mat-checkbox
         >
       </div>
-      <p></p><h2>Servidor de saída</h2>
+      <p></p>
+      <h2>Servidor de saída</h2>
       <div fxLayoutGap="16px" fxFlexAlign="start" fxLayout="row">
         <mat-form-field appearance="outline">
           <mat-label>Servidor</mat-label>
@@ -97,12 +107,8 @@
         >
       </div>
     </form>
-    <div
-      class="navigation-buttons"
-      fxLayoutAlign="center end"
-      fxLayoutGap="16px"
-    >
-      <button mat-flat-button color="primary">Conectar</button>
-    </div>
+  </div>
+  <div class="navigation-buttons" fxLayoutAlign="center end" fxLayoutGap="16px">
+    <button mat-flat-button color="primary">Conectar</button>
   </div>
 </div>

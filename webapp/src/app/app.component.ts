@@ -33,6 +33,8 @@ export class AppComponent {
       icon: 'work',
       selected: false,
       action: '/vaga/lista',
+      selectedList: '/vaga/lista',
+      selectedNew: '/vaga/novo',
     },
 
     {
@@ -55,6 +57,10 @@ export class AppComponent {
     this.router.events
       .pipe(filter((event) => event instanceof NavigationEnd))
       .subscribe((res: any) => {
+        console.log(
+          '🚀 ~ file: app.component.ts ~ line 58 ~ AppComponent ~ .subscribe ~ res',
+          res
+        );
         this.activeMenu = res.url;
       });
   }

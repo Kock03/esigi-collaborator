@@ -57,6 +57,8 @@ export class SettingEmailComponent implements OnInit {
     return o1.id === o2.id;
   }
 
- 
+ back(){
+   this.router.navigate(['setting/novo'])
+ }
 
 }
