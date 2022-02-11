@@ -3,13 +3,14 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { FindConditions, FindOneOptions, Repository } from 'typeorm';
 import { CollaboratorsEntity } from './collaborators.entity';
 import { CreateCollaboratorsDto } from './dtos/create-collaborators.dto';
+import { UpdateCollaboratorsDto } from './dtos/update-collaborators.dto';
 
 @Injectable()
 export class CollaboratorsService {
   constructor(
     @InjectRepository(CollaboratorsEntity)
     private readonly collaboratorsRepository: Repository<CollaboratorsEntity>,
-  ) {}
+  ) { }
 
   async findAll() {
     const collaboratorsWhiteAll = await this.collaboratorsRepository
@@ -50,7 +51,7 @@ export class CollaboratorsService {
     return await this.collaboratorsRepository.save(collaborator);
   }
 
-  async update(id: string, data: CreateCollaboratorsDto) {
+  async update(id: string, data: UpdateCollaboratorsDto) {
     const collaborator = await this.collaboratorsRepository.findOneOrFail({
       id,
     });
