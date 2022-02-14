@@ -238,7 +238,5 @@ export class JobCreateComponent implements OnInit {
     } else if (this.step < 2 && direction === 'next') {
       this.step += 1;
     }
-
-    this.router.navigate(['vaga/lista']);
   }
 }

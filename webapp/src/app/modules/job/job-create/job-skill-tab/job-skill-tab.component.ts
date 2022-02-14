@@ -52,12 +52,7 @@ export class JobSkillTabComponent implements OnInit {
     });
   }
 
-  logTeste(teste: any) {
-    console.log(
-      '🚀 ~ file: job-skill-tab.component.ts ~ line 48 ~ JobSkillTabComponent ~ log ~ teste',
-      teste
-    );
-  }
+  logTeste(teste: any) {}
   openDialog() {
     const dialogRef = this.dialog.open(JobDialogSkill, {
       width: '450px',

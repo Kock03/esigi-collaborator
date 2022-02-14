@@ -44,7 +44,7 @@
     class="navigation-buttons"
     fxLayoutAlign="center end"
     fxLayoutGap="16px"
-    *ngIf="jobId == 'novo'"
+    *ngIf="jobId === 'novo'"
   >
     <button mat-button *ngIf="step != 1" (click)="navigate('back')">
       Voltar

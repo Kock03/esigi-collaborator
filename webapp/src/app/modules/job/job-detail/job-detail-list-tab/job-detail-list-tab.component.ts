@@ -64,7 +64,6 @@ export class JobDetailListTabComponent implements OnInit {
 
   ngOnInit(): void {
     const state: any = this._location.getState();
-    console.log("🚀 ~ file: job-detail-list-tab.component.ts ~ line 67 ~ JobDetailListTabComponent ~ ngOnInit ~ state", state)
     this.jobId = this.route.snapshot.paramMap.get('id');
     this.getJob();
   }

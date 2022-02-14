@@ -25,7 +25,6 @@ export class DependentsController {
 
     @Post()
     async store(@Body() body: CreatedependentsDto) {
-        console.log("🚀 ~ file: dependents.controller.ts ~ line 28 ~ dependentsController ~ store ~ body", body)
         return await this.dependentsRepository.store(body);
     }
 

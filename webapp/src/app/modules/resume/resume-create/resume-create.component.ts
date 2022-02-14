@@ -75,10 +75,6 @@ export class ResumeCreateComponent implements OnInit {
     });
 
     this.resumeForm.valueChanges.subscribe((res) => {
-      console.log(
-        '🚀 ~ file: resume-create.component.ts ~ line 90 ~ ResumeCreateComponent ~ initForm ~ res',
-        res
-      );
     });
   }
 

@@ -71,7 +71,6 @@ export class FeedbackCreateComponent implements OnInit {
 
   async saveFeedback() {
     let data = this.feedbackForm.getRawValue();
-    console.log(data);
     try {
       const feedback = await this.feedbackProvider.store(data);
     } catch (error) {

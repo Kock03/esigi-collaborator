@@ -77,7 +77,7 @@ export class CollaboratorCreateComponent implements OnInit {
   async saveCollaborator() {
     let data = this.collaboratorForm.getRawValue();
 
-    console.log(data);
+ 
     if (!data.Dependents.length) {
       data.Dependents = null;
     }
