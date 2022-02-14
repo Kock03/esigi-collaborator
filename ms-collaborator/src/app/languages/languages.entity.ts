@@ -1,18 +1,20 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
-import { CollaboratorsEntity } from "../collaborators/collaborators.entity";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { CollaboratorsEntity } from '../collaborators/collaborators.entity';
 
 @Entity({ name: 'languages' })
 export class LanguagesEntity {
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
-    @PrimaryGeneratedColumn('uuid')
-    id: string;
+  @Column()
+  languageName: string;
 
-    @Column({ name: 'language_name' })
-    languageName: string;
+  @Column({ type: 'int' })
+  degreeOfInfluence: degreeOfInfluence;
 
-    @Column({ name: 'degree_of_influence', type: 'int' })
-    degreeOfInfluence: degreeOfInfluence;
-
-    @ManyToOne(() => CollaboratorsEntity, collaborator => collaborator.Languages)
-    Collaborator: CollaboratorsEntity;
+  @ManyToOne(
+    () => CollaboratorsEntity,
+    (collaborator) => collaborator.Languages,
+  )
+  Collaborator: CollaboratorsEntity;
 }

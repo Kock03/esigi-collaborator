@@ -1,17 +1,24 @@
-import { Optional } from "@nestjs/common";
-import { IsNotEmpty, IsOptional } from "class-validator";
+import { Optional } from '@nestjs/common';
+import {
+  IsNotEmpty,
+  IsNumber,
+  IsOptional,
+  Length,
+  MaxLength,
+  maxLength,
+  MinLength,
+} from 'class-validator';
 import { AddressEntity } from 'src/app/address/address.entity';
 import { BankDataEntity } from 'src/app/bank-data/bank-data.entity';
-import { DocumentsEntity } from "src/app/documents/documents.entity";
-import { EducationsEntity } from "src/app/educations/educations.entity";
+import { DocumentsEntity } from 'src/app/documents/documents.entity';
+import { EducationsEntity } from 'src/app/educations/educations.entity';
 import { FinancialsEntity } from 'src/app/financials/financials.entity';
-import { LanguagesEntity } from "src/app/languages/languages.entity";
+import { LanguagesEntity } from 'src/app/languages/languages.entity';
 import { PhoneEntity } from 'src/app/phone/phone.entity';
 import { SkillsEntity } from 'src/app/skills/skills.entity';
 import { CollaboratorTypes } from './collaborator-types.enum';
 
 export class CreateCollaboratorsDto {
-
   @IsNotEmpty()
   firstNameCorporateName: string;
 
@@ -26,10 +33,10 @@ export class CreateCollaboratorsDto {
 
   @IsNotEmpty()
   office: string;
-  
+
   @IsNotEmpty()
   collaboratorTypes: CollaboratorTypes;
-  
+
   @IsOptional()
   cpf: string;
 
@@ -50,7 +57,7 @@ export class CreateCollaboratorsDto {
 
   @IsNotEmpty()
   site: string;
-  
+
   @IsOptional()
   photo: string;
 
@@ -65,7 +72,7 @@ export class CreateCollaboratorsDto {
 
   @IsOptional()
   Skills: SkillsEntity[];
-  
+
   @IsOptional()
   Documents: DocumentsEntity[];
 
@@ -81,6 +88,3 @@ export class CreateCollaboratorsDto {
   @IsOptional()
   Financials: FinancialsEntity[];
 }
-
-
-

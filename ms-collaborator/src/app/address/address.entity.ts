@@ -14,37 +14,36 @@ export class AddressEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ name: 'cep' })
+  @Column()
   cep: string;
 
-  @Column({ name: 'number' })
+  @Column()
   number: string;
 
-  @Column({ name: 'street' })
+  @Column()
   street: string;
 
-  @Column({ name: 'district'})
+  @Column()
   district: string;
 
-  @Column({ name: 'state' })
+  @Column()
   state: string;
 
-  @Column({ name: 'city' })
+  @Column()
   city: string;
 
-  @Column({ name: 'complement' })
+  @Column()
   complement: string;
 
-  @OneToOne(() => CollaboratorsEntity, collaborator => collaborator.Address)
+  @OneToOne(() => CollaboratorsEntity, (collaborator) => collaborator.Address)
   Collaborator: CollaboratorsEntity;
 
-  @CreateDateColumn({ name: 'created_at', type: 'datetime' })
+  @CreateDateColumn({ type: 'datetime' })
   createdAt: Date;
 
-  @UpdateDateColumn({ name: 'updated_at', type: 'datetime' })
+  @UpdateDateColumn({ type: 'datetime' })
   updatedAt: Date;
 
-  @DeleteDateColumn({ name: 'deleted_at', type: 'datetime' })
+  @DeleteDateColumn({ type: 'datetime' })
   deletedAt: Date;
-
 }

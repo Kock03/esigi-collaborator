@@ -1,5 +1,6 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { HttpException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { DocumentValidator } from 'src/validators/document.validator';
 import { FindConditions, FindOneOptions, Repository } from 'typeorm';
 import { CollaboratorsEntity } from './collaborators.entity';
 import { CreateCollaboratorsDto } from './dtos/create-collaborators.dto';
@@ -9,7 +10,7 @@ export class CollaboratorsService {
   constructor(
     @InjectRepository(CollaboratorsEntity)
     private readonly collaboratorsRepository: Repository<CollaboratorsEntity>,
-  ) { }
+  ) {}
 
   async findAll() {
     const collaboratorsWhiteAll = await this.collaboratorsRepository
@@ -21,8 +22,20 @@ export class CollaboratorsService {
 
   async findOneOrFail(
     conditions: FindConditions<CollaboratorsEntity>,
-    options?: FindOneOptions<CollaboratorsEntity>,) {
-    options = { relations: ['BankData','Educations','Languages','Documents','Skills','Phone','Address', 'Financials'] }
+    options?: FindOneOptions<CollaboratorsEntity>,
+  ) {
+    options = {
+      relations: [
+        'BankData',
+        'Educations',
+        'Languages',
+        'Documents',
+        'Skills',
+        'Phone',
+        'Address',
+        'Financials',
+      ],
+    };
     try {
       return await this.collaboratorsRepository.findOneOrFail(
         conditions,
@@ -34,12 +47,18 @@ export class CollaboratorsService {
   }
 
   async store(data: CreateCollaboratorsDto) {
+    const invalidCpf = DocumentValidator.isValidCpf(data.cpf);
+    if (invalidCpf) {
+      throw new HttpException('O CPF é inválido', 404);
+    }
     const collaborator = this.collaboratorsRepository.create(data);
     return await this.collaboratorsRepository.save(collaborator);
   }
 
   async update(id: string, data: CreateCollaboratorsDto) {
-    const collaborator = await this.collaboratorsRepository.findOneOrFail({ id });
+    const collaborator = await this.collaboratorsRepository.findOneOrFail({
+      id,
+    });
     this.collaboratorsRepository.merge(collaborator, data);
     return await this.collaboratorsRepository.save(collaborator);
   }
