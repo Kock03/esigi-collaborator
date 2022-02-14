@@ -34,10 +34,20 @@
       <p class="tab-item">Skills</p>
       <span class="tab-border"></span>
     </div>
+
+    <div
+      fxLayout="column"
+      class="tab-group"
+      [ngClass]="{ done: step > 4, active: step == 5 }"
+    >
+      <p class="tab-item">Candidaturas</p>
+      <span class="tab-border"></span>
+    </div>
+
     <div
       fxLayout="column"
       class="tab-group disabled"
-      [ngClass]="{ done: step > 4, active: step == 5 }"
+      [ngClass]="{ done: step > 5, active: step == 6 }"
     >
       <p class="tab-item">Acompanhamento </p>
       <span class="tab-border"></span>
@@ -66,9 +76,14 @@
     (onChange)="handleChanges($event)"
   >
   </app-resume-skills-tab>
-  <app-resume-monitoring-tab
+  <app-resume-application-tab  
     [hidden]="step != 5"
-   
+    [form]="resumeForm"
+    (onChange)="handleChanges($event)"
+  >
+  </app-resume-application-tab>
+  <app-resume-monitoring-tab
+    [hidden]="step != 6"
   >
   </app-resume-monitoring-tab>
 
@@ -78,7 +93,7 @@
     </button>
     <button
       mat-flat-button
-      *ngIf="step != 4"
+      *ngIf="step != 5"
       (click)="navigate('next')"
       color="primary"
     >
@@ -86,7 +101,7 @@
     </button>
     <button
       mat-flat-button
-      *ngIf="step == 4"
+      *ngIf="step == 5"
       (click)="saveResume()"
       color="primary"
     >

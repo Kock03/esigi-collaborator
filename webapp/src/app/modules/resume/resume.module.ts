@@ -6,9 +6,19 @@ import { RouterModule, Routes } from '@angular/router';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatButtonModule } from '@angular/material/button';
 import { ResumeRegisterTabComponent } from './resume-create/resume-register-tab/resume-register-tab.component';
-import { ResumeEducationDialog, ResumeEducationTabComponent, ResumeLanguageDialog } from './resume-create/resume-education-tab/resume-education-tab.component';
-import { ResumeDialogExperience, ResumeExperienceTabComponent } from './resume-create/resume-experience-tab/resume-experience-tab.component';
-import { ResumeSkillDialog, ResumeSkillsTabComponent } from './resume-create/resume-skills-tab/resume-skills-tab.component';
+import {
+  ResumeEducationDialog,
+  ResumeEducationTabComponent,
+  ResumeLanguageDialog,
+} from './resume-create/resume-education-tab/resume-education-tab.component';
+import {
+  ResumeDialogExperience,
+  ResumeExperienceTabComponent,
+} from './resume-create/resume-experience-tab/resume-experience-tab.component';
+import {
+  ResumeSkillDialog,
+  ResumeSkillsTabComponent,
+} from './resume-create/resume-skills-tab/resume-skills-tab.component';
 import { ResumeMonitoringTabComponent } from './resume-create/resume-monitoring-tab/resume-monitoring-tab.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -18,7 +28,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgxMaskModule } from 'ngx-mask';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
-import { MatInputModule } from '@angular/material/input'
+import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ResumeCreateComponent } from './resume-create/resume-create.component';
@@ -26,7 +36,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { MatListModule } from '@angular/material/list';
-
+import { ResumeApplicationTabComponent } from './resume-create/resume-application-tab/resume-application-tab.component';
 
 const routes: Routes = [
   {
@@ -37,6 +47,7 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
+    ResumeApplicationTabComponent,
     ResumeCreateComponent,
     ResumeRegisterTabComponent,
     ResumeEducationTabComponent,
@@ -47,6 +58,7 @@ const routes: Routes = [
     ResumeLanguageDialog,
     ResumeEducationDialog,
     ResumeSkillDialog,
+    ResumeApplicationTabComponent,
   ],
   imports: [
     CommonModule,
@@ -74,6 +86,7 @@ const routes: Routes = [
   ],
 
   entryComponents: [
+    ResumeApplicationTabComponent,
     ResumeCreateComponent,
     ResumeRegisterTabComponent,
     ResumeEducationTabComponent,
@@ -83,7 +96,6 @@ const routes: Routes = [
     ResumeLanguageDialog,
     ResumeEducationDialog,
     ResumeSkillDialog
-
   ],
 })
 export class ResumeModule { }

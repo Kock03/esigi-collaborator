@@ -31,6 +31,7 @@ export class ResumeCreateComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
+    this.step = 1;
   }
 
   initForm() {
@@ -74,8 +75,7 @@ export class ResumeCreateComponent implements OnInit {
       Skills: this.fb.array([]),
     });
 
-    this.resumeForm.valueChanges.subscribe((res) => {
-    });
+    this.resumeForm.valueChanges.subscribe((res) => {});
   }
 
   async saveResume() {
@@ -91,7 +91,7 @@ export class ResumeCreateComponent implements OnInit {
   navigate(direction: string) {
     if (this.step > 1 && direction === 'back') {
       this.step -= 1;
-    } else if (this.step < 4 && direction === 'next') {
+    } else if (this.step < 5 && direction === 'next') {
       this.step += 1;
     }
   }

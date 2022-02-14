@@ -10,15 +10,31 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { CollaboratorRegisterTabComponent } from './collaborator-create/collaborator-register-tab/collaborator-register-tab.component';
 import { MatSelectModule } from '@angular/material/select';
-import { CollaboratorBankDialog, CollaboratorBankTabComponent } from './collaborator-create/collaborator-bank-tab/collaborator-bank-tab.component';
-import { CollaboratorFinanceDialog, CollaboratorFinanceTabComponent } from './collaborator-create/collaborator-finance-tab/collaborator-finance-tab.component';
+import {
+  CollaboratorBankDialog,
+  CollaboratorBankTabComponent,
+} from './collaborator-create/collaborator-bank-tab/collaborator-bank-tab.component';
+import {
+  CollaboratorFinanceDialog,
+  CollaboratorFinanceTabComponent,
+} from './collaborator-create/collaborator-finance-tab/collaborator-finance-tab.component';
 import { CollaboratorPanelTabComponent } from './collaborator-create/collaborator-panel-tab/collaborator-panel-tab.component';
-import { CollaboratorSkillDialog, CollaboratorSkillTabComponent } from './collaborator-create/collaborator-skill-tab/collaborator-skill-tab.component';
+import {
+  CollaboratorSkillDialog,
+  CollaboratorSkillTabComponent,
+} from './collaborator-create/collaborator-skill-tab/collaborator-skill-tab.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
-import { CollaboratorEducationDialog, CollaboratorEducationTabComponent, CollaboratorLanguageDialog } from './collaborator-create/collaborator-education-tab/collaborator-education-tab.component';
-import { CollaboratorDocumentDialog, CollaboratorDocumentTabComponent } from './collaborator-create/collaborator-document-tab/collaborator-document-tab.component';
+import {
+  CollaboratorEducationDialog,
+  CollaboratorEducationTabComponent,
+  CollaboratorLanguageDialog,
+} from './collaborator-create/collaborator-education-tab/collaborator-education-tab.component';
+import {
+  CollaboratorDocumentDialog,
+  CollaboratorDocumentTabComponent,
+} from './collaborator-create/collaborator-document-tab/collaborator-document-tab.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxMaskModule } from 'ngx-mask';
 import { DocumentValidator } from 'src/app/validators/document.validator';
@@ -26,14 +42,20 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { CollaboratorFeedbackTabComponent } from './collaborator-create/collaborator-feedback-tab/collaborator-feedback-tab.component';
-import { CollaboradorDependentsDialog, CollaboratorDependentsTabComponent } from './collaborator-create/collaborator-dependents-tab/collaborator-dependents-tab.component';
+import {
+  CollaboradorDependentsDialog,
+  CollaboratorDependentsTabComponent,
+} from './collaborator-create/collaborator-dependents-tab/collaborator-dependents-tab.component';
 import { FeedbackCreateComponent } from './feedback-create/feedback-create.component';
-
-
+import { CollaboratorListComponent } from './collaborator-list/collaborator-list.component';
 
 const routes: Routes = [
   {
-    path: 'novo',
+    path: 'lista',
+    component: CollaboratorListComponent,
+  },
+  {
+    path: ':id',
     component: CollaboratorCreateComponent,
   },
   {
@@ -61,8 +83,8 @@ const routes: Routes = [
     CollaboratorFeedbackTabComponent,
     CollaboratorDependentsTabComponent,
     CollaboradorDependentsDialog,
-    FeedbackCreateComponent
-
+    FeedbackCreateComponent,
+    CollaboratorListComponent,
   ],
   imports: [
     RouterModule.forChild(routes),
@@ -81,7 +103,7 @@ const routes: Routes = [
     MatIconModule,
     HttpClientModule,
     NgxMaskModule,
-    MatDialogModule
+    MatDialogModule,
   ],
   entryComponents: [
     CollaboratorRegisterTabComponent,
@@ -99,12 +121,10 @@ const routes: Routes = [
     CollaboratorDocumentDialog,
     CollaboratorFeedbackTabComponent,
     CollaboratorDependentsTabComponent,
-    CollaboradorDependentsDialog
+    CollaboradorDependentsDialog,
+    CollaboratorListComponent,
   ],
-  providers: [
-    MatDatepickerModule
-  ],
-  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
-
+  providers: [MatDatepickerModule],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class CollaboratorModule {}

@@ -9,34 +9,36 @@ import { environment } from 'src/environments/environment';
 export class CollaboratorProvider {
   constructor(private apiGateway: ApiGateway) {}
 
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void {}
 
   findAll(): Promise<any> {
     return new Promise((resolve, reject) => {
       this.apiGateway
-        .get(environment.COLLABORATOR_MS +'collaborators')
+        .get(environment.COLLABORATOR_MS + 'collaborators')
         .subscribe((response: HttpResponse<any>) => {
           resolve(response.body);
         }, reject);
     });
   }
 
-  findOne(id: string): Promise<any> {
+  findOne(id: string | null): Promise<any> {
     return new Promise((resolve, reject) => {
       this.apiGateway
-        .get('collaborators', { id: id })
+        .get(environment.COLLABORATOR_MS + 'collaborators/:id', { id: id })
         .subscribe((response: HttpResponse<any>) => {
           resolve(response.body);
         }, reject);
     });
   }
 
-  update(collaborator: any): Promise<any> {
+  update(id: string | null, collaborator: any): Promise<any> {
     return new Promise((resolve, reject) => {
       this.apiGateway
-        .put(environment.COLLABORATOR_MS + 'collaborators', collaborator)
+        .put(
+          environment.COLLABORATOR_MS + 'collaborators/:id',
+          { id: id },
+          collaborator
+        )
         .subscribe((response: HttpResponse<any>) => {
           resolve(response.body);
         }, reject);
@@ -53,10 +55,12 @@ export class CollaboratorProvider {
     });
   }
 
-  destroy(collaborator: any): Promise<any> {
+  destroy(collaboratorId: string): Promise<any> {
+    console.log(collaboratorId);
+
     return new Promise((resolve, reject) => {
       this.apiGateway
-        .delete(environment.COLLABORATOR_MS + 'collaborators', collaborator)
+        .delete(environment.COLLABORATOR_MS + 'collaborators/' + collaboratorId)
         .subscribe((response: HttpResponse<any>) => {
           resolve(response.body);
         }, reject);

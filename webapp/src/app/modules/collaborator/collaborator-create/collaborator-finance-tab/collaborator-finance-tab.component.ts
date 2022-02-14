@@ -11,18 +11,27 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { DateAdapter, MAT_DATE_FORMATS, NativeDateAdapter } from '@angular/material/core';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+
+import {
+  DateAdapter,
+  MAT_DATE_FORMATS,
+  NativeDateAdapter,
+} from '@angular/material/core';
+
+import {
+  MatDialog,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+} from '@angular/material/dialog';
+
 import { MatTable } from '@angular/material/table';
 
 export interface finance {
   dateInclusion: string;
-  contractType: string,
+  contractType: string;
   reason: string;
   value: string;
 }
-
-
 
 @Component({
   selector: 'app-collaborator-finance-tab',
@@ -35,7 +44,16 @@ export class CollaboratorFinanceTabComponent implements OnInit {
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
   @ViewChild('financeTable') financeTable!: MatTable<any>;
 
-  displayedColumns: string[] = ['data', 'type', 'reason', 'value', 'monthlyValue', 'icon'];
+  displayedColumns: string[] = [
+    'data',
+    'type',
+    'reason',
+    'value',
+    'monthlyValue',
+    'icon',
+  ];
+
+  data: [] = [];
 
   financials: finance[] = [
     {
@@ -45,7 +63,6 @@ export class CollaboratorFinanceTabComponent implements OnInit {
       value: '',
     },
   ];
-
 
   selectedIndex = 0;
 
@@ -58,10 +75,11 @@ export class CollaboratorFinanceTabComponent implements OnInit {
     return this.collaboratorForm.controls['Financials'] as FormArray;
   }
 
-  constructor(private fb: FormBuilder, public dialog: MatDialog) { }
+  constructor(private fb: FormBuilder, public dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.initForm();
+    this.data = this.financeArray.value;
   }
 
   openDialog() {
@@ -96,14 +114,12 @@ export class CollaboratorFinanceTabComponent implements OnInit {
       width: '500px',
       height: '550px',
       data: { financeSelected },
-
     });
 
     this.index = index;
     dialogRef.afterClosed().subscribe((finance) => {
       this.financeArray.controls[this.index].setValue(finance);
     });
-
   }
 
   deleteFinance(index: number) {
@@ -117,15 +133,15 @@ export const PICK_FORMATS = {
     dateInput: 'input',
     monthYearLabel: { year: 'numeric', month: 'numeric' },
     dateA11yLabel: { year: 'numeric', month: 'numeric', day: 'numeric' },
-    monthYearA11yLabel: { year: 'numeric', month: 'numeric' }
-  }
+    monthYearA11yLabel: { year: 'numeric', month: 'numeric' },
+  },
 };
 
 @Injectable()
 export class PickDateAdapter extends NativeDateAdapter {
   override format(date: Date, displayFormat: Object): string {
     if (displayFormat === 'input') {
-      return formatDate(date, 'dd-MM-yyyy', this.locale);;
+      return formatDate(date, 'dd-MM-yyyy', this.locale);
     } else {
       return date.toDateString();
     }
@@ -136,21 +152,22 @@ export class PickDateAdapter extends NativeDateAdapter {
   templateUrl: 'collaborator-finance-dialog.html',
   providers: [
     { provide: DateAdapter, useClass: PickDateAdapter },
-    { provide: MAT_DATE_FORMATS, useValue: PICK_FORMATS }
-  ]
+    { provide: MAT_DATE_FORMATS, useValue: PICK_FORMATS },
+  ],
 })
 export class CollaboratorFinanceDialog {
   @Input('form') collaboratorForm!: FormGroup;
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
 
   financeForm!: FormGroup;
+
   Date: any;
 
   constructor(
     public dialogRef: MatDialogRef<CollaboratorFinanceDialog>,
     private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: { financeSelected: any }
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.initForm();
@@ -165,9 +182,9 @@ export class CollaboratorFinanceDialog {
       payday: ['2004-06-12', Validators.required],
     });
     if (this.data && this.data.financeSelected) {
+      this.financeForm.patchValue(this.data.financeSelected);
 
-      this.financeForm.patchValue(this.data.financeSelected)
-
+      this.financeForm.patchValue(this.data.financeSelected);
     }
   }
 
