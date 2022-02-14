@@ -25,13 +25,7 @@ export class CollaboratorsController {
 
   @Post()
   async store(@Body() body: CreateCollaboratorsDto) {
-<<<<<<< HEAD
-=======
-    console.log(
-      '🚀 ~ file: collaborators.controller.ts ~ line 28 ~ CollaboratorsController ~ store ~ body',
-      body,
-    );
->>>>>>> origin/feature/113-criação-tab-candidatura
+
     return await this.collaboratorsRepository.store(body);
   }
 

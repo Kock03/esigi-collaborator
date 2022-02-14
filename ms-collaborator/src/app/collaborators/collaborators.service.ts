@@ -22,10 +22,8 @@ export class CollaboratorsService {
 
   async findOneOrFail(
     conditions: FindConditions<CollaboratorsEntity>,
-<<<<<<< HEAD
-    options?: FindOneOptions<CollaboratorsEntity>,) {
-    options = { relations: ['BankData', 'Educations', 'Languages', 'Documents', 'Skills', 'Phone', 'Address', 'Financials', 'Dependents', 'Feedbacks'] }
-=======
+
+
     options?: FindOneOptions<CollaboratorsEntity>,
   ) {
     options = {
@@ -40,7 +38,7 @@ export class CollaboratorsService {
         'Financials',
       ],
     };
->>>>>>> origin/feature/113-criação-tab-candidatura
+
     try {
       return await this.collaboratorsRepository.findOneOrFail(
         conditions,
@@ -57,11 +55,7 @@ export class CollaboratorsService {
   }
 
   async update(id: string, data: UpdateCollaboratorsDto) {
-<<<<<<< HEAD
-    const collaborator = await this.collaboratorsRepository.findOneOrFail({ id });
-    this.collaboratorsRepository.merge(collaborator, data);
-    return await this.collaboratorsRepository.save(collaborator);
-=======
+
     const collaborator = await this.collaboratorsRepository.findOneOrFail({
       id,
     });
@@ -69,7 +63,7 @@ export class CollaboratorsService {
       throw new HttpException('Not found', 404);
     }
     return await this.collaboratorsRepository.save({ id: id, ...data });
->>>>>>> origin/feature/113-criação-tab-candidatura
+
   }
 
   async destroy(id: string) {

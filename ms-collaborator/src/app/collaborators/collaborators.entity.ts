@@ -125,17 +125,15 @@ export class CollaboratorsEntity {
   @JoinColumn()
   Phone: PhoneEntity;
 
-<<<<<<< HEAD
+
   @OneToMany(() => BankDataEntity, (BankData) => BankData.Collaborator, {
     cascade: ['insert', 'update', 'remove'],
     orphanedRowAction: 'delete',
   })
   @JoinColumn()
   BankData: BankDataEntity[];
-=======
-  @OneToOne(() => BankDataEntity, (bank) => bank.Collaborator)
-  BankData: BankDataEntity;
->>>>>>> origin/feature/113-criação-tab-candidatura
+
+
 
   @OneToMany(() => FinancialsEntity, (Financials) => Financials.Collaborator, {
     cascade: ['insert', 'update', 'remove'],
