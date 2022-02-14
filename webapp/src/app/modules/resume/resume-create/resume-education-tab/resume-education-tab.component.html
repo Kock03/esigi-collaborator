@@ -5,6 +5,13 @@
         <ng-template mat-tab-label> Escolaridade </ng-template>
         <div fxLayout="row">
           <div class="envolti-table mat-elevation-z8" fxLayout="column">
+            <ng-container matColumnDef="iconAdd">
+              <th mat-header-cell *matHeaderCellDef>
+                <button class="edit-button" mat-flat-button color="primary"  (click)="openDialogEducation()">
+                  <mat-icon>add</mat-icon>
+                </button>
+              </th>
+            </ng-container>
             <table
               mat-table
               [dataSource]="resumeForm.controls['Educations'].value"
@@ -83,16 +90,7 @@
                 *matRowDef="let row; columns: displayedEducation"
               ></tr>
             </table>
-          </div>
-          <button
-            fxFlex="5"
-            class="edit-button"
-            mat-flat-button
-            color="primary"
-            (click)="openDialogEducation()"
-          >
-            <mat-icon>add</mat-icon>
-          </button>
+          </div> 
         </div>
       </mat-tab>
 

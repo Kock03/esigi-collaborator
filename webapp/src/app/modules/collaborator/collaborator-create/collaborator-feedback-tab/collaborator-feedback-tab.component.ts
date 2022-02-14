@@ -26,6 +26,7 @@ export class CollaboratorFeedbackTabComponent implements OnInit {
     'type',
     'manager',
     'status',
+    'icon',
   ];
   feedbacks: Feedback[] = [
     {

@@ -40,7 +40,7 @@ export class JobListComponent implements OnInit {
     'requester',
     'openingDate',
     'status',
-    'icon',
+    'iconAdd',
   ];
   jobs!: Job[];
   filteredJobList!: any[];
