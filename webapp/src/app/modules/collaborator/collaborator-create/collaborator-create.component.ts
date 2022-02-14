@@ -1,6 +1,9 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatTable } from '@angular/material/table';
+import { ActivatedRoute, Router } from '@angular/router';
+
 import { DocumentValidator } from 'src/app/validators/document.validator';
 import { CollaboratorProvider } from 'src/providers/collaborator.provider';
 
@@ -11,20 +14,63 @@ import { CollaboratorProvider } from 'src/providers/collaborator.provider';
   encapsulation: ViewEncapsulation.None,
 })
 export class CollaboratorCreateComponent implements OnInit {
+
   collaboratorForm!: FormGroup;
   step: number = 1;
+  collaboratorId!: string | null;
+  collaborator!: any;
+
+  Educations: any;
+  Languages: any;
+  BankData: any;
+  Financials: any;
+  Skills: any;
+  Documents: any;
 
   constructor(
     private fb: FormBuilder,
     private collaboratorProvider: CollaboratorProvider,
     private http: HttpClient,
-  ) {
+     private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
-  }
 
   async ngOnInit(): Promise<void> {
+    this.collaboratorId = this.route.snapshot.paramMap.get('id');
     this.initForm();
     this.step = 1;
+    if (this.collaboratorId !== 'novo') {
+      await this.getCollaborator();
+      this.setFormValue();
+    }
+  }
+
+  async getCollaborator() {
+    try {
+      this.collaborator = await this.collaboratorProvider.findOne(
+        this.collaboratorId
+      );
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  listCollaborator() {
+    this.router.navigate(['colaborador/lista']);
+  }
+
+  async saveEditCollaborator() {
+    let data = this.collaboratorForm.getRawValue();
+    try {
+      const job = await this.collaboratorProvider.update(
+        this.collaboratorId,
+        data
+      );
+      this.router.navigate(['colaborador/lista']);
+    } catch (error) {
+      console.error(error);
+    }
   }
 
 
@@ -37,10 +83,12 @@ export class CollaboratorCreateComponent implements OnInit {
       maritalStatus: [1, Validators.required],
       office: ['Desenvolvedor Angular', Validators.required],
       collaboratorTypes: [1, Validators.required],
-      active: [true, Validators.required],
+ active: [true, Validators.required],
       cpf: this.fb.control({ value: null, disabled: false }, [DocumentValidator.isValidCpf(), Validators.required]),
       birthDate: ['2004-06-12', Validators.required],
       admissionDate: ['', Validators.required],
+
+  
       email: ['davi@email', [Validators.email, Validators.required]],
       cnpj: ['', Validators.required],
       stateRegistration: ['', Validators.required],
@@ -49,7 +97,10 @@ export class CollaboratorCreateComponent implements OnInit {
       linkedin: ['linkedin.davi', Validators.required],
       photo: [''],
       Phone: this.fb.group({
-        phoneNumber: ['343234908', [Validators.required, Validators.maxLength(9)]],
+        phoneNumber: [
+          '343234908',
+          [Validators.required, Validators.maxLength(9)],
+        ],
         ddd: ['71', [Validators.required, Validators.maxLength(2)]],
         ddi: ['55', Validators.required],
       }),
@@ -64,14 +115,107 @@ export class CollaboratorCreateComponent implements OnInit {
         district: ['', Validators.required],
       }),
 
+
       Dependents: this.fb.array([]),
-      Educations: this.fb.array([]),
-      Languages: this.fb.array([]),
-      BankData: this.fb.array([]),
-      Financials: this.fb.array([]),
-      Skills: this.fb.array([]),
-      Documents: this.fb.array([]),
+      // Educations: this.fb.array([]),
+      // Languages: this.fb.array([]),
+      // BankData: this.fb.array([]),
+      // Financials: this.fb.array([]),
+      // Skills: this.fb.array([]),
+      // Documents: this.fb.array([]),
+
+      Educations: this.fb.array(
+        new Array(
+          this.fb.group({
+            schooling: null,
+            course: null,
+            institution: null,
+            situation: null,
+          })
+        )
+      ),
+      Languages: this.fb.array(
+        new Array(
+          this.fb.group({
+            languageName: null,
+            degreeOfInfluence: null,
+          })
+        )
+      ),
+      BankData: this.fb.array(
+        new Array(
+          this.fb.group({
+            bank: null,
+            agency: null,
+            accountTypet: null,
+            accountNumber: null,
+            digit: null,
+            bankAccountDigit: null,
+          })
+        )
+      ),
+      Financials: this.fb.array(
+        new Array(
+          this.fb.group({
+            contractType: null,
+            value: null,
+            reason: null,
+            dateInclusion: null,
+          })
+        )
+      ),
+      Skills: this.fb.array(
+        new Array(
+          this.fb.group({
+            tecnology: null,
+            seniority: null,
+            yearsExperience: null,
+            currentPosition: null,
+          })
+        )
+      ),
+      Documents: this.fb.array(
+        new Array(
+          this.fb.group({
+            name: null,
+            file: null,
+          })
+        )
+      ),
+
     });
+  }
+
+  setFormValue() {
+    this.collaboratorForm.patchValue(this.collaborator);
+    // if (this.collaborator.Address[0]) {
+    //   const address = this.collaboratorForm.controls['Address'] as FormGroup;
+    //   address.patchValue(this.collaborator.Address[0]);
+    // }
+    // if (this.collaborator.Phone[0]) {
+    //   const phone = this.collaboratorForm.controls['Phone'] as FormGroup;
+    //   phone.value.patchValue(this.collaborator.Phone[0]);
+    // }
+    // if (this.collaborator.Educations[0] == null) {
+    //   console.log(this.collaborator.Educations);
+
+    //   const educations = this.collaboratorForm.controls[
+    //     'Educations'
+    //   ] as FormArray;
+    //   educations.value.splice(0, 1);
+    // }
+    // if (this.collaborator.Language == null) {
+    //   const languages = this.collaboratorForm.controls[
+    //     'Languages'
+    //   ] as FormArray;
+    //   languages.value.splice(0, 1);
+    // }
+
+    // if (this.collaborator.BankData == null) {
+    //   const bankData = this.collaboratorForm.controls['BankData'] as FormArray;
+
+    //   bankData.value.splice(0, 1);
+    // }
   }
 
   async saveCollaborator() {

@@ -25,6 +25,13 @@ export class CollaboratorsController {
 
   @Post()
   async store(@Body() body: CreateCollaboratorsDto) {
+<<<<<<< HEAD
+=======
+    console.log(
+      '🚀 ~ file: collaborators.controller.ts ~ line 28 ~ CollaboratorsController ~ store ~ body',
+      body,
+    );
+>>>>>>> origin/feature/113-criação-tab-candidatura
     return await this.collaboratorsRepository.store(body);
   }
 
@@ -36,7 +43,8 @@ export class CollaboratorsController {
   @Put(':id')
   async update(
     @Param('id', new ParseUUIDPipe()) id: string,
-    @Body() body: UpdateCollaboratorsDto,) {
+    @Body() body: UpdateCollaboratorsDto,
+  ) {
     return await this.collaboratorsRepository.update(id, body);
   }
 

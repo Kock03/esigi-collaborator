@@ -1,21 +1,20 @@
-import { IsNotEmpty } from "class-validator";
-import { CollaboratorsEntity } from "src/app/collaborators/collaborators.entity";
-import { Schooling } from "./schooling.enum";
+import { IsNotEmpty } from 'class-validator';
+import { CollaboratorsEntity } from 'src/app/collaborators/collaborators.entity';
+import { Schooling } from './schooling.enum';
 
-export class CreateEducationsDto{
-     
-    @IsNotEmpty()
-    course: string;
-  
-    @IsNotEmpty()
-    schooling: Schooling
+export class CreateEducationsDto {
+  @IsNotEmpty()
+  course: string;
 
-    @IsNotEmpty()
-    institution: string;
+  @IsNotEmpty()
+  schooling: Schooling;
 
-    @IsNotEmpty()
-    situation: Situation;
+  @IsNotEmpty()
+  institution: string;
 
-    @IsNotEmpty()
-    collaborator: CollaboratorsEntity;
+  @IsNotEmpty()
+  situation: Situation;
+
+  @IsNotEmpty()
+  collaborator: CollaboratorsEntity;
 }

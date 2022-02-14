@@ -15,10 +15,10 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { DateAdapter, MAT_DATE_FORMATS, NativeDateAdapter } from '@angular/material/core';
+
+import { DateAdapter, MAT_DATE_FORMATS, NativeDateAdapter } from '@angular/material/core'
 import { ApiGateway } from 'src/api-gateway';
 import { CepService } from 'src/services/cep.service';
-
 
 export interface collaboratorTypes {
   id: number;
@@ -64,7 +64,10 @@ export class CollaboratorRegisterTabComponent implements OnInit {
   date: any;
 
   onFileSelected(changes: any): void {
+
     this.selectedFile = changes.target.files[0]
+    this.selectedFile = changes.target.files[0];
+
   }
 
   typeControl = new FormControl();
@@ -85,13 +88,13 @@ export class CollaboratorRegisterTabComponent implements OnInit {
 
   ngOnInit(): void {
 
+
     this.collaboratorForm.valueChanges.subscribe((res) => {
       const addressForm = this.collaboratorForm.controls[
         'Address'
       ] as FormGroup;
 
-      addressForm.controls['cep'].valueChanges.subscribe((res) => {
-      });
+      addressForm.controls['cep'].valueChanges.subscribe((res) => {});
     });
   }
 
