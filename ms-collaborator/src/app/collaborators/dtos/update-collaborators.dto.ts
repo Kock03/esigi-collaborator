@@ -47,7 +47,7 @@ export class UpdateCollaboratorsDto {
   @IsNotEmpty()
   municipalInscription: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   site: string;
 
   @IsNotEmpty()
@@ -61,10 +61,10 @@ export class UpdateCollaboratorsDto {
 
   @IsOptional()
   Phone: PhoneEntity;
-  
+
   @IsOptional()
   Skills: SkillsEntity[];
-  
+
   @IsOptional()
   Documents: DocumentsEntity[];
 

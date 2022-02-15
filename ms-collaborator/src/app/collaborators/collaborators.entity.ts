@@ -111,7 +111,10 @@ export class CollaboratorsEntity {
   @JoinColumn()
   Phone: PhoneEntity;
 
-  @OneToOne(() => BankDataEntity, (bank) => bank.Collaborator)
+  @OneToOne(() => BankDataEntity, (bank) => bank.Collaborator, {
+    cascade: ['insert', 'update', 'remove'],
+    orphanedRowAction: 'delete',
+  })
   @JoinColumn()
   BankData: BankDataEntity;
 

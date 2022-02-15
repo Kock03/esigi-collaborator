@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { HttpException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { FindConditions, FindOneOptions, Repository } from 'typeorm';
 import { SkillsEntity } from './skills.entity';
@@ -14,8 +14,8 @@ export class SkillsService {
 
   async findAll() {
     const skillsWhiteCollaborator = await this.skillsRepository
-    .createQueryBuilder('skills')
-    .getMany();
+      .createQueryBuilder('skills')
+      .getMany();
 
     return skillsWhiteCollaborator;
   }
@@ -24,7 +24,7 @@ export class SkillsService {
     conditions: FindConditions<SkillsEntity>,
     options?: FindOneOptions<SkillsEntity>,
   ) {
-    options = { relations: ['Collaborator']};
+    options = { relations: ['Collaborator'] };
     try {
       return await this.skillsRepository.findOneOrFail(conditions, options);
     } catch (error) {
@@ -32,15 +32,17 @@ export class SkillsService {
     }
   }
 
-  async store(skillsDto: CreateSkillsDto) {
-    const skill = this.skillsRepository.create(skillsDto);
+  async store(data: CreateSkillsDto) {
+    const skill = this.skillsRepository.create(data);
     return await this.skillsRepository.save(skill);
   }
 
-  async update(id: string, skillsDto: UpdateSkillsDto) {
-    const skill = await this.skillsRepository.findOneOrFail({id});
-    this.skillsRepository.merge(skill, skillsDto);
-    return await this.skillsRepository.save(skill);
+  async update(id: string, data: UpdateSkillsDto) {
+    const skill = await this.skillsRepository.findOneOrFail({ id });
+    if (!skill) {
+      throw new HttpException('Not Found', 404);
+    }
+    return await this.skillsRepository.save({ id: id, ...data });
   }
 
   async destroy(id: string) {

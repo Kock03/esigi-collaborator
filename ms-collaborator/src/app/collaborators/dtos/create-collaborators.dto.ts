@@ -55,17 +55,17 @@ export class CreateCollaboratorsDto {
   @IsOptional()
   municipalInscription: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   site: string;
+
+  @IsOptional()
+  linkedin: string;
 
   @IsOptional()
   photo: string;
 
   @IsOptional()
   Address: AddressEntity;
-
-  @IsOptional()
-  linkedin: string;
 
   @IsOptional()
   Phone: PhoneEntity;

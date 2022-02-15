@@ -35,7 +35,6 @@ export class BankDataEntity {
   bankAccountDigit: number;
 
   @OneToOne(() => CollaboratorsEntity)
-  @JoinColumn()
   Collaborator: CollaboratorsEntity;
 
   @CreateDateColumn({ type: 'datetime' })

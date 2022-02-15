@@ -1,4 +1,10 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  HttpCode,
+  HttpException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
+import { HttpErrorByCode } from '@nestjs/common/utils/http-error-by-code.util';
 import { InjectRepository } from '@nestjs/typeorm';
 import { FindConditions, FindOneOptions, Repository } from 'typeorm';
 import { AddressEntity } from './address.entity';
@@ -14,8 +20,8 @@ export class AddressService {
 
   async findAll() {
     const addressWhiteCollaborator = await this.addressRepository
-    .createQueryBuilder('address')
-    .getMany();
+      .createQueryBuilder('address')
+      .getMany();
 
     return addressWhiteCollaborator;
   }
@@ -24,7 +30,7 @@ export class AddressService {
     conditions: FindConditions<AddressEntity>,
     options?: FindOneOptions<AddressEntity>,
   ) {
-    options = { relations: ['Collaborator']};
+    options = { relations: ['Collaborator'] };
     try {
       return await this.addressRepository.findOneOrFail(conditions, options);
     } catch (error) {
@@ -38,9 +44,11 @@ export class AddressService {
   }
 
   async update(id: string, data: UpdateAddressDto) {
-    const address = await this.addressRepository.findOneOrFail(id);
-    this.addressRepository.merge(address, data);
-    return await this.addressRepository.save(address);
+    const address = await this.addressRepository.findOneOrFail({ id });
+    if (!address) {
+      throw new HttpException('Not Found', 404);
+    }
+    return await this.addressRepository.save({ id: id, ...data });
   }
 
   async destroy(id: string) {
