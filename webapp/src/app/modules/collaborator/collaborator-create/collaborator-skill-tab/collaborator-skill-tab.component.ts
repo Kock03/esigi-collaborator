@@ -12,7 +12,7 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatTable } from '@angular/material/table';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 export interface skill {
-  tecnology: string;
+  technology: string;
   seniority: string;
   yearsExperience: string;
   currentPosition: boolean;
@@ -33,7 +33,7 @@ export class CollaboratorSkillTabComponent implements OnInit {
 
   skills: skill[] = [
     {
-      tecnology: 'Java',
+      technology: 'Java',
       yearsExperience: '',
       seniority: 'Senior',
       currentPosition: false,
@@ -74,7 +74,7 @@ export class CollaboratorSkillTabComponent implements OnInit {
 
   initForm(): void {
     this.skillForm = this.fb.group({
-      tecnology: ['Java'],
+      technology: ['Java'],
       seniority: ['Senior'],
       yearsExperience: ['5'],
       currentPosition: [true],
@@ -139,7 +139,7 @@ export class CollaboratorSkillDialog{
 
   initForm(): void {
     this.skillForm = this.fb.group({
-      tecnology:['Angular', [Validators.required, Validators.maxLength(50)]],
+      technology:['Angular', [Validators.required, Validators.maxLength(50)]],
       seniority: [1, Validators.required],
       yearsExperience: ['2', [Validators.required, Validators.maxLength(2)]],
       currentPosition: [true, Validators.required]

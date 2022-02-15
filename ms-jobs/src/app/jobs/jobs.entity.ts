@@ -1,16 +1,29 @@
-import { BeforeRemove, BeforeUpdate, Column, CreateDateColumn, DeleteDateColumn, Entity, JoinColumn, JoinTable, ManyToMany, OneToMany, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
-import { KnowledgesEntity } from "../knowledges/knowledges.entity";
-import { Schooling } from "./dtos/schooling.enum";
-import { Status } from "./dtos/status.enum";
-import { Type } from "./dtos/type.enum";
-import { TypeOfContract } from "./dtos/typeOfContract.enum";
-import { Workplace } from "./dtos/workplace.enum";
-import { SenioritiesEntity } from "../seniorities/seniorities.entity";
-import { LanguagesEntity } from "../languages/languages.entity";
+import {
+  BeforeRemove,
+  BeforeUpdate,
+  Column,
+  CreateDateColumn,
+  DeleteDateColumn,
+  Entity,
+  JoinColumn,
+  JoinTable,
+  ManyToMany,
+  OneToMany,
+  OneToOne,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
+import { KnowledgesEntity } from '../knowledges/knowledges.entity';
+import { Schooling } from './dtos/schooling.enum';
+import { Status } from './dtos/status.enum';
+import { Type } from './dtos/type.enum';
+import { TypeOfContract } from './dtos/typeOfContract.enum';
+import { Workplace } from './dtos/workplace.enum';
+import { SenioritiesEntity } from '../seniorities/seniorities.entity';
+import { LanguagesEntity } from '../languages/languages.entity';
 
 @Entity({ name: 'jobs' })
 export class JobsEntity {
-
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -77,7 +90,7 @@ export class JobsEntity {
   @OneToMany(() => LanguagesEntity, (languages) => languages.Job, {
     cascade: ['insert', 'update', 'soft-remove'],
     orphanedRowAction: 'delete',
-    eager: true
+    eager: true,
   })
   Languages: LanguagesEntity[];
 
@@ -87,15 +100,13 @@ export class JobsEntity {
   })
   Knowledges: KnowledgesEntity[];
 
-
   @OneToOne(() => SenioritiesEntity, {
     cascade: ['insert', 'update', 'remove'],
     orphanedRowAction: 'delete',
-    eager: true
-  } ) 
+    eager: true,
+  })
   @JoinColumn()
   Seniorities: SenioritiesEntity;
-
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
@@ -105,5 +116,4 @@ export class JobsEntity {
 
   @DeleteDateColumn({ name: 'deleted_at' })
   deletedAt: Date;
-
 }

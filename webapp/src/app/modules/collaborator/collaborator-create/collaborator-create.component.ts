@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { DocumentValidator } from 'src/app/validators/document.validator';
 import { CollaboratorProvider } from 'src/providers/collaborator.provider';
+import { SnackBarService } from 'src/services/snackbar.service';
 
 @Component({
   selector: 'app-collaborator-create',
@@ -32,6 +33,7 @@ export class CollaboratorCreateComponent implements OnInit {
     private collaboratorProvider: CollaboratorProvider,
     private http: HttpClient,
      private router: Router,
+     private snackbarService: SnackBarService,
     private route: ActivatedRoute
   ) {}
 
@@ -243,6 +245,8 @@ export class CollaboratorCreateComponent implements OnInit {
     }
     try {
       const collaborator = await this.collaboratorProvider.store(data);
+      this.snackbarService.successMessage('Colaborador Cadastrado Com Sucesso');
+      this.router.navigate(['collaborator/lista'])
     } catch (error) {
       console.log('ERROR 132' + error);
     }

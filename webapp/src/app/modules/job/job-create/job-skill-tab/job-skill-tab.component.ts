@@ -52,27 +52,32 @@ export class JobSkillTabComponent implements OnInit {
     });
   }
 
-  logTeste(teste: any) {}
   openDialog() {
     const dialogRef = this.dialog.open(JobDialogSkill, {
       width: '450px',
       height: '200px',
     });
 
+    console.log(this.knowledgeArray);
+
     dialogRef.afterClosed().subscribe((knowledge) => {
       if (knowledge) {
-        this.knowledgeArray.insert(0, this.fb.group(knowledge)),
-          this.knowledgeTable.renderRows();
+        if (!this.knowledgeArray.controls[0].value.name){
+          this.knowledgeArray.controls[0].patchValue(knowledge);
+        } else {
+          this.knowledgeArray.insert(0, this.fb.group(knowledge));
+        }
+        this.knowledgeTable.renderRows();
       }
     });
   }
 
-  saveKnowledge() {
-    const data = this.knowledgeForm.getRawValue();
-    this.knowledgeArray.insert(0, this.fb.group(data));
-    this.knowledgeTable.renderRows();
-    this.knowledgeForm.reset();
-  }
+  // saveKnowledge() {
+  //   const data = this.knowledgeForm.getRawValue();
+  //   this.knowledgeArray.insert(0, this.fb.group(data));
+  //   this.knowledgeTable.renderRows();
+  //   this.knowledgeForm.reset();
+  // }
 
   getKnowledge(knowledgeSelected: any, index: number) {
     const dialogRef = this.dialog.open(JobDialogSkill, {

@@ -72,9 +72,6 @@ export class JobCreateComponent implements OnInit {
     'icon',
   ];
 
-  get knowledgeArray() {
-    return this.jobForm.controls['Knowledges'] as FormArray;
-  }
   Date: any;
   jobForm!: FormGroup;
   step: number = 1;
@@ -86,6 +83,10 @@ export class JobCreateComponent implements OnInit {
 
   jobId!: string | null;
   job!: any;
+
+  get knowledgeArray() {
+    return this.jobForm.controls['Knowledges'] as FormArray;
+  }
 
   constructor(
     private fb: FormBuilder,
@@ -100,6 +101,7 @@ export class JobCreateComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     this.jobId = this.route.snapshot.paramMap.get('id');
     this.initForm();
+
     if (this.jobId !== 'novo') {
       await this.getJob();
       this.setFormValue();
@@ -181,7 +183,16 @@ export class JobCreateComponent implements OnInit {
         pleno: [false],
         senior: [false],
       }),
-      Knowledges: this.fb.array([new Array()]),
+      Knowledges: this.fb.array([
+        new Array(
+          this.fb.group({
+            id: null,
+            name: null,
+            yearsExperience: null,
+            typeOfPeriod: null,
+          })
+        ),
+      ]),
     });
   }
 

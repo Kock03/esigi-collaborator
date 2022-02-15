@@ -3,7 +3,7 @@ import { IsNotEmpty } from "class-validator";
 export class UpdateSkillsDto {
 
   @IsNotEmpty()
-  tecnology: string;
+  technology: string;
   
   @IsNotEmpty()
   seniority: Senioridade;

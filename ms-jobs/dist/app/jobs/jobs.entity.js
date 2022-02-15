@@ -109,7 +109,7 @@ __decorate([
     (0, typeorm_1.OneToMany)(() => languages_entity_1.LanguagesEntity, (languages) => languages.Job, {
         cascade: ['insert', 'update', 'soft-remove'],
         orphanedRowAction: 'delete',
-        eager: true
+        eager: true,
     }),
     __metadata("design:type", Array)
 ], JobsEntity.prototype, "Languages", void 0);
@@ -124,7 +124,7 @@ __decorate([
     (0, typeorm_1.OneToOne)(() => seniorities_entity_1.SenioritiesEntity, {
         cascade: ['insert', 'update', 'remove'],
         orphanedRowAction: 'delete',
-        eager: true
+        eager: true,
     }),
     (0, typeorm_1.JoinColumn)(),
     __metadata("design:type", seniorities_entity_1.SenioritiesEntity)

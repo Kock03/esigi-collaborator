@@ -4,7 +4,7 @@ import { CollaboratorsEntity } from "src/app/collaborators/collaborators.entity"
 export class CreateSkillsDto {
   
   @IsNotEmpty()
-  tecnology: string;
+  technology: string;
   
   @IsNotEmpty()
   seniority: Senioridade;

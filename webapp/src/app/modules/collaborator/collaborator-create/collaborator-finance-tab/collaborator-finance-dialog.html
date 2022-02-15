@@ -3,11 +3,17 @@
     <h2 mat-dialog-title class="title-dialog">Cadastro Financeiro</h2>
     <mat-dialog-content class="mat-typography">
       <form [formGroup]="financeForm" fxLayout="column">
-
         <mat-form-field fxFlex="35" appearance="outline">
           <mat-label>Data de Inclusão</mat-label>
-          <input matInput [matDatepicker]="picker" formControlName="dateInclusion" />
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <input
+            matInput
+            [matDatepicker]="picker"
+            formControlName="dateInclusion"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
 
@@ -33,22 +39,41 @@
 
         <mat-form-field appearance="outline">
           <mat-label>Valor</mat-label>
-          <input mask="00.000,00" matInput disableRipple formControlName="value" />
+          <input
+            mask="00.000,00"
+            matInput
+            disableRipple
+            formControlName="value"
+          />
         </mat-form-field>
 
         <mat-form-field fxFlex="50" appearance="outline">
           <mat-label>Data de Pagamento</mat-label>
-          <input matInput [matDatepicker]="paypicker" formControlName="payday" />
-          <mat-datepicker-toggle matSuffix [for]="paypicker"></mat-datepicker-toggle>
+          <input
+            matInput
+            [matDatepicker]="paypicker"
+            formControlName="payday"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="paypicker"
+          ></mat-datepicker-toggle>
           <mat-datepicker #paypicker></mat-datepicker>
         </mat-form-field>
       </form>
     </mat-dialog-content>
     <mat-dialog-actions>
       <div class="button-dialog">
-        <button mat-flat-button mat-dialog-close (click)="onNoClick()">Cancelar</button>
-        <button color="primary" [disabled]="financeForm.invalid" mat-flat-button [mat-dialog-close]="true"
-          cdkFocusInitial (click)="save()">
+        <button mat-flat-button mat-dialog-close (click)="onNoClick()">
+          Cancelar
+        </button>
+        <button
+          color="primary"
+          [disabled]="financeForm.invalid"
+          mat-flat-button
+          [mat-dialog-close]="true"
+          (click)="save()"
+        >
           Salvar
         </button>
       </div>

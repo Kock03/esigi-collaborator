@@ -14,8 +14,8 @@ export class SkillsEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ name: 'tecnology' })
-  tecnology: string;
+  @Column({ name: 'technology' })
+  technology: string;
 
   @Column({ type:'int'})
   seniority: Senioridade;
