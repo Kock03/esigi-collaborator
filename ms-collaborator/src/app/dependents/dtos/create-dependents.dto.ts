@@ -1,38 +1,49 @@
-import { IsNotEmpty } from "class-validator";
-import { CollaboratorsEntity } from "src/app/collaborators/collaborators.entity";
+import { ApiProperty } from '@nestjs/swagger';
+import { IsNotEmpty } from 'class-validator';
+import { CollaboratorsEntity } from 'src/app/collaborators/collaborators.entity';
 
 export class CreatedependentsDto {
+  @ApiProperty()
+  @IsNotEmpty()
+  type: Type;
 
-    @IsNotEmpty()
-    type: Type;
+  @ApiProperty()
+  @IsNotEmpty()
+  firstName: string;
 
-    @IsNotEmpty()
-    firstName: string;
+  @ApiProperty()
+  @IsNotEmpty()
+  lastName: string;
 
-    @IsNotEmpty()
-    lastName: string;
+  @ApiProperty()
+  @IsNotEmpty()
+  gender: Gender;
 
-    @IsNotEmpty()
-    gender: Gender;
+  @ApiProperty()
+  @IsNotEmpty()
+  cpf: string;
 
-    @IsNotEmpty()
-    cpf: string;
+  @ApiProperty()
+  @IsNotEmpty()
+  birthDate: Date;
 
-    @IsNotEmpty()
-    birthDate: Date;
+  @ApiProperty()
+  @IsNotEmpty()
+  phoneNumber: string;
 
-    @IsNotEmpty()
-    phoneNumber: string;
+  @ApiProperty()
+  @IsNotEmpty()
+  ddd: string;
 
-    @IsNotEmpty()
-    ddd: string;
+  @ApiProperty()
+  @IsNotEmpty()
+  ddi: string;
 
-    @IsNotEmpty()
-    ddi: string;
+  @ApiProperty()
+  @IsNotEmpty()
+  email: string;
 
-    @IsNotEmpty()
-    email: string;
-
-    @IsNotEmpty()
-    Collaborator: CollaboratorsEntity;
+  @ApiProperty()
+  @IsNotEmpty()
+  Collaborator: CollaboratorsEntity;
 }

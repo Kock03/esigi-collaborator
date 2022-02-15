@@ -1,10 +1,12 @@
-import { IsNotEmpty } from "class-validator";
+import { ApiProperty } from '@nestjs/swagger';
+import { IsNotEmpty } from 'class-validator';
 
 export class UpdateDocumentsDto {
+  @ApiProperty()
+  @IsNotEmpty()
+  name: string;
 
-    @IsNotEmpty()
-    name: string;
-
-    @IsNotEmpty()
-    file: string;
+  @ApiProperty()
+  @IsNotEmpty()
+  file: string;
 }

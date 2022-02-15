@@ -58,14 +58,14 @@ export class CollaboratorsService {
     return await this.collaboratorsRepository.save(collaborator);
   }
 
-
   async update(id: string, data: UpdateCollaboratorsDto) {
     const collaborator = await this.collaboratorsRepository.findOneOrFail({
       id,
     });
-    this.collaboratorsRepository.merge(collaborator, data);
-    return await this.collaboratorsRepository.save(collaborator);
-
+    if (!collaborator) {
+      throw new HttpException('Not Found', 404);
+    }
+    return await this.collaboratorsRepository.save({ id: id, ...data });
   }
 
   async destroy(id: string) {
