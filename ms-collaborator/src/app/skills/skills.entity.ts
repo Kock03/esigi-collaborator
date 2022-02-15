@@ -14,29 +14,29 @@ export class SkillsEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
+
   @Column({ name: 'technology' })
   technology: string;
 
-  @Column({ type:'int'})
+
+  @Column({ type: 'int' })
   seniority: Senioridade;
 
-  @Column({ name: 'years_experience' })
+  @Column()
   yearsExperience: number;
 
-  @Column({ name: 'current_position' })
+  @Column()
   currentPosition: boolean;
 
-  @ManyToOne(() => CollaboratorsEntity, collaborators => collaborators.Skills)
+  @ManyToOne(() => CollaboratorsEntity, (collaborators) => collaborators.Skills)
   Collaborator: CollaboratorsEntity;
 
-
-  @CreateDateColumn({ name: 'created_at', type: 'datetime' })
+  @CreateDateColumn({ type: 'datetime' })
   createdAt: Date;
 
-  @UpdateDateColumn({ name: 'updated_at', type: 'datetime' })
+  @UpdateDateColumn({ type: 'datetime' })
   updatedAt: Date;
 
-  @DeleteDateColumn({ name: 'deleted_at', type: 'datetime' })
+  @DeleteDateColumn({ type: 'datetime' })
   deletedAt: Date;
-
 }

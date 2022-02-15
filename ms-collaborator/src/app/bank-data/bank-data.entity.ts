@@ -17,34 +17,33 @@ export class BankDataEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ name: 'bank' })
+  @Column()
   bank: string;
 
-  @Column({ name: 'agency' })
+  @Column()
   agency: string;
 
-  @Column({ name: 'account_typet' })
+  @Column()
   accountType: AccountTypes;
 
-  @Column({ name: 'account_number', type: 'int' })
+  @Column({ type: 'int' })
   accountNumber: number;
 
-  @Column({ name: 'digit', type: 'int' })
+  @Column({ type: 'int' })
   digit: number;
 
-  @Column({ name: 'bank_account_digit', type: 'int' })
+  @Column({ type: 'int' })
   bankAccountDigit: number;
 
-  @ManyToOne(() => CollaboratorsEntity, collaborators => collaborators.BankData)
-  Collaborator: CollaboratorsEntity; 
+  @OneToOne(() => CollaboratorsEntity)
+  Collaborator: CollaboratorsEntity;
 
-  @CreateDateColumn({ name: 'created_at', type: 'datetime' })
+  @CreateDateColumn({ type: 'datetime' })
   createdAt: Date;
 
-  @UpdateDateColumn({ name: 'updated_at', type: 'datetime' })
+  @UpdateDateColumn({ type: 'datetime' })
   updatedAt: Date;
 
-  @DeleteDateColumn({ name: 'deleted_at', type: 'datetime' })
+  @DeleteDateColumn({ type: 'datetime' })
   deletedAt: Date;
-
 }

@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { HttpException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { FindConditions, FindOneOptions, Repository } from 'typeorm';
 import { BankDataEntity } from './bank-data.entity';
@@ -14,8 +14,8 @@ export class BankDataService {
 
   async findAll() {
     const banksWhiteCollaborator = await this.bankDataRepository
-    .createQueryBuilder('bank_data')
-    .getMany();
+      .createQueryBuilder('bank_data')
+      .getMany();
 
     return banksWhiteCollaborator;
   }
@@ -24,9 +24,12 @@ export class BankDataService {
     conditions: FindConditions<BankDataEntity>,
     options?: FindOneOptions<BankDataEntity>,
   ) {
-    options = { relations: ['Collaborator']};
+    options = { relations: ['Collaborator'] };
     try {
-      return await (await this.bankDataRepository.findOneOrFail(conditions, options));
+      return await await this.bankDataRepository.findOneOrFail(
+        conditions,
+        options,
+      );
     } catch (error) {
       throw new NotFoundException(error.message);
     }
@@ -38,13 +41,15 @@ export class BankDataService {
   }
 
   async update(id: string, data: UpdateBankDataDto) {
-    const bank = await this.bankDataRepository.findOneOrFail({id});
-    this.bankDataRepository.merge(bank, data);
-    return await this.bankDataRepository.save(bank);
+    const bank = await this.bankDataRepository.findOneOrFail({ id });
+    if (!bank) {
+      throw new HttpException('Not Found', 404);
+    }
+    return await this.bankDataRepository.save({ id: id, ...data });
   }
 
   async destroy(id: string) {
-   this.bankDataRepository.findOneOrFail({ id });
+    this.bankDataRepository.findOneOrFail({ id });
     return await this.bankDataRepository.softDelete({ id });
   }
 }

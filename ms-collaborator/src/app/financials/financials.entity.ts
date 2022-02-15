@@ -8,37 +8,41 @@ import {
   DeleteDateColumn,
   OneToOne,
   JoinColumn,
-
   ManyToOne,
 } from 'typeorm';
 import { ContractTypes } from './dtos/contract-types.enum';
 
-@Entity({ name: 'financials' })
+@Entity()
 export class FinancialsEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @Column({ name: 'contract_type', type: 'int' })
+  @Column({ type: 'int' })
   contractType: ContractTypes;
 
-  @Column({ name: 'value' })
+  @Column()
   value: number;
 
-  @Column({ name: 'reason', type: 'int' })
+  @Column({ type: 'int' })
   reason: Reasons;
-
-  @Column()
-  dateInclusion: Date;
-
-  @ManyToOne(() => CollaboratorsEntity, collaborator => collaborator.Financials)
-  Collaborator: CollaboratorsEntity;
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
 
-  @UpdateDateColumn({ name: 'updated_at', type: 'datetime' })
+  @ManyToOne(
+    () => CollaboratorsEntity,
+    (collaborator) => collaborator.Financials,
+    { onDelete: 'CASCADE' },
+  ) // specify inverse side as a second parameter
+  Collaborator: CollaboratorsEntity;
+
+  @CreateDateColumn()
+  dateInclusion: Date;
+
+  @UpdateDateColumn({ type: 'datetime' })
   updatedAt: Date;
 
-  @DeleteDateColumn({ name: 'deleted_at', type: 'datetime' })
+  @DeleteDateColumn({ type: 'datetime' })
   deletedAt: Date;
 }

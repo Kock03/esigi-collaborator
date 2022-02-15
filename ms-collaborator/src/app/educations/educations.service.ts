@@ -1,9 +1,9 @@
-import { Injectable, NotFoundException } from "@nestjs/common";
-import { InjectRepository } from "@nestjs/typeorm";
-import { FindConditions, FindOneOptions, Repository } from "typeorm";
-import { CreateEducationsDto } from "./dtos/create-educations.dto";
-import { UpdateEducationsDto } from "./dtos/update-educations.dto";
-import { EducationsEntity } from "./educations.entity";
+import { HttpException, Injectable, NotFoundException } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { FindConditions, FindOneOptions, Repository } from 'typeorm';
+import { CreateEducationsDto } from './dtos/create-educations.dto';
+import { UpdateEducationsDto } from './dtos/update-educations.dto';
+import { EducationsEntity } from './educations.entity';
 
 @Injectable()
 export class EducationsService {
@@ -14,16 +14,17 @@ export class EducationsService {
 
   async findAll() {
     const educationsWhiteCollaborator = await this.educationsRepository
-    .createQueryBuilder('educations')
-    .getMany();
+      .createQueryBuilder('educations')
+      .getMany();
 
     return educationsWhiteCollaborator;
   }
 
   async findOneOrFail(
     conditions: FindConditions<EducationsEntity>,
-    options?: FindOneOptions<EducationsEntity>) {
-      options = { relations: ['Collaborator']};
+    options?: FindOneOptions<EducationsEntity>,
+  ) {
+    options = { relations: ['Collaborator'] };
     try {
       return await this.educationsRepository.findOneOrFail(conditions, options);
     } catch (error) {
@@ -32,14 +33,16 @@ export class EducationsService {
   }
 
   async store(data: CreateEducationsDto) {
-    const financial = this.educationsRepository.create(data);
-    return await this.educationsRepository.save(financial);
+    const education = this.educationsRepository.create(data);
+    return await this.educationsRepository.save(education);
   }
 
   async update(id: string, data: UpdateEducationsDto) {
-    const education = await this.educationsRepository.findOneOrFail({id});
-    this.educationsRepository.merge(education, data);
-    return await this.educationsRepository.save(education);
+    const education = await this.educationsRepository.findOneOrFail({ id });
+    if (!education) {
+      throw new HttpException('Not Found', 404);
+    }
+    return await this.educationsRepository.save({ id: id, ...data });
   }
 
   async destroy(id: string) {

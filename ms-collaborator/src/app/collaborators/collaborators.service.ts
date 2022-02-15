@@ -1,5 +1,6 @@
 import { HttpException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { DocumentValidator } from 'src/validators/document.validator';
 import { FindConditions, FindOneOptions, Repository } from 'typeorm';
 import { CollaboratorsEntity } from './collaborators.entity';
 import { CreateCollaboratorsDto } from './dtos/create-collaborators.dto';
@@ -10,7 +11,7 @@ export class CollaboratorsService {
   constructor(
     @InjectRepository(CollaboratorsEntity)
     private readonly collaboratorsRepository: Repository<CollaboratorsEntity>,
-  ) { }
+  ) {}
 
   async findAll() {
     const collaboratorsWhiteAll = await this.collaboratorsRepository
@@ -22,7 +23,6 @@ export class CollaboratorsService {
 
   async findOneOrFail(
     conditions: FindConditions<CollaboratorsEntity>,
-
 
     options?: FindOneOptions<CollaboratorsEntity>,
   ) {
@@ -50,19 +50,21 @@ export class CollaboratorsService {
   }
 
   async store(data: CreateCollaboratorsDto) {
+    const invalidCpf = DocumentValidator.isValidCpf(data.cpf);
+    if (invalidCpf) {
+      throw new HttpException('O CPF é inválido', 404);
+    }
     const collaborator = this.collaboratorsRepository.create(data);
     return await this.collaboratorsRepository.save(collaborator);
   }
 
-  async update(id: string, data: UpdateCollaboratorsDto) {
 
+  async update(id: string, data: UpdateCollaboratorsDto) {
     const collaborator = await this.collaboratorsRepository.findOneOrFail({
       id,
     });
-    if (!collaborator) {
-      throw new HttpException('Not found', 404);
-    }
-    return await this.collaboratorsRepository.save({ id: id, ...data });
+    this.collaboratorsRepository.merge(collaborator, data);
+    return await this.collaboratorsRepository.save(collaborator);
 
   }
 

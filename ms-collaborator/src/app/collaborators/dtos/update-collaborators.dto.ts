@@ -53,7 +53,7 @@ export class UpdateCollaboratorsDto {
   @IsOptional()
   municipalInscription: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   site: string;
 
   @IsNotEmpty()
@@ -81,7 +81,7 @@ export class UpdateCollaboratorsDto {
   Educations: EducationsEntity[];
 
   @IsOptional()
-  BankData: BankDataEntity[];
+  BankData: BankDataEntity;
 
   @IsOptional()
   Dependents: DependentsEntity[];

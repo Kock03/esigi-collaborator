@@ -15,16 +15,16 @@ export class EducationsEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ name: 'schooling' })
+  @Column()
   schooling: Schooling;
 
-  @Column({ name: 'course' })
+  @Column()
   course: string;
 
-  @Column({ name: 'institution' })
+  @Column()
   institution: string;
 
-  @Column({ name: 'situation', type: 'int' })
+  @Column({ type: 'int' })
   situation: Situation;
 
   @ManyToOne(
@@ -33,12 +33,12 @@ export class EducationsEntity {
   )
   Collaborator: CollaboratorsEntity;
 
-  @CreateDateColumn({ name: 'created_at' })
+  @CreateDateColumn()
   createdAt: Date;
 
-  @UpdateDateColumn({ name: 'updated_at' })
+  @UpdateDateColumn()
   updatedAt: Date;
 
-  @DeleteDateColumn({ name: 'deleted_at' })
+  @DeleteDateColumn()
   deletedAt: Date;
 }

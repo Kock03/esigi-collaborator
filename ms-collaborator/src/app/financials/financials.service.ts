@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { HttpException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { FindConditions, FindOneOptions, Repository } from 'typeorm';
 import { CreateFinancialsDto } from './dtos/create-financials.dto';
@@ -14,8 +14,8 @@ export class FinancialsService {
 
   async findAll() {
     const financialsWhiteCollaborator = await this.financialsRepository
-    .createQueryBuilder('financials')
-    .getMany();
+      .createQueryBuilder('financials')
+      .getMany();
 
     return financialsWhiteCollaborator;
   }
@@ -24,7 +24,7 @@ export class FinancialsService {
     conditions: FindConditions<FinancialsEntity>,
     options?: FindOneOptions<FinancialsEntity>,
   ) {
-    options = { relations: ['Collaborator']};
+    options = { relations: ['Collaborator'] };
     try {
       return await this.financialsRepository.findOneOrFail(conditions, options);
     } catch (error) {
@@ -38,9 +38,11 @@ export class FinancialsService {
   }
 
   async update(id: string, data: UpdateFinancialsDto) {
-    const financial = await this.financialsRepository.findOneOrFail({id});
-    this.financialsRepository.merge(financial, data);
-    return await this.financialsRepository.save(financial);
+    const financial = await this.financialsRepository.findOneOrFail({ id });
+    if (!financial) {
+      throw new HttpException('Not Found', 404);
+    }
+    return await this.financialsRepository.save({ id: id, ...data });
   }
 
   async destroy(id: string) {

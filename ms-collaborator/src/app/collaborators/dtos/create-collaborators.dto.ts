@@ -1,11 +1,19 @@
-import { Optional } from "@nestjs/common";
-import { IsNotEmpty, IsOptional } from "class-validator";
+import { Optional } from '@nestjs/common';
+import {
+  IsNotEmpty,
+  IsNumber,
+  IsOptional,
+  Length,
+  MaxLength,
+  maxLength,
+  MinLength,
+} from 'class-validator';
 import { AddressEntity } from 'src/app/address/address.entity';
 import { BankDataEntity } from 'src/app/bank-data/bank-data.entity';
-import { DocumentsEntity } from "src/app/documents/documents.entity";
-import { EducationsEntity } from "src/app/educations/educations.entity";
+import { DocumentsEntity } from 'src/app/documents/documents.entity';
+import { EducationsEntity } from 'src/app/educations/educations.entity';
 import { FinancialsEntity } from 'src/app/financials/financials.entity';
-import { LanguagesEntity } from "src/app/languages/languages.entity";
+import { LanguagesEntity } from 'src/app/languages/languages.entity';
 import { PhoneEntity } from 'src/app/phone/phone.entity';
 import { SkillsEntity } from 'src/app/skills/skills.entity';
 import { CollaboratorTypes } from './types.enum';
@@ -14,7 +22,6 @@ import { DependentsEntity } from "src/app/dependents/dependents.entity";
 import { FeedbacksEntity } from "src/app/feedbacks/feedbacks.entity";
 
 export class CreateCollaboratorsDto {
-
   @IsNotEmpty()
   firstNameCorporateName: string;
 
@@ -60,17 +67,17 @@ export class CreateCollaboratorsDto {
   @IsOptional()
   municipalInscription: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   site: string;
+
+  @IsOptional()
+  linkedin: string;
 
   @IsOptional()
   photo: string;
 
   @IsOptional()
   Address: AddressEntity;
-
-  @IsOptional()
-  linkedin: string;
 
   @IsOptional()
   Phone: PhoneEntity;
@@ -88,7 +95,7 @@ export class CreateCollaboratorsDto {
   Educations: EducationsEntity[];
 
   @IsOptional()
-  BankData: BankDataEntity[];
+  BankData: BankDataEntity;
 
   @IsOptional()
   Financials: FinancialsEntity[];
@@ -99,6 +106,3 @@ export class CreateCollaboratorsDto {
   @IsOptional()
   Feedbacks: FeedbacksEntity[];
 }
-
-
-
