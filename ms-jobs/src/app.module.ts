@@ -8,6 +8,10 @@ import { JobsModule } from './app/jobs/jobs.module';
 import { KnowledgesModule } from './app/knowledges/knowledges.module';
 import { LanguagesModule } from './app/languages/languages.module';
 import { SenioritiesModule } from './app/seniorities/seniorities.module';
+import { BehavioralInterviewsModule } from './behavioral-interviews/behavioral-interviews.module';
+import { ClientInterviewsModule } from './client-interviews/client-interviews.module';
+import { TechnicalInterviewsModule } from './technical-interviews/technical-interviews.module';
+import { BehavioralInterviewsModule } from './behavioral-interviews/behavioral-interviews.module';
 
 @Module({
   imports: [
@@ -27,6 +31,9 @@ import { SenioritiesModule } from './app/seniorities/seniorities.module';
     KnowledgesModule,
     SenioritiesModule,
     LanguagesModule,
+    BehavioralInterviewsModule,
+    TechnicalInterviewsModule,
+    ClientInterviewsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
