@@ -10,15 +10,9 @@
 
   </div>
 
-  <div class="envolti-table mat-elevation-z8" fxLayout="column">
+  <div class="envolti-table mat-elevation-z8" fxLayout="column" *ngIf="filteredJobList">
     <table mat-table [dataSource]="filteredJobList">
-      <ng-container matColumnDef="iconAdd">
-        <th mat-header-cell *matHeaderCellDef>
-          <button class="edit-button" mat-flat-button color="primary"  (click)="createJob()">
-            <mat-icon>add</mat-icon>
-          </button>
-        </th>
-      </ng-container>
+   
       <ng-container matColumnDef="jobName">
         <th mat-header-cell *matHeaderCellDef>Nome da Vaga</th>
         <td mat-cell *matCellDef="let job">
@@ -67,7 +61,11 @@
       </ng-container>
 
       <ng-container matColumnDef="icon">
-        <th mat-header-cell *matHeaderCellDef></th>
+        <th mat-header-cell *matHeaderCellDef>
+          <button class="edit-button" mat-flat-button color="primary"  (click)="createJob()">
+            <mat-icon>add</mat-icon>
+          </button>
+        </th>
         <td class="button-tab" mat-cell *matCellDef="let job">
           <button class="table-button" mat-button (click)="editJob(job.id)">
             <mat-icon>edit</mat-icon>

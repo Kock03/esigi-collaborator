@@ -48,6 +48,8 @@ export class JobSkillTabComponent implements OnInit {
 
   ngOnInit(): void {
     this.jobForm.valueChanges.subscribe((res) => {
+      // console.log("🚀 ~ file: job-skill-tab.component.ts ~ line 52 ~ JobSkillTabComponent ~ this.jobForm.valueChanges.subscribe ~ this.knowledgeArray", this.knowledgeArray)
+      console.log("🚀 ~ file: job-skill-tab.component.ts ~ line 53 ~ JobSkillTabComponent ~ this.jobForm.valueChanges.subscribe ~ this.knowledgeArray.value", this.knowledgeArray.value)
       this.data = this.knowledgeArray.value;
     });
   }
@@ -62,11 +64,12 @@ export class JobSkillTabComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((knowledge) => {
       if (knowledge) {
-        if (!this.knowledgeArray.controls[0].value.name){
-          this.knowledgeArray.controls[0].patchValue(knowledge);
-        } else {
-          this.knowledgeArray.insert(0, this.fb.group(knowledge));
-        }
+        this.knowledgeArray.insert(0, this.fb.group(knowledge));
+        // if (!this.knowledgeArray.controls[0].value.name){
+        //   this.knowledgeArray.controls[0].patchValue(knowledge);
+        // } else {
+        //   this.knowledgeArray.insert(0, this.fb.group(knowledge));
+        // }
         this.knowledgeTable.renderRows();
       }
     });

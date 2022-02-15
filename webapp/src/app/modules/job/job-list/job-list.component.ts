@@ -40,11 +40,10 @@ export class JobListComponent implements OnInit {
     'requester',
     'openingDate',
     'status',
-    'iconAdd',
+    'icon',
   ];
   jobs!: Job[];
   filteredJobList!: any[];
-
 
   constructor(
     private snackbarService: SnackBarService,
@@ -56,8 +55,7 @@ export class JobListComponent implements OnInit {
   }
 
   async ngOnInit() {
-    this.getJobList();
-    this.filteredJobList = this.jobs;
+    await this.getJobList();
     this.initFilter();
   }
 
@@ -68,6 +66,7 @@ export class JobListComponent implements OnInit {
   async getJobList() {
     try {
       this.filteredJobList = this.jobs = await this.jobProvider.findAll();
+      console.log("🚀 ~ file: job-list.component.ts ~ line 69 ~ JobListComponent ~ getJobList ~  this.filteredJobList",  this.filteredJobList)
     } catch (error) {
       console.error(error);
     }

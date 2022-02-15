@@ -100,13 +100,11 @@ export class JobCreateComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.jobId = this.route.snapshot.paramMap.get('id');
-    this.initForm();
-
     if (this.jobId !== 'novo') {
       await this.getJob();
+      this.initForm();
       this.setFormValue();
     }
-
     this.step = 1;
   }
 
@@ -183,16 +181,7 @@ export class JobCreateComponent implements OnInit {
         pleno: [false],
         senior: [false],
       }),
-      Knowledges: this.fb.array([
-        new Array(
-          this.fb.group({
-            id: null,
-            name: null,
-            yearsExperience: null,
-            typeOfPeriod: null,
-          })
-        ),
-      ]),
+      Knowledges: this.fb.array([this.job.Knowledges]),
     });
   }
 
@@ -202,10 +191,9 @@ export class JobCreateComponent implements OnInit {
       const languages = this.jobForm.controls['Languages'] as FormGroup;
       languages.patchValue(this.job.Languages[0]);
     }
-    if (!this.job.Knowledges[0]) {
-      const knowledge = this.jobForm.controls['Knowledges'] as FormArray;
-      knowledge.value.splice(0, 1);
-    }
+    // this.job.Knowledges.forEach((element: any) => {
+    //   this.knowledgeArray.insert(0, element);
+    // });
   }
 
   handleStep(number: number): void {
@@ -228,6 +216,7 @@ export class JobCreateComponent implements OnInit {
   }
 
   async saveEditJob() {
+    console.log(this.jobForm)
     let data = this.jobForm.getRawValue();
     try {
       data.Languages = new Array(data.Languages);
