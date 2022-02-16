@@ -8,10 +8,6 @@
         <mat-icon matSuffix style="cursor: pointer">search</mat-icon>
       </mat-form-field>
     </form>
-
-    <button mat-flat-button class="new-btn" color="primary" (click)="createCollaborator()">
-      Novo
-    </button>
   </div>
 
   <section id="collaboratorList" fxLayout="column">
@@ -25,7 +21,8 @@
       <ng-container matColumnDef="collaborator">
         <th mat-header-cell *matHeaderCellDef>Colaborador</th>
         <td mat-cell *matCellDef="let collaborator">
-          {{ collaborator.firstNameCorporateName }} {{ collaborator.lastNameFantasyName }}
+          {{ collaborator.firstNameCorporateName }}
+          {{ collaborator.lastNameFantasyName }}
         </td>
       </ng-container>
 
@@ -53,23 +50,44 @@
       <ng-container matColumnDef="status">
         <th mat-header-cell *matHeaderCellDef>Status</th>
         <td mat-cell *matCellDef="let collaborator">
-          {{collaborator.status}}
+          {{ collaborator.status }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="icon">
+        <th mat-header-cell *matHeaderCellDef>
+          <button
+            class="edit-button"
+            mat-flat-button
+            color="primary"
+            (click)="createCollaborator()"
+          >
+            <mat-icon>add</mat-icon>
+          </button>
+        </th>
         <th mat-header-cell *matHeaderCellDef></th>
         <td class="button-tab" mat-cell *matCellDef="let collaborator">
-          <button class="table-button" mat-button (click)="editCollaborator(collaborator.id)">
+          <button
+            class="table-button"
+            mat-button
+            (click)="editCollaborator(collaborator.id)"
+          >
             <mat-icon>edit</mat-icon>
           </button>
-          <button class="table-button" mat-button (click)="deleteCollaborator(index)">
+          <button
+            class="table-button"
+            mat-button
+            (click)="deleteCollaborator(index)"
+          >
             <mat-icon>delete</mat-icon>
           </button>
         </td>
       </ng-container>
 
-      <tr mat-header-row *matHeaderRowDef="displayedCollaborator; sticky: true"></tr>
+      <tr
+        mat-header-row
+        *matHeaderRowDef="displayedCollaborator; sticky: true"
+      ></tr>
       <tr mat-row *matRowDef="let row; columns: displayedCollaborator"></tr>
     </table>
   </div>

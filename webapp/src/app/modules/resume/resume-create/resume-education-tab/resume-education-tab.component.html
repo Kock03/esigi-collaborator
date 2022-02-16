@@ -5,13 +5,6 @@
         <ng-template mat-tab-label> Escolaridade </ng-template>
         <div fxLayout="row">
           <div class="envolti-table mat-elevation-z8" fxLayout="column">
-            <ng-container matColumnDef="iconAdd">
-              <th mat-header-cell *matHeaderCellDef>
-                <button class="edit-button" mat-flat-button color="primary"  (click)="openDialogEducation()">
-                  <mat-icon>add</mat-icon>
-                </button>
-              </th>
-            </ng-container>
             <table
               mat-table
               [dataSource]="resumeForm.controls['Educations'].value"
@@ -58,6 +51,16 @@
               </ng-container>
 
               <ng-container matColumnDef="icon">
+                <th mat-header-cell *matHeaderCellDef>
+                  <button
+                    class="edit-button"
+                    mat-flat-button
+                    color="primary"
+                    (click)="openDialogEducation()"
+                  >
+                    <mat-icon>add</mat-icon>
+                  </button>
+                </th>
                 <th mat-header-cell *matHeaderCellDef></th>
                 <td
                   class="button-tab"
@@ -90,7 +93,7 @@
                 *matRowDef="let row; columns: displayedEducation"
               ></tr>
             </table>
-          </div> 
+          </div>
         </div>
       </mat-tab>
 
@@ -130,6 +133,16 @@
               </ng-container>
 
               <ng-container matColumnDef="icon">
+                <th mat-header-cell *matHeaderCellDef>
+                  <button
+                    class="edit-button"
+                    mat-flat-button
+                    color="primary"
+                    (click)="openDialogLanguage()"
+                  >
+                    <mat-icon>add</mat-icon>
+                  </button>
+                </th>
                 <th mat-header-cell *matHeaderCellDef></th>
                 <td
                   class="button-tab"
@@ -160,15 +173,6 @@
               <tr mat-row *matRowDef="let row; columns: displayedLanguage"></tr>
             </table>
           </div>
-          <button
-            fxFlex="5"
-            class="edit-button"
-            mat-flat-button
-            color="primary"
-            (click)="openDialogLanguage()"
-          >
-            <mat-icon>add</mat-icon>
-          </button>
         </div>
       </mat-tab>
     </mat-tab-group>

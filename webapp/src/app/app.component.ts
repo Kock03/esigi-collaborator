@@ -40,7 +40,7 @@ export class AppComponent {
       name: 'Curriculo',
       icon: 'description',
       selected: false,
-      action: '/curriculo/novo',
+      action: '/curriculo/lista',
     },
     {
       name: 'Configurações',

@@ -1,5 +1,5 @@
 import { formatDate } from '@angular/common';
-import { Component, Injectable, Input, OnInit } from '@angular/core';
+import { Component, Injectable, Input, OnInit, ViewEncapsulation} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DateAdapter, MAT_DATE_FORMATS, NativeDateAdapter } from '@angular/material/core';
 import { Router } from '@angular/router';
@@ -32,7 +32,8 @@ export class PickDateAdapter extends NativeDateAdapter {
   providers: [
     { provide: DateAdapter, useClass: PickDateAdapter },
     { provide: MAT_DATE_FORMATS, useValue: PICK_FORMATS }
-  ]
+  ],
+  encapsulation: ViewEncapsulation.None,
 })
 export class FeedbackCreateComponent implements OnInit {
 
