@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty } from 'class-validator';
+import { Seniority } from './seniority.enun';
 
 export class UpdateSkillsDto {
   @ApiProperty()
@@ -8,7 +9,7 @@ export class UpdateSkillsDto {
 
   @ApiProperty()
   @IsNotEmpty()
-  seniority: Senioridade;
+  seniority: Seniority;
 
   @ApiProperty()
   @IsNotEmpty()

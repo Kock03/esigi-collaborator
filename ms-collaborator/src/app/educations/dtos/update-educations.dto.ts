@@ -1,6 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty } from 'class-validator';
 import { Schooling } from './schooling.enum';
+import { Situation } from './situation.enum';
 
 export class UpdateEducationsDto {
   @ApiProperty()

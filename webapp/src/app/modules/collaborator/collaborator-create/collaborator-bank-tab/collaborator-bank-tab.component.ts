@@ -16,7 +16,7 @@ import {
 } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
 
-export interface Bank {
+export interface BankData {
   bank: string;
   agency: string;
   accountType: string;
@@ -46,19 +46,6 @@ export class CollaboratorBankTabComponent implements OnInit {
     'icon',
   ];
 
-  banks: Bank[] = [
-    {
-      bank: 'Banco do Brasil',
-      agency: '',
-      accountType: 'Conta Corrente',
-      accountNumber: '',
-      digit: '',
-      bankAccountDigit: '',
-    },
-  ];
-
-  selectedIndex = 0;
-
   bankForm!: FormGroup;
 
   index: any = null;
@@ -68,10 +55,9 @@ export class CollaboratorBankTabComponent implements OnInit {
     return this.collaboratorForm.controls['BankData'] as FormArray;
   }
 
-  constructor(private fb: FormBuilder, public dialog: MatDialog) {}
+  constructor(private fb: FormBuilder, public dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.initForm();
     this.collaboratorForm.valueChanges.subscribe((res) => {
       console.log(res);
 
@@ -86,20 +72,14 @@ export class CollaboratorBankTabComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((bank) => {
       if (bank) {
-        this.bankArray.insert(0, this.fb.group(bank));
+
+        if (!this.bankArray.controls[0].value.name) {
+          this.bankArray.controls[0].patchValue(bank);
+        } else {
+          this.bankArray.insert(0, this.fb.group(bank));
+        }
         this.bankTable.renderRows();
       }
-    });
-  }
-
-  initForm(): void {
-    this.bankForm = this.fb.group({
-      bank: ['Banco do Brasil', Validators.required],
-      agency: ['5464645', Validators.required],
-      accountType: ['Conta Corrente', Validators.required],
-      accountNumber: ['4365634', Validators.required],
-      digit: ['4', Validators.required],
-      bankAccountDigit: ['4', Validators.required],
     });
   }
 
@@ -107,12 +87,11 @@ export class CollaboratorBankTabComponent implements OnInit {
     this.onChange.next(true);
   }
 
-  saveBank() {
+  /*saveBank() {
     const data = this.bankForm.getRawValue();
     this.bankArray.insert(0, this.fb.group(data));
     this.bankTable.renderRows();
-    this.bankForm.reset();
-  }
+    this.bankFor*/
 
   getBank(bankSelected: any, index: number) {
     const dialogRef = this.dialog.open(CollaboratorBankDialog, {
@@ -124,13 +103,6 @@ export class CollaboratorBankTabComponent implements OnInit {
     dialogRef.afterClosed().subscribe((bank) => {
       this.bankArray.controls[this.index].setValue(bank);
     });
-  }
-
-  editbank() {
-    this.bankArray.at(this.index).setValue(this.bankForm.getRawValue());
-    this.bankTable.renderRows();
-    this.bankForm.reset();
-    this.index = null;
   }
 
   deleteBank(index: number) {
@@ -152,7 +124,7 @@ export class CollaboratorBankDialog {
     public dialogRef: MatDialogRef<CollaboratorBankDialog>,
     private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: { bankSelected: any }
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.initForm();

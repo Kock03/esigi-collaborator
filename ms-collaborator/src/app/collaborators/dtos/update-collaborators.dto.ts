@@ -12,6 +12,7 @@ import { MaritalStatus } from './MaritalStatus.enum';
 import { DependentsEntity } from 'src/app/dependents/dependents.entity';
 import { FeedbacksEntity } from 'src/app/feedbacks/feedbacks.entity';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { Gender } from './gender.enum';
 
 export class UpdateCollaboratorsDto {
   @ApiProperty()

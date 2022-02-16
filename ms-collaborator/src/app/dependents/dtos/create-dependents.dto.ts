@@ -1,6 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty } from 'class-validator';
 import { CollaboratorsEntity } from 'src/app/collaborators/collaborators.entity';
+import { Gender } from 'src/app/collaborators/dtos/gender.enum';
+import { Type } from './type.enum';
 
 export class CreatedependentsDto {
   @ApiProperty()

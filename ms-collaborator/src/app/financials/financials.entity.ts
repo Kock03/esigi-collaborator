@@ -10,6 +10,7 @@ import {
   JoinColumn,
   ManyToOne,
 } from 'typeorm';
+import { Reasons } from './dtos/contract-reasons.enum';
 import { ContractTypes } from './dtos/contract-types.enum';
 
 @Entity()

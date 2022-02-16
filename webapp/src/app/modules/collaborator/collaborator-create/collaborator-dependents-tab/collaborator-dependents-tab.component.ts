@@ -43,23 +43,8 @@ export class CollaboratorDependentsTabComponent implements OnInit {
     'icon'
   ];
 
-  dependents: Dependent[] = [
-    {
-      type: 'string',
-      firstName: 'string',
-      lastName: 'string',
-      gender: 'string',
-      cpf: 'string',
-      birthDate: 'string',
-      ddi: 'string',
-      ddd: 'string',
-      phoneNumber: 'string',
-      email: 'string',
-    },
-  ];
 
-  selectedIndex = 0;
-
+  data: [] = [];
   dependentForm!: FormGroup;
 
   index: any = null;
@@ -72,7 +57,11 @@ export class CollaboratorDependentsTabComponent implements OnInit {
   constructor(private fb: FormBuilder, public dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.initForm();
+    this.collaboratorForm.valueChanges.subscribe((res) => {
+      console.log(res);
+
+      this.data = this.dependentArray.value;
+    });
   }
   openDialog() {
     const dialogRef = this.dialog.open(CollaboradorDependentsDialog, {
@@ -82,37 +71,21 @@ export class CollaboratorDependentsTabComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((dependents) => {
       if (dependents) {
-        this.dependentArray.insert(0, this.fb.group(dependents));
+        if (!this.dependentArray.controls[0].value) {
+          this.dependentArray.controls[0].patchValue(dependents);
+        } else {
+          this.dependentArray.insert(0, this.fb.group(dependents));
+        }
         this.dependentTable.renderRows();
       }
     });
   }
 
-  initForm(): void {
-    this.dependentForm = this.fb.group({
-      type: ['Banco do Brasil', Validators.required],
-      firstName: ['5464645', Validators.required],
-      lastName: ['Conta Corrente', Validators.required],
-      gender: ['4365634', Validators.required],
-      cpf: ['4', Validators.required],
-      birthDate: ['4', Validators.required],
-      ddi: ['4', Validators.required],
-      ddd: ['4', Validators.required],
-      phoneNumber: ['4', Validators.required],
-      email: ['4', Validators.required],
-    });
-  }
 
   next() {
     this.onChange.next(true);
   }
 
-  saveDependents() {
-    const data = this.dependentForm.getRawValue();
-    this.dependentArray.insert(0, this.fb.group(data));
-    this.dependentTable.renderRows();
-    this.dependentForm.reset();
-  }
 
   getDependents(dependentsSelected: any, index: number) {
     const dialogRef = this.dialog.open(CollaboradorDependentsDialog, {

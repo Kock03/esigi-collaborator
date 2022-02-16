@@ -9,6 +9,7 @@ import {
 } from 'typeorm';
 import { CollaboratorsEntity } from '../collaborators/collaborators.entity';
 import { Schooling } from './dtos/schooling.enum';
+import { Situation } from './dtos/situation.enum';
 
 @Entity({ name: 'educations' })
 export class EducationsEntity {

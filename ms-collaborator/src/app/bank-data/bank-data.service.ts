@@ -10,7 +10,7 @@ export class BankDataService {
   constructor(
     @InjectRepository(BankDataEntity)
     private readonly bankDataRepository: Repository<BankDataEntity>,
-  ) {}
+  ) { }
 
   async findAll() {
     const banksWhiteCollaborator = await this.bankDataRepository
@@ -26,7 +26,7 @@ export class BankDataService {
   ) {
     options = { relations: ['Collaborator'] };
     try {
-      return await await this.bankDataRepository.findOneOrFail(
+      return await this.bankDataRepository.findOneOrFail(
         conditions,
         options,
       );
@@ -37,6 +37,7 @@ export class BankDataService {
 
   async store(data: CreateBankDataDto) {
     const bank = this.bankDataRepository.create(data);
+    console.log(data)
     return await this.bankDataRepository.save(bank);
   }
 

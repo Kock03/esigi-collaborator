@@ -1,5 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty } from 'class-validator';
+import { Gender } from 'src/app/collaborators/dtos/gender.enum';
+import { Type } from './type.enum';
 
 export class UpdateDependentsDto {
   @ApiProperty()

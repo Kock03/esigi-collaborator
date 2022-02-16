@@ -4,6 +4,7 @@ import { CollaboratorsEntity } from 'src/app/collaborators/collaborators.entity'
 import { AccountTypes } from './account-types.enum';
 
 export class CreateBankDataDto {
+
   @ApiProperty()
   @IsNotEmpty()
   bank: string;

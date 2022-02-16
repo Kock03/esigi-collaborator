@@ -1,4 +1,4 @@
-enum Type {
+export enum Type {
     spouse = 1,
     child = 2,
     stepchild = 3,

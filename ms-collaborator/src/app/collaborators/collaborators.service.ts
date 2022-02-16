@@ -11,7 +11,7 @@ export class CollaboratorsService {
   constructor(
     @InjectRepository(CollaboratorsEntity)
     private readonly collaboratorsRepository: Repository<CollaboratorsEntity>,
-  ) {}
+  ) { }
 
   async findAll() {
     const collaboratorsWhiteAll = await this.collaboratorsRepository
@@ -54,6 +54,11 @@ export class CollaboratorsService {
     if (invalidCpf) {
       throw new HttpException('O CPF é inválido', 404);
     }
+    const invalidCnpj = DocumentValidator.isValidCnpj(data.cnpj);
+    if (invalidCnpj) {
+      throw new HttpException('O CNPJ é inválido', 404);
+    }
+
     const collaborator = this.collaboratorsRepository.create(data);
     return await this.collaboratorsRepository.save(collaborator);
   }
