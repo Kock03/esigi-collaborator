@@ -1,83 +1,92 @@
-import { IsNotEmpty, IsOptional } from "class-validator";
-import { KnowledgesEntity } from "src/app/knowledges/knowledges.entity";
-import { LanguagesEntity } from "src/app/languages/languages.entity";
-import { SenioritiesEntity } from "src/app/seniorities/seniorities.entity";
-import { Schooling } from "./schooling.enum";
-import { Status } from "./status.enum";
-import { Type } from "./type.enum";
-import { TypeOfContract } from "./typeOfContract.enum";
-import { Workplace } from "./workplace.enum";
+import { isNotEmpty, IsNotEmpty, IsOptional } from 'class-validator';
+import { BehaviroalInterviewsEntity } from 'src/app/behavioral-interviews/behavioral-interviews.entity';
+import { ClientInterviewsEntity } from 'src/app/client-interviews/client-interviews.entity';
+import { KnowledgesEntity } from 'src/app/knowledges/knowledges.entity';
+import { LanguagesEntity } from 'src/app/languages/languages.entity';
+import { SenioritiesEntity } from 'src/app/seniorities/seniorities.entity';
+import { TechnicalInterviewsEntity } from 'src/app/technical-interviews/technical-interviews.entity';
+import { Schooling } from './schooling.enum';
+import { Status } from './status.enum';
+import { Type } from './type.enum';
+import { TypeOfContract } from './typeOfContract.enum';
+import { Workplace } from './workplace.enum';
 
-export class CreateJobsDto{
-     
-    @IsNotEmpty()
-    requester: string;
-  
-    @IsNotEmpty()
-    status: Status;
+export class CreateJobsDto {
+  @IsNotEmpty()
+  requester: string;
 
-    @IsNotEmpty()
-    publish: boolean;
+  @IsNotEmpty()
+  status: Status;
 
-    @IsNotEmpty()
-    client: string;
+  @IsNotEmpty()
+  publish: boolean;
 
-    @IsNotEmpty()
-    typeOfJob: Type;
+  @IsNotEmpty()
+  client: string;
 
-    @IsNotEmpty()
-    temporary: boolean;
+  @IsNotEmpty()
+  typeOfJob: Type;
 
-    @IsOptional()
-    monthTime: string;
+  @IsNotEmpty()
+  temporary: boolean;
 
-    @IsNotEmpty()
-    jobName: string;
+  @IsOptional()
+  monthTime: string;
 
-    @IsNotEmpty()
-    startForecast: Date;
+  @IsNotEmpty()
+  jobName: string;
 
-    @IsNotEmpty()
-    jobNumber: number;
+  @IsNotEmpty()
+  startForecast: Date;
 
-    @IsNotEmpty()
-    typeOfContract: TypeOfContract;
+  @IsNotEmpty()
+  jobNumber: number;
 
-    @IsNotEmpty()
-    workplace: Workplace;
+  @IsNotEmpty()
+  typeOfContract: TypeOfContract;
 
-    @IsNotEmpty()
-    workingDay: string;
-    
-    @IsNotEmpty()
-    minimumValue: number;
+  @IsNotEmpty()
+  workplace: Workplace;
 
-    @IsNotEmpty()
-    maximumValue: number;
+  @IsNotEmpty()
+  workingDay: string;
 
-    @IsNotEmpty()
-    schooling: Schooling; 
+  @IsNotEmpty()
+  minimumValue: number;
 
-    @IsNotEmpty()
-    collaboratorActivities: string;
+  @IsNotEmpty()
+  maximumValue: number;
 
-    @IsNotEmpty()
-    Knowledges: KnowledgesEntity[];
+  @IsNotEmpty()
+  schooling: Schooling;
 
-    @IsNotEmpty()
-    skills: string;
+  @IsNotEmpty()
+  collaboratorActivities: string;
 
-    @IsNotEmpty()
-    attitudes: string;
+  @IsNotEmpty()
+  Knowledges: KnowledgesEntity[];
 
-    @IsNotEmpty()
-    openingDate: Date;
+  @IsNotEmpty()
+  skills: string;
 
-    @IsNotEmpty()
-    Seniorities: SenioritiesEntity;
+  @IsNotEmpty()
+  attitudes: string;
 
-    @IsNotEmpty()
-    Languages: LanguagesEntity[];
+  @IsNotEmpty()
+  openingDate: Date;
 
+  @IsNotEmpty()
+  Seniorities: SenioritiesEntity;
 
+  @IsNotEmpty()
+  Languages: LanguagesEntity[];
+
+  @IsOptional()
+  behaviorInterviews: BehaviroalInterviewsEntity[];
+
+  @IsOptional()
+  clientInterviews: ClientInterviewsEntity[];
+
+  @IsOptional()
+  technicalInterviews: TechnicalInterviewsEntity[];
 }

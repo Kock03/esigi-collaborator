@@ -11,12 +11,13 @@ const common_1 = require("@nestjs/common");
 const config_1 = require("@nestjs/config");
 const typeorm_1 = require("@nestjs/typeorm");
 const typeorm_naming_strategies_1 = require("typeorm-naming-strategies");
-const app_controller_1 = require("./app.controller");
-const app_service_1 = require("./app.service");
 const jobs_module_1 = require("./app/jobs/jobs.module");
 const knowledges_module_1 = require("./app/knowledges/knowledges.module");
 const languages_module_1 = require("./app/languages/languages.module");
 const seniorities_module_1 = require("./app/seniorities/seniorities.module");
+const behavioral_interviews_module_1 = require("./app/behavioral-interviews/behavioral-interviews.module");
+const client_interviews_module_1 = require("./app/client-interviews/client-interviews.module");
+const technical_interviews_module_1 = require("./app/technical-interviews/technical-interviews.module");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -38,9 +39,12 @@ AppModule = __decorate([
             knowledges_module_1.KnowledgesModule,
             seniorities_module_1.SenioritiesModule,
             languages_module_1.LanguagesModule,
+            behavioral_interviews_module_1.BehavioralInterviewsModule,
+            technical_interviews_module_1.TechnicalInterviewsModule,
+            client_interviews_module_1.ClientInterviewsModule,
         ],
-        controllers: [app_controller_1.AppController],
-        providers: [app_service_1.AppService],
+        controllers: [],
+        providers: [],
     })
 ], AppModule);
 exports.AppModule = AppModule;

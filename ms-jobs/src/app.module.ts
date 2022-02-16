@@ -2,17 +2,13 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { JobsModule } from './app/jobs/jobs.module';
 import { KnowledgesModule } from './app/knowledges/knowledges.module';
 import { LanguagesModule } from './app/languages/languages.module';
 import { SenioritiesModule } from './app/seniorities/seniorities.module';
-import { BehavioralInterviewsModule } from './behavioral-interviews/behavioral-interviews.module';
-import { ClientInterviewsModule } from './client-interviews/client-interviews.module';
-import { TechnicalInterviewsModule } from './technical-interviews/technical-interviews.module';
-import { BehavioralInterviewsModule } from './behavioral-interviews/behavioral-interviews.module';
-
+import { BehavioralInterviewsModule } from './app/behavioral-interviews/behavioral-interviews.module';
+import { ClientInterviewsModule } from './app/client-interviews/client-interviews.module';
+import { TechnicalInterviewsModule } from './app/technical-interviews/technical-interviews.module';
 @Module({
   imports: [
     ConfigModule.forRoot(),
@@ -35,7 +31,7 @@ import { BehavioralInterviewsModule } from './behavioral-interviews/behavioral-i
     TechnicalInterviewsModule,
     ClientInterviewsModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}

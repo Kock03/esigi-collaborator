@@ -31,6 +31,9 @@ export declare class JobsController {
         skills: string;
         attitudes: string;
         Languages: import("../languages/languages.entity").LanguagesEntity[];
+        behaviorInterviews: import("../behavioral-interviews/behavioral-interviews.entity").BehaviroalInterviewsEntity[];
+        clientInterviews: import("../client-interviews/client-interviews.entity").ClientInterviewsEntity[];
+        technicalInterviews: import("../technical-interviews/technical-interviews.entity").TechnicalInterviewsEntity[];
         id: string;
     } & import("./jobs.entity").JobsEntity>;
     destroy(id: string): Promise<{

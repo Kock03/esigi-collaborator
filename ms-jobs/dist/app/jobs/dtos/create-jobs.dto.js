@@ -111,5 +111,17 @@ __decorate([
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", Array)
 ], CreateJobsDto.prototype, "Languages", void 0);
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    __metadata("design:type", Array)
+], CreateJobsDto.prototype, "behaviorInterviews", void 0);
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    __metadata("design:type", Array)
+], CreateJobsDto.prototype, "clientInterviews", void 0);
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    __metadata("design:type", Array)
+], CreateJobsDto.prototype, "technicalInterviews", void 0);
 exports.CreateJobsDto = CreateJobsDto;
 //# sourceMappingURL=create-jobs.dto.js.map
