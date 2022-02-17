@@ -1,0 +1,98 @@
+import { Component, ElementRef, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Router } from '@angular/router';
+import { debounceTime, distinctUntilChanged, fromEvent, Subject } from 'rxjs';
+import { ResumeProvider } from 'src/providers/resume.provider';
+
+import { ResumeCreateComponent } from '../resume-create/resume-create.component';
+import { ResumeRegisterTabComponent } from '../resume-create/resume-register-tab/resume-register-tab.component';
+
+export interface Resume {
+  id: string;
+  firstName: string;
+  birthDate: Date;
+  phoneNumber: number;
+}
+
+
+@Component({
+  selector: 'app-resume-list',
+  templateUrl: './resume-list.component.html',
+  styleUrls: ['./resume-list.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+})
+export class ResumeListComponent implements OnInit {
+  @ViewChild('filter', {static:true}) filter!: ElementRef;
+
+  private _unsubscribeAll: Subject<any>;
+
+  displayedResume: string[] = [
+    'name',
+    'birthDate',
+    'phoneNumber',
+    'icon',
+  ];
+
+  
+  resumes!: Resume[];
+  filteredResumeList!: any[];
+  index: any = null;
+  Resume: any;
+  resume!: any;
+
+  constructor(private router: Router,
+    private resumeProvider: ResumeProvider) {
+      this._unsubscribeAll = new Subject();
+     }
+
+
+
+  ngOnInit(): void {
+    this.getResumeList();
+
+    this.initFilter();
+
+  }
+
+  createResume() {
+    this.router.navigate(['curriculo/novo']);
+  }
+  
+  editResume(resumeId: any) {
+    this.router.navigate([`resume/${resumeId}`]);
+  }
+
+  async deleteResume(index: number) {
+    const resume = this.filteredResumeList[index];
+    try {
+      await this.resumeProvider.destroy(resume.id);
+      this.getResumeList();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+
+  async getResumeList() {
+    try {
+      this.filteredResumeList = this.resumes =
+        await this.resumeProvider.findAll();
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  initFilter() {
+    fromEvent(this.filter.nativeElement, 'keyup')
+    .pipe(debounceTime(200), distinctUntilChanged())
+
+    .subscribe((res) => {
+      this.filteredResumeList = this.resumes.filter(
+        (resume) =>
+          resume.firstName
+            .toLocaleLowerCase()
+            .includes(this.filter.nativeElement.value.toLocaleLowerCase())
+      );
+    });
+  }
+
+}

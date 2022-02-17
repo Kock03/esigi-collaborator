@@ -221,34 +221,25 @@ export class CollaboratorCreateComponent implements OnInit {
   }
 
   async saveCollaborator() {
+
+
     let data = this.collaboratorForm.getRawValue();
 
- 
-    if (!data.Dependents.length) {
-      data.Dependents = null;
-    }
-
-    if (!data.Educations.length) {
-      data.Educations = null;
-    }
-    if (!data.Languages.length) {
-      data.Languages = null;
-    }
-    if (!data.BankData.length) {
-      data.BankData = null;
-    }
-    if (!data.Financials.length) {
-      data.Financials = null;
-    }
-    if (!data.Skills.length) {
-      data.Skills = null;
-    }
     try {
-      const collaborator = await this.collaboratorProvider.store(data);
-      this.snackbarService.successMessage('Colaborador Cadastrado Com Sucesso');
-      this.router.navigate(['collaborator/lista'])
+      data.Dependents = new Array(data.Dependents);
+      data.Educations = new Array(data.Educations);
+      data.Languages = new Array(data.Languages);
+      data.BankData = new Array(data.BankData);
+      data.Financials = new Array(data.Financials);
+      data.Skills = new Array(data.Skills);
+
+      const colaborators = await this.collaboratorProvider.store(data);
+
+      this.snackbarService.successMessage('Vaga Cadastrada Com Sucesso');
+      this.router.navigate(['collaborador/lista']);
     } catch (error) {
       console.log('ERROR 132' + error);
+      this.snackbarService.showError('Falha ao Cadastrar');
     }
   }
   handleChanges(value: any): void {

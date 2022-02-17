@@ -16,7 +16,7 @@ export class FeedbackProvider {
 
     findAll(): Promise<any> {
         return new Promise((resolve, reject) => {
-            this.apiGateway.get(environment.FEEDBACK_MS + 'feedbacks').subscribe((response: HttpResponse<any>) => {
+            this.apiGateway.get(environment.COLLABORATOR_MS + 'feedbacks').subscribe((response: HttpResponse<any>) => {
                 resolve(response.body);
             }, reject);
         });
@@ -24,7 +24,7 @@ export class FeedbackProvider {
 
     findOne(id: string): Promise<any> {
         return new Promise((resolve, reject) => {
-            this.apiGateway.get(environment.FEEDBACK_MS + 'feedbacks', { id: id }).subscribe((response: HttpResponse<any>) => {
+            this.apiGateway.get(environment.COLLABORATOR_MS + 'feedbacks', { id: id }).subscribe((response: HttpResponse<any>) => {
                 resolve(response.body);
             }, reject);
         });
@@ -33,7 +33,7 @@ export class FeedbackProvider {
 
     update(feedback: any): Promise<any> {
         return new Promise((resolve, reject) => {
-            this.apiGateway.put(environment.FEEDBACK_MS + 'feedbacks', feedback).subscribe((response: HttpResponse<any>) => {
+            this.apiGateway.put(environment.COLLABORATOR_MS + 'feedbacks', feedback).subscribe((response: HttpResponse<any>) => {
                 resolve(response.body);
             }, reject);
         });
@@ -41,7 +41,7 @@ export class FeedbackProvider {
 
     store(feedback: any): Promise<any> {
         return new Promise((resolve, reject) => {
-            this.apiGateway.post(environment.FEEDBACK_MS + 'feedbacks', feedback).subscribe((response: HttpResponse<any>) => {
+            this.apiGateway.post(environment.COLLABORATOR_MS + 'feedbacks', feedback).subscribe((response: HttpResponse<any>) => {
                 resolve(response.body);
             }, reject);
         });
@@ -49,7 +49,7 @@ export class FeedbackProvider {
 
     destroy(feedback: any): Promise<any> {
         return new Promise((resolve, reject) => {
-            this.apiGateway.delete(environment.FEEDBACK_MS + 'feedbacks', feedback).subscribe((response: HttpResponse<any>) => {
+            this.apiGateway.delete(environment.COLLABORATOR_MS + 'feedbacks', feedback).subscribe((response: HttpResponse<any>) => {
                 resolve(response.body);
             }, reject);
         })

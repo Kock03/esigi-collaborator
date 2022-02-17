@@ -37,11 +37,17 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { MatListModule } from '@angular/material/list';
 import { ResumeApplicationTabComponent } from './resume-create/resume-application-tab/resume-application-tab.component';
+import { ResumeListComponent } from './resume-list/resume-list.component';
 
 const routes: Routes = [
   {
     path: 'novo',
     component: ResumeCreateComponent,
+  },
+
+  {
+    path: 'lista',
+    component: ResumeListComponent,
   },
 ];
 
@@ -59,6 +65,7 @@ const routes: Routes = [
     ResumeEducationDialog,
     ResumeSkillDialog,
     ResumeApplicationTabComponent,
+    ResumeListComponent,
   ],
   imports: [
     CommonModule,

@@ -1,8 +1,9 @@
 <div id="resumeCreate" class="page">
-  <h2 >Cadastro de Candidato</h2>
+  <h2>Cadastro de Currículo</h2>
 
   <div fxLayout="row" class="tab" fxLayoutGap="16px">
     <div
+      (click)="this.step = 1"
       fxLayout="column"
       class="tab-group"
       [ngClass]="{ done: step > 0, active: step == 1 }"
@@ -11,6 +12,7 @@
       <span class="tab-border"></span>
     </div>
     <div
+      (click)="this.step = 2"
       fxLayout="column"
       class="tab-group"
       [ngClass]="{ done: step > 1, active: step == 2 }"
@@ -19,6 +21,7 @@
       <span class="tab-border"></span>
     </div>
     <div
+      (click)="this.step = 3"
       fxLayout="column"
       class="tab-group"
       [ngClass]="{ done: step > 2, active: step == 3 }"
@@ -27,6 +30,7 @@
       <span class="tab-border"></span>
     </div>
     <div
+      (click)="this.step = 4"
       fxLayout="column"
       class="tab-group"
       [ngClass]="{ done: step > 3, active: step == 4 }"
@@ -36,6 +40,7 @@
     </div>
 
     <div
+      (click)="this.step = 5"
       fxLayout="column"
       class="tab-group"
       [ngClass]="{ done: step > 4, active: step == 5 }"
@@ -45,11 +50,12 @@
     </div>
 
     <div
+      (click)="this.step = 6"
       fxLayout="column"
       class="tab-group disabled"
       [ngClass]="{ done: step > 5, active: step == 6 }"
     >
-      <p class="tab-item">Acompanhamento </p>
+      <p class="tab-item">Acompanhamento</p>
       <span class="tab-border"></span>
     </div>
   </div>
@@ -76,16 +82,13 @@
     (onChange)="handleChanges($event)"
   >
   </app-resume-skills-tab>
-  <app-resume-application-tab  
+  <app-resume-application-tab
     [hidden]="step != 5"
     [form]="resumeForm"
     (onChange)="handleChanges($event)"
   >
   </app-resume-application-tab>
-  <app-resume-monitoring-tab
-    [hidden]="step != 6"
-  >
-  </app-resume-monitoring-tab>
+  <app-resume-monitoring-tab [hidden]="step != 6"> </app-resume-monitoring-tab>
 
   <div class="navigation-buttons" fxLayoutAlign="center end" fxLayoutGap="16px">
     <button mat-button *ngIf="step != 1" (click)="navigate('back')">

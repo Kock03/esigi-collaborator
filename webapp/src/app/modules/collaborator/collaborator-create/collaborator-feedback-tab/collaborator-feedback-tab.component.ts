@@ -1,4 +1,13 @@
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild, ViewEncapsulation } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+  ViewEncapsulation,
+} from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatTable } from '@angular/material/table';
 import { Router } from '@angular/router';
@@ -21,13 +30,7 @@ export interface Feedback {
 export class CollaboratorFeedbackTabComponent implements OnInit {
   @ViewChild('feedbackTable') feedbackTable!: MatTable<any>;
 
-  displayedFeedback: string[] = [
-    'date',
-    'type',
-    'manager',
-    'status',
-    'icon',
-  ];
+  displayedFeedback: string[] = ['date', 'type', 'manager', 'status', 'icon'];
   feedbacks: Feedback[] = [
     {
       date: '20/05/2005',
@@ -38,8 +41,7 @@ export class CollaboratorFeedbackTabComponent implements OnInit {
   ];
   filteredFeedbackList!: any[];
 
-
-  constructor(private router: Router) { }
+  constructor(private router: Router) {}
 
   async ngOnInit() {
     //this.getFeedbackList();
@@ -52,9 +54,7 @@ export class CollaboratorFeedbackTabComponent implements OnInit {
   //     console.error(error);
   //   }
 
-  
-  navigateFeedback(){
-    this.router.navigate(['colaborador/feedback'])
+  navigateFeedback() {
+    this.router.navigate(['colaborador/feedback/novo']);
   }
 }
-

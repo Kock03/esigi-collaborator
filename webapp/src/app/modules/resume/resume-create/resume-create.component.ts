@@ -20,6 +20,7 @@ import { ResumeProvider } from 'src/providers/resume.provider';
 export class ResumeCreateComponent implements OnInit {
   resumeForm!: FormGroup;
   step: number = 1;
+  resume!: any;
 
   Experience: any;
 

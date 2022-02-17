@@ -59,7 +59,7 @@ const routes: Routes = [
     component: CollaboratorCreateComponent,
   },
   {
-    path: 'feedback',
+    path: 'feedback/novo',
     component: FeedbackCreateComponent,
   },
 ];
@@ -123,6 +123,7 @@ const routes: Routes = [
     CollaboratorDependentsTabComponent,
     CollaboradorDependentsDialog,
     CollaboratorListComponent,
+    FeedbackCreateComponent,
   ],
   providers: [MatDatepickerModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

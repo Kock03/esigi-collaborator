@@ -76,7 +76,7 @@ export class ResumeEducationTabComponent implements OnInit {
     'icon'
   ];
 
-  displayedLanguage: string[] = ['language', 'fluency', 'icon'];
+  displayedLanguage: string[] = ['language', 'fluency',  'icon'];
 
   selectedIndex: number = 0;
 

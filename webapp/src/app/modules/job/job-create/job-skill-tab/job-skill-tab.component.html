@@ -83,14 +83,6 @@
       </form>
 
       <div fxLayoutGap="16px" fxLayout="column">
-        <div>
-          <div fxLayout="row" fxLayoutAlign="start center ">
-            <p class="skills-text">Conhecimentos</p>
-            <button mat-button color="primary" (click)="openDialog()">
-              Adicionar
-            </button>
-          </div>
-        </div>
         <div class="envolti-table mat-elevation-z8" fxLayout="column">
           <table mat-table [dataSource]="data" #knowledgeTable>
             <ng-container matColumnDef="name">
@@ -115,6 +107,11 @@
             </ng-container>
 
             <ng-container matColumnDef="icon">
+              <th mat-header-cell *matHeaderCellDef>
+                <button class="edit-button" mat-flat-button color="primary" (click)="openDialog()">
+                  <mat-icon>add</mat-icon>
+                </button>
+              </th>
               <th mat-header-cell *matHeaderCellDef></th>
               <td
                 class="button-tab"

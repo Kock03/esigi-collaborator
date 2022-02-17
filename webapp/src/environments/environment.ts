@@ -7,9 +7,6 @@ export const environment = {
   COLLABORATOR_MS: 'localhost:3501/api/v1/',
   RESUME_MS: 'localhost:3502/api/v1/',
   JOBS_MS: 'localhost:3503/api/v1/',
-
-  FEEDBACK_MS: 'localhost:3504/api/v1/',
-
   SETTING_MS: 'localhost:3504/api/v1/',
 
   message: 'LOCAL',

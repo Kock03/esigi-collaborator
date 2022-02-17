@@ -9,7 +9,7 @@
   <div fxLayout="column" class="content-scroll">
     <form [formGroup]="feedbackForm" fxLayout="column">
       <div class="formGroup1" fxFlex="100" fxLayoutGap="16px">
-        <mat-form-field appearance="outline" fxFlex="33">
+        <mat-form-field appearance="outline" fxFlex="25">
           <mat-label>Tipo de Feedback</mat-label>
           <mat-select formControlName="feedbackType">
             <mat-option [value]="1">Profissional Desmotivado</mat-option>
@@ -18,7 +18,7 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field appearance="outline" fxFlex="33">
+        <mat-form-field appearance="outline" fxFlex="25">
           <mat-label>Motivo</mat-label>
           <mat-select formControlName="reason">
             <mat-option [value]="1">Solicitação Gestão</mat-option>
@@ -27,7 +27,7 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field appearance="outline" fxFlex="33">
+        <mat-form-field appearance="outline" fxFlex="25">
           <mat-label>Projeto</mat-label>
           <mat-select formControlName="project">
             <mat-option [value]="1">Ptojeto RH - Benner</mat-option>
@@ -35,7 +35,7 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field appearance="outline" fxFlex="33">
+        <mat-form-field appearance="outline" fxFlex="25">
           <mat-label>Gestor</mat-label>
           <mat-select formControlName="manager">
             <mat-option [value]="1">Wellington</mat-option>
@@ -43,13 +43,6 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field appearance="outline" fxFlex="33">
-          <mat-label>Colaborador</mat-label>
-          <mat-select formControlName="collaborator">
-            <mat-option [value]="1">Bianca</mat-option>
-            <mat-option [value]="2">Victor</mat-option>
-          </mat-select>
-        </mat-form-field>
       </div>
 
       <div class="formGroup1" fxFlex="200" fxLayoutGap="20px">
@@ -167,7 +160,7 @@
     class="saveButton"
     fxLayoutGap="16px"
   >
-    <button mat-flat-button color="primary" (click)="saveFeedback()">
+    <button mat-flat-button color="primary" [disabled]="this.feedbackForm.invalid" (click)="saveFeedback()">
       Salvar
     </button>
   </div>

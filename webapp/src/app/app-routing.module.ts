@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { FeedbackCreateComponent } from './modules/collaborator/feedback-create/feedback-create.component';
 import { SettingActiveDirectoryComponent } from './modules/setting/setting-create/setting-active-directory/setting-active-directory.component';
 import { SettingEmailComponent } from './modules/setting/setting-create/setting-email/setting-email.component';
 
@@ -20,6 +21,9 @@ const routes: Routes = [
       ),
   },
 
+  
+
+
   {
 
     path: 'vaga',
@@ -36,7 +40,6 @@ const routes: Routes = [
         (m) => m.ResumeModule
       ),
   },
-
 
   {
     path: 'setting',

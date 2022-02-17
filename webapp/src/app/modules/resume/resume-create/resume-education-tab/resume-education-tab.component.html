@@ -61,6 +61,9 @@
                     <mat-icon>add</mat-icon>
                   </button>
                 </th>
+
+                <th mat-header-cell *matHeaderCellDef></th>
+
                 <td
                   class="button-tab"
                   mat-cell
@@ -132,6 +135,16 @@
               </ng-container>
 
               <ng-container matColumnDef="icon">
+                <th mat-header-cell *matHeaderCellDef>
+                  <button
+                    class="edit-button"
+                    mat-flat-button
+                    color="primary"
+                    (click)="openDialogLanguage()"
+                  >
+                    <mat-icon>add</mat-icon>
+                  </button>
+                </th>
                 <th mat-header-cell *matHeaderCellDef></th>
                 <td
                   class="button-tab"
@@ -162,15 +175,6 @@
               <tr mat-row *matRowDef="let row; columns: displayedLanguage"></tr>
             </table>
           </div>
-          <button
-            fxFlex="5"
-            class="edit-button"
-            mat-flat-button
-            color="primary"
-            (click)="openDialogLanguage()"
-          >
-            <mat-icon>add</mat-icon>
-          </button>
         </div>
       </mat-tab>
     </mat-tab-group>
