@@ -18,6 +18,9 @@ import { NgxMaskModule, IConfig } from 'ngx-mask';
 import { SnackBarComponent } from './components/snack-bar/snack-bar.component';
 import { SnackBarService } from 'src/services/snackbar.service';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+import { ConfirmDialogService } from 'src/services/confirn-dialog.service';
+import { ConfirmDialogModule } from './components/confirm-dialog/confirm-dialog.module';
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
 
 @NgModule({
@@ -36,10 +39,10 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
     MatDividerModule,
     HttpClientModule,
     MatListModule,
+    ConfirmDialogModule,
     MatSnackBarModule,
-
-  ],
-  providers: [SnackBarService],
+                                                                                                                                                                            ],
+  providers: [SnackBarService, ConfirmDialogService],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

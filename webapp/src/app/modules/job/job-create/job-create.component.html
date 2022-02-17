@@ -34,6 +34,7 @@
   >
   </app-job-register-tab>
   <app-job-skill-tab
+  *ngIf="jobForm"
     [hidden]="step != 2"
     [form]="jobForm"
     (onChange)="handleChanges($event)"

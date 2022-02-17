@@ -14,6 +14,7 @@ import {
   Subject,
 } from 'rxjs';
 import { JobProvider } from 'src/providers/job.provider';
+import { ConfirmDialogService } from 'src/services/confirn-dialog.service';
 import { SnackBarService } from 'src/services/snackbar.service';
 
 export interface Job {
@@ -49,7 +50,8 @@ export class JobListComponent implements OnInit {
     private snackbarService: SnackBarService,
     private router: Router,
     private jobProvider: JobProvider,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private dialogService: ConfirmDialogService
   ) {
     this._unsubscribeAll = new Subject();
   }
@@ -66,7 +68,10 @@ export class JobListComponent implements OnInit {
   async getJobList() {
     try {
       this.filteredJobList = this.jobs = await this.jobProvider.findAll();
-      console.log("🚀 ~ file: job-list.component.ts ~ line 69 ~ JobListComponent ~ getJobList ~  this.filteredJobList",  this.filteredJobList)
+      console.log(
+        '🚀 ~ file: job-list.component.ts ~ line 69 ~ JobListComponent ~ getJobList ~  this.filteredJobList',
+        this.filteredJobList
+      );
     } catch (error) {
       console.error(error);
     }
@@ -94,14 +99,28 @@ export class JobListComponent implements OnInit {
   }
 
   async deleteJob(jobId: any) {
-    try {
-      const jobs = await this.jobProvider.destroy(jobId);
-      this.getJobList();
+    const options = {
+      data: {
+        title: 'Você Tem Certeza Que Quer Excluir Esta Vaga?',
+        subtitle: '',
+      },
+      panelClass: 'confirm-modal',
+    };
 
-      this.snackbarService.successMessage('Vaga Apagada Com Sucesso');
-    } catch (error) {
-      console.log('ERROR 132' + error);
-      this.snackbarService.showError('Falha ao Deletar');
-    }
+    this.dialogService.open(options);
+
+    this.dialogService.confirmed().subscribe(async (confirmed) => {
+      if (confirmed) {
+        try {
+          const jobs = await this.jobProvider.destroy(jobId);
+          this.getJobList();
+
+          this.snackbarService.successMessage('Vaga Excluída Com Sucesso');
+        } catch (error) {
+          console.log('ERROR 132' + error);
+          this.snackbarService.showError('Falha ao Deletar');
+        }
+      }
+    });
   }
 }

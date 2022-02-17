@@ -102,9 +102,9 @@ export class JobCreateComponent implements OnInit {
     this.jobId = this.route.snapshot.paramMap.get('id');
     if (this.jobId !== 'novo') {
       await this.getJob();
-      this.initForm();
-      this.setFormValue();
     }
+    this.initForm();
+    this.setFormValue();
     this.step = 1;
   }
 
@@ -181,19 +181,22 @@ export class JobCreateComponent implements OnInit {
         pleno: [false],
         senior: [false],
       }),
-      Knowledges: this.fb.array([this.job.Knowledges]),
+      Knowledges: this.fb.array(this.job? this.job.Knowledges: [null]),
     });
   }
 
   setFormValue() {
-    this.jobForm.patchValue(this.job);
-    if (this.job.Languages[0]) {
-      const languages = this.jobForm.controls['Languages'] as FormGroup;
-      languages.patchValue(this.job.Languages[0]);
-    }
-    // this.job.Knowledges.forEach((element: any) => {
-    //   this.knowledgeArray.insert(0, element);
-    // });
+    if (this.job){
+
+      this.jobForm.patchValue(this.job);
+      if (this.job.Languages[0]) {
+        const languages = this.jobForm.controls['Languages'] as FormGroup;
+        languages.patchValue(this.job.Languages[0]);
+      }
+      // this.job.Knowledges.forEach((element: any) => {
+        //   this.knowledgeArray.insert(0, element);
+        // });
+      }
   }
 
   handleStep(number: number): void {

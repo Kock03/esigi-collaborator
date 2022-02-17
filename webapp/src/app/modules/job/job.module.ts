@@ -26,7 +26,8 @@ import { JobDetailListTabComponent } from './job-detail/job-detail-list-tab/job-
 import { JobInterviewTabComponent } from './job-detail/job-interview-tab/job-interview-tab.component';
 import { JobPanelTabComponent } from './job-detail/job-panel-tab/job-panel-tab.component';
 import { JobRegisterTabComponent, PickDateAdapter } from './job-create/job-register-tab/job-register-tab.component';
-import { JobDialogSkill, JobSkillTabComponent } from './job-create/job-skill-tab/job-skill-tab.component';
+import { JobDialogSkill, JobSkillTabComponent } from './job-create/job-skill-tab/job-skill-tab.component';             
+import { ConfirmDialogService } from 'src/services/confirn-dialog.service';
 
 const routes: Routes = [
   {
@@ -75,7 +76,7 @@ const routes: Routes = [
     MatTreeModule,
     HttpClientModule,
   ],
-  providers: [MatDatepickerModule],
+  providers: [MatDatepickerModule, ConfirmDialogService],
   entryComponents: [
     JobDialogSkill,
     JobRegisterTabComponent,

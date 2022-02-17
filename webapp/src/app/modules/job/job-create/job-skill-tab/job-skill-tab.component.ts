@@ -47,10 +47,32 @@ export class JobSkillTabComponent implements OnInit {
   constructor(public dialog: MatDialog, private fb: FormBuilder) {}
 
   ngOnInit(): void {
-    this.jobForm.valueChanges.subscribe((res) => {
-      // console.log("🚀 ~ file: job-skill-tab.component.ts ~ line 52 ~ JobSkillTabComponent ~ this.jobForm.valueChanges.subscribe ~ this.knowledgeArray", this.knowledgeArray)
-      console.log("🚀 ~ file: job-skill-tab.component.ts ~ line 53 ~ JobSkillTabComponent ~ this.jobForm.valueChanges.subscribe ~ this.knowledgeArray.value", this.knowledgeArray.value)
+    if (
+      this.knowledgeArray.value.findIndex(
+        (knowledge: any) => knowledge == null
+      ) === -1
+    ) {
       this.data = this.knowledgeArray.value;
+    }
+
+    this.initObservables();
+    console.log(
+      '🚀 ~ file: job-skill-tab.component.ts ~ line 51 ~ JobSkillTabComponent ~ ngOnInit ~  this.knowledgeArray.value',
+      this.knowledgeArray.value
+    );
+  }
+
+  initObservables() {
+    this.knowledgeArray.valueChanges.subscribe((res) => {
+      const isNullIndex = this.knowledgeArray.value.findIndex(
+        (knowledge: any) => knowledge == null
+      );
+      if (isNullIndex !== -1) {
+        this.knowledgeArray.removeAt(isNullIndex);
+      }
+      if (res) {
+        this.data = this.knowledgeArray.value;
+      }
     });
   }
 

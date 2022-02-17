@@ -27,6 +27,7 @@ export class AppComponent {
       icon: 'person',
       selected: false,
       action: '/colaborador/lista',
+      selectedNew: '/colaborador/novo',
     },
     {
       name: 'Vagas',
@@ -47,7 +48,9 @@ export class AppComponent {
       icon: 'manage_accounts',
       selected: false,
       action: '/setting/novo',
+      selectedNew: '/setting/criacao',
       selectedAd: '/setting/conexao'
+      
     },
   ];
 
