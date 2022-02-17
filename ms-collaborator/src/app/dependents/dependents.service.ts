@@ -1,5 +1,6 @@
 import { HttpException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { DocumentValidator } from 'src/validators/document.validator';
 import { FindConditions, FindOneOptions, Repository } from 'typeorm';
 import { DependentsEntity } from './dependents.entity';
 import { CreatedependentsDto } from './dtos/create-dependents.dto';
@@ -10,7 +11,7 @@ export class DependentsService {
   constructor(
     @InjectRepository(DependentsEntity)
     private readonly dependentsRepository: Repository<DependentsEntity>,
-  ) {}
+  ) { }
 
   async findAll() {
     const dependentsWhiteAll = await this.dependentsRepository
@@ -33,8 +34,24 @@ export class DependentsService {
   }
 
   async store(data: CreatedependentsDto) {
-    const dependent = this.dependentsRepository.create(data);
-    return await this.dependentsRepository.save(dependent);
+    if (data.cpf) {
+      const invalidCpf = DocumentValidator.isValidCpf(data.cpf);
+      if (invalidCpf) {
+        throw new HttpException('O CPF é inválido', 404);
+      }
+      else {
+        try {
+          const dependent = this.dependentsRepository.create(data);
+          return await this.dependentsRepository.save(dependent);
+        } catch (error) {
+          throw new HttpException('Duplicidade de CPF', 404);
+        }
+      }
+    }
+    else {
+      throw new HttpException('CPF não podem ser nulos', 404);
+    }
+
   }
 
   async update(id: string, data: UpdateDependentsDto) {

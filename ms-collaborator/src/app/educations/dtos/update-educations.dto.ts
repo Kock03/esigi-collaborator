@@ -1,22 +1,26 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsObject, IsOptional, IsString } from 'class-validator';
 import { Schooling } from './schooling.enum';
 import { Situation } from './situation.enum';
 
 export class UpdateEducationsDto {
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
+  @IsString()
   course: string;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
+  @IsNumber()
   schooling: Schooling;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
+  @IsNumber()
   institution: string;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
+  @IsObject()
   situation: Situation;
 }

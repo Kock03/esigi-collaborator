@@ -65,8 +65,14 @@ export class CollaboratorsService {
     if (data.cpf === null && data.cnpj === null) {
       throw new HttpException('CPF ou CNPJ não podem ser nulos', 404);
     } else {
-      const collaborator = this.collaboratorsRepository.create(data);
-      return await this.collaboratorsRepository.save(collaborator);
+      try {
+        const collaborator = this.collaboratorsRepository.create(data);
+        return await this.collaboratorsRepository.save(collaborator);
+      }
+      catch (error) {
+        throw new HttpException('Duplicidade de CPF', 404);
+      }
+
     }
   }
 
