@@ -73,7 +73,7 @@ export class ResumeEducationTabComponent implements OnInit {
     'situation',
     'course',
     'institution',
-    'iconAdd',
+    'icon'
   ];
 
   displayedLanguage: string[] = ['language', 'fluency', 'icon'];
