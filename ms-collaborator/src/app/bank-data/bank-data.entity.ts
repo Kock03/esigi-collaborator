@@ -7,8 +7,6 @@ import {
   DeleteDateColumn,
   PrimaryGeneratedColumn,
   OneToOne,
-  JoinColumn,
-  ManyToOne,
 } from 'typeorm';
 import { AccountTypes } from './dtos/account-types.enum';
 

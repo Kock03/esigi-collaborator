@@ -21,6 +21,7 @@ import { EducationsEntity } from '../educations/educations.entity';
 import { MaritalStatus } from './dtos/MaritalStatus.enum';
 import { DependentsEntity } from '../dependents/dependents.entity';
 import { FeedbacksEntity } from '../feedbacks/feedbacks.entity';
+import { Gender } from './dtos/gender.enum';
 
 @Entity({ name: 'collaborators' })
 export class CollaboratorsEntity {
@@ -48,7 +49,7 @@ export class CollaboratorsEntity {
   @Column()
   collaboratorTypes: CollaboratorTypes;
 
-  @Column({ unique: true, length: 11 })
+  @Column({ unique: true, length: 11, nullable: true })
   cpf: string;
 
   @Column()
@@ -63,7 +64,7 @@ export class CollaboratorsEntity {
   @Column()
   admissionDate: Date;
 
-  @Column({ length: 14 })
+  @Column({ unique: true, length: 14, nullable: true })
   cnpj: string;
 
   @Column()
@@ -129,7 +130,7 @@ export class CollaboratorsEntity {
   @JoinColumn()
   Phone: PhoneEntity;
 
-  @OneToOne(() => BankDataEntity, (bank) => bank.Collaborator, {
+  @OneToOne(() => BankDataEntity, {
     cascade: ['insert', 'update', 'remove'],
     orphanedRowAction: 'delete',
   })

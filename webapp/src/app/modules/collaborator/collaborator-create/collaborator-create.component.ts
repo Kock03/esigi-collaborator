@@ -21,6 +21,7 @@ export class CollaboratorCreateComponent implements OnInit {
   collaboratorId!: string | null;
   collaborator!: any;
 
+  Dependents: any;
   Educations: any;
   Languages: any;
   BankData: any;
@@ -32,10 +33,10 @@ export class CollaboratorCreateComponent implements OnInit {
     private fb: FormBuilder,
     private collaboratorProvider: CollaboratorProvider,
     private http: HttpClient,
-     private router: Router,
-     private snackbarService: SnackBarService,
+    private router: Router,
+    private snackbarService: SnackBarService,
     private route: ActivatedRoute
-  ) {}
+  ) { }
 
 
   async ngOnInit(): Promise<void> {
@@ -85,12 +86,12 @@ export class CollaboratorCreateComponent implements OnInit {
       maritalStatus: [1, Validators.required],
       office: ['Desenvolvedor Angular', Validators.required],
       collaboratorTypes: [1, Validators.required],
- active: [true, Validators.required],
+      active: [true, Validators.required],
       cpf: this.fb.control({ value: null, disabled: false }, [DocumentValidator.isValidCpf(), Validators.required]),
       birthDate: ['2004-06-12', Validators.required],
       admissionDate: ['', Validators.required],
 
-  
+
       email: ['davi@email', [Validators.email, Validators.required]],
       cnpj: ['', Validators.required],
       stateRegistration: ['', Validators.required],
@@ -118,14 +119,22 @@ export class CollaboratorCreateComponent implements OnInit {
       }),
 
 
-      Dependents: this.fb.array([]),
-      // Educations: this.fb.array([]),
-      // Languages: this.fb.array([]),
-      // BankData: this.fb.array([]),
-      // Financials: this.fb.array([]),
-      // Skills: this.fb.array([]),
-      // Documents: this.fb.array([]),
-
+      Dependents: this.fb.array(
+        new Array(
+          this.fb.group({
+            type: null,
+            firstName: null,
+            lastName: null,
+            gender: null,
+            cpf: null,
+            birthDate: null,
+            ddi: null,
+            ddd: null,
+            phoneNumber: null,
+            email: null,
+          })
+        )
+      ),
       Educations: this.fb.array(
         new Array(
           this.fb.group({
@@ -149,7 +158,7 @@ export class CollaboratorCreateComponent implements OnInit {
           this.fb.group({
             bank: null,
             agency: null,
-            accountTypet: null,
+            accountType: null,
             accountNumber: null,
             digit: null,
             bankAccountDigit: null,
@@ -224,6 +233,8 @@ export class CollaboratorCreateComponent implements OnInit {
 
 
     let data = this.collaboratorForm.getRawValue();
+
+
 
     try {
       data.Dependents = new Array(data.Dependents);

@@ -1,38 +1,60 @@
-import { IsNotEmpty } from "class-validator";
-import { CollaboratorsEntity } from "src/app/collaborators/collaborators.entity";
+import { ApiProperty } from '@nestjs/swagger';
+import { IsEmail, IsNotEmpty, IsNumber, IsObject, IsString } from 'class-validator';
+import { CollaboratorsEntity } from 'src/app/collaborators/collaborators.entity';
+import { Gender } from 'src/app/collaborators/dtos/gender.enum';
+import { Type } from './type.enum';
 
 export class CreatedependentsDto {
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsNumber()
+  type: Type;
 
-    @IsNotEmpty()
-    type: Type;
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsString()
+  firstName: string;
 
-    @IsNotEmpty()
-    firstName: string;
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsString()
+  lastName: string;
 
-    @IsNotEmpty()
-    lastName: string;
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsNumber()
+  gender: Gender;
 
-    @IsNotEmpty()
-    gender: Gender;
+  @ApiProperty()
+  @IsNotEmpty()
+  cpf: string;
 
-    @IsNotEmpty()
-    cpf: string;
+  @ApiProperty()
+  @IsNotEmpty()
+  birthDate: Date;
 
-    @IsNotEmpty()
-    birthDate: Date;
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsString()
+  phoneNumber: string;
 
-    @IsNotEmpty()
-    phoneNumber: string;
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsString()
+  ddd: string;
 
-    @IsNotEmpty()
-    ddd: string;
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsString()
+  ddi: string;
 
-    @IsNotEmpty()
-    ddi: string;
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsEmail()
+  email: string;
 
-    @IsNotEmpty()
-    email: string;
-
-    @IsNotEmpty()
-    Collaborator: CollaboratorsEntity;
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsObject()
+  Collaborator: CollaboratorsEntity;
 }

@@ -1,35 +1,54 @@
-import { IsNotEmpty } from "class-validator";
+import { ApiProperty } from '@nestjs/swagger';
+import { IsEmail, IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
+import { Gender } from 'src/app/collaborators/dtos/gender.enum';
+import { Type } from './type.enum';
 
 export class UpdateDependentsDto {
+  @ApiProperty()
+  @IsOptional()
+  @IsNumber()
+  type: Type;
 
-    @IsNotEmpty()
-    type: Type;
+  @ApiProperty()
+  @IsOptional()
+  @IsString()
+  firstName: string;
 
-    @IsNotEmpty()
-    firstName: string;
+  @ApiProperty()
+  @IsOptional()
+  @IsString()
+  lastName: string;
 
-    @IsNotEmpty()
-    lastName: string;
+  @ApiProperty()
+  @IsOptional()
+  @IsNumber()
+  gender: Gender;
 
-    @IsNotEmpty()
-    gender: Gender;
+  @ApiProperty()
+  @IsOptional()
+  cpf: string;
 
-    @IsNotEmpty()
-    cpf: string;
+  @ApiProperty()
+  @IsOptional()
+  birthDate: Date;
 
-    @IsNotEmpty()
-    birthDate: Date;
+  @ApiProperty()
+  @IsOptional()
+  @IsString()
+  phoneNumber: string;
 
-    @IsNotEmpty()
-    phoneNumber: string;
+  @ApiProperty()
+  @IsOptional()
+  @IsString()
+  ddd: string;
 
-    @IsNotEmpty()
-    ddd: string;
+  @ApiProperty()
+  @IsOptional()
+  @IsString()
+  ddi: string;
 
-    @IsNotEmpty()
-    ddi: string;
-
-    @IsNotEmpty()
-    email: string;
-
+  @ApiProperty()
+  @IsOptional()
+  @IsEmail()
+  email: string;
 }

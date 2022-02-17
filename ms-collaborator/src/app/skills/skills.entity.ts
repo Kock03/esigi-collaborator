@@ -8,6 +8,7 @@ import {
   PrimaryGeneratedColumn,
   ManyToOne,
 } from 'typeorm';
+import { Seniority } from './dtos/seniority.enun';
 
 @Entity({ name: 'skills' })
 export class SkillsEntity {
@@ -20,7 +21,7 @@ export class SkillsEntity {
 
 
   @Column({ type: 'int' })
-  seniority: Senioridade;
+  seniority: Seniority;
 
   @Column()
   yearsExperience: number;

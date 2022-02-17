@@ -1,4 +1,4 @@
-enum degreeOfInfluence{
+export enum degreeOfInfluence {
     allOptions = 1,
     writing = 2,
     reading = 3,

@@ -1,4 +1,4 @@
-enum Senioridade{
+export enum Seniority {
     Senior = 1,
     Pleno = 2,
     Junior = 3,

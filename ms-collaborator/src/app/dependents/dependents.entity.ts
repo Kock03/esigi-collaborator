@@ -1,5 +1,7 @@
 import { Column, DeleteDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { CollaboratorsEntity } from "../collaborators/collaborators.entity";
+import { Gender } from "../collaborators/dtos/gender.enum";
+import { Type } from "./dtos/type.enum";
 
 @Entity({ name: 'dependents' })
 export class DependentsEntity {

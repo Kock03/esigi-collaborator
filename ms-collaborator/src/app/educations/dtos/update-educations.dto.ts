@@ -1,17 +1,26 @@
-import { IsNotEmpty } from "class-validator";
-import { Schooling } from "./schooling.enum";
+import { ApiProperty } from '@nestjs/swagger';
+import { IsNotEmpty, IsNumber, IsObject, IsOptional, IsString } from 'class-validator';
+import { Schooling } from './schooling.enum';
+import { Situation } from './situation.enum';
 
-export class UpdateEducationsDto{
-     
-    @IsNotEmpty()
-    course: string;
-  
-    @IsNotEmpty()
-    schooling: Schooling
+export class UpdateEducationsDto {
+  @ApiProperty()
+  @IsOptional()
+  @IsString()
+  course: string;
 
-    @IsNotEmpty()
-    institution: string;
+  @ApiProperty()
+  @IsOptional()
+  @IsNumber()
+  schooling: Schooling;
 
-    @IsNotEmpty()
-    situation: Situation;
+  @ApiProperty()
+  @IsOptional()
+  @IsNumber()
+  institution: string;
+
+  @ApiProperty()
+  @IsOptional()
+  @IsObject()
+  situation: Situation;
 }
