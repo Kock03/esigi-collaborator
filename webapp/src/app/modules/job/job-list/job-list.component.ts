@@ -101,8 +101,8 @@ export class JobListComponent implements OnInit {
   async deleteJob(jobId: any) {
     const options = {
       data: {
-        title: 'Você Tem Certeza Que Quer Excluir Esta Vaga?',
-        subtitle: '',
+        title: 'Anteção',
+        subtitle: 'Você tem certeza que deseja excluir esta vaga?',
       },
       panelClass: 'confirm-modal',
     };
