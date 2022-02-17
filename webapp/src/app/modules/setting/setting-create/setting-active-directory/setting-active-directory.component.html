@@ -6,11 +6,10 @@
     <h2 mat-dialog-title class="title">Conexão Avtive Directory</h2>
   </div>
   <div
-    class="content-scroll"
+    class="content-form"
     fxLayout="column"
-    fxLayoutAlign="space-around start"
   >
-    <form [formGroup]="settingForm">
+    <form [formGroup]="settingForm" class="form-box">
       <mat-form-field class="form-control" appearance="outline">
         <mat-label>Endereço AD</mat-label>
         <input matInput placeholder="Endereço AD" formControlName="adAdress" />
