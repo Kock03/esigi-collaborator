@@ -49,7 +49,7 @@ export class CollaboratorsEntity {
   @Column()
   collaboratorTypes: CollaboratorTypes;
 
-  @Column({ unique: true, length: 11 })
+  @Column({ unique: true, length: 11, nullable: true })
   cpf: string;
 
   @Column()
@@ -64,7 +64,7 @@ export class CollaboratorsEntity {
   @Column()
   admissionDate: Date;
 
-  @Column({ length: 14 })
+  @Column({ unique: true, length: 14, nullable: true })
   cnpj: string;
 
   @Column()

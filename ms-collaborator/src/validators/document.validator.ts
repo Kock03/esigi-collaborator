@@ -1,3 +1,5 @@
+import { cnpj } from "cpf-cnpj-validator"
+
 export class DocumentValidator {
   static isValidCpf(cpf: string) {
     if (cpf) {
@@ -45,14 +47,15 @@ export class DocumentValidator {
     }
     return true;
   }
+
   static isValidCnpj(cnpj: string) {
+
     if (cnpj) {
       cnpj = cnpj.replace(/[^\d]+/g, '');
-
-      if (cnpj == '') return false;
+      if (cnpj == '') return { cnpjNotValid: true };
 
       if (cnpj.length != 14)
-        return false;
+        return { cpfNotValid: true };
 
       if (cnpj == "00000000000000" ||
         cnpj == "11111111111111" ||
@@ -64,41 +67,47 @@ export class DocumentValidator {
         cnpj == "77777777777777" ||
         cnpj == "88888888888888" ||
         cnpj == "99999999999999")
-        return false;
+        return { cnpjNotValid: true };
 
-      let numbers, digits, size, post, result, sum, i;
+      let tamanho, numeros, digitos, soma, pos, i, resultado;
+      tamanho = cnpj.length - 2
+      numeros = cnpj.substring(0, tamanho);
+      digitos = cnpj.substring(tamanho);
+      soma = 0;
+      pos = tamanho - 7;
+      i = 0;
 
-      size = cnpj.length - 2
-      numbers = cnpj.substring(0, size);
-      digits = cnpj.substring(size);
-      sum = 0;
-
-      post = size - 7;
-      for (i = size; i >= 1; i--) {
-        sum += numbers.charAt(size - post) * post--;
-        if (post < 2)
-          post = 9;
+      for (i = tamanho; i >= 1; i--) {
+        soma += numeros.charAt(tamanho - i) * pos--;
+        if (pos < 2)
+          pos = 9;
       }
-      result = sum % 11 < 2 ? 0 : 11 - sum % 11;
-      if (result != digits.charAt(0))
-        return false;
+      resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
+      if (resultado != digitos.charAt(0))
+        return { cnpjNotValid: true };
 
-      size = size + 1;
-      numbers = cnpj.substring(0, size);
-      sum = 0;
-      post = size - 7;
-      for (i = size; i >= 1; i--) {
-        sum += numbers.charAt(size - i) * post--;
-        if (post < 2)
-          post = 9;
+      tamanho = tamanho + 1;
+      numeros = cnpj.substring(0, tamanho);
+      soma = 0;
+      pos = tamanho - 7;
+      i = 0;
+      for (i = tamanho; i >= 1; i--) {
+        soma += numeros.charAt(tamanho - i) * pos--;
+        if (pos < 2)
+          pos = 9;
       }
-      result = sum % 11 < 2 ? 0 : 11 - sum % 11;
-      if (result != digits.charAt(1))
-        return false;
+      resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
+      if (resultado != digitos.charAt(1))
+        return { cnpjNotValid: true };
 
-      return true;
+      return { cnpjNotValid: false };
+
     }
+
+
+
   }
+
 }
 
 
