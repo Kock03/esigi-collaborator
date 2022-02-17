@@ -35,9 +35,21 @@ __decorate([
     __metadata("design:type", Boolean)
 ], SenioritiesEntity.prototype, "senior", void 0);
 __decorate([
-    (0, typeorm_1.OneToOne)(() => jobs_entity_1.JobsEntity, job => job.Seniorities),
+    (0, typeorm_1.OneToOne)(() => jobs_entity_1.JobsEntity, (job) => job.Seniorities),
     __metadata("design:type", jobs_entity_1.JobsEntity)
 ], SenioritiesEntity.prototype, "Job", void 0);
+__decorate([
+    (0, typeorm_1.CreateDateColumn)(),
+    __metadata("design:type", Date)
+], SenioritiesEntity.prototype, "createdAt", void 0);
+__decorate([
+    (0, typeorm_1.UpdateDateColumn)(),
+    __metadata("design:type", Date)
+], SenioritiesEntity.prototype, "updatedAt", void 0);
+__decorate([
+    (0, typeorm_1.DeleteDateColumn)(),
+    __metadata("design:type", Date)
+], SenioritiesEntity.prototype, "deletedAt", void 0);
 SenioritiesEntity = __decorate([
     (0, typeorm_1.Entity)()
 ], SenioritiesEntity);

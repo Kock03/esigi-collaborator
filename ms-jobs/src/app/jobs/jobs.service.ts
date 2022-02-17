@@ -24,7 +24,7 @@ export class JobsService {
     conditions: FindConditions<JobsEntity>,
     options?: FindOneOptions<JobsEntity>,
   ) {
-    options = { relations: ['Knowledges', 'Seniorities', 'Languages'] };
+    // options = { relations: ['Knowledges', 'Seniorities', 'Languages'] };
 
     try {
       return await this.jobsRepository.findOneOrFail(conditions, options);
@@ -53,6 +53,6 @@ export class JobsService {
       throw new HttpException('Registro não existe ou invalido', 404);
     }
 
-    return await this.jobsRepository.softRemove({ id });
+    return await this.jobsRepository.softDelete({ id });
   }
 }

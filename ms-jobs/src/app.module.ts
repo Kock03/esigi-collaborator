@@ -9,6 +9,7 @@ import { SenioritiesModule } from './app/seniorities/seniorities.module';
 import { BehavioralInterviewsModule } from './app/behavioral-interviews/behavioral-interviews.module';
 import { ClientInterviewsModule } from './app/client-interviews/client-interviews.module';
 import { TechnicalInterviewsModule } from './app/technical-interviews/technical-interviews.module';
+import { ReturnsModule } from './app/returns/returns.module';
 @Module({
   imports: [
     ConfigModule.forRoot(),
@@ -30,6 +31,7 @@ import { TechnicalInterviewsModule } from './app/technical-interviews/technical-
     BehavioralInterviewsModule,
     TechnicalInterviewsModule,
     ClientInterviewsModule,
+    ReturnsModule,
   ],
   controllers: [],
   providers: [],

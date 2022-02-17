@@ -1,4 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { IsNotEmpty } from 'class-validator';
 import { Punctuality } from 'src/app/behavioral-interviews/enums/punctuality.enum';
 import { JobsEntity } from 'src/app/jobs/jobs.entity';
 

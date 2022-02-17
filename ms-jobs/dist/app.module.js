@@ -18,6 +18,7 @@ const seniorities_module_1 = require("./app/seniorities/seniorities.module");
 const behavioral_interviews_module_1 = require("./app/behavioral-interviews/behavioral-interviews.module");
 const client_interviews_module_1 = require("./app/client-interviews/client-interviews.module");
 const technical_interviews_module_1 = require("./app/technical-interviews/technical-interviews.module");
+const returns_module_1 = require("./app/returns/returns.module");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -42,6 +43,7 @@ AppModule = __decorate([
             behavioral_interviews_module_1.BehavioralInterviewsModule,
             technical_interviews_module_1.TechnicalInterviewsModule,
             client_interviews_module_1.ClientInterviewsModule,
+            returns_module_1.ReturnsModule,
         ],
         controllers: [],
         providers: [],

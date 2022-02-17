@@ -1,3 +1,4 @@
+import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, IsOptional } from 'class-validator';
 import { BehaviroalInterviewsEntity } from 'src/app/behavioral-interviews/behavioral-interviews.entity';
 import { ClientInterviewsEntity } from 'src/app/client-interviews/client-interviews.entity';
@@ -12,78 +13,107 @@ import { TypeOfContract } from './typeOfContract.enum';
 import { Workplace } from './workplace.enum';
 
 export class UpdateJobsDto {
+  @ApiProperty()
   @IsNotEmpty()
   requester: string;
 
+  @ApiProperty()
   @IsNotEmpty()
   status: Status;
 
+  @ApiProperty()
   @IsNotEmpty()
   publish: boolean;
 
+  @ApiProperty()
   @IsNotEmpty()
   client: string;
 
+  @ApiProperty()
   @IsNotEmpty()
   typeOfJob: Type;
 
+  @ApiProperty()
   @IsNotEmpty()
   temporary: boolean;
 
+  @ApiProperty()
   @IsOptional()
   monthTime: string;
 
+  @ApiProperty()
   @IsNotEmpty()
   jobName: string;
 
+  @ApiProperty()
   @IsNotEmpty()
   startForecast: Date;
 
-  @IsNotEmpty()
-  collaboratorActivities: string;
-
-  @IsNotEmpty()
-  Seniorities: SenioritiesEntity;
-
+  @ApiProperty()
   @IsNotEmpty()
   jobNumber: number;
 
+  @ApiProperty()
   @IsNotEmpty()
   typeOfContract: TypeOfContract;
 
+  @ApiProperty()
   @IsNotEmpty()
   workplace: Workplace;
 
+  @ApiProperty()
   @IsNotEmpty()
   workingDay: string;
 
+  @ApiProperty()
   @IsNotEmpty()
   minimumValue: number;
 
-  @IsNotEmpty()
-  openingDate: Date;
-
+  @ApiProperty()
   @IsNotEmpty()
   maximumValue: number;
 
+  @ApiProperty()
   @IsNotEmpty()
   schooling: Schooling;
 
+  @ApiProperty()
   @IsNotEmpty()
+  collaboratorActivities: string;
+
+  // @ApiProperty()
+  @IsOptional()
   Knowledges: KnowledgesEntity[];
 
+  @ApiProperty()
   @IsNotEmpty()
   skills: string;
 
+  @ApiProperty()
   @IsNotEmpty()
   attitudes: string;
 
+  @ApiProperty()
   @IsNotEmpty()
+  openingDate: Date;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  Seniorities: SenioritiesEntity;
+
+  // @ApiProperty()
+  @IsOptional()
   Languages: LanguagesEntity[];
 
+  // @ApiProperty()
+  @IsOptional()
   behaviorInterviews: BehaviroalInterviewsEntity[];
 
+  // @ApiProperty()
+  @IsOptional()
   clientInterviews: ClientInterviewsEntity[];
 
+  // @ApiProperty()
+  @IsOptional()
   technicalInterviews: TechnicalInterviewsEntity[];
 }

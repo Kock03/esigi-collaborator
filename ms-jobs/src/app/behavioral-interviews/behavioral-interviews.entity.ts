@@ -55,7 +55,7 @@ export class BehaviroalInterviewsEntity {
   availabilityOfInitialize: string;
 
   @ManyToMany(() => JobsEntity, (jobs) => jobs.BehavioralInterviews, {
-    cascade: ['insert', 'update', 'soft-remove'],
+    cascade: ['insert'],
   })
   jobs: JobsEntity[];
 

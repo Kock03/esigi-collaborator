@@ -46,8 +46,8 @@ let KnowledgesService = class KnowledgesService {
         return await this.knowledgesRepository.save(knowledge);
     }
     async destroy(id) {
-        const knowledge = await this.knowledgesRepository.findOneOrFail({ id });
-        return await this.knowledgesRepository.softDelete(knowledge);
+        await this.knowledgesRepository.findOneOrFail({ id });
+        return await this.knowledgesRepository.softDelete({ id });
     }
 };
 KnowledgesService = __decorate([

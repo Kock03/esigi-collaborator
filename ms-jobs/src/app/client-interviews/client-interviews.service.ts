@@ -38,7 +38,7 @@ export class ClientInterviewsService {
 
   async store(data: CreateClientInterviewsDto) {
     const interview = await this.clientInterviewsRepository.create(data);
-    await this.clientInterviewsRepository.save(interview);
+    return await this.clientInterviewsRepository.save(interview);
   }
 
   async update(id: string, data: UpdateClientInterviewsDto) {
@@ -53,7 +53,7 @@ export class ClientInterviewsService {
 
   async destroy(id: string) {
     try {
-      const interview = await this.clientInterviewsRepository.findOneOrFail({
+      await this.clientInterviewsRepository.findOneOrFail({
         id,
       });
     } catch (error) {

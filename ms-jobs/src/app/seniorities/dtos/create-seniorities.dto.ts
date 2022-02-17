@@ -1,20 +1,25 @@
-import { IsNotEmpty } from "class-validator";
-import { JobsEntity } from "src/app/jobs/jobs.entity";
+import { ApiProperty } from '@nestjs/swagger';
+import { IsNotEmpty, IsOptional } from 'class-validator';
+import { JobsEntity } from 'src/app/jobs/jobs.entity';
 
-export class CreateSenioritiesDto{
+export class CreateSenioritiesDto {
+  @ApiProperty()
+  @IsNotEmpty()
+  intern: boolean;
 
-    @IsNotEmpty()
-    intern: boolean;
-  
-    @IsNotEmpty()
-    junior: boolean;
+  @ApiProperty()
+  @IsNotEmpty()
+  junior: boolean;
 
-    @IsNotEmpty()
-    pleno: boolean;
+  @ApiProperty()
+  @IsNotEmpty()
+  pleno: boolean;
 
-    @IsNotEmpty()
-    senior: boolean;
+  @ApiProperty()
+  @IsNotEmpty()
+  senior: boolean;
 
-    @IsNotEmpty()
-    Job: JobsEntity;
+  @ApiProperty()
+  @IsOptional()
+  Job: JobsEntity;
 }

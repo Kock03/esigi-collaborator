@@ -34,12 +34,14 @@ export class BehavioralInterviewsService {
 
   async store(data: CreateBehaviorInterviewsDto) {
     const inertview = this.behavioralInterviewsRepository.create(data);
-    return await this.behavioralInterviewsRepository.save(data);
+    return await this.behavioralInterviewsRepository.save(inertview);
   }
 
   async update(id: string, data: UpdateBehaviorInterviewsDto) {
-    const job = await this.behavioralInterviewsRepository.findOneOrFail({ id });
-    if (!job) {
+    const inertview = await this.behavioralInterviewsRepository.findOneOrFail({
+      id,
+    });
+    if (!inertview) {
       throw new HttpException('Not found', 404);
     }
     return await this.behavioralInterviewsRepository.save({ id: id, ...data });
@@ -52,6 +54,6 @@ export class BehavioralInterviewsService {
       throw new HttpException('Registro não existe ou invalido', 404);
     }
 
-    return await this.behavioralInterviewsRepository.softRemove({ id });
+    return await this.behavioralInterviewsRepository.softDelete({ id });
   }
 }

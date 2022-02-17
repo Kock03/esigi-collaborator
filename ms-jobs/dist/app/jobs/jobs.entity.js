@@ -120,6 +120,7 @@ __decorate([
     (0, typeorm_1.OneToMany)(() => knowledges_entity_1.KnowledgesEntity, (Knowledges) => Knowledges.Job, {
         cascade: ['insert', 'update', 'soft-remove'],
         orphanedRowAction: 'delete',
+        eager: true,
     }),
     __metadata("design:type", Array)
 ], JobsEntity.prototype, "Knowledges", void 0);
@@ -137,23 +138,35 @@ __decorate([
         cascade: ['insert', 'update', 'soft-remove'],
         eager: true,
     }),
-    (0, typeorm_1.JoinTable)(),
+    (0, typeorm_1.JoinTable)({
+        name: 'behavioral_interviews_jobs',
+        joinColumn: { name: 'id' },
+        inverseJoinColumn: { name: 'behavioral_interviews_id' },
+    }),
     __metadata("design:type", Array)
 ], JobsEntity.prototype, "BehavioralInterviews", void 0);
 __decorate([
-    (0, typeorm_1.ManyToMany)(() => technical_interviews_entity_1.TechnicalInterviewsEntity, (technical) => technical.Jobs, {
+    (0, typeorm_1.ManyToMany)(() => technical_interviews_entity_1.TechnicalInterviewsEntity, (technical) => technical.jobs, {
         cascade: ['insert', 'update', 'soft-remove'],
         eager: true,
     }),
-    (0, typeorm_1.JoinTable)(),
+    (0, typeorm_1.JoinTable)({
+        name: 'technical_interviews_jobs',
+        joinColumn: { name: 'id' },
+        inverseJoinColumn: { name: 'technical_interviews_id' },
+    }),
     __metadata("design:type", Array)
 ], JobsEntity.prototype, "TechnicalInterviews", void 0);
 __decorate([
-    (0, typeorm_1.ManyToMany)(() => client_interviews_entity_1.ClientInterviewsEntity, (client) => client.Jobs, {
+    (0, typeorm_1.ManyToMany)(() => client_interviews_entity_1.ClientInterviewsEntity, (client) => client.jobs, {
         cascade: ['insert', 'update', 'soft-remove'],
         eager: true,
     }),
-    (0, typeorm_1.JoinTable)(),
+    (0, typeorm_1.JoinTable)({
+        name: 'client_interviews_jobs',
+        joinColumn: { name: 'id' },
+        inverseJoinColumn: { name: 'client_interviews_id' },
+    }),
     __metadata("design:type", Array)
 ], JobsEntity.prototype, "ClientInterviews", void 0);
 __decorate([

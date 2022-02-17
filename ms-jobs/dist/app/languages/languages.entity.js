@@ -27,7 +27,9 @@ __decorate([
     __metadata("design:type", Number)
 ], LanguagesEntity.prototype, "degreeOfInfluence", void 0);
 __decorate([
-    (0, typeorm_1.ManyToOne)(() => jobs_entity_1.JobsEntity, job => job.Languages, { onDelete: "CASCADE" }),
+    (0, typeorm_1.ManyToOne)(() => jobs_entity_1.JobsEntity, (job) => job.Languages, {
+        cascade: ['insert', 'update', 'soft-remove'],
+    }),
     __metadata("design:type", jobs_entity_1.JobsEntity)
 ], LanguagesEntity.prototype, "Job", void 0);
 LanguagesEntity = __decorate([

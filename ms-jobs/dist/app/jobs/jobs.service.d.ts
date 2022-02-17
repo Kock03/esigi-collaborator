@@ -20,26 +20,24 @@ export declare class JobsService {
         monthTime: string;
         jobName: string;
         startForecast: Date;
-        collaboratorActivities: string;
-        Seniorities: import("../seniorities/seniorities.entity").SenioritiesEntity;
         jobNumber: number;
         typeOfContract: import("./dtos/typeOfContract.enum").TypeOfContract;
         workplace: import("./dtos/workplace.enum").Workplace;
         workingDay: string;
         minimumValue: number;
-        openingDate: Date;
         maximumValue: number;
         schooling: import("./dtos/schooling.enum").Schooling;
+        collaboratorActivities: string;
         Knowledges: import("../knowledges/knowledges.entity").KnowledgesEntity[];
         skills: string;
         attitudes: string;
+        openingDate: Date;
+        Seniorities: import("../seniorities/seniorities.entity").SenioritiesEntity;
         Languages: import("../languages/languages.entity").LanguagesEntity[];
         behaviorInterviews: import("../behavioral-interviews/behavioral-interviews.entity").BehaviroalInterviewsEntity[];
         clientInterviews: import("../client-interviews/client-interviews.entity").ClientInterviewsEntity[];
         technicalInterviews: import("../technical-interviews/technical-interviews.entity").TechnicalInterviewsEntity[];
         id: string;
     } & JobsEntity>;
-    destroy(id: string): Promise<{
-        id: string;
-    } & JobsEntity>;
+    destroy(id: string): Promise<import("typeorm").UpdateResult>;
 }

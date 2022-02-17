@@ -1,15 +1,17 @@
-import { IsNotEmpty, IsOptional } from "class-validator";
-import { JobsEntity } from "src/app/jobs/jobs.entity";
+import { ApiProperty } from '@nestjs/swagger';
+import { IsNotEmpty, IsOptional } from 'class-validator';
+import { JobsEntity } from 'src/app/jobs/jobs.entity';
 
 export class CreateLanguagesDto {
+  @ApiProperty()
+  @IsNotEmpty()
+  languageName: string;
 
-    @IsNotEmpty()
-    languageName: string;
+  @ApiProperty()
+  @IsNotEmpty()
+  degreeOfInfluence: degreeOfInfluence;
 
-    @IsNotEmpty()
-    degreeOfInfluence: degreeOfInfluence;
-
-    @IsOptional()
-    Job: JobsEntity;
-
+  @ApiProperty()
+  @IsOptional()
+  Job: JobsEntity;
 }

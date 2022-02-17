@@ -24,6 +24,7 @@ import { LanguagesEntity } from '../languages/languages.entity';
 import { BehaviroalInterviewsEntity } from 'src/app/behavioral-interviews/behavioral-interviews.entity';
 import { ClientInterviewsEntity } from '../client-interviews/client-interviews.entity';
 import { TechnicalInterviewsEntity } from '../technical-interviews/technical-interviews.entity';
+import { ReturnsEntity } from '../returns/returns.entity';
 
 @Entity({ name: 'jobs' })
 export class JobsEntity {
@@ -100,6 +101,7 @@ export class JobsEntity {
   @OneToMany(() => KnowledgesEntity, (Knowledges) => Knowledges.Job, {
     cascade: ['insert', 'update', 'soft-remove'],
     orphanedRowAction: 'delete',
+    eager: true,
   })
   Knowledges: KnowledgesEntity[];
 
@@ -119,22 +121,41 @@ export class JobsEntity {
       eager: true,
     },
   )
-  @JoinTable()
+  @JoinTable({
+    name: 'behavioral_interviews_jobs',
+    joinColumn: { name: 'id' },
+    inverseJoinColumn: { name: 'behavioral_interviews_id' },
+  })
   BehavioralInterviews: BehaviroalInterviewsEntity[];
 
-  @ManyToMany(() => TechnicalInterviewsEntity, (technical) => technical.Jobs, {
+  @ManyToMany(() => TechnicalInterviewsEntity, (technical) => technical.jobs, {
     cascade: ['insert', 'update', 'soft-remove'],
     eager: true,
   })
-  @JoinTable()
+  @JoinTable({
+    name: 'technical_interviews_jobs',
+    joinColumn: { name: 'id' },
+    inverseJoinColumn: { name: 'technical_interviews_id' },
+  })
   TechnicalInterviews: TechnicalInterviewsEntity[];
 
-  @ManyToMany(() => ClientInterviewsEntity, (client) => client.Jobs, {
+  @ManyToMany(() => ClientInterviewsEntity, (client) => client.jobs, {
     cascade: ['insert', 'update', 'soft-remove'],
     eager: true,
   })
-  @JoinTable()
+  @JoinTable({
+    name: 'client_interviews_jobs',
+    joinColumn: { name: 'id' },
+    inverseJoinColumn: { name: 'client_interviews_id' },
+  })
   ClientInterviews: ClientInterviewsEntity[];
+
+  // @OneToOne(() => ReturnsEntity, {
+  //   cascade: ['insert', 'update', 'soft-remove'],
+  //   eager: true,
+  // })
+  // @JoinColumn()
+  // returns: ReturnsEntity;
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;

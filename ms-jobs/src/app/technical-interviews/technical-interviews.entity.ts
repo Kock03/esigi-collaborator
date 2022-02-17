@@ -46,9 +46,9 @@ export class TechnicalInterviewsEntity {
   situational: boolean;
 
   @ManyToMany(() => JobsEntity, (jobs) => jobs.TechnicalInterviews, {
-    cascade: ['insert', 'update', 'soft-remove'],
+    cascade: ['insert'],
   })
-  Jobs: JobsEntity[];
+  jobs: JobsEntity[];
 
   @CreateDateColumn()
   createdAt: Date;

@@ -1,16 +1,20 @@
-import { IsNotEmpty } from "class-validator";
+import { ApiProperty } from '@nestjs/swagger';
+import { IsNotEmpty } from 'class-validator';
 
-export class UpdateSenioritiesDto{
+export class UpdateSenioritiesDto {
+  @ApiProperty()
+  @IsNotEmpty()
+  intern: boolean;
 
-    @IsNotEmpty()
-    intern: boolean;
-  
-    @IsNotEmpty()
-    junior: boolean;
+  @ApiProperty()
+  @IsNotEmpty()
+  junior: boolean;
 
-    @IsNotEmpty()
-    pleno: boolean;
+  @ApiProperty()
+  @IsNotEmpty()
+  pleno: boolean;
 
-    @IsNotEmpty()
-    senior: boolean;
+  @ApiProperty()
+  @IsNotEmpty()
+  senior: boolean;
 }

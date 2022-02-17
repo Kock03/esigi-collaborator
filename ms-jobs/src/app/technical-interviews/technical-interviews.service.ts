@@ -36,8 +36,8 @@ export class TechnicalInterviewsService {
   }
 
   async store(data: CreateTechnicalInterviewsDto) {
-    const interview = await this.technicalInterviewsRepository.create(data);
-    await this.technicalInterviewsRepository.save(interview);
+    const interview = this.technicalInterviewsRepository.create(data);
+    return await this.technicalInterviewsRepository.save(interview);
   }
 
   async update(id: string, data: UpdateTechnicalInterviewsDto) {
@@ -52,12 +52,12 @@ export class TechnicalInterviewsService {
 
   async destroy(id: string) {
     try {
-      const interview = await this.technicalInterviewsRepository.findOneOrFail({
+      await this.technicalInterviewsRepository.findOneOrFail({
         id,
       });
     } catch (error) {
       throw new HttpException('Registro não encontrado', 404);
     }
-    return await this.technicalInterviewsRepository.softRemove({ id });
+    return await this.technicalInterviewsRepository.softDelete({ id });
   }
 }
