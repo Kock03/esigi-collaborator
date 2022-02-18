@@ -26,11 +26,7 @@ import {
 import { MatTableModule } from '@angular/material/table';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
-import {
-  CollaboratorEducationDialog,
-  CollaboratorEducationTabComponent,
-  CollaboratorLanguageDialog,
-} from './collaborator-create/collaborator-education-tab/collaborator-education-tab.component';
+import { CollaboratorEducationTabComponent } from './collaborator-create/collaborator-education-tab/collaborator-education-tab.component';
 import {
   CollaboratorDocumentDialog,
   CollaboratorDocumentTabComponent,
@@ -42,12 +38,12 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { CollaboratorFeedbackTabComponent } from './collaborator-create/collaborator-feedback-tab/collaborator-feedback-tab.component';
-import {
-  CollaboradorDependentsDialog,
-  CollaboratorDependentsTabComponent,
-} from './collaborator-create/collaborator-dependents-tab/collaborator-dependents-tab.component';
+import { CollaboratorDependentsTabComponent } from './collaborator-create/collaborator-dependents-tab/collaborator-dependents-tab.component';
 import { FeedbackCreateComponent } from './feedback-create/feedback-create.component';
 import { CollaboratorListComponent } from './collaborator-list/collaborator-list.component';
+import { CollaboratorDependentsDialog } from './collaborator-create/collaborator-dependents-tab/collaborator-dependents-dialog.component';
+import { CollaboratorEducationDialog } from './collaborator-create/collaborator-education-tab/collaborator-education-dialog.component';
+import { CollaboratorLanguageDialog } from './collaborator-create/collaborator-education-tab/collaborator-language-dialog.component';
 
 const routes: Routes = [
   {
@@ -82,7 +78,7 @@ const routes: Routes = [
     CollaboratorDocumentDialog,
     CollaboratorFeedbackTabComponent,
     CollaboratorDependentsTabComponent,
-    CollaboradorDependentsDialog,
+    CollaboratorDependentsDialog,
     FeedbackCreateComponent,
     CollaboratorListComponent,
   ],
@@ -121,7 +117,7 @@ const routes: Routes = [
     CollaboratorDocumentDialog,
     CollaboratorFeedbackTabComponent,
     CollaboratorDependentsTabComponent,
-    CollaboradorDependentsDialog,
+    CollaboratorDependentsDialog,
     CollaboratorListComponent,
     FeedbackCreateComponent,
   ],

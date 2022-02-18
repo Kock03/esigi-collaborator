@@ -181,22 +181,18 @@ export class JobCreateComponent implements OnInit {
         pleno: [false],
         senior: [false],
       }),
-      Knowledges: this.fb.array(this.job? this.job.Knowledges: [null]),
+      Knowledges: this.fb.array(this.job ? this.job.Knowledges : [null]),
     });
   }
 
   setFormValue() {
-    if (this.job){
-
+    if (this.job) {
       this.jobForm.patchValue(this.job);
       if (this.job.Languages[0]) {
         const languages = this.jobForm.controls['Languages'] as FormGroup;
         languages.patchValue(this.job.Languages[0]);
       }
-      // this.job.Knowledges.forEach((element: any) => {
-        //   this.knowledgeArray.insert(0, element);
-        // });
-      }
+    }
   }
 
   handleStep(number: number): void {
@@ -219,7 +215,6 @@ export class JobCreateComponent implements OnInit {
   }
 
   async saveEditJob() {
-    console.log(this.jobForm)
     let data = this.jobForm.getRawValue();
     try {
       data.Languages = new Array(data.Languages);

@@ -7,9 +7,9 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class CollaboratorProvider {
-  constructor(private apiGateway: ApiGateway) { }
+  constructor(private apiGateway: ApiGateway) {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   findAll(): Promise<any> {
     return new Promise((resolve, reject) => {
@@ -46,7 +46,6 @@ export class CollaboratorProvider {
   }
 
   store(collaborator: any): Promise<any> {
-    console.log(collaborator)
     return new Promise((resolve, reject) => {
       this.apiGateway
         .post(environment.COLLABORATOR_MS + 'collaborators', collaborator)
@@ -55,12 +54,9 @@ export class CollaboratorProvider {
           resolve(response.body);
         }, reject);
     });
-
   }
 
   destroy(collaboratorId: string): Promise<any> {
-    console.log(collaboratorId);
-
     return new Promise((resolve, reject) => {
       this.apiGateway
         .delete(environment.COLLABORATOR_MS + 'collaborators/' + collaboratorId)

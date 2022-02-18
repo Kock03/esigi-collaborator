@@ -10,6 +10,7 @@ import {
 } from '@angular/material/dialog';
 import { ResumeDialogExperience } from './resume-experience-tab/resume-experience-tab.component';
 import { ResumeProvider } from 'src/providers/resume.provider';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-resume-create',
@@ -26,7 +27,7 @@ export class ResumeCreateComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-
+    private router: Router,
     private resumeProvider: ResumeProvider
   ) {}
 
@@ -95,6 +96,10 @@ export class ResumeCreateComponent implements OnInit {
     } else if (this.step < 5 && direction === 'next') {
       this.step += 1;
     }
+  }
+
+  listResume() {
+    this.router.navigate(['curriculo/lista']);
   }
 
   handleChanges(value: any): void {}

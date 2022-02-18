@@ -11,22 +11,11 @@ import {
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {
   MatDialog,
-  MatDialogRef,
-  MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
+import { CollaboratorEducationDialog } from './collaborator-education-dialog.component';
+import { CollaboratorLanguageDialog } from './collaborator-language-dialog.component';
 
-export interface education {
-  schooling: string;
-  situation: string;
-  course: string;
-  institution: string;
-}
-
-export interface language {
-  languageName: string;
-  degreeOfInfluence: string;
-}
 
 @Component({
   selector: 'app-collaborator-education-tab',
@@ -40,34 +29,12 @@ export class CollaboratorEducationTabComponent implements OnInit {
   @ViewChild('languageTable') languageTable!: MatTable<any>;
   @ViewChild('educationTable') educationTable!: MatTable<any>;
 
-  languages: language[] = [
-    { languageName: 'Russo', degreeOfInfluence: 'Escrita' },
-    { languageName: 'Inglês', degreeOfInfluence: 'Leitura' },
-    { languageName: 'Alemão', degreeOfInfluence: 'Conversação' },
-  ];
 
-  educations: education[] = [
-    {
-      schooling: 'Ensino Fundamental',
-      situation: 'completo',
-      course: '',
-      institution: '',
-    },
-    {
-      schooling: 'Ensino Médio',
-      situation: 'Incompleto',
-      course: '',
-      institution: '',
-    },
-    {
-      schooling: 'Ensino Superior',
-      situation: 'Em andamento',
-      course: '',
-      institution: '',
-    },
-  ];
 
-  data: [] = [];
+
+  dataLanguage: [] = [];
+
+  dataEducation: [] = [];
 
 
   displayedEducation: string[] = [
@@ -102,12 +69,48 @@ export class CollaboratorEducationTabComponent implements OnInit {
   constructor(private fb: FormBuilder, public dialog: MatDialog) {}
 
   ngOnInit(): void {
-    this.initForm();
-    this.collaboratorForm.valueChanges.subscribe((res) => {
-      console.log(res);
-      this.educationList = this.educationArray.value;
+    if (
+      this.educationArray.value.findIndex(
+        (education: any) => education == null
+      ) === -1
+    ) {
+      this.dataEducation = this.educationArray.value;
+    }
 
-      this.languageList = this.languageArray.value;
+    if (
+      this.languageArray.value.findIndex(
+        (language: any) => language == null
+      ) === -1
+    ) {
+      this.dataLanguage = this.languageArray.value;
+    }
+
+    this.initObservables();
+  }
+
+  initObservables() {
+    this.educationArray.valueChanges.subscribe((res) => {
+      const isNullIndex = this.educationArray.value.findIndex(
+        (education: any) => education == null
+      );
+      if (isNullIndex !== -1) {
+        this.educationArray.removeAt(isNullIndex);
+      }
+      if (res) {
+        this.dataEducation = this.educationArray.value;
+      }
+    });
+
+    this.languageArray.valueChanges.subscribe((res) => {
+      const isNullIndex = this.languageArray.value.findIndex(
+        (language: any) => language == null
+      );
+      if (isNullIndex !== -1) {
+        this.languageArray.removeAt(isNullIndex);
+      }
+      if (res) {
+        this.dataLanguage = this.languageArray.value;
+      }
     });
   }
 
@@ -139,37 +142,11 @@ export class CollaboratorEducationTabComponent implements OnInit {
     });
   }
 
-  initForm(): void {
-    this.languageForm = this.fb.group({
-      languageName: ['', Validators.required],
-      degreeOfInfluence: [1, Validators.required],
-    });
-    this.educationForm = this.fb.group({
-      schooling: [1, Validators.required],
-      situation: [1, Validators.required],
-      course: ['', Validators.required],
-      institution: ['', Validators.required],
-    });
-  }
-
   next() {
     this.onChange.next(true);
   }
 
-  saveEducation() {
-    const data = this.educationForm.getRawValue();
-    this.educationArray.insert(0, this.fb.group(data));
-    this.educationTable.renderRows();
-    this.educationForm.reset();
-  }
-
-  saveLanguage() {
-    const data = this.languageForm.getRawValue();
-    this.languageArray.insert(0, this.fb.group(data));
-    this.languageTable.renderRows();
-    this.languageForm.reset();
-  }
-
+ 
   getLanguage(languageSelected: any, index: number) {
     const dialogRef = this.dialog.open(CollaboratorLanguageDialog, {
       width: '500px',
@@ -232,94 +209,4 @@ export class CollaboratorEducationTabComponent implements OnInit {
 
 }
 
-@Component({
-  selector: 'collaborator-language-dialog',
-  templateUrl: 'collaborator-language-dialog.html',
-  styleUrls: ['./collaborator-education-tab.component.scss'],
-})
-export class CollaboratorLanguageDialog {
-  @Input('form') collaboratorForm!: FormGroup;
-  @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
 
-  languageForm!: FormGroup;
-
-  constructor(
-    public dialogRef: MatDialogRef<CollaboratorLanguageDialog>,
-    private fb: FormBuilder,
-    @Inject(MAT_DIALOG_DATA) public data: { languageSelected: any }
-  ) {}
-
-  ngOnInit(): void {
-    this.initForm();
-  }
-
-  initForm(): void {
-    this.languageForm = this.fb.group({
-      languageName: ['Inglês', [Validators.required, Validators.maxLength(40)]],
-      degreeOfInfluence: [1, Validators.required],
-    });
-    if (this.data && this.data.languageSelected) {
-      this.languageForm.patchValue(this.data.languageSelected);
-    }
-  }
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-
-  save() {
-    this.dialogRef.close(this.languageForm.getRawValue());
-  }
-}
-
-@Component({
-  selector: 'collaborator-education-dialog',
-  templateUrl: 'collaborator-education-dialog.html',
-  styleUrls: ['./collaborator-education-tab.component.scss'],
-})
-export class CollaboratorEducationDialog {
-  @Input('form') collaboratorForm!: FormGroup;
-  @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
-
-  educationForm!: FormGroup;
-
-  constructor(
-    public dialogRef: MatDialogRef<CollaboratorEducationDialog>,
-    private fb: FormBuilder,
-    @Inject(MAT_DIALOG_DATA) public data: { educationSelected: any }
-  ) {}
-
-  ngOnInit(): void {
-    this.initForm();
-  }
-
-  initForm(): void {
-    this.educationForm = this.fb.group({
-      schooling: [1, Validators.required],
-      situation: [1, Validators.required],
-
-      course: [
-        'Engenharia de Software',
-        [Validators.required, Validators.maxLength(100)],
-      ],
-
-
-
-      institution: ['FURB', [Validators.required, Validators.maxLength(100)]],
-    });
-    if (this.data && this.data.educationSelected) {
-      this.educationForm.patchValue(this.data.educationSelected);
-    }
-  }
-
-  ngAfterViewInit(): void {}
-
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-
-  save() {
-    this.dialogRef.close(this.educationForm.getRawValue());
-  }
-}

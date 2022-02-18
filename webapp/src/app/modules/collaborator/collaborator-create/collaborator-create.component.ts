@@ -15,13 +15,11 @@ import { SnackBarService } from 'src/services/snackbar.service';
   encapsulation: ViewEncapsulation.None,
 })
 export class CollaboratorCreateComponent implements OnInit {
-
   collaboratorForm!: FormGroup;
   step: number = 1;
   collaboratorId!: string | null;
   collaborator!: any;
 
-  Dependents: any;
   Educations: any;
   Languages: any;
   BankData: any;
@@ -36,8 +34,7 @@ export class CollaboratorCreateComponent implements OnInit {
     private router: Router,
     private snackbarService: SnackBarService,
     private route: ActivatedRoute
-  ) { }
-
+  ) {}
 
   async ngOnInit(): Promise<void> {
     this.collaboratorId = this.route.snapshot.paramMap.get('id');
@@ -76,7 +73,6 @@ export class CollaboratorCreateComponent implements OnInit {
     }
   }
 
-
   initForm() {
     this.collaboratorForm = this.fb.group({
       firstNameCorporateName: ['Davi', Validators.required],
@@ -87,10 +83,12 @@ export class CollaboratorCreateComponent implements OnInit {
       office: ['Desenvolvedor Angular', Validators.required],
       collaboratorTypes: [1, Validators.required],
       active: [true, Validators.required],
-      cpf: this.fb.control({ value: null, disabled: false }, [DocumentValidator.isValidCpf(), Validators.required]),
+      cpf: this.fb.control({ value: null, disabled: false }, [
+        DocumentValidator.isValidCpf(),
+        Validators.required,
+      ]),
       birthDate: ['2004-06-12', Validators.required],
       admissionDate: ['', Validators.required],
-
 
       email: ['davi@email', [Validators.email, Validators.required]],
       cnpj: ['', Validators.required],
@@ -118,40 +116,14 @@ export class CollaboratorCreateComponent implements OnInit {
         district: ['', Validators.required],
       }),
 
-
       Dependents: this.fb.array(
-        new Array(
-          this.fb.group({
-            type: null,
-            firstName: null,
-            lastName: null,
-            gender: null,
-            cpf: null,
-            birthDate: null,
-            ddi: null,
-            ddd: null,
-            phoneNumber: null,
-            email: null,
-          })
-        )
+        this.collaborator ? this.collaborator.Dependents : [null]
       ),
       Educations: this.fb.array(
-        new Array(
-          this.fb.group({
-            schooling: null,
-            course: null,
-            institution: null,
-            situation: null,
-          })
-        )
+        this.collaborator ? this.collaborator.Educations : [null]
       ),
       Languages: this.fb.array(
-        new Array(
-          this.fb.group({
-            languageName: null,
-            degreeOfInfluence: null,
-          })
-        )
+        this.collaborator ? this.collaborator.Languages : [null]
       ),
       BankData: this.fb.array(
         new Array(
@@ -193,48 +165,15 @@ export class CollaboratorCreateComponent implements OnInit {
           })
         )
       ),
-
     });
   }
 
   setFormValue() {
     this.collaboratorForm.patchValue(this.collaborator);
-    // if (this.collaborator.Address[0]) {
-    //   const address = this.collaboratorForm.controls['Address'] as FormGroup;
-    //   address.patchValue(this.collaborator.Address[0]);
-    // }
-    // if (this.collaborator.Phone[0]) {
-    //   const phone = this.collaboratorForm.controls['Phone'] as FormGroup;
-    //   phone.value.patchValue(this.collaborator.Phone[0]);
-    // }
-    // if (this.collaborator.Educations[0] == null) {
-    //   console.log(this.collaborator.Educations);
-
-    //   const educations = this.collaboratorForm.controls[
-    //     'Educations'
-    //   ] as FormArray;
-    //   educations.value.splice(0, 1);
-    // }
-    // if (this.collaborator.Language == null) {
-    //   const languages = this.collaboratorForm.controls[
-    //     'Languages'
-    //   ] as FormArray;
-    //   languages.value.splice(0, 1);
-    // }
-
-    // if (this.collaborator.BankData == null) {
-    //   const bankData = this.collaboratorForm.controls['BankData'] as FormArray;
-
-    //   bankData.value.splice(0, 1);
-    // }
   }
 
   async saveCollaborator() {
-
-
     let data = this.collaboratorForm.getRawValue();
-
-
 
     try {
       data.Dependents = new Array(data.Dependents);
@@ -253,8 +192,7 @@ export class CollaboratorCreateComponent implements OnInit {
       this.snackbarService.showError('Falha ao Cadastrar');
     }
   }
-  handleChanges(value: any): void {
-  }
+  handleChanges(value: any): void {}
 
   handleStep(number: number): void {
     this.step = number;

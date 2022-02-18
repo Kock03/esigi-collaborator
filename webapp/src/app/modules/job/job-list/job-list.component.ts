@@ -68,10 +68,6 @@ export class JobListComponent implements OnInit {
   async getJobList() {
     try {
       this.filteredJobList = this.jobs = await this.jobProvider.findAll();
-      console.log(
-        '🚀 ~ file: job-list.component.ts ~ line 69 ~ JobListComponent ~ getJobList ~  this.filteredJobList',
-        this.filteredJobList
-      );
     } catch (error) {
       console.error(error);
     }

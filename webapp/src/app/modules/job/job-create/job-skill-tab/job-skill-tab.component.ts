@@ -56,10 +56,6 @@ export class JobSkillTabComponent implements OnInit {
     }
 
     this.initObservables();
-    console.log(
-      '🚀 ~ file: job-skill-tab.component.ts ~ line 51 ~ JobSkillTabComponent ~ ngOnInit ~  this.knowledgeArray.value',
-      this.knowledgeArray.value
-    );
   }
 
   initObservables() {
@@ -82,27 +78,14 @@ export class JobSkillTabComponent implements OnInit {
       height: '200px',
     });
 
-    console.log(this.knowledgeArray);
-
     dialogRef.afterClosed().subscribe((knowledge) => {
       if (knowledge) {
         this.knowledgeArray.insert(0, this.fb.group(knowledge));
-        // if (!this.knowledgeArray.controls[0].value.name){
-        //   this.knowledgeArray.controls[0].patchValue(knowledge);
-        // } else {
-        //   this.knowledgeArray.insert(0, this.fb.group(knowledge));
-        // }
         this.knowledgeTable.renderRows();
       }
     });
   }
-
-  // saveKnowledge() {
-  //   const data = this.knowledgeForm.getRawValue();
-  //   this.knowledgeArray.insert(0, this.fb.group(data));
-  //   this.knowledgeTable.renderRows();
-  //   this.knowledgeForm.reset();
-  // }
+          
 
   getKnowledge(knowledgeSelected: any, index: number) {
     const dialogRef = this.dialog.open(JobDialogSkill, {

@@ -59,8 +59,6 @@ export class CollaboratorBankTabComponent implements OnInit {
 
   ngOnInit(): void {
     this.collaboratorForm.valueChanges.subscribe((res) => {
-      console.log(res);
-
       this.data = this.bankArray.value;
     });
   }
