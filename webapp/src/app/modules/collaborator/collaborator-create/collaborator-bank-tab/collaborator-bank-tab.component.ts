@@ -8,22 +8,13 @@ import {
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup} from '@angular/forms';
 import {
   MatDialog,
-  MatDialogRef,
-  MAT_DIALOG_DATA,
+
 } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
-
-export interface BankData {
-  bank: string;
-  agency: string;
-  accountType: string;
-  accountNumber: string;
-  digit: string;
-  bankAccountDigit: string;
-}
+import { CollaboratorBankDialog } from './collaborator-bank-dialog.component';
 
 @Component({
   selector: 'app-collaborator-bank-tab',
@@ -55,13 +46,30 @@ export class CollaboratorBankTabComponent implements OnInit {
     return this.collaboratorForm.controls['BankData'] as FormArray;
   }
 
-  constructor(private fb: FormBuilder, public dialog: MatDialog) { }
+  constructor(private fb: FormBuilder, public dialog: MatDialog) {}
 
   ngOnInit(): void {
-    this.collaboratorForm.valueChanges.subscribe((res) => {
+    if (this.bankArray.value.findIndex((bank: any) => bank == null) === -1) {
       this.data = this.bankArray.value;
+    }
+
+    this.initObservables();
+  }
+
+  initObservables() {
+    this.bankArray.valueChanges.subscribe((res) => {
+      const isNullIndex = this.bankArray.value.findIndex(
+        (dependent: any) => dependent == null
+      );
+      if (isNullIndex !== -1) {
+        this.bankArray.removeAt(isNullIndex);
+      }
+      if (res) {
+        this.data = this.bankArray.value;
+      }
     });
   }
+
   openDialog() {
     const dialogRef = this.dialog.open(CollaboratorBankDialog, {
       width: '500px',
@@ -70,12 +78,7 @@ export class CollaboratorBankTabComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((bank) => {
       if (bank) {
-
-        if (!this.bankArray.controls[0].value.name) {
-          this.bankArray.controls[0].patchValue(bank);
-        } else {
-          this.bankArray.insert(0, this.fb.group(bank));
-        }
+        this.bankArray.controls[0].patchValue(bank);
         this.bankTable.renderRows();
       }
     });
@@ -85,11 +88,6 @@ export class CollaboratorBankTabComponent implements OnInit {
     this.onChange.next(true);
   }
 
-  /*saveBank() {
-    const data = this.bankForm.getRawValue();
-    this.bankArray.insert(0, this.fb.group(data));
-    this.bankTable.renderRows();
-    this.bankFor*/
 
   getBank(bankSelected: any, index: number) {
     const dialogRef = this.dialog.open(CollaboratorBankDialog, {
@@ -108,45 +106,3 @@ export class CollaboratorBankTabComponent implements OnInit {
   }
 }
 
-@Component({
-  selector: 'collaborator-bank-dialog',
-  templateUrl: 'collaborator-bank-dialog.html',
-})
-export class CollaboratorBankDialog {
-  @Input('form') collaboratorForm!: FormGroup;
-  @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
-
-  bankForm!: FormGroup;
-
-  constructor(
-    public dialogRef: MatDialogRef<CollaboratorBankDialog>,
-    private fb: FormBuilder,
-    @Inject(MAT_DIALOG_DATA) public data: { bankSelected: any }
-  ) { }
-
-  ngOnInit(): void {
-    this.initForm();
-  }
-
-  initForm(): void {
-    this.bankForm = this.fb.group({
-      bank: ['Bradesco', [Validators.required, Validators.maxLength(50)]],
-      agency: ['1111', [Validators.required, Validators.maxLength(4)]],
-      accountType: [1, Validators.required],
-      accountNumber: ['11111', [Validators.required, Validators.maxLength(5)]],
-      digit: ['1', [Validators.required, Validators.maxLength(1)]],
-      bankAccountDigit: ['1', [Validators.required, Validators.maxLength(1)]],
-    });
-    if (this.data && this.data.bankSelected) {
-      this.bankForm.patchValue(this.data.bankSelected);
-    }
-  }
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-
-  save() {
-    this.dialogRef.close(this.bankForm.getRawValue());
-  }
-}

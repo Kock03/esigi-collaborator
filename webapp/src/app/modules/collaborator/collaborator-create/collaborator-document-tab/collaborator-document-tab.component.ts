@@ -16,11 +16,7 @@ import {
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
-
-export interface document {
-  name: string;
-  file: string;
-}
+import { CollaboratorDocumentDialog } from './collaborator-document-dialog.component';
 
 @Component({
   selector: 'app-collaborator-document-tab',
@@ -34,17 +30,12 @@ export class CollaboratorDocumentTabComponent implements OnInit {
   @ViewChild('documentTable') documentTable!: MatTable<any>;
 
   displayedColumns: string[] = ['name', 'file', 'icon'];
-  documents: document[] = [
-    {
-      name: 'RG',
-      file: '',
-    },
-  ];
 
   selectedIndex = 0;
   documentForm!: FormGroup;
   index: any = null;
   Document: any;
+  data: [] = [];
 
   get documentArray() {
     return this.collaboratorForm.controls['Documents'] as FormArray;
@@ -53,7 +44,29 @@ export class CollaboratorDocumentTabComponent implements OnInit {
   constructor(private fb: FormBuilder, public dialog: MatDialog) {}
 
   ngOnInit(): void {
-    this.initForm();
+    if (
+      this.documentArray.value.findIndex(
+        (document: any) => document == null
+      ) === -1
+    ) {
+      this.data = this.documentArray.value;
+    }
+
+    this.initObservables();
+  }
+
+  initObservables() {
+    this.documentArray.valueChanges.subscribe((res) => {
+      const isNullIndex = this.documentArray.value.findIndex(
+        (document: any) => document == null
+      );
+      if (isNullIndex !== -1) {
+        this.documentArray.removeAt(isNullIndex);
+      }
+      if (res) {
+        this.data = this.documentArray.value;
+      }
+    });
   }
 
   openDialog() {
@@ -67,13 +80,6 @@ export class CollaboratorDocumentTabComponent implements OnInit {
         this.documentArray.insert(0, this.fb.group(document));
         this.documentTable.renderRows();
       }
-    });
-  }
-
-  initForm(): void {
-    this.documentForm = this.fb.group({
-      name: [''],
-      file: [''],
     });
   }
 
@@ -92,55 +98,5 @@ export class CollaboratorDocumentTabComponent implements OnInit {
 
   deleteDocument(index: number) {
     this.documentArray.removeAt(index);
-  }
-}
-
-@Component({
-  selector: 'collaborator-document-dialog',
-  templateUrl: 'collaborator-document-dialog.html',
-  styleUrls: ['./collaborator-document-tab.component.scss'],
-})
-export class CollaboratorDocumentDialog {
-  @Input('form') collaboratorForm!: FormGroup;
-  @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
-
-  documentForm!: FormGroup;
-
-  constructor(
-    public dialogRef: MatDialogRef<CollaboratorDocumentDialog>,
-    private fb: FormBuilder,
-    @Inject(MAT_DIALOG_DATA) public data: { documentSelected: any }
-  ) {}
-
-
-
-  ngOnInit(): void {
-    this.initForm();
-  }
-
-  initForm(): void {
-    this.documentForm = this.fb.group({
-      name: ['RG', Validators.required],
-      file: [''],
-    });
-
-    if (this.data && this.data.documentSelected) {
-      this.documentForm.patchValue(this.data.documentSelected);
-    }
-  }
-
-  onFileSelected(event: any) {
-    if (event.target.files.length > 0) {
-      const file = event.target.files[0];
-
-    }
-  }
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-
-  async save() {
-    this.dialogRef.close(this.documentForm.getRawValue());
   }
 }

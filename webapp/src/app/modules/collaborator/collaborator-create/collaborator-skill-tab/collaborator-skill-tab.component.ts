@@ -11,12 +11,7 @@ import {
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatTable } from '@angular/material/table';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-export interface skill {
-  technology: string;
-  seniority: string;
-  yearsExperience: string;
-  currentPosition: boolean;
-}
+import { CollaboratorSkillDialog } from './collaborator-skill-dialog.component';
 
 @Component({
   selector: 'app-collaborator-skill-tab',
@@ -29,16 +24,9 @@ export class CollaboratorSkillTabComponent implements OnInit {
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
   @ViewChild('skillTable') skillTable!: MatTable<any>;
 
-  displayedColumns: string[] = ['name', 'time', 'level', 'icon'];
+  displayedColumns: string[] = ['technology', 'time', 'level', 'icon'];
 
-  skills: skill[] = [
-    {
-      technology: 'Java',
-      yearsExperience: '',
-      seniority: 'Senior',
-      currentPosition: false,
-    },
-  ];
+ data: [] = [];
 
   selectedIndex: number = 0;
   skillForm!: FormGroup;
@@ -53,9 +41,30 @@ export class CollaboratorSkillTabComponent implements OnInit {
   constructor(private fb: FormBuilder,public dialog: MatDialog,) {}
 
   ngOnInit(): void {
-    this.initForm();
+    if (
+      this.skillArray.value.findIndex(
+        (skill: any) => skill == null
+      ) === -1
+    ) {
+      this.data = this.skillArray.value;
+    }
+
+    this.initObservables();
   }
 
+  initObservables() {
+    this.skillArray.valueChanges.subscribe((res) => {
+      const isNullIndex = this.skillArray.value.findIndex(
+        (skill: any) => skill == null
+      );
+      if (isNullIndex !== -1) {
+        this.skillArray.removeAt(isNullIndex);
+      }
+      if (res) {
+        this.data = this.skillArray.value;
+      }
+    });
+  }
   openDialog() {
     const dialogRef = this.dialog.open(CollaboratorSkillDialog, {
       width: '500px',
@@ -71,27 +80,8 @@ export class CollaboratorSkillTabComponent implements OnInit {
   }
 
 
-
-  initForm(): void {
-    this.skillForm = this.fb.group({
-      technology: ['Java'],
-      seniority: ['Senior'],
-      yearsExperience: ['5'],
-      currentPosition: [true],
-    });
-    
-  }
-
   next() {
     this.onChange.next(true);
-  }
-
-  
-  saveSkill() {
-    const data = this.skillForm.getRawValue();
-    this.skillArray.insert(0, this.fb.group(data));
-    this.skillTable.renderRows();
-    this.skillForm.reset();
   }
 
   getSkill(skillSelected: any, index: number) {
@@ -115,45 +105,3 @@ export class CollaboratorSkillTabComponent implements OnInit {
   }
 }
 
-@Component({
-  selector: 'collaborator-skill-dialog',
-  templateUrl: 'collaborator-skill-dialog.html',
-})
-export class CollaboratorSkillDialog{
-
-  @Input('form') collaboratorForm!: FormGroup;
-  @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
-
-  skillForm!: FormGroup;
-
-
-  constructor(
-    public dialogRef: MatDialogRef<CollaboratorSkillDialog>,
-    private fb: FormBuilder,
-    @Inject(MAT_DIALOG_DATA) public data: { skillSelected: any}
-  ) {}
-
-  ngOnInit(): void {
-    this.initForm();
-  }
-
-  initForm(): void {
-    this.skillForm = this.fb.group({
-      technology:['Angular', [Validators.required, Validators.maxLength(50)]],
-      seniority: [1, Validators.required],
-      yearsExperience: ['2', [Validators.required, Validators.maxLength(2)]],
-      currentPosition: [true, Validators.required]
-    });
-    if (this.data && this.data.skillSelected) {
-      this.skillForm.patchValue(this.data.skillSelected)
-    }
-  }
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-
-  save() {
-    this.dialogRef.close(this.skillForm.getRawValue());
-  }
-}

@@ -126,44 +126,16 @@ export class CollaboratorCreateComponent implements OnInit {
         this.collaborator ? this.collaborator.Languages : [null]
       ),
       BankData: this.fb.array(
-        new Array(
-          this.fb.group({
-            bank: null,
-            agency: null,
-            accountType: null,
-            accountNumber: null,
-            digit: null,
-            bankAccountDigit: null,
-          })
-        )
+        this.collaborator ? this.collaborator.BankData : [null]
       ),
       Financials: this.fb.array(
-        new Array(
-          this.fb.group({
-            contractType: null,
-            value: null,
-            reason: null,
-            dateInclusion: null,
-          })
-        )
+        this.collaborator ? this.collaborator.Financials : [null]
       ),
       Skills: this.fb.array(
-        new Array(
-          this.fb.group({
-            tecnology: null,
-            seniority: null,
-            yearsExperience: null,
-            currentPosition: null,
-          })
-        )
+        this.collaborator ? this.collaborator.Skills : [null]
       ),
       Documents: this.fb.array(
-        new Array(
-          this.fb.group({
-            name: null,
-            file: null,
-          })
-        )
+        this.collaborator ? this.collaborator.Documents : [null]
       ),
     });
   }

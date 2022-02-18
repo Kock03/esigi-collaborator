@@ -36,7 +36,6 @@ export class CollaboratorDependentsTabComponent implements OnInit {
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
   @ViewChild('dependentTable') dependentTable!: MatTable<any>;
 
-  date: any;
 
   displayedDependents: string[] = [
     'type',
@@ -95,10 +94,6 @@ export class CollaboratorDependentsTabComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((dependent) => {
       if (dependent) {
-        console.log(
-          '🚀 ~ file: collaborator-dependents-tab.component.ts ~ line 95 ~ CollaboratorDependentsTabComponent ~ dialogRef.afterClosed ~ dependents',
-          dependent
-        );
         this.dependentArray.insert(0, this.fb.group(dependent));
         this.dependentTable.renderRows();
       }
