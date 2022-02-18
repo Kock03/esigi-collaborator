@@ -19,6 +19,9 @@ const typeOfContract_enum_1 = require("./dtos/typeOfContract.enum");
 const workplace_enum_1 = require("./dtos/workplace.enum");
 const seniorities_entity_1 = require("../seniorities/seniorities.entity");
 const languages_entity_1 = require("../languages/languages.entity");
+const behavioral_interviews_entity_1 = require("../behavioral-interviews/behavioral-interviews.entity");
+const client_interviews_entity_1 = require("../client-interviews/client-interviews.entity");
+const technical_interviews_entity_1 = require("../technical-interviews/technical-interviews.entity");
 let JobsEntity = class JobsEntity {
 };
 __decorate([
@@ -117,6 +120,7 @@ __decorate([
     (0, typeorm_1.OneToMany)(() => knowledges_entity_1.KnowledgesEntity, (Knowledges) => Knowledges.Job, {
         cascade: ['insert', 'update', 'soft-remove'],
         orphanedRowAction: 'delete',
+        eager: true,
     }),
     __metadata("design:type", Array)
 ], JobsEntity.prototype, "Knowledges", void 0);
@@ -129,6 +133,42 @@ __decorate([
     (0, typeorm_1.JoinColumn)(),
     __metadata("design:type", seniorities_entity_1.SenioritiesEntity)
 ], JobsEntity.prototype, "Seniorities", void 0);
+__decorate([
+    (0, typeorm_1.ManyToMany)(() => behavioral_interviews_entity_1.BehaviroalInterviewsEntity, (behavioral) => behavioral.jobs, {
+        cascade: ['insert', 'update', 'soft-remove'],
+        eager: true,
+    }),
+    (0, typeorm_1.JoinTable)({
+        name: 'behavioral_interviews_jobs',
+        joinColumn: { name: 'id' },
+        inverseJoinColumn: { name: 'behavioral_interviews_id' },
+    }),
+    __metadata("design:type", Array)
+], JobsEntity.prototype, "BehavioralInterviews", void 0);
+__decorate([
+    (0, typeorm_1.ManyToMany)(() => technical_interviews_entity_1.TechnicalInterviewsEntity, (technical) => technical.jobs, {
+        cascade: ['insert', 'update', 'soft-remove'],
+        eager: true,
+    }),
+    (0, typeorm_1.JoinTable)({
+        name: 'technical_interviews_jobs',
+        joinColumn: { name: 'id' },
+        inverseJoinColumn: { name: 'technical_interviews_id' },
+    }),
+    __metadata("design:type", Array)
+], JobsEntity.prototype, "TechnicalInterviews", void 0);
+__decorate([
+    (0, typeorm_1.ManyToMany)(() => client_interviews_entity_1.ClientInterviewsEntity, (client) => client.jobs, {
+        cascade: ['insert', 'update', 'soft-remove'],
+        eager: true,
+    }),
+    (0, typeorm_1.JoinTable)({
+        name: 'client_interviews_jobs',
+        joinColumn: { name: 'id' },
+        inverseJoinColumn: { name: 'client_interviews_id' },
+    }),
+    __metadata("design:type", Array)
+], JobsEntity.prototype, "ClientInterviews", void 0);
 __decorate([
     (0, typeorm_1.CreateDateColumn)({ name: 'created_at' }),
     __metadata("design:type", Date)

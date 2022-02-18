@@ -26,7 +26,6 @@ let JobsService = class JobsService {
         return jobsWhiteAll;
     }
     async findOneOrFail(conditions, options) {
-        options = { relations: ['Knowledges', 'Seniorities', 'Languages'] };
         try {
             return await this.jobsRepository.findOneOrFail(conditions, options);
         }
@@ -52,7 +51,7 @@ let JobsService = class JobsService {
         catch (error) {
             throw new common_1.HttpException('Registro não existe ou invalido', 404);
         }
-        return await this.jobsRepository.softRemove({ id });
+        return await this.jobsRepository.softDelete({ id });
     }
 };
 JobsService = __decorate([

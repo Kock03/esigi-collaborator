@@ -1,25 +1,41 @@
-import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from "typeorm";
-import { JobsEntity } from "../jobs/jobs.entity";
+import {
+  Column,
+  CreateDateColumn,
+  DeleteDateColumn,
+  Entity,
+  JoinColumn,
+  OneToOne,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
+import { JobsEntity } from '../jobs/jobs.entity';
 
 @Entity()
-export class SenioritiesEntity{
+export class SenioritiesEntity {
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
-    @PrimaryGeneratedColumn('uuid')
-    id: string;
+  @Column()
+  intern: boolean;
 
-    @Column()
-    intern: boolean;
+  @Column()
+  junior: boolean;
 
-    @Column()
-    junior: boolean;
+  @Column()
+  pleno: boolean;
 
-    @Column()
-    pleno: boolean;
+  @Column()
+  senior: boolean;
 
-    @Column()
-    senior: boolean;
+  @OneToOne(() => JobsEntity, (job) => job.Seniorities)
+  Job: JobsEntity;
 
-    @OneToOne(() => JobsEntity, job => job.Seniorities)
-    Job: JobsEntity;
+  @CreateDateColumn()
+  createdAt: Date;
 
+  @UpdateDateColumn()
+  updatedAt: Date;
+
+  @DeleteDateColumn()
+  deletedAt: Date;
 }

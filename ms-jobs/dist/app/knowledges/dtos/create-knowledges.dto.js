@@ -10,26 +10,36 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateKnowledgesDto = void 0;
+const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const jobs_entity_1 = require("../../jobs/jobs.entity");
 const typeOfPeriod_enum_1 = require("./typeOfPeriod.enum");
 class CreateKnowledgesDto {
 }
 __decorate([
+    (0, swagger_1.ApiProperty)(),
     (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.MinLength)(3),
+    (0, class_validator_1.MaxLength)(80),
     __metadata("design:type", String)
 ], CreateKnowledgesDto.prototype, "name", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)(),
     (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsNumber)(),
     __metadata("design:type", Number)
 ], CreateKnowledgesDto.prototype, "yearsExperience", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)(),
     (0, class_validator_1.IsNotEmpty)(),
-    __metadata("design:type", jobs_entity_1.JobsEntity)
-], CreateKnowledgesDto.prototype, "Job", void 0);
-__decorate([
-    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsEnum)(typeOfPeriod_enum_1.TypeOfPeriod),
     __metadata("design:type", Number)
 ], CreateKnowledgesDto.prototype, "typeOfPeriod", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    (0, class_validator_1.IsOptional)(),
+    __metadata("design:type", jobs_entity_1.JobsEntity)
+], CreateKnowledgesDto.prototype, "Job", void 0);
 exports.CreateKnowledgesDto = CreateKnowledgesDto;
 //# sourceMappingURL=create-knowledges.dto.js.map
