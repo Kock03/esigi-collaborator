@@ -81,7 +81,7 @@ export class UpdateJobsDto {
   @IsNotEmpty()
   collaboratorActivities: string;
 
-  // @ApiProperty()
+  @ApiProperty()
   @IsOptional()
   Knowledges: KnowledgesEntity[];
 
@@ -101,19 +101,19 @@ export class UpdateJobsDto {
   @IsNotEmpty()
   Seniorities: SenioritiesEntity;
 
-  // @ApiProperty()
+  @ApiProperty()
   @IsOptional()
   Languages: LanguagesEntity[];
 
-  // @ApiProperty()
+  @ApiProperty()
   @IsOptional()
   behaviorInterviews: BehaviroalInterviewsEntity[];
 
-  // @ApiProperty()
+  @ApiProperty()
   @IsOptional()
   clientInterviews: ClientInterviewsEntity[];
 
-  // @ApiProperty()
+  @ApiProperty()
   @IsOptional()
   technicalInterviews: TechnicalInterviewsEntity[];
 }
