@@ -8,11 +8,8 @@ import {
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup} from '@angular/forms';
-import {
-  MatDialog,
-
-} from '@angular/material/dialog';
+import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
 import { CollaboratorBankDialog } from './collaborator-bank-dialog.component';
 
@@ -27,7 +24,7 @@ export class CollaboratorBankTabComponent implements OnInit {
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
   @ViewChild('bankTable') bankTable!: MatTable<any>;
 
-  data: [] = [];
+  data: any[] = [];
 
   displayedBank: string[] = [
     'bank',
@@ -43,15 +40,13 @@ export class CollaboratorBankTabComponent implements OnInit {
   Bank: any;
 
   get bankArray() {
-    return this.collaboratorForm.controls['BankData'] as FormArray;
+    return this.collaboratorForm.controls['BankData'] as FormGroup;
   }
 
   constructor(private fb: FormBuilder, public dialog: MatDialog) {}
 
   ngOnInit(): void {
-    if (this.bankArray.value.findIndex((bank: any) => bank == null) === -1) {
-      this.data = this.bankArray.value;
-    }
+    // this.data = new Array(this.bankArray.value);
 
     this.initObservables();
   }
@@ -61,12 +56,12 @@ export class CollaboratorBankTabComponent implements OnInit {
       const isNullIndex = this.bankArray.value.findIndex(
         (dependent: any) => dependent == null
       );
-      if (isNullIndex !== -1) {
-        this.bankArray.removeAt(isNullIndex);
-      }
-      if (res) {
-        this.data = this.bankArray.value;
-      }
+      // if (isNullIndex !== -1) {
+      //   this.bankArray.removeAt(isNullIndex);
+      // }
+      // if (res) {
+      //   this.data = this.bankArray.value;
+      // }
     });
   }
 
@@ -74,20 +69,20 @@ export class CollaboratorBankTabComponent implements OnInit {
     const dialogRef = this.dialog.open(CollaboratorBankDialog, {
       width: '500px',
       height: '470px',
+      data: {bankForm: this.bankArray},
+      
     });
+    console.log("🚀 ~ file: collaborator-bank-tab.component.ts ~ line 73 ~ CollaboratorBankTabComponent ~ openDialog ~ this.bankForm", this.bankArray)
 
     dialogRef.afterClosed().subscribe((bank) => {
-      if (bank) {
-        this.bankArray.controls[0].patchValue(bank);
+        this.data = new Array(this.bankArray.value);
         this.bankTable.renderRows();
-      }
     });
   }
 
   next() {
     this.onChange.next(true);
   }
-
 
   getBank(bankSelected: any, index: number) {
     const dialogRef = this.dialog.open(CollaboratorBankDialog, {
@@ -102,7 +97,7 @@ export class CollaboratorBankTabComponent implements OnInit {
   }
 
   deleteBank(index: number) {
-    this.bankArray.removeAt(index);
+    this.data.splice(0, 1);
+    this.bankTable.renderRows();
   }
 }
-

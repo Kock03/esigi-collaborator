@@ -196,7 +196,7 @@ export class CollaboratorEducationTabComponent implements OnInit {
           ? 'Ensino Médio'
           : 'Ensino Superior';
       case 'situation': {
-        return element.situation == 1
+        return element.situation == 1  
           ? 'Parado'
           : element.situation == 2
           ? 'Completo'
