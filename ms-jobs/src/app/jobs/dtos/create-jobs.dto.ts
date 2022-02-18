@@ -1,5 +1,18 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { isNotEmpty, IsNotEmpty, IsOptional } from 'class-validator';
+import {
+  IsBoolean,
+  IsDataURI,
+  IsDate,
+  IsEnum,
+  isNotEmpty,
+  IsNotEmpty,
+  IsNumber,
+  IsOptional,
+  IsSemVer,
+  IsString,
+  MaxLength,
+  MinLength,
+} from 'class-validator';
 import { BehaviroalInterviewsEntity } from 'src/app/behavioral-interviews/behavioral-interviews.entity';
 import { ClientInterviewsEntity } from 'src/app/client-interviews/client-interviews.entity';
 import { KnowledgesEntity } from 'src/app/knowledges/knowledges.entity';
@@ -15,34 +28,47 @@ import { Workplace } from './workplace.enum';
 export class CreateJobsDto {
   @ApiProperty()
   @IsNotEmpty()
+  @IsString()
+  @MinLength(3)
+  @MaxLength(80)
   requester: string;
 
   @ApiProperty()
   @IsNotEmpty()
+  @IsEnum(Status)
   status: Status;
 
   @ApiProperty()
   @IsNotEmpty()
+  @IsBoolean()
   publish: boolean;
 
   @ApiProperty()
   @IsNotEmpty()
+  @IsString()
+  @MinLength(3)
+  @MaxLength(80)
   client: string;
 
   @ApiProperty()
   @IsNotEmpty()
+  @IsEnum(Type)
   typeOfJob: Type;
 
   @ApiProperty()
   @IsNotEmpty()
+  @IsBoolean()
   temporary: boolean;
 
   @ApiProperty()
   @IsOptional()
+  @IsString()
   monthTime: string;
 
   @ApiProperty()
   @IsNotEmpty()
+  @IsString()
+  @MaxLength(80)
   jobName: string;
 
   @ApiProperty()
@@ -51,34 +77,42 @@ export class CreateJobsDto {
 
   @ApiProperty()
   @IsNotEmpty()
+  @IsNumber()
   jobNumber: number;
 
   @ApiProperty()
   @IsNotEmpty()
+  @IsEnum(TypeOfContract)
   typeOfContract: TypeOfContract;
 
   @ApiProperty()
   @IsNotEmpty()
+  @IsEnum(Workplace)
   workplace: Workplace;
 
   @ApiProperty()
   @IsNotEmpty()
+  @IsString()
   workingDay: string;
 
   @ApiProperty()
   @IsNotEmpty()
+  @IsNumber()
   minimumValue: number;
 
   @ApiProperty()
   @IsNotEmpty()
+  @IsNumber()
   maximumValue: number;
 
   @ApiProperty()
   @IsNotEmpty()
+  @IsEnum(Workplace)
   schooling: Schooling;
 
   @ApiProperty()
   @IsNotEmpty()
+  @IsString()
   collaboratorActivities: string;
 
   @ApiProperty()
@@ -87,10 +121,12 @@ export class CreateJobsDto {
 
   @ApiProperty()
   @IsNotEmpty()
+  @IsString()
   skills: string;
 
   @ApiProperty()
   @IsNotEmpty()
+  @IsString()
   attitudes: string;
 
   @ApiProperty()

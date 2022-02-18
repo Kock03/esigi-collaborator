@@ -1,15 +1,29 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty } from 'class-validator';
+import {
+  IsBoolean,
+  IsDate,
+  IsEnum,
+  IsNotEmpty,
+  IsString,
+  MaxLength,
+  MinLength,
+} from 'class-validator';
 import { Punctuality } from 'src/app/behavioral-interviews/enums/punctuality.enum';
 import { JobsEntity } from 'src/app/jobs/jobs.entity';
 
 export class UpdateClientInterviewsDto {
   @ApiProperty()
   @IsNotEmpty()
+  @IsString()
+  @MinLength(3)
+  @MaxLength(80)
   nameCandidate: string;
 
   @ApiProperty()
   @IsNotEmpty()
+  @IsString()
+  @MinLength(3)
+  @MaxLength(80)
   evaluator: string;
 
   @ApiProperty()
@@ -22,21 +36,26 @@ export class UpdateClientInterviewsDto {
 
   @ApiProperty()
   @IsNotEmpty()
+  @IsEnum(Punctuality)
   punctuality: Punctuality;
 
   @ApiProperty()
   @IsNotEmpty()
+  @IsString()
   jobProfile: string;
 
   @ApiProperty()
   @IsNotEmpty()
+  @IsString()
   technicalEvaluation: string;
 
   @ApiProperty()
   @IsNotEmpty()
+  @IsString()
   comments: string;
 
   @ApiProperty()
   @IsNotEmpty()
+  @IsBoolean()
   situational: boolean;
 }
