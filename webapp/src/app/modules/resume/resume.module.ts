@@ -41,7 +41,7 @@ import { ResumeListComponent } from './resume-list/resume-list.component';
 
 const routes: Routes = [
   {
-    path: 'novo',
+    path: ':id',
     component: ResumeCreateComponent,
   },
 

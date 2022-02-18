@@ -45,7 +45,7 @@
               </button>
             </th>
             <th mat-header-cell *matHeaderCellDef></th>
-            <td class="button-tab" mat-cell *matCellDef="let collaborator">
+            <td class="button-tab" mat-cell *matCellDef="let resume">
               <button
                 class="table-button"
                 mat-button
@@ -56,7 +56,7 @@
               <button
                 class="table-button"
                 mat-button
-                (click)="deleteResume(index)"
+                (click)="deleteResume(resume.id)"
               >
                 <mat-icon>delete</mat-icon>
               </button>

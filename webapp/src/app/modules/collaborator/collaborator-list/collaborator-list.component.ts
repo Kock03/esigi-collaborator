@@ -22,6 +22,8 @@ import {
 import { CollaboratorProvider } from 'src/providers/collaborator.provider';
 import { CollaboratorCreateComponent } from '../collaborator-create/collaborator-create.component';
 import { CollaboratorRegisterTabComponent } from '../collaborator-create/collaborator-register-tab/collaborator-register-tab.component';
+import { ConfirmDialogService } from 'src/services/confirn-dialog.service';
+import { SnackBarService } from 'src/services/snackbar.service';
 
 export interface Collaborator {
   id: string;
@@ -63,14 +65,15 @@ export class CollaboratorListComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private collaboratorProvider: CollaboratorProvider
+    private collaboratorProvider: CollaboratorProvider,
+    private snackbarService: SnackBarService,
+    private dialogService: ConfirmDialogService,
   ) {
     this._unsubscribeAll = new Subject();
   }
 
   async ngOnInit() {
     this.getCollaboratorList();
-
     this.initFilter();
   }
 
@@ -89,14 +92,40 @@ export class CollaboratorListComponent implements OnInit {
   //   });
   // }
 
-  async deleteCollaborator(index: number) {
-    const collaborator = this.filteredCollaboratorList[index];
-    try {
-      await this.collaboratorProvider.destroy(collaborator.id);
-      this.getCollaboratorList();
-    } catch (error) {
-      console.log(error);
-    }
+  // async deleteCollaborator(index: number) {
+  //   const collaborator = this.filteredCollaboratorList[index];
+  //   try {
+  //     await this.collaboratorProvider.destroy(collaborator.id);
+  //     this.getCollaboratorList();
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }
+
+  async deleteCollaborator(collaboratorId: any) {
+    const options = {
+      data: {
+        title: 'Anteção',
+        subtitle: 'Você tem certeza que deseja excluir esta vaga?',
+      },
+      panelClass: 'confirm-modal',
+    };
+
+    this.dialogService.open(options);
+
+    this.dialogService.confirmed().subscribe(async (confirmed) => {
+      if (confirmed) {
+        try {
+          const collaborators = await this.collaboratorProvider.destroy(collaboratorId);
+          this.getCollaboratorList();
+
+          this.snackbarService.successMessage('Vaga Excluída Com Sucesso');
+        } catch (error) {
+          console.log('ERROR 132' + error);
+          this.snackbarService.showError('Falha ao Deletar');
+        }
+      }
+    });
   }
 
   async getCollaboratorList() {

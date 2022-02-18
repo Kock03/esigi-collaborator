@@ -5,6 +5,8 @@ import { ResumeProvider } from 'src/providers/resume.provider';
 
 import { ResumeCreateComponent } from '../resume-create/resume-create.component';
 import { ResumeRegisterTabComponent } from '../resume-create/resume-register-tab/resume-register-tab.component';
+import { ConfirmDialogService } from 'src/services/confirn-dialog.service';
+import { SnackBarService } from 'src/services/snackbar.service';
 
 export interface Resume {
   id: string;
@@ -40,7 +42,9 @@ export class ResumeListComponent implements OnInit {
   resume!: any;
 
   constructor(private router: Router,
-    private resumeProvider: ResumeProvider) {
+    private resumeProvider: ResumeProvider,
+    private dialogService: ConfirmDialogService,
+    private snackbarService: SnackBarService,) {
       this._unsubscribeAll = new Subject();
      }
 
@@ -48,7 +52,6 @@ export class ResumeListComponent implements OnInit {
 
   ngOnInit(): void {
     this.getResumeList();
-
     this.initFilter();
 
   }
@@ -61,15 +64,42 @@ export class ResumeListComponent implements OnInit {
     this.router.navigate([`resume/${resumeId}`]);
   }
 
-  async deleteResume(index: number) {
-    const resume = this.filteredResumeList[index];
-    try {
-      await this.resumeProvider.destroy(resume.id);
-      this.getResumeList();
-    } catch (error) {
-      console.log(error);
-    }
+  // async deleteResume(index: number) {
+  //   const resume = this.filteredResumeList[index];
+  //   try {
+  //     await this.resumeProvider.destroy(resume.id);
+  //     this.getResumeList();
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }
+
+  async deleteResume(resumeId: any) {
+    const options = {
+      data: {
+        title: 'Anteção',
+        subtitle: 'Você tem certeza que deseja excluir esta vaga?',
+      },
+      panelClass: 'confirm-modal',
+    };
+
+    this.dialogService.open(options);
+
+    this.dialogService.confirmed().subscribe(async (confirmed) => {
+      if (confirmed) {
+        try {
+          const jobs = await this.resumeProvider.destroy(resumeId);
+          this.getResumeList();
+
+          this.snackbarService.successMessage('Currículo excluído com sucesso');
+        } catch (error) {
+          console.log('ERROR 132' + error);
+          this.snackbarService.showError('Falha ao Deletar');
+        }
+      }
+    });
   }
+
 
 
   async getResumeList() {

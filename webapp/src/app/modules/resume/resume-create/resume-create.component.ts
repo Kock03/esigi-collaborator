@@ -11,6 +11,8 @@ import {
 import { ResumeDialogExperience } from './resume-experience-tab/resume-experience-tab.component';
 import { ResumeProvider } from 'src/providers/resume.provider';
 import { Router } from '@angular/router';
+import { SnackBarService } from 'src/services/snackbar.service';
+
 
 @Component({
   selector: 'app-resume-create',
@@ -22,13 +24,16 @@ export class ResumeCreateComponent implements OnInit {
   resumeForm!: FormGroup;
   step: number = 1;
   resume!: any;
+  resumeId!: string | null;
 
   Experience: any;
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private resumeProvider: ResumeProvider
+    private resumeProvider: ResumeProvider,
+    private snackbarService: SnackBarService,
+    private http: HttpClient,
   ) {}
 
   ngOnInit(): void {
@@ -80,15 +85,35 @@ export class ResumeCreateComponent implements OnInit {
     this.resumeForm.valueChanges.subscribe((res) => {});
   }
 
+  // async saveResume() {
+  //   let data = this.resumeForm.getRawValue();
+
+  //   try {
+  //     const resume = await this.resumeProvider.store(data);
+  //   } catch (error) {
+  //     console.log('ERROR 132' + error);
+  //   }
+  // }
+
   async saveResume() {
     let data = this.resumeForm.getRawValue();
 
     try {
+      data.Educations = new Array(data.Educations);
+      data.Languages = new Array(data.Languages);
+      data.Experiences = new Array(data.Experiences);
+      data.Skills = new Array(data.Skills);
       const resume = await this.resumeProvider.store(data);
+
+      this.snackbarService.successMessage('Vaga Cadastrada Com Sucesso');
+      this.router.navigate(['curriculo/lista']);
     } catch (error) {
       console.log('ERROR 132' + error);
+      this.snackbarService.showError('Falha ao Cadastrar');
     }
   }
+
+  
 
   navigate(direction: string) {
     if (this.step > 1 && direction === 'back') {
