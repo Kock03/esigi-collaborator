@@ -1,4 +1,4 @@
-import { JobsEntity } from "../jobs/jobs.entity";
+import { JobsEntity } from '../jobs/jobs.entity';
 export declare class SenioritiesEntity {
     id: string;
     intern: boolean;
@@ -6,4 +6,7 @@ export declare class SenioritiesEntity {
     pleno: boolean;
     senior: boolean;
     Job: JobsEntity;
+    createdAt: Date;
+    updatedAt: Date;
+    deletedAt: Date;
 }

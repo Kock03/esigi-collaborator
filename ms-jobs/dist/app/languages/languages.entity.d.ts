@@ -1,4 +1,4 @@
-import { JobsEntity } from "../jobs/jobs.entity";
+import { JobsEntity } from '../jobs/jobs.entity';
 export declare class LanguagesEntity {
     id: string;
     languageName: string;

@@ -1,4 +1,4 @@
-import { IsArray, IsBoolean, IsEmail, IsNotEmpty, IsNumber, IsObject, IsOptional, IsString } from 'class-validator';
+import { IsArray, IsBoolean, IsEmail, IsEnum, IsNotEmpty, IsNumber, IsObject, IsOptional, IsString, Length, MaxLength, MinLength } from 'class-validator';
 import { AddressEntity } from 'src/app/address/address.entity';
 import { BankDataEntity } from 'src/app/bank-data/bank-data.entity';
 import { DocumentsEntity } from 'src/app/documents/documents.entity';
@@ -18,40 +18,49 @@ export class UpdateCollaboratorsDto {
   @ApiProperty()
   @IsOptional()
   @IsString()
+  @MinLength(4)
+  @MaxLength(100)
   firstNameCorporateName: string;
 
   @ApiProperty()
   @IsOptional()
   @IsString()
+  @MinLength(4)
+  @MaxLength(100)
   lastNameFantasyName: string;
 
   @ApiProperty()
   @IsOptional()
   @IsString()
+  @MinLength(4)
+  @MaxLength(20)
   login: string;
 
   @ApiProperty()
   @IsOptional()
-  @IsNumber()
+  @IsEnum(Gender)
   gender: Gender;
 
   @ApiProperty()
   @IsOptional()
   @IsString()
+  @MinLength(10)
+  @MaxLength(200)
   office: string;
 
   @ApiProperty()
   @IsOptional()
-  @IsNumber()
+  @IsEnum(CollaboratorTypes)
   collaboratorTypes: CollaboratorTypes;
 
   @ApiProperty()
   @IsOptional()
+  @Length(4)
   cpf: string;
 
   @ApiProperty()
   @IsOptional()
-  @IsNumber()
+  @IsEnum(MaritalStatus)
   maritalStatus: MaritalStatus;
 
   @ApiProperty()
@@ -70,35 +79,48 @@ export class UpdateCollaboratorsDto {
   @ApiProperty()
   @IsOptional()
   @IsEmail()
+  @MinLength(10)
+  @MaxLength(150)
   email: string;
 
   @ApiProperty()
   @IsOptional()
+  @Length(14)
   cnpj: string;
 
   @ApiProperty()
   @IsOptional()
   @IsString()
+  @MinLength(4)
+  @MaxLength(50)
   stateRegistration: string;
 
   @ApiProperty()
   @IsOptional()
   @IsString()
+  @MinLength(5)
+  @MaxLength(100)
   municipalInscription: string;
 
   @ApiProperty()
   @IsOptional()
   @IsString()
+  @MinLength(5)
+  @MaxLength(50)
   site: string;
 
   @ApiProperty()
   @IsOptional()
   @IsString()
+  @MinLength(5)
+  @MaxLength(50)
   linkedin: string;
 
   @ApiProperty()
   @IsOptional()
   @IsString()
+  @MinLength(100)
+  @MaxLength(300)
   photo: string;
 
   @ApiProperty()

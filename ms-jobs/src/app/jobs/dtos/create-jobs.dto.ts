@@ -1,83 +1,155 @@
-import { IsNotEmpty, IsOptional } from "class-validator";
-import { KnowledgesEntity } from "src/app/knowledges/knowledges.entity";
-import { LanguagesEntity } from "src/app/languages/languages.entity";
-import { SenioritiesEntity } from "src/app/seniorities/seniorities.entity";
-import { Schooling } from "./schooling.enum";
-import { Status } from "./status.enum";
-import { Type } from "./type.enum";
-import { TypeOfContract } from "./typeOfContract.enum";
-import { Workplace } from "./workplace.enum";
+import { ApiProperty } from '@nestjs/swagger';
+import {
+  IsBoolean,
+  IsDataURI,
+  IsDate,
+  IsEnum,
+  isNotEmpty,
+  IsNotEmpty,
+  IsNumber,
+  IsOptional,
+  IsSemVer,
+  IsString,
+  MaxLength,
+  MinLength,
+} from 'class-validator';
+import { BehaviroalInterviewsEntity } from 'src/app/behavioral-interviews/behavioral-interviews.entity';
+import { ClientInterviewsEntity } from 'src/app/client-interviews/client-interviews.entity';
+import { KnowledgesEntity } from 'src/app/knowledges/knowledges.entity';
+import { LanguagesEntity } from 'src/app/languages/languages.entity';
+import { SenioritiesEntity } from 'src/app/seniorities/seniorities.entity';
+import { TechnicalInterviewsEntity } from 'src/app/technical-interviews/technical-interviews.entity';
+import { Schooling } from './schooling.enum';
+import { Status } from './status.enum';
+import { Type } from './type.enum';
+import { TypeOfContract } from './typeOfContract.enum';
+import { Workplace } from './workplace.enum';
 
-export class CreateJobsDto{
-     
-    @IsNotEmpty()
-    requester: string;
-  
-    @IsNotEmpty()
-    status: Status;
+export class CreateJobsDto {
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsString()
+  @MinLength(3)
+  @MaxLength(80)
+  requester: string;
 
-    @IsNotEmpty()
-    publish: boolean;
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsEnum(Status)
+  status: Status;
 
-    @IsNotEmpty()
-    client: string;
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsBoolean()
+  publish: boolean;
 
-    @IsNotEmpty()
-    typeOfJob: Type;
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsString()
+  @MinLength(3)
+  @MaxLength(80)
+  client: string;
 
-    @IsNotEmpty()
-    temporary: boolean;
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsEnum(Type)
+  typeOfJob: Type;
 
-    @IsOptional()
-    monthTime: string;
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsBoolean()
+  temporary: boolean;
 
-    @IsNotEmpty()
-    jobName: string;
+  @ApiProperty()
+  @IsOptional()
+  @IsString()
+  monthTime: string;
 
-    @IsNotEmpty()
-    startForecast: Date;
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsString()
+  @MaxLength(80)
+  jobName: string;
 
-    @IsNotEmpty()
-    jobNumber: number;
+  @ApiProperty()
+  @IsNotEmpty()
+  startForecast: Date;
 
-    @IsNotEmpty()
-    typeOfContract: TypeOfContract;
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsNumber()
+  jobNumber: number;
 
-    @IsNotEmpty()
-    workplace: Workplace;
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsEnum(TypeOfContract)
+  typeOfContract: TypeOfContract;
 
-    @IsNotEmpty()
-    workingDay: string;
-    
-    @IsNotEmpty()
-    minimumValue: number;
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsEnum(Workplace)
+  workplace: Workplace;
 
-    @IsNotEmpty()
-    maximumValue: number;
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsString()
+  workingDay: string;
 
-    @IsNotEmpty()
-    schooling: Schooling; 
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsNumber()
+  minimumValue: number;
 
-    @IsNotEmpty()
-    collaboratorActivities: string;
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsNumber()
+  maximumValue: number;
 
-    @IsNotEmpty()
-    Knowledges: KnowledgesEntity[];
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsEnum(Workplace)
+  schooling: Schooling;
 
-    @IsNotEmpty()
-    skills: string;
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsString()
+  collaboratorActivities: string;
 
-    @IsNotEmpty()
-    attitudes: string;
+  @ApiProperty()
+  @IsOptional()
+  Knowledges: KnowledgesEntity[];
 
-    @IsNotEmpty()
-    openingDate: Date;
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsString()
+  skills: string;
 
-    @IsNotEmpty()
-    Seniorities: SenioritiesEntity;
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsString()
+  attitudes: string;
 
-    @IsNotEmpty()
-    Languages: LanguagesEntity[];
+  @ApiProperty()
+  @IsNotEmpty()
+  openingDate: Date;
 
+  @ApiProperty()
+  @IsNotEmpty()
+  Seniorities: SenioritiesEntity;
 
+  @ApiProperty()
+  @IsOptional()
+  Languages: LanguagesEntity[];
+
+  @ApiProperty()
+  @IsOptional()
+  behaviorInterviews: BehaviroalInterviewsEntity[];
+
+  @ApiProperty()
+  @IsOptional()
+  clientInterviews: ClientInterviewsEntity[];
+
+  @ApiProperty()
+  @IsOptional()
+  technicalInterviews: TechnicalInterviewsEntity[];
 }

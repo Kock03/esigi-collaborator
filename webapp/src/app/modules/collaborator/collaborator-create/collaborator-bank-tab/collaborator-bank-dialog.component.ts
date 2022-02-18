@@ -15,7 +15,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
     constructor(
       public dialogRef: MatDialogRef<CollaboratorBankDialog>,
       private fb: FormBuilder,
-      @Inject(MAT_DIALOG_DATA) public data: { bankSelected: any }
+      @Inject(MAT_DIALOG_DATA) public data: { bankForm: FormGroup}
     ) {}
   
     ngOnInit(): void {
@@ -23,17 +23,18 @@ import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
     }
   
     initForm(): void {
-      this.bankForm = this.fb.group({
-        bank: ['Bradesco', [Validators.required, Validators.maxLength(50)]],
-        agency: ['1111', [Validators.required, Validators.maxLength(4)]],
-        accountType: [1, Validators.required],
-        accountNumber: ['11111', [Validators.required, Validators.maxLength(5)]],
-        digit: ['1', [Validators.required, Validators.maxLength(1)]],
-        bankAccountDigit: ['1', [Validators.required, Validators.maxLength(1)]],
-      });
-      if (this.data && this.data.bankSelected) {
-        this.bankForm.patchValue(this.data.bankSelected);
-      }
+      this.bankForm = this.data.bankForm;
+      // this.collaboratorForm.controls['BankData'] = this.fb.group({
+      //   bank: ['Bradesco', [Validators.required, Validators.maxLength(50)]],
+      //   agency: ['1111', [Validators.required, Validators.maxLength(4)]],
+      //   accountType: [1, Validators.required],
+      //   accountNumber: ['11111', [Validators.required, Validators.maxLength(5)]],
+      //   digit: ['1', [Validators.required, Validators.maxLength(1)]],
+      //   bankAccountDigit: ['1', [Validators.required, Validators.maxLength(1)]],
+      // });
+      // if (this.data && this.data.bankSelected) {
+      //   this.bankForm.patchValue(this.data.bankSelected);
+      // }
     }
   
     onNoClick(): void {
@@ -41,7 +42,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
     }
   
     save() {
-      this.dialogRef.close(this.bankForm.getRawValue());
+      this.dialogRef.close();
     }
   }
   

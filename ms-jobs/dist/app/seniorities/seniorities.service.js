@@ -46,8 +46,8 @@ let SenioritiesService = class SenioritiesService {
         return await this.senioritiesRepository.save(seniority);
     }
     async destroy(id) {
-        const seniority = await this.senioritiesRepository.findOneOrFail({ id });
-        return await this.senioritiesRepository.softDelete(seniority);
+        await this.senioritiesRepository.findOneOrFail({ id });
+        return await this.senioritiesRepository.softDelete({ id });
     }
 };
 SenioritiesService = __decorate([

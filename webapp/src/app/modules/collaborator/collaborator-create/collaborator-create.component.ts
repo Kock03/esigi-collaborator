@@ -115,6 +115,14 @@ export class CollaboratorCreateComponent implements OnInit {
         city: ['', Validators.required],
         district: ['', Validators.required],
       }),
+      BankData: this.fb.group({
+        bank: [this.collaborator? this.collaborator.BankData.bank: '-', [Validators.required, Validators.maxLength(50)]],
+        agency: ['1111', [Validators.required, Validators.maxLength(4)]],
+        accountType: [1, Validators.required],
+        accountNumber: ['11111', [Validators.required, Validators.maxLength(5)]],
+        digit: ['1', [Validators.required, Validators.maxLength(1)]],
+        bankAccountDigit: ['1', [Validators.required, Validators.maxLength(1)]],
+      }),
 
       Dependents: this.fb.array(
         this.collaborator ? this.collaborator.Dependents : [null]
@@ -125,9 +133,9 @@ export class CollaboratorCreateComponent implements OnInit {
       Languages: this.fb.array(
         this.collaborator ? this.collaborator.Languages : [null]
       ),
-      BankData: this.fb.array(
-        this.collaborator ? this.collaborator.BankData : [null]
-      ),
+      // BankData: this.fb.group(
+      //   this.collaborator ? this.collaborator.BankData : [null]
+      // ),
       Financials: this.fb.array(
         this.collaborator ? this.collaborator.Financials : [null]
       ),
@@ -151,7 +159,7 @@ export class CollaboratorCreateComponent implements OnInit {
       data.Dependents = new Array(data.Dependents);
       data.Educations = new Array(data.Educations);
       data.Languages = new Array(data.Languages);
-      data.BankData = new Array(data.BankData);
+      // data.BankData = new Array(data.BankData);
       data.Financials = new Array(data.Financials);
       data.Skills = new Array(data.Skills);
 
