@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsNumber, IsObject } from 'class-validator';
+import { IsEnum, IsNotEmpty, IsNumber, IsObject, MaxLength, MinLength } from 'class-validator';
 import { CollaboratorsEntity } from 'src/app/collaborators/collaborators.entity';
 import { Reasons } from './contract-reasons.enum';
 import { ContractTypes } from './contract-types.enum';
@@ -7,17 +7,19 @@ import { ContractTypes } from './contract-types.enum';
 export class CreateFinancialsDto {
   @ApiProperty()
   @IsNotEmpty()
-  @IsNumber()
+  @IsEnum(ContractTypes)
   contractType: ContractTypes;
 
   @ApiProperty()
   @IsNotEmpty()
   @IsNumber()
+  @MinLength(2)
+  @MaxLength(300)
   value: number;
 
   @ApiProperty()
   @IsNotEmpty()
-  @IsNumber()
+  @IsEnum(Reasons)
   reason: Reasons;
 
   @ApiProperty()

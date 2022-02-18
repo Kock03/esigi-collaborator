@@ -3,11 +3,15 @@ import {
   IsArray,
   IsBoolean,
   IsEmail,
+  IsEnum,
   IsNotEmpty,
   IsNumber,
   IsObject,
   IsOptional,
   IsString,
+  Length,
+  MaxLength,
+  MinLength,
 } from 'class-validator';
 import { AddressEntity } from 'src/app/address/address.entity';
 import { BankDataEntity } from 'src/app/bank-data/bank-data.entity';
@@ -28,40 +32,49 @@ export class CreateCollaboratorsDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
+  @MinLength(4)
+  @MaxLength(100)
   firstNameCorporateName: string;
 
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
+  @MinLength(4)
+  @MaxLength(100)
   lastNameFantasyName: string;
 
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
+  @MinLength(3)
+  @MaxLength(70)
   login: string;
 
   @ApiProperty()
   @IsNotEmpty()
-  @IsNumber()
+  @IsEnum(Gender)
   gender: Gender;
 
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
+  @MinLength(10)
+  @MaxLength(200)
   office: string;
 
   @ApiProperty()
   @IsNotEmpty()
-  @IsNumber()
+  @IsEnum(CollaboratorTypes)
   collaboratorTypes: CollaboratorTypes;
 
   @ApiProperty()
   @IsOptional()
+  @Length(4)
   cpf: string;
 
   @ApiProperty()
   @IsNotEmpty()
-  @IsNumber()
+  @IsEnum(MaritalStatus)
   maritalStatus: MaritalStatus;
 
   @ApiProperty()
@@ -80,35 +93,48 @@ export class CreateCollaboratorsDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsEmail()
+  @MinLength(10)
+  @MaxLength(150)
   email: string;
 
   @ApiProperty()
   @IsOptional()
+  @Length(14)
   cnpj: string;
 
   @ApiProperty()
   @IsOptional()
   @IsString()
+  @MinLength(4)
+  @MaxLength(50)
   stateRegistration: string;
 
   @ApiProperty()
   @IsOptional()
   @IsString()
+  @MinLength(5)
+  @MaxLength(100)
   municipalInscription: string;
 
   @ApiProperty()
   @IsOptional()
   @IsString()
+  @MinLength(5)
+  @MaxLength(50)
   site: string;
 
   @ApiProperty()
   @IsOptional()
   @IsString()
+  @MinLength(5)
+  @MaxLength(50)
   linkedin: string;
 
   @ApiProperty()
   @IsOptional()
   @IsString()
+  @MinLength(100)
+  @MaxLength(300)
   photo: string;
 
   @ApiProperty()

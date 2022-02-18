@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsNumber, IsObject, IsOptional, IsString } from 'class-validator';
+import { IsEnum, IsNotEmpty, IsNumber, IsObject, IsOptional, IsString, MaxLength, MinLength } from 'class-validator';
 import { CollaboratorsEntity } from 'src/app/collaborators/collaborators.entity';
 import { degreeOfInfluence } from './degree-of-influence.enum';
 
@@ -7,11 +7,13 @@ export class CreateLanguagesDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
+  @MinLength(4)
+  @MaxLength(20)
   languageName: string;
 
   @ApiProperty()
   @IsNotEmpty()
-  @IsNumber()
+  @IsEnum(degreeOfInfluence)
   degreeOfInfluence: degreeOfInfluence;
 
   @ApiProperty()
