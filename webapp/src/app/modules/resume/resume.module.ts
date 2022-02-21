@@ -41,13 +41,12 @@ import { ResumeListComponent } from './resume-list/resume-list.component';
 
 const routes: Routes = [
   {
-    path: ':id',
-    component: ResumeCreateComponent,
-  },
-
-  {
     path: 'lista',
     component: ResumeListComponent,
+  },
+  {
+    path: ':id',
+    component: ResumeCreateComponent,
   },
 ];
 
@@ -86,11 +85,9 @@ const routes: Routes = [
     MatNativeDateModule,
     ScrollingModule,
     MatListModule,
-    MatDatepickerModule
+    MatDatepickerModule,
   ],
-  providers: [
-    MatDatepickerModule
-  ],
+  providers: [MatDatepickerModule],
 
   entryComponents: [
     ResumeApplicationTabComponent,
@@ -102,7 +99,7 @@ const routes: Routes = [
     ResumeMonitoringTabComponent,
     ResumeLanguageDialog,
     ResumeEducationDialog,
-    ResumeSkillDialog
+    ResumeSkillDialog,
   ],
 })
-export class ResumeModule { }
+export class ResumeModule {}
