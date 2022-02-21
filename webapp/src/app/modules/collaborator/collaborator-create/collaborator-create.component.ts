@@ -68,7 +68,9 @@ export class CollaboratorCreateComponent implements OnInit {
         data
       );
       this.router.navigate(['colaborador/lista']);
-      this.snackbarService.successMessage('Colaborador atualizado com sucesso!')
+      this.snackbarService.successMessage(
+        'Colaborador atualizado com sucesso!'
+      );
     } catch (error) {
       console.error(error);
     }
@@ -154,20 +156,12 @@ export class CollaboratorCreateComponent implements OnInit {
 
   setFormValue() {
     this.collaboratorForm.patchValue(this.collaborator);
-    console.log("🚀 ~ file: collaborator-create.component.ts ~ line 156 ~ CollaboratorCreateComponent ~ setFormValue ~ this.collaborator", this.collaborator)
   }
-  
 
   async saveCollaborator() {
     let data = this.collaboratorForm.getRawValue();
 
     try {
-      // data.Dependents = new Array(data.Dependents);
-      // data.Educations = new Array(data.Educations);
-      // data.Languages = new Array(data.Languages);
-      // data.Financials = new Array(data.Financials);
-      // data.Skills = new Array(data.Skills);
-       
       const colaborators = await this.collaboratorProvider.store(data);
 
       this.snackbarService.successMessage('Vaga Cadastrada Com Sucesso');
@@ -182,7 +176,6 @@ export class CollaboratorCreateComponent implements OnInit {
   handleStep(number: number): void {
     this.step = number;
   }
-  
 
   navigate(direction: string) {
     if (this.step > 1 && direction === 'back') {

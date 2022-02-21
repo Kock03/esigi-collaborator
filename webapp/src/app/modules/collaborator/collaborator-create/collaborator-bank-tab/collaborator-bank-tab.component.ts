@@ -46,9 +46,9 @@ export class CollaboratorBankTabComponent implements OnInit {
   constructor(private fb: FormBuilder, public dialog: MatDialog) {}
 
   ngOnInit(): void {
-    // this.data = new Array(this.bankArray.value);
+    this.data = new Array(this.bankArray.value);
 
-    this.initObservables();
+    // this.initObservables();
   }
 
   initObservables() {

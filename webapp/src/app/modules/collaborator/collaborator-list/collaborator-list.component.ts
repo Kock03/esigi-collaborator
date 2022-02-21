@@ -59,9 +59,6 @@ export class CollaboratorListComponent implements OnInit {
   index: any = null;
   Collaborator: any;
 
-  // get collaboratorArray() {
-  //   return this.collaboratorForm.controls['Collaborators'] as FormArray;
-  // }
 
   constructor(
     private router: Router,
@@ -81,32 +78,12 @@ export class CollaboratorListComponent implements OnInit {
     this.router.navigate(['colaborador/novo']);
   }
 
-  // getCollaborator(collaboratorSelected: any, index: number) {
-  //   const dialogRef = this.dialog.open(CollaboratorCreateComponent, {
-  //     data: { collaboratorSelected },
-  //   });
-
-  //   this.index = index;
-  //   dialogRef.afterClosed().subscribe((collaborator) => {
-  //     this.collaboratorArray.controls[this.index].setValue(collaborator);
-  //   });
-  // }
-
-  // async deleteCollaborator(index: number) {
-  //   const collaborator = this.filteredCollaboratorList[index];
-  //   try {
-  //     await this.collaboratorProvider.destroy(collaborator.id);
-  //     this.getCollaboratorList();
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }
 
   async deleteCollaborator(collaboratorId: any) {
     const options = {
       data: {
         title: 'Anteção',
-        subtitle: 'Você tem certeza que deseja excluir esta vaga?',
+        subtitle: 'Você tem certeza que deseja excluir esste colaborador?',
       },
       panelClass: 'confirm-modal',
     };
@@ -119,10 +96,11 @@ export class CollaboratorListComponent implements OnInit {
           const collaborators = await this.collaboratorProvider.destroy(collaboratorId);
           this.getCollaboratorList();
 
-          this.snackbarService.successMessage('Vaga Excluída Com Sucesso');
+          this.snackbarService.successMessage('Colaborador Excluido Com Sucesso');
         } catch (error) {
           console.log('ERROR 132' + error);
-          this.snackbarService.showError('Falha ao Deletar');
+          this.snackbarService.showError('Falha ao Excluir');
+          this.getCollaboratorList()
         }
       }
     });
