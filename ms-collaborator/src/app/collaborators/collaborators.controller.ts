@@ -25,7 +25,6 @@ export class CollaboratorsController {
 
   @Post()
   async store(@Body() body: CreateCollaboratorsDto) {
-
     return await this.collaboratorsRepository.store(body);
   }
 

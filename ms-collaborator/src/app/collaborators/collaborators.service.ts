@@ -68,7 +68,7 @@ export class CollaboratorsService {
         const collaborator = this.collaboratorsRepository.create(data);
         return await this.collaboratorsRepository.save(collaborator);
       } catch (error) {
-        throw new HttpException('Duplicidade de CPF', 404);
+        throw new HttpException(error, 404);
       }
     }
   }

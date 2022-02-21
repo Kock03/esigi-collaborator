@@ -91,9 +91,9 @@ export class CollaboratorCreateComponent implements OnInit {
       admissionDate: ['', Validators.required],
 
       email: ['davi@email', [Validators.email, Validators.required]],
-      cnpj: ['', Validators.required],
-      stateRegistration: ['', Validators.required],
-      municipalInscription: ['', Validators.required],
+      cnpj: [null, Validators.required],
+      stateRegistration: [null, Validators.required],
+      municipalInscription: [null, Validators.required],
       site: ['site.davi', Validators.required],
       linkedin: ['linkedin.davi', Validators.required],
       photo: [''],
@@ -116,10 +116,16 @@ export class CollaboratorCreateComponent implements OnInit {
         district: ['', Validators.required],
       }),
       BankData: this.fb.group({
-        bank: [this.collaborator? this.collaborator.BankData.bank: '-', [Validators.required, Validators.maxLength(50)]],
+        bank: [
+          this.collaborator ? this.collaborator.BankData.bank : '-',
+          [Validators.required, Validators.maxLength(50)],
+        ],
         agency: ['1111', [Validators.required, Validators.maxLength(4)]],
         accountType: [1, Validators.required],
-        accountNumber: ['11111', [Validators.required, Validators.maxLength(5)]],
+        accountNumber: [
+          '11111',
+          [Validators.required, Validators.maxLength(5)],
+        ],
         digit: ['1', [Validators.required, Validators.maxLength(1)]],
         bankAccountDigit: ['1', [Validators.required, Validators.maxLength(1)]],
       }),
@@ -133,9 +139,6 @@ export class CollaboratorCreateComponent implements OnInit {
       Languages: this.fb.array(
         this.collaborator ? this.collaborator.Languages : [null]
       ),
-      // BankData: this.fb.group(
-      //   this.collaborator ? this.collaborator.BankData : [null]
-      // ),
       Financials: this.fb.array(
         this.collaborator ? this.collaborator.Financials : [null]
       ),
@@ -156,20 +159,19 @@ export class CollaboratorCreateComponent implements OnInit {
     let data = this.collaboratorForm.getRawValue();
 
     try {
-      data.Dependents = new Array(data.Dependents);
-      data.Educations = new Array(data.Educations);
-      data.Languages = new Array(data.Languages);
-      // data.BankData = new Array(data.BankData);
-      data.Financials = new Array(data.Financials);
-      data.Skills = new Array(data.Skills);
-
+      // data.Dependents = new Array(data.Dependents);
+      // data.Educations = new Array(data.Educations);
+      // data.Languages = new Array(data.Languages);
+      // data.Financials = new Array(data.Financials);
+      // data.Skills = new Array(data.Skills);
+       
       const colaborators = await this.collaboratorProvider.store(data);
 
       this.snackbarService.successMessage('Vaga Cadastrada Com Sucesso');
-      this.router.navigate(['collaborador/lista']);
-    } catch (error) {
+      this.router.navigate(['colaborador/lista']);
+    } catch (error: any) {
       console.log('ERROR 132' + error);
-      this.snackbarService.showError('Falha ao Cadastrar');
+      this.snackbarService.showError(error.message);
     }
   }
   handleChanges(value: any): void {}

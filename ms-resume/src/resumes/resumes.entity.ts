@@ -81,8 +81,9 @@ export class ResumesEntity {
 
   @OneToMany(() => LanguagesEntity, (languages) => languages.resume, {
     cascade: ['insert', 'update', 'soft-remove'],
+    orphanedRowAction: 'delete',
+    eager: true,
   })
-  @JoinColumn()
   Languages: LanguagesEntity[];
 
   @Column({ name: 'email', length: 100, unique: true })
