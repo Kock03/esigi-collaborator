@@ -110,10 +110,10 @@ export class CollaboratorsEntity {
   Documents: DocumentsEntity[];
 
   @OneToMany(() => LanguagesEntity, (languages) => languages.Collaborator, {
-    cascade: ['insert', 'update', 'remove'],
+    cascade: ['insert', 'update', 'soft-remove'],
     orphanedRowAction: 'delete',
+    eager: true,
   })
-  @JoinColumn()
   Languages: LanguagesEntity[];
 
   @OneToMany(() => EducationsEntity, (educations) => educations.Collaborator, {

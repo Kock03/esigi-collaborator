@@ -17,18 +17,6 @@ import {
 import { MatTable } from '@angular/material/table';
 import { MatTabGroup } from '@angular/material/tabs';
 
-export interface education {
-  schooling: string;
-  situation: string;
-  course: string;
-  institution: string;
-}
-
-export interface language {
-  languageName: string;
-  degreeOfInfluence: string;
-}
-
 @Component({
   selector: 'app-resume-education-tab',
   templateUrl: './resume-education-tab.component.html',
@@ -41,42 +29,21 @@ export class ResumeEducationTabComponent implements OnInit {
   @ViewChild('languageTable') languageTable!: MatTable<any>;
   @ViewChild('educationTable') educationTable!: MatTable<any>;
 
-  languages: language[] = [
-    { languageName: 'Russo', degreeOfInfluence: 'Escrita' },
-    { languageName: 'Inglês', degreeOfInfluence: 'Leitura' },
-    { languageName: 'Alemão', degreeOfInfluence: 'Conversação' },
-  ];
+  displayedColumns: string[] = ['schooling', 'situation', 'course', 'icon'];
 
-  educations: education[] = [
-    {
-      schooling: 'Ensino Fundamental',
-      situation: 'completo',
-      course: '',
-      institution: '',
-    },
-    {
-      schooling: 'Ensino Médio',
-      situation: 'Incompleto',
-      course: '',
-      institution: '',
-    },
-    {
-      schooling: 'Ensino Superior',
-      situation: 'Em andamento',
-      course: '',
-      institution: '',
-    },
-  ];
+  dataLanguage: [] = [];
+
+  dataEducation: [] = [];
+
+  displayedLanguage: string[] = ['language', 'fluency', 'icon'];
 
   displayedEducation: string[] = [
     'schooling',
     'situation',
     'course',
     'institution',
-    'icon'
+    'icon',
   ];
-
-  displayedLanguage: string[] = ['language', 'fluency',  'icon'];
 
   selectedIndex: number = 0;
 
@@ -85,7 +52,9 @@ export class ResumeEducationTabComponent implements OnInit {
 
   index: any = null;
   Language: any;
+  languageList: any = [];
   Education: any;
+  educationList: any = [];
 
   get languageArray() {
     return this.resumeForm.controls['Languages'] as FormArray;
@@ -98,7 +67,53 @@ export class ResumeEducationTabComponent implements OnInit {
   constructor(private fb: FormBuilder, public dialog: MatDialog) {}
 
   ngOnInit(): void {
-    this.initForm();
+    if (
+      this.educationArray.value &&
+      this.educationArray.value.findIndex(
+        (education: any) => education == null
+      ) === -1
+    ) {
+      this.dataEducation = this.educationArray.value;
+    } else {
+      this.educationArray.value.splice(0, 1)
+    }
+
+    if (
+      this.languageArray.value &&
+      this.languageArray.value.findIndex(
+        (language: any) => language == null
+      ) === -1
+    ) {
+      this.dataLanguage = this.languageArray.value;
+    }
+
+    this.initObservables();
+  }
+
+  initObservables() {
+    this.educationArray.valueChanges.subscribe((res) => {
+      const isNullIndex = this.educationArray.value.findIndex(
+        (education: any) => education == null
+      );
+      if (isNullIndex !== -1) {
+        this.educationArray.removeAt(isNullIndex);
+      }
+      if (res) {
+        this.dataEducation = this.educationArray.value;
+      }
+    });
+
+    this.languageArray.valueChanges.subscribe((res) => {
+      const isNullIndex = this.languageArray.value.findIndex(
+        (language: any) => language == null
+      );
+      if (isNullIndex !== -1) {
+        this.languageArray.removeAt(isNullIndex);
+      }
+      if (res) {
+        this.dataLanguage = this.languageArray.value;
+      }
+    });
   }
 
   openDialogLanguage() {
@@ -192,6 +207,29 @@ export class ResumeEducationTabComponent implements OnInit {
 
   deleteEducation(index: number) {
     this.educationArray.removeAt(index);
+  }
+
+  getLabel(label: string, element: any) {
+    if (!element) {
+      return;
+    }
+    switch (label) {
+      case 'schooling':
+        return element.schooling == 1
+          ? 'Ensino Fundamental'
+          : element.schooling == 2
+          ? 'Ensino Médio'
+          : 'Ensino Superior';
+      case 'situation': {
+        return element.situation == 1
+          ? 'Parado'
+          : element.situation == 2
+          ? 'Completo'
+          : 'Em andamento';
+      }
+      default:
+        return;
+    }
   }
 }
 

@@ -31,6 +31,7 @@ export class ResumesService {
 
   async store(createDto: CreateResumesDto) {
     const resume = this.resumesRepository.create(createDto);
+    console.log("🚀 ~ file: resumes.service.ts ~ line 34 ~ ResumesService ~ store ~ resume", resume)
     return await this.resumesRepository.save(resume);
   }
 

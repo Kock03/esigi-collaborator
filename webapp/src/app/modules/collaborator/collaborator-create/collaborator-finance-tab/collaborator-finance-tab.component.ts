@@ -18,9 +18,7 @@ import {
   NativeDateAdapter,
 } from '@angular/material/core';
 
-import {
-  MatDialog,
-} from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 
 import { MatTable } from '@angular/material/table';
 import { CollaboratorFinanceDialog } from './collaborator-finance-dialog.component';
@@ -111,7 +109,9 @@ export class CollaboratorFinanceTabComponent implements OnInit {
 
     this.index = index;
     dialogRef.afterClosed().subscribe((finance) => {
-      this.financeArray.controls[this.index].setValue(finance);
+      if (finance) {
+        this.financeArray.controls[this.index].setValue(finance);
+      }
     });
   }
 
@@ -119,4 +119,3 @@ export class CollaboratorFinanceTabComponent implements OnInit {
     this.financeArray.removeAt(index);
   }
 }
-

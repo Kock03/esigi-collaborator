@@ -156,8 +156,9 @@ export class CollaboratorEducationTabComponent implements OnInit {
 
     this.index = index;
     dialogRef.afterClosed().subscribe((language) => {
+      if(language){
       this.languageArray.controls[this.index].setValue(language);
-    });
+    }});
   }
 
   deleteLanguage(index: number) {

@@ -10,7 +10,11 @@ import {
 } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatTable } from '@angular/material/table';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import {
+  MatDialog,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+} from '@angular/material/dialog';
 import { CollaboratorSkillDialog } from './collaborator-skill-dialog.component';
 
 @Component({
@@ -26,7 +30,7 @@ export class CollaboratorSkillTabComponent implements OnInit {
 
   displayedColumns: string[] = ['technology', 'time', 'level', 'icon'];
 
- data: [] = [];
+  data: [] = [];
 
   selectedIndex: number = 0;
   skillForm!: FormGroup;
@@ -38,14 +42,10 @@ export class CollaboratorSkillTabComponent implements OnInit {
     return this.collaboratorForm.controls['Skills'] as FormArray;
   }
 
-  constructor(private fb: FormBuilder,public dialog: MatDialog,) {}
+  constructor(private fb: FormBuilder, public dialog: MatDialog) {}
 
   ngOnInit(): void {
-    if (
-      this.skillArray.value.findIndex(
-        (skill: any) => skill == null
-      ) === -1
-    ) {
+    if (this.skillArray.value.findIndex((skill: any) => skill == null) === -1) {
       this.data = this.skillArray.value;
     }
 
@@ -72,13 +72,12 @@ export class CollaboratorSkillTabComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((skill) => {
-      if(skill){
+      if (skill) {
         this.skillArray.insert(0, this.fb.group(skill));
         this.skillTable.renderRows();
       }
     });
   }
-
 
   next() {
     this.onChange.next(true);
@@ -89,19 +88,17 @@ export class CollaboratorSkillTabComponent implements OnInit {
       width: '500px',
       height: '620px',
       data: { skillSelected },
-
     });
 
     this.index = index;
     dialogRef.afterClosed().subscribe((skill) => {
-      this.skillArray.controls[this.index].setValue(skill);
+      if (skill) {
+        this.skillArray.controls[this.index].setValue(skill);
+      }
     });
-
   }
 
-  deleteSkill(index: number){
-     this.skillArray.removeAt(index);
-  
+  deleteSkill(index: number) {
+    this.skillArray.removeAt(index);
   }
 }
-

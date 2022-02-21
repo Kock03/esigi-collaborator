@@ -92,7 +92,9 @@ export class CollaboratorDocumentTabComponent implements OnInit {
 
     this.index = index;
     dialogRef.afterClosed().subscribe((document) => {
-      this.documentArray.controls[this.index].setValue(document);
+      if (document) {
+        this.documentArray.controls[this.index].setValue(document);
+      }
     });
   }
 

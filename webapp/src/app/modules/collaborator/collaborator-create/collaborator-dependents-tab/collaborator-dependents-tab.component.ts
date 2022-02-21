@@ -23,7 +23,7 @@ import {
 } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
 import { DocumentValidator } from 'src/app/validators/document.validator';
-import {CollaboratorDependentsDialog } from './collaborator-dependents-dialog.component';
+import { CollaboratorDependentsDialog } from './collaborator-dependents-dialog.component';
 
 @Component({
   selector: 'app-collaborator-dependents-tab',
@@ -35,7 +35,6 @@ export class CollaboratorDependentsTabComponent implements OnInit {
   @Input('form') collaboratorForm!: FormGroup;
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
   @ViewChild('dependentTable') dependentTable!: MatTable<any>;
-
 
   displayedDependents: string[] = [
     'type',
@@ -112,7 +111,9 @@ export class CollaboratorDependentsTabComponent implements OnInit {
     });
     this.index = index;
     dialogRef.afterClosed().subscribe((dependent) => {
-      this.dependentArray.controls[this.index].setValue(dependent);
+      if (dependent) {
+        this.dependentArray.controls[this.index].setValue(dependent);
+      }
     });
   }
 
@@ -120,4 +121,3 @@ export class CollaboratorDependentsTabComponent implements OnInit {
     this.dependentArray.removeAt(index);
   }
 }
-

@@ -40,20 +40,31 @@ export class ResumeExperienceTabComponent implements OnInit {
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
 
   Experience: any;
+  experienceList: any[] = [];
   experienceForm!: FormGroup;
   index: any = null;
+
+  get experiencesArray() {
+    return this.resumeForm.controls['Experiences'] as FormArray;
+  }
 
   // constructor(private dialog: MatDialog,) { }
 
   constructor(private fb: FormBuilder, public dialog: MatDialog) {}
 
   ngOnInit(): void {
-    this.initForm();
+    if (
+      this.experiencesArray.value &&
+      this.experiencesArray.value.findIndex(
+        (education: any) => education == null
+      ) === -1
+    ) {
+      this.experienceList = this.experiencesArray.value;
+
+      this.initForm();
+    }
   }
 
-  get experiencesArray() {
-    return this.resumeForm.controls['Experiences'] as FormArray;
-  }
 
   initForm(): void {
     this.experienceForm = this.fb.group({
@@ -78,6 +89,7 @@ export class ResumeExperienceTabComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((experience) => {
       this.experiencesArray.insert(0, this.fb.group(experience));
+      this.experienceList.push(experience);
     });
   }
 
@@ -87,6 +99,7 @@ export class ResumeExperienceTabComponent implements OnInit {
 
   deleteExperience(index: number) {
     this.experiencesArray.removeAt(index);
+    this.experienceList.splice(index, 1);
   }
 
   getExperience(experienceSelected: any, index: number) {
@@ -99,6 +112,7 @@ export class ResumeExperienceTabComponent implements OnInit {
     this.index = index;
     dialogRef.afterClosed().subscribe((experience) => {
       this.experiencesArray.controls[this.index].setValue(experience);
+      this.experienceList[this.index] = experience;
     });
   }
 }

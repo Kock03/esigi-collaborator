@@ -47,36 +47,22 @@ export class CollaboratorBankTabComponent implements OnInit {
 
   ngOnInit(): void {
     this.data = new Array(this.bankArray.value);
-
-    // this.initObservables();
-  }
-
-  initObservables() {
-    this.bankArray.valueChanges.subscribe((res) => {
-      const isNullIndex = this.bankArray.value.findIndex(
-        (dependent: any) => dependent == null
-      );
-      // if (isNullIndex !== -1) {
-      //   this.bankArray.removeAt(isNullIndex);
-      // }
-      // if (res) {
-      //   this.data = this.bankArray.value;
-      // }
-    });
   }
 
   openDialog() {
     const dialogRef = this.dialog.open(CollaboratorBankDialog, {
       width: '500px',
       height: '470px',
-      data: {bankForm: this.bankArray},
-      
+      data: { bankForm: this.bankArray },
     });
-    console.log("🚀 ~ file: collaborator-bank-tab.component.ts ~ line 73 ~ CollaboratorBankTabComponent ~ openDialog ~ this.bankForm", this.bankArray)
+    console.log(
+      '🚀 ~ file: collaborator-bank-tab.component.ts ~ line 73 ~ CollaboratorBankTabComponent ~ openDialog ~ this.bankForm',
+      this.bankArray
+    );
 
     dialogRef.afterClosed().subscribe((bank) => {
-        this.data = new Array(this.bankArray.value);
-        this.bankTable.renderRows();
+      this.data = new Array(this.bankArray.value);
+      this.bankTable.renderRows();
     });
   }
 
@@ -92,7 +78,9 @@ export class CollaboratorBankTabComponent implements OnInit {
     });
     this.index = index;
     dialogRef.afterClosed().subscribe((bank) => {
-      this.bankArray.controls[this.index].setValue(bank);
+      if (bank) {
+        this.bankArray.controls[this.index].setValue(bank);
+      }
     });
   }
 

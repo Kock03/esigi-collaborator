@@ -9,15 +9,12 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import {
+  MatDialog,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+} from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
-
-export interface skill {
-  technology: string;
-  seniority: string;
-  yearsExperience: string;
-  currentPosition: boolean;
-}
 
 @Component({
   selector: 'app-resume-skills-tab',
@@ -32,14 +29,7 @@ export class ResumeSkillsTabComponent implements OnInit {
 
   displayedColumns: string[] = ['name', 'time', 'level', 'icon'];
 
-  skills: skill[] = [
-    {
-      technology: 'Java',
-      yearsExperience: '',
-      seniority: 'Senior',
-      currentPosition: false,
-    },
-  ];
+  data: [] = [];
 
   selectedIndex: number = 0;
   skillForm!: FormGroup;
@@ -51,11 +41,30 @@ export class ResumeSkillsTabComponent implements OnInit {
     return this.resumeForm.controls['Skills'] as FormArray;
   }
 
-  constructor(private fb: FormBuilder,public dialog: MatDialog,) {}
+  constructor(private fb: FormBuilder, public dialog: MatDialog) {}
 
   ngOnInit(): void {
-    this.initForm();
+    if (this.skillArray.value && this.skillArray.value.findIndex((skill: any) => skill == null) === -1) {
+      this.data = this.skillArray.value;
+    }
+
+    this.initObservables();
   }
+
+  initObservables() {
+    this.skillArray.valueChanges.subscribe((res) => {
+      const isNullIndex = this.skillArray.value.findIndex(
+        (skill: any) => skill == null
+      );
+      if (isNullIndex !== -1) {
+        this.skillArray.removeAt(isNullIndex);
+      }
+      if (res) {
+        this.data = this.skillArray.value;
+      }
+    });
+  }
+
 
   openDialog() {
     const dialogRef = this.dialog.open(ResumeSkillDialog, {
@@ -64,35 +73,15 @@ export class ResumeSkillsTabComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((skill) => {
-      if(skill){
+      if (skill) {
         this.skillArray.insert(0, this.fb.group(skill));
         this.skillTable.renderRows();
       }
     });
   }
 
-
-
-  initForm(): void {
-    this.skillForm = this.fb.group({
-      technology: ['Java'],
-      seniority: ['Senior'],
-      yearsExperience: ['5'],
-      currentPosition: [true],
-    });
-    
-  }
-
   next() {
     this.onChange.next(true);
-  }
-
-  
-  saveSkill() {
-    const data = this.skillForm.getRawValue();
-    this.skillArray.insert(0, this.fb.group(data));
-    this.skillTable.renderRows();
-    this.skillForm.reset();
   }
 
   getSkill(skillSelected: any, index: number) {
@@ -100,19 +89,16 @@ export class ResumeSkillsTabComponent implements OnInit {
       width: '500px',
       height: '620px',
       data: { skillSelected },
-
     });
 
     this.index = index;
     dialogRef.afterClosed().subscribe((skill) => {
       this.skillArray.controls[this.index].setValue(skill);
     });
-
   }
 
-  deleteSkill(index: number){
-     this.skillArray.removeAt(index);
-  
+  deleteSkill(index: number) {
+    this.skillArray.removeAt(index);
   }
 }
 
@@ -121,18 +107,16 @@ export class ResumeSkillsTabComponent implements OnInit {
   templateUrl: 'resume-skill-dialog.html',
   styleUrls: ['./resume-skills-tab.component.scss'],
 })
-export class ResumeSkillDialog{
-
+export class ResumeSkillDialog {
   @Input('form') collaboratorForm!: FormGroup;
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
 
   skillForm!: FormGroup;
 
-
   constructor(
     public dialogRef: MatDialogRef<ResumeSkillDialog>,
     private fb: FormBuilder,
-    @Inject(MAT_DIALOG_DATA) public data: { skillSelected: any}
+    @Inject(MAT_DIALOG_DATA) public data: { skillSelected: any }
   ) {}
 
   ngOnInit(): void {
@@ -141,13 +125,13 @@ export class ResumeSkillDialog{
 
   initForm(): void {
     this.skillForm = this.fb.group({
-      technology:['Angular', [Validators.required, Validators.maxLength(50)]],
+      technology: ['Angular', [Validators.required, Validators.maxLength(50)]],
       seniority: [1, Validators.required],
       yearsExperience: ['2', [Validators.required, Validators.maxLength(2)]],
-      currentPosition: [true, Validators.required]
+      currentPosition: [true, Validators.required],
     });
     if (this.data && this.data.skillSelected) {
-      this.skillForm.patchValue(this.data.skillSelected)
+      this.skillForm.patchValue(this.data.skillSelected);
     }
   }
 

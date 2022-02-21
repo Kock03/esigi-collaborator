@@ -10,7 +10,7 @@ import {
 } from '@angular/material/dialog';
 import { ResumeDialogExperience } from './resume-experience-tab/resume-experience-tab.component';
 import { ResumeProvider } from 'src/providers/resume.provider';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SnackBarService } from 'src/services/snackbar.service';
 
 
@@ -34,11 +34,25 @@ export class ResumeCreateComponent implements OnInit {
     private resumeProvider: ResumeProvider,
     private snackbarService: SnackBarService,
     private http: HttpClient,
+    private route: ActivatedRoute
   ) {}
 
-  ngOnInit(): void {
+  // ngOnInit(): void {
+  //   this.initForm();
+  //   this.step = 1;
+
+  //   this.resumeForm.controls['Experiences'].valueChanges.subscribe(res => {
+  //     console.log("🚀 ~ file: resume-create.component.ts ~ line 46 ~ ResumeCreateComponent ~ ngOnInit ~ res", res)
+  //   })
+  // }
+
+  async ngOnInit(): Promise<void> {
+    this.resumeId = this.route.snapshot.paramMap.get('id');
     this.initForm();
     this.step = 1;
+    if (this.resumeId !== 'novo') {
+      this.setFormValue();
+    }
   }
 
   initForm() {
@@ -76,24 +90,28 @@ export class ResumeCreateComponent implements OnInit {
       site: ['', Validators.required],
       linkedin: ['', Validators.required],
 
-      Languages: this.fb.array([]),
-      Educations: this.fb.array([]),
-      Experiences: this.fb.array([]),
-      Skills: this.fb.array([]),
+
+
+   
+      Educations: this.fb.array(
+        this.resume ? this.resume.Educations : [null]
+      ),
+      Languages: this.fb.array(
+        this.resume ? this.resume.Languages : [null]
+      ),
+      Experiences: this.fb.array(
+        this.resume ? this.resume.Experiences : [null]
+      ),
+      Skills: this.fb.array(
+        this.resume ? this.resume.Skills : [null]
+      ),
     });
 
-    this.resumeForm.valueChanges.subscribe((res) => {});
   }
 
-  // async saveResume() {
-  //   let data = this.resumeForm.getRawValue();
-
-  //   try {
-  //     const resume = await this.resumeProvider.store(data);
-  //   } catch (error) {
-  //     console.log('ERROR 132' + error);
-  //   }
-  // }
+   setFormValue() {
+    this.resumeForm.patchValue(this.resume);
+  }
 
   async saveResume() {
     let data = this.resumeForm.getRawValue();
