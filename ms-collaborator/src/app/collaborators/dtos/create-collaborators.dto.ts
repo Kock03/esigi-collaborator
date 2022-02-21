@@ -130,11 +130,11 @@ export class CreateCollaboratorsDto {
   @MaxLength(50)
   linkedin: string;
 
-  // @ApiProperty()
+  @ApiProperty()
   @IsOptional()
-  // @IsString()
-  // @MinLength(100)
-  // @MaxLength(300)
+  @IsString()
+  @MinLength(100)
+  @MaxLength(300)
   photo: string;
 
   @ApiProperty()

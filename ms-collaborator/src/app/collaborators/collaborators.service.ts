@@ -36,6 +36,7 @@ export class CollaboratorsService {
         'Phone',
         'Address',
         'Financials',
+        'Dependents'
       ],
     };
 

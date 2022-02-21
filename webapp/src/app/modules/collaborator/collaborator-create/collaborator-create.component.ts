@@ -68,6 +68,7 @@ export class CollaboratorCreateComponent implements OnInit {
         data
       );
       this.router.navigate(['colaborador/lista']);
+      this.snackbarService.successMessage('Colaborador atualizado com sucesso!')
     } catch (error) {
       console.error(error);
     }
@@ -96,7 +97,7 @@ export class CollaboratorCreateComponent implements OnInit {
       municipalInscription: [null, Validators.required],
       site: ['site.davi', Validators.required],
       linkedin: ['linkedin.davi', Validators.required],
-      photo: [''],
+      photo: [null],
       Phone: this.fb.group({
         phoneNumber: [
           '343234908',
@@ -153,7 +154,9 @@ export class CollaboratorCreateComponent implements OnInit {
 
   setFormValue() {
     this.collaboratorForm.patchValue(this.collaborator);
+    console.log("🚀 ~ file: collaborator-create.component.ts ~ line 156 ~ CollaboratorCreateComponent ~ setFormValue ~ this.collaborator", this.collaborator)
   }
+  
 
   async saveCollaborator() {
     let data = this.collaboratorForm.getRawValue();
@@ -171,7 +174,7 @@ export class CollaboratorCreateComponent implements OnInit {
       this.router.navigate(['colaborador/lista']);
     } catch (error: any) {
       console.log('ERROR 132' + error);
-      this.snackbarService.showError(error.message);
+      this.snackbarService.showError(error);
     }
   }
   handleChanges(value: any): void {}
@@ -179,6 +182,7 @@ export class CollaboratorCreateComponent implements OnInit {
   handleStep(number: number): void {
     this.step = number;
   }
+  
 
   navigate(direction: string) {
     if (this.step > 1 && direction === 'back') {

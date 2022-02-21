@@ -178,4 +178,18 @@
       Salvar
     </button>
   </div>
+  <div
+  class="navigation-buttons"
+  fxLayoutAlign="center end"
+  fxLayoutGap="16px"
+  *ngIf="collaboratorId !== 'novo'"
+>
+  <button
+    mat-flat-button
+    (click)="saveEditCollaborator()"
+    color="primary"
+  >
+    Salvar
+  </button>
+</div>
 </div>
