@@ -1,5 +1,7 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import {
+  isArray,
+  IsArray,
   IsBoolean,
   IsDataURI,
   IsDate,
@@ -115,7 +117,8 @@ export class CreateJobsDto {
   @IsString()
   collaboratorActivities: string;
 
-  @ApiProperty()
+  @ApiPropertyOptional()
+  @IsArray()
   @IsOptional()
   Knowledges: KnowledgesEntity[];
 
@@ -137,7 +140,8 @@ export class CreateJobsDto {
   @IsNotEmpty()
   Seniorities: SenioritiesEntity;
 
-  @ApiProperty()
+  @ApiPropertyOptional()
+  @IsArray()
   @IsOptional()
   Languages: LanguagesEntity[];
 
@@ -145,11 +149,13 @@ export class CreateJobsDto {
   @IsOptional()
   behaviorInterviews: BehaviroalInterviewsEntity[];
 
-  @ApiProperty()
+  @ApiPropertyOptional()
+  @IsArray()
   @IsOptional()
   clientInterviews: ClientInterviewsEntity[];
 
-  @ApiProperty()
+  @ApiPropertyOptional()
+  @IsArray()
   @IsOptional()
   technicalInterviews: TechnicalInterviewsEntity[];
 }

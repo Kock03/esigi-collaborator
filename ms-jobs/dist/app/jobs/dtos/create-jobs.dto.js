@@ -127,7 +127,8 @@ __decorate([
     __metadata("design:type", String)
 ], CreateJobsDto.prototype, "collaboratorActivities", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)(),
+    (0, swagger_1.ApiPropertyOptional)(),
+    (0, class_validator_1.IsArray)(),
     (0, class_validator_1.IsOptional)(),
     __metadata("design:type", Array)
 ], CreateJobsDto.prototype, "Knowledges", void 0);
@@ -154,7 +155,8 @@ __decorate([
     __metadata("design:type", seniorities_entity_1.SenioritiesEntity)
 ], CreateJobsDto.prototype, "Seniorities", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)(),
+    (0, swagger_1.ApiPropertyOptional)(),
+    (0, class_validator_1.IsArray)(),
     (0, class_validator_1.IsOptional)(),
     __metadata("design:type", Array)
 ], CreateJobsDto.prototype, "Languages", void 0);
@@ -164,12 +166,14 @@ __decorate([
     __metadata("design:type", Array)
 ], CreateJobsDto.prototype, "behaviorInterviews", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)(),
+    (0, swagger_1.ApiPropertyOptional)(),
+    (0, class_validator_1.IsArray)(),
     (0, class_validator_1.IsOptional)(),
     __metadata("design:type", Array)
 ], CreateJobsDto.prototype, "clientInterviews", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)(),
+    (0, swagger_1.ApiPropertyOptional)(),
+    (0, class_validator_1.IsArray)(),
     (0, class_validator_1.IsOptional)(),
     __metadata("design:type", Array)
 ], CreateJobsDto.prototype, "technicalInterviews", void 0);

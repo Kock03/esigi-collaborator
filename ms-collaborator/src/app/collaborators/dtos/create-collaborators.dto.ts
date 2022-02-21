@@ -69,7 +69,6 @@ export class CreateCollaboratorsDto {
 
   @ApiProperty()
   @IsOptional()
-  @Length(11)
   cpf: string;
 
   @ApiProperty()
@@ -99,7 +98,7 @@ export class CreateCollaboratorsDto {
 
   @ApiProperty()
   @IsOptional()
-  @Length(14)
+  // @Length(14)
   cnpj: string;
 
   @ApiProperty()
