@@ -13,6 +13,7 @@ export interface Resume {
   firstName: string;
   birthDate: Date;
   phoneNumber: number;
+  Phone: {}
 }
 
 
@@ -79,7 +80,7 @@ export class ResumeListComponent implements OnInit {
     this.dialogService.confirmed().subscribe(async (confirmed) => {
       if (confirmed) {
         try {
-          const jobs = await this.resumeProvider.destroy(resumeId);
+          const resumes = await this.resumeProvider.destroy(resumeId);
           this.getResumeList();
 
           this.snackbarService.successMessage('Currículo excluído com sucesso');
