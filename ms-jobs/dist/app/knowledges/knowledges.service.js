@@ -42,8 +42,10 @@ let KnowledgesService = class KnowledgesService {
         return await this.knowledgesRepository.save(knowledge);
     }
     async update(id, data) {
-        const knowledge = await this.knowledgesRepository.findOneOrFail({ id });
-        if (!knowledge) {
+        try {
+            const knowledge = await this.knowledgesRepository.findOneOrFail({ id });
+        }
+        catch (_a) {
             throw new not_found_exception_1.NotFoundException();
         }
         return await this.knowledgesRepository.save(Object.assign({ id: id }, data));

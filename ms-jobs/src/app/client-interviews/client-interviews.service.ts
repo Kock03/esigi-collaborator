@@ -43,10 +43,11 @@ export class ClientInterviewsService {
   }
 
   async update(id: string, data: UpdateClientInterviewsDto) {
-    const interview = await this.clientInterviewsRepository.findOneOrFail({
-      id,
-    });
-    if (!interview) {
+    try {
+      const interview = await this.clientInterviewsRepository.findOneOrFail({
+        id,
+      });
+    } catch {
       throw new NotFoundException();
     }
     return await this.clientInterviewsRepository.save({ id: id, ...data });

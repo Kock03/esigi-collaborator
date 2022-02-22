@@ -40,8 +40,9 @@ export class JobsService {
   }
 
   async update(id: string, data: UpdateJobsDto) {
-    const job = await this.jobsRepository.findOneOrFail({ id });
-    if (!job) {
+    try {
+      const job = await this.jobsRepository.findOneOrFail({ id });
+    } catch {
       throw new NotFoundException();
     }
     return await this.jobsRepository.save({ id: id, ...data });

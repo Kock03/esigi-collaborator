@@ -42,8 +42,9 @@ export class SenioritiesService {
   }
 
   async update(id: string, data: UpdateSenioritiesDto) {
-    const seniority = await this.senioritiesRepository.findOneOrFail({ id });
-    if (!seniority) {
+    try {
+      const seniority = await this.senioritiesRepository.findOneOrFail({ id });
+    } catch {
       throw new NotFoundException();
     }
     return await this.senioritiesRepository.save({ id: id, ...data });

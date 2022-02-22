@@ -14,9 +14,7 @@ export class ReturnsService {
   ) {}
 
   async findAll() {
-    const interviews = await this.returnsRepository.find();
-
-    return interviews;
+    return await this.returnsRepository.find();
   }
 
   async findOneOrFail(
@@ -36,8 +34,9 @@ export class ReturnsService {
   }
 
   async update(id: string, data: UpdateReturnsDto) {
-    const job = await this.returnsRepository.findOneOrFail({ id });
-    if (!job) {
+    try {
+      const job = await this.returnsRepository.findOneOrFail({ id });
+    } catch {
       throw new NotFoundException();
     }
     return await this.returnsRepository.save({ id: id, ...data });

@@ -39,10 +39,13 @@ export class BehavioralInterviewsService {
   }
 
   async update(id: string, data: UpdateBehaviorInterviewsDto) {
-    const inertview = await this.behavioralInterviewsRepository.findOneOrFail({
-      id,
-    });
-    if (!inertview) {
+    try {
+      const inertview = await this.behavioralInterviewsRepository.findOneOrFail(
+        {
+          id,
+        },
+      );
+    } catch {
       throw new NotFoundException();
     }
     return await this.behavioralInterviewsRepository.save({ id: id, ...data });
@@ -51,10 +54,9 @@ export class BehavioralInterviewsService {
   async destroy(id: string) {
     try {
       await this.behavioralInterviewsRepository.findOneOrFail({ id });
-    } catch (error) {
+    } catch {
       throw new NotFoundException();
     }
-
     return await this.behavioralInterviewsRepository.softDelete({ id });
   }
 }

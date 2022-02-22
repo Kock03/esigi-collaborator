@@ -42,10 +42,12 @@ let LanguagesService = class LanguagesService {
         return await this.languagesRepository.save(language);
     }
     async update(id, data) {
-        const language = await this.languagesRepository.findOneOrFail({
-            id,
-        });
-        if (!language) {
+        try {
+            const language = await this.languagesRepository.findOneOrFail({
+                id,
+            });
+        }
+        catch (_a) {
             throw new not_found_exception_1.NotFoundException();
         }
         return await this.languagesRepository.save(Object.assign({ id: id }, data));

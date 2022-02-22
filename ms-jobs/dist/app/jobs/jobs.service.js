@@ -40,8 +40,10 @@ let JobsService = class JobsService {
         return await this.jobsRepository.save(job);
     }
     async update(id, data) {
-        const job = await this.jobsRepository.findOneOrFail({ id });
-        if (!job) {
+        try {
+            const job = await this.jobsRepository.findOneOrFail({ id });
+        }
+        catch (_a) {
             throw new not_found_exception_1.NotFoundException();
         }
         return await this.jobsRepository.save(Object.assign({ id: id }, data));

@@ -39,8 +39,9 @@ export class KnowledgesService {
   }
 
   async update(id: string, data: UpdateKnowledgesDto) {
-    const knowledge = await this.knowledgesRepository.findOneOrFail({ id });
-    if (!knowledge) {
+    try {
+      const knowledge = await this.knowledgesRepository.findOneOrFail({ id });
+    } catch {
       throw new NotFoundException();
     }
     return await this.knowledgesRepository.save({ id: id, ...data });

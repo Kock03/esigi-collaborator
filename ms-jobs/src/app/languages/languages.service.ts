@@ -40,10 +40,11 @@ export class LanguagesService {
   }
 
   async update(id: string, data: UpdateLanguagesDto) {
-    const language = await this.languagesRepository.findOneOrFail({
-      id,
-    });
-    if (!language) {
+    try {
+      const language = await this.languagesRepository.findOneOrFail({
+        id,
+      });
+    } catch {
       throw new NotFoundException();
     }
     return await this.languagesRepository.save({ id: id, ...data });

@@ -22,7 +22,6 @@ import { SkillsEntity } from 'src/skills/skills.entity';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateResumesDto {
-
   @ApiProperty()
   @IsOptional()
   photo: string;
@@ -49,7 +48,8 @@ export class CreateResumesDto {
 
   @ApiProperty()
   @IsNotEmpty()
-  @Length(11)
+  @MinLength(11)
+  @MaxLength(11)
   @IsString()
   cpf: string;
 

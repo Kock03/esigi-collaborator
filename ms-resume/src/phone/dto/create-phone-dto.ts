@@ -1,24 +1,32 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsString, Length } from 'class-validator';
+import {
+  IsNotEmpty,
+  IsString,
+  Length,
+  MaxLength,
+  MinLength,
+} from 'class-validator';
 import { ResumesEntity } from 'src/resumes/resumes.entity';
 
 export class CreatePhoneDto {
-  
   @ApiProperty()
   @IsNotEmpty()
-  @Length(9)
+  @MinLength(9)
+  @MaxLength(9)
   @IsString()
   phoneNumber: string;
 
   @ApiProperty()
   @IsNotEmpty()
-  @Length(2)
+  @MinLength(2)
+  @MaxLength(2)
   @IsString()
   ddd: string;
 
   @ApiProperty()
   @IsNotEmpty()
-  @Length(2)
+  @MinLength(2)
+  @MaxLength(2)
   @IsString()
   ddi: string;
 }

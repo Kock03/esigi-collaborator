@@ -1,5 +1,6 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { NotFoundException } from 'src/exceptions/not-found-exception';
 import { Repository, FindConditions, FindOneOptions } from 'typeorm';
 import { CreateSkillsDto } from './dto/create-skills-dto';
 import { UpdateSkillsDto } from './dto/update-skills-dto';
@@ -22,8 +23,8 @@ export class SkillsService {
   ) {
     try {
       return await this.skillsRepository.findOneOrFail(conditions, options);
-    } catch (error) {
-      throw new NotFoundException(error.message);
+    } catch {
+      throw new NotFoundException();
     }
   }
 
@@ -32,14 +33,21 @@ export class SkillsService {
     return await this.skillsRepository.save(skills);
   }
 
-  async update(id: string, updateDto: UpdateSkillsDto) {
-    const skills = await this.skillsRepository.findOneOrFail({ id });
-    this.skillsRepository.merge(skills, updateDto);
-    return this.skillsRepository.save(skills);
+  async update(id: string, data: UpdateSkillsDto) {
+    try {
+      const skills = await this.skillsRepository.findOneOrFail({ id });
+    } catch {
+      throw new NotFoundException();
+    }
+    return await this.skillsRepository.save({ id: id, ...data });
   }
 
   async destroy(id: string) {
-    await this.skillsRepository.findOneOrFail({ id });
+    try {
+      await this.skillsRepository.findOneOrFail({ id });
+    } catch {
+      throw new NotFoundException();
+    }
     return await this.skillsRepository.softDelete({ id });
   }
 }

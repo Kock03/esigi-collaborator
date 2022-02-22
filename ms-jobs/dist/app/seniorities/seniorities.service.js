@@ -42,8 +42,10 @@ let SenioritiesService = class SenioritiesService {
         return await this.senioritiesRepository.save(seniority);
     }
     async update(id, data) {
-        const seniority = await this.senioritiesRepository.findOneOrFail({ id });
-        if (!seniority) {
+        try {
+            const seniority = await this.senioritiesRepository.findOneOrFail({ id });
+        }
+        catch (_a) {
             throw new not_found_exception_1.NotFoundException();
         }
         return await this.senioritiesRepository.save(Object.assign({ id: id }, data));

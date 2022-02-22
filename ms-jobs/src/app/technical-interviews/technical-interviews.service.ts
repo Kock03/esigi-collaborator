@@ -42,10 +42,11 @@ export class TechnicalInterviewsService {
   }
 
   async update(id: string, data: UpdateTechnicalInterviewsDto) {
-    const interview = await this.technicalInterviewsRepository.findOneOrFail({
-      id,
-    });
-    if (!interview) {
+    try {
+      const interview = await this.technicalInterviewsRepository.findOneOrFail({
+        id,
+      });
+    } catch {
       throw new NotFoundException();
     }
     return await this.technicalInterviewsRepository.save({ id: id, ...data });
@@ -56,7 +57,7 @@ export class TechnicalInterviewsService {
       await this.technicalInterviewsRepository.findOneOrFail({
         id,
       });
-    } catch (error) {
+    } catch {
       throw new NotFoundException();
     }
     return await this.technicalInterviewsRepository.softDelete({ id });
