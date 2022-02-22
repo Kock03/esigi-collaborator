@@ -28,16 +28,18 @@ export class CollaboratorDocumentDialog {
       name: ['RG', Validators.required],
       file: [''],
     });
-
     if (this.data && this.data.documentSelected) {
       this.documentForm.patchValue(this.data.documentSelected);
     }
   }
-
-  onFileSelected(event: any) {
-    if (event.target.files.length > 0) {
-      const file = event.target.files[0];
-    }
+  fileChanged(file: any) {
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.documentForm.patchValue({
+        file: reader.result,
+      });
+    };
+    reader.readAsText(file.target.files[0]);
   }
 
   onNoClick(): void {

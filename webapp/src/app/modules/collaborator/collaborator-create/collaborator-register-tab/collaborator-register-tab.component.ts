@@ -130,4 +130,14 @@ export class CollaboratorRegisterTabComponent implements OnInit {
       });
     }
   }
+
+  fileChanged(file: any) {
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.collaboratorForm.patchValue({
+        photo: reader.result,
+      });
+    };
+    reader.readAsText(file.target.files[0]);
+  }
 }

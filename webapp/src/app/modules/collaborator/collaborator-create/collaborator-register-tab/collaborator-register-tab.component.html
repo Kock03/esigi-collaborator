@@ -2,16 +2,15 @@
   <div class="content-scroll" *ngIf="collaboratorForm">
     <form (submit)="next()" [formGroup]="collaboratorForm" fxLayout="column">
       <div fxLayout="row">
-        <!-- <div class="image-upload">
+        <div class="image-upload">
           <label for="fileInput">
             <img
               src="https://st.depositphotos.com/1734074/4228/v/450/depositphotos_42286141-stock-illustration-vector-man-with-mustache-in.jpg"
-              alt="">
+              alt=""
+            />
           </label>
-          <input
-            type="file" 
-            id="fileInput" formControlName="photo">
-          </div> -->
+          <input type="file" id="fileInput" (change)="fileChanged($event)" />
+        </div>
 
         <div fxFlex="100" fxLayoutGap="16px" fxFlexAlign="end">
           <mat-form-field fxFlex="30" appearance="outline">
