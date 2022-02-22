@@ -48,9 +48,9 @@ export class ResumeProvider {
         });
     };
 
-    destroy(resume: any): Promise<any> {
+    destroy(id: string | null): Promise<any> {
       return new Promise((resolve, reject) => {
-          this.apiGateway.delete(environment.RESUME_MS + 'resumes', resume).subscribe((response: HttpResponse<any>) => {
+          this.apiGateway.delete(environment.RESUME_MS + 'resumes/:id', {id: id}).subscribe((response: HttpResponse<any>) => {
               resolve(response.body);
           }, reject);
       })
