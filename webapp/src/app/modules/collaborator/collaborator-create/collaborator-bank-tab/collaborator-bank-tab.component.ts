@@ -55,14 +55,10 @@ export class CollaboratorBankTabComponent implements OnInit {
       height: '470px',
       data: { bankForm: this.bankArray },
     });
-    console.log(
-      '🚀 ~ file: collaborator-bank-tab.component.ts ~ line 73 ~ CollaboratorBankTabComponent ~ openDialog ~ this.bankForm',
-      this.bankArray
-    );
-
     dialogRef.afterClosed().subscribe((bank) => {
       this.data = new Array(this.bankArray.value);
       this.bankTable.renderRows();
+      console.log("🚀 ~ file: collaborator-bank-tab.component.ts ~ line 64 ~ CollaboratorBankTabComponent ~ dialogRef.afterClosed ~ bank", bank)
     });
   }
 

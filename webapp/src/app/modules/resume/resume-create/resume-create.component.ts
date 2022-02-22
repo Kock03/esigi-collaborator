@@ -13,7 +13,6 @@ import { ResumeProvider } from 'src/providers/resume.provider';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SnackBarService } from 'src/services/snackbar.service';
 
-
 @Component({
   selector: 'app-resume-create',
   templateUrl: './resume-create.component.html',
@@ -37,22 +36,24 @@ export class ResumeCreateComponent implements OnInit {
     private route: ActivatedRoute
   ) {}
 
-  // ngOnInit(): void {
-  //   this.initForm();
-  //   this.step = 1;
-
-  //   this.resumeForm.controls['Experiences'].valueChanges.subscribe(res => {
-  //     console.log("🚀 ~ file: resume-create.component.ts ~ line 46 ~ ResumeCreateComponent ~ ngOnInit ~ res", res)
-  //   })
-  // }
-
   async ngOnInit(): Promise<void> {
     this.resumeId = this.route.snapshot.paramMap.get('id');
     this.initForm();
     this.step = 1;
     if (this.resumeId !== 'novo') {
-      this.setFormValue();
+       await this.getResume()
     }
+    this.setFormValue();
+  }
+
+  async getResume(){
+    try{
+      this.resume = await this.resumeProvider.findOne(this.resumeId)
+    }
+    catch (error) {
+      console.error(error);
+    }
+ 
   }
 
   initForm() {
@@ -69,7 +70,7 @@ export class ResumeCreateComponent implements OnInit {
       birthDate: ['2022-01-01', Validators.required],
       gender: [1, Validators.required],
       maritalStatus: [1, Validators.required],
-      photo: ['', Validators.required],
+      photo: [null],
 
       Address: this.fb.group({
         cep: ['89040400', Validators.required],
@@ -90,26 +91,14 @@ export class ResumeCreateComponent implements OnInit {
       site: ['', Validators.required],
       linkedin: ['', Validators.required],
 
-
-
-   
-      Educations: this.fb.array(
-        this.resume ? this.resume.Educations : [null]
-      ),
-      Languages: this.fb.array(
-        this.resume ? this.resume.Languages : [null]
-      ),
-      Experiences: this.fb.array(
-        this.resume ? this.resume.Experiences : [null]
-      ),
-      Skills: this.fb.array(
-        this.resume ? this.resume.Skills : [null]
-      ),
+      Educations: this.fb.array(this.resume ? this.resume.Educations : [null]),
+      Languages: this.fb.array(this.resume ? this.resume.Languages : [null]),
+      Experiences: this.fb.array([]),
+      Skills: this.fb.array(this.resume ? this.resume.Skills : [null]),
     });
-
   }
 
-   setFormValue() {
+  setFormValue() {
     this.resumeForm.patchValue(this.resume);
   }
 
@@ -117,10 +106,6 @@ export class ResumeCreateComponent implements OnInit {
     let data = this.resumeForm.getRawValue();
 
     try {
-      data.Educations = new Array(data.Educations);
-      data.Languages = new Array(data.Languages);
-      data.Experiences = new Array(data.Experiences);
-      data.Skills = new Array(data.Skills);
       const resume = await this.resumeProvider.store(data);
 
       this.snackbarService.successMessage('Vaga Cadastrada Com Sucesso');
@@ -130,8 +115,6 @@ export class ResumeCreateComponent implements OnInit {
       this.snackbarService.showError('Falha ao Cadastrar');
     }
   }
-
-  
 
   navigate(direction: string) {
     if (this.step > 1 && direction === 'back') {
@@ -146,4 +129,16 @@ export class ResumeCreateComponent implements OnInit {
   }
 
   handleChanges(value: any): void {}
+
+  async saveEditResume(){
+    let data = this.resumeForm.getRawValue();
+    console.log("🚀 ~ file: resume-create.component.ts ~ line 135 ~ ResumeCreateComponent ~ saveEditResume ~ data", data)
+    try{
+      const resume = await this.resumeProvider.update(this.resumeId, data);
+      this.snackbarService.successMessage('Curriculo atualizado com sucesso');
+      this.router.navigate(['curriculo/lista']);
+    }catch (error) {
+      console.error(error);
+    }
+  }
 }

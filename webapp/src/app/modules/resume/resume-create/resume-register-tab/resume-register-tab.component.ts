@@ -1,8 +1,20 @@
 import { formatDate } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component, EventEmitter, Injectable, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Injectable,
+  Input,
+  OnInit,
+  Output,
+  ViewEncapsulation,
+} from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { DateAdapter, MAT_DATE_FORMATS, NativeDateAdapter } from '@angular/material/core';
+import {
+  DateAdapter,
+  MAT_DATE_FORMATS,
+  NativeDateAdapter,
+} from '@angular/material/core';
 import { DocumentValidator } from 'src/app/validators/document.validator';
 import { CepService } from 'src/services/cep.service';
 
@@ -12,15 +24,15 @@ export const PICK_FORMATS = {
     dateInput: 'input',
     monthYearLabel: { year: 'numeric', month: 'numeric' },
     dateA11yLabel: { year: 'numeric', month: 'numeric', day: 'numeric' },
-    monthYearA11yLabel: { year: 'numeric', month: 'numeric' }
-  }
+    monthYearA11yLabel: { year: 'numeric', month: 'numeric' },
+  },
 };
 
 @Injectable()
 export class PickDateAdapter extends NativeDateAdapter {
   override format(date: Date, displayFormat: Object): string {
     if (displayFormat === 'input') {
-      return formatDate(date, 'dd-MM-yyyy', this.locale);;
+      return formatDate(date, 'dd-MM-yyyy', this.locale);
     } else {
       return date.toDateString();
     }
@@ -33,8 +45,8 @@ export class PickDateAdapter extends NativeDateAdapter {
   encapsulation: ViewEncapsulation.None,
   providers: [
     { provide: DateAdapter, useClass: PickDateAdapter },
-    { provide: MAT_DATE_FORMATS, useValue: PICK_FORMATS }
-  ]
+    { provide: MAT_DATE_FORMATS, useValue: PICK_FORMATS },
+  ],
 })
 export class ResumeRegisterTabComponent implements OnInit {
   @Input('form') resumeForm!: FormGroup;
@@ -44,12 +56,12 @@ export class ResumeRegisterTabComponent implements OnInit {
   Date: any;
   MaritalStatus: any = ['Solteiro(a)', 'Casado', 'Viúvo', 'União Estável'];
 
-  constructor(private fb: FormBuilder, private cepService: CepService) { }
+  constructor(private fb: FormBuilder, private cepService: CepService) {}
 
   ngOnInit(): void {
     this.resumeForm.valueChanges.subscribe((res) => {
       const addressForm = this.resumeForm.controls['Address'] as FormGroup;
-      addressForm.controls['cep'].valueChanges.subscribe((res) => { });
+      addressForm.controls['cep'].valueChanges.subscribe((res) => {});
     });
   }
 
@@ -65,8 +77,6 @@ export class ResumeRegisterTabComponent implements OnInit {
   }
   async getAddress() {
     const address = this.resumeForm.controls['Address'].value;
-
-
 
     const district = await this.cepService.findDistrict(
       address.cep.replace('-', '')
@@ -87,8 +97,16 @@ export class ResumeRegisterTabComponent implements OnInit {
         district: district.bairro,
 
         state: district.uf,
-
       });
     }
+  }
+  fileChanged(file: any) {
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.resumeForm.patchValue({
+        photo: reader.result,
+      });
+    };
+    reader.readAsText(file.target.files[0]);
   }
 }

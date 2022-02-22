@@ -164,7 +164,7 @@ export class CollaboratorCreateComponent implements OnInit {
     try {
       const colaborators = await this.collaboratorProvider.store(data);
 
-      this.snackbarService.successMessage('Vaga Cadastrada Com Sucesso');
+      this.snackbarService.successMessage('Colaborador Cadastrado Com Sucesso');
       this.router.navigate(['colaborador/lista']);
     } catch (error: any) {
       console.log('ERROR 132' + error);

@@ -29,7 +29,6 @@ export class ResumeEducationTabComponent implements OnInit {
   @ViewChild('languageTable') languageTable!: MatTable<any>;
   @ViewChild('educationTable') educationTable!: MatTable<any>;
 
-  displayedColumns: string[] = ['schooling', 'situation', 'course', 'icon'];
 
   dataLanguage: [] = [];
 
@@ -144,35 +143,8 @@ export class ResumeEducationTabComponent implements OnInit {
     });
   }
 
-  initForm(): void {
-    this.languageForm = this.fb.group({
-      languageName: ['', Validators.required],
-      degreeOfInfluence: [1, Validators.required],
-    });
-    this.educationForm = this.fb.group({
-      schooling: [1, Validators.required],
-      situation: [1, Validators.required],
-      course: ['', Validators.required],
-      institution: ['', Validators.required],
-    });
-  }
-
   next() {
     this.onChange.next(true);
-  }
-
-  saveEducation() {
-    const data = this.educationForm.getRawValue();
-    this.educationArray.insert(0, this.fb.group(data));
-    this.educationTable.renderRows();
-    this.educationForm.reset();
-  }
-
-  saveLanguage() {
-    const data = this.languageForm.getRawValue();
-    this.languageArray.insert(0, this.fb.group(data));
-    this.languageTable.renderRows();
-    this.languageForm.reset();
   }
 
   getLanguage(languageSelected: any, index: number) {

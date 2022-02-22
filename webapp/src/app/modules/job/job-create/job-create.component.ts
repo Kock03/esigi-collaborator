@@ -219,7 +219,7 @@ export class JobCreateComponent implements OnInit {
     try {
       data.Languages = new Array(data.Languages);
       const job = await this.jobProvider.update(this.jobId, data);
-      this.snackbarService.successMessage('Vaga Atualizada com Sucesso');
+      this.snackbarService.successMessage('Vaga atualizada com sucesso');
       this.router.navigate(['vaga/lista']);
     } catch (error) {
       console.error(error);

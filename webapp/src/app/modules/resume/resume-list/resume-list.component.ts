@@ -61,24 +61,15 @@ export class ResumeListComponent implements OnInit {
   }
   
   editResume(resumeId: any) {
-    this.router.navigate([`resume/${resumeId}`]);
+    this.router.navigate([`curriculo/${resumeId}`]);
   }
 
-  // async deleteResume(index: number) {
-  //   const resume = this.filteredResumeList[index];
-  //   try {
-  //     await this.resumeProvider.destroy(resume.id);
-  //     this.getResumeList();
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }
 
   async deleteResume(resumeId: any) {
     const options = {
       data: {
         title: 'Anteção',
-        subtitle: 'Você tem certeza que deseja excluir esta vaga?',
+        subtitle: 'Você tem certeza que deseja excluir este currículo?',
       },
       panelClass: 'confirm-modal',
     };

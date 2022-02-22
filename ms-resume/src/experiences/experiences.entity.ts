@@ -39,7 +39,7 @@ export class ExperiencesEntity {
   description: string;
 
   @ManyToOne(() => ResumesEntity, (resumes) => resumes.Experiences, {
-    eager: true,
+
   })
   resume: ResumesEntity;
 

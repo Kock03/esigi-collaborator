@@ -22,18 +22,18 @@ export class ResumeProvider {
         });
     }
 
-    findOne(id: string): Promise<any> {
+    findOne(id: string | null): Promise<any> {
         return new Promise((resolve, reject) => {
-            this.apiGateway.get(environment.RESUME_MS + 'resumes', { id: id }).subscribe((response: HttpResponse<any>) => {
+            this.apiGateway.get(environment.RESUME_MS + 'resumes/:id', { id: id }).subscribe((response: HttpResponse<any>) => {
                 resolve(response.body);
             }, reject);
         });
     }
 
 
-    update(resume: any): Promise<any> {
+    update(id: string | null, resume: any): Promise<any> {
         return new Promise((resolve, reject) => {
-            this.apiGateway.put(environment.RESUME_MS +'resumes', resume).subscribe((response: HttpResponse<any>) => {
+            this.apiGateway.put(environment.RESUME_MS +'resumes/:id', {id: id}, resume).subscribe((response: HttpResponse<any>) => {
                 resolve(response.body);
             }, reject);
         });

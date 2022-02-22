@@ -28,7 +28,6 @@ export class SkillsEntity {
   currentPosition: boolean;
 
   @ManyToOne(() => ResumesEntity, (resumes) => resumes.Skills, {
-    eager: true,
   })
   resume: ResumesEntity;
 

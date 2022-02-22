@@ -94,7 +94,7 @@
   </app-resume-application-tab>
   <app-resume-monitoring-tab [hidden]="step != 6"> </app-resume-monitoring-tab>
 
-  <div class="navigation-buttons" fxLayoutAlign="center end" fxLayoutGap="16px">
+  <div class="navigation-buttons" fxLayoutAlign="center end" fxLayoutGap="16px"  *ngIf="resumeId == 'novo'">
     <button mat-button *ngIf="step != 1" (click)="navigate('back')">
       Voltar
     </button>
@@ -110,6 +110,15 @@
       mat-flat-button
       *ngIf="step == 5"
       (click)="saveResume()"
+      color="primary"
+    >
+      Salvar
+    </button>
+  </div>
+  <div class="navigation-buttons" fxLayoutAlign="center end" fxLayoutGap="16px"  *ngIf="resumeId !== 'novo'">
+    <button
+      mat-flat-button
+      (click)="saveEditResume()"
       color="primary"
     >
       Salvar

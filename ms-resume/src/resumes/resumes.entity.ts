@@ -63,18 +63,21 @@ export class ResumesEntity {
 
   @OneToMany(() => EducationsEntity, (educations) => educations.resume, {
     cascade: ['insert', 'update', 'soft-remove'],
+    eager: true,
   })
   @JoinColumn()
   Educations: EducationsEntity[];
 
   @OneToMany(() => ExperiencesEntity, (experiences) => experiences.resume, {
     cascade: ['insert', 'update', 'soft-remove'],
+    eager: true,
   })
   @JoinColumn()
   Experiences: ExperiencesEntity[];
 
   @OneToMany(() => SkillsEntity, (skills) => skills.resume, {
     cascade: ['insert', 'update', 'soft-remove'],
+    eager: true,
   })
   @JoinColumn()
   Skills: SkillsEntity[];

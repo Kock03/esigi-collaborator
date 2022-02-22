@@ -60,25 +60,7 @@ export class ResumeExperienceTabComponent implements OnInit {
       ) === -1
     ) {
       this.experienceList = this.experiencesArray.value;
-
-      this.initForm();
     }
-  }
-
-
-  initForm(): void {
-    this.experienceForm = this.fb.group({
-      office: ['', Validators.required],
-      companyName: ['', Validators.required],
-      locality: [''],
-      active: [false],
-      startMonth: ['', Validators.required],
-      startYear: ['', Validators.required],
-      terminusMonth: ['', Validators.required],
-      terminusYear: ['', Validators.required],
-      sector: ['', Validators.required],
-      description: ['', Validators.required],
-    });
   }
 
   openDialog() {
@@ -88,8 +70,10 @@ export class ResumeExperienceTabComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((experience) => {
-      this.experiencesArray.insert(0, this.fb.group(experience));
-      this.experienceList.push(experience);
+      if (experience) {
+        this.experiencesArray.insert(0, this.fb.group(experience));
+        this.experienceList.push(experience);
+      }
     });
   }
 
@@ -112,7 +96,7 @@ export class ResumeExperienceTabComponent implements OnInit {
     this.index = index;
     dialogRef.afterClosed().subscribe((experience) => {
       this.experiencesArray.controls[this.index].setValue(experience);
-      this.experienceList[this.index] = experience;
+      // this.experienceList[this.index] = experience;
     });
   }
 }
@@ -162,10 +146,6 @@ export class ResumeDialogExperience {
 
   onNoClick(): void {
     this.dialogRef.close();
-  }
-
-  save() {
-    this.dialogRef.close(this.experienceForm.value);
   }
 
   async saveExperience() {

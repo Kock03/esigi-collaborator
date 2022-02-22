@@ -26,19 +26,19 @@ export class CollaboratorsService {
 
     options?: FindOneOptions<CollaboratorsEntity>,
   ) {
-    options = {
-      relations: [
-        'BankData',
-        'Educations',
-        'Languages',
-        'Documents',
-        'Skills',
-        'Phone',
-        'Address',
-        'Financials',
-        'Dependents'
-      ],
-    };
+    // options = {
+    //   relations: [
+    //     'BankData',
+    //     'Educations',
+    //     'Languages',
+    //     'Documents',
+    //     'Skills',
+    //     'Phone',
+    //     'Address',
+    //     'Financials',
+    //     'Dependents'
+    //   ],
+    // };
 
     try {
       return await this.collaboratorsRepository.findOneOrFail(
