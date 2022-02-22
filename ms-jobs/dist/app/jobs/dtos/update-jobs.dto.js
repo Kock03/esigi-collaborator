@@ -70,6 +70,7 @@ __decorate([
     (0, swagger_1.ApiProperty)(),
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),
+    (0, class_validator_1.MinLength)(3),
     (0, class_validator_1.MaxLength)(80),
     __metadata("design:type", String)
 ], UpdateJobsDto.prototype, "jobName", void 0);

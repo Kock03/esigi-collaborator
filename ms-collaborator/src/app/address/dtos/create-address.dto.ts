@@ -1,12 +1,23 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsDefined, IsNotEmpty, IsNumber, IsObject, IsOptional, IsString, Length, MaxLength, MinLength } from 'class-validator';
+import {
+  IsDefined,
+  IsNotEmpty,
+  IsNumber,
+  IsObject,
+  IsOptional,
+  IsString,
+  Length,
+  MaxLength,
+  MinLength,
+} from 'class-validator';
 import { CollaboratorsEntity } from 'src/app/collaborators/collaborators.entity';
 
 export class CreateAddressDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
-  @Length(8)
+  @MinLength(8)
+  @MaxLength(8)
   cep: string;
 
   @ApiProperty()
@@ -54,5 +65,5 @@ export class CreateAddressDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsObject()
-  collaborator: CollaboratorsEntity;
+  Collaborator: CollaboratorsEntity;
 }

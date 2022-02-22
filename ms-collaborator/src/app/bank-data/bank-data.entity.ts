@@ -24,14 +24,14 @@ export class BankDataEntity {
   @Column()
   accountType: AccountTypes;
 
-  @Column({ type: 'int' })
-  accountNumber: number;
+  @Column()
+  accountNumber: string;
 
-  @Column({ type: 'int' })
-  digit: number;
+  @Column()
+  digit: string;
 
-  @Column({ type: 'int' })
-  bankAccountDigit: number;
+  @Column()
+  bankAccountDigit: string;
 
   @OneToOne(() => CollaboratorsEntity)
   Collaborator: CollaboratorsEntity;

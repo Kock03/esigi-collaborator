@@ -46,7 +46,7 @@ export class CreateCollaboratorsDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
-  @MinLength(3)
+  @MinLength(5)
   @MaxLength(70)
   login: string;
 
@@ -58,8 +58,8 @@ export class CreateCollaboratorsDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
-  @MinLength(10)
-  @MaxLength(200)
+  @MinLength(3)
+  @MaxLength(70)
   office: string;
 
   @ApiProperty()
@@ -69,6 +69,8 @@ export class CreateCollaboratorsDto {
 
   @ApiProperty()
   @IsOptional()
+  @MinLength(11)
+  @MaxLength(11)
   cpf: string;
 
   @ApiProperty()
@@ -93,47 +95,45 @@ export class CreateCollaboratorsDto {
   @IsNotEmpty()
   @IsEmail()
   @MinLength(10)
-  @MaxLength(150)
+  @MaxLength(100)
   email: string;
 
   @ApiProperty()
   @IsOptional()
-  // @Length(14)
+  @MinLength(14)
+  @MaxLength(14)
   cnpj: string;
 
   @ApiProperty()
   @IsOptional()
   @IsString()
-  @MinLength(4)
-  @MaxLength(50)
+  @MinLength(12)
+  @MaxLength(12)
   stateRegistration: string;
 
   @ApiProperty()
   @IsOptional()
   @IsString()
-  @MinLength(5)
-  @MaxLength(100)
+  @MinLength(12)
+  @MaxLength(12)
   municipalInscription: string;
 
   @ApiProperty()
   @IsOptional()
   @IsString()
   @MinLength(5)
-  @MaxLength(50)
+  @MaxLength(70)
   site: string;
 
   @ApiProperty()
   @IsOptional()
   @IsString()
   @MinLength(5)
-  @MaxLength(50)
+  @MaxLength(70)
   linkedin: string;
 
-  // @ApiProperty()
+  @ApiProperty()
   @IsOptional()
-  // @IsString()
-  // @MinLength(100)
-  // @MaxLength(300)
   photo: string;
 
   @ApiProperty()
@@ -167,7 +167,7 @@ export class CreateCollaboratorsDto {
   Educations: EducationsEntity[];
 
   @ApiPropertyOptional()
-  @IsOptional()
+  @IsNotEmpty()
   @IsObject()
   BankData: BankDataEntity;
 

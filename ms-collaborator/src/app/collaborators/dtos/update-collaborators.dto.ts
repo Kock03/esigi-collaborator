@@ -1,4 +1,17 @@
-import { IsArray, IsBoolean, IsEmail, IsEnum, IsNotEmpty, IsNumber, IsObject, IsOptional, IsString, Length, MaxLength, MinLength } from 'class-validator';
+import {
+  IsArray,
+  IsBoolean,
+  IsEmail,
+  IsEnum,
+  IsNotEmpty,
+  IsNumber,
+  IsObject,
+  IsOptional,
+  IsString,
+  Length,
+  MaxLength,
+  MinLength,
+} from 'class-validator';
 import { AddressEntity } from 'src/app/address/address.entity';
 import { BankDataEntity } from 'src/app/bank-data/bank-data.entity';
 import { DocumentsEntity } from 'src/app/documents/documents.entity';
@@ -32,8 +45,8 @@ export class UpdateCollaboratorsDto {
   @ApiProperty()
   @IsOptional()
   @IsString()
-  @MinLength(4)
-  @MaxLength(20)
+  @MinLength(5)
+  @MaxLength(70)
   login: string;
 
   @ApiProperty()
@@ -44,7 +57,7 @@ export class UpdateCollaboratorsDto {
   @ApiProperty()
   @IsOptional()
   @IsString()
-  @MinLength(10)
+  @MinLength(5)
   @MaxLength(200)
   office: string;
 
@@ -55,7 +68,8 @@ export class UpdateCollaboratorsDto {
 
   @ApiProperty()
   @IsOptional()
-  @Length(4)
+  @MinLength(11)
+  @MaxLength(11)
   cpf: string;
 
   @ApiProperty()
@@ -80,47 +94,45 @@ export class UpdateCollaboratorsDto {
   @IsOptional()
   @IsEmail()
   @MinLength(10)
-  @MaxLength(150)
+  @MaxLength(100)
   email: string;
 
   @ApiProperty()
   @IsOptional()
-  @Length(14)
+  @MinLength(14)
+  @MaxLength(14)
   cnpj: string;
 
   @ApiProperty()
   @IsOptional()
   @IsString()
-  @MinLength(4)
-  @MaxLength(50)
+  @MinLength(12)
+  @MaxLength(12)
   stateRegistration: string;
 
   @ApiProperty()
   @IsOptional()
   @IsString()
-  @MinLength(5)
-  @MaxLength(100)
+  @MinLength(12)
+  @MaxLength(12)
   municipalInscription: string;
 
   @ApiProperty()
   @IsOptional()
   @IsString()
   @MinLength(5)
-  @MaxLength(50)
+  @MaxLength(70)
   site: string;
 
   @ApiProperty()
   @IsOptional()
   @IsString()
   @MinLength(5)
-  @MaxLength(50)
+  @MaxLength(70)
   linkedin: string;
 
   @ApiProperty()
   @IsOptional()
-  @IsString()
-  @MinLength(100)
-  @MaxLength(300)
   photo: string;
 
   @ApiProperty()

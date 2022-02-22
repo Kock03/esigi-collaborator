@@ -1,6 +1,7 @@
-import { HttpException, Injectable, NotFoundException } from '@nestjs/common';
+import { HttpException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { FindConditions, FindOneOptions, Repository } from 'typeorm';
+import { NotFoundException } from '../exceptions/not-found-exception';
 import { CreatePhoneDto } from './dtos/create-phone.dto';
 import { UpdatePhoneDto } from './dtos/update-phone.dto';
 import { PhoneEntity } from './phone.entity';
@@ -27,8 +28,8 @@ export class PhoneService {
     options = { relations: ['Collaborator'] };
     try {
       return await this.phoneRepository.findOneOrFail(conditions, options);
-    } catch (error) {
-      throw new NotFoundException(error.message);
+    } catch {
+      throw new NotFoundException();
     }
   }
 
@@ -40,13 +41,17 @@ export class PhoneService {
   async update(id: string, data: UpdatePhoneDto) {
     const phone = await this.phoneRepository.findOneOrFail({ id });
     if (!phone) {
-      throw new HttpException('Not Found', 404);
+      throw new NotFoundException();
     }
     return await this.phoneRepository.save({ id: id, ...data });
   }
 
   async destroy(id: string) {
-    await this.phoneRepository.findOneOrFail({ id });
+    try {
+      await this.phoneRepository.findOneOrFail({ id });
+    } catch {
+      throw new NotFoundException();
+    }
     return await this.phoneRepository.softDelete({ id });
   }
 }

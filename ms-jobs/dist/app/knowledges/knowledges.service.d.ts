@@ -8,6 +8,11 @@ export declare class KnowledgesService {
     findAll(): Promise<KnowledgesEntity[]>;
     findOneOrfail(conditions: FindConditions<KnowledgesEntity>, options?: FindOneOptions<KnowledgesEntity>): Promise<KnowledgesEntity>;
     store(data: CreateKnowledgesDto): Promise<KnowledgesEntity>;
-    update(id: string, data: UpdateKnowledgesDto): Promise<KnowledgesEntity>;
+    update(id: string, data: UpdateKnowledgesDto): Promise<{
+        name: string;
+        yearsExperience: number;
+        typeOfPeriod: import("./dtos/typeOfPeriod.enum").TypeOfPeriod;
+        id: string;
+    } & KnowledgesEntity>;
     destroy(id: string): Promise<import("typeorm").UpdateResult>;
 }

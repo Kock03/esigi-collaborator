@@ -1,6 +1,7 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, FindConditions, FindOneOptions } from 'typeorm';
+import { NotFoundException } from '../exceptions/not-found-exception';
 import { CreateSenioritiesDto } from './dtos/create-seniorities.dto';
 import { UpdateSenioritiesDto } from './dtos/update-seniorities.dto';
 import { SenioritiesEntity } from './seniorities.entity';
@@ -30,8 +31,8 @@ export class SenioritiesService {
         conditions,
         options,
       );
-    } catch (error) {
-      throw new NotFoundException(error.message);
+    } catch {
+      throw new NotFoundException();
     }
   }
 
@@ -42,12 +43,18 @@ export class SenioritiesService {
 
   async update(id: string, data: UpdateSenioritiesDto) {
     const seniority = await this.senioritiesRepository.findOneOrFail({ id });
-    this.senioritiesRepository.merge(seniority, data);
-    return await this.senioritiesRepository.save(seniority);
+    if (!seniority) {
+      throw new NotFoundException();
+    }
+    return await this.senioritiesRepository.save({ id: id, ...data });
   }
 
   async destroy(id: string) {
-    await this.senioritiesRepository.findOneOrFail({ id });
+    try {
+      await this.senioritiesRepository.findOneOrFail({ id });
+    } catch {
+      throw new NotFoundException();
+    }
     return await this.senioritiesRepository.softDelete({ id });
   }
 }

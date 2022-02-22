@@ -32,9 +32,21 @@ __decorate([
     __metadata("design:type", Number)
 ], KnowledgesEntity.prototype, "typeOfPeriod", void 0);
 __decorate([
-    (0, typeorm_1.ManyToOne)(() => jobs_entity_1.JobsEntity, job => job.Knowledges, { onDelete: "CASCADE" }),
+    (0, typeorm_1.ManyToOne)(() => jobs_entity_1.JobsEntity, (job) => job.Knowledges, { onDelete: 'CASCADE' }),
     __metadata("design:type", jobs_entity_1.JobsEntity)
 ], KnowledgesEntity.prototype, "Job", void 0);
+__decorate([
+    (0, typeorm_1.CreateDateColumn)({ name: 'created_at' }),
+    __metadata("design:type", Date)
+], KnowledgesEntity.prototype, "createdAt", void 0);
+__decorate([
+    (0, typeorm_1.UpdateDateColumn)({ name: 'updated_at' }),
+    __metadata("design:type", Date)
+], KnowledgesEntity.prototype, "updatedAt", void 0);
+__decorate([
+    (0, typeorm_1.DeleteDateColumn)({ name: 'deleted_at' }),
+    __metadata("design:type", Date)
+], KnowledgesEntity.prototype, "deletedAt", void 0);
 KnowledgesEntity = __decorate([
     (0, typeorm_1.Entity)({ name: 'knowledges' })
 ], KnowledgesEntity);

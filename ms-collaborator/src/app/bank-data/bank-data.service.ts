@@ -48,8 +48,9 @@ export class BankDataService {
   }
 
   async destroy(id: string) {
-    const bankData = this.bankDataRepository.findOneOrFail({ id });
-    if (!bankData) {
+    try {
+      await this.bankDataRepository.findOneOrFail({ id });
+    } catch {
       throw new NotFoundException();
     }
     return await this.bankDataRepository.softDelete({ id });

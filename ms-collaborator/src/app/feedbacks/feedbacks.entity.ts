@@ -1,9 +1,11 @@
-
 import {
   Column,
+  CreateDateColumn,
+  DeleteDateColumn,
   Entity,
   ManyToOne,
   PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 import { CollaboratorsEntity } from '../collaborators/collaborators.entity';
 import { FeedbackTypes } from './enums/feedback-types.enum';
@@ -54,9 +56,18 @@ export class FeedbacksEntity {
   @Column()
   commitment: string;
 
-  @ManyToOne(() => CollaboratorsEntity, collaborators => collaborators.Feedbacks)
+  @CreateDateColumn()
+  createdAt: Date;
+
+  @UpdateDateColumn()
+  updatedAt: Date;
+
+  @DeleteDateColumn()
+  deletedAt: Date;
+
+  @ManyToOne(
+    () => CollaboratorsEntity,
+    (collaborators) => collaborators.Feedbacks,
+  )
   Collaborator: CollaboratorsEntity;
-
-
-
 }

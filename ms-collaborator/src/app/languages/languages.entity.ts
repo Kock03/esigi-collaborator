@@ -1,4 +1,12 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  DeleteDateColumn,
+  Entity,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 import { CollaboratorsEntity } from '../collaborators/collaborators.entity';
 import { degreeOfInfluence } from './dtos/degree-of-influence.enum';
 
@@ -12,6 +20,15 @@ export class LanguagesEntity {
 
   @Column({ type: 'int' })
   degreeOfInfluence: degreeOfInfluence;
+
+  @CreateDateColumn()
+  dateInclusion: Date;
+
+  @UpdateDateColumn({ type: 'datetime' })
+  updatedAt: Date;
+
+  @DeleteDateColumn({ type: 'datetime' })
+  deletedAt: Date;
 
   @ManyToOne(
     () => CollaboratorsEntity,

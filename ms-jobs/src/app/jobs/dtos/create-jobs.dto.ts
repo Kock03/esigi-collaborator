@@ -70,6 +70,7 @@ export class CreateJobsDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
+  @MinLength(3)
   @MaxLength(80)
   jobName: string;
 

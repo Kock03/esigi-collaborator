@@ -16,6 +16,7 @@ exports.KnowledgesService = void 0;
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const typeorm_2 = require("typeorm");
+const not_found_exception_1 = require("../exceptions/not-found-exception");
 const knowledges_entity_1 = require("./knowledges.entity");
 let KnowledgesService = class KnowledgesService {
     constructor(knowledgesRepository) {
@@ -32,8 +33,8 @@ let KnowledgesService = class KnowledgesService {
         try {
             return await this.knowledgesRepository.findOneOrFail(conditions, options);
         }
-        catch (error) {
-            throw new common_1.NotFoundException(error.message);
+        catch (_a) {
+            throw new not_found_exception_1.NotFoundException();
         }
     }
     async store(data) {
@@ -42,11 +43,18 @@ let KnowledgesService = class KnowledgesService {
     }
     async update(id, data) {
         const knowledge = await this.knowledgesRepository.findOneOrFail({ id });
-        this.knowledgesRepository.merge(knowledge, data);
-        return await this.knowledgesRepository.save(knowledge);
+        if (!knowledge) {
+            throw new not_found_exception_1.NotFoundException();
+        }
+        return await this.knowledgesRepository.save(Object.assign({ id: id }, data));
     }
     async destroy(id) {
-        await this.knowledgesRepository.findOneOrFail({ id });
+        try {
+            await this.knowledgesRepository.findOneOrFail({ id });
+        }
+        catch (_a) {
+            throw new not_found_exception_1.NotFoundException();
+        }
         return await this.knowledgesRepository.softDelete({ id });
     }
 };

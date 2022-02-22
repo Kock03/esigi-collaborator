@@ -16,6 +16,7 @@ exports.LanguagesService = void 0;
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const Repository_1 = require("typeorm/repository/Repository");
+const not_found_exception_1 = require("../exceptions/not-found-exception");
 const languages_entity_1 = require("./languages.entity");
 let LanguagesService = class LanguagesService {
     constructor(languagesRepository) {
@@ -32,8 +33,8 @@ let LanguagesService = class LanguagesService {
         try {
             return await this.languagesRepository.findOneOrFail(conditions, options);
         }
-        catch (error) {
-            throw new common_1.NotFoundException(error.message);
+        catch (_a) {
+            throw new not_found_exception_1.NotFoundException();
         }
     }
     async store(data) {
@@ -41,12 +42,21 @@ let LanguagesService = class LanguagesService {
         return await this.languagesRepository.save(language);
     }
     async update(id, data) {
-        const language = await this.languagesRepository.findOneOrFail({ id });
-        this.languagesRepository.merge(language, data);
-        return await this.languagesRepository.save(language);
+        const language = await this.languagesRepository.findOneOrFail({
+            id,
+        });
+        if (!language) {
+            throw new not_found_exception_1.NotFoundException();
+        }
+        return await this.languagesRepository.save(Object.assign({ id: id }, data));
     }
     async destroy(id) {
-        await this.languagesRepository.findOneOrFail({ id });
+        try {
+            await this.languagesRepository.findOneOrFail({ id });
+        }
+        catch (_a) {
+            throw new not_found_exception_1.NotFoundException();
+        }
         return await this.languagesRepository.softDelete({ id });
     }
 };

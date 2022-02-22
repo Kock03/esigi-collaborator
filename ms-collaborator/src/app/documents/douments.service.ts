@@ -1,6 +1,7 @@
-import { HttpException, Injectable, NotFoundException } from '@nestjs/common';
+import { HttpException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { FindConditions, FindOneOptions, Repository } from 'typeorm';
+import { NotFoundException } from '../exceptions/not-found-exception';
 import { DocumentsEntity } from './documents.entity';
 import { CreateDocumentsDto } from './dtos/create-documents.dto';
 import { UpdateDocumentsDto } from './dtos/update-documents.dto';
@@ -27,8 +28,8 @@ export class DocumentsService {
     options = { relations: ['Collaborator'] };
     try {
       return await this.documentsRepository.findOneOrFail(conditions, options);
-    } catch (error) {
-      throw new NotFoundException(error.message);
+    } catch {
+      throw new NotFoundException();
     }
   }
 
@@ -40,13 +41,17 @@ export class DocumentsService {
   async update(id: string, data: UpdateDocumentsDto) {
     const document = await this.documentsRepository.findOneOrFail({ id });
     if (!document) {
-      throw new HttpException('Not Found', 404);
+      throw new NotFoundException();
     }
     return await this.documentsRepository.save({ id: id, ...data });
   }
 
   async destroy(id: string) {
-    await this.documentsRepository.findOneOrFail({ id });
+    try {
+      await this.documentsRepository.findOneOrFail({ id });
+    } catch {
+      throw new NotFoundException();
+    }
     return await this.documentsRepository.softDelete({ id });
   }
 }

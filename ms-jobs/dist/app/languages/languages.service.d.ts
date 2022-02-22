@@ -9,6 +9,10 @@ export declare class LanguagesService {
     findAll(): Promise<LanguagesEntity[]>;
     findOneOrfail(conditions: FindConditions<LanguagesEntity>, options?: FindOneOptions<LanguagesEntity>): Promise<LanguagesEntity>;
     store(data: CreateLanguagesDto): Promise<LanguagesEntity>;
-    update(id: string, data: UpdateLanguagesDto): Promise<LanguagesEntity>;
+    update(id: string, data: UpdateLanguagesDto): Promise<{
+        languageName: string;
+        degreeOfInfluence: degreeOfInfluence;
+        id: string;
+    } & LanguagesEntity>;
     destroy(id: string): Promise<import("typeorm").UpdateResult>;
 }

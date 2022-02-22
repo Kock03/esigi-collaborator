@@ -45,8 +45,9 @@ export class AddressService {
   }
 
   async update(id: string, data: UpdateAddressDto) {
-    const address = await this.addressRepository.findOneOrFail({ id });
-    if (!address) {
+    try {
+      await this.addressRepository.findOneOrFail({ id });
+    } catch {
       throw new NotFoundException();
     }
     return await this.addressRepository.save({ id: id, ...data });

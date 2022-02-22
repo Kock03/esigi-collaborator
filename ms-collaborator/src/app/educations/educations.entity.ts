@@ -16,7 +16,7 @@ export class EducationsEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column()
+  @Column({ type: 'int' })
   schooling: Schooling;
 
   @Column()

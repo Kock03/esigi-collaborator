@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { DocumentValidator } from 'src/app/validators/document.validator';
 import { FindConditions, FindOneOptions, Repository } from 'typeorm';
 import { BadRequestException } from '../exceptions/bad-request.exception';
+import { ConflictException } from '../exceptions/conflict.exception';
 import { NotFoundException } from '../exceptions/not-found-exception';
 import { CollaboratorsEntity } from './collaborators.entity';
 import { CreateCollaboratorsDto } from './dtos/create-collaborators.dto';
@@ -69,8 +70,8 @@ export class CollaboratorsService {
       try {
         const collaborator = this.collaboratorsRepository.create(data);
         return await this.collaboratorsRepository.save(collaborator);
-      } catch (error) {
-        throw new NotFoundException();
+      } catch {
+        throw new ConflictException();
       }
     }
   }
@@ -87,8 +88,8 @@ export class CollaboratorsService {
 
   async destroy(id: string) {
     try {
-      this.collaboratorsRepository.findOneOrFail({ id });
-    } catch (error) {
+      await this.collaboratorsRepository.findOneOrFail({ id });
+    } catch {
       throw new NotFoundException();
     }
     return await this.collaboratorsRepository.softDelete({ id });

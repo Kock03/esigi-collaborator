@@ -1,5 +1,14 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsEnum, IsNotEmpty, IsNumber, IsObject, IsOptional, IsString, MaxLength, MinLength } from 'class-validator';
+import {
+  IsEnum,
+  IsNotEmpty,
+  IsNumber,
+  IsObject,
+  IsOptional,
+  IsString,
+  MaxLength,
+  MinLength,
+} from 'class-validator';
 import { Schooling } from './schooling.enum';
 import { Situation } from './situation.enum';
 
@@ -7,8 +16,8 @@ export class UpdateEducationsDto {
   @ApiProperty()
   @IsOptional()
   @IsString()
-  @MinLength(10)
-  @MaxLength(150)
+  @MinLength(3)
+  @MaxLength(70)
   course: string;
 
   @ApiProperty()

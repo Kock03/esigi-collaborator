@@ -16,6 +16,7 @@ exports.SenioritiesService = void 0;
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const typeorm_2 = require("typeorm");
+const not_found_exception_1 = require("../exceptions/not-found-exception");
 const seniorities_entity_1 = require("./seniorities.entity");
 let SenioritiesService = class SenioritiesService {
     constructor(senioritiesRepository) {
@@ -32,8 +33,8 @@ let SenioritiesService = class SenioritiesService {
         try {
             return await this.senioritiesRepository.findOneOrFail(conditions, options);
         }
-        catch (error) {
-            throw new common_1.NotFoundException(error.message);
+        catch (_a) {
+            throw new not_found_exception_1.NotFoundException();
         }
     }
     async store(data) {
@@ -42,11 +43,18 @@ let SenioritiesService = class SenioritiesService {
     }
     async update(id, data) {
         const seniority = await this.senioritiesRepository.findOneOrFail({ id });
-        this.senioritiesRepository.merge(seniority, data);
-        return await this.senioritiesRepository.save(seniority);
+        if (!seniority) {
+            throw new not_found_exception_1.NotFoundException();
+        }
+        return await this.senioritiesRepository.save(Object.assign({ id: id }, data));
     }
     async destroy(id) {
-        await this.senioritiesRepository.findOneOrFail({ id });
+        try {
+            await this.senioritiesRepository.findOneOrFail({ id });
+        }
+        catch (_a) {
+            throw new not_found_exception_1.NotFoundException();
+        }
         return await this.senioritiesRepository.softDelete({ id });
     }
 };
