@@ -131,11 +131,7 @@ export class CreateCollaboratorsDto {
   linkedin: string;
 
   @ApiProperty()
-  @IsOptional()
-  @IsString()
-  @MinLength(100)
-  @MaxLength(300)
-  photo: string;
+  photo: Buffer;
 
   @ApiProperty()
   @IsNotEmpty()

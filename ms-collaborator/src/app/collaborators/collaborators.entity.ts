@@ -79,8 +79,8 @@ export class CollaboratorsEntity {
   @Column()
   linkedin: string;
 
-  @Column({ type: 'blob', nullable: true })
-  photo: string;
+  @Column({ nullable: true })
+  photo: Buffer;
 
   @OneToOne(() => AddressEntity, {
     cascade: ['insert', 'update', 'remove'],
@@ -93,7 +93,7 @@ export class CollaboratorsEntity {
   @OneToMany(() => SkillsEntity, (skills) => skills.Collaborator, {
     cascade: ['insert', 'update', 'remove'],
     orphanedRowAction: 'delete',
-    eager: true,
+    eager: true, 
   })
   @JoinColumn()
   Skills: SkillsEntity[];

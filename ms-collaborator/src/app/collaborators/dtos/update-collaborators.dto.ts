@@ -118,10 +118,7 @@ export class UpdateCollaboratorsDto {
 
   @ApiProperty()
   @IsOptional()
-  @IsString()
-  @MinLength(100)
-  @MaxLength(300)
-  photo: string;
+  photo: Buffer;
 
   @ApiProperty()
   @IsOptional()

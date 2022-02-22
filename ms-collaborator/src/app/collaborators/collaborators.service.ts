@@ -1,4 +1,4 @@
-import { HttpException, Injectable, NotFoundException } from '@nestjs/common';
+import { HttpException, Injectable, NotFoundException, UploadedFile } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DocumentValidator } from 'src/validators/document.validator';
 import { FindConditions, FindOneOptions, Repository } from 'typeorm';
