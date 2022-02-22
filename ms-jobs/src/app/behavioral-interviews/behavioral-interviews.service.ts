@@ -10,7 +10,7 @@ export class BehavioralInterviewsService {
   constructor(
     @InjectRepository(BehaviroalInterviewsEntity)
     private readonly behavioralInterviewsRepository: Repository<BehaviroalInterviewsEntity>,
-  ) {}
+  ) { }
 
   async findAll() {
     const interviews = await this.behavioralInterviewsRepository.find();

@@ -4,10 +4,12 @@ import {
   DeleteDateColumn,
   Entity,
   JoinColumn,
+  ManyToOne,
   OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { Situation } from '../behavioral-interviews/enums/situational.enum';
 import { JobsEntity } from '../jobs/jobs.entity';
 import { Reason } from './enums/reason.enum';
 import { TypeContract } from './enums/type-contract.enum';
@@ -21,41 +23,38 @@ export class ReturnsEntity {
   nameCandidate: string;
 
   @Column()
-  returnDate: Date;
+  dateOfReturn: Date;
 
   @Column()
-  bahvioralAssessment: boolean;
+  behavioralEvaluation: Situation;
 
   @Column()
-  technicalAssessment: boolean;
+  technicalEvaluation: Situation;
 
   @Column()
-  bahvioralAssessmentDescription: string;
+  behavioralEvaluationComent: string;
 
   @Column()
-  technicalAssessmentDescription: string;
+  technicalEvaluationComent: string;
 
   @Column()
-  candidateReturn: boolean;
+  returnOfCandidate: boolean;
 
   @Column()
   reason: Reason;
 
   @Column()
-  typeContract: TypeContract;
+  typeOdContract: TypeContract;
 
   @Column()
-  closedValue: string;
+  combinedValue: string;
 
   @Column()
-  startDate: Date;
+  initialData: Date;
 
-  @OneToOne(() => JobsEntity, {
-    cascade: ['insert', 'update', 'soft-remove'],
-    eager: true,
-  })
+  @ManyToOne(() => JobsEntity, job => job.Returns, { onDelete: "CASCADE", eager: true })
   @JoinColumn()
-  job: JobsEntity;
+  Job: JobsEntity;
 
   @CreateDateColumn()
   createdAt: Date;

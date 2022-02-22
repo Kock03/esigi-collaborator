@@ -1,4 +1,6 @@
 export enum Punctuality {
-  ponctual = 1,
-  late = 2,
+  punctual = 1,
+  delay5Minutes = 2,
+  delayMore5Minutes = 3,
+  didNotAttend = 4
 }

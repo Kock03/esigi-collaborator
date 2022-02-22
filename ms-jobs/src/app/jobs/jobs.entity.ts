@@ -96,6 +96,7 @@ export class JobsEntity {
     orphanedRowAction: 'delete',
     eager: true,
   })
+  @JoinColumn()
   Languages: LanguagesEntity[];
 
   @OneToMany(() => KnowledgesEntity, (Knowledges) => Knowledges.Job, {
@@ -103,6 +104,7 @@ export class JobsEntity {
     orphanedRowAction: 'delete',
     eager: true,
   })
+  @JoinColumn()
   Knowledges: KnowledgesEntity[];
 
   @OneToOne(() => SenioritiesEntity, {
@@ -113,49 +115,30 @@ export class JobsEntity {
   @JoinColumn()
   Seniorities: SenioritiesEntity;
 
-  @ManyToMany(
-    () => BehaviroalInterviewsEntity,
-    (behavioral) => behavioral.jobs,
-    {
-      cascade: ['insert', 'update', 'soft-remove'],
-      eager: true,
-    },
-  )
-  @JoinTable({
-    name: 'behavioral_interviews_jobs',
-    joinColumn: { name: 'id' },
-    inverseJoinColumn: { name: 'behavioral_interviews_id' },
+  @OneToMany(() => BehaviroalInterviewsEntity, (Behaviroal) => Behaviroal.Job, {
+    cascade: ['insert', 'update', 'soft-remove'],
+    orphanedRowAction: 'delete',
   })
   BehavioralInterviews: BehaviroalInterviewsEntity[];
 
-  @ManyToMany(() => TechnicalInterviewsEntity, (technical) => technical.jobs, {
+  @OneToMany(() => TechnicalInterviewsEntity, (technical) => technical.Job, {
     cascade: ['insert', 'update', 'soft-remove'],
-    eager: true,
-  })
-  @JoinTable({
-    name: 'technical_interviews_jobs',
-    joinColumn: { name: 'id' },
-    inverseJoinColumn: { name: 'technical_interviews_id' },
+    orphanedRowAction: 'delete',
   })
   TechnicalInterviews: TechnicalInterviewsEntity[];
 
-  @ManyToMany(() => ClientInterviewsEntity, (client) => client.jobs, {
+  @OneToMany(() => ClientInterviewsEntity, (client) => client.Job, {
     cascade: ['insert', 'update', 'soft-remove'],
-    eager: true,
-  })
-  @JoinTable({
-    name: 'client_interviews_jobs',
-    joinColumn: { name: 'id' },
-    inverseJoinColumn: { name: 'client_interviews_id' },
+    orphanedRowAction: 'delete',
   })
   ClientInterviews: ClientInterviewsEntity[];
 
-  // @OneToOne(() => ReturnsEntity, {
-  //   cascade: ['insert', 'update', 'soft-remove'],
-  //   eager: true,
-  // })
-  // @JoinColumn()
-  // returns: ReturnsEntity;
+
+  @OneToMany(() => ReturnsEntity, (returns) => returns.Job, {
+    cascade: ['insert', 'update', 'soft-remove'],
+    orphanedRowAction: 'delete',
+  })
+  Returns: ReturnsEntity[];
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;

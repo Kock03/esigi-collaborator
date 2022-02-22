@@ -7,11 +7,15 @@ import {
   JoinColumn,
   JoinTable,
   ManyToMany,
+  ManyToOne,
+  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { HiringPreferencesEntity } from '../hiringPreferences/hiringPreferences.entity';
 import { Presentation } from './enums/presentation.enum';
 import { Punctuality } from './enums/punctuality.enum';
+import { Situation } from './enums/situational.enum';
 
 @Entity({ name: 'behavioral_interviews' })
 export class BehaviroalInterviewsEntity {
@@ -39,8 +43,6 @@ export class BehaviroalInterviewsEntity {
   @Column()
   salaryExpectation: string;
 
-  @Column()
-  hiringPreference: string;
 
   @Column()
   behavioralAssessment: string;
@@ -49,15 +51,23 @@ export class BehaviroalInterviewsEntity {
   comments: string;
 
   @Column()
-  situational: boolean;
+  situational: Situation;
 
   @Column()
   availabilityOfInitialize: string;
 
-  @ManyToMany(() => JobsEntity, (jobs) => jobs.BehavioralInterviews, {
-    cascade: ['insert'],
+  @OneToOne(() => HiringPreferencesEntity, {
+    cascade: ['insert', 'update', 'remove'],
+    orphanedRowAction: 'delete',
+    eager: true,
   })
-  jobs: JobsEntity[];
+  @JoinColumn()
+  hiringPreferences: HiringPreferencesEntity;
+
+  @ManyToOne(() => JobsEntity, job => job.TechnicalInterviews, { onDelete: "CASCADE", eager: true })
+  @JoinColumn()
+  Job: JobsEntity;
+
 
   @CreateDateColumn()
   createdAt: Date;

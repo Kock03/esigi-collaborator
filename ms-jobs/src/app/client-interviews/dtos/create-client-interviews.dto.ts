@@ -10,6 +10,7 @@ import {
   MinLength,
 } from 'class-validator';
 import { Punctuality } from 'src/app/behavioral-interviews/enums/punctuality.enum';
+import { Situation } from 'src/app/behavioral-interviews/enums/situational.enum';
 import { JobsEntity } from 'src/app/jobs/jobs.entity';
 
 export class CreateClientInterviewsDto {
@@ -33,7 +34,8 @@ export class CreateClientInterviewsDto {
 
   @ApiProperty()
   @IsNotEmpty()
-  hourInterview: Date;
+  @IsString()
+  hourInterview: string;
 
   @ApiProperty()
   @IsNotEmpty()
@@ -42,8 +44,8 @@ export class CreateClientInterviewsDto {
 
   @ApiProperty()
   @IsNotEmpty()
-  @IsString()
-  jobProfile: string;
+  @IsBoolean()
+  jobProfile: boolean;
 
   @ApiProperty()
   @IsNotEmpty()
@@ -57,10 +59,10 @@ export class CreateClientInterviewsDto {
 
   @ApiProperty()
   @IsNotEmpty()
-  @IsBoolean()
-  situational: boolean;
+  @IsEnum(Situation)
+  situational: Situation;
 
   @ApiProperty()
   @IsNotEmpty()
-  jobs: JobsEntity[];
+  Job: JobsEntity;
 }

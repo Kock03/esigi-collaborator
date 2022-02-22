@@ -8,6 +8,7 @@ import {
   MaxLength,
   MinLength,
 } from 'class-validator';
+import { Situation } from 'src/app/behavioral-interviews/enums/situational.enum';
 import { JobsEntity } from 'src/app/jobs/jobs.entity';
 import { Reason } from '../enums/reason.enum';
 import { TypeContract } from '../enums/type-contract.enum';
@@ -22,31 +23,31 @@ export class UpdateReturnsDto {
 
   @ApiProperty()
   @IsNotEmpty()
-  returnDate: Date;
+  dateOfReturn: Date;
 
   @ApiProperty()
   @IsNotEmpty()
-  @IsBoolean()
-  bahvioralAssessment: boolean;
+  @IsEnum(Situation)
+  behavioralEvaluation: Situation;
 
   @ApiProperty()
   @IsNotEmpty()
-  @IsBoolean()
-  technicalAssessment: boolean;
+  @IsEnum(Situation)
+  technicalEvaluation: Situation;
 
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
-  bahvioralAssessmentDescription: string;
+  behavioralEvaluationComent: string;
 
   @ApiProperty()
   @IsNotEmpty()
-  technicalAssessmentDescription: string;
+  technicalEvaluationComent: string;
 
   @ApiProperty()
   @IsNotEmpty()
   @IsBoolean()
-  candidateReturn: boolean;
+  returnOfCandidate: boolean;
 
   @ApiProperty()
   @IsNotEmpty()
@@ -56,14 +57,15 @@ export class UpdateReturnsDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsEnum(TypeContract)
-  typeContract: TypeContract;
+  typeOdContract: TypeContract;
 
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
-  closedValue: string;
+  combinedValue: string;
 
   @ApiProperty()
   @IsNotEmpty()
-  startDate: Date;
+  initialData: Date;
+
 }

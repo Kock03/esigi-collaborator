@@ -12,11 +12,11 @@ import { BehavioralInterviewsService } from './behavioral-interviews.service';
 import { CreateBehaviorInterviewsDto } from './dtos/create-behavioral-interviews.dto';
 import { UpdateBehaviorInterviewsDto } from './dtos/update-behavioral-interviews.dto';
 
-@Controller('/api/v1/behavioral-interviews')
+@Controller('/api/v1/behaviroalInterviews')
 export class BehavioralInterviewsController {
   constructor(
     private readonly behavioralInterviewsService: BehavioralInterviewsService,
-  ) {}
+  ) { }
 
   @Get()
   async index() {

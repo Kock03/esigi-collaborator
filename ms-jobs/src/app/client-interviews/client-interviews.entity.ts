@@ -8,9 +8,11 @@ import {
   JoinColumn,
   JoinTable,
   ManyToMany,
+  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { Situation } from '../behavioral-interviews/enums/situational.enum';
 
 @Entity({ name: 'client_interviews' })
 export class ClientInterviewsEntity {
@@ -27,13 +29,13 @@ export class ClientInterviewsEntity {
   clientInterviewDate: Date;
 
   @Column()
-  hourInterview: Date;
+  hourInterview: string;
 
   @Column()
   punctuality: Punctuality;
 
   @Column()
-  jobProfile: string;
+  jobProfile: boolean;
 
   @Column()
   technicalEvaluation: string;
@@ -42,12 +44,11 @@ export class ClientInterviewsEntity {
   comments: string;
 
   @Column()
-  situational: boolean;
+  situational: Situation;
 
-  @ManyToMany(() => JobsEntity, (jobs) => jobs.ClientInterviews, {
-    cascade: ['insert'],
-  })
-  jobs: JobsEntity[];
+  @ManyToOne(() => JobsEntity, job => job.ClientInterviews, { onDelete: "CASCADE", eager: true })
+  @JoinColumn()
+  Job: JobsEntity;
 
   @CreateDateColumn()
   createdAt: Date;

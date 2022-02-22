@@ -9,6 +9,7 @@ import { LanguagesEntity } from '../languages/languages.entity';
 import { BehaviroalInterviewsEntity } from 'src/app/behavioral-interviews/behavioral-interviews.entity';
 import { ClientInterviewsEntity } from '../client-interviews/client-interviews.entity';
 import { TechnicalInterviewsEntity } from '../technical-interviews/technical-interviews.entity';
+import { ReturnsEntity } from '../returns/returns.entity';
 export declare class JobsEntity {
     id: string;
     requester: string;
@@ -37,6 +38,7 @@ export declare class JobsEntity {
     BehavioralInterviews: BehaviroalInterviewsEntity[];
     TechnicalInterviews: TechnicalInterviewsEntity[];
     ClientInterviews: ClientInterviewsEntity[];
+    Returns: ReturnsEntity[];
     createdAt: Date;
     updatedAt: Date;
     deletedAt: Date;

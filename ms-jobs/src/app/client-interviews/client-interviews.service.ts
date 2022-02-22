@@ -16,7 +16,7 @@ export class ClientInterviewsService {
   constructor(
     @InjectRepository(ClientInterviewsEntity)
     private readonly clientInterviewsRepository: Repository<ClientInterviewsEntity>,
-  ) {}
+  ) { }
 
   async findAll() {
     return await this.clientInterviewsRepository.find();

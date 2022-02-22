@@ -12,7 +12,7 @@ export class JobsService {
   constructor(
     @InjectRepository(JobsEntity)
     private readonly jobsRepository: Repository<JobsEntity>,
-  ) {}
+  ) { }
 
   async findAll() {
     const jobsWhiteAll = await this.jobsRepository.find();
@@ -24,7 +24,7 @@ export class JobsService {
     conditions: FindConditions<JobsEntity>,
     options?: FindOneOptions<JobsEntity>,
   ) {
-    // options = { relations: ['Knowledges', 'Seniorities', 'Languages'] };
+    options = { relations: ['BehavioralInterviews', 'TechnicalInterviews', 'ClientInterviews', 'Returns'] };
 
     try {
       return await this.jobsRepository.findOneOrFail(conditions, options);
@@ -32,6 +32,7 @@ export class JobsService {
       throw new NotFoundException(error.Message);
     }
   }
+
 
   async store(data: CreateJobsDto) {
     const job = this.jobsRepository.create(data);

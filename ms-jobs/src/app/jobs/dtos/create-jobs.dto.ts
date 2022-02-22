@@ -17,6 +17,7 @@ import { BehaviroalInterviewsEntity } from 'src/app/behavioral-interviews/behavi
 import { ClientInterviewsEntity } from 'src/app/client-interviews/client-interviews.entity';
 import { KnowledgesEntity } from 'src/app/knowledges/knowledges.entity';
 import { LanguagesEntity } from 'src/app/languages/languages.entity';
+import { ReturnsEntity } from 'src/app/returns/returns.entity';
 import { SenioritiesEntity } from 'src/app/seniorities/seniorities.entity';
 import { TechnicalInterviewsEntity } from 'src/app/technical-interviews/technical-interviews.entity';
 import { Schooling } from './schooling.enum';
@@ -118,6 +119,10 @@ export class CreateJobsDto {
   @ApiProperty()
   @IsOptional()
   Knowledges: KnowledgesEntity[];
+
+  @ApiProperty()
+  @IsOptional()
+  Returns: ReturnsEntity[];
 
   @ApiProperty()
   @IsNotEmpty()

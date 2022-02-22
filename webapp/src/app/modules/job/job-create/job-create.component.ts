@@ -96,7 +96,7 @@ export class JobCreateComponent implements OnInit {
     private snackbarService: SnackBarService,
     private router: Router,
     private route: ActivatedRoute
-  ) {}
+  ) { }
 
   async ngOnInit(): Promise<void> {
     this.jobId = this.route.snapshot.paramMap.get('id');
@@ -116,7 +116,7 @@ export class JobCreateComponent implements OnInit {
     }
   }
 
-  handleChanges(value: any): void {}
+  handleChanges(value: any): void { }
 
   initForm() {
     this.jobForm = this.fb.group({

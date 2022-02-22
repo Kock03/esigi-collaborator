@@ -10,6 +10,7 @@ import { BehavioralInterviewsModule } from './app/behavioral-interviews/behavior
 import { ClientInterviewsModule } from './app/client-interviews/client-interviews.module';
 import { TechnicalInterviewsModule } from './app/technical-interviews/technical-interviews.module';
 import { ReturnsModule } from './app/returns/returns.module';
+import { HiringPreferencesModule } from './app/hiringPreferences/hiringPreferences.module';
 @Module({
   imports: [
     ConfigModule.forRoot(),
@@ -32,8 +33,9 @@ import { ReturnsModule } from './app/returns/returns.module';
     TechnicalInterviewsModule,
     ClientInterviewsModule,
     ReturnsModule,
+    HiringPreferencesModule
   ],
   controllers: [],
   providers: [],
 })
-export class AppModule {}
+export class AppModule { }

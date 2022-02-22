@@ -9,9 +9,11 @@ import {
   MaxLength,
   MinLength,
 } from 'class-validator';
+import { HiringPreferencesEntity } from 'src/app/hiringPreferences/hiringPreferences.entity';
 import { JobsEntity } from 'src/app/jobs/jobs.entity';
 import { Presentation } from '../enums/presentation.enum';
 import { Punctuality } from '../enums/punctuality.enum';
+import { Situation } from '../enums/situational.enum';
 
 export class CreateBehaviorInterviewsDto {
   @MinLength(3)
@@ -55,11 +57,6 @@ export class CreateBehaviorInterviewsDto {
   @IsNotEmpty()
   @ApiProperty()
   @IsString()
-  hiringPreference: string;
-
-  @IsNotEmpty()
-  @ApiProperty()
-  @IsString()
   behavioralAssessment: string;
 
   @IsNotEmpty()
@@ -69,8 +66,8 @@ export class CreateBehaviorInterviewsDto {
 
   @IsNotEmpty()
   @ApiProperty()
-  @IsBoolean()
-  situational: boolean;
+  @IsEnum(Situation)
+  situational: Situation;
 
   @IsNotEmpty()
   @ApiProperty()
@@ -79,5 +76,9 @@ export class CreateBehaviorInterviewsDto {
 
   @ApiProperty()
   @IsNotEmpty()
-  jobs: JobsEntity[];
+  hiringPreferences: HiringPreferencesEntity;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  Job: JobsEntity;
 }

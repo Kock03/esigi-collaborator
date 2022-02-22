@@ -4,75 +4,84 @@ import {
   IsDate,
   IsEnum,
   IsNotEmpty,
+  IsOptional,
   IsString,
   MaxLength,
   MinLength,
 } from 'class-validator';
+import { HiringPreferencesEntity } from 'src/app/hiringPreferences/hiringPreferences.entity';
 import { JobsEntity } from 'src/app/jobs/jobs.entity';
 import { Presentation } from '../enums/presentation.enum';
 import { Punctuality } from '../enums/punctuality.enum';
+import { Situation } from '../enums/situational.enum';
 
 export class UpdateBehaviorInterviewsDto {
   @MinLength(3)
   @MaxLength(80)
   @IsString()
-  @IsNotEmpty()
+  @IsOptional()
   @ApiProperty()
   nameCandidate: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   @ApiProperty()
   @MinLength(3)
   @MaxLength(80)
   @IsString()
   techRecruter: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   @ApiProperty()
   behavioralInterviewDate: Date;
 
-  @IsNotEmpty()
+  @IsOptional()
   @ApiProperty()
   @IsString()
   hourInterview: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   @ApiProperty()
   @IsEnum(Punctuality)
   punctuality: Punctuality;
 
-  @IsNotEmpty()
+  @IsOptional()
   @ApiProperty()
   @IsEnum(Presentation)
   presentation: Presentation;
 
-  @IsNotEmpty()
+  @IsOptional()
   @ApiProperty()
   @IsString()
   salaryExpectation: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   @ApiProperty()
   @IsString()
   hiringPreference: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   @ApiProperty()
   @IsString()
   behavioralAssessment: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   @ApiProperty()
   @IsString()
   comments: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   @ApiProperty()
-  @IsBoolean()
-  situational: boolean;
+  @IsEnum(Situation)
+  situational: Situation;
 
-  @IsNotEmpty()
+  @ApiProperty()
+  @IsOptional()
+  hiringPreferences: HiringPreferencesEntity;
+
+  @IsOptional()
   @ApiProperty()
   @IsString()
   availabilityOfInitialize: string;
 }
+
+
