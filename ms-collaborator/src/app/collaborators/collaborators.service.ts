@@ -60,8 +60,8 @@ export class CollaboratorsService {
         throw new DocumentsBadRequestExcpetion();
       }
     } else {
-      const invalidCnpj = DocumentValidator.isValidCnpj(data.cnpj);
-      if (!invalidCnpj) {
+      const validCnpj = DocumentValidator.isValidCnpj(data.cnpj);
+      if (!validCnpj) {
         throw new DocumentsBadRequestExcpetion();
       }
     }

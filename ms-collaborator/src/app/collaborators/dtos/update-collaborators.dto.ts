@@ -29,40 +29,40 @@ import { Gender } from './gender.enum';
 
 export class UpdateCollaboratorsDto {
   @ApiProperty()
-  @IsOptional()
+  @IsNotEmpty()
   @IsString()
   @MinLength(4)
   @MaxLength(100)
   firstNameCorporateName: string;
 
   @ApiProperty()
-  @IsOptional()
+  @IsNotEmpty()
   @IsString()
   @MinLength(4)
   @MaxLength(100)
   lastNameFantasyName: string;
 
   @ApiProperty()
-  @IsOptional()
+  @IsNotEmpty()
   @IsString()
   @MinLength(5)
   @MaxLength(70)
   login: string;
 
   @ApiProperty()
-  @IsOptional()
+  @IsNotEmpty()
   @IsEnum(Gender)
   gender: Gender;
 
   @ApiProperty()
-  @IsOptional()
+  @IsNotEmpty()
   @IsString()
   @MinLength(5)
   @MaxLength(200)
   office: string;
 
   @ApiProperty()
-  @IsOptional()
+  @IsNotEmpty()
   @IsEnum(CollaboratorTypes)
   collaboratorTypes: CollaboratorTypes;
 
@@ -73,12 +73,12 @@ export class UpdateCollaboratorsDto {
   cpf: string;
 
   @ApiProperty()
-  @IsOptional()
+  @IsNotEmpty()
   @IsEnum(MaritalStatus)
   maritalStatus: MaritalStatus;
 
   @ApiProperty()
-  @IsOptional()
+  @IsNotEmpty()
   birthDate: Date;
 
   @ApiProperty()
@@ -87,11 +87,11 @@ export class UpdateCollaboratorsDto {
   active: boolean;
 
   @ApiProperty()
-  @IsOptional()
+  @IsNotEmpty()
   admissionDate: Date;
 
   @ApiProperty()
-  @IsOptional()
+  @IsNotEmpty()
   @IsEmail()
   @MinLength(10)
   @MaxLength(100)
@@ -135,14 +135,13 @@ export class UpdateCollaboratorsDto {
   @IsOptional()
   photo: Buffer;
 
-
   @ApiProperty()
-  @IsOptional()
+  @IsNotEmpty()
   @IsObject()
   Address: AddressEntity;
 
   @ApiProperty()
-  @IsOptional()
+  @IsNotEmpty()
   @IsObject()
   Phone: PhoneEntity;
 
