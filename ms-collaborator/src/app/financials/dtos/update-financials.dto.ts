@@ -12,23 +12,23 @@ import { ContractTypes } from './contract-types.enum';
 
 export class UpdateFinancialsDto {
   @ApiProperty()
-  @IsOptional()
+  @IsNotEmpty()
   @IsEnum(ContractTypes)
   contractType: ContractTypes;
 
   @ApiProperty()
-  @IsOptional()
+  @IsNotEmpty()
   @IsNumber()
   @MinLength(2)
   @MaxLength(40)
   value: number;
 
   @ApiProperty()
-  @IsOptional()
+  @IsNotEmpty()
   @IsEnum(Reasons)
   reason: Reasons;
 
   @ApiProperty()
-  @IsOptional()
+  @IsNotEmpty()
   dateInclusion: Date;
 }

@@ -10,21 +10,21 @@ import {
 
 export class UpdatePhoneDto {
   @ApiProperty()
-  @IsOptional()
+  @IsNotEmpty()
   @IsString()
   @MinLength(9)
   @MaxLength(9)
   phoneNumber: string;
 
   @ApiProperty()
-  @IsOptional()
+  @IsNotEmpty()
   @IsString()
   @MinLength(2)
   @MaxLength(2)
   ddd: string;
 
   @ApiProperty()
-  @IsOptional()
+  @IsNotEmpty()
   @IsString()
   @MinLength(2)
   @MaxLength(2)

@@ -14,19 +14,19 @@ import { Seniority } from './seniority.enun';
 
 export class UpdateSkillsDto {
   @ApiProperty()
-  @IsOptional()
+  @IsNotEmpty()
   @IsString()
   @MinLength(4)
   @MaxLength(40)
   technology: string;
 
   @ApiProperty()
-  @IsOptional()
+  @IsNotEmpty()
   @IsEnum(Seniority)
   seniority: Seniority;
 
   @ApiProperty()
-  @IsOptional()
+  @IsNotEmpty()
   @IsNumber()
   yearsExperience: number;
 

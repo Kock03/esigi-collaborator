@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import {
+  IsNotEmpty,
   IsOptional,
   IsString,
   Length,
@@ -8,49 +9,49 @@ import {
 } from 'class-validator';
 export class UpdateAddressDto {
   @ApiProperty()
-  @IsOptional()
+  @IsNotEmpty()
   @IsString()
   @MinLength(8)
   @MaxLength(8)
   cep: string;
 
   @ApiProperty()
-  @IsOptional()
+  @IsNotEmpty()
   @IsString()
   @MinLength(1)
   @MaxLength(10)
   number: string;
 
   @ApiProperty()
-  @IsOptional()
+  @IsNotEmpty()
   @IsString()
   @MinLength(3)
   @MaxLength(60)
   street: string;
 
   @ApiProperty()
-  @IsOptional()
+  @IsNotEmpty()
   @IsString()
   @MinLength(3)
   @MaxLength(60)
   district: string;
 
   @ApiProperty()
-  @IsOptional()
+  @IsNotEmpty()
   @IsString()
   @MinLength(3)
   @MaxLength(60)
   state: string;
 
   @ApiProperty()
-  @IsOptional()
+  @IsNotEmpty()
   @IsString()
   @MinLength(3)
   @MaxLength(60)
   city: string;
 
   @ApiProperty()
-  @IsOptional()
+  @IsNotEmpty()
   @IsString()
   @MinLength(3)
   @MaxLength(60)

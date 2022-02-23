@@ -9,14 +9,14 @@ import {
 
 export class UpdateDocumentsDto {
   @ApiProperty()
-  @IsOptional()
+  @IsNotEmpty()
   @IsString()
   @MinLength(3)
   @MaxLength(70)
   name: string;
 
   @ApiProperty()
-  @IsOptional()
+  @IsNotEmpty()
   @IsString()
   @MaxLength(255)
   file: string;

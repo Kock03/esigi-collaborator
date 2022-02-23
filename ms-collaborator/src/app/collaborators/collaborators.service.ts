@@ -1,21 +1,20 @@
-
 import { HttpException, Injectable, UploadedFile } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DocumentValidator } from 'src/app/validators/document.validator';
 import { FindConditions, FindOneOptions, Repository } from 'typeorm';
-import { BadRequestException } from '../exceptions/bad-request.exception';
 import { ConflictException } from '../exceptions/conflict.exception';
 import { NotFoundException } from '../exceptions/not-found-exception';
 import { CollaboratorsEntity } from './collaborators.entity';
 import { CreateCollaboratorsDto } from './dtos/create-collaborators.dto';
 import { UpdateCollaboratorsDto } from './dtos/update-collaborators.dto';
+import { DocumentsBadRequestExcpetion } from '../exceptions/documents-bad-request.exception';
 
 @Injectable()
 export class CollaboratorsService {
   constructor(
     @InjectRepository(CollaboratorsEntity)
     private readonly collaboratorsRepository: Repository<CollaboratorsEntity>,
-  ) { }
+  ) {}
 
   async findAll() {
     const collaboratorsWhiteAll = await this.collaboratorsRepository
@@ -58,16 +57,16 @@ export class CollaboratorsService {
     if (data.cpf) {
       const invalidCpf = DocumentValidator.isValidCpf(data.cpf);
       if (invalidCpf) {
-        throw new BadRequestException();
+        throw new DocumentsBadRequestExcpetion();
       }
     } else {
       const invalidCnpj = DocumentValidator.isValidCnpj(data.cnpj);
-      if (invalidCnpj) {
-        throw new BadRequestException();
+      if (!invalidCnpj) {
+        throw new DocumentsBadRequestExcpetion();
       }
     }
     if (data.cpf === null && data.cnpj === null) {
-      throw new BadRequestException();
+      throw new DocumentsBadRequestExcpetion();
     } else {
       try {
         const collaborator = this.collaboratorsRepository.create(data);

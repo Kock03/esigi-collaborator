@@ -15,62 +15,62 @@ import { Type } from './type.enum';
 
 export class UpdateDependentsDto {
   @ApiProperty()
-  @IsOptional()
+  @IsNotEmpty()
   @IsEnum(Type)
   type: Type;
 
   @ApiProperty()
-  @IsOptional()
+  @IsNotEmpty()
   @IsString()
   @MinLength(3)
   @MaxLength(70)
   firstName: string;
 
   @ApiProperty()
-  @IsOptional()
+  @IsNotEmpty()
   @IsString()
   @MinLength(3)
   @MaxLength(70)
   lastName: string;
 
   @ApiProperty()
-  @IsOptional()
+  @IsNotEmpty()
   @IsEnum(Gender)
   gender: Gender;
 
   @ApiProperty()
-  @IsOptional()
+  @IsNotEmpty()
   @MinLength(11)
   @MaxLength(11)
   cpf: string;
 
   @ApiProperty()
-  @IsOptional()
+  @IsNotEmpty()
   birthDate: Date;
 
   @ApiProperty()
-  @IsOptional()
+  @IsNotEmpty()
   @IsString()
   @MinLength(9)
   @MaxLength(9)
   phoneNumber: string;
 
   @ApiProperty()
-  @IsOptional()
+  @IsNotEmpty()
   @IsString()
   @MinLength(2)
   @MaxLength(2)
   ddd: string;
 
   @ApiProperty()
-  @IsOptional()
+  @IsNotEmpty()
   @IsString()
   @MinLength(2)
   @MaxLength(2)
   ddi: string;
 
   @ApiProperty()
-  @IsOptional()
+  @IsNotEmpty()
   @IsEmail()
   @MinLength(10)
   @MaxLength(100)

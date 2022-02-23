@@ -14,26 +14,26 @@ import { Situation } from './situation.enum';
 
 export class UpdateEducationsDto {
   @ApiProperty()
-  @IsOptional()
+  @IsNotEmpty()
   @IsString()
   @MinLength(3)
   @MaxLength(70)
   course: string;
 
   @ApiProperty()
-  @IsOptional()
+  @IsNotEmpty()
   @IsEnum(Schooling)
   schooling: Schooling;
 
   @ApiProperty()
-  @IsOptional()
+  @IsNotEmpty()
   @IsNumber()
   @MinLength(10)
   @MaxLength(100)
   institution: string;
 
   @ApiProperty()
-  @IsOptional()
+  @IsNotEmpty()
   @IsEnum(Situation)
   situation: Situation;
 }

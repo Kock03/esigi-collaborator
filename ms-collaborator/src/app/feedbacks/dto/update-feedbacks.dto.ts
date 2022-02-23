@@ -15,72 +15,72 @@ import { Status } from '../enums/status.enum';
 
 export class UpdateFeedbacksDto {
   @ApiProperty()
-  @IsOptional()
+  @IsNotEmpty()
   @IsNumber()
   feedbackType: FeedbackTypes;
 
   @ApiProperty()
-  @IsOptional()
+  @IsNotEmpty()
   @IsEnum(Reason)
   reason: Reason;
 
   @ApiProperty()
-  @IsOptional()
+  @IsNotEmpty()
   @IsString()
   @MinLength(5)
   @MaxLength(100)
   project: string;
 
   @ApiProperty()
-  @IsOptional()
+  @IsNotEmpty()
   @IsEnum(Status)
   status: Status;
 
   @ApiProperty()
-  @IsOptional()
+  @IsNotEmpty()
   feedbackDate: Date;
 
   @ApiProperty()
-  @IsOptional()
+  @IsNotEmpty()
   @IsString()
   hourDate: string;
 
   @ApiProperty()
-  @IsOptional()
+  @IsNotEmpty()
   feedbackDateRetorn: Date;
 
   @ApiProperty()
-  @IsOptional()
+  @IsNotEmpty()
   @IsString()
   hourDateRetorn: string;
 
   @ApiProperty()
-  @IsOptional()
+  @IsNotEmpty()
   @IsString()
   @MinLength(5)
   @MaxLength(70)
   manager: string;
 
   @ApiProperty()
-  @IsOptional()
+  @IsNotEmpty()
   @IsString()
   @MaxLength(200)
   managerDescription: string;
 
   @ApiProperty()
-  @IsOptional()
+  @IsNotEmpty()
   @IsString()
   @MaxLength(200)
   improvementPoints: string;
 
   @ApiProperty()
-  @IsOptional()
+  @IsNotEmpty()
   @IsString()
   @MaxLength(200)
   collaboratorDescription: string;
 
   @ApiProperty()
-  @IsOptional()
+  @IsNotEmpty()
   @IsString()
   @MaxLength(100)
   commitment: string;

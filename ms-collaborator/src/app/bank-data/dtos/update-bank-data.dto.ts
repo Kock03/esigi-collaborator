@@ -14,40 +14,40 @@ import { AccountTypes } from './account-types.enum';
 
 export class UpdateBankDataDto {
   @ApiProperty()
-  @IsOptional()
+  @IsNotEmpty()
   @IsString()
   @MinLength(3)
   @MaxLength(30)
   bank: string;
 
   @ApiProperty()
-  @IsOptional()
+  @IsNotEmpty()
   @IsString()
   @MinLength(4)
   @MaxLength(4)
   agency: string;
 
   @ApiProperty()
-  @IsOptional()
+  @IsNotEmpty()
   @IsNumber()
   @MinLength(1)
   @MaxLength(1)
   digit: string;
 
   @ApiProperty()
-  @IsOptional()
+  @IsNotEmpty()
   @IsEnum(AccountTypes)
   accountType: AccountTypes;
 
   @ApiProperty()
-  @IsOptional()
+  @IsNotEmpty()
   @IsNumber()
   @MinLength(9)
   @MaxLength(9)
   accountNumber: string;
 
   @ApiProperty()
-  @IsOptional()
+  @IsNotEmpty()
   @IsNumber()
   @MinLength(4)
   @MaxLength(4)
