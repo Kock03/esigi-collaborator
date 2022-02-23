@@ -48,16 +48,17 @@ export class CollaboratorBankTabComponent implements OnInit {
   ngOnInit(): void {                       
 
    this.initObservables()
-   this.data = new Array(this.bankArray.value);
   }
 
   initObservables() {
     if (
-      this.data.findIndex(
+      this.bankArray.value.findIndex(
         (bank: any) => bank == null
+       
       ) === -1
+      
     ) {
-      this.data = this.bankArray.value;
+      this.data = new Array(this.bankArray.value);
    }
   }
   
