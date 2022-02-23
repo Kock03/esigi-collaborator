@@ -8,7 +8,6 @@ import {
   MatDialogRef,
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
-import { ResumeDialogExperience } from './resume-experience-tab/resume-experience-tab.component';
 import { ResumeProvider } from 'src/providers/resume.provider';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SnackBarService } from 'src/services/snackbar.service';
@@ -41,19 +40,17 @@ export class ResumeCreateComponent implements OnInit {
     this.initForm();
     this.step = 1;
     if (this.resumeId !== 'novo') {
-       await this.getResume()
+      await this.getResume();
     }
     this.setFormValue();
   }
 
-  async getResume(){
-    try{
-      this.resume = await this.resumeProvider.findOne(this.resumeId)
-    }
-    catch (error) {
+  async getResume() {
+    try {
+      this.resume = await this.resumeProvider.findOne(this.resumeId);
+    } catch (error) {
       console.error(error);
     }
- 
   }
 
   initForm() {
@@ -130,14 +127,17 @@ export class ResumeCreateComponent implements OnInit {
 
   handleChanges(value: any): void {}
 
-  async saveEditResume(){
+  async saveEditResume() {
     let data = this.resumeForm.getRawValue();
-    console.log("🚀 ~ file: resume-create.component.ts ~ line 135 ~ ResumeCreateComponent ~ saveEditResume ~ data", data)
-    try{
+    console.log(
+      '🚀 ~ file: resume-create.component.ts ~ line 135 ~ ResumeCreateComponent ~ saveEditResume ~ data',
+      data
+    );
+    try {
       const resume = await this.resumeProvider.update(this.resumeId, data);
       this.snackbarService.successMessage('Curriculo atualizado com sucesso');
       this.router.navigate(['curriculo/lista']);
-    }catch (error) {
+    } catch (error) {
       console.error(error);
     }
   }

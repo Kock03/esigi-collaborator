@@ -16,6 +16,8 @@ import {
 } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
 import { MatTabGroup } from '@angular/material/tabs';
+import { ResumeEducationDialog } from './resume-education-dialog.component';
+import { ResumeLanguageDialog } from './resume-language-dialog.component';
 
 @Component({
   selector: 'app-resume-education-tab',
@@ -205,87 +207,4 @@ export class ResumeEducationTabComponent implements OnInit {
   }
 }
 
-@Component({
-  selector: 'resume-language-dialog',
-  templateUrl: 'resume-language-dialog.html',
-  styleUrls: ['./resume-education-tab.component.scss'],
-})
-export class ResumeLanguageDialog {
-  @Input('form') resumeForm!: FormGroup;
-  @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
 
-  languageForm!: FormGroup;
-
-  constructor(
-    public dialogRef: MatDialogRef<ResumeLanguageDialog>,
-    private fb: FormBuilder,
-    @Inject(MAT_DIALOG_DATA) public data: { languageSelected: any }
-  ) {}
-
-  ngOnInit(): void {
-    this.initForm();
-  }
-
-  initForm(): void {
-    this.languageForm = this.fb.group({
-      languageName: ['Inglês', [Validators.required, Validators.maxLength(40)]],
-      degreeOfInfluence: [1, Validators.required],
-    });
-    if (this.data && this.data.languageSelected) {
-      this.languageForm.patchValue(this.data.languageSelected);
-    }
-  }
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-
-  save() {
-    this.dialogRef.close(this.languageForm.getRawValue());
-  }
-}
-
-@Component({
-  selector: 'resume-education-dialog',
-  templateUrl: 'resume-education-dialog.html',
-  styleUrls: ['./resume-education-tab.component.scss'],
-})
-export class ResumeEducationDialog {
-  @Input('form') resumeForm!: FormGroup;
-  @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
-
-  educationForm!: FormGroup;
-
-  constructor(
-    public dialogRef: MatDialogRef<ResumeEducationDialog>,
-    private fb: FormBuilder,
-    @Inject(MAT_DIALOG_DATA) public data: { educationSelected: any }
-  ) {}
-
-  ngOnInit(): void {
-    this.initForm();
-  }
-
-  initForm(): void {
-    this.educationForm = this.fb.group({
-      schooling: [1, Validators.required],
-      situation: [1, Validators.required],
-      course: [
-        'Engenharia de Software',
-        [Validators.required, Validators.maxLength(100)],
-      ],
-      institution: ['FURB', [Validators.required, Validators.maxLength(100)]],
-    });
-    if (this.data && this.data.educationSelected) {
-      this.educationForm.patchValue(this.data.educationSelected);
-    }
-  }
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-
-  save() {
-    this.dialogRef.close(this.educationForm.getRawValue());
-  }
-}

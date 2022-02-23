@@ -45,9 +45,22 @@ export class CollaboratorBankTabComponent implements OnInit {
 
   constructor(private fb: FormBuilder, public dialog: MatDialog) {}
 
-  ngOnInit(): void {
-    this.data = new Array(this.bankArray.value);
+  ngOnInit(): void {                       
+
+   this.initObservables()
+   this.data = new Array(this.bankArray.value);
   }
+
+  initObservables() {
+    if (
+      this.data.findIndex(
+        (bank: any) => bank == null
+      ) === -1
+    ) {
+      this.data = this.bankArray.value;
+   }
+  }
+  
 
   openDialog() {
     const dialogRef = this.dialog.open(CollaboratorBankDialog, {
@@ -58,7 +71,6 @@ export class CollaboratorBankTabComponent implements OnInit {
     dialogRef.afterClosed().subscribe((bank) => {
       this.data = new Array(this.bankArray.value);
       this.bankTable.renderRows();
-      console.log("🚀 ~ file: collaborator-bank-tab.component.ts ~ line 64 ~ CollaboratorBankTabComponent ~ dialogRef.afterClosed ~ bank", bank)
     });
   }
 
@@ -66,17 +78,15 @@ export class CollaboratorBankTabComponent implements OnInit {
     this.onChange.next(true);
   }
 
-  getBank(bankSelected: any, index: number) {
+  getBank(bankForm: any, index: number) {
     const dialogRef = this.dialog.open(CollaboratorBankDialog, {
       width: '500px',
       height: '470px',
-      data: { bankSelected },
+      data: { bankForm },
     });
     this.index = index;
     dialogRef.afterClosed().subscribe((bank) => {
-      if (bank) {
-        this.bankArray.controls[this.index].setValue(bank);
-      }
+      this.bankArray.controls[this.index].setValue(bank);
     });
   }
 

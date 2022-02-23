@@ -15,6 +15,7 @@ import {
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
+import { JobDialogSkill } from './job-skill-dialog.component';
 
 @Component({
   selector: 'app-job-skill-tab',
@@ -85,7 +86,6 @@ export class JobSkillTabComponent implements OnInit {
       }
     });
   }
-          
 
   getKnowledge(knowledgeSelected: any, index: number) {
     const dialogRef = this.dialog.open(JobDialogSkill, {
@@ -102,45 +102,5 @@ export class JobSkillTabComponent implements OnInit {
 
   deleteKnowledge(index: number) {
     this.knowledgeArray.removeAt(index);
-  }
-}
-
-@Component({
-  selector: 'job-dialog-skill',
-  templateUrl: 'job-dialog-skill.html',
-})
-export class JobDialogSkill implements OnInit {
-  @Input('form') jobForm!: FormGroup;
-  @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
-
-  knowledgeForm!: FormGroup;
-
-  constructor(
-    public dialogRef: MatDialogRef<JobDialogSkill>,
-    private fb: FormBuilder,
-    @Inject(MAT_DIALOG_DATA) public data: { knowledgeSelected: any }
-  ) {}
-
-  ngOnInit(): void {
-    this.initForm();
-  }
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-
-  initForm(): void {
-    this.knowledgeForm = this.fb.group({
-      name: ['', [Validators.required, Validators.maxLength(20)]],
-      yearsExperience: [1, Validators.required],
-      typeOfPeriod: [1, Validators.required],
-    });
-    if (this.data && this.data.knowledgeSelected) {
-      this.knowledgeForm.patchValue(this.data.knowledgeSelected);
-    }
-  }
-
-  async saveKnowledge() {
-    this.dialogRef.close(this.knowledgeForm.getRawValue());
   }
 }

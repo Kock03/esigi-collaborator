@@ -7,16 +7,12 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatButtonModule } from '@angular/material/button';
 import { ResumeRegisterTabComponent } from './resume-create/resume-register-tab/resume-register-tab.component';
 import {
-  ResumeEducationDialog,
   ResumeEducationTabComponent,
-  ResumeLanguageDialog,
 } from './resume-create/resume-education-tab/resume-education-tab.component';
 import {
-  ResumeDialogExperience,
   ResumeExperienceTabComponent,
 } from './resume-create/resume-experience-tab/resume-experience-tab.component';
 import {
-  ResumeSkillDialog,
   ResumeSkillsTabComponent,
 } from './resume-create/resume-skills-tab/resume-skills-tab.component';
 import { ResumeMonitoringTabComponent } from './resume-create/resume-monitoring-tab/resume-monitoring-tab.component';
@@ -38,6 +34,10 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
 import { MatListModule } from '@angular/material/list';
 import { ResumeApplicationTabComponent } from './resume-create/resume-application-tab/resume-application-tab.component';
 import { ResumeListComponent } from './resume-list/resume-list.component';
+import { ResumeSkillDialog } from './resume-create/resume-skills-tab/resume-skill.dialog.component';
+import { ResumeDialogExperience } from './resume-create/resume-experience-tab/resume-experience-dialog.component';
+import { ResumeEducationDialog } from './resume-create/resume-education-tab/resume-education-dialog.component';
+import { ResumeLanguageDialog } from './resume-create/resume-education-tab/resume-language-dialog.component';
 
 const routes: Routes = [
   {
