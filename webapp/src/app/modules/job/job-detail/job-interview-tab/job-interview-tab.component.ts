@@ -20,7 +20,6 @@ import { ReturnProvider } from 'src/providers/return.provider';
 import { SnackBarService } from 'src/services/snackbar.service';
 import { Location } from '@angular/common';
 
-
 @Component({
   selector: 'app-job-interview-tab',
   templateUrl: './job-interview-tab.component.html',
@@ -38,7 +37,8 @@ export class JobInterviewTabComponent implements OnInit {
   selectedIndex: number = 0;
   disable = false;
   typeControl = new FormControl();
-  constructor(private fb: FormBuilder,
+  constructor(
+    private fb: FormBuilder,
     private behaviroalInterviewProvider: BehaviroalInterviewProvider,
     private technicalInterviewProvider: TechnicalInterviewProvider,
     private clientInterviewProvider: ClientInterviewProvider,
@@ -46,14 +46,12 @@ export class JobInterviewTabComponent implements OnInit {
     private snackbarService: SnackBarService,
     private route: ActivatedRoute,
     private _location: Location,
-    private router: Router,) { }
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.jobId = this.route.snapshot.paramMap.get('id');
     this.initForm();
-
-
-
   }
 
   initForm() {
@@ -75,9 +73,7 @@ export class JobInterviewTabComponent implements OnInit {
       comments: ['', Validators.required],
       situational: [1, Validators.required],
       availabilityOfInitialize: ['', Validators.required],
-      Job:
-        { id: this.jobId }
-
+      Job: { id: this.jobId },
     });
     this.technicalInterviewForm = this.fb.group({
       nameCandidate: ['', Validators.required],
@@ -89,9 +85,7 @@ export class JobInterviewTabComponent implements OnInit {
       technicalEvaluation: ['', Validators.required],
       comments: ['', Validators.required],
       situational: [1, Validators.required],
-      Job:
-        { id: this.jobId }
-
+      Job: { id: this.jobId },
     });
 
     this.clientInterviewForm = this.fb.group({
@@ -104,9 +98,7 @@ export class JobInterviewTabComponent implements OnInit {
       technicalEvaluation: ['', Validators.required],
       comments: ['', Validators.required],
       situational: [1, Validators.required],
-      Job:
-        { id: this.jobId }
-
+      Job: { id: this.jobId },
     });
 
     this.returnForm = this.fb.group({
@@ -121,9 +113,7 @@ export class JobInterviewTabComponent implements OnInit {
       typeOdContract: [1, Validators.required],
       combinedValue: ['', Validators.required],
       initialData: ['', Validators.required],
-      Job:
-        { id: this.jobId }
-
+      Job: { id: this.jobId },
     });
   }
 
@@ -134,9 +124,10 @@ export class JobInterviewTabComponent implements OnInit {
       await this.behaviroalInterviewProvider.store(data);
       console.log(data);
 
-
-      this.snackbarService.successMessage('Entrevista Comportional Cadastrada Com Sucesso');
-      this.nextStep()
+      this.snackbarService.successMessage(
+        'Entrevista Comportional Cadastrada Com Sucesso'
+      );
+      this.nextStep();
     } catch (error) {
       console.log('ERROR 132' + error);
       this.snackbarService.showError('Falha ao Cadastrar');
@@ -148,7 +139,9 @@ export class JobInterviewTabComponent implements OnInit {
 
     try {
       await this.technicalInterviewProvider.store(data);
-      this.snackbarService.successMessage('Entrevista Técnica Cadastrada Com Sucesso');
+      this.snackbarService.successMessage(
+        'Entrevista Técnica Cadastrada Com Sucesso'
+      );
       this.step += 1;
     } catch (error) {
       console.log('ERROR 132' + error);
@@ -162,8 +155,10 @@ export class JobInterviewTabComponent implements OnInit {
     try {
       await this.clientInterviewProvider.store(data);
 
-      this.snackbarService.successMessage('Entrevista Cliente Cadastrada Com Sucesso');
-      this.nextStep()
+      this.snackbarService.successMessage(
+        'Entrevista Cliente Cadastrada Com Sucesso'
+      );
+      this.step += 1;
     } catch (error) {
       console.log('ERROR 132' + error);
       this.snackbarService.showError('Falha ao Cadastrar');
@@ -177,12 +172,12 @@ export class JobInterviewTabComponent implements OnInit {
       await this.ReturnProvider.store(data);
 
       this.snackbarService.successMessage('Retorno Cadastrada Com Sucesso');
+      this.step += 1;
     } catch (error) {
       console.log('ERROR 132' + error);
       this.snackbarService.showError('Falha ao Cadastrar');
     }
   }
-
 
   nextStep() {
     if (this.selectedIndex != 1) {
