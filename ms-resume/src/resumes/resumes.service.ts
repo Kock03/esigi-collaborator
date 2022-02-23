@@ -1,6 +1,7 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { AddressEntity } from 'src/address/address.entity';
+import { NotFoundException } from 'src/exceptions/not-found-exception';
 import { PhoneEntity } from 'src/phone/phone.entity';
 import { Repository, FindConditions, FindOneOptions } from 'typeorm';
 import { CreateResumesDto } from './dto/create-resumes-dto';
@@ -25,7 +26,7 @@ export class ResumesService {
     try {
       return await this.resumesRepository.findOneOrFail(conditions, options);
     } catch (error) {
-      throw new NotFoundException(error.message);
+      throw new NotFoundException();
     }
   }
 
@@ -35,14 +36,21 @@ export class ResumesService {
     return await this.resumesRepository.save(resume);
   }
 
-  async update(id: string, updateDto: UpdateResumesDto) {
-    const resume = await this.resumesRepository.findOneOrFail({ id });
-    this.resumesRepository.merge(resume, updateDto);
-    return this.resumesRepository.save(resume);
+  async update(id: string, data: UpdateResumesDto) {
+    try {
+      const resume = await this.resumesRepository.findOneOrFail({ id });
+    } catch {
+      throw new NotFoundException();
+    }
+    return await this.resumesRepository.save({ id: id, ...data });
   }
 
   async destroy(id: string) {
-    await this.resumesRepository.findOne({ id });
+    try {
+      await this.resumesRepository.findOneOrFail({ id });
+    } catch {
+      throw new NotFoundException();
+    }
     return await this.resumesRepository.softDelete({ id });
   }
 }

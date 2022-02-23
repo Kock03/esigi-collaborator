@@ -1,7 +1,11 @@
-import { HttpException, Injectable, NotFoundException, UploadedFile } from '@nestjs/common';
+
+import { HttpException, Injectable, UploadedFile } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { DocumentValidator } from 'src/validators/document.validator';
+import { DocumentValidator } from 'src/app/validators/document.validator';
 import { FindConditions, FindOneOptions, Repository } from 'typeorm';
+import { BadRequestException } from '../exceptions/bad-request.exception';
+import { ConflictException } from '../exceptions/conflict.exception';
+import { NotFoundException } from '../exceptions/not-found-exception';
 import { CollaboratorsEntity } from './collaborators.entity';
 import { CreateCollaboratorsDto } from './dtos/create-collaborators.dto';
 import { UpdateCollaboratorsDto } from './dtos/update-collaborators.dto';
@@ -11,7 +15,7 @@ export class CollaboratorsService {
   constructor(
     @InjectRepository(CollaboratorsEntity)
     private readonly collaboratorsRepository: Repository<CollaboratorsEntity>,
-  ) {}
+  ) { }
 
   async findAll() {
     const collaboratorsWhiteAll = await this.collaboratorsRepository
@@ -46,7 +50,7 @@ export class CollaboratorsService {
         options,
       );
     } catch (error) {
-      throw new NotFoundException(error.message);
+      throw new NotFoundException();
     }
   }
 
@@ -54,22 +58,22 @@ export class CollaboratorsService {
     if (data.cpf) {
       const invalidCpf = DocumentValidator.isValidCpf(data.cpf);
       if (invalidCpf) {
-        throw new HttpException('O CPF é inválido', 404);
+        throw new BadRequestException();
       }
     } else {
       const invalidCnpj = DocumentValidator.isValidCnpj(data.cnpj);
       if (invalidCnpj) {
-        throw new HttpException('O CNPJ é inválido', 404);
+        throw new BadRequestException();
       }
     }
     if (data.cpf === null && data.cnpj === null) {
-      throw new HttpException('CPF ou CNPJ não podem ser nulos', 404);
+      throw new BadRequestException();
     } else {
       try {
         const collaborator = this.collaboratorsRepository.create(data);
         return await this.collaboratorsRepository.save(collaborator);
-      } catch (error) {
-        throw new HttpException(error, 404);
+      } catch {
+        throw new ConflictException();
       }
     }
   }
@@ -79,16 +83,16 @@ export class CollaboratorsService {
       id,
     });
     if (!collaborator) {
-      throw new HttpException('Not Found', 404);
+      throw new NotFoundException();
     }
     return await this.collaboratorsRepository.save({ id: id, ...data });
   }
 
   async destroy(id: string) {
     try {
-      this.collaboratorsRepository.findOneOrFail({ id });
-    } catch (error) {
-      throw new HttpException('Registro não existe ou invalido', 404);
+      await this.collaboratorsRepository.findOneOrFail({ id });
+    } catch {
+      throw new NotFoundException();
     }
     return await this.collaboratorsRepository.softDelete({ id });
   }

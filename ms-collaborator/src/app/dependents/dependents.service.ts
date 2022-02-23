@@ -1,17 +1,20 @@
-import { HttpException, Injectable, NotFoundException } from '@nestjs/common';
+import { HttpException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { DocumentValidator } from 'src/validators/document.validator';
+import { DocumentValidator } from '../validators/document.validator';
 import { FindConditions, FindOneOptions, Repository } from 'typeorm';
 import { DependentsEntity } from './dependents.entity';
 import { CreatedependentsDto } from './dtos/create-dependents.dto';
 import { UpdateDependentsDto } from './dtos/update-dependents.dto';
+import { NotFoundException } from '../exceptions/not-found-exception';
+import { BadRequestException } from '../exceptions/bad-request.exception';
+import { ConflictException } from '../exceptions/conflict.exception';
 
 @Injectable()
 export class DependentsService {
   constructor(
     @InjectRepository(DependentsEntity)
     private readonly dependentsRepository: Repository<DependentsEntity>,
-  ) { }
+  ) {}
 
   async findAll() {
     const dependentsWhiteAll = await this.dependentsRepository
@@ -28,8 +31,8 @@ export class DependentsService {
     options = { relations: ['Collaborator'] };
     try {
       return await this.dependentsRepository.findOneOrFail(conditions, options);
-    } catch (error) {
-      throw new NotFoundException(error.message);
+    } catch {
+      throw new NotFoundException();
     }
   }
 
@@ -37,33 +40,33 @@ export class DependentsService {
     if (data.cpf) {
       const invalidCpf = DocumentValidator.isValidCpf(data.cpf);
       if (invalidCpf) {
-        throw new HttpException('O CPF é inválido', 404);
-      }
-      else {
+        throw new BadRequestException();
+      } else {
         try {
           const dependent = this.dependentsRepository.create(data);
           return await this.dependentsRepository.save(dependent);
         } catch (error) {
-          throw new HttpException('Duplicidade de CPF', 404);
+          throw new ConflictException();
         }
       }
+    } else {
+      throw new BadRequestException();
     }
-    else {
-      throw new HttpException('CPF não podem ser nulos', 404);
-    }
-
   }
 
   async update(id: string, data: UpdateDependentsDto) {
     const dependent = await this.dependentsRepository.findOneOrFail({ id });
     if (!dependent) {
-      throw new HttpException('Not Found', 404);
+      throw new NotFoundException();
     }
     return await this.dependentsRepository.save({ id: id, ...data });
   }
 
   async destroy(id: string) {
-    this.dependentsRepository.findOneOrFail({ id });
+    const dependent = this.dependentsRepository.findOneOrFail({ id });
+    if (!dependent) {
+      throw new NotFoundException();
+    }
     return await this.dependentsRepository.softDelete({ id });
   }
 }

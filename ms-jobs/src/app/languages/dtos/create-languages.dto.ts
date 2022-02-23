@@ -3,6 +3,7 @@ import {
   IsEnum,
   IsNotEmpty,
   IsNumber,
+  IsObject,
   IsOptional,
   IsString,
   MaxLength,
@@ -22,4 +23,9 @@ export class CreateLanguagesDto {
   @IsNotEmpty()
   @IsNumber()
   degreeOfInfluence: degreeOfInfluence;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsObject()
+  Job: JobsEntity;
 }

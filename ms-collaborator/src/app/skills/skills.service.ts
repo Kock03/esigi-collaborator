@@ -1,9 +1,10 @@
-import { HttpException, Injectable, NotFoundException } from '@nestjs/common';
+import { HttpException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { FindConditions, FindOneOptions, Repository } from 'typeorm';
 import { SkillsEntity } from './skills.entity';
 import { CreateSkillsDto } from './dtos/create-skills.dto';
 import { UpdateSkillsDto } from './dtos/update-skills.dto';
+import { NotFoundException } from '../exceptions/not-found-exception';
 
 @Injectable()
 export class SkillsService {
@@ -27,8 +28,8 @@ export class SkillsService {
     options = { relations: ['Collaborator'] };
     try {
       return await this.skillsRepository.findOneOrFail(conditions, options);
-    } catch (error) {
-      throw new NotFoundException(error.message);
+    } catch {
+      throw new NotFoundException();
     }
   }
 
@@ -40,13 +41,17 @@ export class SkillsService {
   async update(id: string, data: UpdateSkillsDto) {
     const skill = await this.skillsRepository.findOneOrFail({ id });
     if (!skill) {
-      throw new HttpException('Not Found', 404);
+      throw new NotFoundException();
     }
     return await this.skillsRepository.save({ id: id, ...data });
   }
 
   async destroy(id: string) {
-    await this.skillsRepository.findOneOrFail({ id });
+    try {
+      await this.skillsRepository.findOneOrFail({ id });
+    } catch {
+      throw new NotFoundException();
+    }
     return await this.skillsRepository.softDelete({ id });
   }
 }

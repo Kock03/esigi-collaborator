@@ -1,6 +1,7 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, FindConditions, FindOneOptions } from 'typeorm';
+import { NotFoundException } from '../exceptions/not-found-exception';
 import { CreateKnowledgesDto } from './dtos/create-knowledges.dto';
 import { UpdateKnowledgesDto } from './dtos/update-knowledges.dto';
 import { KnowledgesEntity } from './knowledges.entity';
@@ -27,8 +28,8 @@ export class KnowledgesService {
     options = { relations: ['Job'] };
     try {
       return await this.knowledgesRepository.findOneOrFail(conditions, options);
-    } catch (error) {
-      throw new NotFoundException(error.message);
+    } catch {
+      throw new NotFoundException();
     }
   }
 
@@ -38,13 +39,20 @@ export class KnowledgesService {
   }
 
   async update(id: string, data: UpdateKnowledgesDto) {
-    const knowledge = await this.knowledgesRepository.findOneOrFail({ id });
-    this.knowledgesRepository.merge(knowledge, data);
-    return await this.knowledgesRepository.save(knowledge);
+    try {
+      const knowledge = await this.knowledgesRepository.findOneOrFail({ id });
+    } catch {
+      throw new NotFoundException();
+    }
+    return await this.knowledgesRepository.save({ id: id, ...data });
   }
 
   async destroy(id: string) {
-    await this.knowledgesRepository.findOneOrFail({ id });
+    try {
+      await this.knowledgesRepository.findOneOrFail({ id });
+    } catch {
+      throw new NotFoundException();
+    }
     return await this.knowledgesRepository.softDelete({ id });
   }
 }

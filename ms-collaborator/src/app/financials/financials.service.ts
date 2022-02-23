@@ -1,6 +1,7 @@
-import { HttpException, Injectable, NotFoundException } from '@nestjs/common';
+import { HttpException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { FindConditions, FindOneOptions, Repository } from 'typeorm';
+import { NotFoundException } from '../exceptions/not-found-exception';
 import { CreateFinancialsDto } from './dtos/create-financials.dto';
 import { UpdateFinancialsDto } from './dtos/update-financials.dto';
 import { FinancialsEntity } from './financials.entity';
@@ -27,8 +28,8 @@ export class FinancialsService {
     options = { relations: ['Collaborator'] };
     try {
       return await this.financialsRepository.findOneOrFail(conditions, options);
-    } catch (error) {
-      throw new NotFoundException(error.message);
+    } catch {
+      throw new NotFoundException();
     }
   }
 
@@ -40,13 +41,17 @@ export class FinancialsService {
   async update(id: string, data: UpdateFinancialsDto) {
     const financial = await this.financialsRepository.findOneOrFail({ id });
     if (!financial) {
-      throw new HttpException('Not Found', 404);
+      throw new NotFoundException();
     }
     return await this.financialsRepository.save({ id: id, ...data });
   }
 
   async destroy(id: string) {
-    await this.financialsRepository.findOneOrFail({ id });
+    try {
+      await this.financialsRepository.findOneOrFail({ id });
+    } catch {
+      throw new NotFoundException();
+    }
     return await this.financialsRepository.softDelete({ id });
   }
 }

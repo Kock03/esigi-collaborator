@@ -67,10 +67,10 @@ export class CollaboratorsEntity {
   @Column({ unique: true, length: 14, nullable: true })
   cnpj: string;
 
-  @Column( {nullable: true })
+  @Column({ nullable: true })
   stateRegistration: string;
 
-  @Column({nullable: true })
+  @Column({ nullable: true })
   municipalInscription: string;
 
   @Column()

@@ -1,10 +1,17 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsOptional, IsString, Length, MaxLength, MinLength } from 'class-validator';
+import {
+  IsOptional,
+  IsString,
+  Length,
+  MaxLength,
+  MinLength,
+} from 'class-validator';
 export class UpdateAddressDto {
   @ApiProperty()
   @IsOptional()
   @IsString()
-  @Length(8)
+  @MinLength(8)
+  @MaxLength(8)
   cep: string;
 
   @ApiProperty()

@@ -1,18 +1,23 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsOptional, IsString, MaxLength, MinLength } from 'class-validator';
+import {
+  IsNotEmpty,
+  IsOptional,
+  IsString,
+  MaxLength,
+  MinLength,
+} from 'class-validator';
 
 export class UpdateDocumentsDto {
   @ApiProperty()
   @IsOptional()
   @IsString()
-  @MinLength(2)
-  @MaxLength(60)
+  @MinLength(3)
+  @MaxLength(70)
   name: string;
 
   @ApiProperty()
   @IsOptional()
   @IsString()
-  @MinLength(100)
-  @MaxLength(300)
+  @MaxLength(255)
   file: string;
 }

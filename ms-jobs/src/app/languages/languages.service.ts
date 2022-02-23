@@ -1,7 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { FindConditions, FindOneOptions } from 'typeorm';
 import { Repository } from 'typeorm/repository/Repository';
+import { NotFoundException } from '../exceptions/not-found-exception';
 import { CreateLanguagesDto } from './dtos/create-languages.dto';
 import { UpdateLanguagesDto } from './dtos/update-languages.dto';
 import { LanguagesEntity } from './languages.entity';
@@ -28,8 +29,8 @@ export class LanguagesService {
     options = { relations: ['Job'] };
     try {
       return await this.languagesRepository.findOneOrFail(conditions, options);
-    } catch (error) {
-      throw new NotFoundException(error.message);
+    } catch {
+      throw new NotFoundException();
     }
   }
 
@@ -39,13 +40,22 @@ export class LanguagesService {
   }
 
   async update(id: string, data: UpdateLanguagesDto) {
-    const language = await this.languagesRepository.findOneOrFail({ id });
-    this.languagesRepository.merge(language, data);
-    return await this.languagesRepository.save(language);
+    try {
+      const language = await this.languagesRepository.findOneOrFail({
+        id,
+      });
+    } catch {
+      throw new NotFoundException();
+    }
+    return await this.languagesRepository.save({ id: id, ...data });
   }
 
   async destroy(id: string) {
-    await this.languagesRepository.findOneOrFail({ id });
+    try {
+      await this.languagesRepository.findOneOrFail({ id });
+    } catch {
+      throw new NotFoundException();
+    }
     return await this.languagesRepository.softDelete({ id });
   }
 }

@@ -38,7 +38,7 @@ __decorate([
 ], CreateKnowledgesDto.prototype, "typeOfPeriod", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)(),
-    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", jobs_entity_1.JobsEntity)
 ], CreateKnowledgesDto.prototype, "Job", void 0);
 exports.CreateKnowledgesDto = CreateKnowledgesDto;

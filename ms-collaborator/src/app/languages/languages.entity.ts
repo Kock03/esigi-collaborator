@@ -13,6 +13,9 @@ export class LanguagesEntity {
   @Column({ type: 'int' })
   degreeOfInfluence: degreeOfInfluence;
 
+  @CreateDateColumn()
+  dateInclusion: Date;
+
   @ManyToOne(
     () => CollaboratorsEntity,
     (collaborator) => collaborator.Languages,

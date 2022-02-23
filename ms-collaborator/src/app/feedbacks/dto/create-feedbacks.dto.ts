@@ -1,5 +1,14 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { IsEnum, IsNotEmpty, IsNumber, IsObject, IsOptional, IsString, Length, MaxLength, MinLength } from 'class-validator';
+import {
+  IsEnum,
+  IsNotEmpty,
+  IsNumber,
+  IsObject,
+  IsOptional,
+  IsString,
+  MaxLength,
+  MinLength,
+} from 'class-validator';
 import { CollaboratorsEntity } from 'src/app/collaborators/collaborators.entity';
 import { FeedbackTypes } from '../enums/feedback-types.enum';
 import { Reason } from '../enums/reason.enum';
@@ -19,7 +28,7 @@ export class CreateFeedbacksDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
-  @MinLength(10)
+  @MinLength(5)
   @MaxLength(100)
   project: string;
 
@@ -35,7 +44,6 @@ export class CreateFeedbacksDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
-  @Length(5)
   hourDate: string;
 
   @ApiProperty()
@@ -45,41 +53,36 @@ export class CreateFeedbacksDto {
   @ApiProperty()
   @IsOptional()
   @IsString()
-  @Length(5)
   hourDateRetorn: string;
 
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
-  @MinLength(10)
-  @MaxLength(100)
+  @MinLength(5)
+  @MaxLength(70)
   manager: string;
 
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
-  @MinLength(10)
   @MaxLength(200)
   managerDescription: string;
 
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
-  @MinLength(10)
-  @MaxLength(100)
+  @MaxLength(200)
   improvementPoints: string;
 
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
-  @MinLength(10)
   @MaxLength(200)
   collaboratorDescription: string;
 
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
-  @MinLength(10)
   @MaxLength(100)
   commitment: string;
 

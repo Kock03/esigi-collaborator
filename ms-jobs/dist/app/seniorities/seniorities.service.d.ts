@@ -8,6 +8,12 @@ export declare class SenioritiesService {
     findAll(): Promise<SenioritiesEntity[]>;
     findOneOrfail(conditions: FindConditions<SenioritiesEntity>, options?: FindOneOptions<SenioritiesEntity>): Promise<SenioritiesEntity>;
     store(data: CreateSenioritiesDto): Promise<SenioritiesEntity>;
-    update(id: string, data: UpdateSenioritiesDto): Promise<SenioritiesEntity>;
+    update(id: string, data: UpdateSenioritiesDto): Promise<{
+        intern: boolean;
+        junior: boolean;
+        pleno: boolean;
+        senior: boolean;
+        id: string;
+    } & SenioritiesEntity>;
     destroy(id: string): Promise<import("typeorm").UpdateResult>;
 }

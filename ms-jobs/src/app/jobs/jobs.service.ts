@@ -1,8 +1,9 @@
-import { HttpException, Injectable, NotFoundException } from '@nestjs/common';
+import { HttpException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { FindConditions } from 'typeorm/find-options/FindConditions';
 import { FindOneOptions } from 'typeorm/find-options/FindOneOptions';
 import { Repository } from 'typeorm/repository/Repository';
+import { NotFoundException } from '../exceptions/not-found-exception';
 import { CreateJobsDto } from './dtos/create-jobs.dto';
 import { UpdateJobsDto } from './dtos/update-jobs.dto';
 import { JobsEntity } from './jobs.entity';
@@ -24,12 +25,13 @@ export class JobsService {
     conditions: FindConditions<JobsEntity>,
     options?: FindOneOptions<JobsEntity>,
   ) {
+
     options = { relations: ['BehavioralInterviews', 'TechnicalInterviews', 'ClientInterviews', 'Returns'] };
 
     try {
       return await this.jobsRepository.findOneOrFail(conditions, options);
     } catch (error) {
-      throw new NotFoundException(error.Message);
+      throw new NotFoundException();
     }
   }
 
@@ -40,9 +42,10 @@ export class JobsService {
   }
 
   async update(id: string, data: UpdateJobsDto) {
-    const job = await this.jobsRepository.findOneOrFail({ id });
-    if (!job) {
-      throw new HttpException('Not found', 404);
+    try {
+      const job = await this.jobsRepository.findOneOrFail({ id });
+    } catch {
+      throw new NotFoundException();
     }
     return await this.jobsRepository.save({ id: id, ...data });
   }
@@ -51,9 +54,8 @@ export class JobsService {
     try {
       await this.jobsRepository.findOneOrFail({ id });
     } catch (error) {
-      throw new HttpException('Registro não existe ou invalido', 404);
+      throw new NotFoundException();
     }
-
     return await this.jobsRepository.softDelete({ id });
   }
 }

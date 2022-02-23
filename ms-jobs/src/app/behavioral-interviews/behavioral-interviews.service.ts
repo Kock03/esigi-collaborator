@@ -1,6 +1,7 @@
-import { HttpException, Injectable, NotFoundException } from '@nestjs/common';
+import { HttpException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { FindConditions, FindOneOptions, Repository } from 'typeorm';
+import { NotFoundException } from '../exceptions/not-found-exception';
 import { BehaviroalInterviewsEntity } from './behavioral-interviews.entity';
 import { CreateBehaviorInterviewsDto } from './dtos/create-behavioral-interviews.dto';
 import { UpdateBehaviorInterviewsDto } from './dtos/update-behavioral-interviews.dto';
@@ -27,8 +28,8 @@ export class BehavioralInterviewsService {
         conditions,
         options,
       );
-    } catch (error) {
-      throw new NotFoundException(error.Message);
+    } catch {
+      throw new NotFoundException();
     }
   }
 
@@ -38,11 +39,14 @@ export class BehavioralInterviewsService {
   }
 
   async update(id: string, data: UpdateBehaviorInterviewsDto) {
-    const inertview = await this.behavioralInterviewsRepository.findOneOrFail({
-      id,
-    });
-    if (!inertview) {
-      throw new HttpException('Not found', 404);
+    try {
+      const inertview = await this.behavioralInterviewsRepository.findOneOrFail(
+        {
+          id,
+        },
+      );
+    } catch {
+      throw new NotFoundException();
     }
     return await this.behavioralInterviewsRepository.save({ id: id, ...data });
   }
@@ -50,10 +54,9 @@ export class BehavioralInterviewsService {
   async destroy(id: string) {
     try {
       await this.behavioralInterviewsRepository.findOneOrFail({ id });
-    } catch (error) {
-      throw new HttpException('Registro não existe ou invalido', 404);
+    } catch {
+      throw new NotFoundException();
     }
-
     return await this.behavioralInterviewsRepository.softDelete({ id });
   }
 }

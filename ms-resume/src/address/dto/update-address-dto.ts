@@ -14,7 +14,9 @@ import {
 export class UpdateAddressDto {
   @ApiProperty()
   @IsNotEmpty()
-  @Length(8)
+  @IsString()
+  @MinLength(8)
+  @MaxLength(8)
   @IsString()
   cep: string;
 

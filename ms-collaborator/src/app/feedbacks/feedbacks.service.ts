@@ -1,6 +1,7 @@
-import { HttpException, Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { FindConditions, FindOneOptions, Repository } from 'typeorm';
+import { NotFoundException } from '../exceptions/not-found-exception';
 import { CreateFeedbacksDto } from './dto/create-feedbacks.dto';
 import { UpdateFeedbacksDto } from './dto/update-feedbacks.dto';
 import { FeedbacksEntity } from './feedbacks.entity';
@@ -23,8 +24,8 @@ export class FeedbacksService {
     options = { relations: ['Collaborator'] };
     try {
       return await this.feedbacksRepository.findOneOrFail(conditions, options);
-    } catch (error) {
-      throw new NotFoundException(error.message);
+    } catch {
+      throw new NotFoundException();
     }
   }
 
@@ -36,13 +37,17 @@ export class FeedbacksService {
   async update(id: string, data: UpdateFeedbacksDto) {
     const feedbacks = await this.feedbacksRepository.findOneOrFail({ id });
     if (!feedbacks) {
-      throw new HttpException('Not Found', 404);
+      throw new NotFoundException();
     }
     return await this.feedbacksRepository.save({ id: id, ...data });
   }
 
   async destroy(id: string) {
-    await this.feedbacksRepository.findOne({ id });
+    try {
+      await this.feedbacksRepository.findOne({ id });
+    } catch {
+      throw new NotFoundException();
+    }
     return await this.feedbacksRepository.softDelete({ id });
   }
 }

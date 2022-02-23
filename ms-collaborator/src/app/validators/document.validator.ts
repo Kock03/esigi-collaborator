@@ -52,10 +52,10 @@ export class DocumentValidator {
 
     if (cnpj) {
       cnpj = cnpj.replace(/[^\d]+/g, '');
-      if (cnpj == '') return { cnpjNotValid: true };
+      if (cnpj == '') return false;
 
       if (cnpj.length != 14)
-        return { cpfNotValid: true };
+        return false;
 
       if (cnpj == "00000000000000" ||
         cnpj == "11111111111111" ||
@@ -67,7 +67,7 @@ export class DocumentValidator {
         cnpj == "77777777777777" ||
         cnpj == "88888888888888" ||
         cnpj == "99999999999999")
-        return { cnpjNotValid: true };
+        return false;
 
       let tamanho, numeros, digitos, soma, pos, i, resultado;
       tamanho = cnpj.length - 2
@@ -84,7 +84,7 @@ export class DocumentValidator {
       }
       resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
       if (resultado != digitos.charAt(0))
-        return { cnpjNotValid: true };
+        return false;
 
       tamanho = tamanho + 1;
       numeros = cnpj.substring(0, tamanho);
@@ -98,10 +98,11 @@ export class DocumentValidator {
       }
       resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
       if (resultado != digitos.charAt(1))
-        return { cnpjNotValid: true };
-
-      return { cnpjNotValid: false };
-
+        return false;
+      else {
+        return true;
+      }
+      return true;
     }
 
 

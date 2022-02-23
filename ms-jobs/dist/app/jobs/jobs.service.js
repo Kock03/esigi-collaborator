@@ -16,6 +16,7 @@ exports.JobsService = void 0;
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const Repository_1 = require("typeorm/repository/Repository");
+const not_found_exception_1 = require("../exceptions/not-found-exception");
 const jobs_entity_1 = require("./jobs.entity");
 let JobsService = class JobsService {
     constructor(jobsRepository) {
@@ -31,7 +32,7 @@ let JobsService = class JobsService {
             return await this.jobsRepository.findOneOrFail(conditions, options);
         }
         catch (error) {
-            throw new common_1.NotFoundException(error.Message);
+            throw new not_found_exception_1.NotFoundException();
         }
     }
     async store(data) {
@@ -39,9 +40,11 @@ let JobsService = class JobsService {
         return await this.jobsRepository.save(job);
     }
     async update(id, data) {
-        const job = await this.jobsRepository.findOneOrFail({ id });
-        if (!job) {
-            throw new common_1.HttpException('Not found', 404);
+        try {
+            const job = await this.jobsRepository.findOneOrFail({ id });
+        }
+        catch (_a) {
+            throw new not_found_exception_1.NotFoundException();
         }
         return await this.jobsRepository.save(Object.assign({ id: id }, data));
     }
@@ -50,7 +53,7 @@ let JobsService = class JobsService {
             await this.jobsRepository.findOneOrFail({ id });
         }
         catch (error) {
-            throw new common_1.HttpException('Registro não existe ou invalido', 404);
+            throw new not_found_exception_1.NotFoundException();
         }
         return await this.jobsRepository.softDelete({ id });
     }

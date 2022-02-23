@@ -12,11 +12,11 @@ import {
 } from 'class-validator';
 
 export class CreateAddressDto {
-
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
-  @Length(8)
+  @MinLength(8)
+  @MaxLength(8)
   @IsString()
   cep: string;
 
@@ -38,7 +38,8 @@ export class CreateAddressDto {
 
   @ApiProperty()
   @IsNotEmpty()
-  @IsString() @IsString()
+  @IsString()
+  @IsString()
   @MinLength(3)
   @MaxLength(60)
   @IsString()

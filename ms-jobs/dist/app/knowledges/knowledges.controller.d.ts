@@ -7,6 +7,11 @@ export declare class KnowledgesController {
     index(): Promise<import("./knowledges.entity").KnowledgesEntity[]>;
     show(id: string): Promise<import("./knowledges.entity").KnowledgesEntity>;
     store(body: CreateKnowledgesDto): Promise<import("./knowledges.entity").KnowledgesEntity>;
-    update(id: string, body: UpdateKnowledgesDto): Promise<import("./knowledges.entity").KnowledgesEntity>;
+    update(id: string, body: UpdateKnowledgesDto): Promise<{
+        name: string;
+        yearsExperience: number;
+        typeOfPeriod: import("./dtos/typeOfPeriod.enum").TypeOfPeriod;
+        id: string;
+    } & import("./knowledges.entity").KnowledgesEntity>;
     destroy(id: string): Promise<import("typeorm").UpdateResult>;
 }

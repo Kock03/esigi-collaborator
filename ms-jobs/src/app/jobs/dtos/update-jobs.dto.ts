@@ -65,6 +65,7 @@ export class UpdateJobsDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
+  @MinLength(3)
   @MaxLength(80)
   jobName: string;
 

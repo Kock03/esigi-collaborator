@@ -6,6 +6,7 @@ import {
   FindOneOptions,
   Repository,
 } from 'typeorm';
+import { NotFoundException } from '../exceptions/not-found-exception';
 import { CreateTechnicalInterviewsDto } from './dtos/create-technical-interviews.dto';
 import { UpdateTechnicalInterviewsDto } from './dtos/update-technical-interviews.dto';
 import { TechnicalInterviewsEntity } from './technical-interviews.entity';
@@ -30,8 +31,8 @@ export class TechnicalInterviewsService {
         conditions,
         options,
       );
-    } catch (error) {
-      throw new HttpException('Registro não encontrado', 404);
+    } catch {
+      throw new NotFoundException();
     }
   }
 
@@ -41,11 +42,12 @@ export class TechnicalInterviewsService {
   }
 
   async update(id: string, data: UpdateTechnicalInterviewsDto) {
-    const interview = await this.technicalInterviewsRepository.findOneOrFail({
-      id,
-    });
-    if (!interview) {
-      throw new HttpException('Registro não encontrado ou inválido', 404);
+    try {
+      const interview = await this.technicalInterviewsRepository.findOneOrFail({
+        id,
+      });
+    } catch {
+      throw new NotFoundException();
     }
     return await this.technicalInterviewsRepository.save({ id: id, ...data });
   }
@@ -55,8 +57,8 @@ export class TechnicalInterviewsService {
       await this.technicalInterviewsRepository.findOneOrFail({
         id,
       });
-    } catch (error) {
-      throw new HttpException('Registro não encontrado', 404);
+    } catch {
+      throw new NotFoundException();
     }
     return await this.technicalInterviewsRepository.softDelete({ id });
   }

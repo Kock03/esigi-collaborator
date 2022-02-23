@@ -1,28 +1,38 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsEnum, IsNotEmpty, IsNumber, IsOptional, IsString, Length, MaxLength, MinLength } from 'class-validator';
+import {
+  IsEnum,
+  IsNotEmpty,
+  IsNumber,
+  IsOptional,
+  IsString,
+  Length,
+  MaxLength,
+  MinLength,
+} from 'class-validator';
 import { CollaboratorsEntity } from 'src/app/collaborators/collaborators.entity';
 import { AccountTypes } from './account-types.enum';
 
 export class UpdateBankDataDto {
-
   @ApiProperty()
   @IsOptional()
   @IsString()
   @MinLength(3)
-  @MaxLength(20)
+  @MaxLength(30)
   bank: string;
 
   @ApiProperty()
   @IsOptional()
   @IsString()
-  @Length(4)
+  @MinLength(4)
+  @MaxLength(4)
   agency: string;
 
   @ApiProperty()
   @IsOptional()
   @IsNumber()
-  @Length(1)
-  digit: number;
+  @MinLength(1)
+  @MaxLength(1)
+  digit: string;
 
   @ApiProperty()
   @IsOptional()
@@ -32,13 +42,14 @@ export class UpdateBankDataDto {
   @ApiProperty()
   @IsOptional()
   @IsNumber()
-  @Length(9)
-  accountNumber: number;
+  @MinLength(9)
+  @MaxLength(9)
+  accountNumber: string;
 
   @ApiProperty()
   @IsOptional()
   @IsNumber()
-  @Length(4)
-  bankAccountDigit: number;
-
+  @MinLength(4)
+  @MaxLength(4)
+  bankAccountDigit: string;
 }

@@ -12,7 +12,9 @@ async function bootstrap() {
         .setVersion('1.0')
         .addTag('jobs')
         .build();
-    const document = swagger_1.SwaggerModule.createDocument(app, config);
+    const document = swagger_1.SwaggerModule.createDocument(app, config, {
+        deepScanRoutes: true,
+    });
     swagger_1.SwaggerModule.setup('api', app, document);
     app.useGlobalPipes(new common_1.ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }));
     app.enableCors();

@@ -12,7 +12,10 @@ async function bootstrap() {
     .setVersion('1.0')
     .addTag('jobs')
     .build();
-  const document = SwaggerModule.createDocument(app, config);
+  const document = SwaggerModule.createDocument(app, config, {
+    deepScanRoutes: true,
+  });
+
   SwaggerModule.setup('api', app, document);
 
   app.useGlobalPipes(

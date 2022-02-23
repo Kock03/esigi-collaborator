@@ -1,6 +1,7 @@
-import { HttpException, Injectable, NotFoundException } from '@nestjs/common';
+import { HttpException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { FindConditions, FindOneOptions, Repository } from 'typeorm';
+import { NotFoundException } from '../exceptions/not-found-exception';
 import { CreateReturnsDto } from './dtos/create-returns.dto';
 import { UpdateReturnsDto } from './dtos/update-returns.dto';
 import { ReturnsEntity } from './returns.entity';
@@ -13,9 +14,7 @@ export class ReturnsService {
   ) {}
 
   async findAll() {
-    const interviews = await this.returnsRepository.find();
-
-    return interviews;
+    return await this.returnsRepository.find();
   }
 
   async findOneOrFail(
@@ -24,8 +23,8 @@ export class ReturnsService {
   ) {
     try {
       return await this.returnsRepository.findOneOrFail(conditions, options);
-    } catch (error) {
-      throw new NotFoundException(error.Message);
+    } catch {
+      throw new NotFoundException();
     }
   }
 
@@ -35,9 +34,10 @@ export class ReturnsService {
   }
 
   async update(id: string, data: UpdateReturnsDto) {
-    const job = await this.returnsRepository.findOneOrFail({ id });
-    if (!job) {
-      throw new HttpException('Not found', 404);
+    try {
+      const job = await this.returnsRepository.findOneOrFail({ id });
+    } catch {
+      throw new NotFoundException();
     }
     return await this.returnsRepository.save({ id: id, ...data });
   }
@@ -46,9 +46,8 @@ export class ReturnsService {
     try {
       await this.returnsRepository.findOneOrFail({ id });
     } catch (error) {
-      throw new HttpException('Registro não existe ou invalido', 404);
+      throw new NotFoundException();
     }
-
     return await this.returnsRepository.softDelete({ id });
   }
 }

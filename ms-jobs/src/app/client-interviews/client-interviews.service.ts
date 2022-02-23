@@ -1,4 +1,4 @@
-import { HttpException, Injectable, NotFoundException } from '@nestjs/common';
+import { HttpException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateBehaviorInterviewsDto } from 'src/app/behavioral-interviews/dtos/create-behavioral-interviews.dto';
 import {
@@ -7,6 +7,7 @@ import {
   FindOneOptions,
   Repository,
 } from 'typeorm';
+import { NotFoundException } from '../exceptions/not-found-exception';
 import { ClientInterviewsEntity } from './client-interviews.entity';
 import { CreateClientInterviewsDto } from './dtos/create-client-interviews.dto';
 import { UpdateClientInterviewsDto } from './dtos/update-client-interviews.dto';
@@ -31,8 +32,8 @@ export class ClientInterviewsService {
         conditions,
         options,
       );
-    } catch (error) {
-      throw new NotFoundException(error.message);
+    } catch {
+      throw new NotFoundException();
     }
   }
 
@@ -42,11 +43,12 @@ export class ClientInterviewsService {
   }
 
   async update(id: string, data: UpdateClientInterviewsDto) {
-    const interview = await this.clientInterviewsRepository.findOneOrFail({
-      id,
-    });
-    if (!interview) {
-      throw new HttpException('Registro não existe ou é inválido', 404);
+    try {
+      const interview = await this.clientInterviewsRepository.findOneOrFail({
+        id,
+      });
+    } catch {
+      throw new NotFoundException();
     }
     return await this.clientInterviewsRepository.save({ id: id, ...data });
   }
@@ -56,8 +58,8 @@ export class ClientInterviewsService {
       await this.clientInterviewsRepository.findOneOrFail({
         id,
       });
-    } catch (error) {
-      throw new HttpException('Registro não existe ou inválido', 404);
+    } catch {
+      throw new NotFoundException();
     }
     return await this.clientInterviewsRepository.softRemove({ id });
   }
