@@ -1,33 +1,38 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty } from 'class-validator';
-import { CollaboratorsEntity } from 'src/app/collaborators/collaborators.entity';
-
+import { IsOptional, IsString } from 'class-validator';
 export class UpdateAddressDto {
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
+  @IsString()
   cep: string;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
+  @IsString()
   number: string;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
+  @IsString()
   street: string;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
+  @IsString()
   district: string;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
+  @IsString()
   state: string;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
+  @IsString()
   city: string;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
+  @IsString()
   complement: string;
 }

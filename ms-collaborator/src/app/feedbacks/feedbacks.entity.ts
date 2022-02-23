@@ -33,10 +33,10 @@ export class FeedbacksEntity {
   @Column()
   hourDate: string;
 
-  @Column()
+  @Column({ nullable: true })
   feedbackDateRetorn: Date;
 
-  @Column()
+  @Column({ nullable: true })
   hourDateRetorn: string;
 
   @Column()

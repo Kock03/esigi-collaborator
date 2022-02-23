@@ -1,21 +1,28 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty } from 'class-validator';
+import { IsBoolean, IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
 import { Seniority } from './seniority.enun';
 
 export class UpdateSkillsDto {
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
+  @IsString()
   technology: string;
 
+
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
+  @IsNumber()
   seniority: Seniority;
 
-  @ApiProperty()
-  @IsNotEmpty()
-  yearsExperience: number;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
+  @IsNumber()
+  yearsExperience: number;
+
+
+  @ApiProperty()
+  @IsOptional()
+  @IsBoolean()
   currentPosition: boolean;
 }

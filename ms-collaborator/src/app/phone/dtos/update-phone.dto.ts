@@ -1,16 +1,19 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty } from 'class-validator';
+import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
 
 export class UpdatePhoneDto {
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
+  @IsString()
   phoneNumber: string;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
+  @IsString()
   ddd: string;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
+  @IsString()
   ddi: string;
 }

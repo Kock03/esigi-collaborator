@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsOptional } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
 import { CollaboratorsEntity } from 'src/app/collaborators/collaborators.entity';
 import { FeedbackTypes } from '../enums/feedback-types.enum';
 import { Reason } from '../enums/reason.enum';
@@ -7,58 +7,67 @@ import { Status } from '../enums/status.enum';
 
 export class UpdateFeedbacksDto {
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
+  @IsNumber()
   feedbackType: FeedbackTypes;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
+  @IsNumber()
   reason: Reason;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
+  @IsString()
   project: string;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
+  @IsNumber()
   status: Status;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
+  @IsString()
   feedbackDate: Date;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
+  @IsString()
   hourDate: string;
 
   @ApiProperty()
   @IsOptional()
+  @IsString()
   feedbackDateRetorn: Date;
 
   @ApiProperty()
   @IsOptional()
+  @IsString()
   hourDateRetorn: string;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
+  @IsString()
   manager: string;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
+  @IsString()
   managerDescription: string;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
+  @IsString()
   improvementPoints: string;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
+  @IsString()
   collaboratorDescription: string;
 
   @ApiProperty()
-  @IsNotEmpty()
-  commitment: string;
-
-  @ApiProperty()
   @IsOptional()
-  Collaborator: CollaboratorsEntity;
+  @IsString()
+  commitment: string;
 }

@@ -1,22 +1,25 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsOptional } from 'class-validator';
 import { Reasons } from './contract-reasons.enum';
 import { ContractTypes } from './contract-types.enum';
 
 export class UpdateFinancialsDto {
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
+  @IsNumber()
   contractType: ContractTypes;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
+  @IsNumber()
   value: number;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
+  @IsNumber()
   reason: Reasons;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   dateInclusion: Date;
 }

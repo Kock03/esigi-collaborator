@@ -1,12 +1,13 @@
 import { Optional } from '@nestjs/common';
 import {
+  IsArray,
+  IsBoolean,
+  IsEmail,
   IsNotEmpty,
   IsNumber,
+  IsObject,
   IsOptional,
-  Length,
-  MaxLength,
-  maxLength,
-  MinLength,
+  IsString,
 } from 'class-validator';
 import { AddressEntity } from 'src/app/address/address.entity';
 import { BankDataEntity } from 'src/app/bank-data/bank-data.entity';
@@ -26,26 +27,32 @@ import { Gender } from './gender.enum';
 export class CreateCollaboratorsDto {
   @ApiProperty()
   @IsNotEmpty()
+  @IsString()
   firstNameCorporateName: string;
 
   @ApiProperty()
   @IsNotEmpty()
+  @IsString()
   lastNameFantasyName: string;
 
   @ApiProperty()
   @IsNotEmpty()
+  @IsString()
   login: string;
 
   @ApiProperty()
   @IsNotEmpty()
+  @IsNumber()
   gender: Gender;
 
   @ApiProperty()
   @IsNotEmpty()
+  @IsString()
   office: string;
 
   @ApiProperty()
   @IsNotEmpty()
+  @IsNumber()
   collaboratorTypes: CollaboratorTypes;
 
   @ApiProperty()
@@ -54,6 +61,7 @@ export class CreateCollaboratorsDto {
 
   @ApiProperty()
   @IsNotEmpty()
+  @IsNumber()
   maritalStatus: MaritalStatus;
 
   @ApiProperty()
@@ -62,6 +70,7 @@ export class CreateCollaboratorsDto {
 
   @ApiProperty()
   @IsNotEmpty()
+  @IsBoolean()
   active: boolean;
 
   @ApiProperty()
@@ -70,6 +79,7 @@ export class CreateCollaboratorsDto {
 
   @ApiProperty()
   @IsNotEmpty()
+  @IsEmail()
   email: string;
 
   @ApiProperty()
@@ -78,61 +88,76 @@ export class CreateCollaboratorsDto {
 
   @ApiProperty()
   @IsOptional()
+  @IsString()
   stateRegistration: string;
 
   @ApiProperty()
   @IsOptional()
+  @IsString()
   municipalInscription: string;
 
   @ApiProperty()
   @IsOptional()
+  @IsString()
   site: string;
 
   @ApiProperty()
   @IsOptional()
+  @IsString()
   linkedin: string;
 
   @ApiProperty()
   @IsOptional()
+  @IsString()
   photo: string;
 
   @ApiProperty()
   @IsNotEmpty()
+  @IsObject()
   Address: AddressEntity;
 
   @ApiProperty()
   @IsNotEmpty()
+  @IsObject()
   Phone: PhoneEntity;
 
   @ApiPropertyOptional()
   @IsOptional()
+  @IsArray()
   Skills: SkillsEntity[];
 
   @ApiPropertyOptional()
   @IsOptional()
+  @IsArray()
   Documents: DocumentsEntity[];
 
   @ApiPropertyOptional()
   @IsOptional()
+  @IsArray()
   Languages: LanguagesEntity[];
 
   @ApiPropertyOptional()
   @IsOptional()
+  @IsArray()
   Educations: EducationsEntity[];
 
   @ApiPropertyOptional()
   @IsOptional()
+  @IsObject()
   BankData: BankDataEntity;
 
   @ApiPropertyOptional()
   @IsOptional()
+  @IsArray()
   Financials: FinancialsEntity[];
 
   @ApiPropertyOptional()
   @IsOptional()
+  @IsArray()
   Dependents: DependentsEntity[];
 
   @ApiPropertyOptional()
   @IsOptional()
+  @IsArray()
   Feedbacks: FeedbacksEntity[];
 }

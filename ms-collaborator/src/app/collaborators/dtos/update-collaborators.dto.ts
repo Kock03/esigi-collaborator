@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsOptional } from 'class-validator';
+import { IsArray, IsBoolean, IsEmail, IsNotEmpty, IsNumber, IsObject, IsOptional, IsString } from 'class-validator';
 import { AddressEntity } from 'src/app/address/address.entity';
 import { BankDataEntity } from 'src/app/bank-data/bank-data.entity';
 import { DocumentsEntity } from 'src/app/documents/documents.entity';
@@ -16,27 +16,33 @@ import { Gender } from './gender.enum';
 
 export class UpdateCollaboratorsDto {
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
+  @IsString()
   firstNameCorporateName: string;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
+  @IsString()
   lastNameFantasyName: string;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
+  @IsString()
   login: string;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
+  @IsNumber()
   gender: Gender;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
+  @IsString()
   office: string;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
+  @IsNumber()
   collaboratorTypes: CollaboratorTypes;
 
   @ApiProperty()
@@ -44,23 +50,26 @@ export class UpdateCollaboratorsDto {
   cpf: string;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
+  @IsNumber()
   maritalStatus: MaritalStatus;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   birthDate: Date;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
+  @IsBoolean()
   active: boolean;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   admissionDate: Date;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
+  @IsEmail()
   email: string;
 
   @ApiProperty()
@@ -69,61 +78,76 @@ export class UpdateCollaboratorsDto {
 
   @ApiProperty()
   @IsOptional()
+  @IsString()
   stateRegistration: string;
 
   @ApiProperty()
   @IsOptional()
+  @IsString()
   municipalInscription: string;
 
   @ApiProperty()
   @IsOptional()
+  @IsString()
   site: string;
 
   @ApiProperty()
   @IsOptional()
+  @IsString()
   linkedin: string;
 
   @ApiProperty()
   @IsOptional()
+  @IsString()
   photo: string;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
+  @IsObject()
   Address: AddressEntity;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
+  @IsObject()
   Phone: PhoneEntity;
 
   @ApiPropertyOptional()
   @IsOptional()
+  @IsArray()
   Skills: SkillsEntity[];
 
   @ApiPropertyOptional()
   @IsOptional()
+  @IsArray()
   Documents: DocumentsEntity[];
 
   @ApiPropertyOptional()
   @IsOptional()
+  @IsArray()
   Languages: LanguagesEntity[];
 
   @ApiPropertyOptional()
   @IsOptional()
+  @IsArray()
   Educations: EducationsEntity[];
 
   @ApiPropertyOptional()
   @IsOptional()
+  @IsObject()
   BankData: BankDataEntity;
 
   @ApiPropertyOptional()
   @IsOptional()
+  @IsArray()
   Financials: FinancialsEntity[];
 
   @ApiPropertyOptional()
   @IsOptional()
+  @IsArray()
   Dependents: DependentsEntity[];
 
   @ApiPropertyOptional()
   @IsOptional()
+  @IsArray()
   Feedbacks: FeedbacksEntity[];
 }
