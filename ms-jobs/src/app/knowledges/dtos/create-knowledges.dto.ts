@@ -30,6 +30,6 @@ export class CreateKnowledgesDto {
   typeOfPeriod: TypeOfPeriod;
 
   @ApiProperty()
-  @IsOptional()
+  @IsNotEmpty()
   Job: JobsEntity;
 }
