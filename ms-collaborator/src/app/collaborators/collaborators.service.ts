@@ -50,24 +50,18 @@ export class CollaboratorsService {
   }
 
   async store(data: CreateCollaboratorsDto) {
-    if (data.cpf) {
-      const invalidCpf = DocumentValidator.isValidCpf(data.cpf);
-      if (invalidCpf) {
-        throw new HttpException('O CPF é inválido', 404);
-      }
+    console.log(DocumentValidator.isValidCpf(data.cpf))
+    if (data.cpf && !DocumentValidator.isValidCpf(data.cpf)) {
+      throw new HttpException('O CPF é inválido', 400);
+
     }
-    else {
-      const invalidCnpj = DocumentValidator.isValidCnpj(data.cnpj);
-      if (invalidCnpj) {
-        throw new HttpException('O CNPJ é inválido', 404);
-      }
+
+    if (data.cnpj && !DocumentValidator.isValidCnpj(data.cnpj)) {
+      throw new HttpException('O CNPJ é inválido', 400);
     }
-    if (data.cpf === null && data.cnpj === null) {
-      throw new HttpException('CPF ou CNPJ não podem ser nulos', 404);
-    } else {
-      const collaborator = this.collaboratorsRepository.create(data);
-      return await this.collaboratorsRepository.save(collaborator);
-    }
+
+    const collaborator = this.collaboratorsRepository.create(data);
+    return await this.collaboratorsRepository.save(collaborator);
   }
 
   async update(id: string, data: UpdateCollaboratorsDto) {
