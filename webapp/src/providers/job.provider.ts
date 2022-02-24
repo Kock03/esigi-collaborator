@@ -1,14 +1,14 @@
 import { HttpResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { ApiGateway } from "src/api-gateway";
-import { Job } from "src/app/modules/job/job-detail/job-detail-list-tab/job-detail-list-tab.component";
+import { Job } from "src/app/interfaces/ijob";
 import { environment } from "src/environments/environment";
 
 @Injectable({
     providedIn: 'root'
 })
 export class JobProvider {
-    constructor(private apiGateway: ApiGateway){
+    constructor(private apiGateway: ApiGateway) {
     }
 
     ngOnInit(): void {
@@ -23,10 +23,10 @@ export class JobProvider {
             }, reject);
         });
     }
- 
+
     findOne(id: string | null): Promise<any> {
         return new Promise((resolve, reject) => {
-            this.apiGateway.get(environment.JOBS_MS +  'jobs/:id', { id: id }).subscribe((response: HttpResponse<Job>) => {
+            this.apiGateway.get(environment.JOBS_MS + 'jobs/:id', { id: id }).subscribe((response: HttpResponse<Job>) => {
                 resolve(response.body);
             }, reject);
         });
@@ -35,7 +35,7 @@ export class JobProvider {
 
     update(id: string | null, job: any): Promise<any> {
         return new Promise((resolve, reject) => {
-            this.apiGateway.put(environment.JOBS_MS + 'jobs/:id',{id: id},  job ).subscribe((response: HttpResponse<any>) => {
+            this.apiGateway.put(environment.JOBS_MS + 'jobs/:id', { id: id }, job).subscribe((response: HttpResponse<any>) => {
                 resolve(response.body);
             }, reject);
         });
@@ -50,11 +50,11 @@ export class JobProvider {
     };
 
     destroy(id: string | null): Promise<any> {
-      return new Promise((resolve, reject) => {
-          this.apiGateway.delete(environment.JOBS_MS + 'jobs/:id', {id: id}).subscribe((response: HttpResponse<any>) => {
-              resolve(response.body);
-          }, reject);
-      })
+        return new Promise((resolve, reject) => {
+            this.apiGateway.delete(environment.JOBS_MS + 'jobs/:id', { id: id }).subscribe((response: HttpResponse<any>) => {
+                resolve(response.body);
+            }, reject);
+        })
     }
 
 }
