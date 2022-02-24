@@ -1,18 +1,18 @@
 <div id="collaboratorFeedbackTab" class="tab">
   <div class="content-scroll">
     <div class="envolti-table mat-elevation-z8" fxLayout="column">
-      <table mat-table [dataSource]="filteredFeedbackList" #feedbackTable>
-        <ng-container matColumnDef="date">
+      <table mat-table [dataSource]="data" #feedbackTable>
+        <ng-container matColumnDef="feedbackDate">
           <th mat-header-cell *matHeaderCellDef>Data</th>
           <td mat-cell *matCellDef="let feedback">
-            {{ feedback.date }}
+            {{ feedback.feedbackDate }}
           </td>
         </ng-container>
 
-        <ng-container matColumnDef="type">
+        <ng-container matColumnDef="feedbackType">
           <th mat-header-cell *matHeaderCellDef>Tipo</th>
           <td mat-cell *matCellDef="let feedback">
-            {{ feedback.type }}
+            {{ feedback.feedbackType }}
           </td>
         </ng-container>
 
@@ -34,6 +34,7 @@
             <button  (click)="navigateFeedback()" class="edit-button" mat-flat-button color="primary">
               <mat-icon>add</mat-icon>
             </button>
+        </th><td mat-cell *matCellDef="let feedback"></td>
         </ng-container>
         <tr
           mat-header-row

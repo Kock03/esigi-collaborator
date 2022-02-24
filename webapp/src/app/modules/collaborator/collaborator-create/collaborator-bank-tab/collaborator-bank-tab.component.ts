@@ -47,7 +47,7 @@ export class CollaboratorBankTabComponent implements OnInit {
 
   ngOnInit(): void {                       
 
-   this.initObservables()
+  //  this.initObservables()
   }
 
   initObservables() {

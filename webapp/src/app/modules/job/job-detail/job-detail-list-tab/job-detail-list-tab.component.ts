@@ -2,49 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { JobProvider } from 'src/providers/job.provider';
 import { Location } from '@angular/common';
-
-export interface Job {
-  jobName: string;
-  client: string;
-  requester: string;
-  openingDate: string;
-  status: number;
-  typeOfJob: number;
-  temporary: boolean;
-  monthTime: string;
-  startForecast: string;
-  jobNumber: number;
-  typeOfContract: number;
-  workplace: number;
-  workingDay: string;
-  Seniorities: {
-    intern: boolean;
-    junior: boolean;
-    pleno: boolean;
-    senior: boolean;
-  };
-  minimumValue: number;
-  maximumValue: number;
-  publish: boolean;
-  schooling: number;
-  Languages: Languanges[];
-  Knowledges: Knowledges[];
-  collaboratorActivities: string;
-  skills: string;
-  attitudes: string;
-}
-
-export interface Languanges {
-  languageName: string;
-  degreeOfInfluence: number;
-}
-
-export interface Knowledges {
-  name: string;
-  yearsExperience: number;
-  typeOfPeriod: number;
-}
-
+import { Job } from 'src/app/interfaces/ijob';
 @Component({
   selector: 'app-job-detail-list-tab',
   templateUrl: './job-detail-list-tab.component.html',
@@ -60,7 +18,7 @@ export class JobDetailListTabComponent implements OnInit {
     private route: ActivatedRoute,
     private _location: Location,
     private jobProvider: JobProvider
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     const state: any = this._location.getState();
