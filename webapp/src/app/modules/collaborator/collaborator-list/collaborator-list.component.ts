@@ -24,15 +24,7 @@ import { CollaboratorCreateComponent } from '../collaborator-create/collaborator
 import { CollaboratorRegisterTabComponent } from '../collaborator-create/collaborator-register-tab/collaborator-register-tab.component';
 import { ConfirmDialogService } from 'src/services/confirn-dialog.service';
 import { SnackBarService } from 'src/services/snackbar.service';
-
-export interface Collaborator {
-  id: string;
-  firstNameCorporateName: string;
-  admissionDate: Date;
-  office: number;
-  currentClient: string;
-  stauts: number;
-}
+import { ICollaborator } from 'src/app/interfaces/icollaborator';
 
 @Component({
   selector: 'app-collaborator-list',
@@ -54,7 +46,7 @@ export class CollaboratorListComponent implements OnInit {
     'icon',
   ];
 
-  collaborators!: Collaborator[];
+  collaborators!: ICollaborator[];
   filteredCollaboratorList!: any[];
   index: any = null;
   Collaborator: any;

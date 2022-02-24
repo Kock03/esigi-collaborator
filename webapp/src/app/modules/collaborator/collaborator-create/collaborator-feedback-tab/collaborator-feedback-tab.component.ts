@@ -12,14 +12,8 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatTable } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
+import { IFeedback } from 'src/app/interfaces/ifeedback';
 import { Job } from 'src/app/modules/job/job-list/job-list.component';
-
-export interface Feedback {
-  date: string;
-  type: string;
-  manager: string;
-  status: string;
-}
 
 @Component({
   selector: 'app-collaborator-feedback-tab',
@@ -31,7 +25,7 @@ export class CollaboratorFeedbackTabComponent implements OnInit {
   @ViewChild('feedbackTable') feedbackTable!: MatTable<any>;
 
   displayedFeedback: string[] = ['date', 'type', 'manager', 'status', 'icon'];
-  feedbacks: Feedback[] = [
+  feedbacks: IFeedback[] = [
     {
       date: '20/05/2005',
       type: 'Aumento de Salario',
@@ -41,7 +35,7 @@ export class CollaboratorFeedbackTabComponent implements OnInit {
   ];
   filteredFeedbackList!: any[];
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) { }
 
   async ngOnInit() {
     //this.getFeedbackList();

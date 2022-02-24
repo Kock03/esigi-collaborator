@@ -14,7 +14,7 @@ export class CollaboratorsService {
   constructor(
     @InjectRepository(CollaboratorsEntity)
     private readonly collaboratorsRepository: Repository<CollaboratorsEntity>,
-  ) {}
+  ) { }
 
   async findAll() {
     const collaboratorsWhiteAll = await this.collaboratorsRepository
@@ -71,8 +71,8 @@ export class CollaboratorsService {
       try {
         const collaborator = this.collaboratorsRepository.create(data);
         return await this.collaboratorsRepository.save(collaborator);
-      } catch {
-        throw new ConflictException();
+      } catch (error) {
+        console.error(error);
       }
     }
   }

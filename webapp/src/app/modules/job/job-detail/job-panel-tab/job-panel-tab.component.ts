@@ -1,15 +1,10 @@
 import { Component, ElementRef, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subject, fromEvent, debounceTime, distinctUntilChanged } from 'rxjs';
+import { IInterview } from 'src/app/interfaces/iinterview';
 import { SnackBarService } from 'src/services/snackbar.service';
+// import { IInterview } from 'src/app/interfaces/iinterview';
 
-export interface Interview {
-  nameCandidate: string;
-  behavioralInterviewDate: string;
-  technicalInterviewDate: string;
-  responsible: string;
-  status: number;
-}
 
 @Component({
   selector: 'app-job-panel-tab',
@@ -28,7 +23,7 @@ export class JobPanelTabComponent implements OnInit {
     'status',
     'icon',
   ];
-  interviews!: Interview[];
+  interviews!: IInterview[];
   filteredInterviewList!: any[];
 
 
@@ -58,7 +53,7 @@ export class JobPanelTabComponent implements OnInit {
   //   }
   // }
 
- 
+
 
   initFilter() {
     fromEvent(this.filter.nativeElement, 'keyup')
