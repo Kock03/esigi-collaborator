@@ -26,6 +26,7 @@ export class CollaboratorCreateComponent implements OnInit {
   Financials: any;
   Skills: any;
   Documents: any;
+  Feedbacks: any;
 
   constructor(
     private fb: FormBuilder,
@@ -51,6 +52,7 @@ export class CollaboratorCreateComponent implements OnInit {
       this.collaborator = await this.collaboratorProvider.findOne(
         this.collaboratorId
       );
+      console.log("🚀 ~ file: collaborator-create.component.ts ~ line 54 ~ CollaboratorCreateComponent ~ getCollaborator ~ this.collaborator", this.collaborator)
     } catch (error) {
       console.error(error);
     }
@@ -150,6 +152,9 @@ export class CollaboratorCreateComponent implements OnInit {
       ),
       Documents: this.fb.array(
         this.collaborator ? this.collaborator.Documents : [null]
+      ),
+      Feedbacks: this.fb.array(
+        this.collaborator ? this.collaborator.Feedbacks : [null]
       ),
     });
   }

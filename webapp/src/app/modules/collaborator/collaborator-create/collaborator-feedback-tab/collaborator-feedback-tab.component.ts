@@ -10,16 +10,9 @@ import {
 } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatTable } from '@angular/material/table';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { Job } from 'src/app/modules/job/job-list/job-list.component';
-
-export interface Feedback {
-  date: string;
-  type: string;
-  manager: string;
-  status: string;
-}
 
 @Component({
   selector: 'app-collaborator-feedback-tab',
@@ -28,33 +21,59 @@ export interface Feedback {
   encapsulation: ViewEncapsulation.None,
 })
 export class CollaboratorFeedbackTabComponent implements OnInit {
+  @Input('form') collaboratorForm!: FormGroup;
+  @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
   @ViewChild('feedbackTable') feedbackTable!: MatTable<any>;
 
-  displayedFeedback: string[] = ['date', 'type', 'manager', 'status', 'icon'];
-  feedbacks: Feedback[] = [
-    {
-      date: '20/05/2005',
-      type: 'Aumento de Salario',
-      manager: 'Danilo',
-      status: 'Concluido',
-    },
+  displayedFeedback: string[] = [
+    'feedbackDate',
+    'feedbackType',
+    'manager',
+    'status',
+    'icon',
   ];
+
   filteredFeedbackList!: any[];
+  collaboratorId!: string | null;
+  data: [] = [];
 
-  constructor(private router: Router) {}
-
-  async ngOnInit() {
-    //this.getFeedbackList();
+  get feedbackArray() {
+    return this.collaboratorForm.controls['Feedbacks'] as FormArray;
   }
 
-  // async getFeedbackList() {
-  //   try {
-  //     this.filteredFeedbackList = this.feedback = await this.feedbackProvider.findAll();
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
+  constructor(
+    private router: Router,
+    private fb: FormBuilder,
+    private route: ActivatedRoute
+  ) {}
+
+  async ngOnInit() {
+    this.collaboratorId = this.route.snapshot.paramMap.get('id');
+
+      // this.data = this.feedbackArray.value();
+   
+    this.initObservables();
+  }
+
+  initObservables() {
+    this.feedbackArray.valueChanges.subscribe((res) => {
+
+        this.data = this.feedbackArray.value;
+        this.feedbackTable.renderRows();
+        console.log(
+          '🚀 ~ file: collaborator-feedback-tab.component.ts ~ line 64 ~ CollaboratorFeedbackTabComponent ~ this.feedbackArray.valueChanges.subscribe ~   this.data ',
+          this.data
+        );
+      
+    });
+  }
 
   navigateFeedback() {
-    this.router.navigate(['colaborador/feedback/novo']);
+    const navigationExtras = {
+      state: {
+        id: this.collaboratorId,
+      },
+    };
+    this.router.navigate(['colaborador/feedback/novo'], navigationExtras);
   }
 }

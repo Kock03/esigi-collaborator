@@ -1,8 +1,19 @@
 import { formatDate } from '@angular/common';
-import { Component, Injectable, Input, OnInit, ViewEncapsulation} from '@angular/core';
+import {
+  Component,
+  Injectable,
+  Input,
+  OnInit,
+  ViewEncapsulation,
+} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { DateAdapter, MAT_DATE_FORMATS, NativeDateAdapter } from '@angular/material/core';
+import {
+  DateAdapter,
+  MAT_DATE_FORMATS,
+  NativeDateAdapter,
+} from '@angular/material/core';
 import { Router } from '@angular/router';
+import { CollaboratorProvider } from 'src/providers/collaborator.provider';
 import { FeedbackProvider } from 'src/providers/feedback.provider';
 import { SnackBarService } from 'src/services/snackbar.service';
 
@@ -12,37 +23,57 @@ export const PICK_FORMATS = {
     dateInput: 'input',
     monthYearLabel: { year: 'numeric', month: 'numeric' },
     dateA11yLabel: { year: 'numeric', month: 'numeric', day: 'numeric' },
-    monthYearA11yLabel: { year: 'numeric', month: 'numeric' }
-  }
+    monthYearA11yLabel: { year: 'numeric', month: 'numeric' },
+  },
 };
 
 @Injectable()
 export class PickDateAdapter extends NativeDateAdapter {
   override format(date: Date, displayFormat: Object): string {
     if (displayFormat === 'input') {
-      return formatDate(date, 'dd-MM-yyyy', this.locale);;
+      return formatDate(date, 'dd-MM-yyyy', this.locale);
     } else {
       return date.toDateString();
     }
   }
 }
+
+export interface Collaborator {
+  id: string;
+  firstNameCorporateName: string;
+  admissionDate: Date;
+  office: number;
+  currentClient: string;
+  stauts: number;
+}
+
 @Component({
   selector: 'app-feedback-create',
   templateUrl: './feedback-create.component.html',
   styleUrls: ['./feedback-create.component.scss'],
   providers: [
     { provide: DateAdapter, useClass: PickDateAdapter },
-    { provide: MAT_DATE_FORMATS, useValue: PICK_FORMATS }
+    { provide: MAT_DATE_FORMATS, useValue: PICK_FORMATS },
   ],
   encapsulation: ViewEncapsulation.None,
 })
 export class FeedbackCreateComponent implements OnInit {
-
   feedbackForm!: FormGroup;
   Date: any;
   step: number = 1;
+  collaborators!: Collaborator[];
+  get!: any;
 
-  constructor(private fb: FormBuilder,  private router: Router, private feedbackProvider: FeedbackProvider, private snackBarService: SnackBarService) { }
+  constructor(
+    private fb: FormBuilder,
+    private collaboratorProvider: CollaboratorProvider,
+    private router: Router,
+    private feedbackProvider: FeedbackProvider,
+    private snackBarService: SnackBarService
+  ) {
+    const getId = this.router.getCurrentNavigation()?.extras.state;
+    this.get = getId;
+  }
 
   ngOnInit(): void {
     this.initForm();
@@ -63,25 +94,23 @@ export class FeedbackCreateComponent implements OnInit {
       hourDate: ['', Validators.required],
       feedbackDateRetorn: ['', Validators.required],
       hourDateRetorn: ['', Validators.required],
-    })
+      Collaborator: { id: this.get.id },
+    });
   }
 
-  listFeedback() {
-    this.router.navigate(['colaborador/novo']);
+  listFeedback(collaboratorId: any) {
+    this.router.navigate([`colaborador/${collaboratorId}`]);
   }
 
-
-
-  async saveFeedback() {
+  async saveFeedback(collaboratorId: any) {
     let data = this.feedbackForm.getRawValue();
     try {
       const feedback = await this.feedbackProvider.store(data);
-      this.router.navigate(['colaborador/novo']);
-      this.snackBarService.showAlert('Feedbcack cadastrado com sucesso!')
+      this.router.navigate([`colaborador/${collaboratorId}`]);
+      this.snackBarService.showAlert('Feedbcack cadastrado com sucesso!');
     } catch (error) {
       console.log('ERROR 132' + error);
+      this.snackBarService.showAlert('Falha ao cadastrar!');
     }
-
   }
 }
-

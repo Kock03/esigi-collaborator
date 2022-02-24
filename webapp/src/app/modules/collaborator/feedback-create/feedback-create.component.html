@@ -1,6 +1,6 @@
 <div class="page" id="feedbackTab">
   <div fxLayout="row" fxLayoutAlign="start start">
-    <button (click)="listFeedback()" color="primary" mat-button>
+    <button (click)="listFeedback(this.get.id)" color="primary" mat-button>
       <mat-icon> chevron_left </mat-icon>
     </button>
     <h2>Feedback</h2>
@@ -29,20 +29,13 @@
 
         <mat-form-field appearance="outline" fxFlex="25">
           <mat-label>Projeto</mat-label>
-          <mat-select formControlName="project">
-            <mat-option [value]="1">Ptojeto RH - Benner</mat-option>
-            <mat-option [value]="2">Ptojeto Canabalização Ambev</mat-option>
-          </mat-select>
+          <input matInput disableRipple formControlName="project" />
         </mat-form-field>
 
         <mat-form-field appearance="outline" fxFlex="25">
           <mat-label>Gestor</mat-label>
-          <mat-select formControlName="manager">
-            <mat-option [value]="1">Wellington</mat-option>
-            <mat-option [value]="2">Danilo</mat-option>
-          </mat-select>
+          <input matInput disableRipple formControlName="manager" />
         </mat-form-field>
-
       </div>
 
       <div class="formGroup1" fxFlex="200" fxLayoutGap="20px">
@@ -160,7 +153,12 @@
     class="saveButton"
     fxLayoutGap="16px"
   >
-    <button mat-flat-button color="primary" [disabled]="this.feedbackForm.invalid" (click)="saveFeedback()">
+    <button
+      mat-flat-button
+      color="primary"
+      [disabled]="this.feedbackForm.invalid"
+      (click)="saveFeedback(this.get.id)"
+    >
       Salvar
     </button>
   </div>
