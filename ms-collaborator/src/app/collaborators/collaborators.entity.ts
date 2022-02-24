@@ -157,6 +157,7 @@ export class CollaboratorsEntity {
     cascade: ['insert', 'update', 'remove'],
     orphanedRowAction: 'delete',
     eager: true,
+    nullable: true
   })
   @JoinColumn()
   Dependents: DependentsEntity[];

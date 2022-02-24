@@ -5,6 +5,7 @@ import {
   IsNotEmpty,
   IsNumber,
   IsObject,
+  IsOptional,
   IsString,
   Length,
   MaxLength,
@@ -78,7 +79,7 @@ export class CreatedependentsDto {
   email: string;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsObject()
   Collaborator: CollaboratorsEntity;
 }

@@ -55,6 +55,8 @@ export class FeedbackCreateComponent implements OnInit {
   step: number = 1;
   collaborators!: ICollaborator[];
   get!: any;
+  feedbackTab: any;
+  collaboratorId!: string | null;
 
   constructor(
     private fb: FormBuilder,
@@ -73,7 +75,7 @@ export class FeedbackCreateComponent implements OnInit {
 
   initForm(): void {
     this.feedbackForm = this.fb.group({
-      feedbackType: ['', Validators.required],
+      feedbackType: [null, Validators.required],
       reason: ['', Validators.required],
       project: ['', Validators.required],
       status: ['', Validators.required],
@@ -105,4 +107,6 @@ export class FeedbackCreateComponent implements OnInit {
       this.snackBarService.showAlert('Falha ao cadastrar!');
     }
   }
-}
+  
+  }
+

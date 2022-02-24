@@ -80,6 +80,8 @@
       fxLayout="column"
       class="tab-group"
       [ngClass]="{ done: step > 7, active: step == 8 }"
+      *ngIf="collaboratorId !== 'novo'"
+      #feedbackTab
     >
       <p class="tab-item">Feedback</p>
       <span class="tab-border"></span>
@@ -139,6 +141,7 @@
   >
   </app-collaborator-document-tab>
   <app-collaborator-feedback-tab
+     *ngIf="collaboratorId !== 'novo'"
     [hidden]="step != 8"
     [form]="collaboratorForm"
     (onChange)="handleChanges($event)"

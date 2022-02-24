@@ -51,7 +51,7 @@ export const PICK_FORMATS = {
   
     initForm(): void {
       this.dependentForm = this.fb.group({
-        type: [1, Validators.required],
+        type: [null, Validators.required],
         firstName: ['alanzoka', Validators.required],
         lastName: ['brazilien', Validators.required],
         gender: [2, Validators.required],
