@@ -154,7 +154,7 @@ export class CollaboratorCreateComponent implements OnInit {
         this.collaborator ? this.collaborator.Documents : [null]
       ),
       Feedbacks: this.fb.array(
-        this.collaborator ? this.collaborator.Feedbacks : [null]
+        this.collaborator ? this.collaborator.Feedbacks : []
       ),
     });
   }
