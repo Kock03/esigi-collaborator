@@ -43,7 +43,6 @@ export class BehaviroalInterviewsEntity {
   @Column()
   salaryExpectation: string;
 
-
   @Column()
   behavioralAssessment: string;
 
@@ -64,10 +63,12 @@ export class BehaviroalInterviewsEntity {
   @JoinColumn()
   hiringPreferences: HiringPreferencesEntity;
 
-  @ManyToOne(() => JobsEntity, job => job.TechnicalInterviews, { onDelete: "CASCADE", eager: true })
+  @ManyToOne(() => JobsEntity, (job) => job.TechnicalInterviews, {
+    onDelete: 'CASCADE',
+    eager: true,
+  })
   @JoinColumn()
   Job: JobsEntity;
-
 
   @CreateDateColumn()
   createdAt: Date;

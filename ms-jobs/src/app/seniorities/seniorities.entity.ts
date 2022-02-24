@@ -10,7 +10,7 @@ import {
 } from 'typeorm';
 import { JobsEntity } from '../jobs/jobs.entity';
 
-@Entity()
+@Entity({ name: 'seniorities' })
 export class SenioritiesEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;

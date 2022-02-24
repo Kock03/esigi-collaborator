@@ -4,6 +4,7 @@ import {
   IsDate,
   IsEnum,
   IsNotEmpty,
+  IsObject,
   IsOptional,
   IsString,
   MaxLength,
@@ -75,7 +76,6 @@ export class CreateBehaviorInterviewsDto {
   availabilityOfInitialize: string;
 
   @ApiProperty()
-  @IsNotEmpty()
   hiringPreferences: HiringPreferencesEntity;
 
   @ApiProperty()

@@ -11,12 +11,20 @@ export class BehavioralInterviewsService {
   constructor(
     @InjectRepository(BehaviroalInterviewsEntity)
     private readonly behavioralInterviewsRepository: Repository<BehaviroalInterviewsEntity>,
-  ) { }
+  ) {}
 
   async findAll() {
     const interviews = await this.behavioralInterviewsRepository.find();
 
     return interviews;
+  }
+
+  async findDetails() {
+    return await this.behavioralInterviewsRepository
+      .createQueryBuilder()
+      .select(['name_candidate', 'behavioral_interview_date'])
+      .from(BehaviroalInterviewsEntity, 'behaviroal_interviews')
+      .innerJoinAndSelect('behaviroal_interviews.job', 'requester', 'status');
   }
 
   async findOneOrFail(
