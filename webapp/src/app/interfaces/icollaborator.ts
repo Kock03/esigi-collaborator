@@ -6,6 +6,6 @@ export interface ICollaborator {
     admissionDate: Date;
     office: number;
     currentClient: string;
-    stauts: number;
+    active: boolean;
     Feedbacks: IFeedback[]
 }
