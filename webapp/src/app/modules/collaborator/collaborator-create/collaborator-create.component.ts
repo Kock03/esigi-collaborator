@@ -39,31 +39,35 @@ export class CollaboratorCreateComponent implements OnInit {
     private router: Router,
     private snackbarService: SnackBarService,
     private route: ActivatedRoute
-  ) {
-  
-  }
+  ) {}
 
-  async ngOnInit(): Promise<void> {   
+  async ngOnInit(): Promise<void> {
     this.collaboratorId = this.route.snapshot.paramMap.get('id');
-    this.initForm();
+  
+    this.step = 1;
     this.step = JSON.parse(sessionStorage.getItem('collaborator_tab')!);
 
-    this.step = 1;
-   
+    // this.step = this.urlStep;
+    // this.step = 1;
 
     if (this.collaboratorId !== 'novo') {
       await this.getCollaborator();
+      this.initForm();
       this.setFormValue();
+    } else {
+      this.initForm();
     }
   }
-
 
   async getCollaborator() {
     try {
       this.collaborator = await this.collaboratorProvider.findOne(
         this.collaboratorId
       );
-      console.log("🚀 ~ file: collaborator-create.component.ts ~ line 82 ~ CollaboratorCreateComponent ~ getCollaborator ~ this.collaborator", this.collaborator)
+      console.log(
+        '🚀 ~ file: collaborator-create.component.ts ~ line 82 ~ CollaboratorCreateComponent ~ getCollaborator ~ this.collaborator',
+        this.collaborator
+      );
     } catch (error) {
       console.error(error);
     }
@@ -133,17 +137,29 @@ export class CollaboratorCreateComponent implements OnInit {
       }),
       BankData: this.fb.group({
         bank: [
-          this.collaborator ? this.collaborator.BankData.bank : '-',
+          this.collaborator ? this.collaborator.BankData.bank : null,
           [Validators.required, Validators.maxLength(50)],
         ],
-        agency: ['1111', [Validators.required, Validators.maxLength(4)]],
-        accountType: [1, Validators.required],
+        agency: [
+          this.collaborator ? this.collaborator.BankData.agency : null,
+          [Validators.required, Validators.maxLength(4)],
+        ],
+        accountType: [
+          this.collaborator ? this.collaborator.BankData.accountType : null,
+          Validators.required,
+        ],
         accountNumber: [
-          '11111',
+          this.collaborator ? this.collaborator.BankData.accountNumber : null,
           [Validators.required, Validators.maxLength(5)],
         ],
-        digit: ['1', [Validators.required, Validators.maxLength(1)]],
-        bankAccountDigit: ['1', [Validators.required, Validators.maxLength(1)]],
+        digit: [
+          this.collaborator ? this.collaborator.BankData.digit : null,
+          [Validators.required, Validators.maxLength(1)],
+        ],
+        bankAccountDigit: [
+          this.collaborator ? this.collaborator.BankData.bankAccountDigit : null,
+          [Validators.required, Validators.maxLength(1)],
+        ],
       }),
 
       Dependents: this.fb.array(
@@ -193,7 +209,7 @@ export class CollaboratorCreateComponent implements OnInit {
 
   handleStep(number: number): void {
     this.step = number;
-    sessionStorage.setItem('collaborator_tab', this.step.toString())
+    sessionStorage.setItem('collaborator_tab', this.step.toString());
   }
 
   navigate(direction: string) {

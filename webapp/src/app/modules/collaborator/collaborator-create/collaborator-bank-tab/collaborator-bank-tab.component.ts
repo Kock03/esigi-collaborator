@@ -33,14 +33,15 @@ export class CollaboratorBankTabComponent implements OnInit {
     'accountType',
     'account',
     'icon',
-  ];
-
-  bankForm!: FormGroup;
+  ]; 
 
   index: any = null;
-  Bank: any;
+  bank: any;
 
   get bankArray() {
+    return this.collaboratorForm.controls['BankData'] as FormGroup;
+  }
+  get bankForm() {
     return this.collaboratorForm.controls['BankData'] as FormGroup;
   }
 
@@ -51,12 +52,14 @@ export class CollaboratorBankTabComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.data = new Array(this.bankArray.value);
+    this.initObservables();
   }
 
   initObservables() {
-    if (this.bankArray.value.findIndex((bank: any) => bank == null) === -1) {
-      this.data = new Array(this.bankArray.value);
+    this.bank = this.collaboratorForm.controls['BankData'].value
+    if   (this.bank.agency) {
+      this.data = new Array(this.bank);
+      this.bankTable.renderRows();
     }
   }
 
@@ -64,11 +67,11 @@ export class CollaboratorBankTabComponent implements OnInit {
     const dialogRef = this.dialog.open(CollaboratorBankDialog, {
       width: '500px',
       height: '470px',
-      data: { bankForm: this.bankArray },
+      data: { bankForm: this.collaboratorForm.controls['BankData'] },
     });
     dialogRef.afterClosed().subscribe((bank) => {
       if (bank) {
-        this.data = new Array(this.bankArray.value);
+        this.data = new Array(this.bankForm.value);
         this.bankTable.renderRows();
       }
     });
@@ -82,7 +85,7 @@ export class CollaboratorBankTabComponent implements OnInit {
     const dialogRef = this.dialog.open(CollaboratorBankDialog, {
       width: '500px',
       height: '470px',
-      data: { bankForm },
+      data: { bankForm: this.bankForm },
     });
     this.index = index;
     dialogRef.afterClosed().subscribe((bank) => {
