@@ -162,17 +162,8 @@ __decorate([
 __decorate([
     (0, swagger_1.ApiProperty)(),
     (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsArray)(),
     __metadata("design:type", Array)
-], UpdateJobsDto.prototype, "behaviorInterviews", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)(),
-    (0, class_validator_1.IsOptional)(),
-    __metadata("design:type", Array)
-], UpdateJobsDto.prototype, "clientInterviews", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)(),
-    (0, class_validator_1.IsOptional)(),
-    __metadata("design:type", Array)
-], UpdateJobsDto.prototype, "technicalInterviews", void 0);
+], UpdateJobsDto.prototype, "interviews", void 0);
 exports.UpdateJobsDto = UpdateJobsDto;
 //# sourceMappingURL=update-jobs.dto.js.map

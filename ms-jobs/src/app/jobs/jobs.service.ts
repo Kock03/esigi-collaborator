@@ -13,7 +13,7 @@ export class JobsService {
   constructor(
     @InjectRepository(JobsEntity)
     private readonly jobsRepository: Repository<JobsEntity>,
-  ) { }
+  ) {}
 
   async findAll() {
     const jobsWhiteAll = await this.jobsRepository.find();
@@ -25,8 +25,9 @@ export class JobsService {
     conditions: FindConditions<JobsEntity>,
     options?: FindOneOptions<JobsEntity>,
   ) {
-
-    options = { relations: ['BehavioralInterviews', 'TechnicalInterviews', 'ClientInterviews', 'Returns'] };
+    options = {
+      relations: ['Returns'],
+    };
 
     try {
       return await this.jobsRepository.findOneOrFail(conditions, options);
@@ -35,6 +36,54 @@ export class JobsService {
     }
   }
 
+  // async findInterviewsList(
+  //   conditions: FindConditions<JobsEntity>,
+  //   options?: FindOneOptions<JobsEntity>,
+  // ) {
+  //   options = {
+  //     relations: ['interviews'],
+  //   };
+
+  //   const job = await this.jobsRepository.findOneOrFail(conditions, options);
+
+  //   try {
+  //     const job = await this.jobsRepository.findOneOrFail(conditions, options);
+  //     const interviewsQuantity = job.interviews.length;
+  //     const interviews = new Array();
+
+  //     let quantity = 0;
+
+  //     quantity = interviewsQuantity;
+  //     for (let index = 0; index < quantity; index++) {
+  //       const interview = {
+  //         name: {
+  //           candidate:
+  //             job.interviews[index]?.behaviroalInterviews.nameCandidate,
+  //         },
+  //         behavioral: {
+  //           behavioralInterviewDate:
+  //             job.interviews[index]?.behaviroalInterviews
+  //               .behavioralInterviewDate,
+  //         },
+  //         technical: {
+  //           technicalInterviewDate:
+  //             job.interviews[index]?.technicalInterviews.technicalInterviewDate,
+  //         },
+  //       };
+  //       interviews.push(interview);
+  //     }
+
+  //     const jobInterviews = {
+  //       requester: job.requester,
+  //       status: job.status,
+  //       interviews,
+  //     };
+  //     return jobInterviews;
+  //   } catch (error) {
+  //     console.log(error);
+  //     throw new NotFoundException();
+  //   }
+  // }
 
   async store(data: CreateJobsDto) {
     const job = this.jobsRepository.create(data);

@@ -12,7 +12,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { HiringPreferencesEntity } from '../hiringPreferences/hiringPreferences.entity';
+import { HiringPreferencesEntity } from '../hiring-preferences/hiring-preferences.entity';
 import { Presentation } from './enums/presentation.enum';
 import { Punctuality } from './enums/punctuality.enum';
 import { Situation } from './enums/situational.enum';
@@ -61,14 +61,7 @@ export class BehaviroalInterviewsEntity {
     eager: true,
   })
   @JoinColumn()
-  hiringPreferences: HiringPreferencesEntity;
-
-  @ManyToOne(() => JobsEntity, (job) => job.TechnicalInterviews, {
-    onDelete: 'CASCADE',
-    eager: true,
-  })
-  @JoinColumn()
-  Job: JobsEntity;
+  hiringPreference: HiringPreferencesEntity;
 
   @CreateDateColumn()
   createdAt: Date;

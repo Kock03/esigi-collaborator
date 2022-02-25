@@ -25,6 +25,7 @@ import { BehaviroalInterviewsEntity } from 'src/app/behavioral-interviews/behavi
 import { ClientInterviewsEntity } from '../client-interviews/client-interviews.entity';
 import { TechnicalInterviewsEntity } from '../technical-interviews/technical-interviews.entity';
 import { ReturnsEntity } from '../returns/returns.entity';
+import { InterviewsEnitiy } from '../interviews/interviews.entity';
 
 @Entity({ name: 'jobs' })
 export class JobsEntity {
@@ -115,24 +116,11 @@ export class JobsEntity {
   @JoinColumn()
   Seniorities: SenioritiesEntity;
 
-  @OneToMany(() => BehaviroalInterviewsEntity, (Behaviroal) => Behaviroal.Job, {
+  @OneToMany(() => InterviewsEnitiy, (interviews) => interviews.jobs, {
     cascade: ['insert', 'update', 'soft-remove'],
-    orphanedRowAction: 'delete',
   })
-  BehavioralInterviews: BehaviroalInterviewsEntity[];
-
-  @OneToMany(() => TechnicalInterviewsEntity, (technical) => technical.Job, {
-    cascade: ['insert', 'update', 'soft-remove'],
-    orphanedRowAction: 'delete',
-  })
-  TechnicalInterviews: TechnicalInterviewsEntity[];
-
-  @OneToMany(() => ClientInterviewsEntity, (client) => client.Job, {
-    cascade: ['insert', 'update', 'soft-remove'],
-    orphanedRowAction: 'delete',
-  })
-  ClientInterviews: ClientInterviewsEntity[];
-
+  @JoinTable({ name: 'jobs_interviews' })
+  interviews: InterviewsEnitiy[];
 
   @OneToMany(() => ReturnsEntity, (returns) => returns.Job, {
     cascade: ['insert', 'update', 'soft-remove'],

@@ -20,7 +20,7 @@ export class HiringPreferencesEntity {
 
   @OneToOne(
     () => BehaviroalInterviewsEntity,
-    (behaviroalInterviews) => behaviroalInterviews.hiringPreferences,
+    (behaviroalInterviews) => behaviroalInterviews.hiringPreference,
   )
   BehaviroalInterview: BehaviroalInterviewsEntity;
 }

@@ -169,19 +169,8 @@ __decorate([
 __decorate([
     (0, swagger_1.ApiProperty)(),
     (0, class_validator_1.IsOptional)(),
-    __metadata("design:type", Array)
-], CreateJobsDto.prototype, "behaviorInterviews", void 0);
-__decorate([
-    (0, swagger_1.ApiPropertyOptional)(),
     (0, class_validator_1.IsArray)(),
-    (0, class_validator_1.IsOptional)(),
     __metadata("design:type", Array)
-], CreateJobsDto.prototype, "clientInterviews", void 0);
-__decorate([
-    (0, swagger_1.ApiPropertyOptional)(),
-    (0, class_validator_1.IsArray)(),
-    (0, class_validator_1.IsOptional)(),
-    __metadata("design:type", Array)
-], CreateJobsDto.prototype, "technicalInterviews", void 0);
+], CreateJobsDto.prototype, "interviews", void 0);
 exports.CreateJobsDto = CreateJobsDto;
 //# sourceMappingURL=create-jobs.dto.js.map

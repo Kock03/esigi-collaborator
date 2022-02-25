@@ -14,11 +14,11 @@ import { CreateTechnicalInterviewsDto } from './dtos/create-technical-interviews
 import { UpdateTechnicalInterviewsDto } from './dtos/update-technical-interviews.dto';
 import { TechnicalInterviewsService } from './technical-interviews.service';
 
-@Controller('/api/v1/technicalInterviews')
+@Controller('/api/v1/technical-interviews')
 export class TechnicalInterviewsController {
   constructor(
     private readonly technicalInterviewsService: TechnicalInterviewsService,
-  ) { }
+  ) {}
 
   @Get()
   async index() {

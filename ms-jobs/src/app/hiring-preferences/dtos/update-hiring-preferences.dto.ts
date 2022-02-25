@@ -1,24 +1,19 @@
-import { ApiProperty } from '@nestjs/swagger';
-import { IsBoolean, IsOptional } from 'class-validator';
+import { IsBoolean, IsOptional } from "class-validator";
 
 export class UpdateHiringPreferencesDto {
-  @ApiProperty()
-  @IsOptional()
-  @IsBoolean()
-  intern: boolean;
+    @IsOptional()
+    @IsBoolean()
+    intern: boolean;
 
-  @ApiProperty()
-  @IsOptional()
-  @IsBoolean()
-  naturalPerson: boolean;
+    @IsOptional()
+    @IsBoolean()
+    naturalPerson: boolean;
 
-  @ApiProperty()
-  @IsOptional()
-  @IsBoolean()
-  legalPerson: boolean;
+    @IsOptional()
+    @IsBoolean()
+    legalPerson: boolean;
 
-  @ApiProperty()
-  @IsOptional()
-  @IsBoolean()
-  cooperative: boolean;
+    @IsOptional()
+    @IsBoolean()
+    cooperative: boolean;
 }

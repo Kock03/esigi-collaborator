@@ -34,9 +34,7 @@ export declare class JobsService {
         openingDate: Date;
         Seniorities: import("../seniorities/seniorities.entity").SenioritiesEntity;
         Languages: import("../languages/languages.entity").LanguagesEntity[];
-        behaviorInterviews: import("../behavioral-interviews/behavioral-interviews.entity").BehaviroalInterviewsEntity[];
-        clientInterviews: import("../client-interviews/client-interviews.entity").ClientInterviewsEntity[];
-        technicalInterviews: import("../technical-interviews/technical-interviews.entity").TechnicalInterviewsEntity[];
+        interviews: import("../interviews/interviews.entity").InterviewsEnitiy[];
         id: string;
     } & JobsEntity>;
     destroy(id: string): Promise<import("typeorm").UpdateResult>;
