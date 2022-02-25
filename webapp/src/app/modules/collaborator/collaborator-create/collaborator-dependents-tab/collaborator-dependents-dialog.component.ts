@@ -56,7 +56,7 @@ export const PICK_FORMATS = {
         lastName: ['brazilien', Validators.required],
         gender: [2, Validators.required],
         cpf: [
-          '10100756913',
+          '',
           [DocumentValidator.isValidCpf(), Validators.required],
         ],
         birthDate: ['02/05/004', Validators.required],
