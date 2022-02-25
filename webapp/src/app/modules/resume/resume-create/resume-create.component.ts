@@ -11,6 +11,7 @@ import {
 import { ResumeProvider } from 'src/providers/resume.provider';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SnackBarService } from 'src/services/snackbar.service';
+import { ThisReceiver } from '@angular/compiler';
 
 @Component({
   selector: 'app-resume-create',
@@ -94,6 +95,7 @@ export class ResumeCreateComponent implements OnInit {
       Experiences: this.fb.array([]),
       Skills: this.fb.array(this.resume ? this.resume.Skills : [null]),
     });
+    
   }
 
   setFormValue() {

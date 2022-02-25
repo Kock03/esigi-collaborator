@@ -12,7 +12,8 @@ import {
   MAT_DATE_FORMATS,
   NativeDateAdapter,
 } from '@angular/material/core';
-import { Router } from '@angular/router';
+import { Router, RoutesRecognized } from '@angular/router';
+import { filter, pairwise } from 'rxjs/operators';
 import { ICollaborator } from 'src/app/interfaces/icollaborator';
 import { CollaboratorProvider } from 'src/providers/collaborator.provider';
 import { FeedbackProvider } from 'src/providers/feedback.provider';
@@ -107,6 +108,7 @@ export class FeedbackCreateComponent implements OnInit {
       this.snackBarService.showAlert('Falha ao cadastrar!');
     }
   }
-  
+
+
   }
 

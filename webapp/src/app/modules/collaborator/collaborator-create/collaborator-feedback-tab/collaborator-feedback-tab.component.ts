@@ -10,10 +10,10 @@ import {
 } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatTable } from '@angular/material/table';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Subject } from 'rxjs';
+import { ActivatedRoute, Router, RoutesRecognized } from '@angular/router';
+import { ICollaborator } from 'src/app/interfaces/icollaborator';
 import { IFeedback } from 'src/app/interfaces/ifeedback';
-import { Job } from 'src/app/modules/job/job-list/job-list.component';
+import { CollaboratorProvider } from 'src/providers/collaborator.provider';
 
 @Component({
   selector: 'app-collaborator-feedback-tab',
@@ -36,7 +36,9 @@ export class CollaboratorFeedbackTabComponent implements OnInit {
 
   filteredFeedbackList!: any[];
   collaboratorId!: string | null;
-  data: [] = [];
+  collaborator!: ICollaborator
+  data!: Array<any>;
+  feedback!: any[]
 
   get feedbackArray() {
     return this.collaboratorForm.controls['Feedbacks'] as FormArray;
@@ -45,30 +47,26 @@ export class CollaboratorFeedbackTabComponent implements OnInit {
   constructor(
     private router: Router,
     private fb: FormBuilder,
-    private route: ActivatedRoute
-  ) { }
-
+    private route: ActivatedRoute,
+    private collaboratorProvider: CollaboratorProvider,
+  ) {}
 
   async ngOnInit() {
     this.collaboratorId = this.route.snapshot.paramMap.get('id');
-
-    // this.data = this.feedbackArray.value();
-
-    this.initObservables();
+    this.getJob()
+    this.feedback = this.collaborator?.Feedbacks
+    console.log("🚀 ~ file: collaborator-feedback-tab.component.ts ~ line 54 ~ CollaboratorFeedbackTabComponent ~ ngOnInit ~ this.collaborator.Feedbacks", this.feedback)
   }
 
-  initObservables() {
-    this.feedbackArray.valueChanges.subscribe((res) => {
-
-      this.data = this.feedbackArray.value;
-      this.feedbackTable.renderRows();
-      console.log(
-        '🚀 ~ file: collaborator-feedback-tab.component.ts ~ line 64 ~ CollaboratorFeedbackTabComponent ~ this.feedbackArray.valueChanges.subscribe ~   this.data ',
-        this.data
-      );
-
-    });
+  async getJob() {
+    try {
+      this.collaborator = await this.collaboratorProvider.findOne(this.collaboratorId);
+      console.log("🚀 ~ file: collaborator-feedback-tab.component.ts ~ line 63 ~ CollaboratorFeedbackTabComponent ~ getJob ~ this.collaborator ", this.collaborator )
+    } catch (error) {
+      console.error(error);
+    }
   }
+  
 
   navigateFeedback() {
     const navigationExtras = {

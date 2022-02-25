@@ -2,7 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatTable } from '@angular/material/table';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RoutesRecognized } from '@angular/router';
+import { filter, pairwise } from 'rxjs';
 
 import { DocumentValidator } from 'src/app/validators/document.validator';
 import { CollaboratorProvider } from 'src/providers/collaborator.provider';
@@ -28,6 +29,9 @@ export class CollaboratorCreateComponent implements OnInit {
   Documents: any;
   Feedbacks: any;
 
+  url!: string;
+  urlStep!: number;
+
   constructor(
     private fb: FormBuilder,
     private collaboratorProvider: CollaboratorProvider,
@@ -35,24 +39,48 @@ export class CollaboratorCreateComponent implements OnInit {
     private router: Router,
     private snackbarService: SnackBarService,
     private route: ActivatedRoute
-  ) {}
+  ) {
+  
+  }
 
   async ngOnInit(): Promise<void> {
+    this.router.events
+    .pipe(
+      filter((evt: any) => evt instanceof RoutesRecognized),
+      pairwise()
+    )
+    .subscribe((events: RoutesRecognized[]) => {
+      this.url = events[0].urlAfterRedirects;
+      if (this.url == '/colaborador/feedback/novo') {
+       this.urlStep == 8;
+      }else{
+        this.urlStep == 1;
+      }
+    });
+
+    
+
     this.collaboratorId = this.route.snapshot.paramMap.get('id');
     this.initForm();
+
+
+    // this.step = this.urlStep;
     this.step = 1;
+   
+
     if (this.collaboratorId !== 'novo') {
       await this.getCollaborator();
       this.setFormValue();
     }
   }
 
+
   async getCollaborator() {
     try {
       this.collaborator = await this.collaboratorProvider.findOne(
         this.collaboratorId
       );
-      console.log("🚀 ~ file: collaborator-create.component.ts ~ line 54 ~ CollaboratorCreateComponent ~ getCollaborator ~ this.collaborator", this.collaborator)
+      console.log("🚀 ~ file: collaborator-create.component.ts ~ line 82 ~ CollaboratorCreateComponent ~ getCollaborator ~ this.collaborator", this.collaborator)
     } catch (error) {
       console.error(error);
     }
@@ -160,10 +188,9 @@ export class CollaboratorCreateComponent implements OnInit {
   }
 
   setFormValue() {
-    if(this.collaborator){
+    if (this.collaborator) {
       this.collaboratorForm.patchValue(this.collaborator);
     }
-   
   }
 
   async saveCollaborator() {

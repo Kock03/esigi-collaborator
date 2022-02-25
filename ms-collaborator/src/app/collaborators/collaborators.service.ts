@@ -14,7 +14,7 @@ export class CollaboratorsService {
   constructor(
     @InjectRepository(CollaboratorsEntity)
     private readonly collaboratorsRepository: Repository<CollaboratorsEntity>,
-  ) { }
+  ) {}
 
   async findAll() {
     const collaboratorsWhiteAll = await this.collaboratorsRepository
@@ -29,20 +29,6 @@ export class CollaboratorsService {
 
     options?: FindOneOptions<CollaboratorsEntity>,
   ) {
-    // options = {
-    //   relations: [
-    //     'BankData',
-    //     'Educations',
-    //     'Languages',
-    //     'Documents',
-    //     'Skills',
-    //     'Phone',
-    //     'Address',
-    //     'Financials',
-    //     'Dependents'
-    //   ],
-    // };
-
     try {
       return await this.collaboratorsRepository.findOneOrFail(
         conditions,

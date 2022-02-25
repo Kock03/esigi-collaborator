@@ -67,7 +67,9 @@ export class FeedbacksEntity {
 
   @ManyToOne(
     () => CollaboratorsEntity,
-    (collaborators) => collaborators.Feedbacks,
+    (collaborators) => collaborators.Feedbacks,{
+     
+    }
   )
   Collaborator: CollaboratorsEntity;
 }
