@@ -43,29 +43,12 @@ export class CollaboratorCreateComponent implements OnInit {
   
   }
 
-  async ngOnInit(): Promise<void> {
-    // this.router.events
-    // .pipe(
-    //   filter((evt: any) => evt instanceof RoutesRecognized),
-    //   pairwise()
-    // )
-    // .subscribe((events: RoutesRecognized[]) => {
-    //   this.url = events[0].urlAfterRedirects;
-    //   if (this.url == '/colaborador/feedback/novo') {
-    //    this.step = 8;
-    //   }else{
-    //     this.step = 1;
-    //   }
-    // });
-
-    
-
+  async ngOnInit(): Promise<void> {   
     this.collaboratorId = this.route.snapshot.paramMap.get('id');
     this.initForm();
     this.step = JSON.parse(sessionStorage.getItem('collaborator_tab')!);
 
-    // this.step = this.urlStep;
-    // this.step = 1;
+    this.step = 1;
    
 
     if (this.collaboratorId !== 'novo') {
