@@ -23,6 +23,7 @@ import { JobDetailComponent } from './job-detail/job-detail.component';
 import { JobDetailListTabComponent } from './job-detail/job-detail-list-tab/job-detail-list-tab.component';
 import { JobInterviewTabComponent } from './job-detail/job-interview-tab/job-interview-tab.component';
 import { JobPanelTabComponent } from './job-detail/job-panel-tab/job-panel-tab.component';
+import { NgxMaskModule } from 'ngx-mask';
 import {
   JobRegisterTabComponent,
   PickDateAdapter,
@@ -77,6 +78,7 @@ const routes: Routes = [
     MatIconModule,
     MatTreeModule,
     HttpClientModule,
+    NgxMaskModule,
   ],
   providers: [MatDatepickerModule, ConfirmDialogService],
   entryComponents: [

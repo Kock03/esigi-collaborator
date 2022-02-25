@@ -142,7 +142,7 @@ export class JobInterviewTabComponent implements OnInit {
       this.snackbarService.successMessage(
         'Entrevista Técnica Cadastrada Com Sucesso'
       );
-      this.step += 1;
+      this.selectedIndex = this.selectedIndex + 1;
     } catch (error) {
       console.log('ERROR 132' + error);
       this.snackbarService.showError('Falha ao Cadastrar');
@@ -158,7 +158,7 @@ export class JobInterviewTabComponent implements OnInit {
       this.snackbarService.successMessage(
         'Entrevista Cliente Cadastrada Com Sucesso'
       );
-      this.step += 1;
+      this.selectedIndex = this.selectedIndex + 1;
     } catch (error) {
       console.log('ERROR 132' + error);
       this.snackbarService.showError('Falha ao Cadastrar');
@@ -172,7 +172,7 @@ export class JobInterviewTabComponent implements OnInit {
       await this.ReturnProvider.store(data);
 
       this.snackbarService.successMessage('Retorno Cadastrada Com Sucesso');
-      this.step += 1;
+      this.router.navigate(['vaga/lista']);
     } catch (error) {
       console.log('ERROR 132' + error);
       this.snackbarService.showError('Falha ao Cadastrar');
