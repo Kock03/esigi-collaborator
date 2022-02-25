@@ -44,28 +44,28 @@ export class CollaboratorCreateComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
-    this.router.events
-    .pipe(
-      filter((evt: any) => evt instanceof RoutesRecognized),
-      pairwise()
-    )
-    .subscribe((events: RoutesRecognized[]) => {
-      this.url = events[0].urlAfterRedirects;
-      if (this.url == '/colaborador/feedback/novo') {
-       this.urlStep == 8;
-      }else{
-        this.urlStep == 1;
-      }
-    });
+    // this.router.events
+    // .pipe(
+    //   filter((evt: any) => evt instanceof RoutesRecognized),
+    //   pairwise()
+    // )
+    // .subscribe((events: RoutesRecognized[]) => {
+    //   this.url = events[0].urlAfterRedirects;
+    //   if (this.url == '/colaborador/feedback/novo') {
+    //    this.step = 8;
+    //   }else{
+    //     this.step = 1;
+    //   }
+    // });
 
     
 
     this.collaboratorId = this.route.snapshot.paramMap.get('id');
     this.initForm();
-
+    this.step = JSON.parse(sessionStorage.getItem('collaborator_tab')!);
 
     // this.step = this.urlStep;
-    this.step = 1;
+    // this.step = 1;
    
 
     if (this.collaboratorId !== 'novo') {
@@ -210,6 +210,7 @@ export class CollaboratorCreateComponent implements OnInit {
 
   handleStep(number: number): void {
     this.step = number;
+    sessionStorage.setItem('collaborator_tab', this.step.toString())
   }
 
   navigate(direction: string) {
