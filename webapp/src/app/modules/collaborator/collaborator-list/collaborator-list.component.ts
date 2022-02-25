@@ -75,7 +75,7 @@ export class CollaboratorListComponent implements OnInit {
     const options = {
       data: {
         title: 'Anteção',
-        subtitle: 'Você tem certeza que deseja excluir esste colaborador?',
+        subtitle: 'Você tem certeza que deseja excluir este colaborador?',
       },
       panelClass: 'confirm-modal',
     };

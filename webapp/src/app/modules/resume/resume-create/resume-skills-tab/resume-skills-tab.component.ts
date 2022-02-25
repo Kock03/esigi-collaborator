@@ -15,6 +15,7 @@ import {
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
+import { ConfirmDialogService } from 'src/services/confirn-dialog.service';
 import { ResumeSkillDialog } from './resume-skill.dialog.component';
 
 @Component({
@@ -42,10 +43,17 @@ export class ResumeSkillsTabComponent implements OnInit {
     return this.resumeForm.controls['Skills'] as FormArray;
   }
 
-  constructor(private fb: FormBuilder, public dialog: MatDialog) {}
+  constructor(
+    private fb: FormBuilder,
+    public dialog: MatDialog,
+    private dialogService: ConfirmDialogService
+  ) {}
 
   ngOnInit(): void {
-    if (this.skillArray.value && this.skillArray.value.findIndex((skill: any) => skill == null) === -1) {
+    if (
+      this.skillArray.value &&
+      this.skillArray.value.findIndex((skill: any) => skill == null) === -1
+    ) {
       this.data = this.skillArray.value;
     }
 
@@ -65,7 +73,6 @@ export class ResumeSkillsTabComponent implements OnInit {
       }
     });
   }
-
 
   openDialog() {
     const dialogRef = this.dialog.open(ResumeSkillDialog, {
@@ -99,7 +106,20 @@ export class ResumeSkillsTabComponent implements OnInit {
   }
 
   deleteSkill(index: number) {
-    this.skillArray.removeAt(index);
+    const options = {
+      data: {
+        title: 'Anteção',
+        subtitle: 'Você tem certeza que deseja excluir essas informações?',
+      },
+      panelClass: 'confirm-modal',
+    };
+
+    this.dialogService.open(options);
+
+    this.dialogService.confirmed().subscribe(async (confirmed) => {
+      if (confirmed) {
+        this.skillArray.removeAt(index);
+      }
+    });
   }
 }
-

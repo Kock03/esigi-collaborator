@@ -11,6 +11,7 @@ import {
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
+import { ConfirmDialogService } from 'src/services/confirn-dialog.service';
 import { CollaboratorBankDialog } from './collaborator-bank-dialog.component';
 
 @Component({
@@ -24,7 +25,7 @@ export class CollaboratorBankTabComponent implements OnInit {
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
   @ViewChild('bankTable') bankTable!: MatTable<any>;
 
-  data: any[] = [];
+  data!: Array<any>;
 
   displayedBank: string[] = [
     'bank',
@@ -43,25 +44,21 @@ export class CollaboratorBankTabComponent implements OnInit {
     return this.collaboratorForm.controls['BankData'] as FormGroup;
   }
 
-  constructor(private fb: FormBuilder, public dialog: MatDialog) {}
+  constructor(
+    private fb: FormBuilder,
+    private dialogService: ConfirmDialogService,
+    public dialog: MatDialog
+  ) {}
 
-  ngOnInit(): void {                       
-
-  //  this.initObservables()
+  ngOnInit(): void {
+    this.data = new Array(this.bankArray.value);
   }
 
   initObservables() {
-    if (
-      this.bankArray.value.findIndex(
-        (bank: any) => bank == null
-       
-      ) === -1
-      
-    ) {
+    if (this.bankArray.value.findIndex((bank: any) => bank == null) === -1) {
       this.data = new Array(this.bankArray.value);
-   }
+    }
   }
-  
 
   openDialog() {
     const dialogRef = this.dialog.open(CollaboratorBankDialog, {
@@ -70,8 +67,10 @@ export class CollaboratorBankTabComponent implements OnInit {
       data: { bankForm: this.bankArray },
     });
     dialogRef.afterClosed().subscribe((bank) => {
-      this.data = new Array(this.bankArray.value);
-      this.bankTable.renderRows();
+      if (bank) {
+        this.data = new Array(this.bankArray.value);
+        this.bankTable.renderRows();
+      }
     });
   }
 
@@ -92,7 +91,21 @@ export class CollaboratorBankTabComponent implements OnInit {
   }
 
   deleteBank(index: number) {
-    this.data.splice(0, 1);
-    this.bankTable.renderRows();
+    const options = {
+      data: {
+        title: 'Anteção',
+        subtitle: 'Você tem certeza que deseja excluir essas informações?',
+      },
+      panelClass: 'confirm-modal',
+    };
+
+    this.dialogService.open(options);
+
+    this.dialogService.confirmed().subscribe(async (confirmed) => {
+      if (confirmed) {
+        this.data.splice(0, 1);
+        this.bankTable.renderRows();
+      }
+    });
   }
 }

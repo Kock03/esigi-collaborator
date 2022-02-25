@@ -16,6 +16,7 @@ import {
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
+import { ConfirmDialogService } from 'src/services/confirn-dialog.service';
 import { CollaboratorDocumentDialog } from './collaborator-document-dialog.component';
 
 @Component({
@@ -41,7 +42,11 @@ export class CollaboratorDocumentTabComponent implements OnInit {
     return this.collaboratorForm.controls['Documents'] as FormArray;
   }
 
-  constructor(private fb: FormBuilder, public dialog: MatDialog) {}
+  constructor(
+    private fb: FormBuilder,
+    public dialog: MatDialog,
+    private dialogService: ConfirmDialogService
+  ) {}
 
   ngOnInit(): void {
     if (
@@ -99,6 +104,20 @@ export class CollaboratorDocumentTabComponent implements OnInit {
   }
 
   deleteDocument(index: number) {
-    this.documentArray.removeAt(index);
+    const options = {
+      data: {
+        title: 'Anteção',
+        subtitle: 'Você tem certeza que deseja excluir essas informações?',
+      },
+      panelClass: 'confirm-modal',
+    };
+
+    this.dialogService.open(options);
+
+    this.dialogService.confirmed().subscribe(async (confirmed) => {
+      if (confirmed) {
+        this.documentArray.removeAt(index);
+      }
+    });
   }
 }

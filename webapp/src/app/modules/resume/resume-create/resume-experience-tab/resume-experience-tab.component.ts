@@ -14,9 +14,8 @@ import {
   MatDialogRef,
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
+import { ConfirmDialogService } from 'src/services/confirn-dialog.service';
 import { ResumeDialogExperience } from './resume-experience-dialog.component';
-
-
 
 export interface Experience {
   office: string;
@@ -50,9 +49,11 @@ export class ResumeExperienceTabComponent implements OnInit {
     return this.resumeForm.controls['Experiences'] as FormArray;
   }
 
-  // constructor(private dialog: MatDialog,) { }
-
-  constructor(private fb: FormBuilder, public dialog: MatDialog) {}
+  constructor(
+    private dialogService: ConfirmDialogService,
+    private fb: FormBuilder,
+    public dialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
     if (
@@ -84,8 +85,22 @@ export class ResumeExperienceTabComponent implements OnInit {
   }
 
   deleteExperience(index: number) {
-    this.experiencesArray.removeAt(index);
-    this.experienceList.splice(index, 1);
+    const options = {
+      data: {
+        title: 'Anteção',
+        subtitle: 'Você tem certeza que deseja excluir essas informações?',
+      },
+      panelClass: 'confirm-modal',
+    };
+
+    this.dialogService.open(options);
+
+    this.dialogService.confirmed().subscribe(async (confirmed) => {
+      if (confirmed) {
+        this.experiencesArray.removeAt(index);
+        this.experienceList.splice(index, 1);
+      }
+    });
   }
 
   getExperience(experienceSelected: any, index: number) {
@@ -98,8 +113,6 @@ export class ResumeExperienceTabComponent implements OnInit {
     this.index = index;
     dialogRef.afterClosed().subscribe((experience) => {
       this.experiencesArray.controls[this.index].setValue(experience);
-      // this.experienceList[this.index] = experience;
     });
   }
 }
-

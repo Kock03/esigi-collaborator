@@ -21,6 +21,7 @@ import {
 import { MatDialog } from '@angular/material/dialog';
 
 import { MatTable } from '@angular/material/table';
+import { ConfirmDialogService } from 'src/services/confirn-dialog.service';
 import { CollaboratorFinanceDialog } from './collaborator-finance-dialog.component';
 
 @Component({
@@ -56,7 +57,11 @@ export class CollaboratorFinanceTabComponent implements OnInit {
     return this.collaboratorForm.controls['Financials'] as FormArray;
   }
 
-  constructor(private fb: FormBuilder, public dialog: MatDialog) {}
+  constructor(
+    private fb: FormBuilder,
+    public dialog: MatDialog,
+    private dialogService: ConfirmDialogService
+  ) {}
 
   ngOnInit(): void {
     if (
@@ -116,6 +121,20 @@ export class CollaboratorFinanceTabComponent implements OnInit {
   }
 
   deleteFinance(index: number) {
-    this.financeArray.removeAt(index);
+    const options = {
+      data: {
+        title: 'Anteção',
+        subtitle: 'Você tem certeza que deseja excluir essas informações?',
+      },
+      panelClass: 'confirm-modal',
+    };
+
+    this.dialogService.open(options);
+
+    this.dialogService.confirmed().subscribe(async (confirmed) => {
+      if (confirmed) {
+        this.financeArray.removeAt(index);
+      }
+    });
   }
 }

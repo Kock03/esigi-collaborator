@@ -160,7 +160,10 @@ export class CollaboratorCreateComponent implements OnInit {
   }
 
   setFormValue() {
-    this.collaboratorForm.patchValue(this.collaborator);
+    if(this.collaborator){
+      this.collaboratorForm.patchValue(this.collaborator);
+    }
+   
   }
 
   async saveCollaborator() {
@@ -185,7 +188,7 @@ export class CollaboratorCreateComponent implements OnInit {
   navigate(direction: string) {
     if (this.step > 1 && direction === 'back') {
       this.step -= 1;
-    } else if (this.step < 9 && direction === 'next') {
+    } else if (this.step < 8 && direction === 'next') {
       this.step += 1;
     }
   }

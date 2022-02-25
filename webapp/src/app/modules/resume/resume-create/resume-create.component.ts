@@ -48,6 +48,7 @@ export class ResumeCreateComponent implements OnInit {
   async getResume() {
     try {
       this.resume = await this.resumeProvider.findOne(this.resumeId);
+      console.log("🚀 ~ file: resume-create.component.ts ~ line 51 ~ ResumeCreateComponent ~ getResume ~ this.resume ", this.resume )
     } catch (error) {
       console.error(error);
     }

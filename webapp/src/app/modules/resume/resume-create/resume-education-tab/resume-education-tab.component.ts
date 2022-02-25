@@ -16,6 +16,7 @@ import {
 } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
 import { MatTabGroup } from '@angular/material/tabs';
+import { ConfirmDialogService } from 'src/services/confirn-dialog.service';
 import { ResumeEducationDialog } from './resume-education-dialog.component';
 import { ResumeLanguageDialog } from './resume-language-dialog.component';
 
@@ -30,7 +31,6 @@ export class ResumeEducationTabComponent implements OnInit {
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
   @ViewChild('languageTable') languageTable!: MatTable<any>;
   @ViewChild('educationTable') educationTable!: MatTable<any>;
-
 
   dataLanguage: [] = [];
 
@@ -65,7 +65,11 @@ export class ResumeEducationTabComponent implements OnInit {
     return this.resumeForm.controls['Educations'] as FormArray;
   }
 
-  constructor(private fb: FormBuilder, public dialog: MatDialog) {}
+  constructor(
+    private dialogService: ConfirmDialogService,
+    private fb: FormBuilder,
+    public dialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
     if (
@@ -76,7 +80,7 @@ export class ResumeEducationTabComponent implements OnInit {
     ) {
       this.dataEducation = this.educationArray.value;
     } else {
-      this.educationArray.value.splice(0, 1)
+      this.educationArray.value.splice(0, 1);
     }
 
     if (
@@ -163,7 +167,21 @@ export class ResumeEducationTabComponent implements OnInit {
   }
 
   deleteLanguage(index: number) {
-    this.languageArray.removeAt(index);
+    const options = {
+      data: {
+        title: 'Anteção',
+        subtitle: 'Você tem certeza que deseja excluir essas informações?',
+      },
+      panelClass: 'confirm-modal',
+    };
+
+    this.dialogService.open(options);
+
+    this.dialogService.confirmed().subscribe(async (confirmed) => {
+      if (confirmed) {
+        this.languageArray.removeAt(index);
+      }
+    });
   }
 
   getEducation(educationSelected: any, index: number) {
@@ -180,7 +198,21 @@ export class ResumeEducationTabComponent implements OnInit {
   }
 
   deleteEducation(index: number) {
-    this.educationArray.removeAt(index);
+    const options = {
+      data: {
+        title: 'Anteção',
+        subtitle: 'Você tem certeza que deseja excluir essas informações?',
+      },
+      panelClass: 'confirm-modal',
+    };
+
+    this.dialogService.open(options);
+
+    this.dialogService.confirmed().subscribe(async (confirmed) => {
+      if (confirmed) {
+        this.educationArray.removeAt(index);
+      }
+    });
   }
 
   getLabel(label: string, element: any) {
@@ -206,5 +238,3 @@ export class ResumeEducationTabComponent implements OnInit {
     }
   }
 }
-
-

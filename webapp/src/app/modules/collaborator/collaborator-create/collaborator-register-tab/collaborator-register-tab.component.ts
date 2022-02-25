@@ -20,10 +20,10 @@ import { DateAdapter, MAT_DATE_FORMATS, NativeDateAdapter } from '@angular/mater
 import { ApiGateway } from 'src/api-gateway';
 import { CepService } from 'src/services/cep.service';
 
-export interface collaboratorTypes {
-  id: number;
-  name: string;
-}
+// export interface collaboratorTypes {
+//   id: number;
+//   name: string;
+// }
 
 export const PICK_FORMATS = {
   parse: { dateInput: { month: 'numeric', year: 'numeric', day: 'numeric' } },
@@ -72,17 +72,6 @@ export class CollaboratorRegisterTabComponent implements OnInit {
 
   typeControl = new FormControl();
 
-  types: collaboratorTypes[] = [
-    { id: 1, name: 'CLT' },
-    { id: 2, name: 'PJ' },
-    { id: 3, name: 'Cooperado' },
-  ];
-
-  Office: any = [
-    'Desenvolvedor NodeJS',
-    'Desenvolvedor Angular',
-    'Desenvolvedor React',
-  ];
 
   constructor(private fb: FormBuilder, private cepService: CepService) { }
 

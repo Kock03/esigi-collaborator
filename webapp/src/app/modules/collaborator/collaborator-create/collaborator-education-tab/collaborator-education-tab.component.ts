@@ -9,13 +9,11 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import {
-  MatDialog,
-} from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
+import { ConfirmDialogService } from 'src/services/confirn-dialog.service';
 import { CollaboratorEducationDialog } from './collaborator-education-dialog.component';
 import { CollaboratorLanguageDialog } from './collaborator-language-dialog.component';
-
 
 @Component({
   selector: 'app-collaborator-education-tab',
@@ -29,13 +27,9 @@ export class CollaboratorEducationTabComponent implements OnInit {
   @ViewChild('languageTable') languageTable!: MatTable<any>;
   @ViewChild('educationTable') educationTable!: MatTable<any>;
 
-
-
-
   dataLanguage: [] = [];
 
   dataEducation: [] = [];
-
 
   displayedEducation: string[] = [
     'schooling',
@@ -66,7 +60,11 @@ export class CollaboratorEducationTabComponent implements OnInit {
     return this.collaboratorForm.controls['Educations'] as FormArray;
   }
 
-  constructor(private fb: FormBuilder, public dialog: MatDialog) {}
+  constructor(
+    private dialogService: ConfirmDialogService,
+    private fb: FormBuilder,
+    public dialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
     if (
@@ -146,7 +144,6 @@ export class CollaboratorEducationTabComponent implements OnInit {
     this.onChange.next(true);
   }
 
- 
   getLanguage(languageSelected: any, index: number) {
     const dialogRef = this.dialog.open(CollaboratorLanguageDialog, {
       width: '500px',
@@ -156,13 +153,28 @@ export class CollaboratorEducationTabComponent implements OnInit {
 
     this.index = index;
     dialogRef.afterClosed().subscribe((language) => {
-      if(language){
-      this.languageArray.controls[this.index].setValue(language);
-    }});
+      if (language) {
+        this.languageArray.controls[this.index].setValue(language);
+      }
+    });
   }
 
   deleteLanguage(index: number) {
-    this.languageArray.removeAt(index);
+    const options = {
+      data: {
+        title: 'Anteção',
+        subtitle: 'Você tem certeza que deseja excluir essas informações?',
+      },
+      panelClass: 'confirm-modal',
+    };
+
+    this.dialogService.open(options);
+
+    this.dialogService.confirmed().subscribe(async (confirmed) => {
+      if (confirmed) {
+        this.languageArray.removeAt(index);
+      }
+    });
   }
 
   getEducation(educationSelected: any, index: number) {
@@ -181,9 +193,22 @@ export class CollaboratorEducationTabComponent implements OnInit {
   }
 
   deleteEducation(index: number) {
-    this.educationArray.removeAt(index);
-  }
+    const options = {
+      data: {
+        title: 'Anteção',
+        subtitle: 'Você tem certeza que deseja excluir essas informações?',
+      },
+      panelClass: 'confirm-modal',
+    };
 
+    this.dialogService.open(options);
+
+    this.dialogService.confirmed().subscribe(async (confirmed) => {
+      if (confirmed) {
+        this.educationArray.removeAt(index);
+      }
+    });
+  }
 
   getLabel(label: string, element: any) {
     if (!element) {
@@ -197,7 +222,7 @@ export class CollaboratorEducationTabComponent implements OnInit {
           ? 'Ensino Médio'
           : 'Ensino Superior';
       case 'situation': {
-        return element.situation == 1  
+        return element.situation == 1
           ? 'Parado'
           : element.situation == 2
           ? 'Completo'
@@ -207,7 +232,4 @@ export class CollaboratorEducationTabComponent implements OnInit {
         return;
     }
   }
-
 }
-
-

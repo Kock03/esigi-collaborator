@@ -24,6 +24,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
   
     initForm(): void {
       this.bankForm = this.data.bankForm
+     
+      
       if (this.data && this.data.bankForm) {
         this.bankForm.patchValue(this.data.bankForm);
       }
@@ -34,7 +36,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
     }
   
     save() {
-      this.dialogRef.close(this.data.bankForm.getRawValue());
+      this.dialogRef.close(this.bankForm.getRawValue());
     }
   }
   

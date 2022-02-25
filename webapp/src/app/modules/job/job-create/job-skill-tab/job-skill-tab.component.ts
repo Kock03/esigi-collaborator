@@ -15,6 +15,7 @@ import {
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
+import { ConfirmDialogService } from 'src/services/confirn-dialog.service';
 import { JobDialogSkill } from './job-skill-dialog.component';
 
 @Component({
@@ -45,7 +46,11 @@ export class JobSkillTabComponent implements OnInit {
     return this.jobForm.controls['Knowledges'] as FormArray;
   }
 
-  constructor(public dialog: MatDialog, private fb: FormBuilder) {}
+  constructor(
+    public dialog: MatDialog,
+    private fb: FormBuilder,
+    private dialogService: ConfirmDialogService
+  ) {}
 
   ngOnInit(): void {
     if (
@@ -101,6 +106,20 @@ export class JobSkillTabComponent implements OnInit {
   }
 
   deleteKnowledge(index: number) {
-    this.knowledgeArray.removeAt(index);
+    const options = {
+      data: {
+        title: 'Anteção',
+        subtitle: 'Você tem certeza que deseja excluir essas informações?',
+      },
+      panelClass: 'confirm-modal',
+    };
+
+    this.dialogService.open(options);
+
+    this.dialogService.confirmed().subscribe(async (confirmed) => {
+      if (confirmed) {
+        this.knowledgeArray.removeAt(index);
+      }
+    });
   }
 }
