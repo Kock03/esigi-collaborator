@@ -83,7 +83,7 @@ export class CollaboratorRegisterTabComponent implements OnInit {
         'Address'
       ] as FormGroup;
 
-      addressForm.controls['cep'].valueChanges.subscribe((res) => {});
+      addressForm.controls['cep'].valueChanges.subscribe((res) => { });
     });
   }
 

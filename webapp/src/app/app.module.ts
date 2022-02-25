@@ -41,8 +41,8 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
     MatListModule,
     ConfirmDialogModule,
     MatSnackBarModule,
-                                                                                                                                                                            ],
+  ],
   providers: [SnackBarService, ConfirmDialogService],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

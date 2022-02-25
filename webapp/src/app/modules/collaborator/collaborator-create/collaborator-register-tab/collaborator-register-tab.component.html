@@ -6,8 +6,7 @@
           <label for="fileInput">
             <img
               src="https://st.depositphotos.com/1734074/4228/v/450/depositphotos_42286141-stock-illustration-vector-man-with-mustache-in.jpg"
-              alt=""
-            />
+              alt="" />
           </label>
           <input type="file" id="fileInput" (change)="fileChanged($event)" />
         </div>
@@ -15,12 +14,7 @@
         <div fxFlex="100" fxLayoutGap="16px" fxFlexAlign="end">
           <mat-form-field fxFlex="30" appearance="outline">
             <mat-label>Tipo de Colaborador</mat-label>
-            <mat-select
-              matInput
-              disableRipple
-              formControlName="collaboratorTypes"
-       
-            >
+            <mat-select matInput disableRipple formControlName="collaboratorTypes">
               <mat-option [value]="1">CLT</mat-option>
               <mat-option [value]="2">PJ</mat-option>
               <mat-option [value]="3">Cooperado</mat-option>
@@ -29,25 +23,17 @@
 
           <mat-form-field fxFlex="35" appearance="outline">
             <mat-label>Cargo</mat-label>
-            <input
-              matInput
-              placeholder="Cargo"
-              formControlName="office"
-            />
+            <input matInput placeholder="Cargo" formControlName="office" />
           </mat-form-field>
 
 
           <mat-form-field fxFlex="35" appearance="outline">
             <mat-label>{{
               collaboratorForm.controls["collaboratorTypes"].value !== 2
-                ? "Nome"
-                : "Razão Social"
-            }}</mat-label>
-            <input
-              matInput
-              placeholder="Nome"
-              formControlName="firstNameCorporateName"
-            />
+              ? "Nome"
+              : "Razão Social"
+              }}</mat-label>
+            <input matInput placeholder="Nome" formControlName="firstNameCorporateName" />
           </mat-form-field>
         </div>
       </div>
@@ -56,17 +42,13 @@
         <mat-form-field fxFlex="35" appearance="outline">
           <mat-label>
             {{
-              collaboratorForm.controls["collaboratorTypes"].value !== 2
-                ? "Sobrenome"
-                : "Nome Fantasia"
+            collaboratorForm.controls["collaboratorTypes"].value !== 2
+            ? "Sobrenome"
+            : "Nome Fantasia"
             }}
           </mat-label>
 
-          <input
-            matInput
-            placeholder="Sobrenome"
-            formControlName="lastNameFantasyName"
-          />
+          <input matInput formControlName="lastNameFantasyName" placeholder="Sobrenome" />
         </mat-form-field>
 
         <mat-form-field fxFlex="30" appearance="outline">
@@ -77,49 +59,23 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field
-          fxFlex="35"
-          appearance="outline"
-          *ngIf="collaboratorForm.controls['collaboratorTypes'].value !== 2"
-        >
+        <mat-form-field fxFlex="35" appearance="outline"
+          *ngIf="collaboratorForm.controls['collaboratorTypes'].value !== 2">
           <mat-label>CPF</mat-label>
-          <input
-            matInput
-            placeholder="Nome"
-            formControlName="cpf"
-            mask="000.000.000-00"
-          />
+          <input matInput placeholder="" formControlName="cpf" mask="000.000.000-00" />
         </mat-form-field>
 
-        <mat-form-field
-          fxFlex="35"
-          appearance="outline"
-          *ngIf="collaboratorForm.controls['collaboratorTypes'].value == 2"
-        >
+        <mat-form-field fxFlex="35" appearance="outline"
+          *ngIf="collaboratorForm.controls['collaboratorTypes'].value == 2">
           <mat-label>CNPJ</mat-label>
-          <input
-            matInput
-            placeholder="Nome"
-            formControlName="cnpj"
-            mask="00.000.000/0000-00"
-          />
+          <input matInput placeholder="Nome" formControlName="cnpj" mask="00.000.000/0000-00" />
         </mat-form-field>
 
-        <mat-form-field
-          *ngIf="collaboratorForm.controls['collaboratorTypes'].value !== 2"
-          fxFlex="30"
-          appearance="outline"
-        >
+        <mat-form-field *ngIf="collaboratorForm.controls['collaboratorTypes'].value !== 2" fxFlex="30"
+          appearance="outline">
           <mat-label>Data Aniversário</mat-label>
-          <input
-            matInput
-            [matDatepicker]="picker"
-            formControlName="birthDate"
-          />
-          <mat-datepicker-toggle
-            matSuffix
-            [for]="picker"
-          ></mat-datepicker-toggle>
+          <input matInput [matDatepicker]="picker" formControlName="birthDate" />
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
       </div>
@@ -137,102 +93,50 @@
 
         <mat-form-field fxFlex="3 0" appearance="outline">
           <mat-label>Data Admissão</mat-label>
-          <input
-            matInput
-            [matDatepicker]="picker"
-            formControlName="admissionDate"
-          />
-          <mat-datepicker-toggle
-            matSuffix
-            [for]="picker"
-          ></mat-datepicker-toggle>
+          <input matInput [matDatepicker]="picker" formControlName="admissionDate" />
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
 
-        <mat-checkbox
-          class="checkbox"
-          color="primary"
-          fxFlex="10"
-          formControlName="active"
-          fxLayoutAlign="center center"
-          >Ativo</mat-checkbox
-        >
+        <mat-checkbox class="checkbox" color="primary" fxFlex="10" formControlName="active"
+          fxLayoutAlign="center center">Ativo</mat-checkbox>
         <div formGroupName="Phone" fxFlex="100" fxLayoutGap="16px">
           <mat-form-field fxFlex="15" appearance="outline">
             <mat-label>DDI</mat-label>
-            <input
-              matInput
-              placeholder="DDI"
-              formControlName="ddi"
-              mask="+00"
-            />
+            <input matInput placeholder="DDI" formControlName="ddi" mask="+00" />
           </mat-form-field>
 
           <mat-form-field fxFlex="15" appearance="outline">
             <mat-label>DDD</mat-label>
-            <input
-              matInput
-              placeholder="DDD"
-              formControlName="ddd"
-              mask="(00)"
-            />
+            <input matInput placeholder="DDD" formControlName="ddd" mask="(00)" />
           </mat-form-field>
 
           <mat-form-field fxFlex="70" appearance="outline">
             <mat-label>Telefone</mat-label>
-            <input
-              matInput
-              placeholder="Nome"
-              formControlName="phoneNumber"
-              mask="00000-0000"
-            />
+            <input matInput placeholder="Telefone" formControlName="phoneNumber" mask="00000-0000" />
           </mat-form-field>
         </div>
       </div>
 
       <div fxFlex="100" fxLayoutGap="16px">
-        <mat-form-field
-          fxFlex="20"
-          appearance="outline"
-          *ngIf="collaboratorForm.controls['collaboratorTypes'].value == 2"
-        >
+        <mat-form-field fxFlex="20" appearance="outline"
+          *ngIf="collaboratorForm.controls['collaboratorTypes'].value == 2">
           <mat-label>Inscrição Estadual</mat-label>
-          <input
-            matInput
-            placeholder="Nome"
-            formControlName="stateRegistration"
-          />
+          <input matInput placeholder="Inscrição Estadual" formControlName="stateRegistration" />
         </mat-form-field>
 
-        <mat-form-field
-          fxFlex="30"
-          appearance="outline"
-          *ngIf="collaboratorForm.controls['collaboratorTypes'].value == 2"
-        >
+        <mat-form-field fxFlex="30" appearance="outline"
+          *ngIf="collaboratorForm.controls['collaboratorTypes'].value == 2">
           <mat-label>Inscrição municipal</mat-label>
-          <input
-            matInput
-            placeholder="Nome"
-            formControlName="municipalInscription"
-          />
+          <input matInput placeholder="Inscrição municipal" formControlName="municipalInscription" />
         </mat-form-field>
 
- 
-        <mat-form-field
-          *ngIf="collaboratorForm.controls['collaboratorTypes'].value == 2"
-          fxFlex="50"
-          appearance="outline"
-        >
+
+        <mat-form-field *ngIf="collaboratorForm.controls['collaboratorTypes'].value == 2" fxFlex="50"
+          appearance="outline">
           <mat-label>Data Aniversário</mat-label>
-          <input
-            matInput
-            [matDatepicker]="picker"
-            formControlName="birthDate"
-          />
-          <mat-datepicker-toggle
-            matSuffix
-            [for]="picker"
-          ></mat-datepicker-toggle>
+          <input matInput [matDatepicker]="picker" formControlName="birthDate" />
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
       </div>
@@ -240,13 +144,7 @@
       <div fxFlex="100" fxLayoutGap="16px" formGroupName="Address">
         <mat-form-field fxFlex="25" appearance="outline">
           <mat-label>CEP </mat-label>
-          <input
-            matInput
-            placeholder="CEP"
-            formControlName="cep"
-            type="text"
-            mask="99999-999"
-          />
+          <input matInput placeholder="CEP" formControlName="cep" type="text" mask="99999-999" />
           <mat-icon matSuffix style="cursor: pointer" (click)="getAddress()">
             search
           </mat-icon>
@@ -254,27 +152,23 @@
 
         <mat-form-field fxFlex="40" appearance="outline">
           <mat-label>Rua</mat-label>
-          <input matInput placeholder="Nome" formControlName="street" />
+          <input matInput placeholder="Rua" formControlName="street" />
         </mat-form-field>
 
         <mat-form-field fxFlex="15" appearance="outline">
           <mat-label>Número</mat-label>
-          <input type="number" matInput placeholder="Nome" formControlName="number" />
+          <input type="number" matInput placeholder="Número" formControlName="number" />
         </mat-form-field>
         <mat-form-field fxFlex="45" appearance="outline">
           <mat-label>Estado</mat-label>
-          <input matInput placeholder="Nome" formControlName="state" />
+          <input matInput placeholder="Estado" formControlName="state" />
         </mat-form-field>
       </div>
 
       <div fxFlex="100" fxLayoutGap="16px" formGroupName="Address">
         <mat-form-field fxFlex="40" appearance="outline">
           <mat-label>Complemento</mat-label>
-          <input
-            matInput
-            placeholder="Complemento"
-            formControlName="complement"
-          />
+          <input matInput placeholder="Complemento" formControlName="complement" />
         </mat-form-field>
 
         <mat-form-field fxFlex="20" appearance="outline">
@@ -284,19 +178,19 @@
 
         <mat-form-field fxFlex="40" appearance="outline">
           <mat-label>Cidade</mat-label>
-          <input matInput placeholder="Nome" formControlName="city" />
+          <input matInput placeholder="Cidade" formControlName="city" />
         </mat-form-field>
       </div>
 
       <div fxFlex="100" fxLayoutGap="16px">
         <mat-form-field fxFlex="50" appearance="outline">
           <mat-label>Email</mat-label>
-          <input matInput placeholder="Nome" formControlName="email" />
+          <input matInput placeholder="Email" formControlName="email" />
         </mat-form-field>
 
         <mat-form-field fxFlex="50" appearance="outline">
           <mat-label>Site</mat-label>
-          <input matInput placeholder="Nome" formControlName="site" />
+          <input matInput placeholder="Site" formControlName="site" />
         </mat-form-field>
       </div>
 
