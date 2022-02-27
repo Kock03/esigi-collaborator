@@ -1,10 +1,8 @@
-import { BehaviroalInterviewsEntity } from 'src/app/behavioral-interviews/behavioral-interviews.entity';
-import { ClientInterviewsEntity } from 'src/app/client-interviews/client-interviews.entity';
+import { InterviewsEnitiy } from 'src/app/interviews/interviews.entity';
 import { KnowledgesEntity } from 'src/app/knowledges/knowledges.entity';
 import { LanguagesEntity } from 'src/app/languages/languages.entity';
 import { ReturnsEntity } from 'src/app/returns/returns.entity';
 import { SenioritiesEntity } from 'src/app/seniorities/seniorities.entity';
-import { TechnicalInterviewsEntity } from 'src/app/technical-interviews/technical-interviews.entity';
 import { Schooling } from './schooling.enum';
 import { Status } from './status.enum';
 import { Type } from './type.enum';
@@ -35,7 +33,5 @@ export declare class CreateJobsDto {
     openingDate: Date;
     Seniorities: SenioritiesEntity;
     Languages: LanguagesEntity[];
-    behaviorInterviews: BehaviroalInterviewsEntity[];
-    clientInterviews: ClientInterviewsEntity[];
-    technicalInterviews: TechnicalInterviewsEntity[];
+    interviews: InterviewsEnitiy[];
 }

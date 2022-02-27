@@ -47,10 +47,6 @@ export class TechnicalInterviewsEntity {
   @Column()
   situational: Situation;
 
-  @ManyToOne(() => JobsEntity, job => job.TechnicalInterviews, { onDelete: "CASCADE", eager: true })
-  @JoinColumn()
-  Job: JobsEntity;
-
   @CreateDateColumn()
   createdAt: Date;
 

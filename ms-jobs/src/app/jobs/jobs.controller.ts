@@ -28,6 +28,11 @@ export class JobsController {
     return await this.jobsService.findOneOrFail({ id });
   }
 
+  // @Get('interviews/:id')
+  // async findInterviews(@Param('id', new ParseUUIDPipe()) id: string) {
+  //   return await this.jobsService.findInterviewsList({ id });
+  // }
+
   @Post()
   async store(@Body() body: CreateJobsDto) {
     return await this.jobsService.store(body);

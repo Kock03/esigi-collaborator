@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import {
+  IsArray,
   IsBoolean,
   IsDate,
   IsEnum,
@@ -12,6 +13,7 @@ import {
 } from 'class-validator';
 import { BehaviroalInterviewsEntity } from 'src/app/behavioral-interviews/behavioral-interviews.entity';
 import { ClientInterviewsEntity } from 'src/app/client-interviews/client-interviews.entity';
+import { InterviewsEnitiy } from 'src/app/interviews/interviews.entity';
 import { KnowledgesEntity } from 'src/app/knowledges/knowledges.entity';
 import { LanguagesEntity } from 'src/app/languages/languages.entity';
 import { SenioritiesEntity } from 'src/app/seniorities/seniorities.entity';
@@ -141,13 +143,6 @@ export class UpdateJobsDto {
 
   @ApiProperty()
   @IsOptional()
-  behaviorInterviews: BehaviroalInterviewsEntity[];
-
-  @ApiProperty()
-  @IsOptional()
-  clientInterviews: ClientInterviewsEntity[];
-
-  @ApiProperty()
-  @IsOptional()
-  technicalInterviews: TechnicalInterviewsEntity[];
+  @IsArray()
+  interviews: InterviewsEnitiy[];
 }

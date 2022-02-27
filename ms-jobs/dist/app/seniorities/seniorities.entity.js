@@ -51,7 +51,7 @@ __decorate([
     __metadata("design:type", Date)
 ], SenioritiesEntity.prototype, "deletedAt", void 0);
 SenioritiesEntity = __decorate([
-    (0, typeorm_1.Entity)()
+    (0, typeorm_1.Entity)({ name: 'seniorities' })
 ], SenioritiesEntity);
 exports.SenioritiesEntity = SenioritiesEntity;
 //# sourceMappingURL=seniorities.entity.js.map

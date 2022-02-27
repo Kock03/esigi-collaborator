@@ -4,12 +4,13 @@ import {
   IsDate,
   IsEnum,
   IsNotEmpty,
+  IsObject,
   IsOptional,
   IsString,
   MaxLength,
   MinLength,
 } from 'class-validator';
-import { HiringPreferencesEntity } from 'src/app/hiringPreferences/hiringPreferences.entity';
+import { HiringPreferencesEntity } from 'src/app/hiring-preferences/hiring-preferences.entity';
 import { JobsEntity } from 'src/app/jobs/jobs.entity';
 import { Presentation } from '../enums/presentation.enum';
 import { Punctuality } from '../enums/punctuality.enum';
@@ -75,8 +76,8 @@ export class CreateBehaviorInterviewsDto {
   availabilityOfInitialize: string;
 
   @ApiProperty()
-  @IsNotEmpty()
-  hiringPreferences: HiringPreferencesEntity;
+  @IsOptional()
+  hiringPreference: HiringPreferencesEntity;
 
   @ApiProperty()
   @IsNotEmpty()

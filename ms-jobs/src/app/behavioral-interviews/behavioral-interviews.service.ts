@@ -2,6 +2,7 @@ import { HttpException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { FindConditions, FindOneOptions, Repository } from 'typeorm';
 import { NotFoundException } from '../exceptions/not-found-exception';
+import { JobsEntity } from '../jobs/jobs.entity';
 import { BehaviroalInterviewsEntity } from './behavioral-interviews.entity';
 import { CreateBehaviorInterviewsDto } from './dtos/create-behavioral-interviews.dto';
 import { UpdateBehaviorInterviewsDto } from './dtos/update-behavioral-interviews.dto';
@@ -11,7 +12,7 @@ export class BehavioralInterviewsService {
   constructor(
     @InjectRepository(BehaviroalInterviewsEntity)
     private readonly behavioralInterviewsRepository: Repository<BehaviroalInterviewsEntity>,
-  ) { }
+  ) {}
 
   async findAll() {
     const interviews = await this.behavioralInterviewsRepository.find();

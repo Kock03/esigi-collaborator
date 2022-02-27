@@ -13,7 +13,7 @@ async function bootstrap() {
     .addTag('collaborators')
     .build();
   const document = SwaggerModule.createDocument(app, config, {
-    deepScanRoutes: true,
+       deepScanRoutes: true,
   });
 
   SwaggerModule.setup('api', app, document);

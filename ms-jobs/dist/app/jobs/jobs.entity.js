@@ -19,10 +19,8 @@ const typeOfContract_enum_1 = require("./dtos/typeOfContract.enum");
 const workplace_enum_1 = require("./dtos/workplace.enum");
 const seniorities_entity_1 = require("../seniorities/seniorities.entity");
 const languages_entity_1 = require("../languages/languages.entity");
-const behavioral_interviews_entity_1 = require("../behavioral-interviews/behavioral-interviews.entity");
-const client_interviews_entity_1 = require("../client-interviews/client-interviews.entity");
-const technical_interviews_entity_1 = require("../technical-interviews/technical-interviews.entity");
 const returns_entity_1 = require("../returns/returns.entity");
+const interviews_entity_1 = require("../interviews/interviews.entity");
 let JobsEntity = class JobsEntity {
 };
 __decorate([
@@ -137,26 +135,12 @@ __decorate([
     __metadata("design:type", seniorities_entity_1.SenioritiesEntity)
 ], JobsEntity.prototype, "Seniorities", void 0);
 __decorate([
-    (0, typeorm_1.OneToMany)(() => behavioral_interviews_entity_1.BehaviroalInterviewsEntity, (Behaviroal) => Behaviroal.Job, {
+    (0, typeorm_1.OneToMany)(() => interviews_entity_1.InterviewsEnitiy, (interviews) => interviews.jobs, {
         cascade: ['insert', 'update', 'soft-remove'],
-        orphanedRowAction: 'delete',
     }),
+    (0, typeorm_1.JoinTable)({ name: 'jobs_interviews' }),
     __metadata("design:type", Array)
-], JobsEntity.prototype, "BehavioralInterviews", void 0);
-__decorate([
-    (0, typeorm_1.OneToMany)(() => technical_interviews_entity_1.TechnicalInterviewsEntity, (technical) => technical.Job, {
-        cascade: ['insert', 'update', 'soft-remove'],
-        orphanedRowAction: 'delete',
-    }),
-    __metadata("design:type", Array)
-], JobsEntity.prototype, "TechnicalInterviews", void 0);
-__decorate([
-    (0, typeorm_1.OneToMany)(() => client_interviews_entity_1.ClientInterviewsEntity, (client) => client.Job, {
-        cascade: ['insert', 'update', 'soft-remove'],
-        orphanedRowAction: 'delete',
-    }),
-    __metadata("design:type", Array)
-], JobsEntity.prototype, "ClientInterviews", void 0);
+], JobsEntity.prototype, "interviews", void 0);
 __decorate([
     (0, typeorm_1.OneToMany)(() => returns_entity_1.ReturnsEntity, (returns) => returns.Job, {
         cascade: ['insert', 'update', 'soft-remove'],

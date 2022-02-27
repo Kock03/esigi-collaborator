@@ -17,6 +17,7 @@ import {
 } from 'class-validator';
 import { BehaviroalInterviewsEntity } from 'src/app/behavioral-interviews/behavioral-interviews.entity';
 import { ClientInterviewsEntity } from 'src/app/client-interviews/client-interviews.entity';
+import { InterviewsEnitiy } from 'src/app/interviews/interviews.entity';
 import { KnowledgesEntity } from 'src/app/knowledges/knowledges.entity';
 import { LanguagesEntity } from 'src/app/languages/languages.entity';
 import { ReturnsEntity } from 'src/app/returns/returns.entity';
@@ -153,15 +154,6 @@ export class CreateJobsDto {
 
   @ApiProperty()
   @IsOptional()
-  behaviorInterviews: BehaviroalInterviewsEntity[];
-
-  @ApiPropertyOptional()
   @IsArray()
-  @IsOptional()
-  clientInterviews: ClientInterviewsEntity[];
-
-  @ApiPropertyOptional()
-  @IsArray()
-  @IsOptional()
-  technicalInterviews: TechnicalInterviewsEntity[];
+  interviews: InterviewsEnitiy[];
 }

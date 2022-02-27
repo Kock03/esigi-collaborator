@@ -1,0 +1,26 @@
+import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { BehaviroalInterviewsEntity } from '../behavioral-interviews/behavioral-interviews.entity';
+
+@Entity({ name: 'hiring_preferences' })
+export class HiringPreferencesEntity {
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
+
+  @Column()
+  intern: boolean;
+
+  @Column()
+  naturalPerson: boolean;
+
+  @Column()
+  legalPerson: boolean;
+
+  @Column()
+  cooperative: boolean;
+
+  @OneToOne(
+    () => BehaviroalInterviewsEntity,
+    (behaviroalInterviews) => behaviroalInterviews.hiringPreference,
+  )
+  BehaviroalInterview: BehaviroalInterviewsEntity;
+}

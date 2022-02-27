@@ -47,7 +47,6 @@
             : "Nome Fantasia"
             }}
           </mat-label>
-
           <input matInput formControlName="lastNameFantasyName" placeholder="Sobrenome" />
         </mat-form-field>
 
@@ -62,19 +61,19 @@
         <mat-form-field fxFlex="35" appearance="outline"
           *ngIf="collaboratorForm.controls['collaboratorTypes'].value !== 2">
           <mat-label>CPF</mat-label>
-          <input matInput placeholder="" formControlName="cpf" mask="000.000.000-00" />
+          <input matInput placeholder="CPF" formControlName="cpf" mask="000.000.000-00" />
         </mat-form-field>
 
         <mat-form-field fxFlex="35" appearance="outline"
           *ngIf="collaboratorForm.controls['collaboratorTypes'].value == 2">
           <mat-label>CNPJ</mat-label>
-          <input matInput placeholder="Nome" formControlName="cnpj" mask="00.000.000/0000-00" />
+          <input matInput placeholder="CNPJ" formControlName="cnpj" mask="00.000.000/0000-00" />
         </mat-form-field>
 
         <mat-form-field *ngIf="collaboratorForm.controls['collaboratorTypes'].value !== 2" fxFlex="30"
           appearance="outline">
           <mat-label>Data Aniversário</mat-label>
-          <input matInput [matDatepicker]="picker" formControlName="birthDate" />
+          <input matInput [matDatepicker]="picker" formControlName="birthDate" placeholder="Data Aniversário" />
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
@@ -93,7 +92,7 @@
 
         <mat-form-field fxFlex="3 0" appearance="outline">
           <mat-label>Data Admissão</mat-label>
-          <input matInput [matDatepicker]="picker" formControlName="admissionDate" />
+          <input matInput [matDatepicker]="picker" formControlName="admissionDate" placeholder="Data Admissão"/>
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
@@ -113,7 +112,7 @@
 
           <mat-form-field fxFlex="70" appearance="outline">
             <mat-label>Telefone</mat-label>
-            <input matInput placeholder="Telefone" formControlName="phoneNumber" mask="00000-0000" />
+            <input matInput placeholder="Telefone" formControlName="phoneNumber" mask="0000-0000||00000-0000" />
           </mat-form-field>
         </div>
       </div>
@@ -135,7 +134,7 @@
         <mat-form-field *ngIf="collaboratorForm.controls['collaboratorTypes'].value == 2" fxFlex="50"
           appearance="outline">
           <mat-label>Data Aniversário</mat-label>
-          <input matInput [matDatepicker]="picker" formControlName="birthDate" />
+          <input matInput [matDatepicker]="picker" formControlName="birthDate" placeholder="Data Aniversário" />
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>

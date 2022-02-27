@@ -17,7 +17,7 @@ export class ClientInterviewsService {
   constructor(
     @InjectRepository(ClientInterviewsEntity)
     private readonly clientInterviewsRepository: Repository<ClientInterviewsEntity>,
-  ) { }
+  ) {}
 
   async findAll() {
     return await this.clientInterviewsRepository.find();
@@ -38,7 +38,7 @@ export class ClientInterviewsService {
   }
 
   async store(data: CreateClientInterviewsDto) {
-    const interview = await this.clientInterviewsRepository.create(data);
+    const interview = this.clientInterviewsRepository.create(data);
     return await this.clientInterviewsRepository.save(interview);
   }
 

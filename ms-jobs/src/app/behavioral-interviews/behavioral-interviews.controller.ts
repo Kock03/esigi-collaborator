@@ -8,15 +8,17 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
+import { stringify } from 'querystring';
+import { BehaviroalInterviewsEntity } from './behavioral-interviews.entity';
 import { BehavioralInterviewsService } from './behavioral-interviews.service';
 import { CreateBehaviorInterviewsDto } from './dtos/create-behavioral-interviews.dto';
 import { UpdateBehaviorInterviewsDto } from './dtos/update-behavioral-interviews.dto';
 
-@Controller('/api/v1/behaviroalInterviews')
+@Controller('/api/v1/behaviroal-interviews')
 export class BehavioralInterviewsController {
   constructor(
     private readonly behavioralInterviewsService: BehavioralInterviewsService,
-  ) { }
+  ) {}
 
   @Get()
   async index() {

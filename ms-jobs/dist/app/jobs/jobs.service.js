@@ -27,7 +27,9 @@ let JobsService = class JobsService {
         return jobsWhiteAll;
     }
     async findOneOrFail(conditions, options) {
-        options = { relations: ['BehavioralInterviews', 'TechnicalInterviews', 'ClientInterviews', 'Returns'] };
+        options = {
+            relations: ['Returns'],
+        };
         try {
             return await this.jobsRepository.findOneOrFail(conditions, options);
         }

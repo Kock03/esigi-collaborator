@@ -14,7 +14,7 @@ export class CollaboratorsService {
   constructor(
     @InjectRepository(CollaboratorsEntity)
     private readonly collaboratorsRepository: Repository<CollaboratorsEntity>,
-  ) {}
+  ) { }
 
   async findAll() {
     const collaboratorsWhiteAll = await this.collaboratorsRepository
