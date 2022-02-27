@@ -26,36 +26,36 @@ import { Workplace } from './workplace.enum';
 
 export class UpdateJobsDto {
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
   @MinLength(3)
   @MaxLength(80)
   requester: string;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsEnum(Status)
   status: Status;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsBoolean()
   publish: boolean;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
   @MinLength(3)
   @MaxLength(80)
   client: string;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsEnum(Type)
   typeOfJob: Type;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsBoolean()
   temporary: boolean;
 
@@ -65,53 +65,51 @@ export class UpdateJobsDto {
   monthTime: string;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
   @MinLength(3)
   @MaxLength(80)
   jobName: string;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   startForecast: Date;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsNumber()
   jobNumber: number;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsEnum(TypeOfContract)
   typeOfContract: TypeOfContract;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsEnum(Workplace)
   workplace: Workplace;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
   workingDay: string;
 
   @ApiProperty()
-  @IsNotEmpty()
-  @IsNumber()
+  @IsOptional()
   minimumValue: number;
 
   @ApiProperty()
-  @IsNotEmpty()
-  @IsNumber()
+  @IsOptional()
   maximumValue: number;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsEnum(Workplace)
   schooling: Schooling;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
   collaboratorActivities: string;
 
@@ -120,21 +118,21 @@ export class UpdateJobsDto {
   Knowledges: KnowledgesEntity[];
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
   skills: string;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
   attitudes: string;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   openingDate: Date;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   Seniorities: SenioritiesEntity;
 
   @ApiProperty()

@@ -16,7 +16,7 @@ export class ClientInterviewProvider {
 
     findAll(): Promise<any> {
         return new Promise((resolve, reject) => {
-            this.apiGateway.get(environment.JOBS_MS + 'clientInterviews').subscribe((response: HttpResponse<any>) => {
+            this.apiGateway.get(environment.JOBS_MS + 'client-interviews').subscribe((response: HttpResponse<any>) => {
                 resolve(response.body);
             }, reject);
         });
@@ -24,7 +24,7 @@ export class ClientInterviewProvider {
 
     findOne(id: string): Promise<any> {
         return new Promise((resolve, reject) => {
-            this.apiGateway.get(environment.JOBS_MS + 'clientInterviews', { id: id }).subscribe((response: HttpResponse<any>) => {
+            this.apiGateway.get(environment.JOBS_MS + 'client-interviews', { id: id }).subscribe((response: HttpResponse<any>) => {
                 resolve(response.body);
             }, reject);
         });
@@ -33,7 +33,7 @@ export class ClientInterviewProvider {
 
     update(clientInterview: any): Promise<any> {
         return new Promise((resolve, reject) => {
-            this.apiGateway.put(environment.JOBS_MS + 'clientInterviews', clientInterview).subscribe((response: HttpResponse<any>) => {
+            this.apiGateway.put(environment.JOBS_MS + 'client-interviews', clientInterview).subscribe((response: HttpResponse<any>) => {
                 resolve(response.body);
             }, reject);
         });
@@ -41,7 +41,7 @@ export class ClientInterviewProvider {
 
     store(clientInterview: any): Promise<any> {
         return new Promise((resolve, reject) => {
-            this.apiGateway.post(environment.JOBS_MS + 'clientInterviews', clientInterview).subscribe((response: HttpResponse<any>) => {
+            this.apiGateway.post(environment.JOBS_MS + 'client-interviews', clientInterview).subscribe((response: HttpResponse<any>) => {
                 resolve(response.body);
             }, reject);
         });
@@ -49,7 +49,7 @@ export class ClientInterviewProvider {
 
     destroy(clientInterview: any): Promise<any> {
         return new Promise((resolve, reject) => {
-            this.apiGateway.delete(environment.JOBS_MS + 'clientInterviews', clientInterview).subscribe((response: HttpResponse<any>) => {
+            this.apiGateway.delete(environment.JOBS_MS + 'client-interviews', clientInterview).subscribe((response: HttpResponse<any>) => {
                 resolve(response.body);
             }, reject);
         })

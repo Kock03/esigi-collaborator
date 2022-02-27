@@ -16,7 +16,7 @@ export class TechnicalInterviewProvider {
 
     findAll(): Promise<any> {
         return new Promise((resolve, reject) => {
-            this.apiGateway.get(environment.JOBS_MS + 'technicalInterviews').subscribe((response: HttpResponse<any>) => {
+            this.apiGateway.get(environment.JOBS_MS + 'technical-interviews').subscribe((response: HttpResponse<any>) => {
                 resolve(response.body);
             }, reject);
         });
@@ -24,7 +24,7 @@ export class TechnicalInterviewProvider {
 
     findOne(id: string): Promise<any> {
         return new Promise((resolve, reject) => {
-            this.apiGateway.get(environment.JOBS_MS + 'technicalInterviews', { id: id }).subscribe((response: HttpResponse<any>) => {
+            this.apiGateway.get(environment.JOBS_MS + 'technical-interviews', { id: id }).subscribe((response: HttpResponse<any>) => {
                 resolve(response.body);
             }, reject);
         });
@@ -33,7 +33,7 @@ export class TechnicalInterviewProvider {
 
     update(technicalInterview: any): Promise<any> {
         return new Promise((resolve, reject) => {
-            this.apiGateway.put(environment.JOBS_MS + 'technicalInterviews', technicalInterview).subscribe((response: HttpResponse<any>) => {
+            this.apiGateway.put(environment.JOBS_MS + 'technical-interviews', technicalInterview).subscribe((response: HttpResponse<any>) => {
                 resolve(response.body);
             }, reject);
         });
@@ -41,7 +41,7 @@ export class TechnicalInterviewProvider {
 
     store(technicalInterview: any): Promise<any> {
         return new Promise((resolve, reject) => {
-            this.apiGateway.post(environment.JOBS_MS + 'technicalInterviews', technicalInterview).subscribe((response: HttpResponse<any>) => {
+            this.apiGateway.post(environment.JOBS_MS + 'technical-interviews', technicalInterview).subscribe((response: HttpResponse<any>) => {
                 resolve(response.body);
             }, reject);
         });
@@ -49,7 +49,7 @@ export class TechnicalInterviewProvider {
 
     destroy(technicalInterview: any): Promise<any> {
         return new Promise((resolve, reject) => {
-            this.apiGateway.delete(environment.JOBS_MS + 'technicalInterview', technicalInterview).subscribe((response: HttpResponse<any>) => {
+            this.apiGateway.delete(environment.JOBS_MS + 'technical-interview', technicalInterview).subscribe((response: HttpResponse<any>) => {
                 resolve(response.body);
             }, reject);
         })

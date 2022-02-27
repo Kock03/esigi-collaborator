@@ -22,7 +22,7 @@ class UpdateJobsDto {
 }
 __decorate([
     (0, swagger_1.ApiProperty)(),
-    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     (0, class_validator_1.MinLength)(3),
     (0, class_validator_1.MaxLength)(80),
@@ -30,19 +30,19 @@ __decorate([
 ], UpdateJobsDto.prototype, "requester", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)(),
-    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsEnum)(status_enum_1.Status),
     __metadata("design:type", Number)
 ], UpdateJobsDto.prototype, "status", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)(),
-    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsBoolean)(),
     __metadata("design:type", Boolean)
 ], UpdateJobsDto.prototype, "publish", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)(),
-    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     (0, class_validator_1.MinLength)(3),
     (0, class_validator_1.MaxLength)(80),
@@ -50,13 +50,13 @@ __decorate([
 ], UpdateJobsDto.prototype, "client", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)(),
-    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsEnum)(type_enum_1.Type),
     __metadata("design:type", Number)
 ], UpdateJobsDto.prototype, "typeOfJob", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)(),
-    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsBoolean)(),
     __metadata("design:type", Boolean)
 ], UpdateJobsDto.prototype, "temporary", void 0);
@@ -68,7 +68,7 @@ __decorate([
 ], UpdateJobsDto.prototype, "monthTime", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)(),
-    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     (0, class_validator_1.MinLength)(3),
     (0, class_validator_1.MaxLength)(80),
@@ -76,54 +76,52 @@ __decorate([
 ], UpdateJobsDto.prototype, "jobName", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)(),
-    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsOptional)(),
     __metadata("design:type", Date)
 ], UpdateJobsDto.prototype, "startForecast", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)(),
-    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsNumber)(),
     __metadata("design:type", Number)
 ], UpdateJobsDto.prototype, "jobNumber", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)(),
-    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsEnum)(typeOfContract_enum_1.TypeOfContract),
     __metadata("design:type", Number)
 ], UpdateJobsDto.prototype, "typeOfContract", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)(),
-    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsEnum)(workplace_enum_1.Workplace),
     __metadata("design:type", Number)
 ], UpdateJobsDto.prototype, "workplace", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)(),
-    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], UpdateJobsDto.prototype, "workingDay", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)(),
-    (0, class_validator_1.IsNotEmpty)(),
-    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.IsOptional)(),
     __metadata("design:type", Number)
 ], UpdateJobsDto.prototype, "minimumValue", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)(),
-    (0, class_validator_1.IsNotEmpty)(),
-    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.IsOptional)(),
     __metadata("design:type", Number)
 ], UpdateJobsDto.prototype, "maximumValue", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)(),
-    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsEnum)(workplace_enum_1.Workplace),
     __metadata("design:type", Number)
 ], UpdateJobsDto.prototype, "schooling", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)(),
-    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], UpdateJobsDto.prototype, "collaboratorActivities", void 0);
@@ -134,24 +132,24 @@ __decorate([
 ], UpdateJobsDto.prototype, "Knowledges", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)(),
-    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], UpdateJobsDto.prototype, "skills", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)(),
-    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], UpdateJobsDto.prototype, "attitudes", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)(),
-    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsOptional)(),
     __metadata("design:type", Date)
 ], UpdateJobsDto.prototype, "openingDate", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)(),
-    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsOptional)(),
     __metadata("design:type", seniorities_entity_1.SenioritiesEntity)
 ], UpdateJobsDto.prototype, "Seniorities", void 0);
 __decorate([

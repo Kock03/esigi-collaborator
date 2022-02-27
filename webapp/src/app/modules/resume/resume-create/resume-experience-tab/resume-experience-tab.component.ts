@@ -53,17 +53,10 @@ export class ResumeExperienceTabComponent implements OnInit {
     private dialogService: ConfirmDialogService,
     private fb: FormBuilder,
     public dialog: MatDialog
-  ) {}
+  ) { }
 
   ngOnInit(): void {
-    if (
-      this.experiencesArray.value &&
-      this.experiencesArray.value.findIndex(
-        (education: any) => education == null
-      ) === -1
-    ) {
-      this.experienceList = this.experiencesArray.value;
-    }
+
   }
 
   openDialog() {

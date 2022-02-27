@@ -13,7 +13,7 @@ export class ResumesService {
   constructor(
     @InjectRepository(ResumesEntity)
     private readonly resumesRepository: Repository<ResumesEntity>,
-  ) {}
+  ) { }
 
   async findAll() {
     return await this.resumesRepository.find();

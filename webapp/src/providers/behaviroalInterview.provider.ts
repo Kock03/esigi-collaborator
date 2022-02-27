@@ -16,7 +16,7 @@ export class BehaviroalInterviewProvider {
 
     findAll(): Promise<any> {
         return new Promise((resolve, reject) => {
-            this.apiGateway.get(environment.JOBS_MS + 'behaviroalInterviews').subscribe((response: HttpResponse<any>) => {
+            this.apiGateway.get(environment.JOBS_MS + 'behaviroal-interviews').subscribe((response: HttpResponse<any>) => {
                 resolve(response.body);
             }, reject);
         });
@@ -24,7 +24,7 @@ export class BehaviroalInterviewProvider {
 
     findOne(id: string): Promise<any> {
         return new Promise((resolve, reject) => {
-            this.apiGateway.get(environment.JOBS_MS + 'behaviroalInterviews', { id: id }).subscribe((response: HttpResponse<any>) => {
+            this.apiGateway.get(environment.JOBS_MS + 'behaviroal-interviews', { id: id }).subscribe((response: HttpResponse<any>) => {
                 resolve(response.body);
             }, reject);
         });
@@ -33,7 +33,7 @@ export class BehaviroalInterviewProvider {
 
     update(behaviroalInterview: any): Promise<any> {
         return new Promise((resolve, reject) => {
-            this.apiGateway.put(environment.JOBS_MS + 'behaviroalInterviews', behaviroalInterview).subscribe((response: HttpResponse<any>) => {
+            this.apiGateway.put(environment.JOBS_MS + 'behaviroal-interviews', behaviroalInterview).subscribe((response: HttpResponse<any>) => {
                 resolve(response.body);
             }, reject);
         });
@@ -41,7 +41,7 @@ export class BehaviroalInterviewProvider {
 
     store(behaviroalInterview: any): Promise<any> {
         return new Promise((resolve, reject) => {
-            this.apiGateway.post(environment.JOBS_MS + 'behaviroalInterviews', behaviroalInterview).subscribe((response: HttpResponse<any>) => {
+            this.apiGateway.post(environment.JOBS_MS + 'behaviroal-interviews', behaviroalInterview).subscribe((response: HttpResponse<any>) => {
                 resolve(response.body);
             }, reject);
         });
@@ -49,7 +49,7 @@ export class BehaviroalInterviewProvider {
 
     destroy(BehaviroalInterview: any): Promise<any> {
         return new Promise((resolve, reject) => {
-            this.apiGateway.delete(environment.JOBS_MS + 'BehaviroalInterviews', BehaviroalInterview).subscribe((response: HttpResponse<any>) => {
+            this.apiGateway.delete(environment.JOBS_MS + 'behaviroal-interviews', BehaviroalInterview).subscribe((response: HttpResponse<any>) => {
                 resolve(response.body);
             }, reject);
         })

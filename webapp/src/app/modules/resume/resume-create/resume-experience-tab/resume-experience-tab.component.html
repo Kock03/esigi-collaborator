@@ -2,72 +2,45 @@
   <div class="content-scroll" *ngIf="resumeForm" fxLayout="column">
     <h2 mat-dialog-title class="label">Cadastro de experiência</h2>
     <div>
-      <button
-        class="edit-button"
-        mat-flat-button
-        color="primary"
-        (click)="openDialog()"
-      >
+      <button class="edit-button" mat-flat-button color="primary" (click)="openDialog()">
         <mat-icon>add</mat-icon>
       </button>
     </div>
-    <mat-list
-      role="list"
-      #experiencesList
-      *ngIf="experiencesArray"
-      class="list-group"
-    >
-      <mat-list-item
-        *ngFor="let experience of experienceList; let i = index"
-        class="list-group-item"
-        fxLayoutAlign="start start"
-      >
-      
-          <div fxLayout="column">
-            <span class="label-office">
-              {{ experience.office }}
-            </span>
-            <span>
-              {{ experience.companyName }}
-            </span>
-            <span class="label-gray">
-              {{ experience.locality }}
-            </span>
-            <span class="label-gray"
-              ><b>Início:</b> {{ experience.startMonth
-              }}<span> / {{ experience.startYear }}</span>
-            </span>
-            <span class="label-gray"
-              ><b>Término:</b> {{ experience.terminusMonth
-              }}<span> / {{ experience.terminusYear }}</span>
-            </span>
-            <p></p>
-            <span>
-              {{ experience.description }}
-            </span>
-          </div>
- 
-        
-        <div
-        class="buttons-experience"
-        fxLayout="row"
-        fxLayoutAlign="end end"
-      >
-        <button
-          class="table-button"
-          mat-button
-          (click)="getExperience(experience, i)"
-        >
-          <mat-icon>edit</mat-icon>
-        </button>
-        <button
-          (click)="deleteExperience(i)"
-          class="table-button"
-          mat-button
-        >
-          <mat-icon>delete</mat-icon>
-        </button>
-      </div>
+    <mat-list role="list" #experiencesList *ngIf="experiencesArray" class="list-group">
+      <mat-list-item *ngFor="let experience of experienceList; let i = index" class="list-group-item"
+        fxLayoutAlign="start start">
+
+        <div fxLayout="column">
+          <span class="label-office">
+            {{ experience.office }}
+          </span>
+          <span>
+            {{ experience.companyName }}
+          </span>
+          <span class="label-gray">
+            {{ experience.locality }}
+          </span>
+          <span class="label-gray"><b>Início:</b> {{ experience.startMonth
+            }}<span> / {{ experience.startYear }}</span>
+          </span>
+          <span class="label-gray"><b>Término:</b> {{ experience.terminusMonth
+            }}<span> / {{ experience.terminusYear }}</span>
+          </span>
+          <p></p>
+          <span>
+            {{ experience.description }}
+          </span>
+        </div>
+
+
+        <div class="buttons-experience" fxLayout="row" fxLayoutAlign="end end">
+          <button class="table-button" mat-button (click)="getExperience(experience, i)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button (click)="deleteExperience(i)" class="table-button" mat-button>
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
       </mat-list-item>
     </mat-list>
   </div>

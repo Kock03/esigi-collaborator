@@ -50,6 +50,7 @@ export class CollaboratorListComponent implements OnInit {
   filteredCollaboratorList!: any[];
   index: any = null;
   Collaborator: any;
+  step: number = 1;
 
 
   constructor(
@@ -101,9 +102,9 @@ export class CollaboratorListComponent implements OnInit {
   async getCollaboratorList() {
     try {
       this.filteredCollaboratorList = this.collaborators =
-     
+
         await this.collaboratorProvider.findAll();
-        console.log("🚀 ~ file: collaborator-list.component.ts ~ line 104 ~ CollaboratorListComponent ~ getCollaboratorList ~ this.collaborators", this.collaborators)
+      console.log("🚀 ~ file: collaborator-list.component.ts ~ line 104 ~ CollaboratorListComponent ~ getCollaboratorList ~ this.collaborators", this.collaborators)
     } catch (error) {
       console.error(error);
     }

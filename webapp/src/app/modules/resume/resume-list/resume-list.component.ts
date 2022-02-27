@@ -24,7 +24,7 @@ export interface Resume {
   encapsulation: ViewEncapsulation.None,
 })
 export class ResumeListComponent implements OnInit {
-  @ViewChild('filter', {static:true}) filter!: ElementRef;
+  @ViewChild('filter', { static: true }) filter!: ElementRef;
 
   private _unsubscribeAll: Subject<any>;
 
@@ -35,7 +35,7 @@ export class ResumeListComponent implements OnInit {
     'icon',
   ];
 
-  
+
   resumes!: Resume[];
   filteredResumeList!: any[];
   index: any = null;
@@ -46,8 +46,8 @@ export class ResumeListComponent implements OnInit {
     private resumeProvider: ResumeProvider,
     private dialogService: ConfirmDialogService,
     private snackbarService: SnackBarService,) {
-      this._unsubscribeAll = new Subject();
-     }
+    this._unsubscribeAll = new Subject();
+  }
 
 
 
@@ -60,7 +60,7 @@ export class ResumeListComponent implements OnInit {
   createResume() {
     this.router.navigate(['curriculo/novo']);
   }
-  
+
   editResume(resumeId: any) {
     this.router.navigate([`curriculo/${resumeId}`]);
   }
@@ -105,16 +105,16 @@ export class ResumeListComponent implements OnInit {
 
   initFilter() {
     fromEvent(this.filter.nativeElement, 'keyup')
-    .pipe(debounceTime(200), distinctUntilChanged())
+      .pipe(debounceTime(200), distinctUntilChanged())
 
-    .subscribe((res) => {
-      this.filteredResumeList = this.resumes.filter(
-        (resume) =>
-          resume.firstName
-            .toLocaleLowerCase()
-            .includes(this.filter.nativeElement.value.toLocaleLowerCase())
-      );
-    });
+      .subscribe((res) => {
+        this.filteredResumeList = this.resumes.filter(
+          (resume) =>
+            resume.firstName
+              .toLocaleLowerCase()
+              .includes(this.filter.nativeElement.value.toLocaleLowerCase())
+        );
+      });
   }
 
 }

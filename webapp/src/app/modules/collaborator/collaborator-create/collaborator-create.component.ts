@@ -47,7 +47,7 @@ export class CollaboratorCreateComponent implements OnInit {
     this.step = 1;
     this.step = JSON.parse(sessionStorage.getItem('collaborator_tab')!);
 
-    // this.step = this.urlStep;
+    //this.step = this.urlStep;
     // this.step = 1;
 
     if (this.collaboratorId !== 'novo') {
@@ -55,6 +55,7 @@ export class CollaboratorCreateComponent implements OnInit {
       this.initForm();
       this.setFormValue();
     } else {
+      this.step = 1;
       this.initForm();
     }
   }

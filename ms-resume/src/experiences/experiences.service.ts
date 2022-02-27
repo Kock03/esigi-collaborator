@@ -12,7 +12,7 @@ export class ExperiencesService {
   constructor(
     @InjectRepository(ExperiencesEntity)
     private readonly experiencesRepository: Repository<ExperiencesEntity>,
-  ) {}
+  ) { }
 
   async findAll() {
     return await this.experiencesRepository.find();
@@ -22,6 +22,7 @@ export class ExperiencesService {
     conditions: FindConditions<ExperiencesEntity>,
     options?: FindOneOptions<ExperiencesEntity>,
   ) {
+    options = { relations: ['Resume'] }
     try {
       return await this.experiencesRepository.findOneOrFail(
         conditions,
