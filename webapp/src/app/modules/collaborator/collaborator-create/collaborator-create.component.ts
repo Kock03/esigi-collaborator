@@ -39,7 +39,7 @@ export class CollaboratorCreateComponent implements OnInit {
     private router: Router,
     private snackbarService: SnackBarService,
     private route: ActivatedRoute
-  ) {}
+  ) { }
 
   async ngOnInit(): Promise<void> {
     this.initForm();
@@ -208,7 +208,7 @@ export class CollaboratorCreateComponent implements OnInit {
       this.snackbarService.showError(error.message);
     }
   }
-  handleChanges(value: any): void {}
+  handleChanges(value: any): void { }
 
   handleStep(number: number): void {
     this.step = number;

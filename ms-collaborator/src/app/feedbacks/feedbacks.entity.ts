@@ -3,6 +3,7 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  JoinColumn,
   ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
@@ -67,9 +68,9 @@ export class FeedbacksEntity {
 
   @ManyToOne(
     () => CollaboratorsEntity,
-    (collaborators) => collaborators.Feedbacks,{
-     
-    }
+    (collaborators) => collaborators.Feedbacks, {
+  }
   )
+  @JoinColumn()
   Collaborator: CollaboratorsEntity;
 }
