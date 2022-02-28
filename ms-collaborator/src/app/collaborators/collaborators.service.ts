@@ -49,7 +49,7 @@ export class CollaboratorsService {
     }
     if (data.cnpj != null) {
       const validCnpj = DocumentValidator.isValidCnpj(data.cnpj);
-      if (!validCnpj) {
+      if (validCnpj) {
         throw new DocumentsBadRequestExcpetion();
       }
     }
