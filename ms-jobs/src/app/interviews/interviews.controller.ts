@@ -15,13 +15,23 @@ export class InterviewsController {
 
   @Get()
   async index() {
-    return await this.interviewsService.finAll();
+    return await this.interviewsService.findAll();
+  }
+
+  @Get('/list-interviews')
+  async findListInterviews() {
+    return await this.interviewsService.findListInterviews();
   }
 
   @Get(':id')
-  async findInterviewsDetails(@Param('id', new ParseUUIDPipe()) id: string) {
-    return await this.interviewsService.findInterviewsDetails({ id });
+  async show(@Param('id', new ParseUUIDPipe()) id: string) {
+    return await this.interviewsService.findOnerOrFail({ id });
   }
+
+  // @Get('list/:id')
+  // async findInterviewsDetails(@Param('id', new ParseUUIDPipe()) id: string) {
+  //   return await this.interviewsService.findInterviewsDetails({ id });
+  // }
 
   @Post()
   async store(@Body() body: CreateInterviewsDto) {
