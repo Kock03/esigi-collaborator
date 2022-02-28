@@ -53,6 +53,10 @@ export class CollaboratorBankTabComponent implements OnInit {
 
   ngOnInit(): void {
     this.initObservables();
+    this.bankArray
+    console.log("🚀 ~ file: collaborator-bank-tab.component.ts ~ line 57 ~ CollaboratorBankTabComponent ~ ngOnInit ~  this.bankArray",  this.bankArray)
+    this.bankForm
+    console.log("🚀 ~ file: collaborator-bank-tab.component.ts ~ line 59 ~ CollaboratorBankTabComponent ~ ngOnInit ~     this.bankForm",     this.bankForm)
   }
 
   initObservables() {
@@ -72,7 +76,7 @@ export class CollaboratorBankTabComponent implements OnInit {
     dialogRef.afterClosed().subscribe((bank) => {
       if (bank) {
         this.data = new Array(this.bankForm.value);
-        // this.bankTable.renderRows();
+        this.bankTable.renderRows();
       }
     });
   }

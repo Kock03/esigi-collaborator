@@ -28,6 +28,7 @@ export class CollaboratorCreateComponent implements OnInit {
   Skills: any;
   Documents: any;
   Feedbacks: any;
+  Dependents: any;
 
   url!: string;
   urlStep!: number;
@@ -42,7 +43,8 @@ export class CollaboratorCreateComponent implements OnInit {
   ) {}
 
   async ngOnInit(): Promise<void> {
-    this.initForm();
+
+
     if (sessionStorage.getItem('collaborator_tab') == undefined) {
       sessionStorage.setItem('collaborator_tab', '1');
     }
@@ -50,10 +52,13 @@ export class CollaboratorCreateComponent implements OnInit {
     this.collaboratorId = this.route.snapshot.paramMap.get('id');
     this.step = JSON.parse(sessionStorage.getItem('collaborator_tab')!);
 
-    if (this.collaboratorId !== 'novo') {
+     if (this.collaboratorId !== 'novo') {
+      this.initForm();
       await this.getCollaborator();
       this.setFormValue();
-    } else {
+    }
+     else {
+      this.initForm();
       this.step = 1;
     }
   }
