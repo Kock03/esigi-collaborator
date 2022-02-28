@@ -43,12 +43,12 @@ export class CollaboratorCreateComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.collaboratorId = this.route.snapshot.paramMap.get('id');
-
-    this.step = 1;
     this.step = JSON.parse(sessionStorage.getItem('collaborator_tab')!);
 
-    //this.step = this.urlStep;
-    // this.step = 1;
+    if(this.collaboratorId == 'novo' && sessionStorage == null){
+     this.handleStep(1)
+    }
+   
 
     if (this.collaboratorId !== 'novo') {
       await this.getCollaborator();

@@ -63,7 +63,7 @@ export class JobInterviewTabComponent implements OnInit {
       punctuality: [1, Validators.required],
       presentation: [1, Validators.required],
       salaryExpectation: ['', Validators.required],
-      hiringPreferences: this.fb.group({
+      hiringPreference: this.fb.group({
         intern: [false, Validators.required],
         naturalPerson: [false, Validators.required],
         legalPerson: [false, Validators.required],
