@@ -12,6 +12,7 @@ export class CollaboratorDocumentDialog {
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
 
   documentForm!: FormGroup;
+  url: any;
 
   constructor(
     public dialogRef: MatDialogRef<CollaboratorDocumentDialog>,
@@ -32,14 +33,16 @@ export class CollaboratorDocumentDialog {
       this.documentForm.patchValue(this.data.documentSelected);
     }
   }
+
   fileChanged(file: any) {
     const reader = new FileReader();
-    reader.onload = () => {
+    reader.readAsDataURL(file.target.files[0]);
+    reader.onload = (_file) => {
+      this.url = reader.result;
       this.documentForm.patchValue({
         file: reader.result,
       });
     };
-    reader.readAsText(file.target.files[0]);
   }
 
   onNoClick(): void {

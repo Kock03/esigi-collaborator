@@ -52,12 +52,11 @@ export class CollaboratorListComponent implements OnInit {
   Collaborator: any;
   step: number = 1;
 
-
   constructor(
     private router: Router,
     private collaboratorProvider: CollaboratorProvider,
     private snackbarService: SnackBarService,
-    private dialogService: ConfirmDialogService,
+    private dialogService: ConfirmDialogService
   ) {
     this._unsubscribeAll = new Subject();
   }
@@ -70,7 +69,6 @@ export class CollaboratorListComponent implements OnInit {
   createCollaborator() {
     this.router.navigate(['colaborador/novo']);
   }
-
 
   async deleteCollaborator(collaboratorId: any) {
     const options = {
@@ -86,14 +84,18 @@ export class CollaboratorListComponent implements OnInit {
     this.dialogService.confirmed().subscribe(async (confirmed) => {
       if (confirmed) {
         try {
-          const collaborators = await this.collaboratorProvider.destroy(collaboratorId);
+          const collaborators = await this.collaboratorProvider.destroy(
+            collaboratorId
+          );
           this.getCollaboratorList();
 
-          this.snackbarService.successMessage('Colaborador Excluido Com Sucesso');
+          this.snackbarService.successMessage(
+            'Colaborador Excluido Com Sucesso'
+          );
         } catch (error) {
           console.log('ERROR 132' + error);
           this.snackbarService.showError('Falha ao Excluir');
-          this.getCollaboratorList()
+          this.getCollaboratorList();
         }
       }
     });
@@ -102,9 +104,7 @@ export class CollaboratorListComponent implements OnInit {
   async getCollaboratorList() {
     try {
       this.filteredCollaboratorList = this.collaborators =
-
         await this.collaboratorProvider.findAll();
-      console.log("🚀 ~ file: collaborator-list.component.ts ~ line 104 ~ CollaboratorListComponent ~ getCollaboratorList ~ this.collaborators", this.collaborators)
     } catch (error) {
       console.error(error);
     }

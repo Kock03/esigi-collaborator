@@ -16,14 +16,14 @@ import {
   Validators,
 } from '@angular/forms';
 
-import { DateAdapter, MAT_DATE_FORMATS, NativeDateAdapter } from '@angular/material/core'
+import {
+  DateAdapter,
+  MAT_DATE_FORMATS,
+  NativeDateAdapter,
+} from '@angular/material/core';
+import { ActivatedRoute } from '@angular/router';
 import { ApiGateway } from 'src/api-gateway';
 import { CepService } from 'src/services/cep.service';
-
-// export interface collaboratorTypes {
-//   id: number;
-//   name: string;
-// }
 
 export const PICK_FORMATS = {
   parse: { dateInput: { month: 'numeric', year: 'numeric', day: 'numeric' } },
@@ -31,15 +31,15 @@ export const PICK_FORMATS = {
     dateInput: 'input',
     monthYearLabel: { year: 'numeric', month: 'numeric' },
     dateA11yLabel: { year: 'numeric', month: 'numeric', day: 'numeric' },
-    monthYearA11yLabel: { year: 'numeric', month: 'numeric' }
-  }
+    monthYearA11yLabel: { year: 'numeric', month: 'numeric' },
+  },
 };
 
 @Injectable()
 export class PickDateAdapter extends NativeDateAdapter {
   override format(date: Date, displayFormat: Object): string {
     if (displayFormat === 'input') {
-      return formatDate(date, 'dd-MM-yyyy', this.locale);;
+      return formatDate(date, 'dd-MM-yyyy', this.locale);
     } else {
       return date.toDateString();
     }
@@ -53,8 +53,8 @@ export class PickDateAdapter extends NativeDateAdapter {
   encapsulation: ViewEncapsulation.None,
   providers: [
     { provide: DateAdapter, useClass: PickDateAdapter },
-    { provide: MAT_DATE_FORMATS, useValue: PICK_FORMATS }
-  ]
+    { provide: MAT_DATE_FORMATS, useValue: PICK_FORMATS },
+  ],
 })
 export class CollaboratorRegisterTabComponent implements OnInit {
   @Input('form') collaboratorForm!: FormGroup;
@@ -62,32 +62,33 @@ export class CollaboratorRegisterTabComponent implements OnInit {
 
   selectedFile: any;
   date: any;
-
-  onFileSelected(changes: any): void {
-
-    this.selectedFile = changes.target.files[0]
-    this.selectedFile = changes.target.files[0];
-
-  }
+  url: any;
+  collaboratorId!: string | null;
 
   typeControl = new FormControl();
 
-
-  constructor(private fb: FormBuilder, private cepService: CepService) { }
+  constructor(
+    private fb: FormBuilder,
+    private cepService: CepService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
+    this.collaboratorId = this.route.snapshot.paramMap.get('id');
+    this.url =
+      'https://st.depositphotos.com/1734074/4228/v/450/depositphotos_42286141-stock-illustration-vector-man-with-mustache-in.jpg';
+    if (this.collaboratorId == 'novo') {
+      this.collaboratorForm.valueChanges.subscribe((res) => {
+        const addressForm = this.collaboratorForm.controls[
+          'Address'
+        ] as FormGroup;
 
-
-    this.collaboratorForm.valueChanges.subscribe((res) => {
-      const addressForm = this.collaboratorForm.controls[
-        'Address'
-      ] as FormGroup;
-
-      addressForm.controls['cep'].valueChanges.subscribe((res) => { });
-    });
+        addressForm.controls['cep'].valueChanges.subscribe((res) => {});
+      });
+    }
   }
 
-  ngAfterViewInit(): void { }
+  ngAfterViewInit(): void {}
 
   next() {
     this.onChange.next(true);
@@ -122,11 +123,12 @@ export class CollaboratorRegisterTabComponent implements OnInit {
 
   fileChanged(file: any) {
     const reader = new FileReader();
-    reader.onload = () => {
+    reader.readAsDataURL(file.target.files[0]);
+    reader.onload = (_file) => {
+      this.url = reader.result;
       this.collaboratorForm.patchValue({
         photo: reader.result,
       });
     };
-    reader.readAsText(file.target.files[0]);
   }
 }

@@ -55,13 +55,11 @@ export class CollaboratorFeedbackTabComponent implements OnInit {
     this.collaboratorId = this.route.snapshot.paramMap.get('id');
     this.getJob()
     this.feedback = this.collaborator?.Feedbacks
-    console.log("🚀 ~ file: collaborator-feedback-tab.component.ts ~ line 54 ~ CollaboratorFeedbackTabComponent ~ ngOnInit ~ this.collaborator.Feedbacks", this.feedback)
   }
 
   async getJob() {
     try {
       this.collaborator = await this.collaboratorProvider.findOne(this.collaboratorId);
-      console.log("🚀 ~ file: collaborator-feedback-tab.component.ts ~ line 63 ~ CollaboratorFeedbackTabComponent ~ getJob ~ this.collaborator ", this.collaborator )
     } catch (error) {
       console.error(error);
     }

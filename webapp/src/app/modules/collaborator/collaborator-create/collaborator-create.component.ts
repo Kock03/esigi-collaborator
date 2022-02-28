@@ -39,24 +39,22 @@ export class CollaboratorCreateComponent implements OnInit {
     private router: Router,
     private snackbarService: SnackBarService,
     private route: ActivatedRoute
-  ) { }
+  ) {}
 
   async ngOnInit(): Promise<void> {
+    this.initForm();
+    if (sessionStorage.getItem('collaborator_tab') == undefined) {
+      sessionStorage.setItem('collaborator_tab', '1');
+    }
+
     this.collaboratorId = this.route.snapshot.paramMap.get('id');
     this.step = JSON.parse(sessionStorage.getItem('collaborator_tab')!);
 
-    if(this.collaboratorId == 'novo' && sessionStorage == null){
-     this.handleStep(1)
-    }
-   
-
     if (this.collaboratorId !== 'novo') {
       await this.getCollaborator();
-      this.initForm();
       this.setFormValue();
     } else {
       this.step = 1;
-      this.initForm();
     }
   }
 
@@ -66,7 +64,7 @@ export class CollaboratorCreateComponent implements OnInit {
         this.collaboratorId
       );
       console.log(
-        '🚀 ~ file: collaborator-create.component.ts ~ line 82 ~ CollaboratorCreateComponent ~ getCollaborator ~ this.collaborator',
+        '🚀 ~ file: collaborator-create.component.ts ~ line 67 ~ CollaboratorCreateComponent ~ getCollaborator ~ this.collaborator',
         this.collaborator
       );
     } catch (error) {
@@ -111,7 +109,10 @@ export class CollaboratorCreateComponent implements OnInit {
       birthDate: ['2004-06-12', Validators.required],
       admissionDate: ['', Validators.required],
       email: ['davi@email', [Validators.email, Validators.required]],
-      cnpj: this.fb.control([null, [DocumentValidator.isValidCnpj(), Validators.required]]),
+      cnpj: this.fb.control([
+        null,
+        [DocumentValidator.isValidCnpj(), Validators.required],
+      ]),
       stateRegistration: [null, Validators.required],
       municipalInscription: [null, Validators.required],
       site: ['site.davi', Validators.required],
@@ -157,7 +158,9 @@ export class CollaboratorCreateComponent implements OnInit {
           [Validators.required, Validators.maxLength(1)],
         ],
         bankAccountDigit: [
-          this.collaborator ? this.collaborator.BankData.bankAccountDigit : null,
+          this.collaborator
+            ? this.collaborator.BankData.bankAccountDigit
+            : null,
           [Validators.required, Validators.maxLength(1)],
         ],
       }),
@@ -202,10 +205,10 @@ export class CollaboratorCreateComponent implements OnInit {
       this.router.navigate(['colaborador/lista']);
     } catch (error: any) {
       console.log('ERROR 132' + error);
-      this.snackbarService.showError(error);
+      this.snackbarService.showError(error.message);
     }
   }
-  handleChanges(value: any): void { }
+  handleChanges(value: any): void {}
 
   handleStep(number: number): void {
     this.step = number;

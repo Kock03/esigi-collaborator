@@ -44,7 +44,6 @@ export class ResumeProvider {
             this.apiGateway.post(environment.RESUME_MS +'resumes', resume).subscribe((response: HttpResponse<any>) => {
                 resolve(response.body);
             }, reject);
-                console.log("🚀 ~ file: resume.provider.ts ~ line 47 ~ ResumeProvider ~ this.apiGateway.post ~ resume", resume)
         });
     };
 

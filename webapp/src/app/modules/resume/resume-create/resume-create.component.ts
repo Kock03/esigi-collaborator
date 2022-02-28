@@ -49,7 +49,6 @@ export class ResumeCreateComponent implements OnInit {
   async getResume() {
     try {
       this.resume = await this.resumeProvider.findOne(this.resumeId);
-      console.log("🚀 ~ file: resume-create.component.ts ~ line 51 ~ ResumeCreateComponent ~ getResume ~ this.resume ", this.resume )
     } catch (error) {
       console.error(error);
     }
@@ -92,7 +91,7 @@ export class ResumeCreateComponent implements OnInit {
 
       Educations: this.fb.array(this.resume ? this.resume.Educations : [null]),
       Languages: this.fb.array(this.resume ? this.resume.Languages : [null]),
-      Experiences: this.fb.array([]),
+      Experiences: this.fb.array(this.resume ? this.resume.Experiences : [null]),
       Skills: this.fb.array(this.resume ? this.resume.Skills : [null]),
     });
     
@@ -132,10 +131,6 @@ export class ResumeCreateComponent implements OnInit {
 
   async saveEditResume() {
     let data = this.resumeForm.getRawValue();
-    console.log(
-      '🚀 ~ file: resume-create.component.ts ~ line 135 ~ ResumeCreateComponent ~ saveEditResume ~ data',
-      data
-    );
     try {
       const resume = await this.resumeProvider.update(this.resumeId, data);
       this.snackbarService.successMessage('Curriculo atualizado com sucesso');

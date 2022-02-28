@@ -162,7 +162,9 @@ export class ResumeEducationTabComponent implements OnInit {
 
     this.index = index;
     dialogRef.afterClosed().subscribe((language) => {
+      if(language){
       this.languageArray.controls[this.index].setValue(language);
+      }
     });
   }
 
@@ -193,7 +195,9 @@ export class ResumeEducationTabComponent implements OnInit {
 
     this.index = index;
     dialogRef.afterClosed().subscribe((education) => {
+      if(education){
       this.educationArray.controls[this.index].setValue(education);
+      }
     });
   }
 

@@ -53,10 +53,31 @@ export class ResumeExperienceTabComponent implements OnInit {
     private dialogService: ConfirmDialogService,
     private fb: FormBuilder,
     public dialog: MatDialog
-  ) { }
+  ) {}
 
   ngOnInit(): void {
+    if (
+      this.experiencesArray.value &&
+      this.experiencesArray.value.findIndex((skill: any) => skill == null) ===
+        -1
+    ) {
+      this.experienceList = this.experiencesArray.value;
+    }
+    this.initObservables();
+  }
 
+  initObservables() {
+    this.experiencesArray.valueChanges.subscribe((res) => {
+      const isNullIndex = this.experiencesArray.value.findIndex(
+        (experience: any) => experience == null
+      );
+      if (isNullIndex !== -1) {
+        this.experiencesArray.removeAt(isNullIndex);
+      }
+      if (res) {
+        this.experienceList = this.experiencesArray.value;
+      }
+    });
   }
 
   openDialog() {
@@ -105,7 +126,9 @@ export class ResumeExperienceTabComponent implements OnInit {
 
     this.index = index;
     dialogRef.afterClosed().subscribe((experience) => {
-      this.experiencesArray.controls[this.index].setValue(experience);
+      if (experience) {
+        this.experiencesArray.controls[this.index].setValue(experience);
+      }
     });
   }
 }

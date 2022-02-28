@@ -35,7 +35,6 @@ export class BankDataService {
 
   async store(data: CreateBankDataDto) {
     const bank = this.bankDataRepository.create(data);
-    console.log(data);
     return await this.bankDataRepository.save(bank);
   }
 

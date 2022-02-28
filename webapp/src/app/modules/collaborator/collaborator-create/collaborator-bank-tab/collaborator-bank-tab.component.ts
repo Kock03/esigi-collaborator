@@ -72,7 +72,7 @@ export class CollaboratorBankTabComponent implements OnInit {
     dialogRef.afterClosed().subscribe((bank) => {
       if (bank) {
         this.data = new Array(this.bankForm.value);
-        this.bankTable.renderRows();
+        // this.bankTable.renderRows();
       }
     });
   }

@@ -95,13 +95,15 @@ export class ResumeSkillsTabComponent implements OnInit {
   getSkill(skillSelected: any, index: number) {
     const dialogRef = this.dialog.open(ResumeSkillDialog, {
       width: '500px',
-      height: '620px',
+      height: '450px',
       data: { skillSelected },
     });
 
     this.index = index;
     dialogRef.afterClosed().subscribe((skill) => {
-      this.skillArray.controls[this.index].setValue(skill);
+      if (skill) {
+        this.skillArray.controls[this.index].setValue(skill);
+      }
     });
   }
 
