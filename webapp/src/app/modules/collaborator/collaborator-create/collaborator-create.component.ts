@@ -40,7 +40,7 @@ export class CollaboratorCreateComponent implements OnInit {
     private router: Router,
     private snackbarService: SnackBarService,
     private route: ActivatedRoute
-  ) {}
+  ) { }
 
   async ngOnInit(): Promise<void> {
 
@@ -114,10 +114,8 @@ export class CollaboratorCreateComponent implements OnInit {
       birthDate: ['2004-06-12', Validators.required],
       admissionDate: ['', Validators.required],
       email: ['davi@email', [Validators.email, Validators.required]],
-      cnpj: this.fb.control([
-        null,
-        [DocumentValidator.isValidCnpj(), Validators.required],
-      ]),
+      cnpj: this.fb.control({ value: null, disabled: false },
+        [DocumentValidator.isValidCnpj(), Validators.required]),
       stateRegistration: [null, Validators.required],
       municipalInscription: [null, Validators.required],
       site: ['site.davi', Validators.required],
@@ -213,7 +211,7 @@ export class CollaboratorCreateComponent implements OnInit {
       this.snackbarService.showError(error.message);
     }
   }
-  handleChanges(value: any): void {}
+  handleChanges(value: any): void { }
 
   handleStep(number: number): void {
     this.step = number;

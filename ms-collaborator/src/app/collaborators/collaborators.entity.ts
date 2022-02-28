@@ -93,7 +93,7 @@ export class CollaboratorsEntity {
   @OneToMany(() => SkillsEntity, (skills) => skills.Collaborator, {
     cascade: ['insert', 'update', 'remove'],
     orphanedRowAction: 'delete',
-    eager: true, 
+    eager: true,
   })
   @JoinColumn()
   Skills: SkillsEntity[];

@@ -29,6 +29,7 @@ export class CollaboratorsService {
 
     options?: FindOneOptions<CollaboratorsEntity>,
   ) {
+    //options = { relations: ['Feedbacks'] }
     try {
       return await this.collaboratorsRepository.findOneOrFail(
         conditions,
@@ -45,12 +46,15 @@ export class CollaboratorsService {
       if (invalidCpf) {
         throw new DocumentsBadRequestExcpetion();
       }
-    } else {
+    }
+    if (data.cnpj != null) {
       const validCnpj = DocumentValidator.isValidCnpj(data.cnpj);
-      if (!validCnpj) {
+      if (validCnpj) {
         throw new DocumentsBadRequestExcpetion();
       }
     }
+
+
     if (data.cpf === null && data.cnpj === null) {
       throw new DocumentsBadRequestExcpetion();
     } else {

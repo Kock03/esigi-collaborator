@@ -11,7 +11,7 @@ export class FeedbacksService {
   constructor(
     @InjectRepository(FeedbacksEntity)
     private readonly feedbacksRepository: Repository<FeedbacksEntity>,
-  ) {}
+  ) { }
 
   async findAll() {
     return await this.feedbacksRepository.find();
