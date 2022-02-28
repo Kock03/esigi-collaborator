@@ -52,12 +52,12 @@ export class CollaboratorCreateComponent implements OnInit {
     this.collaboratorId = this.route.snapshot.paramMap.get('id');
     this.step = JSON.parse(sessionStorage.getItem('collaborator_tab')!);
 
-     if (this.collaboratorId !== 'novo') {
+    if (this.collaboratorId !== 'novo') {
       this.initForm();
       await this.getCollaborator();
       this.setFormValue();
     }
-     else {
+    else {
       this.initForm();
       this.step = 1;
     }
@@ -114,7 +114,7 @@ export class CollaboratorCreateComponent implements OnInit {
       birthDate: ['2004-06-12', Validators.required],
       admissionDate: ['', Validators.required],
       email: ['davi@email', [Validators.email, Validators.required]],
-      cnpj: this.fb.control({ value: null, disabled: false },
+      cnpj: this.fb.control({ value: null, disabled: true },
         [DocumentValidator.isValidCnpj(), Validators.required]),
       stateRegistration: [null, Validators.required],
       municipalInscription: [null, Validators.required],

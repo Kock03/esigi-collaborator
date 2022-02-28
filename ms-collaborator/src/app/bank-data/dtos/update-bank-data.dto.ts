@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import {
+  IsBoolean,
   IsEnum,
   IsNotEmpty,
   IsNumber,
@@ -52,4 +53,9 @@ export class UpdateBankDataDto {
   @MinLength(4)
   @MaxLength(4)
   bankAccountDigit: string;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsBoolean()
+  status: boolean;
 }

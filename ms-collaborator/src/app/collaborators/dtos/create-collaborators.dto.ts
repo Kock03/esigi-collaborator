@@ -169,7 +169,7 @@ export class CreateCollaboratorsDto {
   @ApiPropertyOptional()
   @IsNotEmpty()
   @IsObject()
-  BankData: BankDataEntity;
+  BankData: BankDataEntity[];
 
   @ApiPropertyOptional()
   @IsOptional()

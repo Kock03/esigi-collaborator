@@ -168,7 +168,7 @@ export class UpdateCollaboratorsDto {
   @ApiPropertyOptional()
   @IsOptional()
   @IsObject()
-  BankData: BankDataEntity;
+  BankData: BankDataEntity[];
 
   @ApiPropertyOptional()
   @IsOptional()

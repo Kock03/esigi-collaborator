@@ -1,4 +1,4 @@
-import { Column, DeleteDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, DeleteDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { CollaboratorsEntity } from "../collaborators/collaborators.entity";
 import { Gender } from "../collaborators/dtos/gender.enum";
 import { Type } from "./dtos/type.enum";
@@ -42,7 +42,8 @@ export class DependentsEntity {
     @ManyToOne(() => CollaboratorsEntity, collaborator => collaborator.Dependents)
     Collaborator: CollaboratorsEntity;
 
-    reatedAt: Date;
+    @CreateDateColumn({ name: 'created_at', type: 'datetime' })
+    CreatedAt: Date;
 
     @UpdateDateColumn({ name: 'updated_at', type: 'datetime' })
     updatedAt: Date;
