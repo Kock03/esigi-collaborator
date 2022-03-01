@@ -12,7 +12,7 @@ import {
   MAT_DATE_FORMATS,
   NativeDateAdapter,
 } from '@angular/material/core';
-import { Router, RoutesRecognized } from '@angular/router';
+import { ActivatedRoute, Router, RoutesRecognized } from '@angular/router';
 import { filter, pairwise } from 'rxjs/operators';
 import { ICollaborator } from 'src/app/interfaces/icollaborator';
 import { CollaboratorProvider } from 'src/providers/collaborator.provider';
@@ -59,38 +59,67 @@ export class FeedbackCreateComponent implements OnInit {
   feedbackTab: any;
   collaboratorId!: string | null;
 
+  feedbackId!: string | null;
+  feedback!: any;
+
   constructor(
     private fb: FormBuilder,
     private collaboratorProvider: CollaboratorProvider,
     private router: Router,
     private feedbackProvider: FeedbackProvider,
-    private snackBarService: SnackBarService
+    private snackBarService: SnackBarService,
+    private route: ActivatedRoute
   ) {
     const getId = this.router.getCurrentNavigation()?.extras.state;
     this.get = getId;
   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+    this.feedbackId = this.route.snapshot.paramMap.get('id');
     this.initForm();
+    if (this.feedbackId !== 'novo') {
+      await this.getFeedback();
+    }
+
+    this.setFormValue();
   }
 
   initForm(): void {
-    this.feedbackForm = this.fb.group({
-      feedbackType: [null, Validators.required],
-      reason: ['', Validators.required],
-      project: ['', Validators.required],
-      status: ['', Validators.required],
-      managerDescription: ['', Validators.required],
-      improvementPoints: ['', Validators.required],
-      collaboratorDescription: ['', Validators.required],
-      commitment: ['', Validators.required],
-      manager: ['', Validators.required],
-      feedbackDate: ['', Validators.required],
-      hourDate: ['', Validators.required],
-      feedbackDateRetorn: ['', Validators.required],
-      hourDateRetorn: ['', Validators.required],
-      Collaborator: { id: this.get.id },
-    });
+    if (this.feedbackId !== 'novo') {
+      this.feedbackForm = this.fb.group({
+        feedbackType: [null, Validators.required],
+        reason: ['', Validators.required],
+        project: ['', Validators.required],
+        status: ['', Validators.required],
+        managerDescription: ['', Validators.required],
+        improvementPoints: ['', Validators.required],
+        collaboratorDescription: ['', Validators.required],
+        commitment: ['', Validators.required],
+        manager: ['', Validators.required],
+        feedbackDate: ['', Validators.required],
+        hourDate: ['', Validators.required],
+        feedbackDateRetorn: ['', Validators.required],
+        hourDateRetorn: ['', Validators.required],
+      });
+    }
+    if (this.feedbackId == 'novo') {
+      this.feedbackForm = this.fb.group({
+        feedbackType: [null, Validators.required],
+        reason: ['', Validators.required],
+        project: ['', Validators.required],
+        status: ['', Validators.required],
+        managerDescription: ['', Validators.required],
+        improvementPoints: ['', Validators.required],
+        collaboratorDescription: ['', Validators.required],
+        commitment: ['', Validators.required],
+        manager: ['', Validators.required],
+        feedbackDate: ['', Validators.required],
+        hourDate: ['', Validators.required],
+        feedbackDateRetorn: ['', Validators.required],
+        hourDateRetorn: ['', Validators.required],
+        Collaborator: { id: this.get.id },
+      });
+    }
   }
 
   listFeedback(collaboratorId: any) {
@@ -109,6 +138,28 @@ export class FeedbackCreateComponent implements OnInit {
     }
   }
 
-
+  setFormValue() {
+    if (this.feedback) {
+      this.feedbackForm.patchValue(this.feedback);
+    }
   }
 
+  async getFeedback() {
+    try {
+      this.feedback = await this.feedbackProvider.findOne(this.feedbackId);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  async saveEditFeedback(collaboratorId: any) {
+    let data = this.feedbackForm.getRawValue();
+    try {
+      const job = await this.feedbackProvider.update(this.feedbackId, data);
+      this.snackBarService.successMessage('Feedbakc atualizado com sucesso');
+      this.router.navigate([`colaborador/${collaboratorId}`]);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+}

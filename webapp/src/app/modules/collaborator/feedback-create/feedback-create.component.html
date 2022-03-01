@@ -6,7 +6,7 @@
     <h2>Feedback</h2>
   </div>
 
-  <div fxLayout="column" class="content-scroll">
+  <div fxLayout="column" class="content-scroll" *ngIf="feedbackForm">
     <form [formGroup]="feedbackForm" fxLayout="column">
       <div class="formGroup1" fxFlex="100" fxLayoutGap="16px">
         <mat-form-field appearance="outline" fxFlex="25">
@@ -150,6 +150,7 @@
   <div
     class="navigation-buttons"
     fxLayoutAlign="center end"
+    *ngIf="feedbackId == 'novo'"
     class="saveButton"
     fxLayoutGap="16px"
   >
@@ -162,4 +163,19 @@
       Salvar
     </button>
   </div>
+  <div
+  class="navigation-buttons"
+  fxLayoutAlign="center end"
+  *ngIf="feedbackId !== 'novo'"
+  class="saveButton"
+  fxLayoutGap="16px"
+>
+  <button
+    mat-flat-button
+    color="primary"
+    (click)="saveEditFeedback(this.get.id)"
+  >
+    Salvar
+  </button>
+</div>
 </div>

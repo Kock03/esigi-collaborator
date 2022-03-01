@@ -109,4 +109,13 @@ export class CollaboratorFeedbackTabComponent implements OnInit {
       }
     });
   }
+
+  editFeedback(feedbackId: any) {
+    const navigationExtras = {
+      state: {
+        id: this.collaboratorId,
+      },
+    };
+    this.router.navigate([`colaborador/feedback/${feedbackId}`], navigationExtras);
+  }
 }

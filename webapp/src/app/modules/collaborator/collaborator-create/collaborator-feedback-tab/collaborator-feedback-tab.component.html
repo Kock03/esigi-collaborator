@@ -52,7 +52,10 @@
               <mat-icon>add</mat-icon>
             </button>
           </th>
-          <td mat-cell *matCellDef="let feedback">
+          <td class="button-tab" mat-cell *matCellDef="let feedback">
+            <button class="table-button" mat-button (click)="editFeedback(feedback.id)">
+              <mat-icon>edit</mat-icon>
+            </button>
             <button class="table-button" mat-button (click)="deleteFeedback(feedback.id)">
               <mat-icon>delete</mat-icon>
             </button>
