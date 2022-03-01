@@ -166,7 +166,7 @@ export class CollaboratorsEntity {
   @CreateDateColumn()
   createdAt: Date;
 
-  @UpdateDateColumn({ type: 'datetime' })
+  @UpdateDateColumn({ name: 'updated_at', type: 'datetime' })
   updatedAt: Date;
 
   @DeleteDateColumn()

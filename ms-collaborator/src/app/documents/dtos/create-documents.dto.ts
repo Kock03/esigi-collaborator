@@ -2,6 +2,7 @@ import { ApiProperty } from '@nestjs/swagger';
 import {
   IsNotEmpty,
   IsObject,
+  IsOptional,
   IsString,
   MaxLength,
   MinLength,
@@ -17,7 +18,7 @@ export class CreateDocumentsDto {
   name: string;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
   @MaxLength(255)
   file: string;

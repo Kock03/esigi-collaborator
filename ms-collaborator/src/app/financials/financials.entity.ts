@@ -43,13 +43,13 @@ export class FinancialsEntity {
   )
   Collaborator: CollaboratorsEntity;
 
-  @CreateDateColumn({ type: 'datetime' })
+  @CreateDateColumn()
   createdAt: Date;
 
-  @UpdateDateColumn({ type: 'datetime' })
+  @UpdateDateColumn({ name: 'updated_at', type: 'datetime' })
   updatedAt: Date;
 
-  @DeleteDateColumn({ type: 'datetime' })
+  @DeleteDateColumn()
   deletedAt: Date;
 
   @BeforeInsert()

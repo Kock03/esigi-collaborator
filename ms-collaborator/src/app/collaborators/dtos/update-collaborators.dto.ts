@@ -50,19 +50,19 @@ export class UpdateCollaboratorsDto {
   login: string;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsEnum(Gender)
   gender: Gender;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
   @MinLength(5)
   @MaxLength(200)
   office: string;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsEnum(CollaboratorTypes)
   collaboratorTypes: CollaboratorTypes;
 
@@ -73,12 +73,12 @@ export class UpdateCollaboratorsDto {
   cpf: string;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsEnum(MaritalStatus)
   maritalStatus: MaritalStatus;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   birthDate: Date;
 
   @ApiProperty()
@@ -87,11 +87,11 @@ export class UpdateCollaboratorsDto {
   active: boolean;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   admissionDate: Date;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsEmail()
   @MinLength(10)
   @MaxLength(100)
