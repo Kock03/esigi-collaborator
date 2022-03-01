@@ -19,8 +19,6 @@ export class UpdateFinancialsDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsNumber()
-  @MinLength(2)
-  @MaxLength(40)
   value: number;
 
   @ApiProperty()

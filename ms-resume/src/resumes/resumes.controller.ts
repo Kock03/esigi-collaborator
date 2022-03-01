@@ -8,13 +8,13 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
-import { CreateResumesDto } from './dto/create-resumes-dto';
-import { UpdateResumesDto } from './dto/update-resumes-dto';
+import { CreateResumesDto } from './dto/create-resumes.dto';
+import { UpdateResumesDto } from './dto/update-resumes.dto';
 import { ResumesService } from './resumes.service';
 
 @Controller('/api/v1/resumes')
 export class ResumesController {
-  constructor(private readonly resumesService: ResumesService) {}
+  constructor(private readonly resumesService: ResumesService) { }
 
   @Get()
   async index() {

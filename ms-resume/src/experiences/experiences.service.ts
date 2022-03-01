@@ -2,8 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { NotFoundException } from 'src/exceptions/not-found-exception';
 import { Repository, FindConditions, FindOneOptions } from 'typeorm';
-import { CreateExperiencesDto } from './dto/create-experiences-dto';
-import { UpdateExperiencesDto } from './dto/update-experiences-dto';
+import { CreateExperiencesDto } from './dto/create-experiences.dto';
+import { UpdateExperiencesDto } from './dto/update-experiences.dto';
 import { ExperiencesEntity } from './experiences.entity';
 import { ExperiencesModule } from './experiences.module';
 

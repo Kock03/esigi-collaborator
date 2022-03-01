@@ -2,8 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { NotFoundException } from 'src/exceptions/not-found-exception';
 import { FindConditions, FindOneOptions, Repository } from 'typeorm';
-import { CreateSchoolingDto } from './dto/create-schooling-dto';
-import { UpdateSchoolingDto } from './dto/update-schooling-dto';
+import { CreateSchoolingDto } from './dto/create-schooling.dto';
+import { UpdateSchoolingDto } from './dto/update-schooling.dto';
 import { EducationsEntity } from './educations.entity';
 
 @Injectable()
@@ -11,7 +11,7 @@ export class EducationsService {
   constructor(
     @InjectRepository(EducationsEntity)
     private readonly educationsRepository: Repository<EducationsEntity>,
-  ) {}
+  ) { }
 
   async findAll() {
     return await this.educationsRepository.find();

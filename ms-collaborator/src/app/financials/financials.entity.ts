@@ -9,6 +9,8 @@ import {
   OneToOne,
   JoinColumn,
   ManyToOne,
+  BeforeInsert,
+  BeforeUpdate,
 } from 'typeorm';
 import { Reasons } from './dtos/contract-reasons.enum';
 import { ContractTypes } from './dtos/contract-types.enum';
@@ -28,22 +30,36 @@ export class FinancialsEntity {
   @Column({ type: 'int' })
   reason: Reasons;
 
-  @CreateDateColumn({ name: 'created_at' })
-  createdAt: Date;
+  @Column()
+  dateInclusion: Date;
+
+  @Column({ type: 'double', nullable: true })
+  monthlyValue: number;
 
   @ManyToOne(
     () => CollaboratorsEntity,
     (collaborator) => collaborator.Financials,
     { onDelete: 'CASCADE' },
-  ) // specify inverse side as a second parameter
+  )
   Collaborator: CollaboratorsEntity;
 
-  @CreateDateColumn()
-  dateInclusion: Date;
+  @CreateDateColumn({ type: 'datetime' })
+  createdAt: Date;
 
   @UpdateDateColumn({ type: 'datetime' })
   updatedAt: Date;
 
   @DeleteDateColumn({ type: 'datetime' })
   deletedAt: Date;
+
+  @BeforeInsert()
+  monthlyValueCalculation() {
+    this.monthlyValue = this.value * 170
+  }
+
+  @BeforeUpdate()
+  monthlyValueCalculationAgain() {
+    this.monthlyValue = this.value * 170
+  }
+
 }
