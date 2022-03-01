@@ -29,21 +29,21 @@ import { Gender } from './gender.enum';
 
 export class UpdateCollaboratorsDto {
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
   @MinLength(4)
   @MaxLength(100)
   firstNameCorporateName: string;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
   @MinLength(4)
   @MaxLength(100)
   lastNameFantasyName: string;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
   @MinLength(5)
   @MaxLength(70)
@@ -141,7 +141,7 @@ export class UpdateCollaboratorsDto {
   Address: AddressEntity;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsObject()
   Phone: PhoneEntity;
 
@@ -167,7 +167,7 @@ export class UpdateCollaboratorsDto {
 
   @ApiPropertyOptional()
   @IsOptional()
-  @IsObject()
+  @IsArray()
   BankData: BankDataEntity[];
 
   @ApiPropertyOptional()

@@ -25,7 +25,7 @@ export class CollaboratorBankTabComponent implements OnInit {
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
   @ViewChild('bankTable') bankTable!: MatTable<any>;
 
-  data!: Array<any>;
+  data: [] = [];
 
   displayedBank: string[] = [
     'bank',
@@ -33,49 +33,57 @@ export class CollaboratorBankTabComponent implements OnInit {
     'accountType',
     'account',
     'icon',
-  ]; 
+  ];
 
   index: any = null;
   bank: any;
 
   get bankArray() {
-    return this.collaboratorForm.controls['BankData'] as FormGroup;
-  }
-  get bankForm() {
-    return this.collaboratorForm.controls['BankData'] as FormGroup;
+    return this.collaboratorForm.controls['BankData'] as FormArray;
   }
 
   constructor(
     private fb: FormBuilder,
     private dialogService: ConfirmDialogService,
     public dialog: MatDialog
-  ) {}
+  ) { }
 
   ngOnInit(): void {
+    if (
+      this.bankArray.value.findIndex(
+        (bank: any) => bank == null
+      ) === -1
+    ) {
+      this.data = this.bankArray.value;
+    }
+
+
     this.initObservables();
-    this.bankArray
-    console.log("🚀 ~ file: collaborator-bank-tab.component.ts ~ line 57 ~ CollaboratorBankTabComponent ~ ngOnInit ~  this.bankArray",  this.bankArray)
-    this.bankForm
-    console.log("🚀 ~ file: collaborator-bank-tab.component.ts ~ line 59 ~ CollaboratorBankTabComponent ~ ngOnInit ~     this.bankForm",     this.bankForm)
+
   }
 
   initObservables() {
-    this.bank = this.collaboratorForm.controls['BankData'].value
-    if   (this.bank.agency) {
-      this.data = new Array(this.bank);
-      this.bankTable.renderRows();
-    }
+    this.bankArray.valueChanges.subscribe((res) => {
+      const isNullIndex = this.bankArray.value.findIndex(
+        (bank: any) => bank == null
+      );
+      if (isNullIndex !== -1) {
+        this.bankArray.removeAt(isNullIndex);
+      }
+      if (res) {
+        this.data = this.bankArray.value;
+      }
+    });
   }
 
   openDialog() {
     const dialogRef = this.dialog.open(CollaboratorBankDialog, {
       width: '500px',
       height: '470px',
-      data: { bankForm: this.collaboratorForm.controls['BankData'] },
     });
     dialogRef.afterClosed().subscribe((bank) => {
       if (bank) {
-        this.data = new Array(this.bankForm.value);
+        this.bankArray.insert(0, this.fb.group(bank));
         this.bankTable.renderRows();
       }
     });
@@ -85,11 +93,11 @@ export class CollaboratorBankTabComponent implements OnInit {
     this.onChange.next(true);
   }
 
-  getBank(bankForm: any, index: number) {
+  getBank(bankSelected: any, index: number) {
     const dialogRef = this.dialog.open(CollaboratorBankDialog, {
       width: '500px',
       height: '470px',
-      data: { bankForm: this.bankForm },
+      data: { bankSelected },
     });
     this.index = index;
     dialogRef.afterClosed().subscribe((bank) => {
@@ -110,8 +118,7 @@ export class CollaboratorBankTabComponent implements OnInit {
 
     this.dialogService.confirmed().subscribe(async (confirmed) => {
       if (confirmed) {
-        this.data.splice(0, 1);
-        this.bankTable.renderRows();
+        this.bankArray.removeAt(index);
       }
     });
   }

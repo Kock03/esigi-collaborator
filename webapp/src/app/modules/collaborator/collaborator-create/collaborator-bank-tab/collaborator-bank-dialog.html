@@ -6,9 +6,24 @@
 
         <mat-form-field appearance="outline">
           <mat-label>Banco</mat-label>
-          <input matInput disableRipple formControlName="bank" placeholder="Banco"  />
+          <input matInput disableRipple formControlName="bank" placeholder="Banco" />
         </mat-form-field>
 
+        <div fxLayout="row" fxFlex="100" fxLayoutGap="16px">
+          <mat-form-field appearance="outline" fxFlex="75">
+            <mat-label>Tipo da Conta</mat-label>
+            <mat-select formControlName="accountType">
+              <mat-option [value]="1">Conta Corrente</mat-option>
+              <mat-option [value]="2">Conta Salário</mat-option>
+              <mat-option [value]="3">Conta Poupança</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <br>
+          <mat-checkbox class="checkbox" color="primary" fxFlex="25" formControlName="status"
+            style=" margin-bottom: 15px">
+            Ativa
+          </mat-checkbox>
+        </div>
         <div fxLayout="row" fxFlex="100" fxLayoutGap="16px">
           <mat-form-field fxFlex="75" appearance="outline">
             <mat-label>Agência</mat-label>
@@ -21,14 +36,7 @@
           </mat-form-field>
         </div>
 
-        <mat-form-field appearance="outline">
-          <mat-label>Tipo da Conta</mat-label>
-          <mat-select formControlName="accountType">
-            <mat-option [value]="1">Conta Corrente</mat-option>
-            <mat-option [value]="2">Conta Salário</mat-option>
-            <mat-option [value]="3">Conta Poupança</mat-option>
-          </mat-select>
-        </mat-form-field>
+
 
 
         <div fxLayout="row" fxFlex="100" fxLayoutGap="16px">
@@ -43,6 +51,7 @@
             <input type="number" matInput disableRipple formControlName="bankAccountDigit" mask="0"
               placeholder="Digito" />
           </mat-form-field>
+
         </div>
       </form>
     </mat-dialog-content>

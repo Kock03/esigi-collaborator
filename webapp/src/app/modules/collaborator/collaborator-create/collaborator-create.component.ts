@@ -139,35 +139,9 @@ export class CollaboratorCreateComponent implements OnInit {
         city: ['', Validators.required],
         district: ['', Validators.required],
       }),
-      BankData: this.fb.group({
-        bank: [
-          this.collaborator ? this.collaborator.BankData.bank : null,
-          [Validators.required, Validators.maxLength(50)],
-        ],
-        agency: [
-          this.collaborator ? this.collaborator.BankData.agency : null,
-          [Validators.required, Validators.maxLength(4)],
-        ],
-        accountType: [
-          this.collaborator ? this.collaborator.BankData.accountType : null,
-          Validators.required,
-        ],
-        accountNumber: [
-          this.collaborator ? this.collaborator.BankData.accountNumber : null,
-          [Validators.required, Validators.maxLength(5)],
-        ],
-        digit: [
-          this.collaborator ? this.collaborator.BankData.digit : null,
-          [Validators.required, Validators.maxLength(1)],
-        ],
-        bankAccountDigit: [
-          this.collaborator
-            ? this.collaborator.BankData.bankAccountDigit
-            : null,
-          [Validators.required, Validators.maxLength(1)],
-        ],
-      }),
-
+      BankData: this.fb.array(
+        this.collaborator ? this.collaborator.BankData : [null]
+      ),
       Dependents: this.fb.array(
         this.collaborator ? this.collaborator.Dependents : [null]
       ),

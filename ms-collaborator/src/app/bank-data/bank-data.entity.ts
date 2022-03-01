@@ -7,7 +7,11 @@ import {
   DeleteDateColumn,
   PrimaryGeneratedColumn,
   OneToOne,
+  ManyToOne,
+  BeforeInsert,
+  BeforeUpdate,
 } from 'typeorm';
+import { EventListenerTypes } from 'typeorm/metadata/types/EventListenerTypes';
 import { AccountTypes } from './dtos/account-types.enum';
 
 @Entity({ name: 'bank_data' })
@@ -33,7 +37,10 @@ export class BankDataEntity {
   @Column()
   bankAccountDigit: string;
 
-  @OneToOne(() => CollaboratorsEntity)
+  @Column()
+  status: boolean;
+
+  @ManyToOne(() => CollaboratorsEntity, collaborator => collaborator.BankData)
   Collaborator: CollaboratorsEntity;
 
   @CreateDateColumn({ type: 'datetime' })
@@ -44,4 +51,12 @@ export class BankDataEntity {
 
   @DeleteDateColumn({ type: 'datetime' })
   deletedAt: Date;
+
+  @BeforeInsert()
+  InsertStatus() {
+    if (this.id == null) {
+      this.status = true
+    }
+  }
+
 }

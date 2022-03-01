@@ -56,11 +56,8 @@ export class CreateBankDataDto {
 
   @ApiProperty()
   @IsNotEmpty()
-  @IsBoolean()
-  status: boolean;
 
-  @ApiProperty()
-  @IsNotEmpty()
-  @IsObject()
   collaborator: CollaboratorsEntity;
+
+
 }
