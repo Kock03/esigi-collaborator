@@ -8,6 +8,7 @@ import { UpdateDependentsDto } from './dtos/update-dependents.dto';
 import { NotFoundException } from '../exceptions/not-found-exception';
 import { BadRequestException } from '../exceptions/bad-request.exception';
 import { ConflictException } from '../exceptions/conflict.exception';
+import { DocumentsBadRequestExcpetion } from '../exceptions/documents-bad-request.exception';
 
 @Injectable()
 export class DependentsService {
@@ -40,7 +41,7 @@ export class DependentsService {
     if (data.cpf) {
       const invalidCpf = DocumentValidator.isValidCpf(data.cpf);
       if (invalidCpf) {
-        throw new BadRequestException();
+        throw new DocumentsBadRequestExcpetion();
       } else {
         try {
           const dependent = this.dependentsRepository.create(data);
@@ -50,7 +51,7 @@ export class DependentsService {
         }
       }
     } else {
-      throw new BadRequestException();
+      throw new DocumentsBadRequestExcpetion();
     }
   }
 

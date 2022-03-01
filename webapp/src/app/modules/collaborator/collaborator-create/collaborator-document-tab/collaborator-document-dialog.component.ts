@@ -18,7 +18,7 @@ export class CollaboratorDocumentDialog {
     public dialogRef: MatDialogRef<CollaboratorDocumentDialog>,
     private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: { documentSelected: any }
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.initForm();
@@ -27,7 +27,7 @@ export class CollaboratorDocumentDialog {
   initForm(): void {
     this.documentForm = this.fb.group({
       name: ['RG', Validators.required],
-      file: [''],
+      file: ['null'],
     });
     if (this.data && this.data.documentSelected) {
       this.documentForm.patchValue(this.data.documentSelected);

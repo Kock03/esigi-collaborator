@@ -21,7 +21,7 @@ import { LanguagesEntity } from 'src/app/languages/languages.entity';
 import { PhoneEntity } from 'src/app/phone/phone.entity';
 import { SkillsEntity } from 'src/app/skills/skills.entity';
 import { CollaboratorTypes } from './types.enum';
-import { MaritalStatus } from './MaritalStatus.enum';
+import { MaritalStatus } from './Marital-status.enum';
 import { DependentsEntity } from 'src/app/dependents/dependents.entity';
 import { FeedbacksEntity } from 'src/app/feedbacks/feedbacks.entity';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
@@ -50,19 +50,19 @@ export class UpdateCollaboratorsDto {
   login: string;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsEnum(Gender)
   gender: Gender;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
   @MinLength(5)
   @MaxLength(200)
   office: string;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsEnum(CollaboratorTypes)
   collaboratorTypes: CollaboratorTypes;
 
@@ -73,12 +73,12 @@ export class UpdateCollaboratorsDto {
   cpf: string;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsEnum(MaritalStatus)
   maritalStatus: MaritalStatus;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   birthDate: Date;
 
   @ApiProperty()
@@ -87,11 +87,11 @@ export class UpdateCollaboratorsDto {
   active: boolean;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   admissionDate: Date;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsEmail()
   @MinLength(10)
   @MaxLength(100)
@@ -136,7 +136,7 @@ export class UpdateCollaboratorsDto {
   photo: Buffer;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsObject()
   Address: AddressEntity;
 

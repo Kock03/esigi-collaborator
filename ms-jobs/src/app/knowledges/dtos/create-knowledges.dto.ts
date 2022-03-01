@@ -9,7 +9,7 @@ import {
   MinLength,
 } from 'class-validator';
 import { JobsEntity } from 'src/app/jobs/jobs.entity';
-import { TypeOfPeriod } from './typeOfPeriod.enum';
+import { TypeOfPeriod } from './type-of-period.enum';
 
 export class CreateKnowledgesDto {
   @ApiProperty()

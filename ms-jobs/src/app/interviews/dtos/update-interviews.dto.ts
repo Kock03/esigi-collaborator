@@ -8,7 +8,7 @@ import { TechnicalInterviewsEntity } from 'src/app/technical-interviews/technica
 export class UpdateInterviewsDto {
   @ApiProperty()
   @IsOptional()
-  behaviroalInterviews: BehaviroalInterviewsEntity;
+  behavioralInterviews: BehaviroalInterviewsEntity;
 
   @ApiProperty()
   @IsOptional()

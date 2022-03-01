@@ -8,13 +8,13 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
-import { CreateExperiencesDto } from './dto/create-experiences-dto';
-import { UpdateExperiencesDto } from './dto/update-experiences-dto';
+import { CreateExperiencesDto } from './dto/create-experiences.dto';
+import { UpdateExperiencesDto } from './dto/update-experiences.dto';
 import { ExperiencesService } from './experiences.service';
 
 @Controller('api/v1/experiences')
 export class ExperiencesController {
-  constructor(private readonly experiencesService: ExperiencesService) {}
+  constructor(private readonly experiencesService: ExperiencesService) { }
 
   @Get()
   async index() {

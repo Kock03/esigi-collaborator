@@ -8,7 +8,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { JobsEntity } from '../jobs/jobs.entity';
-import { TypeOfPeriod } from './dtos/typeOfPeriod.enum';
+import { TypeOfPeriod } from './dtos/type-of-period.enum';
 
 @Entity({ name: 'knowledges' })
 export class KnowledgesEntity {

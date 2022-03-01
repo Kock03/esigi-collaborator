@@ -16,7 +16,7 @@ import { UpdateBankDataDto } from './dtos/update-bank-data.dto';
 
 @Controller('/api/v1/bank')
 export class BankDataController {
-  constructor(private readonly bankDataService: BankDataService) { }
+  constructor(private readonly bankDataService: BankDataService) {}
 
   @Get()
   async index() {
@@ -25,7 +25,7 @@ export class BankDataController {
 
   @Get(':id')
   async show(@Param('id', new ParseUUIDPipe()) id: string) {
-    return await this.bankDataService.findOneOrFail({ id });
+    return await this.bankDataService.method(id);
   }
 
   @Post()

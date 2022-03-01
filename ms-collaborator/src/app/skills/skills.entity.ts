@@ -35,7 +35,7 @@ export class SkillsEntity {
   @CreateDateColumn({ type: 'datetime' })
   createdAt: Date;
 
-  @UpdateDateColumn({ type: 'datetime' })
+  @UpdateDateColumn({ name: 'updated_at', type: 'datetime' })
   updatedAt: Date;
 
   @DeleteDateColumn({ type: 'datetime' })
