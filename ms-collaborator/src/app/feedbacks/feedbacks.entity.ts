@@ -71,6 +71,5 @@ export class FeedbacksEntity {
     (collaborators) => collaborators.Feedbacks, {
   }
   )
-  @JoinColumn()
   Collaborator: CollaboratorsEntity;
 }

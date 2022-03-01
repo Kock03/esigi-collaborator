@@ -14,6 +14,9 @@ import { ActivatedRoute, Router, RoutesRecognized } from '@angular/router';
 import { ICollaborator } from 'src/app/interfaces/icollaborator';
 import { IFeedback } from 'src/app/interfaces/ifeedback';
 import { CollaboratorProvider } from 'src/providers/collaborator.provider';
+import { FeedbackProvider } from 'src/providers/feedback.provider';
+import { ConfirmDialogService } from 'src/services/confirn-dialog.service';
+import { SnackBarService } from 'src/services/snackbar.service';
 
 @Component({
   selector: 'app-collaborator-feedback-tab',
@@ -34,11 +37,12 @@ export class CollaboratorFeedbackTabComponent implements OnInit {
     'icon',
   ];
 
-  filteredFeedbackList!: any[];
+  
   collaboratorId!: string | null;
-  collaborator!: ICollaborator
+  collaborator!: any;
+  feedback!: IFeedback[];
   data!: Array<any>;
-  feedback!: any[]
+  
 
   get feedbackArray() {
     return this.collaboratorForm.controls['Feedbacks'] as FormArray;
@@ -49,17 +53,22 @@ export class CollaboratorFeedbackTabComponent implements OnInit {
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private collaboratorProvider: CollaboratorProvider,
+    private snackbarService: SnackBarService,
+    private dialogService: ConfirmDialogService,
+    private feedbackProvider: FeedbackProvider,
   ) {}
 
   async ngOnInit() {
     this.collaboratorId = this.route.snapshot.paramMap.get('id');
-    this.getJob()
-    this.feedback = this.collaborator?.Feedbacks
+    this.getFeedback()
+    
   }
 
-  async getJob() {
+  async getFeedback() {
     try {
       this.collaborator = await this.collaboratorProvider.findOne(this.collaboratorId);
+       this.feedback = this.collaborator.Feedbacks
+       console.log("🚀 ~ file: collaborator-feedback-tab.component.ts ~ line 65 ~ CollaboratorFeedbackTabComponent ~ getJob ~  this.feedback",  this.feedback)
     } catch (error) {
       console.error(error);
     }
@@ -73,5 +82,31 @@ export class CollaboratorFeedbackTabComponent implements OnInit {
       },
     };
     this.router.navigate(['colaborador/feedback/novo'], navigationExtras);
+  }
+
+  async deleteFeedback(feedbackId: any) {
+    const options = {
+      data: {
+        title: 'Anteção',
+        subtitle: 'Você tem certeza que deseja excluir este Feedback?',
+      },
+      panelClass: 'confirm-modal',
+    };
+
+    this.dialogService.open(options);
+
+    this.dialogService.confirmed().subscribe(async (confirmed) => {
+      if (confirmed) {
+        try {
+          const jobs = await this.feedbackProvider.destroy(feedbackId);
+          this.getFeedback()
+
+          this.snackbarService.successMessage('Vaga Excluída Com Sucesso');
+        } catch (error) {
+          console.log('ERROR 132' + error);
+          this.snackbarService.showError('Falha ao Deletar');
+        }
+      }
+    });
   }
 }

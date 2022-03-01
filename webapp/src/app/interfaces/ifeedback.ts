@@ -1,6 +1,7 @@
 export interface IFeedback {
-    date: string;
-    type: string;
+    id: string;
+    feedbackDate: string;
+    feedbackType: string;
     manager: string;
     status: string;
 }

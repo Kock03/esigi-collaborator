@@ -47,9 +47,9 @@ export class FeedbackProvider {
         });
     };
 
-    destroy(feedback: any): Promise<any> {
+    destroy(id: string | null): Promise<any> {
         return new Promise((resolve, reject) => {
-            this.apiGateway.delete(environment.COLLABORATOR_MS + 'feedbacks', feedback).subscribe((response: HttpResponse<any>) => {
+            this.apiGateway.delete(environment.COLLABORATOR_MS + 'feedbacks/:id', { id: id }).subscribe((response: HttpResponse<any>) => {
                 resolve(response.body);
             }, reject);
         })

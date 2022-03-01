@@ -100,10 +100,11 @@ export class JobCreateComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.jobId = this.route.snapshot.paramMap.get('id');
+    this.initForm();
     if (this.jobId !== 'novo') {
       await this.getJob();
     }
-    this.initForm();
+    
     this.setFormValue();
     this.step = 1;
   }

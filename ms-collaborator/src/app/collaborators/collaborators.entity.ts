@@ -103,6 +103,7 @@ export class CollaboratorsEntity {
     orphanedRowAction: 'delete',
     eager: true,
   })
+  @JoinColumn()
   Feedbacks: FeedbacksEntity[];
 
   @OneToMany(() => DocumentsEntity, (documents) => documents.Collaborator, {
