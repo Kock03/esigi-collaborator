@@ -2,7 +2,7 @@ import { KnowledgesEntity } from '../knowledges/knowledges.entity';
 import { Schooling } from './dtos/schooling.enum';
 import { Status } from './dtos/status.enum';
 import { Type } from './dtos/type.enum';
-import { TypeOfContract } from './dtos/typeOfContract.enum';
+import { TypeOfContract } from './dtos/type-of-contract.enum';
 import { Workplace } from './dtos/workplace.enum';
 import { SenioritiesEntity } from '../seniorities/seniorities.entity';
 import { LanguagesEntity } from '../languages/languages.entity';

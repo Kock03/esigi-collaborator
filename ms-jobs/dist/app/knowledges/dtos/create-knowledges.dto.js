@@ -13,7 +13,7 @@ exports.CreateKnowledgesDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const jobs_entity_1 = require("../../jobs/jobs.entity");
-const typeOfPeriod_enum_1 = require("./typeOfPeriod.enum");
+const type_of_period_enum_1 = require("./type-of-period.enum");
 class CreateKnowledgesDto {
 }
 __decorate([
@@ -33,7 +33,7 @@ __decorate([
 __decorate([
     (0, swagger_1.ApiProperty)(),
     (0, class_validator_1.IsNotEmpty)(),
-    (0, class_validator_1.IsEnum)(typeOfPeriod_enum_1.TypeOfPeriod),
+    (0, class_validator_1.IsEnum)(type_of_period_enum_1.TypeOfPeriod),
     __metadata("design:type", Number)
 ], CreateKnowledgesDto.prototype, "typeOfPeriod", void 0);
 __decorate([

@@ -10,11 +10,12 @@ import {
 } from '@nestjs/common';
 import { CreateFeedbacksDto } from './dto/create-feedbacks.dto';
 import { UpdateFeedbacksDto } from './dto/update-feedbacks.dto';
+import { FeedbacksEntity } from './feedbacks.entity';
 import { FeedbacksService } from './feedbacks.service';
 
 @Controller('api/v1/feedbacks')
 export class FeedbacksController {
-  constructor(private readonly feedbacksService: FeedbacksService) { }
+  constructor(private readonly feedbacksService: FeedbacksService) {}
 
   @Get()
   async index() {
@@ -25,6 +26,11 @@ export class FeedbacksController {
   async show(@Param('id', new ParseUUIDPipe()) id: string) {
     return await this.feedbacksService.findOneOrFail({ id });
   }
+
+  // @Get(':id')
+  // async feedbacks(@Param('collaboratorId', new ParseUUIDPipe()) collaboratorId: string): Promise<FeedbacksEntity[]> {
+  //   return await this.feedbacksService.viewFeedbacks({ collaboratorId });
+  // }
 
   @Post()
   async store(@Body() body: CreateFeedbacksDto) {

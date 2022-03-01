@@ -4,8 +4,8 @@ import { AddressEntity } from 'src/address/address.entity';
 import { NotFoundException } from 'src/exceptions/not-found-exception';
 import { PhoneEntity } from 'src/phone/phone.entity';
 import { Repository, FindConditions, FindOneOptions } from 'typeorm';
-import { CreateResumesDto } from './dto/create-resumes-dto';
-import { UpdateResumesDto } from './dto/update-resumes-dto';
+import { CreateResumesDto } from './dto/create-resumes.dto';
+import { UpdateResumesDto } from './dto/update-resumes.dto';
 import { ResumesEntity } from './resumes.entity';
 
 @Injectable()

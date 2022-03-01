@@ -4,6 +4,7 @@ import {
   IsNotEmpty,
   IsNumber,
   IsObject,
+  IsOptional,
   MaxLength,
   MinLength,
 } from 'class-validator';
@@ -20,8 +21,6 @@ export class CreateFinancialsDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsNumber()
-  @MinLength(2)
-  @MaxLength(40)
   value: number;
 
   @ApiProperty()
@@ -37,4 +36,5 @@ export class CreateFinancialsDto {
   @IsNotEmpty()
   @IsObject()
   Collaborator: CollaboratorsEntity;
+
 }

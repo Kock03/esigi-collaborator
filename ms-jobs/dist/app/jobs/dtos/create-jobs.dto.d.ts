@@ -6,7 +6,7 @@ import { SenioritiesEntity } from 'src/app/seniorities/seniorities.entity';
 import { Schooling } from './schooling.enum';
 import { Status } from './status.enum';
 import { Type } from './type.enum';
-import { TypeOfContract } from './typeOfContract.enum';
+import { TypeOfContract } from './type-of-contract.enum';
 import { Workplace } from './workplace.enum';
 export declare class CreateJobsDto {
     requester: string;

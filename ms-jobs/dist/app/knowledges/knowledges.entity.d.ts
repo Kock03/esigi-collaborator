@@ -1,5 +1,5 @@
 import { JobsEntity } from '../jobs/jobs.entity';
-import { TypeOfPeriod } from './dtos/typeOfPeriod.enum';
+import { TypeOfPeriod } from './dtos/type-of-period.enum';
 export declare class KnowledgesEntity {
     id: string;
     name: string;

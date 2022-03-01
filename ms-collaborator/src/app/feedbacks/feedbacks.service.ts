@@ -11,7 +11,7 @@ export class FeedbacksService {
   constructor(
     @InjectRepository(FeedbacksEntity)
     private readonly feedbacksRepository: Repository<FeedbacksEntity>,
-  ) { }
+  ) {}
 
   async findAll() {
     return await this.feedbacksRepository.find();
@@ -32,6 +32,15 @@ export class FeedbacksService {
   async store(data: CreateFeedbacksDto) {
     const feedbacks = this.feedbacksRepository.create(data);
     return await this.feedbacksRepository.save(feedbacks);
+  }
+
+  async viewFeedbacks(collaboratorId): Promise<FeedbacksEntity[]> {
+    return await this.feedbacksRepository.find({
+      where: {
+        collaborator: collaboratorId
+      },
+      relations: ['collaborator'],
+  });
   }
 
   async update(id: string, data: UpdateFeedbacksDto) {

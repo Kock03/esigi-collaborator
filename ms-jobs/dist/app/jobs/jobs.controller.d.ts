@@ -18,7 +18,7 @@ export declare class JobsController {
         jobName: string;
         startForecast: Date;
         jobNumber: number;
-        typeOfContract: import("./dtos/typeOfContract.enum").TypeOfContract;
+        typeOfContract: import("./dtos/type-of-contract.enum").TypeOfContract;
         workplace: import("./dtos/workplace.enum").Workplace;
         workingDay: string;
         minimumValue: number;

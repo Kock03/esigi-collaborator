@@ -47,7 +47,7 @@ const routes: Routes = [
     component: CollaboratorCreateComponent,
   },
   {
-    path: 'feedback/novo',
+    path: 'feedback/:id',
     component: FeedbackCreateComponent,
   },
 ];

@@ -12,7 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.KnowledgesEntity = void 0;
 const typeorm_1 = require("typeorm");
 const jobs_entity_1 = require("../jobs/jobs.entity");
-const typeOfPeriod_enum_1 = require("./dtos/typeOfPeriod.enum");
+const type_of_period_enum_1 = require("./dtos/type-of-period.enum");
 let KnowledgesEntity = class KnowledgesEntity {
 };
 __decorate([

@@ -10,7 +10,7 @@ export declare class KnowledgesController {
     update(id: string, body: UpdateKnowledgesDto): Promise<{
         name: string;
         yearsExperience: number;
-        typeOfPeriod: import("./dtos/typeOfPeriod.enum").TypeOfPeriod;
+        typeOfPeriod: import("./dtos/type-of-period.enum").TypeOfPeriod;
         id: string;
     } & import("./knowledges.entity").KnowledgesEntity>;
     destroy(id: string): Promise<import("typeorm").UpdateResult>;

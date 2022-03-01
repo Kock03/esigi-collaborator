@@ -11,7 +11,7 @@ export declare class KnowledgesService {
     update(id: string, data: UpdateKnowledgesDto): Promise<{
         name: string;
         yearsExperience: number;
-        typeOfPeriod: import("./dtos/typeOfPeriod.enum").TypeOfPeriod;
+        typeOfPeriod: import("./dtos/type-of-period.enum").TypeOfPeriod;
         id: string;
     } & KnowledgesEntity>;
     destroy(id: string): Promise<import("typeorm").UpdateResult>;

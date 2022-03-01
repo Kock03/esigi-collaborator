@@ -16,7 +16,7 @@ const seniorities_entity_1 = require("../../seniorities/seniorities.entity");
 const schooling_enum_1 = require("./schooling.enum");
 const status_enum_1 = require("./status.enum");
 const type_enum_1 = require("./type.enum");
-const typeOfContract_enum_1 = require("./typeOfContract.enum");
+const type_of_contract_enum_1 = require("./type-of-contract.enum");
 const workplace_enum_1 = require("./workplace.enum");
 class CreateJobsDto {
 }
@@ -88,7 +88,7 @@ __decorate([
 __decorate([
     (0, swagger_1.ApiProperty)(),
     (0, class_validator_1.IsNotEmpty)(),
-    (0, class_validator_1.IsEnum)(typeOfContract_enum_1.TypeOfContract),
+    (0, class_validator_1.IsEnum)(type_of_contract_enum_1.TypeOfContract),
     __metadata("design:type", Number)
 ], CreateJobsDto.prototype, "typeOfContract", void 0);
 __decorate([
