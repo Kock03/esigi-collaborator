@@ -1,10 +1,13 @@
-import { Component, Input, Output, EventEmitter, Inject } from "@angular/core";
+import { Component, Input, Output, EventEmitter, Inject, ViewEncapsulation } from "@angular/core";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 
 @Component({
   selector: 'collaborator-bank-dialog',
   templateUrl: 'collaborator-bank-dialog.html',
+  styleUrls: ['./collaborator-bank-tab.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+ 
 })
 export class CollaboratorBankDialog {
   @Input('form') collaboratorForm!: FormGroup;
