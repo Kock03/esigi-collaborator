@@ -138,7 +138,7 @@ export class CollaboratorsEntity {
   @JoinColumn()
   Phone: PhoneEntity;
 
-  @OneToMany(() => BankDataEntity, (bank) => bank.Collaborator, {
+  @OneToMany(() => BankDataEntity, (bank) => bank.collaborator, {
     cascade: ['insert', 'update', 'remove'],
     orphanedRowAction: 'delete',
     eager: true,
@@ -158,7 +158,7 @@ export class CollaboratorsEntity {
     cascade: ['insert', 'update', 'remove'],
     orphanedRowAction: 'delete',
     eager: true,
-    nullable: true
+    nullable: true,
   })
   @JoinColumn()
   Dependents: DependentsEntity[];

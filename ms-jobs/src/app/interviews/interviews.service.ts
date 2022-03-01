@@ -20,7 +20,7 @@ export class InterviewsService {
     return await this.interviewsRepository.find();
   }
 
-  async findOnerOrFail(
+  async findOneOrFail(
     conditions: FindConditions<InterviewsEnitiy>,
     options?: FindOneOptions<InterviewsEnitiy>,
   ) {

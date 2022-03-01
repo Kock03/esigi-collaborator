@@ -10,6 +10,7 @@ import {
   ManyToOne,
   BeforeInsert,
   BeforeUpdate,
+  JoinColumn,
 } from 'typeorm';
 import { EventListenerTypes } from 'typeorm/metadata/types/EventListenerTypes';
 import { AccountTypes } from './dtos/account-types.enum';
@@ -38,10 +39,17 @@ export class BankDataEntity {
   bankAccountDigit: string;
 
   @Column()
-  status: boolean;
+  isActive: boolean;
 
-  @ManyToOne(() => CollaboratorsEntity, collaborator => collaborator.BankData)
-  Collaborator: CollaboratorsEntity;
+  @ManyToOne(
+    () => CollaboratorsEntity,
+    (collaborator) => collaborator.BankData,
+    {
+      cascade: ['update'],
+    },
+  )
+  @JoinColumn()
+  collaborator: CollaboratorsEntity;
 
   @CreateDateColumn({ type: 'datetime' })
   createdAt: Date;
@@ -51,12 +59,4 @@ export class BankDataEntity {
 
   @DeleteDateColumn({ type: 'datetime' })
   deletedAt: Date;
-
-  @BeforeInsert()
-  InsertStatus() {
-    if (this.id == null) {
-      this.status = true
-    }
-  }
-
 }
