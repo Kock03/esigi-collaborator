@@ -14,6 +14,7 @@ import {
   MatDialogRef,
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
+import { ActivatedRoute } from '@angular/router';
 import { ConfirmDialogService } from 'src/services/confirn-dialog.service';
 import { ResumeDialogExperience } from './resume-experience-dialog.component';
 
@@ -44,6 +45,7 @@ export class ResumeExperienceTabComponent implements OnInit {
   experienceList: any[] = [];
   experienceForm!: FormGroup;
   index: any = null;
+  resumeId!: any;
 
   get experiencesArray() {
     return this.resumeForm.controls['Experiences'] as FormArray;
@@ -52,18 +54,23 @@ export class ResumeExperienceTabComponent implements OnInit {
   constructor(
     private dialogService: ConfirmDialogService,
     private fb: FormBuilder,
-    public dialog: MatDialog
-  ) {}
+    public dialog: MatDialog,
+    private route: ActivatedRoute
+  ) { }
 
   ngOnInit(): void {
-    if (
-      this.experiencesArray.value &&
-      this.experiencesArray.value.findIndex((skill: any) => skill == null) ===
-        -1
-    ) {
-      this.experienceList = this.experiencesArray.value;
+    // if (
+    //   this.experiencesArray.value &&
+    //   this.experiencesArray.value.findIndex((skill: any) => skill == null) ===
+    //   -1
+    // ) {
+    //   this.experienceList = this.experiencesArray.value;
+    // }
+    this.resumeId = this.route.snapshot.paramMap.get('id');
+    if (this.resumeId != 'novo') {
+      this.initObservables();
     }
-    this.initObservables();
+
   }
 
   initObservables() {

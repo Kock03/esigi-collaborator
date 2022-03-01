@@ -30,18 +30,10 @@ export class FinancialsEntity {
   @Column({ type: 'int' })
   reason: Reasons;
 
-  @Column()
-<<<<<<< HEAD
-  valuePerDay: number;
-
-  @CreateDateColumn({ name: 'created_at' })
-  createdAt: Date;
-=======
   dateInclusion: Date;
 
   @Column({ type: 'double', nullable: true })
   monthlyValue: number;
->>>>>>> dba0147b9ed65bdf0d98820f259b9594bcfd84d3
 
   @ManyToOne(
     () => CollaboratorsEntity,
