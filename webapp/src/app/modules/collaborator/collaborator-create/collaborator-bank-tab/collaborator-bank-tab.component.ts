@@ -32,6 +32,7 @@ export class CollaboratorBankTabComponent implements OnInit {
     'agency',
     'accountType',
     'account',
+    'status',
     'icon',
   ];
 
@@ -46,19 +47,28 @@ export class CollaboratorBankTabComponent implements OnInit {
     private fb: FormBuilder,
     private dialogService: ConfirmDialogService,
     public dialog: MatDialog
-  ) { }
+  ) {}
 
   ngOnInit(): void {
-    if (
-      this.bankArray.value.findIndex(
-        (bank: any) => bank == null
-      ) === -1
-    ) {
+    if (this.bankArray.value.findIndex((bank: any) => bank == null) === -1) {
       this.data = this.bankArray.value;
     }
 
 
+    // if (this.bankArray.controls[0].value.status == true) {
+    //   this.bankArray.value.status.setValue(false);
+    // }
+
     this.initObservables();
+
+    console.log(this.bankArray.controls[0].status);
+    console.log("🚀 ~ file: collaborator-bank-tab.component.ts ~ line 67 ~ CollaboratorBankTabComponent ~ ngOnInit ~ this.bankArray.controls[0].status", this.bankArray.value?.status);
+     console.log(this.data)
+    if(this.bankArray.value.status == true) {
+      console.log("🚀 ~ file: collaborator-bank-tab.component.ts ~ line 67 ~ CollaboratorBankTabComponent ~ ngOnInit ~ this.bankArray.controls[0].status", this.bankArray.controls[0])
+      console.log("blyat")
+      
+    }
 
   }
 
@@ -101,7 +111,9 @@ export class CollaboratorBankTabComponent implements OnInit {
     });
     this.index = index;
     dialogRef.afterClosed().subscribe((bank) => {
-      this.bankArray.controls[this.index].setValue(bank);
+      if (bank) {
+        this.bankArray.controls[this.index].setValue(bank);
+      }
     });
   }
 
