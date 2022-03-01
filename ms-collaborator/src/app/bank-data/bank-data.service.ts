@@ -25,16 +25,31 @@ export class BankDataService {
     conditions: FindConditions<BankDataEntity>,
     options?: FindOneOptions<BankDataEntity>,
   ) {
-    options = { relations: ['Collaborator'] };
     try {
       return await this.bankDataRepository.findOneOrFail(conditions, options);
     } catch {
       throw new NotFoundException();
+      ('');
+    }
+  }
+
+  async method(id: string) {
+    const bankdata = await this.bankDataRepository.query(
+      'select created_at from esigi_collaborator.bank_data where collaborator_id = ":id"',
+      [id],
+    );
+
+    if (bankdata.created_at.length > 1) {
+      for (let index = 0; index < bankdata.created_at.length; index++) {
+        if ([index] < bankdata.created_at.length) bankdata.isActive = false;
+        bankdata.isActive = true;
+      }
     }
   }
 
   async store(data: CreateBankDataDto) {
     const bank = this.bankDataRepository.create(data);
+
     return await this.bankDataRepository.save(bank);
   }
 
@@ -43,6 +58,7 @@ export class BankDataService {
     if (!bank) {
       throw new NotFoundException();
     }
+
     return await this.bankDataRepository.save({ id: id, ...data });
   }
 

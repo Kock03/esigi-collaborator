@@ -28,6 +28,9 @@ export class FinancialsEntity {
   @Column({ type: 'int' })
   reason: Reasons;
 
+  @Column()
+  valuePerDay: number;
+
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
 
