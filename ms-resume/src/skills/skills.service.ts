@@ -2,8 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { NotFoundException } from 'src/exceptions/not-found-exception';
 import { Repository, FindConditions, FindOneOptions } from 'typeorm';
-import { CreateSkillsDto } from './dto/create-skills-dto';
-import { UpdateSkillsDto } from './dto/update-skills-dto';
+import { CreateSkillsDto } from './dto/create-skills.dto';
+import { UpdateSkillsDto } from './dto/update-skills.dto';
 import { SkillsEntity } from './skills.entity';
 
 @Injectable()
@@ -11,7 +11,7 @@ export class SkillsService {
   constructor(
     @InjectRepository(SkillsEntity)
     private readonly skillsRepository: Repository<SkillsEntity>,
-  ) {}
+  ) { }
 
   async findAll() {
     return await this.skillsRepository.find();

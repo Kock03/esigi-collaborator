@@ -29,7 +29,7 @@ export class DocumentsEntity {
   @CreateDateColumn()
   createdAt: Date;
 
-  @UpdateDateColumn()
+  @UpdateDateColumn({ name: 'updated_at', type: 'datetime' })
   updatedAt: Date;
 
   @DeleteDateColumn()

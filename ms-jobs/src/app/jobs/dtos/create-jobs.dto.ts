@@ -26,7 +26,7 @@ import { TechnicalInterviewsEntity } from 'src/app/technical-interviews/technica
 import { Schooling } from './schooling.enum';
 import { Status } from './status.enum';
 import { Type } from './type.enum';
-import { TypeOfContract } from './typeOfContract.enum';
+import { TypeOfContract } from './type-of-contract.enum';
 import { Workplace } from './workplace.enum';
 
 export class CreateJobsDto {

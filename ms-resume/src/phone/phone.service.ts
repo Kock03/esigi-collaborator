@@ -2,8 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { NotFoundException } from 'src/exceptions/not-found-exception';
 import { Repository, FindConditions, FindOneOptions } from 'typeorm';
-import { CreatePhoneDto } from './dto/create-phone-dto';
-import { UpdatePhoneDto } from './dto/update-phone-dto';
+import { CreatePhoneDto } from './dto/create-phone.dto';
+import { UpdatePhoneDto } from './dto/update-phone.dto';
 import { PhoneEntity } from './phone.entity';
 
 @Injectable()
@@ -11,7 +11,7 @@ export class PhoneService {
   constructor(
     @InjectRepository(PhoneEntity)
     private readonly phoneRepository: Repository<PhoneEntity>,
-  ) {}
+  ) { }
 
   async findAll() {
     return await this.phoneRepository.find();

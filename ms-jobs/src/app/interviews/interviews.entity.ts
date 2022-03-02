@@ -20,7 +20,7 @@ export class InterviewsEnitiy {
     eager: true,
   })
   @JoinColumn()
-  behaviroalInterviews: BehaviroalInterviewsEntity;
+  behavioralInterviews: BehaviroalInterviewsEntity;
 
   @OneToOne(() => TechnicalInterviewsEntity, {
     cascade: ['insert', 'update', 'soft-remove'],

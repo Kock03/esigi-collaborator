@@ -5,12 +5,14 @@ import {
   IsNotEmpty,
   IsNumber,
   IsObject,
+  IsOptional,
   IsString,
   Length,
   MaxLength,
   MinLength,
 } from 'class-validator';
 import { CollaboratorsEntity } from 'src/app/collaborators/collaborators.entity';
+import { ConnectionIsNotSetError } from 'typeorm';
 import { AccountTypes } from './account-types.enum';
 
 export class CreateBankDataDto {
@@ -56,8 +58,10 @@ export class CreateBankDataDto {
 
   @ApiProperty()
   @IsNotEmpty()
+  @IsBoolean()
+  isActive: boolean;
 
+  @ApiProperty()
+  @IsOptional()
   collaborator: CollaboratorsEntity;
-
-
 }

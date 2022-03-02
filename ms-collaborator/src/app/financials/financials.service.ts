@@ -11,7 +11,7 @@ export class FinancialsService {
   constructor(
     @InjectRepository(FinancialsEntity)
     private readonly financialsRepository: Repository<FinancialsEntity>,
-  ) {}
+  ) { }
 
   async findAll() {
     const financialsWhiteCollaborator = await this.financialsRepository
@@ -34,8 +34,11 @@ export class FinancialsService {
   }
 
   async store(data: CreateFinancialsDto) {
+
     const financial = this.financialsRepository.create(data);
     return await this.financialsRepository.save(financial);
+
+
   }
 
   async update(id: string, data: UpdateFinancialsDto) {

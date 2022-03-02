@@ -8,8 +8,8 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
-import { CreateSkillsDto } from './dto/create-skills-dto';
-import { UpdateSkillsDto } from './dto/update-skills-dto';
+import { CreateSkillsDto } from './dto/create-skills.dto';
+import { UpdateSkillsDto } from './dto/update-skills.dto';
 import { SkillsService } from './skills.service';
 
 @Controller('api/v1/skills')

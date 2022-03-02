@@ -55,6 +55,11 @@ export class UpdateBankDataDto {
   bankAccountDigit: string;
 
   @ApiProperty()
+  @IsNotEmpty()
+  @IsBoolean()
+  isActive: boolean;
+
+  @ApiProperty()
   @IsOptional()
   status: boolean;
 }
