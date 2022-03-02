@@ -31,6 +31,16 @@ export class JobProvider {
     });
   }
 
+  getFollowUpInterviews(id: string | null): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.apiGateway
+        .get(environment.JOBS_MS + 'interviews/follow-up-interviews/:id', { id: id })
+        .subscribe((response: HttpResponse<any>) => {
+          resolve(response.body);
+        }, reject);
+    });
+  }
+
   update(id: string | null, job: any): Promise<any> {
     return new Promise((resolve, reject) => {
       this.apiGateway

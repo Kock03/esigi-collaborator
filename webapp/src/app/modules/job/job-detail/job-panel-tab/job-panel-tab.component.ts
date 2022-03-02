@@ -32,7 +32,7 @@ export class JobPanelTabComponent implements OnInit {
   filteredInterviewList!: any[];
   jobs!: Job[];
   job: any;
-  interviewsId!: string | null;
+  jobId!: string | null;
 
 
   constructor(
@@ -47,10 +47,10 @@ export class JobPanelTabComponent implements OnInit {
 
   async ngOnInit() {
     // this.getInterviewList();
-    this.interviewsId = this.route.snapshot.paramMap.get('id')
+    this.jobId = this.route.snapshot.paramMap.get('id')
+    this.getInterviewList();
     this.filteredInterviewList = this.interviews;
     this.initFilter();
-    this.getInterviewList();
   }
 
   // async getInterviewList() {
@@ -64,7 +64,7 @@ export class JobPanelTabComponent implements OnInit {
 
   async getInterviewList() {
     try {
-      this.job = await this.JobProvider.findOne(this.interviewsId);
+      this.job = await this.JobProvider.getFollowUpInterviews(this.jobId);
       console.log("🚀 ~ file: job-panel-tab.component.ts ~ line 68 ~ JobPanelTabComponent ~ getInterviewList ~ this.job ", this.job )
        this.interviews = this.job.Jobs
     } catch (error) {
