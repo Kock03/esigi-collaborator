@@ -1,5 +1,5 @@
 import { IsBoolean, IsNotEmpty, IsOptional } from 'class-validator';
-import { BehaviroalInterviewsEntity } from 'src/app/behavioral-interviews/behavioral-interviews.entity';
+import { BehavioralInterviewsEntity } from 'src/app/behavioral-interviews/behavioral-interviews.entity';
 
 export class CreateHiringPreferencesDto {
   @IsOptional()
@@ -19,5 +19,5 @@ export class CreateHiringPreferencesDto {
   cooperative: boolean;
 
   @IsOptional()
-  BehaviroalInterview: BehaviroalInterviewsEntity;
+  BehaviroalInterview: BehavioralInterviewsEntity;
 }

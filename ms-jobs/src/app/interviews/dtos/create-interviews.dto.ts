@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsOptional } from 'class-validator';
-import { BehaviroalInterviewsEntity } from 'src/app/behavioral-interviews/behavioral-interviews.entity';
+import { BehavioralInterviewsEntity } from 'src/app/behavioral-interviews/behavioral-interviews.entity';
 import { ClientInterviewsEntity } from 'src/app/client-interviews/client-interviews.entity';
 import { JobsEntity } from 'src/app/jobs/jobs.entity';
 import { TechnicalInterviewsEntity } from 'src/app/technical-interviews/technical-interviews.entity';
@@ -8,7 +8,7 @@ import { TechnicalInterviewsEntity } from 'src/app/technical-interviews/technica
 export class CreateInterviewsDto {
   @ApiProperty()
   @IsOptional()
-  behavioralInterviews: BehaviroalInterviewsEntity;
+  behavioralInterviews: BehavioralInterviewsEntity;
 
   @ApiProperty()
   @IsOptional()

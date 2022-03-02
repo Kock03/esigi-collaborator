@@ -5,7 +5,7 @@ import {
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { BehaviroalInterviewsEntity } from '../behavioral-interviews/behavioral-interviews.entity';
+import { BehavioralInterviewsEntity } from '../behavioral-interviews/behavioral-interviews.entity';
 import { ClientInterviewsEntity } from '../client-interviews/client-interviews.entity';
 import { JobsEntity } from '../jobs/jobs.entity';
 import { TechnicalInterviewsEntity } from '../technical-interviews/technical-interviews.entity';
@@ -15,12 +15,12 @@ export class InterviewsEnitiy {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @OneToOne(() => BehaviroalInterviewsEntity, {
+  @OneToOne(() => BehavioralInterviewsEntity, {
     cascade: ['insert', 'update', 'soft-remove'],
     eager: true,
   })
   @JoinColumn()
-  behavioralInterviews: BehaviroalInterviewsEntity;
+  behavioralInterviews: BehavioralInterviewsEntity;
 
   @OneToOne(() => TechnicalInterviewsEntity, {
     cascade: ['insert', 'update', 'soft-remove'],
