@@ -9,7 +9,10 @@ import {
   ParseUUIDPipe,
   Post,
   Put,
+  Query,
+  Req,
 } from '@nestjs/common';
+import { Observable } from 'rxjs';
 import { CollaboratorsService } from './collaborators.service';
 import { CreateCollaboratorsDto } from './dtos/create-collaborators.dto';
 import { UpdateCollaboratorsDto } from './dtos/update-collaborators.dto';
@@ -34,9 +37,10 @@ export class CollaboratorsController {
     return await this.collaboratorsRepository.findOneOrFail({ id });
   }
 
-  @Get('/find-inactive')
+  @Get('list/inactive')
   async findInactive() {
     return await this.collaboratorsRepository.findInactive();
+
   }
 
   @Put(':id')

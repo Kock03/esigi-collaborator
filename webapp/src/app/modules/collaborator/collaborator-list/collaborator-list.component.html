@@ -10,13 +10,16 @@
     </form>
   </div>
 
-  <section id="collaboratorList" fxLayout="column">
+  <section [formGroup]="form" id="collaboratorList" fxLayout="column">
     <div fxLayout="row" fxLayoutAlign="none">
-      <mat-checkbox color="primary" fxFlex="50">Ver inativos</mat-checkbox>
+      <mat-checkbox formControlName="checked">Ver inativos
+      </mat-checkbox>
     </div>
   </section>
 
-  <div class="envolti-table mat-elevation-z8" fxLayout="column">
+
+
+  <div class=" envolti-table mat-elevation-z8" fxLayout="column">
     <table mat-table [dataSource]="filteredCollaboratorList">
       <ng-container matColumnDef="collaborator">
         <th mat-header-cell *matHeaderCellDef>Colaborador</th>
@@ -49,48 +52,31 @@
 
       <ng-container matColumnDef="status">
         <th mat-header-cell *matHeaderCellDef>Status</th>
-        <td mat-cell *matCellDef="let collaborator"
-        >
-          {{ 
-            collaborator.active == true ? "Ativo" : "Inativo"
+        <td mat-cell *matCellDef="let collaborator">
+          {{
+          collaborator.active == true ? "Ativo" : "Inativo"
           }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="icon">
         <th mat-header-cell *matHeaderCellDef>
-          <button
-            class="edit-button"
-            mat-flat-button
-            color="primary"
-            (click)="createCollaborator()"
-          >
+          <button class="edit-button" mat-flat-button color="primary" (click)="createCollaborator()">
             <mat-icon>add</mat-icon>
           </button>
         </th>
         <th mat-header-cell *matHeaderCellDef></th>
         <td class="button-tab" mat-cell *matCellDef="let collaborator">
-          <button
-            class="table-button"
-            mat-button
-            (click)="editCollaborator(collaborator.id)"
-          >
+          <button class="table-button" mat-button (click)="editCollaborator(collaborator.id)">
             <mat-icon>edit</mat-icon>
           </button>
-          <button
-            class="table-button"
-            mat-button
-            (click)="deleteCollaborator(collaborator.id)"
-          >
+          <button class="table-button" mat-button (click)="deleteCollaborator(collaborator.id)">
             <mat-icon>delete</mat-icon>
           </button>
         </td>
       </ng-container>
 
-      <tr
-        mat-header-row
-        *matHeaderRowDef="displayedCollaborator; sticky: true"
-      ></tr>
+      <tr mat-header-row *matHeaderRowDef="displayedCollaborator; sticky: true"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedCollaborator"></tr>
     </table>
   </div>

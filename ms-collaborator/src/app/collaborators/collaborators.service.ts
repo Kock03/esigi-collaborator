@@ -26,7 +26,7 @@ export class CollaboratorsService {
   }
 
   async findInactive() {
-    const collaboratorsInactiveAll = this.collaboratorsRepository
+    const collaboratorsInactiveAll = await this.collaboratorsRepository
       .createQueryBuilder('collaborators')
       .where('collaborators.active =false')
       .getMany();
@@ -70,17 +70,16 @@ export class CollaboratorsService {
     /*const activeBanks = data.BankData.filter((bank) => bank.isActive);
     if (activeBanks.length > 1) {
       throw new BadRequestException();
-    } */
-
+    }*/
     if (data.cpf) {
       const invalidCpf = DocumentValidator.isValidCpf(data.cpf);
       if (invalidCpf) {
         throw new DocumentsBadRequestExcpetion();
       }
     }
-    if (data.cnpj != null) {
-      const validCnpj = DocumentValidator.isValidCnpj(data.cnpj);
-      if (validCnpj) {
+    if (data.cnpj) {
+      const invalidCnpj = DocumentValidator.isValidCnpj(data.cnpj);
+      if (invalidCnpj) {
         throw new DocumentsBadRequestExcpetion();
       }
     }
