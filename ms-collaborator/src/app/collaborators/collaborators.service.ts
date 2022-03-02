@@ -15,7 +15,7 @@ export class CollaboratorsService {
   constructor(
     @InjectRepository(CollaboratorsEntity)
     private readonly collaboratorsRepository: Repository<CollaboratorsEntity>,
-  ) {}
+  ) { }
 
   async findAll() {
     const collaboratorsWhiteAll = await this.collaboratorsRepository
@@ -23,6 +23,15 @@ export class CollaboratorsService {
       .getMany();
 
     return collaboratorsWhiteAll;
+  }
+
+  async findInactive() {
+    const collaboratorsInactiveAll = this.collaboratorsRepository
+      .createQueryBuilder('collaborators')
+      .where('collaborators.active =false')
+      .getMany();
+
+    return collaboratorsInactiveAll;
   }
 
   async findOneOrFail(
@@ -58,10 +67,10 @@ export class CollaboratorsService {
   // }
 
   async store(data: CreateCollaboratorsDto) {
-    const activeBanks = data.BankData.filter((bank) => bank.isActive);
+    /*const activeBanks = data.BankData.filter((bank) => bank.isActive);
     if (activeBanks.length > 1) {
       throw new BadRequestException();
-    }
+    } */
 
     if (data.cpf) {
       const invalidCpf = DocumentValidator.isValidCpf(data.cpf);
@@ -86,6 +95,7 @@ export class CollaboratorsService {
         throw new ConflictException();
       }
     }
+
   }
 
   async update(id: string, data: UpdateCollaboratorsDto) {

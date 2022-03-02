@@ -16,7 +16,7 @@ import { UpdateCollaboratorsDto } from './dtos/update-collaborators.dto';
 
 @Controller('/api/v1/collaborators')
 export class CollaboratorsController {
-  constructor(private readonly collaboratorsRepository: CollaboratorsService) {}
+  constructor(private readonly collaboratorsRepository: CollaboratorsService) { }
 
   @Get()
   async index() {
@@ -32,6 +32,11 @@ export class CollaboratorsController {
   @Get(':id')
   async show(@Param('id', new ParseUUIDPipe()) id: string) {
     return await this.collaboratorsRepository.findOneOrFail({ id });
+  }
+
+  @Get('/find-inactive')
+  async findInactive() {
+    return await this.collaboratorsRepository.findInactive();
   }
 
   @Put(':id')
