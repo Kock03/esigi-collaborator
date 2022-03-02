@@ -9,7 +9,7 @@ import {
   ViewEncapsulation,
   EventEmitter,
 } from '@angular/core';
-import { FormArray, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import {
@@ -51,21 +51,34 @@ export class CollaboratorListComponent implements OnInit {
   index: any = null;
   Collaborator: any;
   step: number = 1;
-  checked = false;
+  form!: FormGroup;
+
+
+
 
   constructor(
     private router: Router,
     private collaboratorProvider: CollaboratorProvider,
     private snackbarService: SnackBarService,
-    private dialogService: ConfirmDialogService
+    private dialogService: ConfirmDialogService,
+    private fb: FormBuilder,
   ) {
     this._unsubscribeAll = new Subject();
   }
 
-  async ngOnInit() {
-    this.getCollaboratorList();
+  async ngOnInit(): Promise<void> {
+
+    this.initForm();
+
+
     this.initFilter();
+
+    this.getCollaboratorList();
+
+
   }
+
+
 
   createCollaborator() {
     this.router.navigate(['colaborador/novo']);
@@ -102,10 +115,27 @@ export class CollaboratorListComponent implements OnInit {
     });
   }
 
+  initForm() {
+    this.form = this.fb.group({
+      checked: [true]
+    })
+
+  }
+
+
+
   async getCollaboratorList() {
     try {
-      this.filteredCollaboratorList = this.collaborators =
-        await this.collaboratorProvider.findAll();
+      if (this.form.controls['checked'].value == true) {
+        this.filteredCollaboratorList = this.collaborators =
+          await this.collaboratorProvider.findInactive();
+        this.getCollaboratorList();
+
+      } else {
+        this.filteredCollaboratorList = this.collaborators =
+          await this.collaboratorProvider.findAll();
+        this.getCollaboratorList();
+      }
     } catch (error) {
       console.error(error);
     }
