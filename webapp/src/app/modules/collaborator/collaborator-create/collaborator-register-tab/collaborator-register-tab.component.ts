@@ -64,6 +64,8 @@ export class CollaboratorRegisterTabComponent implements OnInit {
   date: any;
   url: any;
   collaboratorId!: string | null;
+  collaborator!: any;
+  
 
   typeControl = new FormControl();
 
@@ -131,4 +133,13 @@ export class CollaboratorRegisterTabComponent implements OnInit {
       });
     };
   }
+  collaboratorIsActive(){
+    if (this.collaborator.active == true) {
+      this.collaborator.active = 'ativo';
+    } 
+    else{
+      this.collaborator.active = 'inativo';
+    }
+  }
+
 }

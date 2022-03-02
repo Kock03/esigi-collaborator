@@ -54,6 +54,8 @@ export class CollaboratorListComponent implements OnInit {
   form!: FormGroup;
 
 
+
+
   constructor(
     private router: Router,
     private collaboratorProvider: CollaboratorProvider,
@@ -153,7 +155,26 @@ export class CollaboratorListComponent implements OnInit {
       });
   }
 
+  // filterActiveAndInactive(){
+  //   if(this.checked == true){
+  //     fromEvent(this.filter.nativeElement, 'keyup')
+  //     .pipe(debounceTime(200), distinctUntilChanged())
+
+  //     .subscribe((res) => {
+  //       this.filteredCollaboratorList = this.collaborators.filter(
+  //         (collaborator) =>
+  //           collaborator.firstNameCorporateName
+  //             .toLocaleLowerCase()
+  //             .includes(this.filter.nativeElement.value.toLocaleLowerCase())
+  //       );
+  //     });
+  //   }
+
+  // }
+
   editCollaborator(collaboratorId: any) {
     this.router.navigate([`colaborador/${collaboratorId}`]);
   }
+
+
 }

@@ -23,9 +23,10 @@ export class InterviewsController {
     return await this.interviewsService.findAll();
   }
 
-  @Get('/list-interviews')
-  async findListInterviews() {
-    return await this.interviewsService.findListInterviews();
+  @Get('follow-up-interviews/:id')
+  async findListInterviews(@Param('id', new ParseUUIDPipe()) id: string) {
+    console.log('matheus' + id);
+    return await this.interviewsService.getFollowUpInterviews(id);
   }
 
   @Get(':id')

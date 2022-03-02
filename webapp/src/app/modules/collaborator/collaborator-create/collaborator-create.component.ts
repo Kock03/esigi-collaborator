@@ -20,6 +20,8 @@ export class CollaboratorCreateComponent implements OnInit {
   step: number = 1;
   collaboratorId!: string | null;
   collaborator!: any;
+  active: boolean = true;
+
 
   Educations: any;
   Languages: any;
