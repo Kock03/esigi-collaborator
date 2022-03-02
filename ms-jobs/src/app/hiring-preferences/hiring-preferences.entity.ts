@@ -1,5 +1,5 @@
 import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { BehaviroalInterviewsEntity } from '../behavioral-interviews/behavioral-interviews.entity';
+import { BehavioralInterviewsEntity } from '../behavioral-interviews/behavioral-interviews.entity';
 
 @Entity({ name: 'hiring_preferences' })
 export class HiringPreferencesEntity {
@@ -19,8 +19,8 @@ export class HiringPreferencesEntity {
   cooperative: boolean;
 
   @OneToOne(
-    () => BehaviroalInterviewsEntity,
+    () => BehavioralInterviewsEntity,
     (behaviroalInterviews) => behaviroalInterviews.hiringPreference,
   )
-  BehaviroalInterview: BehaviroalInterviewsEntity;
+  BehaviroalInterview: BehavioralInterviewsEntity;
 }

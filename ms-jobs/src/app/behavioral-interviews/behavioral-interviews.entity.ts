@@ -18,7 +18,7 @@ import { Punctuality } from './enums/punctuality.enum';
 import { Situation } from './enums/situational.enum';
 
 @Entity({ name: 'behavioral_interviews' })
-export class BehaviroalInterviewsEntity {
+export class BehavioralInterviewsEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 

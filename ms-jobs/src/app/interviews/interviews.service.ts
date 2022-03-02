@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { join } from 'path/posix';
 import { FindConditions, FindOneOptions, Repository } from 'typeorm';
-import { BehaviroalInterviewsEntity } from '../behavioral-interviews/behavioral-interviews.entity';
+import { BehavioralInterviewsEntity } from '../behavioral-interviews/behavioral-interviews.entity';
 import { NotFoundException } from '../exceptions/not-found-exception';
 import { TechnicalInterviewsEntity } from '../technical-interviews/technical-interviews.entity';
 import { CreateInterviewsDto } from './dtos/create-interviews.dto';

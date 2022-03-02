@@ -3,15 +3,15 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { FindConditions, FindOneOptions, Repository } from 'typeorm';
 import { NotFoundException } from '../exceptions/not-found-exception';
 import { JobsEntity } from '../jobs/jobs.entity';
-import { BehaviroalInterviewsEntity } from './behavioral-interviews.entity';
+import { BehavioralInterviewsEntity } from './behavioral-interviews.entity';
 import { CreateBehaviorInterviewsDto } from './dtos/create-behavioral-interviews.dto';
 import { UpdateBehaviorInterviewsDto } from './dtos/update-behavioral-interviews.dto';
 
 @Injectable()
 export class BehavioralInterviewsService {
   constructor(
-    @InjectRepository(BehaviroalInterviewsEntity)
-    private readonly behavioralInterviewsRepository: Repository<BehaviroalInterviewsEntity>,
+    @InjectRepository(BehavioralInterviewsEntity)
+    private readonly behavioralInterviewsRepository: Repository<BehavioralInterviewsEntity>,
   ) {}
 
   async findAll() {
@@ -21,8 +21,8 @@ export class BehavioralInterviewsService {
   }
 
   async findOneOrFail(
-    conditions: FindConditions<BehaviroalInterviewsEntity>,
-    options?: FindOneOptions<BehaviroalInterviewsEntity>,
+    conditions: FindConditions<BehavioralInterviewsEntity>,
+    options?: FindOneOptions<BehavioralInterviewsEntity>,
   ) {
     try {
       return await this.behavioralInterviewsRepository.findOneOrFail(

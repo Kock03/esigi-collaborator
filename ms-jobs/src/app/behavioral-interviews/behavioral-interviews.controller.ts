@@ -9,7 +9,7 @@ import {
   Put,
 } from '@nestjs/common';
 import { stringify } from 'querystring';
-import { BehaviroalInterviewsEntity } from './behavioral-interviews.entity';
+import { BehavioralInterviewsEntity } from './behavioral-interviews.entity';
 import { BehavioralInterviewsService } from './behavioral-interviews.service';
 import { CreateBehaviorInterviewsDto } from './dtos/create-behavioral-interviews.dto';
 import { UpdateBehaviorInterviewsDto } from './dtos/update-behavioral-interviews.dto';

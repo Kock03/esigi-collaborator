@@ -15,7 +15,7 @@ import {
   MaxLength,
   MinLength,
 } from 'class-validator';
-import { BehaviroalInterviewsEntity } from 'src/app/behavioral-interviews/behavioral-interviews.entity';
+import { BehavioralInterviewsEntity } from 'src/app/behavioral-interviews/behavioral-interviews.entity';
 import { ClientInterviewsEntity } from 'src/app/client-interviews/client-interviews.entity';
 import { InterviewsEnitiy } from 'src/app/interviews/interviews.entity';
 import { KnowledgesEntity } from 'src/app/knowledges/knowledges.entity';
