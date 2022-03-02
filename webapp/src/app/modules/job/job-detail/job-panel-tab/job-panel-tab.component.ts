@@ -2,7 +2,11 @@ import { Component, ElementRef, OnInit, ViewChild, ViewEncapsulation } from '@an
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subject, fromEvent, debounceTime, distinctUntilChanged } from 'rxjs';
 import { IInterview } from 'src/app/interfaces/iinterview';
+import { IJob } from 'src/app/interfaces/ijob';
 import { SnackBarService } from 'src/services/snackbar.service';
+import { JobProvider } from 'src/providers/job.provider';
+import { ConfirmDialogService } from 'src/services/confirn-dialog.service';
+import { Job } from '../../job-list/job-list.component';
 // import { IInterview } from 'src/app/interfaces/iinterview';
 
 
@@ -13,6 +17,7 @@ import { SnackBarService } from 'src/services/snackbar.service';
   encapsulation: ViewEncapsulation.None,
 })
 export class JobPanelTabComponent implements OnInit {
+  [x: string]: any;
   @ViewChild('filter', { static: true }) filter!: ElementRef;
   private _unsubscribeAll: Subject<any>;
   displayedJob: string[] = [
@@ -25,20 +30,46 @@ export class JobPanelTabComponent implements OnInit {
   ];
   interviews!: IInterview[];
   filteredInterviewList!: any[];
+  jobs!: Job[];
+  job: any;
+  interviewsId!: string | null;
 
 
   constructor(
     private snackbarService: SnackBarService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private JobProvider: JobProvider,
+    private dialogService: ConfirmDialogService
   ) {
     this._unsubscribeAll = new Subject();
   }
 
   async ngOnInit() {
     // this.getInterviewList();
+    this.interviewsId = this.route.snapshot.paramMap.get('id')
     this.filteredInterviewList = this.interviews;
     this.initFilter();
+    this.getInterviewList();
+  }
+
+  // async getInterviewList() {
+  //   try {
+  //     this.filteredInterviewList = this.interviews =
+  //       await this.JobProvider.findAll();
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // }
+
+  async getInterviewList() {
+    try {
+      this.job = await this.JobProvider.findOne(this.interviewsId);
+      console.log("🚀 ~ file: job-panel-tab.component.ts ~ line 68 ~ JobPanelTabComponent ~ getInterviewList ~ this.job ", this.job )
+       this.interviews = this.job.Jobs
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   createJob() {

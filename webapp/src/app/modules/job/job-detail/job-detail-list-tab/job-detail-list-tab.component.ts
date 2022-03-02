@@ -2,7 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { JobProvider } from 'src/providers/job.provider';
 import { Location } from '@angular/common';
-import { Job } from 'src/app/interfaces/ijob';
+import { IJob } from 'src/app/interfaces/ijob';
 @Component({
   selector: 'app-job-detail-list-tab',
   templateUrl: './job-detail-list-tab.component.html',
@@ -11,7 +11,7 @@ import { Job } from 'src/app/interfaces/ijob';
 })
 export class JobDetailListTabComponent implements OnInit {
   jobId!: string | null;
-  job!: Job;
+  job!: IJob;
 
   constructor(
     private router: Router,

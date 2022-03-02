@@ -1,7 +1,7 @@
 import { Knowledges } from "./iknowledges";
 import { Languanges } from "./ilanguages";
 
-export interface Job {
+export interface IJob {
     jobName: string;
     client: string;
     requester: string;

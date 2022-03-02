@@ -9,37 +9,37 @@
     </form>
 
     <div class="envolti-table mat-elevation-z8" fxLayout="column">
-      <table mat-table [dataSource]="filteredInterviewList">
+      <table mat-table [dataSource]="interviews">
         <ng-container matColumnDef="nameCandidate">
           <th mat-header-cell *matHeaderCellDef>Nome do Candidato</th>
-          <td mat-cell *matCellDef="let interview"></td>
+          <td mat-cell *matCellDef="let interviews">{{ interviews.nameCandidate }}</td>
         </ng-container>
 
         <ng-container matColumnDef="behavioralInterviewDate">
           <th mat-header-cell *matHeaderCellDef>
             Data Entrevista Comportamental
           </th>
-          <td mat-cell *matCellDef="let interview"></td>
+          <td mat-cell *matCellDef="let interviews">{{ interviews.behavioralInterviewDate }}</td>
         </ng-container>
 
         <ng-container matColumnDef="technicalInterviewDate">
           <th mat-header-cell *matHeaderCellDef>Data Entrevista Técnica</th>
-          <td mat-cell *matCellDef="let interview"></td>
+          <td mat-cell *matCellDef="let interviews">{{ interviews.technicalInterviewDate}}</td>
         </ng-container>
 
         <ng-container matColumnDef="responsible">
           <th mat-header-cell *matHeaderCellDef>Responsável</th>
-          <td mat-cell *matCellDef="let interview"></td>
+          <td mat-cell *matCellDef="let interviews">{{ interviews.techRecruter}}</td>
         </ng-container>
 
         <ng-container matColumnDef="status">
           <th mat-header-cell *matHeaderCellDef>Status</th>
-          <td mat-cell *matCellDef="let interview"></td>
+          <td mat-cell *matCellDef="let interviews"></td>
         </ng-container>
 
         <ng-container matColumnDef="icon">
           <th mat-header-cell *matHeaderCellDef></th>
-          <td class="button-tab" mat-cell *matCellDef="let interview">
+          <td class="button-tab" mat-cell *matCellDef="let interviews">
             <button class="table-button" mat-button>
               <mat-icon>delete</mat-icon>
             </button>
