@@ -41,30 +41,30 @@ export class BehaviroalInterviewProvider {
     });
   }
 
-  update(behaviroalInterview: any): Promise<any> {
+  update(interview: any): Promise<any> {
     return new Promise((resolve, reject) => {
       this.apiGateway
-        .put(environment.JOBS_MS + 'interviews', behaviroalInterview)
+        .put(environment.JOBS_MS + 'interviews', interview)
         .subscribe((response: HttpResponse<any>) => {
           resolve(response.body);
         }, reject);
     });
   }
 
-  store(behaviroalInterview: any): Promise<any> {
+  store(interview: any): Promise<any> {
     return new Promise((resolve, reject) => {
       this.apiGateway
-        .post(environment.JOBS_MS + 'interviews', behaviroalInterview)
+        .post(environment.JOBS_MS + 'interviews', interview)
         .subscribe((response: HttpResponse<any>) => {
           resolve(response.body);
         }, reject);
     });
   }
 
-  destroy(BehaviroalInterview: any): Promise<any> {
+  destroy(interview: any): Promise<any> {
     return new Promise((resolve, reject) => {
       this.apiGateway
-        .delete(environment.JOBS_MS + 'interviews', BehaviroalInterview)
+        .delete(environment.JOBS_MS + 'interviews', interview)
         .subscribe((response: HttpResponse<any>) => {
           resolve(response.body);
         }, reject);
