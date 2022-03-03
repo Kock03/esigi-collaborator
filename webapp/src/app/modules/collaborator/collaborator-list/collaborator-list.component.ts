@@ -53,32 +53,23 @@ export class CollaboratorListComponent implements OnInit {
   step: number = 1;
   form!: FormGroup;
 
-
-
-
   constructor(
     private router: Router,
     private collaboratorProvider: CollaboratorProvider,
     private snackbarService: SnackBarService,
     private dialogService: ConfirmDialogService,
-    private fb: FormBuilder,
+    private fb: FormBuilder
   ) {
     this._unsubscribeAll = new Subject();
   }
 
   async ngOnInit(): Promise<void> {
-
     this.initForm();
-
 
     this.initFilter();
 
     this.getCollaboratorList();
-
-
   }
-
-
 
   createCollaborator() {
     this.router.navigate(['colaborador/novo']);
@@ -117,28 +108,24 @@ export class CollaboratorListComponent implements OnInit {
 
   initForm() {
     this.form = this.fb.group({
-      checked: [true]
-    })
-
+      checked: [false],
+    });
   }
 
-
+  async checkInative(ev: any) {
+    if (ev.checked == true) {
+      return (this.filteredCollaboratorList = this.collaborators =
+        await this.collaboratorProvider.findInactive());
+    }
+    if (ev.checked == false) {
+      return (this.filteredCollaboratorList = this.collaborators =
+        await this.collaboratorProvider.findAll());
+    }
+  }
 
   async getCollaboratorList() {
-    try {
-      if (this.form.controls['checked'].value == true) {
-        this.filteredCollaboratorList = this.collaborators =
-          await this.collaboratorProvider.findInactive();
-        this.getCollaboratorList();
-
-      } else {
-        this.filteredCollaboratorList = this.collaborators =
-          await this.collaboratorProvider.findAll();
-        this.getCollaboratorList();
-      }
-    } catch (error) {
-      console.error(error);
-    }
+    this.filteredCollaboratorList = this.collaborators =
+      await this.collaboratorProvider.findAll();
   }
 
   initFilter() {
@@ -175,6 +162,4 @@ export class CollaboratorListComponent implements OnInit {
   editCollaborator(collaboratorId: any) {
     this.router.navigate([`colaborador/${collaboratorId}`]);
   }
-
-
 }

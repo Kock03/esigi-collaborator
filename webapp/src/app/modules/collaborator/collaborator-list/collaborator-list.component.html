@@ -12,7 +12,7 @@
 
   <section [formGroup]="form" id="collaboratorList" fxLayout="column">
     <div fxLayout="row" fxLayoutAlign="none">
-      <mat-checkbox formControlName="checked">Ver inativos
+      <mat-checkbox color="primary" formControlName="checked" (change)="checkInative($event)">Ver inativos
       </mat-checkbox>
 
 

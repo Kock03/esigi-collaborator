@@ -59,7 +59,7 @@ export class CreateBankDataDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsBoolean()
-  isActive: boolean;
+  status: boolean;
 
   @ApiProperty()
   @IsOptional()
