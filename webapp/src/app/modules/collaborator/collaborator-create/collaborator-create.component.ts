@@ -35,10 +35,16 @@ export class CollaboratorCreateComponent implements OnInit {
   url!: string;
   urlStep!: number;
 
+  get educationArray() {
+    return this.collaboratorForm.controls['Educations'] as FormArray;
+  }
+  get languageArray() {
+    return this.collaboratorForm.controls['Languages'] as FormArray;
+  }
+
   constructor(
     private fb: FormBuilder,
     private collaboratorProvider: CollaboratorProvider,
-    private http: HttpClient,
     private router: Router,
     private snackbarService: SnackBarService,
     private route: ActivatedRoute
@@ -55,8 +61,8 @@ export class CollaboratorCreateComponent implements OnInit {
     this.step = JSON.parse(sessionStorage.getItem('collaborator_tab')!);
 
     if (this.collaboratorId !== 'novo') {
-      this.initForm();
       await this.getCollaborator();
+      this.initForm();
       this.setFormValue();
     }
     else {
@@ -70,10 +76,6 @@ export class CollaboratorCreateComponent implements OnInit {
       this.collaborator = await this.collaboratorProvider.findOne(
         this.collaboratorId
       );
-      console.log(
-        '🚀 ~ file: collaborator-create.component.ts ~ line 67 ~ CollaboratorCreateComponent ~ getCollaborator ~ this.collaborator',
-        this.collaborator
-      );
     } catch (error) {
       console.error(error);
     }
@@ -83,7 +85,7 @@ export class CollaboratorCreateComponent implements OnInit {
     this.router.navigate(['colaborador/lista']);
   }
 
-  async saveEditCollaborator() {
+  async editCollaborator() {
     let data = this.collaboratorForm.getRawValue();
     try {
       const job = await this.collaboratorProvider.update(
@@ -94,15 +96,15 @@ export class CollaboratorCreateComponent implements OnInit {
       this.snackbarService.successMessage(
         'Colaborador atualizado com sucesso!'
       );
-    } catch (error) {
-      console.error(error);
+    } catch (err: any) {
+      this.snackbarService.showError(err.error?.message?? 'Ocorreu um erro, tente novamente');
     }
   }
-
+ 
   initForm() {
     this.collaboratorForm = this.fb.group({
-      firstNameCorporateName: ['Davi', Validators.required],
-      lastNameFantasyName: ['Luiz', Validators.required],
+      firstNameCorporateName: [null, Validators.required],
+      lastNameFantasyName: [null, Validators.required],
       login: ['davi.log', Validators.required],
       gender: [1, Validators.required],
       maritalStatus: [1, Validators.required],
@@ -115,7 +117,7 @@ export class CollaboratorCreateComponent implements OnInit {
       ]),
       birthDate: ['2004-06-12', Validators.required],
       admissionDate: ['', Validators.required],
-      email: ['davi@email', [Validators.email, Validators.required]],
+      email: ['davi@email.com', [Validators.email, Validators.required]],
       cnpj: this.fb.control({ value: null, disabled: true },
         [DocumentValidator.isValidCnpj(), Validators.required]),
       stateRegistration: [null, Validators.required],
@@ -142,25 +144,25 @@ export class CollaboratorCreateComponent implements OnInit {
         district: ['', Validators.required],
       }),
       BankData: this.fb.array(
-        this.collaborator ? this.collaborator.BankData : [null]
+        this.collaborator ? this.collaborator.BankData : []
       ),
       Dependents: this.fb.array(
-        this.collaborator ? this.collaborator.Dependents : [null]
+        this.collaborator ? this.collaborator.Dependents : []
       ),
       Educations: this.fb.array(
-        this.collaborator ? this.collaborator.Educations : [null]
+        this.collaborator ? this.collaborator.Educations : []
       ),
       Languages: this.fb.array(
-        this.collaborator ? this.collaborator.Languages : [null]
+        this.collaborator ? this.collaborator.Languages : []
       ),
       Financials: this.fb.array(
-        this.collaborator ? this.collaborator.Financials : [null]
+        this.collaborator ? this.collaborator.Financials : []
       ),
       Skills: this.fb.array(
-        this.collaborator ? this.collaborator.Skills : [null]
+        this.collaborator ? this.collaborator.Skills : []
       ),
       Documents: this.fb.array(
-        this.collaborator ? this.collaborator.Documents : [null]
+        this.collaborator ? this.collaborator.Documents : []
       ),
       Feedbacks: this.fb.array(
         this.collaborator ? this.collaborator.Feedbacks : []

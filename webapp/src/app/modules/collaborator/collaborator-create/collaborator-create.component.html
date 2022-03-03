@@ -122,8 +122,11 @@
   >
   </app-collaborator-dependents-tab>
   <app-collaborator-education-tab
+    *ngIf="collaboratorForm"
     [hidden]="step != 3"
     [form]="collaboratorForm"
+    [educationArray]="educationArray"
+    [languageArray]="languageArray"
     (onChange)="handleChanges($event)"
   >
   </app-collaborator-education-tab>
@@ -159,14 +162,14 @@
   >
   </app-collaborator-feedback-tab>
   <app-collaborator-panel-tab
-  *ngIf="collaboratorId !== 'novo'"
+    *ngIf="collaboratorId !== 'novo'"
     [hidden]="step != 9"
     [form]="collaboratorForm"
     (onChange)="handleChanges($event)"
   >
   </app-collaborator-panel-tab>
   <app-collaborator-panel-tab
-  *ngIf="collaboratorId == 'novo'"
+    *ngIf="collaboratorId == 'novo'"
     [hidden]="step != 8"
     [form]="collaboratorForm"
     (onChange)="handleChanges($event)"
@@ -206,7 +209,7 @@
     fxLayoutGap="16px"
     *ngIf="collaboratorId !== 'novo'"
   >
-    <button mat-flat-button (click)="saveEditCollaborator()" color="primary">
+    <button mat-flat-button (click)="editCollaborator()" color="primary">
       Salvar
     </button>
   </div>

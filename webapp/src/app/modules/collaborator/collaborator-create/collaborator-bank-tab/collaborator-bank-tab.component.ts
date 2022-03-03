@@ -50,10 +50,9 @@ export class CollaboratorBankTabComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    if (this.bankArray.value.findIndex((bank: any) => bank == null) === -1) {
+    if (this.bankArray.value.length > 0) {
       this.data = this.bankArray.value;
     }
-
 
     // if (this.bankArray.controls[0].value.status == true) {
     //   this.bankArray.value.status.setValue(false);
@@ -61,15 +60,9 @@ export class CollaboratorBankTabComponent implements OnInit {
 
     this.initObservables();
 
-    console.log(this.bankArray.controls[0].status);
-    console.log("🚀 ~ file: collaborator-bank-tab.component.ts ~ line 67 ~ CollaboratorBankTabComponent ~ ngOnInit ~ this.bankArray.controls[0].status", this.bankArray.value?.status);
-     console.log(this.data)
-    if(this.bankArray.value.status == true) {
-      console.log("🚀 ~ file: collaborator-bank-tab.component.ts ~ line 67 ~ CollaboratorBankTabComponent ~ ngOnInit ~ this.bankArray.controls[0].status", this.bankArray.controls[0])
-      console.log("blyat")
-      
+    if (this.bankArray.value.status == true) {
+    
     }
-
   }
 
   initObservables() {
@@ -107,14 +100,27 @@ export class CollaboratorBankTabComponent implements OnInit {
     const dialogRef = this.dialog.open(CollaboratorBankDialog, {
       width: '500px',
       height: '470px',
-      data: { bankSelected },
+      data: bankSelected,
     });
     this.index = index;
     dialogRef.afterClosed().subscribe((bank) => {
       if (bank) {
-        this.bankArray.controls[this.index].setValue(bank);
+        this.checkBank(bank);
       }
     });
+  }
+
+  checkBank(bank: any) {
+    if (bank.status) {
+      const activeLength = this.bankArray.value.filter(
+        (item: any) => item.status
+      );
+      if (activeLength.length > 1) {
+      //  TODO - Exibir mensagem que não pode um banco ativo
+      }
+    } else {
+      this.bankArray.controls[this.index].patchValue(bank);
+    }
   }
 
   deleteBank(index: number) {

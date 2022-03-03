@@ -91,7 +91,8 @@ export class CollaboratorsService {
         const collaborator = this.collaboratorsRepository.create(data);
         return await this.collaboratorsRepository.save(collaborator);
       } catch (error) {
-        throw new ConflictException();
+        console.log("🚀 ~ file: collaborators.service.ts ~ line 94 ~ CollaboratorsService ~ store ~ error", error)
+        throw new HttpException(JSON.stringify(error), 400);
       }
     }
 
@@ -100,7 +101,7 @@ export class CollaboratorsService {
   async update(id: string, data: UpdateCollaboratorsDto) {
     const activeBanks = data.BankData.filter((bank) => bank.status);
     if (activeBanks.length > 1) {
-      throw new BadRequestException();
+      throw new BadRequestException('Existem mais de um banco ativo');
     }
 
     try {

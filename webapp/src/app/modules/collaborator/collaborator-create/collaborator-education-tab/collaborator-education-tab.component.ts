@@ -8,7 +8,7 @@ import {
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
 import { ConfirmDialogService } from 'src/services/confirn-dialog.service';
@@ -22,7 +22,8 @@ import { CollaboratorLanguageDialog } from './collaborator-language-dialog.compo
   encapsulation: ViewEncapsulation.None,
 })
 export class CollaboratorEducationTabComponent implements OnInit {
-  @Input('form') collaboratorForm!: FormGroup;
+  @Input('educationArray') educationArray!: FormArray;
+  @Input('languageArray') languageArray!: FormArray;
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
   @ViewChild('languageTable') languageTable!: MatTable<any>;
   @ViewChild('educationTable') educationTable!: MatTable<any>;
@@ -52,14 +53,6 @@ export class CollaboratorEducationTabComponent implements OnInit {
   Education: any;
   educationList: any = [];
 
-  get languageArray() {
-    return this.collaboratorForm.controls['Languages'] as FormArray;
-  }
-
-  get educationArray() {
-    return this.collaboratorForm.controls['Educations'] as FormArray;
-  }
-
   constructor(
     private dialogService: ConfirmDialogService,
     private fb: FormBuilder,
@@ -67,49 +60,7 @@ export class CollaboratorEducationTabComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    if (
-      this.educationArray.value.findIndex(
-        (education: any) => education == null
-      ) === -1
-    ) {
-      this.dataEducation = this.educationArray.value;
-    }
-
-    if (
-      this.languageArray.value.findIndex(
-        (language: any) => language == null
-      ) === -1
-    ) {
-      this.dataLanguage = this.languageArray.value;
-    }
-
-    this.initObservables();
-  }
-
-  initObservables() {
-    this.educationArray.valueChanges.subscribe((res) => {
-      const isNullIndex = this.educationArray.value.findIndex(
-        (education: any) => education == null
-      );
-      if (isNullIndex !== -1) {
-        this.educationArray.removeAt(isNullIndex);
-      }
-      if (res) {
-        this.dataEducation = this.educationArray.value;
-      }
-    });
-
-    this.languageArray.valueChanges.subscribe((res) => {
-      const isNullIndex = this.languageArray.value.findIndex(
-        (language: any) => language == null
-      );
-      if (isNullIndex !== -1) {
-        this.languageArray.removeAt(isNullIndex);
-      }
-      if (res) {
-        this.dataLanguage = this.languageArray.value;
-      }
-    });
+    // this.initObservables();
   }
 
   openDialogLanguage() {
