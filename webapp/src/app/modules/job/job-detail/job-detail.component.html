@@ -20,15 +20,6 @@
     </div>
     <div
       fxLayout="column"
-      (click)="this.step = 2"
-      class="tab-group"
-      [ngClass]="{ done: step > 1, active: step == 2 }"
-    >
-      <p class="tab-item">Entrevistas</p>
-      <span class="tab-border"></span>
-    </div>
-    <div
-      fxLayout="column"
       class="tab-group"
       (click)="this.step = 3"
       [ngClass]="{ done: step > 2, active: step == 3 }"
@@ -43,11 +34,6 @@
     (onChange)="handleChanges($event)"
   >
   </app-job-detail-list-tab>
-  <app-job-interview-tab
-    [hidden]="step != 2"
-    (onChange)="handleChanges($event)"
-  >
-  </app-job-interview-tab>
   <app-job-panel-tab [hidden]="step != 3" (onChange)="handleChanges($event)">
   </app-job-panel-tab>
 

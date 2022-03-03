@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { FeedbackCreateComponent } from './modules/collaborator/feedback-create/feedback-create.component';
+import { JobInterviewCreateComponent } from './modules/job/job-interview-create/job-interview-create.component';
 import { SettingActiveDirectoryComponent } from './modules/setting/setting-create/setting-active-directory/setting-active-directory.component';
 import { SettingEmailComponent } from './modules/setting/setting-create/setting-email/setting-email.component';
+
 
 const routes: Routes = [
   {
@@ -50,6 +52,7 @@ const routes: Routes = [
   },
   { path: 'active-directory', component: SettingActiveDirectoryComponent },
   { path: 'email', component: SettingEmailComponent },
+ 
 
    ]
 

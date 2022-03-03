@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { JobInterviewTabComponent } from './job-interview-tab.component';
+import { JobInterviewCreateComponent } from './job-interview-create.component';
 
-describe('JobInterviewTabComponent', () => {
-  let component: JobInterviewTabComponent;
-  let fixture: ComponentFixture<JobInterviewTabComponent>;
+describe('JobInterviewCreateComponent', () => {
+  let component: JobInterviewCreateComponent;
+  let fixture: ComponentFixture<JobInterviewCreateComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ JobInterviewTabComponent ]
+      declarations: [ JobInterviewCreateComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(JobInterviewTabComponent);
+    fixture = TestBed.createComponent(JobInterviewCreateComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
