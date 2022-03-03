@@ -64,7 +64,7 @@ export class CollaboratorListComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
-    this.initForm();
+
 
     this.initFilter();
 
@@ -106,13 +106,10 @@ export class CollaboratorListComponent implements OnInit {
     });
   }
 
-  initForm() {
-    this.form = this.fb.group({
-      checked: [false],
-    });
-  }
+
 
   async checkInative(ev: any) {
+    console.log(ev)
     if (ev.checked == true) {
       return (this.filteredCollaboratorList = this.collaborators =
         await this.collaboratorProvider.findInactive());
@@ -122,6 +119,18 @@ export class CollaboratorListComponent implements OnInit {
         await this.collaboratorProvider.findAll());
     }
   }
+
+  async checkActive(ev: any) {
+    if (ev.checked == true) {
+      return (this.filteredCollaboratorList = this.collaborators =
+        await this.collaboratorProvider.findActive());
+    }
+    if (ev.checked == false) {
+      return (this.filteredCollaboratorList = this.collaborators =
+        await this.collaboratorProvider.findAll());
+    }
+  }
+
 
   async getCollaboratorList() {
     this.filteredCollaboratorList = this.collaborators =

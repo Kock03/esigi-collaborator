@@ -1,5 +1,15 @@
 <div id="collaboratorList" class="page">
-  <h2>Colaboradores</h2>
+  <section id="collaboratorList" fxLayout="column">
+    <h2>Colaboradores</h2>
+    <div fxLayout="row" style="align-content: flex-end;">
+      <mat-checkbox color="primary" (change)="checkInative($event)" style="padding-right: 20px;">Ver inativos
+      </mat-checkbox>
+      <mat-checkbox (change)="checkActive($event)" color="primary">Ver Ativos
+      </mat-checkbox>
+    </div>
+  </section>
+
+
   <div fxLayout="row" fxLayoutAlign="space-between">
     <form class="search">
       <mat-form-field appearance="outline">
@@ -9,15 +19,6 @@
       </mat-form-field>
     </form>
   </div>
-
-  <section [formGroup]="form" id="collaboratorList" fxLayout="column">
-    <div fxLayout="row" fxLayoutAlign="none">
-      <mat-checkbox color="primary" formControlName="checked" (change)="checkInative($event)">Ver inativos
-      </mat-checkbox>
-
-
-    </div>
-  </section>
 
 
 

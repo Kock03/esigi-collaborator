@@ -34,6 +34,15 @@ export class CollaboratorsService {
     return collaboratorsInactiveAll;
   }
 
+  async findActive() {
+    const collaboratorsActiveAll = await this.collaboratorsRepository
+      .createQueryBuilder('collaborators')
+      .where('collaborators.active =true')
+      .getMany();
+
+    return collaboratorsActiveAll;
+  }
+
   async findOneOrFail(
     conditions: FindConditions<CollaboratorsEntity>,
 

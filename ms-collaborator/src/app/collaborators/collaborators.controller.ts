@@ -40,7 +40,12 @@ export class CollaboratorsController {
   @Get('list/inactive')
   async findInactive() {
     return await this.collaboratorsRepository.findInactive();
+  }
 
+
+  @Get('list/active')
+  async findActive() {
+    return await this.collaboratorsRepository.findActive();
   }
 
   @Put(':id')
