@@ -26,7 +26,7 @@ import { CollaboratorDocumentDialog } from './collaborator-document-dialog.compo
   encapsulation: ViewEncapsulation.None,
 })
 export class CollaboratorDocumentTabComponent implements OnInit {
-  @Input('form') collaboratorForm!: FormGroup;
+  @Input('documentArray') documentArray!: FormArray;
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
   @ViewChild('documentTable') documentTable!: MatTable<any>;
 
@@ -37,10 +37,6 @@ export class CollaboratorDocumentTabComponent implements OnInit {
   index: any = null;
   Document: any;
   data: [] = [];
-
-  get documentArray() {
-    return this.collaboratorForm.controls['Documents'] as FormArray;
-  }
 
   constructor(
     private fb: FormBuilder,

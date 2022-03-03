@@ -1,7 +1,7 @@
 <div id="collaboratorBankTab" class="tab">
-  <div class="content-scroll" *ngIf="collaboratorForm">
+  <div class="content-scroll" *ngIf="bankArray">
     <div fxLayout="row">
-      <div class="envolti-table mat-elevation-z8" fxLayout="column" *ngIf="collaboratorForm">
+      <div class="envolti-table mat-elevation-z8" fxLayout="column">
         <table mat-table [dataSource]="data" #bankTable>
           <ng-container matColumnDef="bank">
             <th mat-header-cell *matHeaderCellDef>Banco</th>

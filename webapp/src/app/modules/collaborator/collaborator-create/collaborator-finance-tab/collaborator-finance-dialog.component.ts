@@ -33,7 +33,6 @@ export const PICK_FORMATS = {
     ],
   })
   export class CollaboratorFinanceDialog {
-    @Input('form') collaboratorForm!: FormGroup;
     @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
   
     financeForm!: FormGroup;

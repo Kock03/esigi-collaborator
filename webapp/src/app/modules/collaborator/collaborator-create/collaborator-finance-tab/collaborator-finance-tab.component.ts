@@ -31,7 +31,7 @@ import { CollaboratorFinanceDialog } from './collaborator-finance-dialog.compone
   encapsulation: ViewEncapsulation.None,
 })
 export class CollaboratorFinanceTabComponent implements OnInit {
-  @Input('form') collaboratorForm!: FormGroup;
+  @Input('financeArray') financeArray!: FormArray;
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
   @ViewChild('financeTable') financeTable!: MatTable<any>;
 
@@ -53,9 +53,7 @@ export class CollaboratorFinanceTabComponent implements OnInit {
   index: any = null;
   Finance: any;
 
-  get financeArray() {
-    return this.collaboratorForm.controls['Financials'] as FormArray;
-  }
+ 
 
   constructor(
     private fb: FormBuilder,

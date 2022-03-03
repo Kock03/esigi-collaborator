@@ -109,6 +109,7 @@
   </div>
 
   <app-collaborator-register-tab
+    *ngIf="collaboratorForm"
     [hidden]="step != 1"
     [form]="collaboratorForm"
     (onChange)="handleChanges($event)"
@@ -116,6 +117,8 @@
   </app-collaborator-register-tab>
 
   <app-collaborator-dependents-tab
+    *ngIf="collaboratorForm"
+    [dependentsArray]="dependentsArray"
     [hidden]="step != 2"
     [form]="collaboratorForm"
     (onChange)="handleChanges($event)"
@@ -131,24 +134,32 @@
   >
   </app-collaborator-education-tab>
   <app-collaborator-bank-tab
+    *ngIf="collaboratorForm"
     [hidden]="step != 4"
     [form]="collaboratorForm"
+    [bankArray]="bankArray"
     (onChange)="handleChanges($event)"
   >
   </app-collaborator-bank-tab>
   <app-collaborator-finance-tab
+    *ngIf="collaboratorForm"
+    [financeArray]="financeArray"
     [hidden]="step != 5"
     [form]="collaboratorForm"
     (onChange)="handleChanges($event)"
   >
   </app-collaborator-finance-tab>
   <app-collaborator-skill-tab
+    *ngIf="collaboratorForm"
+    [skillArray]="skillArray"
     [hidden]="step != 6"
     [form]="collaboratorForm"
     (onChange)="handleChanges($event)"
   >
   </app-collaborator-skill-tab>
   <app-collaborator-document-tab
+    [documentArray]="documentArray"
+    *ngIf="collaboratorForm"
     [hidden]="step != 7"
     [form]="collaboratorForm"
     (onChange)="handleChanges($event)"

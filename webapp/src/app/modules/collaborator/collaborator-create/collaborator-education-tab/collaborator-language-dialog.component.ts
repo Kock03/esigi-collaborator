@@ -8,7 +8,6 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrls: ['./collaborator-education-tab.component.scss'],
 })
 export class CollaboratorLanguageDialog {
-  @Input('form') collaboratorForm!: FormGroup;
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
 
   languageForm!: FormGroup;

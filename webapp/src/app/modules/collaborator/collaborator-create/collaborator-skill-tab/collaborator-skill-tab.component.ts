@@ -24,7 +24,7 @@ import { CollaboratorSkillDialog } from './collaborator-skill-dialog.component';
   encapsulation: ViewEncapsulation.None,
 })
 export class CollaboratorSkillTabComponent implements OnInit {
-  @Input('form') collaboratorForm!: FormGroup;
+  @Input('skillArray') skillArray!: FormArray;
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
   @ViewChild('skillTable') skillTable!: MatTable<any>;
 
@@ -38,10 +38,7 @@ export class CollaboratorSkillTabComponent implements OnInit {
   Skill: any;
   checked = false;
 
-  get skillArray() {
-    return this.collaboratorForm.controls['Skills'] as FormArray;
-  }
-
+ 
   constructor(private fb: FormBuilder, public dialog: MatDialog) {}
 
   ngOnInit(): void {

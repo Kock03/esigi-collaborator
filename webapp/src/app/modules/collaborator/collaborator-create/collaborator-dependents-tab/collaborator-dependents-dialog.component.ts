@@ -34,7 +34,6 @@ export const PICK_FORMATS = {
     ],
   })
   export class CollaboratorDependentsDialog {
-    @Input('form') collaboratorForm!: FormGroup;
     @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
   
     dependentForm!: FormGroup;

@@ -21,7 +21,7 @@ import { CollaboratorBankDialog } from './collaborator-bank-dialog.component';
   encapsulation: ViewEncapsulation.None,
 })
 export class CollaboratorBankTabComponent implements OnInit {
-  @Input('form') collaboratorForm!: FormGroup;
+  @Input('bankArray') bankArray!: FormArray;
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
   @ViewChild('bankTable') bankTable!: MatTable<any>;
 
@@ -39,9 +39,6 @@ export class CollaboratorBankTabComponent implements OnInit {
   index: any = null;
   bank: any;
 
-  get bankArray() {
-    return this.collaboratorForm.controls['BankData'] as FormArray;
-  }
 
   constructor(
     private fb: FormBuilder,
@@ -53,10 +50,6 @@ export class CollaboratorBankTabComponent implements OnInit {
     if (this.bankArray.value.length > 0) {
       this.data = this.bankArray.value;
     }
-
-    // if (this.bankArray.controls[0].value.status == true) {
-    //   this.bankArray.value.status.setValue(false);
-    // }
 
     this.initObservables();
 
