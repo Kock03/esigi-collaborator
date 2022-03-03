@@ -91,7 +91,6 @@ export class CollaboratorsService {
         const collaborator = this.collaboratorsRepository.create(data);
         return await this.collaboratorsRepository.save(collaborator);
       } catch (error) {
-        console.log("🚀 ~ file: collaborators.service.ts ~ line 94 ~ CollaboratorsService ~ store ~ error", error)
         throw new HttpException(JSON.stringify(error), 400);
       }
     }
