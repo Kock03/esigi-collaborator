@@ -1,10 +1,12 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   ParseUUIDPipe,
   Post,
+  Put,
 } from '@nestjs/common';
 import { CreateInterviewsDto } from './dtos/create-interviews.dto';
 import { InterviewsService } from './interviews.service';
@@ -37,5 +39,18 @@ export class InterviewsController {
   @Post()
   async store(@Body() body: CreateInterviewsDto) {
     return await this.interviewsService.store(body);
+  }
+
+  @Put(':id')
+  async update(
+    @Param('id', new ParseUUIDPipe()) id: string,
+    @Body() body: CreateInterviewsDto,
+  ) {
+    return await this.interviewsService.update(id, body);
+  }
+
+  @Delete(':id')
+  async destroy(@Param('id', new ParseUUIDPipe()) id: string) {
+    return await this.interviewsService.destroy(id);
   }
 }
