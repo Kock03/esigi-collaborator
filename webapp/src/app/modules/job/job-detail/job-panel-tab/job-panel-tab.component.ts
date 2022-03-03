@@ -72,6 +72,16 @@ export class JobPanelTabComponent implements OnInit {
     }
   }
 
+  navigateJobs() {
+    const navigationExtras = {
+      state: {
+        id: this.jobId,
+      },
+    };
+    this.router.navigate(['vaga/interview/novo'], navigationExtras);
+  }
+
+
   createJob() {
     this.router.navigate(['vaga/novo']);
   }

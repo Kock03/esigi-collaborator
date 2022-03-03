@@ -21,18 +21,18 @@ import { SnackBarService } from 'src/services/snackbar.service';
 import { Location } from '@angular/common';
 
 @Component({
-  selector: 'app-job-interview-tab',
-  templateUrl: './job-interview-tab.component.html',
-  styleUrls: ['./job-interview-tab.component.scss'],
-  encapsulation: ViewEncapsulation.None,
+  selector: 'app-job-interview-create',
+  templateUrl: './job-interview-create.component.html',
+  styleUrls: ['./job-interview-create.component.scss']
 })
-export class JobInterviewTabComponent implements OnInit {
+export class JobInterviewCreateComponent implements OnInit {
   behavioralInterviewForm!: FormGroup;
   technicalInterviewForm!: FormGroup;
   clientInterviewForm!: FormGroup;
   returnForm!: FormGroup;
   jobId!: string | null;
   id!: any;
+  get!: any;
   step: number = 1;
   selectedIndex: number = 0;
   disable = false;
@@ -47,7 +47,10 @@ export class JobInterviewTabComponent implements OnInit {
     private route: ActivatedRoute,
     private _location: Location,
     private router: Router
-  ) {}
+  ) {const getId = this.router.getCurrentNavigation()?.extras.state;
+    this.get = getId;
+    console.log("🚀 ~ file: job-interview-create.component.ts ~ line 52 ~ JobInterviewCreateComponent ~  this.get",  this.get)
+  }
 
   ngOnInit(): void {
     this.jobId = this.route.snapshot.paramMap.get('id');
@@ -189,5 +192,9 @@ export class JobInterviewTabComponent implements OnInit {
     if (this.selectedIndex != 0) {
       this.selectedIndex = this.selectedIndex - 1;
     }
+  }
+
+  backToList(jobId: string) {
+    this.router.navigate([`vaga/detalhe/${jobId}`]);
   }
 }

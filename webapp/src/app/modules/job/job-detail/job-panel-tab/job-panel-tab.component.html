@@ -38,7 +38,11 @@
         </ng-container>
 
         <ng-container matColumnDef="icon">
-          <th mat-header-cell *matHeaderCellDef></th>
+          <th mat-header-cell *matHeaderCellDef>
+            <button class="edit-button" mat-flat-button color="primary"  (click)="navigateJobs()">
+              <mat-icon>add</mat-icon>
+            </button>
+          </th>
           <td class="button-tab" mat-cell *matCellDef="let interviews">
             <button class="table-button" mat-button>
               <mat-icon>delete</mat-icon>

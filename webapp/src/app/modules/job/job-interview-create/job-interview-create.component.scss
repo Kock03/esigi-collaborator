@@ -1,0 +1,48 @@
+#jobInterview {
+    max-width: 1240px;
+  
+    .mat-tab-label-active {
+      border-bottom: 2px solid #673ab7;
+      opacity: 1 !important;
+    }
+  
+    .mat-ink-bar {
+      height: 0px !important;
+    }
+  
+    .form {
+      margin-top: 20px;
+    }
+  
+    .checkbox-section {
+      .text {
+        margin-bottom: 5px;
+      }
+    }
+  
+    .text-area {
+      height: 150px;
+    }
+  
+    .save-button {
+      height: 40px;
+      margin-top: 7px;
+    }
+  
+    .job-checkbox {
+      margin-top: 15px;
+    }
+
+    .title{
+        margin-left: 300px;
+    }
+
+    .content-scroll{
+        // margin-top: 70px;
+        margin-left: 150px;
+        max-width: 800px;
+        width: 100%;
+    }
+  
+  }
+  
