@@ -62,8 +62,8 @@
         </td>
       </ng-container>
 
-      <ng-container matColumnDef="icon">
-        <th mat-header-cell *matHeaderCellDef>
+      <ng-container matColumnDef="icon"  clas="iconAdd">
+        <th mat-header-cell *matHeaderCellDef style="text-align: end">
           <button
             class="edit-button"
             mat-flat-button
@@ -73,7 +73,7 @@
             <mat-icon>add</mat-icon>
           </button>
         </th>
-        <td class="button-tab" mat-cell *matCellDef="let job">
+        <td class="button-tab" mat-cell *matCellDef="let job"  style="text-align: end" >
           <button class="table-button" mat-button (click)="editJob(job.id)">
             <mat-icon>edit</mat-icon>
           </button>

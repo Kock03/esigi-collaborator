@@ -38,8 +38,8 @@
               </td>
             </ng-container>
 
-              <ng-container matColumnDef="icon">
-                <th mat-header-cell *matHeaderCellDef>
+              <ng-container matColumnDef="icon" >
+                <th mat-header-cell *matHeaderCellDef style="text-align: end" style="text-align: end">
                   <button
                     class="edit-button"
                     mat-flat-button
@@ -50,9 +50,9 @@
                   </button>
                 </th>
 
-                <th mat-header-cell *matHeaderCellDef></th>
-
                 <td
+                style="text-align: end"
+                 style="text-align: end"
                   class="button-tab"
                   mat-cell
                   *matCellDef="let education; let index = index"
@@ -123,7 +123,7 @@
               </ng-container>
 
               <ng-container matColumnDef="icon">
-                <th mat-header-cell *matHeaderCellDef>
+                <th mat-header-cell *matHeaderCellDef style="text-align: end">
                   <button
                     class="edit-button"
                     mat-flat-button
@@ -133,8 +133,8 @@
                     <mat-icon>add</mat-icon>
                   </button>
                 </th>
-                <th mat-header-cell *matHeaderCellDef></th>
                 <td
+                style="text-align: end"
                   class="button-tab"
                   mat-cell
                   *matCellDef="let language; let index = index"
