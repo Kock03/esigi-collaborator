@@ -8,7 +8,6 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrls: ['./collaborator-education-tab.component.scss'],
 })
 export class CollaboratorLanguageDialog {
-  @Input('form') collaboratorForm!: FormGroup;
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
 
   languageForm!: FormGroup;
@@ -16,7 +15,7 @@ export class CollaboratorLanguageDialog {
   constructor(
     public dialogRef: MatDialogRef<CollaboratorLanguageDialog>,
     private fb: FormBuilder,
-    @Inject(MAT_DIALOG_DATA) public data: { languageSelected: any }
+    @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
   ngOnInit(): void {
@@ -25,11 +24,11 @@ export class CollaboratorLanguageDialog {
 
   initForm(): void {
     this.languageForm = this.fb.group({
-      languageName: ['Inglês', [Validators.required, Validators.maxLength(40)]],
-      degreeOfInfluence: [1, Validators.required],
+      languageName: [null, [Validators.required, Validators.maxLength(40)]],
+      degreeOfInfluence: [null, Validators.required],
     });
-    if (this.data && this.data.languageSelected) {
-      this.languageForm.patchValue(this.data.languageSelected);
+    if (this.data) {
+      this.languageForm.patchValue(this.data);
     }
   }
 
@@ -38,6 +37,7 @@ export class CollaboratorLanguageDialog {
   }
 
   save() {
-    this.dialogRef.close(this.languageForm.getRawValue());
+    const data = this.languageForm.getRawValue()
+    this.dialogRef.close(data);
   }
 }

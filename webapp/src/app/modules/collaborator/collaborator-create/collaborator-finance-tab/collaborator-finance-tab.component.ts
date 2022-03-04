@@ -31,7 +31,7 @@ import { CollaboratorFinanceDialog } from './collaborator-finance-dialog.compone
   encapsulation: ViewEncapsulation.None,
 })
 export class CollaboratorFinanceTabComponent implements OnInit {
-  @Input('form') collaboratorForm!: FormGroup;
+  @Input('financeArray') financeArray!: FormArray;
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
   @ViewChild('financeTable') financeTable!: MatTable<any>;
 
@@ -53,9 +53,7 @@ export class CollaboratorFinanceTabComponent implements OnInit {
   index: any = null;
   Finance: any;
 
-  get financeArray() {
-    return this.collaboratorForm.controls['Financials'] as FormArray;
-  }
+ 
 
   constructor(
     private fb: FormBuilder,
@@ -64,10 +62,7 @@ export class CollaboratorFinanceTabComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    if (
-      this.financeArray.value.findIndex((finance: any) => finance == null) ===
-      -1
-    ) {
+    if (this.financeArray.value.length > 0) {
       this.data = this.financeArray.value;
     }
     this.initObservables();
@@ -109,13 +104,13 @@ export class CollaboratorFinanceTabComponent implements OnInit {
     const dialogRef = this.dialog.open(CollaboratorFinanceDialog, {
       width: '500px',
       height: '550px',
-      data: { financeSelected },
+      data: financeSelected ,
     });
 
     this.index = index;
     dialogRef.afterClosed().subscribe((finance) => {
       if (finance) {
-        this.financeArray.controls[this.index].setValue(finance);
+        this.financeArray.controls[this.index].patchValue(finance);
       }
     });
   }

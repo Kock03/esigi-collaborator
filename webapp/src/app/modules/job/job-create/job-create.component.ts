@@ -96,17 +96,19 @@ export class JobCreateComponent implements OnInit {
     private snackbarService: SnackBarService,
     private router: Router,
     private route: ActivatedRoute
-  ) { }
+  ) {}
 
   async ngOnInit(): Promise<void> {
     this.jobId = this.route.snapshot.paramMap.get('id');
-    this.initForm();
+
     if (this.jobId !== 'novo') {
       await this.getJob();
+      this.initForm();
+      this.setFormValue();
+    } else {
+      this.initForm();
+      this.step = 1;
     }
-    
-    this.setFormValue();
-    this.step = 1;
   }
 
   async getJob() {
@@ -117,7 +119,7 @@ export class JobCreateComponent implements OnInit {
     }
   }
 
-  handleChanges(value: any): void { }
+  handleChanges(value: any): void {}
 
   initForm() {
     this.jobForm = this.fb.group({
@@ -182,7 +184,7 @@ export class JobCreateComponent implements OnInit {
         pleno: [false],
         senior: [false],
       }),
-      Knowledges: this.fb.array(this.job ? this.job.Knowledges : [null]),
+      Knowledges: this.fb.array(this.job ? this.job.Knowledges : []),
     });
   }
 

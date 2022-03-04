@@ -24,7 +24,7 @@ import { CollaboratorSkillDialog } from './collaborator-skill-dialog.component';
   encapsulation: ViewEncapsulation.None,
 })
 export class CollaboratorSkillTabComponent implements OnInit {
-  @Input('form') collaboratorForm!: FormGroup;
+  @Input('skillArray') skillArray!: FormArray;
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
   @ViewChild('skillTable') skillTable!: MatTable<any>;
 
@@ -38,14 +38,11 @@ export class CollaboratorSkillTabComponent implements OnInit {
   Skill: any;
   checked = false;
 
-  get skillArray() {
-    return this.collaboratorForm.controls['Skills'] as FormArray;
-  }
-
+ 
   constructor(private fb: FormBuilder, public dialog: MatDialog) {}
 
   ngOnInit(): void {
-    if (this.skillArray.value.findIndex((skill: any) => skill == null) === -1) {
+    if (this.skillArray.value.length > 0) {
       this.data = this.skillArray.value;
     }
 
@@ -87,13 +84,13 @@ export class CollaboratorSkillTabComponent implements OnInit {
     const dialogRef = this.dialog.open(CollaboratorSkillDialog, {
       width: '500px',
       height: '620px',
-      data: { skillSelected },
+      data: skillSelected ,
     });
 
     this.index = index;
     dialogRef.afterClosed().subscribe((skill) => {
       if (skill) {
-        this.skillArray.controls[this.index].setValue(skill);
+        this.skillArray.controls[this.index].patchValue(skill);
       }
     });
   }

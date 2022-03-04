@@ -25,7 +25,7 @@ import { ResumeSkillDialog } from './resume-skill.dialog.component';
   encapsulation: ViewEncapsulation.None,
 })
 export class ResumeSkillsTabComponent implements OnInit {
-  @Input('form') resumeForm!: FormGroup;
+  @Input('skillArray') skillArray!: FormArray;
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
   @ViewChild('skillTable') skillTable!: MatTable<any>;
 
@@ -39,9 +39,6 @@ export class ResumeSkillsTabComponent implements OnInit {
   Skill: any;
   checked = false;
 
-  get skillArray() {
-    return this.resumeForm.controls['Skills'] as FormArray;
-  }
 
   constructor(
     private fb: FormBuilder,
@@ -50,10 +47,7 @@ export class ResumeSkillsTabComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    if (
-      this.skillArray.value &&
-      this.skillArray.value.findIndex((skill: any) => skill == null) === -1
-    ) {
+    if (this.skillArray.value.length > 0) {
       this.data = this.skillArray.value;
     }
 
@@ -96,13 +90,13 @@ export class ResumeSkillsTabComponent implements OnInit {
     const dialogRef = this.dialog.open(ResumeSkillDialog, {
       width: '500px',
       height: '450px',
-      data: { skillSelected },
+      data: skillSelected,
     });
 
     this.index = index;
     dialogRef.afterClosed().subscribe((skill) => {
       if (skill) {
-        this.skillArray.controls[this.index].setValue(skill);
+        this.skillArray.controls[this.index].patchValue(skill);
       }
     });
   }

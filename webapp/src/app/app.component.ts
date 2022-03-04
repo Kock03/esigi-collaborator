@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { BreakpointObserver, LayoutModule } from '@angular/cdk/layout';
-import { NavigationEnd, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
 
 @Component({
@@ -27,14 +27,12 @@ export class AppComponent {
       icon: 'person',
       selected: false,
       action: '/colaborador/lista',
-      selectedNew: '/colaborador/novo',
     },
     {
       name: 'Vagas',
       icon: 'work',
       selected: false,
       action: '/vaga/lista',
-      selectedNew: '/vaga/novo',
     },
 
     {
@@ -48,19 +46,28 @@ export class AppComponent {
       icon: 'manage_accounts',
       selected: false,
       action: '/setting/novo',
-      selectedNew: '/setting/criacao',
-      selectedAd: '/setting/conexao'
-      
     },
   ];
 
-  constructor(private observer: BreakpointObserver, private router: Router) {}
+  collaboratorId!: string | null;
+
+  constructor(
+    private observer: BreakpointObserver,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     this.router.events
       .pipe(filter((event) => event instanceof NavigationEnd))
       .subscribe((res: any) => {
-        this.activeMenu = res.url;
+        console.log(
+          '🚀 ~ file: app.component.ts ~ line 62 ~ AppComponent ~ .subscribe ~ res',
+          res.url
+        );
+        // this.activeMenu = res.url.filter((res: any) =>
+        //   res.startWith('/colaborador')
+        // );
       });
   }
 

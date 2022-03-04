@@ -16,7 +16,7 @@ import { InterviewsService } from './interviews.service';
 
 @Controller('api/v1/interviews')
 export class InterviewsController {
-  constructor(private readonly interviewsService: InterviewsService) { }
+  constructor(private readonly interviewsService: InterviewsService) {}
 
   @Get()
   async index() {
@@ -25,7 +25,6 @@ export class InterviewsController {
 
   @Get('follow-up-interviews/:id')
   async findListInterviews(@Param('id', new ParseUUIDPipe()) id: string) {
-    console.log('matheus' + id);
     return await this.interviewsService.getFollowUpInterviews(id);
   }
 
@@ -33,8 +32,6 @@ export class InterviewsController {
   async show(@Param('id', new ParseUUIDPipe()) id: string) {
     return await this.interviewsService.findOneOrFail({ id });
   }
-
-
 
   @Post()
   async store(@Body() body: CreateInterviewsDto) {

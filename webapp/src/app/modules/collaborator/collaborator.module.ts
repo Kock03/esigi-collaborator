@@ -36,6 +36,7 @@ import { CollaboratorBankDialog } from './collaborator-create/collaborator-bank-
 import { CollaboratorFinanceDialog } from './collaborator-create/collaborator-finance-tab/collaborator-finance-dialog.component';
 import { CollaboratorSkillDialog } from './collaborator-create/collaborator-skill-tab/collaborator-skill-dialog.component';
 import { CollaboratorDocumentDialog } from './collaborator-create/collaborator-document-tab/collaborator-document-dialog.component';
+import { MatRadioModule } from '@angular/material/radio';
 
 const routes: Routes = [
   {
@@ -81,6 +82,7 @@ const routes: Routes = [
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
+    MatRadioModule,
     FlexLayoutModule,
     MatButtonModule,
     MatSelectModule,
@@ -116,4 +118,4 @@ const routes: Routes = [
   providers: [MatDatepickerModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class CollaboratorModule {}
+export class CollaboratorModule { }

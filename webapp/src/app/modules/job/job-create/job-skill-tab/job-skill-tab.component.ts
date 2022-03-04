@@ -26,6 +26,7 @@ import { JobDialogSkill } from './job-skill-dialog.component';
 })
 export class JobSkillTabComponent implements OnInit {
   @Input('form') jobForm!: FormGroup;
+  @Input('knowledgeArray') knowledgeArray!: FormArray;
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
 
   @ViewChild('knowledgeTable') knowledgeTable!: MatTable<any>;
@@ -42,9 +43,6 @@ export class JobSkillTabComponent implements OnInit {
     'icon',
   ];
 
-  get knowledgeArray() {
-    return this.jobForm.controls['Knowledges'] as FormArray;
-  }
 
   constructor(
     public dialog: MatDialog,
@@ -53,14 +51,10 @@ export class JobSkillTabComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    if (
-      this.knowledgeArray.value.findIndex(
-        (knowledge: any) => knowledge == null
-      ) === -1
-    ) {
+    if (this.knowledgeArray.value.length > 0) {
       this.data = this.knowledgeArray.value;
     }
-
+     
     this.initObservables();
   }
 
@@ -96,12 +90,15 @@ export class JobSkillTabComponent implements OnInit {
     const dialogRef = this.dialog.open(JobDialogSkill, {
       width: '450px',
       height: '200px',
-      data: { knowledgeSelected },
+      data: knowledgeSelected ,
     });
 
     this.index = index;
     dialogRef.afterClosed().subscribe((knowledge) => {
-      this.knowledgeArray.controls[this.index].setValue(knowledge);
+      if(knowledge){
+        this.knowledgeArray.controls[this.index].patchValue(knowledge);
+      }
+     
     });
   }
 

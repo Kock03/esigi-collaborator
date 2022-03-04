@@ -33,7 +33,7 @@ import { CollaboratorDependentsDialog } from './collaborator-dependents-dialog.c
   encapsulation: ViewEncapsulation.None,
 })
 export class CollaboratorDependentsTabComponent implements OnInit {
-  @Input('form') collaboratorForm!: FormGroup;
+  @Input('dependentsArray') dependentsArray!: FormArray;
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
   @ViewChild('dependentTable') dependentTable!: MatTable<any>;
 
@@ -54,10 +54,6 @@ export class CollaboratorDependentsTabComponent implements OnInit {
   index: any = null;
   Dependent: any;
 
-  get dependentArray() {
-    return this.collaboratorForm.controls['Dependents'] as FormArray;
-  }
-
   constructor(
     private fb: FormBuilder,
     public dialog: MatDialog,
@@ -65,27 +61,23 @@ export class CollaboratorDependentsTabComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    if (
-      this.dependentArray.value.findIndex(
-        (dependent: any) => dependent == null
-      ) === -1
-    ) {
-      this.data = this.dependentArray.value;
+    if (this.dependentsArray.value.length > 0) {
+      this.data = this.dependentsArray.value;
     }
-
+     
     this.initObservables();
   }
 
   initObservables() {
-    this.dependentArray.valueChanges.subscribe((res) => {
-      const isNullIndex = this.dependentArray.value.findIndex(
+    this.dependentsArray.valueChanges.subscribe((res) => {
+      const isNullIndex = this.dependentsArray.value.findIndex(
         (dependent: any) => dependent == null
       );
       if (isNullIndex !== -1) {
-        this.dependentArray.removeAt(isNullIndex);
+        this.dependentsArray.removeAt(isNullIndex);
       }
       if (res) {
-        this.data = this.dependentArray.value;
+        this.data = this.dependentsArray.value;
       }
     });
   }
@@ -98,7 +90,7 @@ export class CollaboratorDependentsTabComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((dependent) => {
       if (dependent) {
-        this.dependentArray.insert(0, this.fb.group(dependent));
+        this.dependentsArray.insert(0, this.fb.group(dependent));
         this.dependentTable.renderRows();
       }
     });
@@ -112,12 +104,12 @@ export class CollaboratorDependentsTabComponent implements OnInit {
     const dialogRef = this.dialog.open(CollaboratorDependentsDialog, {
       width: '500px',
       height: '650px',
-      data: { dependentsSelected },
+      data: dependentsSelected ,
     });
     this.index = index;
     dialogRef.afterClosed().subscribe((dependent) => {
       if (dependent) {
-        this.dependentArray.controls[this.index].setValue(dependent);
+        this.dependentsArray.controls[this.index].patchValue(dependent);
       }
     });
   }
@@ -136,7 +128,7 @@ export class CollaboratorDependentsTabComponent implements OnInit {
 
     this.dialogService.confirmed().subscribe(async (confirmed) => {
       if (confirmed) {
-        this.dependentArray.removeAt(index);
+        this.dependentsArray.removeAt(index);
       }
     });
   }

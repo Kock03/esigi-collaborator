@@ -27,7 +27,8 @@ import { ResumeLanguageDialog } from './resume-language-dialog.component';
   encapsulation: ViewEncapsulation.None,
 })
 export class ResumeEducationTabComponent implements OnInit {
-  @Input('form') resumeForm!: FormGroup;
+  @Input('educationArray') educationArray!: FormArray;
+  @Input('languageArray') languageArray!: FormArray;
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
   @ViewChild('languageTable') languageTable!: MatTable<any>;
   @ViewChild('educationTable') educationTable!: MatTable<any>;
@@ -57,13 +58,7 @@ export class ResumeEducationTabComponent implements OnInit {
   Education: any;
   educationList: any = [];
 
-  get languageArray() {
-    return this.resumeForm.controls['Languages'] as FormArray;
-  }
 
-  get educationArray() {
-    return this.resumeForm.controls['Educations'] as FormArray;
-  }
 
   constructor(
     private dialogService: ConfirmDialogService,
@@ -72,26 +67,12 @@ export class ResumeEducationTabComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    if (
-      this.educationArray.value &&
-      this.educationArray.value.findIndex(
-        (education: any) => education == null
-      ) === -1
-    ) {
+    if (this.educationArray.value.length > 0) {
       this.dataEducation = this.educationArray.value;
-    } else {
-      this.educationArray.value.splice(0, 1);
     }
-
-    if (
-      this.languageArray.value &&
-      this.languageArray.value.findIndex(
-        (language: any) => language == null
-      ) === -1
-    ) {
+    if (this.languageArray.value.length > 0) {
       this.dataLanguage = this.languageArray.value;
     }
-
     this.initObservables();
   }
 
@@ -157,13 +138,13 @@ export class ResumeEducationTabComponent implements OnInit {
     const dialogRef = this.dialog.open(ResumeLanguageDialog, {
       width: '500px',
       height: '300px',
-      data: { languageSelected },
+      data: languageSelected ,
     });
 
     this.index = index;
     dialogRef.afterClosed().subscribe((language) => {
       if(language){
-      this.languageArray.controls[this.index].setValue(language);
+      this.languageArray.controls[this.index].patchValue(language);
       }
     });
   }
@@ -190,13 +171,13 @@ export class ResumeEducationTabComponent implements OnInit {
     const dialogRef = this.dialog.open(ResumeEducationDialog, {
       width: '500px',
       height: '470px',
-      data: { educationSelected },
+      data: educationSelected,
     });
 
     this.index = index;
     dialogRef.afterClosed().subscribe((education) => {
       if(education){
-      this.educationArray.controls[this.index].setValue(education);
+      this.educationArray.controls[this.index].patchValue(education);
       }
     });
   }

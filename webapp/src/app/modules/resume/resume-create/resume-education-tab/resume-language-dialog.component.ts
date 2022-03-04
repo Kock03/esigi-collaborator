@@ -16,7 +16,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
     constructor(
       public dialogRef: MatDialogRef<ResumeLanguageDialog>,
       private fb: FormBuilder,
-      @Inject(MAT_DIALOG_DATA) public data: { languageSelected: any }
+      @Inject(MAT_DIALOG_DATA) public data: any 
     ) {}
   
     ngOnInit(): void {
@@ -25,11 +25,11 @@ import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
   
     initForm(): void {
       this.languageForm = this.fb.group({
-        languageName: ['Inglês', [Validators.required, Validators.maxLength(40)]],
-        degreeOfInfluence: [1, Validators.required],
+        languageName: [null, [Validators.required, Validators.maxLength(40)]],
+        degreeOfInfluence: [null, Validators.required],
       });
-      if (this.data && this.data.languageSelected) {
-        this.languageForm.patchValue(this.data.languageSelected);
+      if (this.data) {
+        this.languageForm.patchValue(this.data);
       }
     }
   
@@ -38,7 +38,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
     }
   
     save() {
-      this.dialogRef.close(this.languageForm.getRawValue());
+      const data = this.languageForm.getRawValue()
+      this.dialogRef.close(data);
     }
   }
   

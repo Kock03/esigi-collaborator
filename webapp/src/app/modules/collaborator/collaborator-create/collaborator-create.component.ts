@@ -22,7 +22,6 @@ export class CollaboratorCreateComponent implements OnInit {
   collaborator!: any;
   active: boolean = true;
 
-
   Educations: any;
   Languages: any;
   BankData: any;
@@ -42,17 +41,33 @@ export class CollaboratorCreateComponent implements OnInit {
     return this.collaboratorForm.controls['Languages'] as FormArray;
   }
 
+  get dependentsArray() {
+    return this.collaboratorForm.controls['Dependents'] as FormArray;
+  }
+  get bankArray() {
+    return this.collaboratorForm.controls['BankData'] as FormArray;
+  }
+
+  get financeArray() {
+    return this.collaboratorForm.controls['Financials'] as FormArray;
+  }
+
+  get skillArray() {
+    return this.collaboratorForm.controls['Skills'] as FormArray;
+  }
+  get documentArray() {
+    return this.collaboratorForm.controls['Documents'] as FormArray;
+  }
+
   constructor(
     private fb: FormBuilder,
     private collaboratorProvider: CollaboratorProvider,
     private router: Router,
     private snackbarService: SnackBarService,
     private route: ActivatedRoute
-  ) { }
+  ) {}
 
   async ngOnInit(): Promise<void> {
-
-
     if (sessionStorage.getItem('collaborator_tab') == undefined) {
       sessionStorage.setItem('collaborator_tab', '1');
     }
@@ -64,8 +79,7 @@ export class CollaboratorCreateComponent implements OnInit {
       await this.getCollaborator();
       this.initForm();
       this.setFormValue();
-    }
-    else {
+    } else {
       this.initForm();
       this.step = 1;
     }
@@ -76,6 +90,7 @@ export class CollaboratorCreateComponent implements OnInit {
       this.collaborator = await this.collaboratorProvider.findOne(
         this.collaboratorId
       );
+      console.log("🚀 ~ file: collaborator-create.component.ts ~ line 93 ~ CollaboratorCreateComponent ~ getCollaborator ~  this.collaborator ",  this.collaborator )
     } catch (error) {
       console.error(error);
     }
@@ -97,10 +112,12 @@ export class CollaboratorCreateComponent implements OnInit {
         'Colaborador atualizado com sucesso!'
       );
     } catch (err: any) {
-      this.snackbarService.showError(err.error?.message?? 'Ocorreu um erro, tente novamente');
+      this.snackbarService.showError(
+        err.error?.message ?? 'Ocorreu um erro, tente novamente'
+      );
     }
   }
- 
+
   initForm() {
     this.collaboratorForm = this.fb.group({
       firstNameCorporateName: [null, Validators.required],
@@ -118,8 +135,10 @@ export class CollaboratorCreateComponent implements OnInit {
       birthDate: ['2004-06-12', Validators.required],
       admissionDate: ['', Validators.required],
       email: ['davi@email.com', [Validators.email, Validators.required]],
-      cnpj: this.fb.control({ value: null, disabled: true },
-        [DocumentValidator.isValidCnpj(), Validators.required]),
+      cnpj: this.fb.control({ value: null, disabled: true }, [
+        DocumentValidator.isValidCnpj(),
+        Validators.required,
+      ]),
       stateRegistration: [null, Validators.required],
       municipalInscription: [null, Validators.required],
       site: ['site.davi', Validators.required],
@@ -158,9 +177,7 @@ export class CollaboratorCreateComponent implements OnInit {
       Financials: this.fb.array(
         this.collaborator ? this.collaborator.Financials : []
       ),
-      Skills: this.fb.array(
-        this.collaborator ? this.collaborator.Skills : []
-      ),
+      Skills: this.fb.array(this.collaborator ? this.collaborator.Skills : []),
       Documents: this.fb.array(
         this.collaborator ? this.collaborator.Documents : []
       ),
@@ -189,7 +206,7 @@ export class CollaboratorCreateComponent implements OnInit {
       this.snackbarService.showError(error.message);
     }
   }
-  handleChanges(value: any): void { }
+  handleChanges(value: any): void {}
 
   handleStep(number: number): void {
     this.step = number;

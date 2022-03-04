@@ -26,7 +26,7 @@ import { CollaboratorDocumentDialog } from './collaborator-document-dialog.compo
   encapsulation: ViewEncapsulation.None,
 })
 export class CollaboratorDocumentTabComponent implements OnInit {
-  @Input('form') collaboratorForm!: FormGroup;
+  @Input('documentArray') documentArray!: FormArray;
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
   @ViewChild('documentTable') documentTable!: MatTable<any>;
 
@@ -38,10 +38,6 @@ export class CollaboratorDocumentTabComponent implements OnInit {
   Document: any;
   data: [] = [];
 
-  get documentArray() {
-    return this.collaboratorForm.controls['Documents'] as FormArray;
-  }
-
   constructor(
     private fb: FormBuilder,
     public dialog: MatDialog,
@@ -49,11 +45,7 @@ export class CollaboratorDocumentTabComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    if (
-      this.documentArray.value.findIndex(
-        (document: any) => document == null
-      ) === -1
-    ) {
+    if (this.documentArray.value.length > 0) {
       this.data = this.documentArray.value;
     }
 
@@ -92,13 +84,13 @@ export class CollaboratorDocumentTabComponent implements OnInit {
     const dialogRef = this.dialog.open(CollaboratorDocumentDialog, {
       width: '500px',
       height: '300px',
-      data: { documentSelected },
+      data: documentSelected,
     });
 
     this.index = index;
     dialogRef.afterClosed().subscribe((document) => {
       if (document) {
-        this.documentArray.controls[this.index].setValue(document);
+        this.documentArray.controls[this.index].patchValue(document);
       }
     });
   }

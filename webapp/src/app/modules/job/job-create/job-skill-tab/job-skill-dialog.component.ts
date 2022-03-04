@@ -22,7 +22,7 @@ export class JobDialogSkill implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<JobDialogSkill>,
     private fb: FormBuilder,
-    @Inject(MAT_DIALOG_DATA) public data: { knowledgeSelected: any }
+    @Inject(MAT_DIALOG_DATA) public data: any 
   ) {}
 
   ngOnInit(): void {
@@ -35,16 +35,17 @@ export class JobDialogSkill implements OnInit {
 
   initForm(): void {
     this.knowledgeForm = this.fb.group({
-      name: ['', [Validators.required, Validators.maxLength(20)]],
-      yearsExperience: [1, Validators.required],
-      typeOfPeriod: [1, Validators.required],
+      name: [null, [Validators.required, Validators.maxLength(20)]],
+      yearsExperience: [null, Validators.required],
+      typeOfPeriod: [null, Validators.required],
     });
-    if (this.data && this.data.knowledgeSelected) {
-      this.knowledgeForm.patchValue(this.data.knowledgeSelected);
+    if (this.data) {
+      this.knowledgeForm.patchValue(this.data);
     }
   }
 
   async saveKnowledge() {
-    this.dialogRef.close(this.knowledgeForm.getRawValue());
+    const data = this.knowledgeForm.getRawValue()
+    this.dialogRef.close(data);
   }
 }

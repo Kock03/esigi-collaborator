@@ -34,7 +34,6 @@ export const PICK_FORMATS = {
     ],
   })
   export class CollaboratorDependentsDialog {
-    @Input('form') collaboratorForm!: FormGroup;
     @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
   
     dependentForm!: FormGroup;
@@ -42,7 +41,7 @@ export const PICK_FORMATS = {
     constructor(
       public dialogRef: MatDialogRef<CollaboratorDependentsDialog>,
       private fb: FormBuilder,
-      @Inject(MAT_DIALOG_DATA) public data: { dependentsSelected: any }
+      @Inject(MAT_DIALOG_DATA) public data: any 
     ) {}
   
     ngOnInit(): void {
@@ -52,21 +51,21 @@ export const PICK_FORMATS = {
     initForm(): void {
       this.dependentForm = this.fb.group({
         type: [null, Validators.required],
-        firstName: ['alanzoka', Validators.required],
-        lastName: ['brazilien', Validators.required],
-        gender: [2, Validators.required],
+        firstName: [null, Validators.required],
+        lastName: [null, Validators.required],
+        gender: [null, Validators.required],
         cpf: [
-          '',
+          null,
           [DocumentValidator.isValidCpf(), Validators.required],
         ],
-        birthDate: ['02/05/004', Validators.required],
-        ddi: ['55', Validators.required],
-        ddd: ['47', Validators.required],
-        phoneNumber: ['992173407', Validators.required],
-        email: ['alan@gmail.com', [Validators.required, Validators.email]],
+        birthDate: [null, Validators.required],
+        ddi: [null, Validators.required],
+        ddd: [null, Validators.required],
+        phoneNumber: [null, Validators.required],
+        email: [null, [Validators.required, Validators.email]],
       });
-      if (this.data && this.data.dependentsSelected) {
-        this.dependentForm.patchValue(this.data.dependentsSelected);
+      if (this.data) {
+        this.dependentForm.patchValue(this.data);
       }
     }
   
@@ -75,7 +74,8 @@ export const PICK_FORMATS = {
     }
   
     save() {
-      this.dialogRef.close(this.dependentForm.getRawValue());
+      const data = this.dependentForm.getRawValue()
+      this.dialogRef.close(data);
     }
   }
   
