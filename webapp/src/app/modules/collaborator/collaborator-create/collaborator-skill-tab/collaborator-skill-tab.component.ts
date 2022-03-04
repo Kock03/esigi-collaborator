@@ -42,7 +42,7 @@ export class CollaboratorSkillTabComponent implements OnInit {
   constructor(private fb: FormBuilder, public dialog: MatDialog) {}
 
   ngOnInit(): void {
-    if (this.skillArray.value.findIndex((skill: any) => skill == null) === -1) {
+    if (this.skillArray.value.length > 0) {
       this.data = this.skillArray.value;
     }
 
@@ -84,13 +84,13 @@ export class CollaboratorSkillTabComponent implements OnInit {
     const dialogRef = this.dialog.open(CollaboratorSkillDialog, {
       width: '500px',
       height: '620px',
-      data: { skillSelected },
+      data: skillSelected ,
     });
 
     this.index = index;
     dialogRef.afterClosed().subscribe((skill) => {
       if (skill) {
-        this.skillArray.controls[this.index].setValue(skill);
+        this.skillArray.controls[this.index].patchValue(skill);
       }
     });
   }

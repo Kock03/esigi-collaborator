@@ -17,7 +17,7 @@ export class CollaboratorDocumentDialog {
   constructor(
     public dialogRef: MatDialogRef<CollaboratorDocumentDialog>,
     private fb: FormBuilder,
-    @Inject(MAT_DIALOG_DATA) public data: { documentSelected: any }
+    @Inject(MAT_DIALOG_DATA) public data:  any 
   ) { }
 
   ngOnInit(): void {
@@ -26,11 +26,11 @@ export class CollaboratorDocumentDialog {
 
   initForm(): void {
     this.documentForm = this.fb.group({
-      name: ['RG', Validators.required],
-      file: ['null'],
+      name: [null, Validators.required],
+      file: [null],
     });
-    if (this.data && this.data.documentSelected) {
-      this.documentForm.patchValue(this.data.documentSelected);
+    if (this.data) {
+      this.documentForm.patchValue(this.data);
     }
   }
 
@@ -50,6 +50,7 @@ export class CollaboratorDocumentDialog {
   }
 
   async save() {
-    this.dialogRef.close(this.documentForm.getRawValue());
+    const data = this.documentForm.getRawValue()
+    this.dialogRef.close(data);
   }
 }

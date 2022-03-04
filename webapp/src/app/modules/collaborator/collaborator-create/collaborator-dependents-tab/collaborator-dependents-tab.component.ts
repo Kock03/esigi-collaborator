@@ -61,14 +61,10 @@ export class CollaboratorDependentsTabComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    if (
-      this.dependentsArray.value.findIndex(
-        (dependent: any) => dependent == null
-      ) === -1
-    ) {
+    if (this.dependentsArray.value.length > 0) {
       this.data = this.dependentsArray.value;
     }
-
+     
     this.initObservables();
   }
 
@@ -108,12 +104,12 @@ export class CollaboratorDependentsTabComponent implements OnInit {
     const dialogRef = this.dialog.open(CollaboratorDependentsDialog, {
       width: '500px',
       height: '650px',
-      data: { dependentsSelected },
+      data: dependentsSelected ,
     });
     this.index = index;
     dialogRef.afterClosed().subscribe((dependent) => {
       if (dependent) {
-        this.dependentsArray.controls[this.index].setValue(dependent);
+        this.dependentsArray.controls[this.index].patchValue(dependent);
       }
     });
   }

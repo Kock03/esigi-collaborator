@@ -65,9 +65,9 @@ export class AppComponent {
           '🚀 ~ file: app.component.ts ~ line 62 ~ AppComponent ~ .subscribe ~ res',
           res.url
         );
-        this.activeMenu = res.url.filter((res: any) =>
-          res.startWith('/colaborador')
-        );
+        // this.activeMenu = res.url.filter((res: any) =>
+        //   res.startWith('/colaborador')
+        // );
       });
   }
 

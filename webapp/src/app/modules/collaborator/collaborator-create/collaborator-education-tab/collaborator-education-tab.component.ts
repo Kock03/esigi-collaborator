@@ -60,7 +60,40 @@ export class CollaboratorEducationTabComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // this.initObservables();
+    if (this.educationArray.value.length > 0) {
+      this.dataEducation = this.educationArray.value;
+    }
+    if (this.languageArray.value.length > 0) {
+      this.dataLanguage = this.languageArray.value;
+    }
+     
+    this.initObservables();
+  }
+
+  initObservables() {
+    this.educationArray.valueChanges.subscribe((res) => {
+      const isNullIndex = this.educationArray.value.findIndex(
+        (knowledge: any) => knowledge == null
+      );
+      if (isNullIndex !== -1) {
+        this.educationArray.removeAt(isNullIndex);
+      }
+      if (res) {
+        this.dataEducation = this.educationArray.value;
+      }
+    });
+
+    this.languageArray.valueChanges.subscribe((res) => {
+      const isNullIndex = this.languageArray.value.findIndex(
+        (knowledge: any) => knowledge == null
+      );
+      if (isNullIndex !== -1) {
+        this.languageArray.removeAt(isNullIndex);
+      }
+      if (res) {
+        this.dataLanguage = this.languageArray.value;
+      }
+    });
   }
 
   openDialogLanguage() {
@@ -99,13 +132,13 @@ export class CollaboratorEducationTabComponent implements OnInit {
     const dialogRef = this.dialog.open(CollaboratorLanguageDialog, {
       width: '500px',
       height: '300px',
-      data: { languageSelected },
+      data: languageSelected,
     });
 
     this.index = index;
     dialogRef.afterClosed().subscribe((language) => {
       if (language) {
-        this.languageArray.controls[this.index].setValue(language);
+        this.languageArray.controls[this.index].patchValue(language);
       }
     });
   }
@@ -132,13 +165,13 @@ export class CollaboratorEducationTabComponent implements OnInit {
     const dialogRef = this.dialog.open(CollaboratorEducationDialog, {
       width: '500px',
       height: '470px',
-      data: { educationSelected },
+      data: educationSelected ,
     });
 
     this.index = index;
     dialogRef.afterClosed().subscribe((education) => {
       if (education) {
-        this.educationArray.controls[this.index].setValue(education);
+        this.educationArray.controls[this.index].patchValue(education);
       }
     });
   }

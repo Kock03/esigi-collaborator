@@ -38,7 +38,7 @@ export interface Experience {
   encapsulation: ViewEncapsulation.None,
 })
 export class ResumeExperienceTabComponent implements OnInit {
-  @Input('form') resumeForm!: FormGroup;
+  @Input('experiencesArray') experiencesArray!: FormArray;
   @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
 
   Experience: any;
@@ -47,9 +47,7 @@ export class ResumeExperienceTabComponent implements OnInit {
   index: any = null;
   resumeId!: any;
 
-  get experiencesArray() {
-    return this.resumeForm.controls['Experiences'] as FormArray;
-  }
+
 
   constructor(
     private dialogService: ConfirmDialogService,
@@ -59,16 +57,9 @@ export class ResumeExperienceTabComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    // if (
-    //   this.experiencesArray.value &&
-    //   this.experiencesArray.value.findIndex((skill: any) => skill == null) ===
-    //   -1
-    // ) {
-    //   this.experienceList = this.experiencesArray.value;
-    // }
-    this.resumeId = this.route.snapshot.paramMap.get('id');
-    if (this.resumeId != 'novo') {
-      this.initObservables();
+
+    if (this.experiencesArray.value.length > 0) {
+      this.experienceList = this.experiencesArray.value;
     }
 
   }
@@ -128,13 +119,13 @@ export class ResumeExperienceTabComponent implements OnInit {
     const dialogRef = this.dialog.open(ResumeDialogExperience, {
       width: '500px',
       height: '620px',
-      data: { experienceSelected },
+      data: experienceSelected,
     });
 
     this.index = index;
     dialogRef.afterClosed().subscribe((experience) => {
       if (experience) {
-        this.experiencesArray.controls[this.index].setValue(experience);
+        this.experiencesArray.controls[this.index].patchValue(experience);
       }
     });
   }

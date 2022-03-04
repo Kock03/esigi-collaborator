@@ -27,6 +27,22 @@ export class ResumeCreateComponent implements OnInit {
 
   Experience: any;
 
+  get educationArray() {
+    return this.resumeForm.controls['Educations'] as FormArray;
+  }
+  get languageArray() {
+    return this.resumeForm.controls['Languages'] as FormArray;
+  }
+
+
+  get skillArray() {
+    return this.resumeForm.controls['Experiences'] as FormArray;
+  }
+  get experiencesArray() {
+    return this.resumeForm.controls['Skills'] as FormArray;
+  }
+
+
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -38,12 +54,15 @@ export class ResumeCreateComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.resumeId = this.route.snapshot.paramMap.get('id');
-    this.initForm();
-    this.step = 1;
+
     if (this.resumeId !== 'novo') {
       await this.getResume();
+      this.initForm();
+      this.setFormValue();
+    } else {
+      this.initForm();
+      this.step = 1;
     }
-    this.setFormValue();
   }
 
   async getResume() {
@@ -89,12 +108,11 @@ export class ResumeCreateComponent implements OnInit {
       site: ['', Validators.required],
       linkedin: ['', Validators.required],
 
-      Educations: this.fb.array(this.resume ? this.resume.Educations : [null]),
-      Languages: this.fb.array(this.resume ? this.resume.Languages : [null]),
-      Experiences: this.fb.array(this.resume ? this.resume.Experiences : [null]),
-      Skills: this.fb.array(this.resume ? this.resume.Skills : [null]),
+      Educations: this.fb.array(this.resume ? this.resume.Educations : []),
+      Languages: this.fb.array(this.resume ? this.resume.Languages : []),
+      Experiences: this.fb.array(this.resume ? this.resume.Experiences : []),
+      Skills: this.fb.array(this.resume ? this.resume.Skills : []),
     });
-    
   }
 
   setFormValue() {

@@ -71,22 +71,24 @@
   ></app-resume-register-tab>
   <app-resume-education-tab
     [hidden]="step != 2"
-    [form]="resumeForm"
+    [educationArray]="educationArray"
+    [languageArray]="languageArray"
     (onChange)="handleChanges($event)"
   >
   </app-resume-education-tab>
   <app-resume-experience-tab
+  [experiencesArray]="experiencesArray"
     [hidden]="step != 3"
-    [form]="resumeForm"
     (onChange)="handleChanges($event)"
   ></app-resume-experience-tab>
   <app-resume-skills-tab
+    [skillArray]="skillArray"
     [hidden]="step != 4"
-    [form]="resumeForm"
     (onChange)="handleChanges($event)"
   >
   </app-resume-skills-tab>
   <app-resume-application-tab
+
     [hidden]="step != 5"
     [form]="resumeForm"
     (onChange)="handleChanges($event)"

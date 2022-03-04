@@ -45,11 +45,7 @@ export class CollaboratorDocumentTabComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    if (
-      this.documentArray.value.findIndex(
-        (document: any) => document == null
-      ) === -1
-    ) {
+    if (this.documentArray.value.length > 0) {
       this.data = this.documentArray.value;
     }
 
@@ -88,13 +84,13 @@ export class CollaboratorDocumentTabComponent implements OnInit {
     const dialogRef = this.dialog.open(CollaboratorDocumentDialog, {
       width: '500px',
       height: '300px',
-      data: { documentSelected },
+      data: documentSelected,
     });
 
     this.index = index;
     dialogRef.afterClosed().subscribe((document) => {
       if (document) {
-        this.documentArray.controls[this.index].setValue(document);
+        this.documentArray.controls[this.index].patchValue(document);
       }
     });
   }

@@ -17,7 +17,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
     constructor(
       public dialogRef: MatDialogRef<CollaboratorSkillDialog>,
       private fb: FormBuilder,
-      @Inject(MAT_DIALOG_DATA) public data: { skillSelected: any}
+      @Inject(MAT_DIALOG_DATA) public data: any
     ) {}
   
     ngOnInit(): void {
@@ -26,13 +26,13 @@ import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
   
     initForm(): void {
       this.skillForm = this.fb.group({
-        technology:['Angular', [Validators.required, Validators.maxLength(50)]],
-        seniority: [1, Validators.required],
-        yearsExperience: ['2', [Validators.required, Validators.maxLength(2)]],
-        currentPosition: [true, Validators.required]
+        technology:[null, [Validators.required, Validators.maxLength(50)]],
+        seniority: [null, Validators.required],
+        yearsExperience: [null, [Validators.required, Validators.maxLength(2)]],
+        currentPosition: [null, Validators.required]
       });
-      if (this.data && this.data.skillSelected) {
-        this.skillForm.patchValue(this.data.skillSelected)
+      if (this.data) {
+        this.skillForm.patchValue(this.data)
       }
     }
   
@@ -41,7 +41,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
     }
   
     save() {
-      this.dialogRef.close(this.skillForm.getRawValue());
+      const data = this.skillForm.getRawValue();
+      this.dialogRef.close(data);
     }
   }
   
