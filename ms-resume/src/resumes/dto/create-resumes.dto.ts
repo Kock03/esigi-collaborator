@@ -47,7 +47,7 @@ export class CreateResumesDto {
   login: string;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @MinLength(11)
   @MaxLength(11)
   @IsString()

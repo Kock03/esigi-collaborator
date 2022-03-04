@@ -35,7 +35,7 @@ export class ResumesEntity {
   @Column({ name: 'login', length: 40 })
   login: string;
 
-  @Column({ name: 'cpf', unique: true, length: 11 })
+  @Column({ name: 'cpf', unique: true, length: 11, nullable: true })
   cpf: string;
 
   @CreateDateColumn({ name: 'birth_date', type: 'datetime' })
