@@ -129,6 +129,7 @@ export class ResumeCreateComponent implements OnInit {
 
       this.snackbarService.successMessage('Vaga Cadastrada Com Sucesso');
       this.router.navigate(['curriculo/lista']);
+      sessionStorage.clear();
     } catch (error) {
       console.log('ERROR 132' + error);
       this.snackbarService.showError('Falha ao Cadastrar');
