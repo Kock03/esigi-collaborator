@@ -4,21 +4,21 @@ import { ResumesEntity } from 'src/resumes/resumes.entity';
 
 export class UpdateExperiencesDto {
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @MinLength(2)
   @MaxLength(40)
   @IsString()
   office: string;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @MinLength(3)
   @MaxLength(70)
   @IsString()
   companyName: string;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @MinLength(2)
   @MaxLength(40)
   @IsString()
@@ -30,22 +30,22 @@ export class UpdateExperiencesDto {
   active: boolean;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   startDate: Date;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   endDate: Date;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @MinLength(2)
   @MaxLength(40)
   @IsString()
   sector: string;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
   description: string;
 }

@@ -137,12 +137,10 @@ export class UpdateCollaboratorsDto {
 
   @ApiProperty()
   @IsOptional()
-  @IsObject()
   Address: AddressEntity;
 
   @ApiProperty()
   @IsOptional()
-  @IsObject()
   Phone: PhoneEntity;
 
   @ApiPropertyOptional()
