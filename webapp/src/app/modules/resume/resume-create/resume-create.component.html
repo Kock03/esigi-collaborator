@@ -8,7 +8,7 @@
 
   <div fxLayout="row" class="tab" fxLayoutGap="16px">
     <div
-      (click)="this.step = 1"
+      (click)="handleStep(1)"
       fxLayout="column"
       class="tab-group"
       [ngClass]="{ done: step > 0, active: step == 1 }"
@@ -17,7 +17,7 @@
       <span class="tab-border"></span>
     </div>
     <div
-      (click)="this.step = 2"
+      (click)="handleStep(2)"
       fxLayout="column"
       class="tab-group"
       [ngClass]="{ done: step > 1, active: step == 2 }"
@@ -26,7 +26,7 @@
       <span class="tab-border"></span>
     </div>
     <div
-      (click)="this.step = 3"
+      (click)="handleStep(3)"
       fxLayout="column"
       class="tab-group"
       [ngClass]="{ done: step > 2, active: step == 3 }"
@@ -35,7 +35,7 @@
       <span class="tab-border"></span>
     </div>
     <div
-      (click)="this.step = 4"
+      (click)="handleStep(4)"
       fxLayout="column"
       class="tab-group"
       [ngClass]="{ done: step > 3, active: step == 4 }"
@@ -45,7 +45,8 @@
     </div>
 
     <div
-      (click)="this.step = 5"
+      *ngIf="resumeId !== 'novo'"
+      (click)="handleStep(5)"
       fxLayout="column"
       class="tab-group"
       [ngClass]="{ done: step > 4, active: step == 5 }"
@@ -55,6 +56,7 @@
     </div>
 
     <div
+      *ngIf="resumeId !== 'novo'"
       fxLayout="column"
       class="tab-group disabled"
       [ngClass]="{ done: step > 5, active: step == 6 }"
@@ -77,7 +79,7 @@
   >
   </app-resume-education-tab>
   <app-resume-experience-tab
-  [experiencesArray]="experiencesArray"
+    [experiencesArray]="experiencesArray"
     [hidden]="step != 3"
     (onChange)="handleChanges($event)"
   ></app-resume-experience-tab>
@@ -88,21 +90,27 @@
   >
   </app-resume-skills-tab>
   <app-resume-application-tab
-
+    *ngIf="resumeId !== 'novo'"
     [hidden]="step != 5"
     [form]="resumeForm"
     (onChange)="handleChanges($event)"
   >
   </app-resume-application-tab>
-  <app-resume-monitoring-tab [hidden]="step != 6"> </app-resume-monitoring-tab>
+  <app-resume-monitoring-tab *ngIf="resumeId !== 'novo'" [hidden]="step != 6">
+  </app-resume-monitoring-tab>
 
-  <div class="navigation-buttons" fxLayoutAlign="center end" fxLayoutGap="16px"  *ngIf="resumeId == 'novo'">
+  <div
+    class="navigation-buttons"
+    fxLayoutAlign="center end"
+    fxLayoutGap="16px"
+    *ngIf="resumeId == 'novo'"
+  >
     <button mat-button *ngIf="step != 1" (click)="navigate('back')">
       Voltar
     </button>
     <button
       mat-flat-button
-      *ngIf="step != 5"
+      *ngIf="step != 4"
       (click)="navigate('next')"
       color="primary"
     >
@@ -110,19 +118,20 @@
     </button>
     <button
       mat-flat-button
-      *ngIf="step == 5"
+      *ngIf="step == 4"
       (click)="saveResume()"
       color="primary"
     >
       Salvar
     </button>
   </div>
-  <div class="navigation-buttons" fxLayoutAlign="center end" fxLayoutGap="16px"  *ngIf="resumeId !== 'novo'">
-    <button
-      mat-flat-button
-      (click)="saveEditResume()"
-      color="primary"
-    >
+  <div
+    class="navigation-buttons"
+    fxLayoutAlign="center end"
+    fxLayoutGap="16px"
+    *ngIf="resumeId !== 'novo'"
+  >
+    <button mat-flat-button (click)="saveEditResume()" color="primary">
       Salvar
     </button>
   </div>

@@ -1,6 +1,7 @@
 #resumeCreate {
   .tab-group {
     width: 100%;
+    cursor: pointer;
   }
 
   .tab-item {
@@ -10,10 +11,10 @@
 
   .content-scroll {
     overflow: auto;
-    height: calc(100vh - 280px);
+    height: calc(100vh - 290px);
   }
 
-  .navigation-buttons {
-    margin-top: 8px;
-  }
+  // .navigation-buttons {
+  //   margin-bottom: 18px;
+  // }
 }

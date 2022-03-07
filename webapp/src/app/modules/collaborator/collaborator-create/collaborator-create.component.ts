@@ -81,7 +81,6 @@ export class CollaboratorCreateComponent implements OnInit {
       this.setFormValue();
     } else {
       this.initForm();
-      this.step = 1;
     }
   }
 
@@ -90,7 +89,10 @@ export class CollaboratorCreateComponent implements OnInit {
       this.collaborator = await this.collaboratorProvider.findOne(
         this.collaboratorId
       );
-      console.log("🚀 ~ file: collaborator-create.component.ts ~ line 93 ~ CollaboratorCreateComponent ~ getCollaborator ~  this.collaborator ",  this.collaborator )
+      console.log(
+        '🚀 ~ file: collaborator-create.component.ts ~ line 93 ~ CollaboratorCreateComponent ~ getCollaborator ~  this.collaborator ',
+        this.collaborator
+      );
     } catch (error) {
       console.error(error);
     }
@@ -98,6 +100,7 @@ export class CollaboratorCreateComponent implements OnInit {
 
   listCollaborator() {
     this.router.navigate(['colaborador/lista']);
+    sessionStorage.clear();
   }
 
   async editCollaborator() {

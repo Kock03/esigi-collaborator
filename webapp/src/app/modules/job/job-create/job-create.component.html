@@ -8,7 +8,7 @@
 
   <div fxLayout="row" class="tab" fxLayoutGap="16px">
     <div
-      (click)="this.step = 1"
+      (click)="handleStep(1)"
       fxLayout="column"
       class="tab-group"
       [ngClass]="{ done: step > 0, active: step == 1 }"
@@ -17,7 +17,7 @@
       <span class="tab-border"></span>
     </div>
     <div
-      (click)="this.step = 2"
+      (click)="handleStep(2)"
       fxLayout="column"
       class="tab-group"
       [ngClass]="{ done: step > 1, active: step == 2 }"

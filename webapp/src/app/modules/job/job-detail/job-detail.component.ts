@@ -16,20 +16,30 @@ export class JobDetailComponent implements OnInit {
   constructor(private router: Router, private fb: FormBuilder) {}
 
   ngOnInit(): void {
-    this.step = 1;
+    if (sessionStorage.getItem('job_detail_tab') == undefined) {
+      sessionStorage.setItem('job_detail_tab', '1');
+    }
+    this.step = JSON.parse(sessionStorage.getItem('job_detail_tab')!);
+
   }
 
   handleChanges(value: any): void {}
 
+  handleStep(number: number): void {
+    this.step = number;
+    sessionStorage.setItem('job_detail_tab', this.step.toString());
+  }
+
   navigate(direction: string) {
     if (this.step > 1 && direction === 'back') {
       this.step -= 1;
-    } else if (this.step < 3 && direction === 'next') {
+    } else if (this.step < 2 && direction === 'next') {
       this.step += 1;
     }
   }
 
   backToList() {
     this.router.navigate(['vaga/lista']);
+    sessionStorage.clear();
   }
 }

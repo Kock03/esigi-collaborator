@@ -100,6 +100,10 @@ export class JobCreateComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.jobId = this.route.snapshot.paramMap.get('id');
+    if (sessionStorage.getItem('job_tab') == undefined) {
+      sessionStorage.setItem('job_tab', '1');
+    }
+    this.step = JSON.parse(sessionStorage.getItem('job_tab')!);
 
     if (this.jobId !== 'novo') {
       await this.getJob();
@@ -107,7 +111,6 @@ export class JobCreateComponent implements OnInit {
       this.setFormValue();
     } else {
       this.initForm();
-      this.step = 1;
     }
   }
 
@@ -200,8 +203,8 @@ export class JobCreateComponent implements OnInit {
 
   handleStep(number: number): void {
     this.step = number;
+    sessionStorage.setItem('job_tab', this.step.toString());
   }
-
   async saveJob() {
     let data = this.jobForm.getRawValue();
 
@@ -231,6 +234,7 @@ export class JobCreateComponent implements OnInit {
 
   listJob() {
     this.router.navigate(['vaga/lista']);
+    sessionStorage.clear();
   }
 
   navigate(direction: string) {

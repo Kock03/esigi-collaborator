@@ -12,7 +12,7 @@
     <div
       fxLayout="column"
       class="tab-group"
-      (click)="this.step = 1"
+      (click)="handleStep(1)"
       [ngClass]="{ done: step > 0, active: step == 1 }"
     >
       <p class="tab-item">Vaga</p>
@@ -21,8 +21,8 @@
     <div
       fxLayout="column"
       class="tab-group"
-      (click)="this.step = 3"
-      [ngClass]="{ done: step > 2, active: step == 3 }"
+      (click)="handleStep(2)"
+      [ngClass]="{ done: step > 1, active: step == 2 }"
     >
       <p class="tab-item">Acompanhamento</p>
       <span class="tab-border"></span>
@@ -34,20 +34,20 @@
     (onChange)="handleChanges($event)"
   >
   </app-job-detail-list-tab>
-  <app-job-panel-tab [hidden]="step != 3" (onChange)="handleChanges($event)">
+  <app-job-panel-tab [hidden]="step != 2" (onChange)="handleChanges($event)">
   </app-job-panel-tab>
 
   <div class="navigation-buttons" fxLayoutAlign="center end" fxLayoutGap="16px">
     <button
       mat-flat-button
-      *ngIf="step == 2"
+      *ngIf="step == 1"
       (click)="navigate('back')"
     >
       Voltar
     </button>
     <button
       mat-flat-button
-      *ngIf="step == 3"
+      *ngIf="step == 2"
       (click)="navigate('back')"
       color="primary"
     >
@@ -55,7 +55,7 @@
     </button>
     <button
       mat-flat-button
-      *ngIf="step != 3"
+      *ngIf="step != 2"
       (click)="navigate('next')"
       color="primary"
     >

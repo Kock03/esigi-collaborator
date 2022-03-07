@@ -48,7 +48,6 @@ export class CollaboratorsService {
 
     options?: FindOneOptions<CollaboratorsEntity>,
   ) {
-    //options = { relations: ['Feedbacks'] }
     try {
       return await this.collaboratorsRepository.findOneOrFail(
         conditions,
@@ -59,27 +58,7 @@ export class CollaboratorsService {
     }
   }
 
-  // async method(id: string) {
-  //   const bankdata = await this.collaboratorsRepository.query(
-  //     'select b.created_at from esigi_collaborator.collaborators' +
-  //       'inner join esigi_collaborator.bank_data b' +
-  //       'on collaborators.bank_data_id = b.id' +
-  //       'where collaborators.id = "a01a9a19-4a48-48ad-a34d-a271db43777f"',
-  //   );
-
-  //   if (bankdata.created_at.length > 1) {
-  //     for (let index = 0; index < bankdata.created_at.length; index++) {
-  //       if ([index] < bankdata.created_at.length) bankdata.isActive = false;
-  //       bankdata.isActive = true;
-  //     }
-  //   }
-  // }
-
   async store(data: CreateCollaboratorsDto) {
-    /*const activeBanks = data.BankData.filter((bank) => bank.isActive);
-    if (activeBanks.length > 1) {
-      throw new BadRequestException();
-    }*/
     if (data.cpf) {
       const invalidCpf = DocumentValidator.isValidCpf(data.cpf);
       if (invalidCpf) {

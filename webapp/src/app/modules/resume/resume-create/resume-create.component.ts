@@ -55,13 +55,17 @@ export class ResumeCreateComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     this.resumeId = this.route.snapshot.paramMap.get('id');
 
+    if (sessionStorage.getItem('resume_tab') == undefined) {
+      sessionStorage.setItem('resume_tab', '1');
+    }
+    this.step = JSON.parse(sessionStorage.getItem('resume_tab')!);
+
     if (this.resumeId !== 'novo') {
       await this.getResume();
       this.initForm();
       this.setFormValue();
     } else {
       this.initForm();
-      this.step = 1;
     }
   }
 
@@ -143,6 +147,12 @@ export class ResumeCreateComponent implements OnInit {
 
   listResume() {
     this.router.navigate(['curriculo/lista']);
+    sessionStorage.clear();
+  }
+
+  handleStep(number: number): void {
+    this.step = number;
+    sessionStorage.setItem('resume_tab', this.step.toString());
   }
 
   handleChanges(value: any): void {}
