@@ -1,6 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import {
   IsNotEmpty,
+  IsOptional,
   IsString,
   Length,
   MaxLength,
@@ -9,21 +10,21 @@ import {
 
 export class UpdatePhoneDto {
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @MinLength(9)
   @MaxLength(9)
   @IsString()
   phoneNumber: string;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @MinLength(2)
   @MaxLength(2)
   @IsString()
   ddd: string;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @MinLength(2)
   @MaxLength(2)
   @IsString()

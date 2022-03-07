@@ -1,28 +1,28 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsBoolean, IsEnum, IsNotEmpty, IsString, MaxLength, MinLength } from 'class-validator';
+import { IsBoolean, IsEnum, IsNotEmpty, IsOptional, IsString, MaxLength, MinLength } from 'class-validator';
 import { ResumesEntity } from 'src/resumes/resumes.entity';
 import { Seniority } from './seniority.enum';
 
 export class UpdateSkillsDto {
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
   @MinLength(3)
   @MaxLength(80)
   technology: string;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
   yearsExperience: string;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsEnum(Seniority)
   seniority: Seniority;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsBoolean()
   currentPosition: boolean;
 }
