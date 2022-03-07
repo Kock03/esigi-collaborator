@@ -39,10 +39,24 @@
   }
 }
 
-.button-dialog {
-  margin-left: 140px;
+
+
+#collaboratorEducationDialog{
+  .button-dialog {
+    margin-left: 140px;
+  }
+  
+  .title-dialog {
+    text-align: center;
+  }
 }
 
-.title-dialog {
-  text-align: center;
+#collaboratorLanguageDialog{
+  .button-dialog {
+    margin-left: 140px;
+  }
+  
+  .title-dialog {
+    text-align: center;
+  }
 }

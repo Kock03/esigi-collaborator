@@ -40,6 +40,7 @@ export class ResumeProvider {
     }
 
     store(resume: any): Promise<any> {
+        console.log("🚀 ~ file: resume.provider.ts ~ line 43 ~ ResumeProvider ~ store ~ resume", resume)
         return new Promise((resolve, reject) => {
             this.apiGateway.post(environment.RESUME_MS +'resumes', resume).subscribe((response: HttpResponse<any>) => {
                 resolve(response.body);

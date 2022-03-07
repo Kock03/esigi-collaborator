@@ -64,8 +64,6 @@ export class CollaboratorListComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
-
-
     this.initFilter();
 
     this.getCollaboratorList();
@@ -106,31 +104,21 @@ export class CollaboratorListComponent implements OnInit {
     });
   }
 
-
-
-  async checkInative(ev: any) {
-    console.log(ev)
-    if (ev.checked == true) {
-      return (this.filteredCollaboratorList = this.collaborators =
-        await this.collaboratorProvider.findInactive());
-    }
-    if (ev.checked == false) {
+  async selectList(ev: any) {
+    console.log(ev);
+    if (ev.value == 1) {
       return (this.filteredCollaboratorList = this.collaborators =
         await this.collaboratorProvider.findAll());
     }
-  }
-
-  async checkActive(ev: any) {
-    if (ev.checked == true) {
+    if (ev.value == 2) {
       return (this.filteredCollaboratorList = this.collaborators =
         await this.collaboratorProvider.findActive());
     }
-    if (ev.checked == false) {
+    if (ev.value == 3) {
       return (this.filteredCollaboratorList = this.collaborators =
-        await this.collaboratorProvider.findAll());
+        await this.collaboratorProvider.findInactive());
     }
   }
-
 
   async getCollaboratorList() {
     this.filteredCollaboratorList = this.collaborators =
@@ -150,23 +138,6 @@ export class CollaboratorListComponent implements OnInit {
         );
       });
   }
-
-  // filterActiveAndInactive(){
-  //   if(this.checked == true){
-  //     fromEvent(this.filter.nativeElement, 'keyup')
-  //     .pipe(debounceTime(200), distinctUntilChanged())
-
-  //     .subscribe((res) => {
-  //       this.filteredCollaboratorList = this.collaborators.filter(
-  //         (collaborator) =>
-  //           collaborator.firstNameCorporateName
-  //             .toLocaleLowerCase()
-  //             .includes(this.filter.nativeElement.value.toLocaleLowerCase())
-  //       );
-  //     });
-  //   }
-
-  // }
 
   editCollaborator(collaboratorId: any) {
     this.router.navigate([`colaborador/${collaboratorId}`]);

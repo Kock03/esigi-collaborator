@@ -1,28 +1,31 @@
 <div id="collaboratorList" class="page">
-  <section id="collaboratorList" fxLayout="column">
-    <h2>Colaboradores</h2>
-    <div fxLayout="row" style="align-content: flex-end;">
-      <mat-checkbox color="primary" (change)="checkInative($event)" style="padding-right: 20px;">Ver inativos
-      </mat-checkbox>
-      <mat-checkbox (change)="checkActive($event)" color="primary">Ver Ativos
-      </mat-checkbox>
-    </div>
-  </section>
+  <h2>Colaboradores</h2>
 
+  <div fxLayout="row">
+ 
 
-  <div fxLayout="row" fxLayoutAlign="space-between">
-    <form class="search">
-      <mat-form-field appearance="outline">
+</div>
+
+  <div fxLayoutAlign="space-between">
+    <form class="search" fxLayout="row">
+      <mat-form-field appearance="outline" fxFlex="80">
         <mat-label>Buscar Colaboradores</mat-label>
         <input matInput placeholder="Colaborador" #filter matInput />
         <mat-icon matSuffix style="cursor: pointer">search</mat-icon>
       </mat-form-field>
+
+      <mat-form-field fxFlex="20" appearance="outline">
+        <mat-label>Filtro</mat-label>
+        <mat-select (selectionChange)="selectList($event)" matInput disableRipple>
+          <mat-option [value]="1">Ver Todos</mat-option>
+          <mat-option [value]="2">Ver Ativos</mat-option>
+          <mat-option [value]="3">Ver Inativos</mat-option>
+        </mat-select>
+      </mat-form-field>
     </form>
   </div>
 
-
-
-  <div class=" envolti-table mat-elevation-z8" fxLayout="column">
+  <div class="envolti-table mat-elevation-z8" fxLayout="column">
     <table mat-table [dataSource]="filteredCollaboratorList">
       <ng-container matColumnDef="collaborator">
         <th mat-header-cell *matHeaderCellDef>Colaborador</th>
@@ -56,29 +59,53 @@
       <ng-container matColumnDef="status">
         <th mat-header-cell *matHeaderCellDef>Status</th>
         <td mat-cell *matCellDef="let collaborator">
-          {{
-          collaborator.active == true ? "Ativo" : "Inativo"
-          }}
+          {{ collaborator.active == true ? "Ativo" : "Inativo" }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="icon">
-        <th mat-header-cell *matHeaderCellDef  clas="iconAdd"  style="text-align: end">
-          <button class="edit-button" mat-flat-button color="primary" (click)="createCollaborator()" >
-            <mat-icon >add</mat-icon>
-          </button> 
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          clas="iconAdd"
+          style="text-align: end"
+        >
+          <button
+            class="edit-button"
+            mat-flat-button
+            color="primary"
+            (click)="createCollaborator()"
+          >
+            <mat-icon>add</mat-icon>
+          </button>
         </th>
-        <td class="button-tab" mat-cell *matCellDef="let collaborator"  style="text-align: end">
-          <button class="table-button" mat-button (click)="editCollaborator(collaborator.id)">
+        <td
+          class="button-tab"
+          mat-cell
+          *matCellDef="let collaborator"
+          style="text-align: end"
+        >
+          <button
+            class="table-button"
+            mat-button
+            (click)="editCollaborator(collaborator.id)"
+          >
             <mat-icon>edit</mat-icon>
           </button>
-          <button class="table-button" mat-button (click)="deleteCollaborator(collaborator.id)">
+          <button
+            class="table-button"
+            mat-button
+            (click)="deleteCollaborator(collaborator.id)"
+          >
             <mat-icon>delete</mat-icon>
           </button>
         </td>
       </ng-container>
 
-      <tr mat-header-row *matHeaderRowDef="displayedCollaborator; sticky: true"></tr>
+      <tr
+        mat-header-row
+        *matHeaderRowDef="displayedCollaborator; sticky: true"
+      ></tr>
       <tr mat-row *matRowDef="let row; columns: displayedCollaborator"></tr>
     </table>
   </div>

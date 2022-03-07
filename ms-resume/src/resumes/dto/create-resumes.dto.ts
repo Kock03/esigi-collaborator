@@ -50,7 +50,6 @@ export class CreateResumesDto {
   @IsOptional()
   @MinLength(11)
   @MaxLength(11)
-  @IsString()
   cpf: string;
 
   @ApiProperty()

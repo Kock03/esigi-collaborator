@@ -4,7 +4,7 @@ import { AddressEntity } from 'src/address/address.entity';
 import { DocumentsBadRequestExcpetion } from 'src/exceptions/documents-bad-request.exception';
 import { NotFoundException } from 'src/exceptions/not-found-exception';
 import { PhoneEntity } from 'src/phone/phone.entity';
-import { DocumentValidator } from 'src/validators/document.validator';
+import { DocumentValidator } from '../validators/document.validator';
 import { Repository, FindConditions, FindOneOptions } from 'typeorm';
 import { CreateResumesDto } from './dto/create-resumes.dto';
 import { UpdateResumesDto } from './dto/update-resumes.dto';
@@ -15,7 +15,7 @@ export class ResumesService {
   constructor(
     @InjectRepository(ResumesEntity)
     private readonly resumesRepository: Repository<ResumesEntity>,
-  ) { }
+  ) {}
 
   async findAll() {
     return await this.resumesRepository.find();
@@ -33,13 +33,20 @@ export class ResumesService {
   }
 
   async store(data: CreateResumesDto) {
-    if (data.cpf != null) {
-      const invalidCpf = DocumentValidator.isValidCpf(data.cpf)
+    if (data.cpf) {
+      const invalidCpf = DocumentValidator.isValidCpf(data.cpf);
       if (invalidCpf) {
         throw new DocumentsBadRequestExcpetion();
       }
     }
-    else {
+    if (data.cpf === null) {
+      try {
+        const resume = this.resumesRepository.create(data);
+        return await this.resumesRepository.save(resume);
+      } catch (error) {
+        throw new HttpException(JSON.stringify(error), 400);
+      }
+    } else {
       try {
         const resume = this.resumesRepository.create(data);
         return await this.resumesRepository.save(resume);
@@ -47,7 +54,6 @@ export class ResumesService {
         throw new HttpException(JSON.stringify(error), 400);
       }
     }
-
   }
 
   async update(id: string, data: UpdateResumesDto) {
