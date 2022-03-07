@@ -34,14 +34,12 @@ export class ResumeCreateComponent implements OnInit {
     return this.resumeForm.controls['Languages'] as FormArray;
   }
 
-
   get skillArray() {
-    return this.resumeForm.controls['Experiences'] as FormArray;
-  }
-  get experiencesArray() {
     return this.resumeForm.controls['Skills'] as FormArray;
   }
-
+  get experiencesArray() {
+    return this.resumeForm.controls['Experiences'] as FormArray;
+  }
 
   constructor(
     private fb: FormBuilder,

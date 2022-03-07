@@ -59,9 +59,9 @@ export class AppComponent {
 
   ngOnInit(): void {
     this.router.events
-      .pipe(filter((event) => event instanceof NavigationEnd))
+      .pipe(filter((event) => event instanceof NavigationEnd) )
       .subscribe((res: any) => {
-        this.activeMenu = res.url
+        this.activeMenu = res.url 
       });
   }
 

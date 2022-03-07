@@ -15,6 +15,7 @@ import {
   MAT_DATE_FORMATS,
   NativeDateAdapter,
 } from '@angular/material/core';
+import { ActivatedRoute } from '@angular/router';
 import { DocumentValidator } from 'src/app/validators/document.validator';
 import { CepService } from 'src/services/cep.service';
 
@@ -55,14 +56,22 @@ export class ResumeRegisterTabComponent implements OnInit {
   Gender: any = ['Masculimo', 'Feminino', 'Não informado'];
   Date: any;
   MaritalStatus: any = ['Solteiro(a)', 'Casado', 'Viúvo', 'União Estável'];
+  resumeId!: string | null;
 
-  constructor(private fb: FormBuilder, private cepService: CepService) {}
+  constructor(
+    private fb: FormBuilder,
+    private cepService: CepService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
-    this.resumeForm.valueChanges.subscribe((res) => {
-      const addressForm = this.resumeForm.controls['Address'] as FormGroup;
-      addressForm.controls['cep'].valueChanges.subscribe((res) => {});
-    });
+    this.resumeId = this.route.snapshot.paramMap.get('id');
+    if (this.resumeId == 'novo') {
+      this.resumeForm.valueChanges.subscribe((res) => {
+        const addressForm = this.resumeForm.controls['Address'] as FormGroup;
+        addressForm.controls['cep'].valueChanges.subscribe((res) => {});
+      });
+    }
   }
 
   next() {
