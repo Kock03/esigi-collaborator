@@ -61,13 +61,7 @@ export class AppComponent {
     this.router.events
       .pipe(filter((event) => event instanceof NavigationEnd))
       .subscribe((res: any) => {
-        console.log(
-          '🚀 ~ file: app.component.ts ~ line 62 ~ AppComponent ~ .subscribe ~ res',
-          res.url
-        );
-        // this.activeMenu = res.url.filter((res: any) =>
-        //   res.startWith('/colaborador')
-        // );
+        this.activeMenu = res.url
       });
   }
 

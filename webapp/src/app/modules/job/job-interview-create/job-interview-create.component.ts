@@ -49,7 +49,6 @@ export class JobInterviewCreateComponent implements OnInit {
     private router: Router
   ) {const getId = this.router.getCurrentNavigation()?.extras.state;
     this.get = getId;
-    console.log("🚀 ~ file: job-interview-create.component.ts ~ line 52 ~ JobInterviewCreateComponent ~  this.get",  this.get)
   }
 
   ngOnInit(): void {
@@ -125,7 +124,6 @@ export class JobInterviewCreateComponent implements OnInit {
 
     try {
       await this.behaviroalInterviewProvider.store(data);
-      console.log(data);
 
       this.snackbarService.successMessage(
         'Entrevista Comportional Cadastrada Com Sucesso'

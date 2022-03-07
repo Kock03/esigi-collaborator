@@ -105,7 +105,6 @@ export class CollaboratorListComponent implements OnInit {
   }
 
   async selectList(ev: any) {
-    console.log(ev);
     if (ev.value == 1) {
       return (this.filteredCollaboratorList = this.collaborators =
         await this.collaboratorProvider.findAll());

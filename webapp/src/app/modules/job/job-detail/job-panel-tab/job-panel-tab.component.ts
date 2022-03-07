@@ -65,7 +65,6 @@ export class JobPanelTabComponent implements OnInit {
   async getInterviewList() {
     try {
       this.job = await this.JobProvider.getFollowUpInterviews(this.jobId);
-      console.log("🚀 ~ file: job-panel-tab.component.ts ~ line 68 ~ JobPanelTabComponent ~ getInterviewList ~ this.job ", this.job )
        this.interviews = this.job.Jobs
     } catch (error) {
       console.error(error);
@@ -86,15 +85,6 @@ export class JobPanelTabComponent implements OnInit {
     this.router.navigate(['vaga/novo']);
   }
 
-  // async getInterviewList() {
-  //   try {
-  //     this.filteredInterviewList = this.interviews = await this.interviewProvider.findAll();
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // }
-
-
 
   initFilter() {
     fromEvent(this.filter.nativeElement, 'keyup')
@@ -109,16 +99,5 @@ export class JobPanelTabComponent implements OnInit {
       });
   }
 
-  // async deleteInterview(interviewId: any) {
-  //   try {
-  //     const interviews = await this.interviewProvider.destroy(interviewId);
-  //     this.getInterviewList();
-
-  //     this.snackbarService.successMessage('Entrevista Apagada Com Sucesso');
-  //   } catch (error) {
-  //     console.log('ERROR 132' + error);
-  //     this.snackbarService.showError('Falha ao Deletar');
-  //   }
-  // }
 
 }

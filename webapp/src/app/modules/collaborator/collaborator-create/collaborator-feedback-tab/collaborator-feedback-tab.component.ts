@@ -68,7 +68,6 @@ export class CollaboratorFeedbackTabComponent implements OnInit {
     try {
       this.collaborator = await this.collaboratorProvider.findOne(this.collaboratorId);
        this.feedback = this.collaborator.Feedbacks
-       console.log("🚀 ~ file: collaborator-feedback-tab.component.ts ~ line 65 ~ CollaboratorFeedbackTabComponent ~ getJob ~  this.feedback",  this.feedback)
     } catch (error) {
       console.error(error);
     }

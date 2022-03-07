@@ -89,10 +89,6 @@ export class CollaboratorCreateComponent implements OnInit {
       this.collaborator = await this.collaboratorProvider.findOne(
         this.collaboratorId
       );
-      console.log(
-        '🚀 ~ file: collaborator-create.component.ts ~ line 93 ~ CollaboratorCreateComponent ~ getCollaborator ~  this.collaborator ',
-        this.collaborator
-      );
     } catch (error) {
       console.error(error);
     }
