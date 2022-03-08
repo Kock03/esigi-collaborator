@@ -17,7 +17,7 @@ import { SnackBarService } from 'src/services/snackbar.service';
 })
 export class CollaboratorCreateComponent implements OnInit {
   collaboratorForm!: FormGroup;
-  step: number = 1;
+  step: any = 1;
   collaboratorId!: string | null;
   collaborator!: any;
   active: boolean = true;
@@ -30,9 +30,14 @@ export class CollaboratorCreateComponent implements OnInit {
   Documents: any;
   Feedbacks: any;
   Dependents: any;
-
+  controllers: any;
   url!: string;
   urlStep!: number;
+
+  validations = [
+      ['cpf', 'admissionDate'],
+      ['Dependents']
+  ]
 
   get educationArray() {
     return this.collaboratorForm.controls['Educations'] as FormArray;
@@ -164,9 +169,12 @@ export class CollaboratorCreateComponent implements OnInit {
       BankData: this.fb.array(
         this.collaborator ? this.collaborator.BankData : []
       ),
+      // Dependents: this.fb.array(
+      //   this.collaborator ? this.collaborator.Dependents : []
+      // ), 
       Dependents: this.fb.array(
-        this.collaborator ? this.collaborator.Dependents : []
-      ),
+        this.collaborator ? this.collaborator.Dependents : [], [Validators.required]
+      ), 
       Educations: this.fb.array(
         this.collaborator ? this.collaborator.Educations : []
       ),
@@ -214,10 +222,26 @@ export class CollaboratorCreateComponent implements OnInit {
   }
 
   navigate(direction: string) {
+
     if (this.step > 1 && direction === 'back') {
       this.step -= 1;
-    } else if (this.step < 8 && direction === 'next') {
+    } else if (this.checkValid() && this.step < 8 && direction === 'next') {
       this.step += 1;
     }
+  }
+
+  checkValid(): boolean {
+    let isValid = true;
+    const validations = this.validations[this.step - 1]
+    console.log("🚀 ~ file: collaborator-create.component.ts ~ line 225 ~ CollaboratorCreateComponent ~ navigate ~ this.validations[this.step]", this.validations)
+    console.log("🚀 ~ file: collaborator-create.component.ts ~ line 236 ~ CollaboratorCreateComponent ~ checkValid ~ this.collaboratorForm.controls[validations[index]]", this.collaboratorForm.controls[validations[0]])
+    for (let index = 0; index < validations.length ; index++) {
+      if  (this.collaboratorForm.controls[validations[index]].invalid) {
+        isValid = false;
+        this.snackbarService.showAlert('Verifique os campos');
+        this.collaboratorForm.markAllAsTouched();
+      }
+    }
+    return isValid;
   }
 }

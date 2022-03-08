@@ -20,32 +20,32 @@ export class AppComponent {
       name: 'Home',
       icon: 'home',
       selected: false,
-      action: '/home',
+      action: 'home',
     },
     {
       name: 'Colaborador',
       icon: 'person',
       selected: false,
-      action: '/colaborador/lista',
+      action: 'colaborador/lista',
     },
     {
       name: 'Vagas',
       icon: 'work',
       selected: false,
-      action: '/vaga/lista',
+      action: 'vaga/lista',
     },
 
     {
       name: 'Curriculo',
       icon: 'description',
       selected: false,
-      action: '/curriculo/lista',
+      action: 'curriculo/lista',
     },
     {
       name: 'Configurações',
       icon: 'manage_accounts',
       selected: false,
-      action: '/setting/novo',
+      action: 'setting/novo',
     },
   ];
 
@@ -59,9 +59,10 @@ export class AppComponent {
 
   ngOnInit(): void {
     this.router.events
-      .pipe(filter((event) => event instanceof NavigationEnd) )
+      .pipe(filter((event) => event instanceof NavigationEnd))
       .subscribe((res: any) => {
-        this.activeMenu = res.url 
+        this.activeMenu = res.url.split('/')[1];
+        console.log("🚀 ~ file: app.component.ts ~ line 65 ~ AppComponent ~ .subscribe ~  this.activeMenu",  this.activeMenu)
       });
   }
 

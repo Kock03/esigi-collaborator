@@ -29,7 +29,7 @@
       <button
         [ngClass]="{
           active:
-            this.activeMenu == menu.action    
+          menu.action.startsWith(this.activeMenu)
         }"
         mat-button
         class="menu-button"
