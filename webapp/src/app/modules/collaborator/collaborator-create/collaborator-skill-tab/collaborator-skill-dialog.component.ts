@@ -29,7 +29,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
         technology:[null, [Validators.required, Validators.maxLength(50)]],
         seniority: [null, Validators.required],
         yearsExperience: [null, [Validators.required, Validators.maxLength(2)]],
-        currentPosition: [null, Validators.required]
+        currentPosition: [false, Validators.required]
       });
       if (this.data) {
         this.skillForm.patchValue(this.data)
