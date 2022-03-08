@@ -15,71 +15,71 @@ export class UpdateResumesDto {
   photo: string;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @MinLength(3)
   @MaxLength(70)
   firstName: string;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @MinLength(3)
   @MaxLength(70)
   @IsString()
   lastName: string;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @MinLength(3)
   @MaxLength(70)
   @IsString()
   login: string;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @Length(11)
   @IsString()
   cpf: string;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   birthDate: Date;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsEnum(GenderTypes)
   gender: GenderTypes;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsEnum(MaritalStatus)
   maritalStatus: MaritalStatus;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   Address: AddressEntity;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   Phone: PhoneEntity;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   Educations: EducationsEntity[];
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   Languages: LanguagesEntity[];
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   Experiences: ExperiencesEntity[];
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   Skills: SkillsEntity[];
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsEmail()
   @IsString()
   @MinLength(5)

@@ -214,6 +214,7 @@ export class JobCreateComponent implements OnInit {
 
       this.snackbarService.successMessage('Vaga Cadastrada Com Sucesso');
       this.router.navigate(['vaga/lista']);
+      sessionStorage.clear();
     } catch (error) {
       console.log('ERROR 132' + error);
       this.snackbarService.showError('Falha ao Cadastrar');

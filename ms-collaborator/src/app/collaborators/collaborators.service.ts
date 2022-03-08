@@ -90,7 +90,6 @@ export class CollaboratorsService {
     if (activeBanks.length > 1) {
       throw new BadRequestException('Existem mais de um banco ativo');
     }
-
     try {
       const collaborator = await this.collaboratorsRepository.findOneOrFail({
         id,

@@ -200,6 +200,7 @@ export class CollaboratorCreateComponent implements OnInit {
 
       this.snackbarService.successMessage('Colaborador Cadastrado Com Sucesso');
       this.router.navigate(['colaborador/lista']);
+      sessionStorage.clear();
     } catch (error: any) {
       console.log('ERROR 132' + error);
       this.snackbarService.showError(error.message);

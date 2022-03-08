@@ -13,7 +13,7 @@ import {
 
 export class UpdateAddressDto {
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
   @MinLength(8)
   @MaxLength(8)
@@ -21,35 +21,35 @@ export class UpdateAddressDto {
   cep: string;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @MinLength(3)
   @MaxLength(60)
   @IsString()
   street: string;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @MinLength(1)
   @MaxLength(10)
   @IsNumber()
   number: string;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @MinLength(3)
   @MaxLength(60)
   @IsString()
   district: string;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @MinLength(3)
   @MaxLength(60)
   @IsString()
   city: string;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @MinLength(3)
   @MaxLength(60)
   @IsString()
