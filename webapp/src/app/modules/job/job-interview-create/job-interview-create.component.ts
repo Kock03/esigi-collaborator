@@ -23,7 +23,7 @@ import { Location } from '@angular/common';
 @Component({
   selector: 'app-job-interview-create',
   templateUrl: './job-interview-create.component.html',
-  styleUrls: ['./job-interview-create.component.scss']
+  styleUrls: ['./job-interview-create.component.scss'],
 })
 export class JobInterviewCreateComponent implements OnInit {
   behavioralInterviewForm!: FormGroup;
@@ -31,11 +31,13 @@ export class JobInterviewCreateComponent implements OnInit {
   clientInterviewForm!: FormGroup;
   returnForm!: FormGroup;
   jobId!: string | null;
+  interviewId!: string | null;
   id!: any;
   get!: any;
   step: number = 1;
   selectedIndex: number = 0;
   disable = false;
+  interview: any;
   typeControl = new FormControl();
   constructor(
     private fb: FormBuilder,
@@ -47,17 +49,34 @@ export class JobInterviewCreateComponent implements OnInit {
     private route: ActivatedRoute,
     private _location: Location,
     private router: Router
-  ) {const getId = this.router.getCurrentNavigation()?.extras.state;
+  ) {
+    const getId = this.router.getCurrentNavigation()?.extras.state;
     this.get = getId;
   }
 
-  ngOnInit(): void {
-    this.jobId = this.route.snapshot.paramMap.get('id');
+  async ngOnInit(): Promise<void> {
+    this.interviewId = this.route.snapshot.paramMap.get('id');
+    console.log(
+      '🚀 ~ file: job-interview-create.component.ts ~ line 56 ~ JobInterviewCreateComponent ~ ngOnInit ~ this.interviewId',
+      this.interviewId
+    );
+
+    // if (this.interviewId !== 'novo') {
+    //   this.interview = await this.jobInterviewProvider.getDetails(
+    //     this.interviewId
+    //   );
+    //   this.initForm();
+    //   this.setFormValue();
+    // } else {
+    //   this.initForm();
+    // }
+
     this.initForm();
   }
 
   initForm() {
     this.behavioralInterviewForm = this.fb.group({
+      id: null,
       nameCandidate: ['', Validators.required],
       techRecruter: ['', Validators.required],
       behavioralInterviewDate: ['', Validators.required],
@@ -78,6 +97,7 @@ export class JobInterviewCreateComponent implements OnInit {
       Job: { id: this.jobId },
     });
     this.technicalInterviewForm = this.fb.group({
+      id: null,
       nameCandidate: ['', Validators.required],
       evaluator: ['', Validators.required],
       technicalInterviewDate: ['', Validators.required],
@@ -91,6 +111,7 @@ export class JobInterviewCreateComponent implements OnInit {
     });
 
     this.clientInterviewForm = this.fb.group({
+      id: null,
       nameCandidate: ['', Validators.required],
       evaluator: ['', Validators.required],
       clientInterviewDate: ['', Validators.required],
@@ -119,16 +140,23 @@ export class JobInterviewCreateComponent implements OnInit {
     });
   }
 
+  handleBehaviroalInterviews(){
+
+    // save or edit (this.interviewId)
+  }
+
+
   async saveBehaviroalInterviews() {
     let data = this.behavioralInterviewForm.getRawValue();
 
     try {
-      await this.behaviroalInterviewProvider.store(data);
+      const res = await this.behaviroalInterviewProvider.store(data);
 
       this.snackbarService.successMessage(
         'Entrevista Comportional Cadastrada Com Sucesso'
       );
-      this.nextStep();
+      this.router.navigate([`vaga/interview/${res.id}`]);
+      // this.nextStep();
     } catch (error) {
       console.log('ERROR 132' + error);
       this.snackbarService.showError('Falha ao Cadastrar');

@@ -32,7 +32,6 @@ import { ConfirmDialogService } from 'src/services/confirn-dialog.service';
 import { JobDialogSkill } from './job-create/job-skill-tab/job-skill-dialog.component';
 import { JobInterviewCreateComponent } from './job-interview-create/job-interview-create.component';
 
-
 const routes: Routes = [
   {
     path: 'lista',
@@ -47,7 +46,7 @@ const routes: Routes = [
     component: JobDetailComponent,
   },
 
-  { path: 'interview/novo', component: JobInterviewCreateComponent },
+  { path: 'interview/:id', component: JobInterviewCreateComponent },
 ];
 
 @NgModule({

@@ -21,6 +21,16 @@ export class JobProvider {
     });
   }
 
+  findAllInterviews(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.apiGateway
+        .get(environment.JOBS_MS + 'jobs')
+        .subscribe((response: HttpResponse<any>) => {
+          resolve(response.body);
+        }, reject);
+    });
+  }
+
   findOne(id: string | null): Promise<any> {
     return new Promise((resolve, reject) => {
       this.apiGateway

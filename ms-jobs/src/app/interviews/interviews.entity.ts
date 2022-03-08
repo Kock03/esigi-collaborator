@@ -37,8 +37,7 @@ export class InterviewsEnitiy {
   clientInterviews: ClientInterviewsEntity;
 
   @ManyToOne(() => JobsEntity, (jobs) => jobs.interviews, {
-    cascade: ['insert', 'update', 'soft-remove'],
-    eager: true,
+    cascade: ['insert', 'update', 'soft-remove']
   })
   jobs: JobsEntity;
 }

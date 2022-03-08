@@ -1,4 +1,10 @@
-import { Component, ElementRef, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  OnInit,
+  ViewChild,
+  ViewEncapsulation,
+} from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subject, fromEvent, debounceTime, distinctUntilChanged } from 'rxjs';
 import { IInterview } from 'src/app/interfaces/iinterview';
@@ -7,8 +13,9 @@ import { SnackBarService } from 'src/services/snackbar.service';
 import { JobProvider } from 'src/providers/job.provider';
 import { ConfirmDialogService } from 'src/services/confirn-dialog.service';
 import { Job } from '../../job-list/job-list.component';
+import { JobPanelModel } from 'src/models/job-panel-model';
+import { MatTable } from '@angular/material/table';
 // import { IInterview } from 'src/app/interfaces/iinterview';
-
 
 @Component({
   selector: 'app-job-panel-tab',
@@ -17,7 +24,7 @@ import { Job } from '../../job-list/job-list.component';
   encapsulation: ViewEncapsulation.None,
 })
 export class JobPanelTabComponent implements OnInit {
-  [x: string]: any;
+  @ViewChild('interviewsTable') interviewsTable!: MatTable<any>;
   @ViewChild('filter', { static: true }) filter!: ElementRef;
   private _unsubscribeAll: Subject<any>;
   displayedJob: string[] = [
@@ -28,12 +35,11 @@ export class JobPanelTabComponent implements OnInit {
     'status',
     'icon',
   ];
-  interviews!: IInterview[];
+  interviews: IInterview[] = [];
   filteredInterviewList!: any[];
   jobs!: Job[];
   job: any;
   jobId!: string | null;
-
 
   constructor(
     private snackbarService: SnackBarService,
@@ -47,7 +53,7 @@ export class JobPanelTabComponent implements OnInit {
 
   async ngOnInit() {
     // this.getInterviewList();
-    this.jobId = this.route.snapshot.paramMap.get('id')
+    this.jobId = this.route.snapshot.paramMap.get('id');
     this.getInterviewList();
     this.filteredInterviewList = this.interviews;
     this.initFilter();
@@ -64,8 +70,15 @@ export class JobPanelTabComponent implements OnInit {
 
   async getInterviewList() {
     try {
-      this.job = await this.JobProvider.getFollowUpInterviews(this.jobId);
-       this.interviews = this.job.Jobs
+      const interviews = await this.JobProvider.getFollowUpInterviews(
+        this.jobId
+      );
+      interviews.map((interview: any) => {
+        this.interviews.push(new JobPanelModel(interview));
+      });
+      this.interviewsTable.renderRows();
+      console.log(this.interviews);
+      
     } catch (error) {
       console.error(error);
     }
@@ -80,11 +93,9 @@ export class JobPanelTabComponent implements OnInit {
     this.router.navigate(['vaga/interview/novo'], navigationExtras);
   }
 
-
   createJob() {
     this.router.navigate(['vaga/novo']);
   }
-
 
   initFilter() {
     fromEvent(this.filter.nativeElement, 'keyup')
@@ -98,6 +109,4 @@ export class JobPanelTabComponent implements OnInit {
         );
       });
   }
-
-
 }

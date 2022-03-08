@@ -9,27 +9,35 @@
     </form>
 
     <div class="envolti-table mat-elevation-z8" fxLayout="column">
-      <table mat-table [dataSource]="interviews">
+      <table mat-table [dataSource]="interviews" #interviewsTable>
         <ng-container matColumnDef="nameCandidate">
           <th mat-header-cell *matHeaderCellDef>Nome do Candidato</th>
-          <td mat-cell *matCellDef="let interviews">{{ interviews.nameCandidate }}</td>
+          <td mat-cell *matCellDef="let interviews">
+            {{ interviews.nameCandidate }}
+          </td>
         </ng-container>
 
         <ng-container matColumnDef="behavioralInterviewDate">
           <th mat-header-cell *matHeaderCellDef>
             Data Entrevista Comportamental
           </th>
-          <td mat-cell *matCellDef="let interviews">{{ interviews.behavioralInterviewDate }}</td>
+          <td mat-cell *matCellDef="let interviews">
+            {{ interviews.behavioralInterviewDate }}
+          </td>
         </ng-container>
 
         <ng-container matColumnDef="technicalInterviewDate">
           <th mat-header-cell *matHeaderCellDef>Data Entrevista Técnica</th>
-          <td mat-cell *matCellDef="let interviews">{{ interviews.technicalInterviewDate}}</td>
+          <td mat-cell *matCellDef="let interviews">
+            {{ interviews.technicalInterviewDate }}
+          </td>
         </ng-container>
 
         <ng-container matColumnDef="responsible">
           <th mat-header-cell *matHeaderCellDef>Responsável</th>
-          <td mat-cell *matCellDef="let interviews">{{ interviews.techRecruter}}</td>
+          <td mat-cell *matCellDef="let interviews">
+            {{ interviews.techRecruter }}
+          </td>
         </ng-container>
 
         <ng-container matColumnDef="status">
@@ -39,11 +47,22 @@
 
         <ng-container matColumnDef="icon">
           <th mat-header-cell *matHeaderCellDef>
-            <button class="edit-button" mat-flat-button color="primary"  (click)="navigateJobs()" style="text-align: end">
+            <button
+              class="edit-button"
+              mat-flat-button
+              color="primary"
+              (click)="navigateJobs()"
+              style="text-align: end"
+            >
               <mat-icon>add</mat-icon>
             </button>
           </th>
-          <td class="button-tab" mat-cell *matCellDef="let interviews" style="text-align: end">
+          <td
+            class="button-tab"
+            mat-cell
+            *matCellDef="let interviews"
+            style="text-align: end"
+          >
             <button class="table-button" mat-button>
               <mat-icon>delete</mat-icon>
             </button>
