@@ -15,6 +15,8 @@ import { ConfirmDialogService } from 'src/services/confirn-dialog.service';
 import { Job } from '../../job-list/job-list.component';
 import { JobPanelModel } from 'src/models/job-panel-model';
 import { MatTable } from '@angular/material/table';
+import { InterviewsProvider } from 'src/providers/interview.provider';
+
 // import { IInterview } from 'src/app/interfaces/iinterview';
 
 @Component({
@@ -46,13 +48,13 @@ export class JobPanelTabComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private JobProvider: JobProvider,
-    private dialogService: ConfirmDialogService
+    private dialogService: ConfirmDialogService,
+    private InterviewsProvider: InterviewsProvider,
   ) {
     this._unsubscribeAll = new Subject();
   }
 
   async ngOnInit() {
-    // this.getInterviewList();
     this.jobId = this.route.snapshot.paramMap.get('id');
     this.getInterviewList();
     this.filteredInterviewList = this.interviews;
@@ -73,15 +75,52 @@ export class JobPanelTabComponent implements OnInit {
       const interviews = await this.JobProvider.getFollowUpInterviews(
         this.jobId
       );
+     
       interviews.map((interview: any) => {
         this.interviews.push(new JobPanelModel(interview));
       });
+      
       this.interviewsTable.renderRows();
-      console.log(this.interviews);
+      console.log(this.interviews)
       
     } catch (error) {
       console.error(error);
     }
+  }
+
+  editInterview(interviewId: any) {
+    this.router.navigate([`interview/${interviewId}`]);
+  }
+
+  async deleteCollaborator(interviewId: any) {
+    const options = {
+      data: {
+        title: 'Anteção',
+        subtitle: 'Você tem certeza que deseja excluir esta entrevista?',
+      },
+      panelClass: 'confirm-modal',
+    };
+
+    this.dialogService.open(options);
+
+    this.dialogService.confirmed().subscribe(async (confirmed) => {
+      if (confirmed) {
+        try {
+          const collaborators = await this.InterviewsProvider.destroy(
+            interviewId
+          );
+          this.getInterviewList();
+
+          this.snackbarService.successMessage(
+            'Colaborador Excluido Com Sucesso'
+          );
+        } catch (error) {
+          console.log('ERROR 132' + error);
+          this.snackbarService.showError('Falha ao Excluir');
+          this.getInterviewList();
+        }
+      }
+    });
   }
 
   navigateJobs() {
