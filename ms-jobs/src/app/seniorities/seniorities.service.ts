@@ -1,6 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository, FindConditions, FindOneOptions } from 'typeorm';
+import {
+  Repository,
+  FindConditions,
+  FindOneOptions,
+  FindManyOptions,
+} from 'typeorm';
 import { NotFoundException } from '../exceptions/not-found-exception';
 import { CreateSenioritiesDto } from './dtos/create-seniorities.dto';
 import { UpdateSenioritiesDto } from './dtos/update-seniorities.dto';
@@ -14,11 +19,10 @@ export class SenioritiesService {
   ) {}
 
   async findAll() {
-    const senioritiesWhiteAll = await this.senioritiesRepository
-      .createQueryBuilder('seniorities')
-      .getMany();
-
-    return senioritiesWhiteAll;
+    const options: FindManyOptions = {
+      order: { createdAt: 'DESC' },
+    };
+    return await this.senioritiesRepository.find(options);
   }
 
   async findOneOrfail(

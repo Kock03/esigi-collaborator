@@ -1,7 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { NotFoundException } from 'src/exceptions/not-found-exception';
-import { Repository, FindConditions, FindOneOptions } from 'typeorm';
+import {
+  Repository,
+  FindConditions,
+  FindOneOptions,
+  FindManyOptions,
+} from 'typeorm';
 import { CreateExperiencesDto } from './dto/create-experiences.dto';
 import { UpdateExperiencesDto } from './dto/update-experiences.dto';
 import { ExperiencesEntity } from './experiences.entity';
@@ -12,9 +17,12 @@ export class ExperiencesService {
   constructor(
     @InjectRepository(ExperiencesEntity)
     private readonly experiencesRepository: Repository<ExperiencesEntity>,
-  ) { }
+  ) {}
 
   async findAll() {
+    const options: FindManyOptions = {
+      order: { createdAt: 'DESC' },
+    };
     return await this.experiencesRepository.find();
   }
 
@@ -22,7 +30,7 @@ export class ExperiencesService {
     conditions: FindConditions<ExperiencesEntity>,
     options?: FindOneOptions<ExperiencesEntity>,
   ) {
-    options = { relations: ['Resume'] }
+    options = { relations: ['Resume'] };
     try {
       return await this.experiencesRepository.findOneOrFail(
         conditions,

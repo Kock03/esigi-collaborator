@@ -12,10 +12,9 @@
     width: 100%;
     margin-top: 20px;
 
-
     .mat-column-iconAdd {
       width: 50px;
-     padding-right: 5px!important;
+      padding-right: 5px !important;
     }
 
     .mat-column-link {
@@ -26,7 +25,6 @@
       white-space: nowrap;
       overflow: hidden;
     }
-
   }
 
   .new-btn {
@@ -55,6 +53,9 @@
     cursor: pointer;
   }
 
+  .mat-sort-header-arrow {
+    color: white !important;
+  }
   // .iconAdd{
   //   display: block;
   //   margin: auto;

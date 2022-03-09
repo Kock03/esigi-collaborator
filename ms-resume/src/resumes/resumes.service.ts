@@ -5,7 +5,12 @@ import { DocumentsBadRequestExcpetion } from 'src/exceptions/documents-bad-reque
 import { NotFoundException } from 'src/exceptions/not-found-exception';
 import { PhoneEntity } from 'src/phone/phone.entity';
 import { DocumentValidator } from '../validators/document.validator';
-import { Repository, FindConditions, FindOneOptions } from 'typeorm';
+import {
+  Repository,
+  FindConditions,
+  FindOneOptions,
+  FindManyOptions,
+} from 'typeorm';
 import { CreateResumesDto } from './dto/create-resumes.dto';
 import { UpdateResumesDto } from './dto/update-resumes.dto';
 import { ResumesEntity } from './resumes.entity';
@@ -18,7 +23,10 @@ export class ResumesService {
   ) {}
 
   async findAll() {
-    return await this.resumesRepository.find();
+    const options: FindManyOptions = {
+      order: { createdAt: 'DESC' },
+    };
+    return await this.resumesRepository.find(options);
   }
 
   async findOneOrFail(

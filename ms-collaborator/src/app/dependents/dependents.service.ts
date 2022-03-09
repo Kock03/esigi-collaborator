@@ -1,7 +1,12 @@
 import { HttpException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DocumentValidator } from '../validators/document.validator';
-import { FindConditions, FindOneOptions, Repository } from 'typeorm';
+import {
+  FindConditions,
+  FindManyOptions,
+  FindOneOptions,
+  Repository,
+} from 'typeorm';
 import { DependentsEntity } from './dependents.entity';
 import { CreatedependentsDto } from './dtos/create-dependents.dto';
 import { UpdateDependentsDto } from './dtos/update-dependents.dto';
@@ -18,11 +23,10 @@ export class DependentsService {
   ) {}
 
   async findAll() {
-    const dependentsWhiteAll = await this.dependentsRepository
-      .createQueryBuilder('dependents')
-      .getMany();
-
-    return dependentsWhiteAll;
+    const options: FindManyOptions = {
+      order: { createdAt: 'DESC' },
+    };
+    return await this.dependentsRepository.find(options);
   }
 
   async findOneOrFail(

@@ -1,6 +1,11 @@
 import { HttpException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { FindConditions, FindOneOptions, Repository } from 'typeorm';
+import {
+  FindConditions,
+  FindManyOptions,
+  FindOneOptions,
+  Repository,
+} from 'typeorm';
 import { NotFoundException } from '../exceptions/not-found-exception';
 import { JobsEntity } from '../jobs/jobs.entity';
 import { BehavioralInterviewsEntity } from './behavioral-interviews.entity';
@@ -15,9 +20,10 @@ export class BehavioralInterviewsService {
   ) {}
 
   async findAll() {
-    const interviews = await this.behavioralInterviewsRepository.find();
-
-    return interviews;
+    const options: FindManyOptions = {
+      order: { createdAt: 'DESC' },
+    };
+    return await this.behavioralInterviewsRepository.find(options);
   }
 
   async findOneOrFail(

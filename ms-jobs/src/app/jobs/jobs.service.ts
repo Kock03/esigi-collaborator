@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { FindManyOptions } from 'typeorm';
 import { FindConditions } from 'typeorm/find-options/FindConditions';
 import { FindOneOptions } from 'typeorm/find-options/FindOneOptions';
 import { Repository } from 'typeorm/repository/Repository';
@@ -16,9 +17,10 @@ export class JobsService {
   ) {}
 
   async findAll() {
-    const jobsWhiteAll = await this.jobsRepository.find();
-
-    return jobsWhiteAll;
+    const options: FindManyOptions = {
+      order: { createdAt: 'DESC' },
+    };
+    return await this.jobsRepository.find(options);
   }
 
   async findOneOrFail(

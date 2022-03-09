@@ -1,6 +1,11 @@
 import { HttpException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { FindConditions, FindOneOptions, Repository } from 'typeorm';
+import {
+  FindConditions,
+  FindManyOptions,
+  FindOneOptions,
+  Repository,
+} from 'typeorm';
 import { NotFoundException } from '../exceptions/not-found-exception';
 import { CreateReturnsDto } from './dtos/create-returns.dto';
 import { UpdateReturnsDto } from './dtos/update-returns.dto';
@@ -14,7 +19,10 @@ export class ReturnsService {
   ) {}
 
   async findAll() {
-    return await this.returnsRepository.find();
+    const options: FindManyOptions = {
+      order: { createdAt: 'DESC' },
+    };
+    return await this.returnsRepository.find(options);
   }
 
   async findOneOrFail(

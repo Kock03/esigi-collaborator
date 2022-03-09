@@ -1,6 +1,11 @@
 import { HttpException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { FindConditions, FindOneOptions, Repository } from 'typeorm';
+import {
+  FindConditions,
+  FindManyOptions,
+  FindOneOptions,
+  Repository,
+} from 'typeorm';
 import { NotFoundException } from '../exceptions/not-found-exception';
 import { BankDataEntity } from './bank-data.entity';
 import { CreateBankDataDto } from './dtos/create-bank-data.dto';
@@ -14,11 +19,10 @@ export class BankDataService {
   ) {}
 
   async findAll() {
-    const banksWhiteCollaborator = await this.bankDataRepository
-      .createQueryBuilder('bank_data')
-      .getMany();
-
-    return banksWhiteCollaborator;
+    const options: FindManyOptions = {
+      order: { createdAt: 'DESC' },
+    };
+    return await this.bankDataRepository.find(options);
   }
 
   async findOneOrFail(
@@ -33,19 +37,19 @@ export class BankDataService {
     }
   }
 
-  async method(id: string) {
-    const bankdata = await this.bankDataRepository.query(
-      'select created_at from esigi_collaborator.bank_data where collaborator_id = ":id"',
-      [id],
-    );
+  // async method(id: string) {
+  //   const bankdata = await this.bankDataRepository.query(
+  //     'select created_at from esigi_collaborator.bank_data where collaborator_id = ":id"',
+  //     [id],
+  //   );
 
-    if (bankdata.created_at.length > 1) {
-      for (let index = 0; index < bankdata.created_at.length; index++) {
-        if ([index] < bankdata.created_at.length) bankdata.isActive = false;
-        bankdata.isActive = true;
-      }
-    }
-  }
+  //   if (bankdata.created_at.length > 1) {
+  //     for (let index = 0; index < bankdata.created_at.length; index++) {
+  //       if ([index] < bankdata.created_at.length) bankdata.isActive = false;
+  //       bankdata.isActive = true;
+  //     }
+  //   }
+  // }
 
   async store(data: CreateBankDataDto) {
     const bank = this.bankDataRepository.create(data);

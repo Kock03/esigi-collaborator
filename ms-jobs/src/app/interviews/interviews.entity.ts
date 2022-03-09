@@ -1,9 +1,12 @@
 import {
+  CreateDateColumn,
+  DeleteDateColumn,
   Entity,
   JoinColumn,
   ManyToOne,
   OneToOne,
   PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 import { BehavioralInterviewsEntity } from '../behavioral-interviews/behavioral-interviews.entity';
 import { ClientInterviewsEntity } from '../client-interviews/client-interviews.entity';
@@ -37,7 +40,16 @@ export class InterviewsEnitiy {
   clientInterviews: ClientInterviewsEntity;
 
   @ManyToOne(() => JobsEntity, (jobs) => jobs.interviews, {
-    cascade: ['insert', 'update', 'soft-remove']
+    cascade: ['insert', 'update', 'soft-remove'],
   })
   jobs: JobsEntity;
+
+  @CreateDateColumn()
+  createdAt: Date;
+
+  @UpdateDateColumn()
+  updatedAt: Date;
+
+  @DeleteDateColumn()
+  deletedAt: Date;
 }

@@ -1,7 +1,12 @@
 import { HttpException, Injectable, UploadedFile } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DocumentValidator } from 'src/app/validators/document.validator';
-import { FindConditions, FindOneOptions, Repository } from 'typeorm';
+import {
+  FindConditions,
+  FindManyOptions,
+  FindOneOptions,
+  Repository,
+} from 'typeorm';
 import { ConflictException } from '../exceptions/conflict.exception';
 import { NotFoundException } from '../exceptions/not-found-exception';
 import { CollaboratorsEntity } from './collaborators.entity';
@@ -15,32 +20,27 @@ export class CollaboratorsService {
   constructor(
     @InjectRepository(CollaboratorsEntity)
     private readonly collaboratorsRepository: Repository<CollaboratorsEntity>,
-  ) { }
+  ) {}
 
   async findAll() {
-    const collaboratorsWhiteAll = await this.collaboratorsRepository
-      .createQueryBuilder('collaborators')
-      .getMany();
-
-    return collaboratorsWhiteAll;
+    const options: FindManyOptions = {
+      order: { createdAt: 'DESC' },
+    };
+    return await this.collaboratorsRepository.find(options);
   }
 
   async findInactive() {
-    const collaboratorsInactiveAll = await this.collaboratorsRepository
+    return await this.collaboratorsRepository
       .createQueryBuilder('collaborators')
       .where('collaborators.active =false')
       .getMany();
-
-    return collaboratorsInactiveAll;
   }
 
   async findActive() {
-    const collaboratorsActiveAll = await this.collaboratorsRepository
+    return await this.collaboratorsRepository
       .createQueryBuilder('collaborators')
       .where('collaborators.active =true')
       .getMany();
-
-    return collaboratorsActiveAll;
   }
 
   async findOneOrFail(
@@ -82,7 +82,6 @@ export class CollaboratorsService {
         throw new HttpException(JSON.stringify(error), 400);
       }
     }
-
   }
 
   async update(id: string, data: UpdateCollaboratorsDto) {
