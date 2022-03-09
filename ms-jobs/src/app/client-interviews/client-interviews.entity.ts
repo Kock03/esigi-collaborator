@@ -9,10 +9,12 @@ import {
   JoinTable,
   ManyToMany,
   ManyToOne,
+  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { Situation } from '../behavioral-interviews/enums/situational.enum';
+import { InterviewsEnitiy } from '../interviews/interviews.entity';
 
 @Entity({ name: 'client_interviews' })
 export class ClientInterviewsEntity {
@@ -45,6 +47,9 @@ export class ClientInterviewsEntity {
 
   @Column()
   situational: Situation;
+
+  @OneToOne(() => InterviewsEnitiy, (interviews) => interviews.ClientInterviews)
+  interviews: InterviewsEnitiy;
 
   @CreateDateColumn()
   createdAt: Date;
