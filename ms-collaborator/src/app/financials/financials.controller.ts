@@ -38,6 +38,7 @@ export class FinancialsController {
     @Param('id', new ParseUUIDPipe()) id: string,
     @Body() body: UpdateFinancialsDto,
   ) {
+
     return await this.financialsService.update(id, body);
   }
 

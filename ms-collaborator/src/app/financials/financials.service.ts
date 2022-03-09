@@ -35,6 +35,7 @@ export class FinancialsService {
 
   async store(data: CreateFinancialsDto) {
 
+
     const financial = this.financialsRepository.create(data);
     return await this.financialsRepository.save(financial);
 

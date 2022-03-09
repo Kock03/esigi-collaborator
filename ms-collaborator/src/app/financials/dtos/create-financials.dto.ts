@@ -34,6 +34,10 @@ export class CreateFinancialsDto {
 
   @ApiProperty()
   @IsNotEmpty()
+  payday: Date;
+
+  @ApiProperty()
+  @IsNotEmpty()
   @IsObject()
   Collaborator: CollaboratorsEntity;
 

@@ -21,7 +21,6 @@ export class FinancialsEntity {
   id: string;
 
   @Column({ name: 'contract_type', type: 'int' })
-  @Column({ type: 'int' })
   contractType: ContractTypes;
 
   @Column()
@@ -30,6 +29,10 @@ export class FinancialsEntity {
   @Column({ type: 'int' })
   reason: Reasons;
 
+  @Column()
+  payday: Date;
+
+  @Column()
   dateInclusion: Date;
 
   @Column({ type: 'double', nullable: true })
@@ -52,12 +55,8 @@ export class FinancialsEntity {
   deletedAt: Date;
 
   @BeforeInsert()
-  monthlyValueCalculation() {
-    this.monthlyValue = this.value * 170
-  }
-
   @BeforeUpdate()
-  monthlyValueCalculationAgain() {
+  monthlyValueCalculation() {
     this.monthlyValue = this.value * 170
   }
 
