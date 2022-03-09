@@ -94,7 +94,7 @@ export class JobInterviewCreateComponent implements OnInit {
       comments: ['', Validators.required],
       situational: [1, Validators.required],
       availabilityOfInitialize: ['', Validators.required],
-      Job: { id: this.jobId },
+      //Job: { id: this.jobId },
     });
     this.technicalInterviewForm = this.fb.group({
       id: null,
@@ -107,7 +107,7 @@ export class JobInterviewCreateComponent implements OnInit {
       technicalEvaluation: ['', Validators.required],
       comments: ['', Validators.required],
       situational: [1, Validators.required],
-      Job: { id: this.jobId },
+      //Job: { id: this.jobId },
     });
 
     this.clientInterviewForm = this.fb.group({
@@ -121,7 +121,7 @@ export class JobInterviewCreateComponent implements OnInit {
       technicalEvaluation: ['', Validators.required],
       comments: ['', Validators.required],
       situational: [1, Validators.required],
-      Job: { id: this.jobId },
+      //Job: { id: this.jobId },
     });
 
     this.returnForm = this.fb.group({
@@ -136,11 +136,11 @@ export class JobInterviewCreateComponent implements OnInit {
       typeOdContract: [1, Validators.required],
       combinedValue: ['', Validators.required],
       initialData: ['', Validators.required],
-      Job: { id: this.jobId },
+      //Job: { id: this.jobId },
     });
   }
 
-  handleBehaviroalInterviews(){
+  handleBehaviroalInterviews() {
 
     // save or edit (this.interviewId)
   }

@@ -17,6 +17,7 @@ import { Punctuality } from '../enums/punctuality.enum';
 import { Situation } from '../enums/situational.enum';
 
 export class CreateBehaviorInterviewsDto {
+
   @MinLength(3)
   @MaxLength(80)
   @IsString()
@@ -79,7 +80,4 @@ export class CreateBehaviorInterviewsDto {
   @IsOptional()
   hiringPreference: HiringPreferencesEntity;
 
-  @ApiProperty()
-  @IsNotEmpty()
-  Job: JobsEntity;
 }

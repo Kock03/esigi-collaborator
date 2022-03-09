@@ -8,17 +8,17 @@ import { TechnicalInterviewsEntity } from 'src/app/technical-interviews/technica
 export class UpdateInterviewsDto {
   @ApiProperty()
   @IsOptional()
-  behavioralInterviews: BehavioralInterviewsEntity;
+  BehavioralInterviews: BehavioralInterviewsEntity;
 
   @ApiProperty()
   @IsOptional()
-  technicalInterviews: TechnicalInterviewsEntity;
+  TechnicalInterviews: TechnicalInterviewsEntity;
 
   @ApiProperty()
   @IsOptional()
-  clientInterviews: ClientInterviewsEntity;
+  ClientInterviews: ClientInterviewsEntity;
 
   @ApiProperty()
   @IsOptional()
-  jobs: JobsEntity;
+  Jobs: JobsEntity;
 }

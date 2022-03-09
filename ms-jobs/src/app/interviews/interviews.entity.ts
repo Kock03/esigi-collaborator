@@ -23,26 +23,26 @@ export class InterviewsEnitiy {
     eager: true,
   })
   @JoinColumn()
-  behavioralInterviews: BehavioralInterviewsEntity;
+  BehavioralInterviews: BehavioralInterviewsEntity;
 
   @OneToOne(() => TechnicalInterviewsEntity, {
     cascade: ['insert', 'update', 'soft-remove'],
     eager: true,
   })
   @JoinColumn()
-  technicalInterviews: TechnicalInterviewsEntity;
+  TechnicalInterviews: TechnicalInterviewsEntity;
 
   @OneToOne(() => ClientInterviewsEntity, {
     cascade: ['insert', 'update', 'soft-remove'],
     eager: true,
   })
   @JoinColumn()
-  clientInterviews: ClientInterviewsEntity;
+  ClientInterviews: ClientInterviewsEntity;
 
   @ManyToOne(() => JobsEntity, (jobs) => jobs.interviews, {
     cascade: ['insert', 'update', 'soft-remove'],
   })
-  jobs: JobsEntity;
+  Jobs: JobsEntity;
 
   @CreateDateColumn()
   createdAt: Date;

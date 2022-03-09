@@ -116,7 +116,7 @@ export class JobsEntity {
   @JoinColumn()
   Seniorities: SenioritiesEntity;
 
-  @OneToMany(() => InterviewsEnitiy, (interviews) => interviews.jobs, {
+  @OneToMany(() => InterviewsEnitiy, (interviews) => interviews.Jobs, {
     cascade: ['insert', 'update', 'soft-remove'],
   })
   @JoinTable({ name: 'jobs_interviews' })
