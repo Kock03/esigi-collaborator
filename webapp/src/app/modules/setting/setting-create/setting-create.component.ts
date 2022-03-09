@@ -1,4 +1,4 @@
-import { Component, OnInit,ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -8,21 +8,15 @@ import { Router } from '@angular/router';
   encapsulation: ViewEncapsulation.None,
 })
 export class SettingCreateComponent implements OnInit {
-  
+  constructor(private router: Router) {}
 
-  constructor(private router: Router,) { }
+  ngOnInit(): void {}
 
-  ngOnInit(): void {
-  }
-  
-
-  navigateAd(){
-    this.router.navigate(['setting/conexao'])
+  navigateAd() {
+    this.router.navigate(['setting/conexao']);
   }
 
-  navigateEmail(){
-    this.router.navigate(['setting/criacao'])
+  navigateEmail() {
+    this.router.navigate(['setting/criacao']);
   }
-
-
 }

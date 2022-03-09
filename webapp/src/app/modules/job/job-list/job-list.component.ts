@@ -85,8 +85,8 @@ export class JobListComponent implements OnInit {
     fromEvent(this.filter.nativeElement, 'keyup')
       .pipe(debounceTime(200), distinctUntilChanged())
 
-      .subscribe((res) => {
-        this.filteredJobList = this.jobs.filter((job) =>
+      .subscribe(res => {
+        this.filteredJobList = this.jobs.filter(job =>
           job.jobName
             .toLocaleLowerCase()
             .includes(this.filter.nativeElement.value.toLocaleLowerCase())
@@ -105,7 +105,7 @@ export class JobListComponent implements OnInit {
 
     this.dialogService.open(options);
 
-    this.dialogService.confirmed().subscribe(async (confirmed) => {
+    this.dialogService.confirmed().subscribe(async confirmed => {
       if (confirmed) {
         try {
           const jobs = await this.jobProvider.destroy(jobId);

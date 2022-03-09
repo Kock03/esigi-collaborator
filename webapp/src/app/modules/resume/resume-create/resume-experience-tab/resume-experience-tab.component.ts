@@ -38,8 +38,8 @@ export interface Experience {
   encapsulation: ViewEncapsulation.None,
 })
 export class ResumeExperienceTabComponent implements OnInit {
-  @Input('experiencesArray') experiencesArray!: FormArray;
-  @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
+  @Input() experiencesArray!: FormArray;
+  @Output() onChange: EventEmitter<any> = new EventEmitter();
 
   Experience: any;
   experienceList: any[] = [];
@@ -47,25 +47,21 @@ export class ResumeExperienceTabComponent implements OnInit {
   index: any = null;
   resumeId!: any;
 
-
-
   constructor(
     private dialogService: ConfirmDialogService,
     private fb: FormBuilder,
     public dialog: MatDialog,
     private route: ActivatedRoute
-  ) { }
+  ) {}
 
   ngOnInit(): void {
-
     if (this.experiencesArray.value.length > 0) {
       this.experienceList = this.experiencesArray.value;
     }
-
   }
 
   initObservables() {
-    this.experiencesArray.valueChanges.subscribe((res) => {
+    this.experiencesArray.valueChanges.subscribe(res => {
       const isNullIndex = this.experiencesArray.value.findIndex(
         (experience: any) => experience == null
       );
@@ -84,7 +80,7 @@ export class ResumeExperienceTabComponent implements OnInit {
       height: '620px',
     });
 
-    dialogRef.afterClosed().subscribe((experience) => {
+    dialogRef.afterClosed().subscribe(experience => {
       if (experience) {
         this.experiencesArray.insert(0, this.fb.group(experience));
         this.experienceList.push(experience);
@@ -107,7 +103,7 @@ export class ResumeExperienceTabComponent implements OnInit {
 
     this.dialogService.open(options);
 
-    this.dialogService.confirmed().subscribe(async (confirmed) => {
+    this.dialogService.confirmed().subscribe(async confirmed => {
       if (confirmed) {
         this.experiencesArray.removeAt(index);
         this.experienceList.splice(index, 1);
@@ -123,7 +119,7 @@ export class ResumeExperienceTabComponent implements OnInit {
     });
 
     this.index = index;
-    dialogRef.afterClosed().subscribe((experience) => {
+    dialogRef.afterClosed().subscribe(experience => {
       if (experience) {
         this.experiencesArray.controls[this.index].patchValue(experience);
       }

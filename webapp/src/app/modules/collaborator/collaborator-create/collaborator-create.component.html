@@ -1,95 +1,185 @@
 <div id="collaboratorCreate" class="page">
   <div fxLayout="row" fxLayoutAlign="start center">
-    <button mat-button class="btn-arrow-back" color="primary" (click)="listCollaborator()">
+    <button
+      mat-button
+      class="btn-arrow-back"
+      color="primary"
+      (click)="listCollaborator()">
       <mat-icon>chevron_left</mat-icon>
     </button>
     <h2 class="title">Colaborador</h2>
   </div>
 
   <div fxLayout="row" class="tab" fxLayoutGap="16px">
-    <div (click)="handleStep(1)" fxLayout="column" class="tab-group" [ngClass]="{ done: step > 0, active: step == 1 }">
+    <div
+      (click)="handleStep(1)"
+      fxLayout="column"
+      class="tab-group"
+      [ngClass]="{ done: step > 0, active: step == 1 }">
       <p class="tab-item">Cadastro</p>
       <span class="tab-border"></span>
     </div>
-    <div (click)="handleStep(2)" fxLayout="column" class="tab-group" [ngClass]="{ done: step > 1, active: step == 2 }">
+    <div
+      (click)="handleStep(2)"
+      fxLayout="column"
+      class="tab-group"
+      [ngClass]="{ done: step > 1, active: step == 2 }">
       <p class="tab-item">Dependentes</p>
       <span class="tab-border"></span>
     </div>
-    <div (click)="handleStep(3)" fxLayout="column" class="tab-group" [ngClass]="{ done: step > 2, active: step == 3 }">
+    <div
+      (click)="handleStep(3)"
+      fxLayout="column"
+      class="tab-group"
+      [ngClass]="{ done: step > 2, active: step == 3 }">
       <p class="tab-item">Educação</p>
       <span class="tab-border"></span>
     </div>
-    <div (click)="handleStep(4)" fxLayout="column" class="tab-group" [ngClass]="{ done: step > 3, active: step == 4 }">
+    <div
+      (click)="handleStep(4)"
+      fxLayout="column"
+      class="tab-group"
+      [ngClass]="{ done: step > 3, active: step == 4 }">
       <p class="tab-item">Dados Bancarios</p>
       <span class="tab-border"></span>
     </div>
-    <div (click)="handleStep(5)" fxLayout="column" class="tab-group" [ngClass]="{ done: step > 4, active: step == 5 }">
+    <div
+      (click)="handleStep(5)"
+      fxLayout="column"
+      class="tab-group"
+      [ngClass]="{ done: step > 4, active: step == 5 }">
       <p class="tab-item">Financeiro</p>
       <span class="tab-border"></span>
     </div>
-    <div (click)="handleStep(6)" fxLayout="column" class="tab-group" [ngClass]="{ done: step > 5, active: step == 6 }">
+    <div
+      (click)="handleStep(6)"
+      fxLayout="column"
+      class="tab-group"
+      [ngClass]="{ done: step > 5, active: step == 6 }">
       <p class="tab-item">Skills</p>
       <span class="tab-border"></span>
     </div>
-    <div (click)="handleStep(7)" fxLayout="column" class="tab-group" [ngClass]="{ done: step > 6, active: step == 7 }">
+    <div
+      (click)="handleStep(7)"
+      fxLayout="column"
+      class="tab-group"
+      [ngClass]="{ done: step > 6, active: step == 7 }">
       <p class="tab-item">Documentos</p>
       <span class="tab-border"></span>
     </div>
-    <div *ngIf="collaboratorId !== 'novo'" (click)="handleStep(8)" fxLayout="column" class="tab-group"
-      [ngClass]="{ done: step > 7, active: step == 8 }" #feedbackTab>
+    <div
+      *ngIf="collaboratorId !== 'novo'"
+      (click)="handleStep(8)"
+      fxLayout="column"
+      class="tab-group"
+      [ngClass]="{ done: step > 7, active: step == 8 }"
+      #feedbackTab>
       <p class="tab-item">Feedback</p>
       <span class="tab-border"></span>
     </div>
-    <div *ngIf="collaboratorId !== 'novo'" (click)="handleStep(9)" fxLayout="column" class="tab-group"
+    <div
+      *ngIf="collaboratorId !== 'novo'"
+      (click)="handleStep(9)"
+      fxLayout="column"
+      class="tab-group"
       [ngClass]="{ done: step > 8, active: step == 9 }">
       <p class="tab-item">Acompanhamento</p>
       <span class="tab-border"></span>
     </div>
   </div>
 
-  <app-collaborator-register-tab *ngIf="collaboratorForm" [hidden]="step != 1" [form]="collaboratorForm"
+  <app-collaborator-register-tab
+    *ngIf="collaboratorForm"
+    [hidden]="step != 1"
+    [form]="collaboratorForm"
     (onChange)="handleChanges($event)">
   </app-collaborator-register-tab>
 
-  <app-collaborator-dependents-tab *ngIf="collaboratorForm" [dependentsArray]="dependentsArray" [hidden]="step != 2"
-    [form]="collaboratorForm" (onChange)="handleChanges($event)">
+  <app-collaborator-dependents-tab
+    *ngIf="collaboratorForm"
+    [dependentsArray]="dependentsArray"
+    [hidden]="step != 2"
+    [form]="collaboratorForm"
+    (onChange)="handleChanges($event)">
   </app-collaborator-dependents-tab>
-  <app-collaborator-education-tab *ngIf="collaboratorForm" [hidden]="step != 3" [form]="collaboratorForm"
-    [educationArray]="educationArray" [languageArray]="languageArray" (onChange)="handleChanges($event)">
+  <app-collaborator-education-tab
+    *ngIf="collaboratorForm"
+    [hidden]="step != 3"
+    [form]="collaboratorForm"
+    [educationArray]="educationArray"
+    [languageArray]="languageArray"
+    (onChange)="handleChanges($event)">
   </app-collaborator-education-tab>
-  <app-collaborator-bank-tab *ngIf="collaboratorForm" [hidden]="step != 4" [form]="collaboratorForm"
-    [bankArray]="bankArray" (onChange)="handleChanges($event)">
+  <app-collaborator-bank-tab
+    *ngIf="collaboratorForm"
+    [hidden]="step != 4"
+    [form]="collaboratorForm"
+    [bankArray]="bankArray"
+    (onChange)="handleChanges($event)">
   </app-collaborator-bank-tab>
-  <app-collaborator-finance-tab *ngIf="collaboratorForm" [financeArray]="financeArray" [hidden]="step != 5"
-    [form]="collaboratorForm" (onChange)="handleChanges($event)">
+  <app-collaborator-finance-tab
+    *ngIf="collaboratorForm"
+    [financeArray]="financeArray"
+    [hidden]="step != 5"
+    [form]="collaboratorForm"
+    (onChange)="handleChanges($event)">
   </app-collaborator-finance-tab>
-  <app-collaborator-skill-tab *ngIf="collaboratorForm" [skillArray]="skillArray" [hidden]="step != 6"
-    [form]="collaboratorForm" (onChange)="handleChanges($event)">
+  <app-collaborator-skill-tab
+    *ngIf="collaboratorForm"
+    [skillArray]="skillArray"
+    [hidden]="step != 6"
+    [form]="collaboratorForm"
+    (onChange)="handleChanges($event)">
   </app-collaborator-skill-tab>
-  <app-collaborator-document-tab [documentArray]="documentArray" *ngIf="collaboratorForm" [hidden]="step != 7"
-    [form]="collaboratorForm" (onChange)="handleChanges($event)">
+  <app-collaborator-document-tab
+    [documentArray]="documentArray"
+    *ngIf="collaboratorForm"
+    [hidden]="step != 7"
+    [form]="collaboratorForm"
+    (onChange)="handleChanges($event)">
   </app-collaborator-document-tab>
-  <app-collaborator-feedback-tab *ngIf="collaboratorId !== 'novo'" [hidden]="step != 8" [form]="collaboratorForm"
+  <app-collaborator-feedback-tab
+    *ngIf="collaboratorId !== 'novo'"
+    [hidden]="step != 8"
+    [form]="collaboratorForm"
     (onChange)="handleChanges($event)">
   </app-collaborator-feedback-tab>
-  <app-collaborator-panel-tab *ngIf="collaboratorId !== 'novo'" [hidden]="step != 9" [form]="collaboratorForm"
+  <app-collaborator-panel-tab
+    *ngIf="collaboratorId !== 'novo'"
+    [hidden]="step != 9"
+    [form]="collaboratorForm"
     (onChange)="handleChanges($event)">
   </app-collaborator-panel-tab>
 
-
-  <div class="navigation-buttons" fxLayoutAlign="center end" fxLayoutGap="16px" *ngIf="collaboratorId == 'novo'">
+  <div
+    class="navigation-buttons"
+    fxLayoutAlign="center end"
+    fxLayoutGap="16px"
+    *ngIf="collaboratorId === 'novo'">
     <button mat-button *ngIf="step != 1" (click)="navigate('back')">
       Voltar
     </button>
 
-    <button mat-flat-button *ngIf="step != 7" (click)="navigate('next')" color="primary">
+    <button
+      mat-flat-button
+      *ngIf="step != 7"
+      (click)="navigate('next')"
+      color="primary">
       Continuar
     </button>
-    <button mat-flat-button *ngIf="step == 7" (click)="saveCollaborator()" color="primary">
+    <button
+      mat-flat-button
+      *ngIf="step == 7"
+      (click)="saveCollaborator()"
+      color="primary">
       Salvar
     </button>
   </div>
-  <div class="navigation-buttons" fxLayoutAlign="center end" fxLayoutGap="16px" *ngIf="collaboratorId !== 'novo'">
+  <div
+    class="navigation-buttons"
+    fxLayoutAlign="center end"
+    fxLayoutGap="16px"
+    *ngIf="collaboratorId !== 'novo'">
     <button mat-flat-button (click)="editCollaborator()" color="primary">
       Salvar
     </button>

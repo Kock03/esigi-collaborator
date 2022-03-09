@@ -24,8 +24,8 @@ import { CollaboratorSkillDialog } from './collaborator-skill-dialog.component';
   encapsulation: ViewEncapsulation.None,
 })
 export class CollaboratorSkillTabComponent implements OnInit {
-  @Input('skillArray') skillArray!: FormArray;
-  @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
+  @Input() skillArray!: FormArray;
+  @Output() onChange: EventEmitter<any> = new EventEmitter();
   @ViewChild('skillTable') skillTable!: MatTable<any>;
 
   displayedColumns: string[] = ['technology', 'time', 'level', 'icon'];
@@ -38,7 +38,6 @@ export class CollaboratorSkillTabComponent implements OnInit {
   Skill: any;
   checked = false;
 
- 
   constructor(private fb: FormBuilder, public dialog: MatDialog) {}
 
   ngOnInit(): void {
@@ -50,7 +49,7 @@ export class CollaboratorSkillTabComponent implements OnInit {
   }
 
   initObservables() {
-    this.skillArray.valueChanges.subscribe((res) => {
+    this.skillArray.valueChanges.subscribe(res => {
       const isNullIndex = this.skillArray.value.findIndex(
         (skill: any) => skill == null
       );
@@ -68,7 +67,7 @@ export class CollaboratorSkillTabComponent implements OnInit {
       height: '470px',
     });
 
-    dialogRef.afterClosed().subscribe((skill) => {
+    dialogRef.afterClosed().subscribe(skill => {
       if (skill) {
         this.skillArray.insert(0, this.fb.group(skill));
         this.skillTable.renderRows();
@@ -84,11 +83,11 @@ export class CollaboratorSkillTabComponent implements OnInit {
     const dialogRef = this.dialog.open(CollaboratorSkillDialog, {
       width: '500px',
       height: '620px',
-      data: skillSelected ,
+      data: skillSelected,
     });
 
     this.index = index;
-    dialogRef.afterClosed().subscribe((skill) => {
+    dialogRef.afterClosed().subscribe(skill => {
       if (skill) {
         this.skillArray.controls[this.index].patchValue(skill);
       }

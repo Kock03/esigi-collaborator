@@ -8,9 +8,8 @@ describe('CollaboratorRegisterTabComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CollaboratorRegisterTabComponent ]
-    })
-    .compileComponents();
+      declarations: [CollaboratorRegisterTabComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

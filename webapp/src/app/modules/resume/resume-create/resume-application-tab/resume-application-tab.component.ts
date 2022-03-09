@@ -30,7 +30,7 @@ export interface Application {
 })
 export class ResumeApplicationTabComponent implements OnInit {
   @Input('form') resumeForm!: FormGroup;
-  @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
+  @Output() onChange: EventEmitter<any> = new EventEmitter();
   @ViewChild('filter', { static: true }) filter!: ElementRef;
 
   private _unsubscribeAll: Subject<any>;
@@ -82,12 +82,11 @@ export class ResumeApplicationTabComponent implements OnInit {
     fromEvent(this.filter.nativeElement, 'keyup')
       .pipe(debounceTime(200), distinctUntilChanged())
 
-      .subscribe((res) => {
-        this.filteredApplicationList = this.applications.filter(
-          (collaborator) =>
-            collaborator.jobName
-              .toLocaleLowerCase()
-              .includes(this.filter.nativeElement.value.toLocaleLowerCase())
+      .subscribe(res => {
+        this.filteredApplicationList = this.applications.filter(collaborator =>
+          collaborator.jobName
+            .toLocaleLowerCase()
+            .includes(this.filter.nativeElement.value.toLocaleLowerCase())
         );
       });
   }

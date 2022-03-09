@@ -20,7 +20,6 @@ export class JobDetailComponent implements OnInit {
       sessionStorage.setItem('job_detail_tab', '1');
     }
     this.step = JSON.parse(sessionStorage.getItem('job_detail_tab')!);
-
   }
 
   handleChanges(value: any): void {}

@@ -9,7 +9,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class CollaboratorDocumentDialog {
   @Input('form') collaboratorForm!: FormGroup;
-  @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
+  @Output() onChange: EventEmitter<any> = new EventEmitter();
 
   documentForm!: FormGroup;
   url: any;
@@ -17,8 +17,8 @@ export class CollaboratorDocumentDialog {
   constructor(
     public dialogRef: MatDialogRef<CollaboratorDocumentDialog>,
     private fb: FormBuilder,
-    @Inject(MAT_DIALOG_DATA) public data:  any 
-  ) { }
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) {}
 
   ngOnInit(): void {
     this.initForm();
@@ -37,7 +37,7 @@ export class CollaboratorDocumentDialog {
   fileChanged(file: any) {
     const reader = new FileReader();
     reader.readAsDataURL(file.target.files[0]);
-    reader.onload = (_file) => {
+    reader.onload = _file => {
       this.url = reader.result;
       this.documentForm.patchValue({
         file: reader.result,
@@ -50,7 +50,7 @@ export class CollaboratorDocumentDialog {
   }
 
   async save() {
-    const data = this.documentForm.getRawValue()
+    const data = this.documentForm.getRawValue();
     this.dialogRef.close(data);
   }
 }

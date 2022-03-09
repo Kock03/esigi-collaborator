@@ -7,7 +7,6 @@
   </div>
   <div class="content-scroll" fxLayout="column">
     <form [formGroup]="settingForm">
-     
       <div fxLayout="column" fxLayoutGap="16px" fxFlexAlign="start">
         <mat-form-field appearance="outline">
           <mat-label>Tipo de Servidor</mat-label>
@@ -15,8 +14,7 @@
             matInput
             disableRipple
             [compareWith]="compareSelect"
-            formControlName="serverType"
-          >
+            formControlName="serverType">
             <mat-option [value]="1">SMTP</mat-option>
             <mat-option [value]="2">POP</mat-option>
             <mat-option [value]="3">IMAP</mat-option>
@@ -30,8 +28,7 @@
           <input
             matInput
             placeholder="Servidor"
-            formControlName="incomingServerName"
-          />
+            formControlName="incomingServerName" />
         </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label>Porta</mat-label>
@@ -49,14 +46,12 @@
 
         <mat-form-field
           appearance="outline"
-          *ngIf="settingForm.controls['serverType'].value !== 1"
-        >
+          *ngIf="settingForm.controls['serverType'].value !== 1">
           <mat-label>Método de Criptografia</mat-label>
           <mat-select
             matInput
             disableRipple
-            formControlName="incomingEncryptionMethod"
-          >
+            formControlName="incomingEncryptionMethod">
             <mat-option value="1">Nenhum</mat-option>
             <mat-option value="2">SSL/TLS</mat-option>
             <mat-option value="3">STARTTLS</mat-option>
@@ -78,8 +73,7 @@
           <input
             matInput
             placeholder="Servidor"
-            formControlName="outgoingServerName"
-          />
+            formControlName="outgoingServerName" />
         </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label>Porta</mat-label>
@@ -92,8 +86,7 @@
           <mat-select
             matInput
             disableRipple
-            formControlName="outgoingEncryptionMethod"
-          >
+            formControlName="outgoingEncryptionMethod">
             <mat-option value="option1">Nenhum</mat-option>
             <mat-option value="option2">SSL/TLS</mat-option>
             <mat-option value="option3">STARTTLS</mat-option>

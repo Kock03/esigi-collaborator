@@ -26,7 +26,7 @@ import { SnackBarService } from 'src/services/snackbar.service';
 })
 export class CollaboratorFeedbackTabComponent implements OnInit {
   @Input('form') collaboratorForm!: FormGroup;
-  @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
+  @Output() onChange: EventEmitter<any> = new EventEmitter();
   @ViewChild('feedbackTable') feedbackTable!: MatTable<any>;
 
   displayedFeedback: string[] = [
@@ -37,12 +37,10 @@ export class CollaboratorFeedbackTabComponent implements OnInit {
     'icon',
   ];
 
-  
   collaboratorId!: string | null;
   collaborator!: any;
   feedback!: IFeedback[];
   data!: Array<any>;
-  
 
   get feedbackArray() {
     return this.collaboratorForm.controls['Feedbacks'] as FormArray;
@@ -55,24 +53,24 @@ export class CollaboratorFeedbackTabComponent implements OnInit {
     private collaboratorProvider: CollaboratorProvider,
     private snackbarService: SnackBarService,
     private dialogService: ConfirmDialogService,
-    private feedbackProvider: FeedbackProvider,
+    private feedbackProvider: FeedbackProvider
   ) {}
 
   async ngOnInit() {
     this.collaboratorId = this.route.snapshot.paramMap.get('id');
-    this.getFeedback()
-    
+    this.getFeedback();
   }
 
   async getFeedback() {
     try {
-      this.collaborator = await this.collaboratorProvider.findOne(this.collaboratorId);
-       this.feedback = this.collaborator.Feedbacks
+      this.collaborator = await this.collaboratorProvider.findOne(
+        this.collaboratorId
+      );
+      this.feedback = this.collaborator.Feedbacks;
     } catch (error) {
       console.error(error);
     }
   }
-  
 
   navigateFeedback() {
     const navigationExtras = {
@@ -94,11 +92,11 @@ export class CollaboratorFeedbackTabComponent implements OnInit {
 
     this.dialogService.open(options);
 
-    this.dialogService.confirmed().subscribe(async (confirmed) => {
+    this.dialogService.confirmed().subscribe(async confirmed => {
       if (confirmed) {
         try {
           const jobs = await this.feedbackProvider.destroy(feedbackId);
-          this.getFeedback()
+          this.getFeedback();
 
           this.snackbarService.successMessage('Vaga Excluída Com Sucesso');
         } catch (error) {
@@ -115,6 +113,9 @@ export class CollaboratorFeedbackTabComponent implements OnInit {
         id: this.collaboratorId,
       },
     };
-    this.router.navigate([`colaborador/feedback/${feedbackId}`], navigationExtras);
+    this.router.navigate(
+      [`colaborador/feedback/${feedbackId}`],
+      navigationExtras
+    );
   }
 }

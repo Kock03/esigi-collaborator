@@ -1,4 +1,4 @@
 export interface Languanges {
-    languageName: string;
-    degreeOfInfluence: number;
+  languageName: string;
+  degreeOfInfluence: number;
 }

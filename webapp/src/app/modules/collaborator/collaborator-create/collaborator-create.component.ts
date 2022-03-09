@@ -35,9 +35,14 @@ export class CollaboratorCreateComponent implements OnInit {
   urlStep!: number;
 
   validations = [
-      ['cpf', 'admissionDate'],
-      ['Dependents']
-  ]
+    ['cpf', 'admissionDate'],
+    ['Dependents'],
+    ['Educations', 'Languages'],
+    ['BankData'],
+    ['Financials'],
+    ['Skills'],
+    ['Documents'],
+  ];
 
   get educationArray() {
     return this.collaboratorForm.controls['Educations'] as FormArray;
@@ -126,35 +131,30 @@ export class CollaboratorCreateComponent implements OnInit {
     this.collaboratorForm = this.fb.group({
       firstNameCorporateName: [null, Validators.required],
       lastNameFantasyName: [null, Validators.required],
-      login: ['davi.log', Validators.required],
-      gender: [1, Validators.required],
-      maritalStatus: [1, Validators.required],
-      office: ['Desenvolvedor Angular', Validators.required],
-      collaboratorTypes: [1, Validators.required],
-      active: [true, Validators.required],
+      login: [null, Validators.required],
+      gender: [null, Validators.required],
+      maritalStatus: [null, Validators.required],
+      office: [null, Validators.required],
+      collaboratorTypes: [null, Validators.required],
+      active: [null, Validators.required],
       cpf: this.fb.control({ value: null, disabled: false }, [
         DocumentValidator.isValidCpf(),
-        Validators.required,
       ]),
-      birthDate: ['2004-06-12', Validators.required],
-      admissionDate: ['', Validators.required],
-      email: ['davi@email.com', [Validators.email, Validators.required]],
+      birthDate: [null, Validators.required],
+      admissionDate: [null, Validators.required],
+      email: [null, [Validators.email, Validators.required]],
       cnpj: this.fb.control({ value: null, disabled: true }, [
         DocumentValidator.isValidCnpj(),
-        Validators.required,
       ]),
-      stateRegistration: [null, Validators.required],
-      municipalInscription: [null, Validators.required],
-      site: ['site.davi', Validators.required],
-      linkedin: ['linkedin.davi', Validators.required],
+      stateRegistration: [null],
+      municipalInscription: [null],
+      site: [null],
+      linkedin: [null],
       photo: [null],
       Phone: this.fb.group({
-        phoneNumber: [
-          '343234908',
-          [Validators.required, Validators.maxLength(9)],
-        ],
-        ddd: ['71', [Validators.required, Validators.maxLength(2)]],
-        ddi: ['55', Validators.required],
+        phoneNumber: [null, [Validators.required, Validators.maxLength(9)]],
+        ddd: [null, [Validators.required, Validators.maxLength(2)]],
+        ddi: [null, Validators.required],
       }),
 
       Address: this.fb.group({
@@ -169,27 +169,32 @@ export class CollaboratorCreateComponent implements OnInit {
       BankData: this.fb.array(
         this.collaborator ? this.collaborator.BankData : []
       ),
-      // Dependents: this.fb.array(
-      //   this.collaborator ? this.collaborator.Dependents : []
-      // ), 
       Dependents: this.fb.array(
-        this.collaborator ? this.collaborator.Dependents : [], [Validators.required]
-      ), 
+        this.collaborator ? this.collaborator.Dependents : [],
+        [Validators.required]
+      ),
       Educations: this.fb.array(
-        this.collaborator ? this.collaborator.Educations : []
+        this.collaborator ? this.collaborator.Educations : [],
+        [Validators.required]
       ),
       Languages: this.fb.array(
-        this.collaborator ? this.collaborator.Languages : []
+        this.collaborator ? this.collaborator.Languages : [],
+        [Validators.required]
       ),
       Financials: this.fb.array(
-        this.collaborator ? this.collaborator.Financials : []
+        this.collaborator ? this.collaborator.Financials : [],
+        [Validators.required]
       ),
-      Skills: this.fb.array(this.collaborator ? this.collaborator.Skills : []),
+      Skills: this.fb.array(this.collaborator ? this.collaborator.Skills : [], [
+        Validators.required,
+      ]),
       Documents: this.fb.array(
-        this.collaborator ? this.collaborator.Documents : []
+        this.collaborator ? this.collaborator.Documents : [],
+        [Validators.required]
       ),
       Feedbacks: this.fb.array(
-        this.collaborator ? this.collaborator.Feedbacks : []
+        this.collaborator ? this.collaborator.Feedbacks : [],
+        [Validators.required]
       ),
     });
   }
@@ -217,28 +222,34 @@ export class CollaboratorCreateComponent implements OnInit {
   handleChanges(value: any): void {}
 
   handleStep(number: number): void {
-    this.step = number;
-    sessionStorage.setItem('collaborator_tab', this.step.toString());
+    if (!this.checkValid() && this.step < number) {
+      this.snackbarService.showAlert('Verifique os campos');
+    } else if (this.step - number < 1) {
+      this.step = number;
+      sessionStorage.setItem('collaborator_tab', this.step.toString());
+    } else {
+      this.step = number;
+      sessionStorage.setItem('collaborator_tab', this.step.toString());
+    }
   }
 
   navigate(direction: string) {
-
     if (this.step > 1 && direction === 'back') {
       this.step -= 1;
     } else if (this.checkValid() && this.step < 8 && direction === 'next') {
       this.step += 1;
+    } else {
+      this.snackbarService.showAlert('Verifique os campos');
     }
   }
 
   checkValid(): boolean {
     let isValid = true;
-    const validations = this.validations[this.step - 1]
-    console.log("🚀 ~ file: collaborator-create.component.ts ~ line 225 ~ CollaboratorCreateComponent ~ navigate ~ this.validations[this.step]", this.validations)
-    console.log("🚀 ~ file: collaborator-create.component.ts ~ line 236 ~ CollaboratorCreateComponent ~ checkValid ~ this.collaboratorForm.controls[validations[index]]", this.collaboratorForm.controls[validations[0]])
-    for (let index = 0; index < validations.length ; index++) {
-      if  (this.collaboratorForm.controls[validations[index]].invalid) {
+    const validations = this.validations[this.step - 1];
+    for (let index = 0; index < validations.length; index++) {
+      if (this.collaboratorForm.controls[validations[index]].invalid) {
         isValid = false;
-        this.snackbarService.showAlert('Verifique os campos');
+
         this.collaboratorForm.markAllAsTouched();
       }
     }

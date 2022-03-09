@@ -7,7 +7,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { SnackBarComponent } from './snack-bar.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
-
 @NgModule({
   declarations: [SnackBarComponent],
   imports: [
@@ -20,6 +19,6 @@ import { FlexLayoutModule } from '@angular/flex-layout';
   ],
   entryComponents: [],
   exports: [SnackBarComponent],
-  providers: []
+  providers: [],
 })
-export class SnackBarModule { }
+export class SnackBarModule {}

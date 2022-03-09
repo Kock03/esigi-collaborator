@@ -84,7 +84,7 @@ export class CollaboratorListComponent implements OnInit {
 
     this.dialogService.open(options);
 
-    this.dialogService.confirmed().subscribe(async (confirmed) => {
+    this.dialogService.confirmed().subscribe(async confirmed => {
       if (confirmed) {
         try {
           const collaborators = await this.collaboratorProvider.destroy(
@@ -128,9 +128,9 @@ export class CollaboratorListComponent implements OnInit {
     fromEvent(this.filter.nativeElement, 'keyup')
       .pipe(debounceTime(200), distinctUntilChanged())
 
-      .subscribe((res) => {
+      .subscribe(res => {
         this.filteredCollaboratorList = this.collaborators.filter(
-          (collaborator) =>
+          collaborator =>
             collaborator.firstNameCorporateName
               .toLocaleLowerCase()
               .includes(this.filter.nativeElement.value.toLocaleLowerCase())

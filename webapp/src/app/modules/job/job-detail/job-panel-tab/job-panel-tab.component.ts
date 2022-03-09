@@ -78,7 +78,6 @@ export class JobPanelTabComponent implements OnInit {
       });
       this.interviewsTable.renderRows();
       console.log(this.interviews);
-      
     } catch (error) {
       console.error(error);
     }
@@ -101,8 +100,8 @@ export class JobPanelTabComponent implements OnInit {
     fromEvent(this.filter.nativeElement, 'keyup')
       .pipe(debounceTime(200), distinctUntilChanged())
 
-      .subscribe((res) => {
-        this.filteredInterviewList = this.interviews.filter((interview) =>
+      .subscribe(res => {
+        this.filteredInterviewList = this.interviews.filter(interview =>
           interview.nameCandidate
             .toLocaleLowerCase()
             .includes(this.filter.nativeElement.value.toLocaleLowerCase())

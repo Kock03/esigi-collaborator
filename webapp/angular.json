@@ -105,9 +105,21 @@
             ],
             "scripts": []
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
+          }
         }
       }
     }
   },
-  "defaultProject": "esigi-collaborator"
+  "defaultProject": "esigi-collaborator",
+  "cli": {
+    "defaultCollection": "@angular-eslint/schematics"
+  }
 }

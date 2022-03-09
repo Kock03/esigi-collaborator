@@ -118,4 +118,4 @@ const routes: Routes = [
   providers: [MatDatepickerModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class CollaboratorModule { }
+export class CollaboratorModule {}

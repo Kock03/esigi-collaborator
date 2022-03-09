@@ -9,7 +9,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class ResumeEducationDialog {
   @Input('form') resumeForm!: FormGroup;
-  @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
+  @Output() onChange: EventEmitter<any> = new EventEmitter();
 
   educationForm!: FormGroup;
 

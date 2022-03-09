@@ -8,9 +8,8 @@ describe('CollaboratorFinanceTabComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CollaboratorFinanceTabComponent ]
-    })
-    .compileComponents();
+      declarations: [CollaboratorFinanceTabComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

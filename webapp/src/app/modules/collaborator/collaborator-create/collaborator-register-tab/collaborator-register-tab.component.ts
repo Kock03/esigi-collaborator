@@ -58,14 +58,13 @@ export class PickDateAdapter extends NativeDateAdapter {
 })
 export class CollaboratorRegisterTabComponent implements OnInit {
   @Input('form') collaboratorForm!: FormGroup;
-  @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
+  @Output() onChange: EventEmitter<any> = new EventEmitter();
 
   selectedFile: any;
   date: any;
   url: any;
   collaboratorId!: string | null;
   collaborator!: any;
-  
 
   typeControl = new FormControl();
 
@@ -80,12 +79,12 @@ export class CollaboratorRegisterTabComponent implements OnInit {
     this.url =
       'https://st.depositphotos.com/1734074/4228/v/450/depositphotos_42286141-stock-illustration-vector-man-with-mustache-in.jpg';
     if (this.collaboratorId == 'novo') {
-      this.collaboratorForm.valueChanges.subscribe((res) => {
+      this.collaboratorForm.valueChanges.subscribe(res => {
         const addressForm = this.collaboratorForm.controls[
           'Address'
         ] as FormGroup;
 
-        addressForm.controls['cep'].valueChanges.subscribe((res) => {});
+        addressForm.controls['cep'].valueChanges.subscribe(res => {});
       });
     }
   }
@@ -126,20 +125,18 @@ export class CollaboratorRegisterTabComponent implements OnInit {
   fileChanged(file: any) {
     const reader = new FileReader();
     reader.readAsDataURL(file.target.files[0]);
-    reader.onload = (_file) => {
+    reader.onload = _file => {
       this.url = reader.result;
       this.collaboratorForm.patchValue({
         photo: reader.result,
       });
     };
   }
-  collaboratorIsActive(){
+  collaboratorIsActive() {
     if (this.collaborator.active == true) {
       this.collaborator.active = 'ativo';
-    } 
-    else{
+    } else {
       this.collaborator.active = 'inativo';
     }
   }
-
 }

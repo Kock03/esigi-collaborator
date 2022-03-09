@@ -33,8 +33,8 @@ import { CollaboratorDependentsDialog } from './collaborator-dependents-dialog.c
   encapsulation: ViewEncapsulation.None,
 })
 export class CollaboratorDependentsTabComponent implements OnInit {
-  @Input('dependentsArray') dependentsArray!: FormArray;
-  @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
+  @Input() dependentsArray!: FormArray;
+  @Output() onChange: EventEmitter<any> = new EventEmitter();
   @ViewChild('dependentTable') dependentTable!: MatTable<any>;
 
   displayedDependents: string[] = [
@@ -64,12 +64,12 @@ export class CollaboratorDependentsTabComponent implements OnInit {
     if (this.dependentsArray.value.length > 0) {
       this.data = this.dependentsArray.value;
     }
-     
+
     this.initObservables();
   }
 
   initObservables() {
-    this.dependentsArray.valueChanges.subscribe((res) => {
+    this.dependentsArray.valueChanges.subscribe(res => {
       const isNullIndex = this.dependentsArray.value.findIndex(
         (dependent: any) => dependent == null
       );
@@ -88,7 +88,7 @@ export class CollaboratorDependentsTabComponent implements OnInit {
       height: '650px',
     });
 
-    dialogRef.afterClosed().subscribe((dependent) => {
+    dialogRef.afterClosed().subscribe(dependent => {
       if (dependent) {
         this.dependentsArray.insert(0, this.fb.group(dependent));
         this.dependentTable.renderRows();
@@ -104,10 +104,10 @@ export class CollaboratorDependentsTabComponent implements OnInit {
     const dialogRef = this.dialog.open(CollaboratorDependentsDialog, {
       width: '500px',
       height: '650px',
-      data: dependentsSelected ,
+      data: dependentsSelected,
     });
     this.index = index;
-    dialogRef.afterClosed().subscribe((dependent) => {
+    dialogRef.afterClosed().subscribe(dependent => {
       if (dependent) {
         this.dependentsArray.controls[this.index].patchValue(dependent);
       }
@@ -115,7 +115,6 @@ export class CollaboratorDependentsTabComponent implements OnInit {
   }
 
   deleteDependents(index: number) {
-    
     const options = {
       data: {
         title: 'Anteção',
@@ -126,7 +125,7 @@ export class CollaboratorDependentsTabComponent implements OnInit {
 
     this.dialogService.open(options);
 
-    this.dialogService.confirmed().subscribe(async (confirmed) => {
+    this.dialogService.confirmed().subscribe(async confirmed => {
       if (confirmed) {
         this.dependentsArray.removeAt(index);
       }

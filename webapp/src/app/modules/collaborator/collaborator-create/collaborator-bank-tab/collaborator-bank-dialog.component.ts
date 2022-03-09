@@ -17,7 +17,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class CollaboratorBankDialog {
   @Input('form') collaboratorForm!: FormGroup;
-  @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
+  @Output() onChange: EventEmitter<any> = new EventEmitter();
 
   bankForm!: FormGroup;
   collaborator!: any;

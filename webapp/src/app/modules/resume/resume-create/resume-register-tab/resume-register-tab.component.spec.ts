@@ -8,9 +8,8 @@ describe('ResumeRegisterTabComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ResumeRegisterTabComponent ]
-    })
-    .compileComponents();
+      declarations: [ResumeRegisterTabComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

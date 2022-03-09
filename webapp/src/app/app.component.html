@@ -6,8 +6,7 @@
     <button
       mat-icon-button
       *ngIf="sidenav.mode === 'over'"
-      (click)="sidenav.toggle()"
-    >
+      (click)="sidenav.toggle()">
       <mat-icon *ngIf="!sidenav.opened"> menu </mat-icon>
       <mat-icon *ngIf="sidenav.opened"> close </mat-icon>
     </button>
@@ -18,8 +17,7 @@
   <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z8">
     <img
       class="avatar mat-elevation-z8"
-      src="https://st.depositphotos.com/1734074/4228/v/450/depositphotos_42286141-stock-illustration-vector-man-with-mustache-in.jpg"
-    />
+      src="https://st.depositphotos.com/1734074/4228/v/450/depositphotos_42286141-stock-illustration-vector-man-with-mustache-in.jpg" />
     <h4 class="name">Usuário</h4>
     <p class="designation">Função</p>
 
@@ -28,13 +26,11 @@
     <div *ngFor="let menu of menuList">
       <button
         [ngClass]="{
-          active:
-          menu.action.startsWith(this.activeMenu)
+          active: menu.action.startsWith(this.activeMenu)
         }"
         mat-button
         class="menu-button"
-        (click)="navigate(menu.action)"
-      >
+        (click)="navigate(menu.action)">
         <mat-icon>{{ menu.icon }}</mat-icon>
         <span>{{ menu.name }}</span>
       </button>

@@ -1,14 +1,11 @@
 <div id="activeDirectory" class="page">
-  <div class="content-active"  fxLayout="row" fxLayoutAlign="start start">
+  <div class="content-active" fxLayout="row" fxLayoutAlign="start start">
     <button (click)="back()" color="primary" mat-button>
       <mat-icon> chevron_left </mat-icon>
     </button>
     <h2 mat-dialog-title class="title">Conexão Avtive Directory</h2>
   </div>
-  <div
-    class="content-form"
-    fxLayout="column"
-  >
+  <div class="content-form" fxLayout="column">
     <form [formGroup]="settingForm" class="form-box">
       <mat-form-field class="form-control" appearance="outline">
         <mat-label>Endereço AD</mat-label>
@@ -16,8 +13,7 @@
         <mat-error
           *ngIf="
             settingForm && settingForm.controls['adAdress'].hasError('required')
-          "
-        >
+          ">
           Campo endereço AD é orbrigatório
         </mat-error>
       </mat-form-field>
@@ -27,8 +23,7 @@
         <mat-error
           *ngIf="
             settingForm && settingForm.controls['user'].hasError('required')
-          "
-        >
+          ">
           Campo user é orbrigatório
         </mat-error>
       </mat-form-field>
@@ -38,24 +33,21 @@
         <mat-error
           *ngIf="
             settingForm && settingForm.controls['password'].hasError('required')
-          "
-        >
+          ">
           Campo senha orbrigatório
         </mat-error>
         <mat-error
           *ngIf="
             settingForm &&
             settingForm.controls['password'].hasError('minlength')
-          "
-        >
+          ">
           Senha muito pequena</mat-error
         >
         <mat-error
           *ngIf="
             settingForm &&
             settingForm.controls['password'].hasError('maxlength')
-          "
-        >
+          ">
           Senha muito grande</mat-error
         >
       </mat-form-field>

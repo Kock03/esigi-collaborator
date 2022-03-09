@@ -18,7 +18,7 @@ export class JobDetailListTabComponent implements OnInit {
     private route: ActivatedRoute,
     private _location: Location,
     private jobProvider: JobProvider
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     const state: any = this._location.getState();

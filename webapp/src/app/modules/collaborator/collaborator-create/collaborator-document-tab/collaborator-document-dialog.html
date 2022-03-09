@@ -5,7 +5,11 @@
       <form [formGroup]="documentForm" fxLayout="column">
         <mat-form-field appearance="outline">
           <mat-label>Nome</mat-label>
-          <input matInput disableRipple formControlName="name" placeholder="Nome do Documento"/>
+          <input
+            matInput
+            disableRipple
+            formControlName="name"
+            placeholder="Nome do Documento" />
         </mat-form-field>
 
         <div class="image-upload">
@@ -14,12 +18,10 @@
             type="file"
             id="fileInput"
             (change)="fileChanged($event)"
-            #fileUpload
-          />
+            #fileUpload />
 
           <!-- <img src="{{url}}"> -->
         </div>
-       
       </form>
     </mat-dialog-content>
     <mat-dialog-actions>
@@ -32,8 +34,7 @@
           [disabled]="documentForm.invalid"
           mat-flat-button
           [mat-dialog-close]="true"
-          (click)="save()"
-        >
+          (click)="save()">
           Salvar
         </button>
       </div>

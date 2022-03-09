@@ -25,8 +25,8 @@ import { ResumeSkillDialog } from './resume-skill.dialog.component';
   encapsulation: ViewEncapsulation.None,
 })
 export class ResumeSkillsTabComponent implements OnInit {
-  @Input('skillArray') skillArray!: FormArray;
-  @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
+  @Input() skillArray!: FormArray;
+  @Output() onChange: EventEmitter<any> = new EventEmitter();
   @ViewChild('skillTable') skillTable!: MatTable<any>;
 
   displayedColumns: string[] = ['name', 'time', 'level', 'icon'];
@@ -38,7 +38,6 @@ export class ResumeSkillsTabComponent implements OnInit {
   index: any = null;
   Skill: any;
   checked = false;
-
 
   constructor(
     private fb: FormBuilder,
@@ -55,7 +54,7 @@ export class ResumeSkillsTabComponent implements OnInit {
   }
 
   initObservables() {
-    this.skillArray.valueChanges.subscribe((res) => {
+    this.skillArray.valueChanges.subscribe(res => {
       const isNullIndex = this.skillArray.value.findIndex(
         (skill: any) => skill == null
       );
@@ -74,7 +73,7 @@ export class ResumeSkillsTabComponent implements OnInit {
       height: '470px',
     });
 
-    dialogRef.afterClosed().subscribe((skill) => {
+    dialogRef.afterClosed().subscribe(skill => {
       if (skill) {
         this.skillArray.insert(0, this.fb.group(skill));
         this.skillTable.renderRows();
@@ -94,7 +93,7 @@ export class ResumeSkillsTabComponent implements OnInit {
     });
 
     this.index = index;
-    dialogRef.afterClosed().subscribe((skill) => {
+    dialogRef.afterClosed().subscribe(skill => {
       if (skill) {
         this.skillArray.controls[this.index].patchValue(skill);
       }
@@ -112,7 +111,7 @@ export class ResumeSkillsTabComponent implements OnInit {
 
     this.dialogService.open(options);
 
-    this.dialogService.confirmed().subscribe(async (confirmed) => {
+    this.dialogService.confirmed().subscribe(async confirmed => {
       if (confirmed) {
         this.skillArray.removeAt(index);
       }

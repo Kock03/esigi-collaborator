@@ -8,9 +8,8 @@ describe('SettingActiveDirectoryComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SettingActiveDirectoryComponent ]
-    })
-    .compileComponents();
+      declarations: [SettingActiveDirectoryComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

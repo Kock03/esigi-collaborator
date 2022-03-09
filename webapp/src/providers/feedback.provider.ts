@@ -33,11 +33,17 @@ export class FeedbackProvider {
 
   update(id: string | null, feedback: any): Promise<any> {
     return new Promise((resolve, reject) => {
-        this.apiGateway.put(environment.COLLABORATOR_MS + 'feedbacks/:id', { id: id }, feedback).subscribe((response: HttpResponse<any>) => {
-            resolve(response.body);
+      this.apiGateway
+        .put(
+          environment.COLLABORATOR_MS + 'feedbacks/:id',
+          { id: id },
+          feedback
+        )
+        .subscribe((response: HttpResponse<any>) => {
+          resolve(response.body);
         }, reject);
     });
-}
+  }
 
   store(feedback: any): Promise<any> {
     return new Promise((resolve, reject) => {

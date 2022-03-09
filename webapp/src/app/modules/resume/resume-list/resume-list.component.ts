@@ -1,4 +1,10 @@
-import { Component, ElementRef, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  OnInit,
+  ViewChild,
+  ViewEncapsulation,
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { debounceTime, distinctUntilChanged, fromEvent, Subject } from 'rxjs';
 import { ResumeProvider } from 'src/providers/resume.provider';
@@ -13,9 +19,8 @@ export interface Resume {
   firstName: string;
   birthDate: Date;
   phoneNumber: number;
-  Phone: {}
+  Phone: {};
 }
-
 
 @Component({
   selector: 'app-resume-list',
@@ -28,13 +33,7 @@ export class ResumeListComponent implements OnInit {
 
   private _unsubscribeAll: Subject<any>;
 
-  displayedResume: string[] = [
-    'name',
-    'birthDate',
-    'phoneNumber',
-    'icon',
-  ];
-
+  displayedResume: string[] = ['name', 'birthDate', 'phoneNumber', 'icon'];
 
   resumes!: Resume[];
   filteredResumeList!: any[];
@@ -42,19 +41,18 @@ export class ResumeListComponent implements OnInit {
   Resume: any;
   resume!: any;
 
-  constructor(private router: Router,
+  constructor(
+    private router: Router,
     private resumeProvider: ResumeProvider,
     private dialogService: ConfirmDialogService,
-    private snackbarService: SnackBarService,) {
+    private snackbarService: SnackBarService
+  ) {
     this._unsubscribeAll = new Subject();
   }
-
-
 
   ngOnInit(): void {
     this.getResumeList();
     this.initFilter();
-
   }
 
   createResume() {
@@ -64,7 +62,6 @@ export class ResumeListComponent implements OnInit {
   editResume(resumeId: any) {
     this.router.navigate([`curriculo/${resumeId}`]);
   }
-
 
   async deleteResume(resumeId: any) {
     const options = {
@@ -77,7 +74,7 @@ export class ResumeListComponent implements OnInit {
 
     this.dialogService.open(options);
 
-    this.dialogService.confirmed().subscribe(async (confirmed) => {
+    this.dialogService.confirmed().subscribe(async confirmed => {
       if (confirmed) {
         try {
           const resumes = await this.resumeProvider.destroy(resumeId);
@@ -92,8 +89,6 @@ export class ResumeListComponent implements OnInit {
     });
   }
 
-
-
   async getResumeList() {
     try {
       this.filteredResumeList = this.resumes =
@@ -107,14 +102,12 @@ export class ResumeListComponent implements OnInit {
     fromEvent(this.filter.nativeElement, 'keyup')
       .pipe(debounceTime(200), distinctUntilChanged())
 
-      .subscribe((res) => {
-        this.filteredResumeList = this.resumes.filter(
-          (resume) =>
-            resume.firstName
-              .toLocaleLowerCase()
-              .includes(this.filter.nativeElement.value.toLocaleLowerCase())
+      .subscribe(res => {
+        this.filteredResumeList = this.resumes.filter(resume =>
+          resume.firstName
+            .toLocaleLowerCase()
+            .includes(this.filter.nativeElement.value.toLocaleLowerCase())
         );
       });
   }
-
 }

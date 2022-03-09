@@ -5,7 +5,11 @@
       <form [formGroup]="languageForm" fxLayout="column">
         <mat-form-field appearance="outline">
           <mat-label>Idioma</mat-label>
-          <input matInput disableRipple formControlName="languageName" placeholder="Idioma" />
+          <input
+            matInput
+            disableRipple
+            formControlName="languageName"
+            placeholder="Idioma" />
         </mat-form-field>
 
         <mat-form-field appearance="outline">
@@ -24,7 +28,11 @@
     <mat-dialog-actions>
       <div class="button-dialog">
         <button mat-flat-button mat-dialog-close>Cancelar</button>
-        <button mat-flat-button [mat-dialog-close]="true" color="primary" (click)="save()"
+        <button
+          mat-flat-button
+          [mat-dialog-close]="true"
+          color="primary"
+          (click)="save()"
           [disabled]="languageForm.invalid">
           Salvar
         </button>

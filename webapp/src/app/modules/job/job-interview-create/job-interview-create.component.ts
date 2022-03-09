@@ -140,11 +140,9 @@ export class JobInterviewCreateComponent implements OnInit {
     });
   }
 
-  handleBehaviroalInterviews(){
-
+  handleBehaviroalInterviews() {
     // save or edit (this.interviewId)
   }
-
 
   async saveBehaviroalInterviews() {
     let data = this.behavioralInterviewForm.getRawValue();
