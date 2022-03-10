@@ -32,6 +32,7 @@ export class TechnicalInterviewsController {
 
   @Post()
   async store(@Body() body: CreateTechnicalInterviewsDto) {
+    console.log("🚀 ~ file: technical-interviews.controller.ts ~ line 35 ~ TechnicalInterviewsController ~ store ~ body", body)
     return await this.technicalInterviewsService.store(body);
   }
 

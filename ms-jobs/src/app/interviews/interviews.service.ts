@@ -83,7 +83,7 @@ export class InterviewsService {
 
   async getFollowUpInterviews(id: string) {
     return await this.interviewsRepository.query(
-      'select b.name_candidate, b.behavioral_interview_date, t.technical_interview_date, j.requester, j.status from interviews inner join behavioral_interviews b on interviews.behavioral_interviews_id = b.id inner join technical_interviews t on interviews.technical_interviews_id = t.id inner join jobs j on interviews.jobs_id = j.id where interviews.jobs_id = ' +
+      'select interviews.id, b.name_candidate, b.behavioral_interview_date, t.technical_interview_date, j.requester, j.status from interviews left join behavioral_interviews b on interviews.behavioral_interviews_id = b.id left join technical_interviews t on interviews.technical_interviews_id = t.id left join jobs j on interviews.job_id = j.id where interviews.job_id = ' +
         '"' +
         id +
         '"',

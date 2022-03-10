@@ -43,14 +43,14 @@ export class TechnicalInterviewsEntity {
   @Column()
   technicalEvaluation: string;
 
-  @Column()
+  @Column() 
   comments: string;
 
   @Column()
   situational: Situation;
 
   @OneToOne(() => InterviewsEnitiy, (interviews) => interviews.TechnicalInterviews)
-  interviews: InterviewsEnitiy;
+  interview: InterviewsEnitiy;
 
   @CreateDateColumn()
   createdAt: Date;

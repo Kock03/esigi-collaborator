@@ -91,7 +91,7 @@ export class JobPanelTabComponent implements OnInit {
   editInterview(interviewId: any) {
     const navigationExtras = {
       state: {
-        id: this.jobId,
+        id: interviewId,
       },
     };
     this.router.navigate([`vaga/interview/${interviewId}`], navigationExtras);

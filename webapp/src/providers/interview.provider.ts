@@ -51,10 +51,10 @@ export class InterviewsProvider {
 //     });
 //   }
 
-  update(id: string | null, interview: any): Promise<any> {
+  update(interview: any): Promise<any> {
     return new Promise((resolve, reject) => {
       this.apiGateway
-        .put(environment.JOBS_MS + 'interviews/:id', { id: id }, interview)
+        .put(environment.JOBS_MS + 'interviews/:id', { id: interview.id }, interview)
         .subscribe((response: HttpResponse<any>) => {
           resolve(response.body);
         }, reject);

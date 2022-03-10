@@ -173,7 +173,7 @@
             </div>
 
             <div fxLayoutAlign="center" fxFlex="20">
-              <button mat-flat-button color="primary" class="save-button" (click)="saveTechnicalInterviews()"
+              <button mat-flat-button color="primary" class="save-button" (click)="handleInterviews('technical')"
                 [disabled]="technicalInterviewForm.invalid">
                 Salvar
               </button>
@@ -246,7 +246,7 @@
             </div>
 
             <div fxLayoutAlign="center" fxFlex="20">
-              <button mat-flat-button color="primary" class="save-button" (click)="saveClientInterviews()"
+              <button mat-flat-button color="primary" class="save-button" (click)="handleInterviews('client')"
                 [disabled]="clientInterviewForm.invalid">
                 Salvar
               </button>

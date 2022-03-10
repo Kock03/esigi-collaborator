@@ -22,14 +22,14 @@
             Data Entrevista Comportamental
           </th>
           <td mat-cell *matCellDef="let interviews">
-            {{ interviews.behavioralInterviewDate }}
+            {{ interviews.behavioralInterviewDate | date : 'dd/MM/yyyy' }}
           </td>
         </ng-container>
 
         <ng-container matColumnDef="technicalInterviewDate">
           <th mat-header-cell *matHeaderCellDef>Data Entrevista Técnica</th>
           <td mat-cell *matCellDef="let interviews">
-            {{ interviews.technicalInterviewDate }}
+            {{ interviews.technicalInterviewDate | date : 'dd/MM/yyyy' }}
           </td>
         </ng-container>
 

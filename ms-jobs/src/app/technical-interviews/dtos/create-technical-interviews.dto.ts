@@ -11,6 +11,7 @@ import {
 } from 'class-validator';
 import { Punctuality } from 'src/app/behavioral-interviews/enums/punctuality.enum';
 import { Situation } from 'src/app/behavioral-interviews/enums/situational.enum';
+import { InterviewsEnitiy } from 'src/app/interviews/interviews.entity';
 import { JobsEntity } from 'src/app/jobs/jobs.entity';
 
 export class CreateTechnicalInterviewsDto {
@@ -62,6 +63,6 @@ export class CreateTechnicalInterviewsDto {
   situational: Situation;
 
   @ApiProperty()
-  @IsNotEmpty()
-  Job: JobsEntity;
+  @IsOptional()
+  Interview: InterviewsEnitiy;
 }
