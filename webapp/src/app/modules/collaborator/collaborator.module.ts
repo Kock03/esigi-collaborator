@@ -37,6 +37,7 @@ import { CollaboratorFinanceDialog } from './collaborator-create/collaborator-fi
 import { CollaboratorSkillDialog } from './collaborator-create/collaborator-skill-tab/collaborator-skill-dialog.component';
 import { CollaboratorDocumentDialog } from './collaborator-create/collaborator-document-tab/collaborator-document-dialog.component';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatSortModule } from '@angular/material/sort';
 
 const routes: Routes = [
   {
@@ -94,6 +95,7 @@ const routes: Routes = [
     HttpClientModule,
     NgxMaskModule,
     MatDialogModule,
+    MatSortModule,
   ],
   entryComponents: [
     CollaboratorRegisterTabComponent,
@@ -118,4 +120,4 @@ const routes: Routes = [
   providers: [MatDatepickerModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class CollaboratorModule { }
+export class CollaboratorModule {}

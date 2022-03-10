@@ -25,6 +25,9 @@ import { CollaboratorRegisterTabComponent } from '../collaborator-create/collabo
 import { ConfirmDialogService } from 'src/services/confirn-dialog.service';
 import { SnackBarService } from 'src/services/snackbar.service';
 import { ICollaborator } from 'src/app/interfaces/icollaborator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+import { LiveAnnouncer } from '@angular/cdk/a11y';
 
 @Component({
   selector: 'app-collaborator-list',
@@ -33,8 +36,9 @@ import { ICollaborator } from 'src/app/interfaces/icollaborator';
   encapsulation: ViewEncapsulation.None,
 })
 export class CollaboratorListComponent implements OnInit {
-  @ViewChild('filter', { static: true }) filter!: ElementRef;
+  @ViewChild(MatSort) sort: MatSort = new MatSort();
 
+  @ViewChild('filter', { static: true }) filter!: ElementRef;
   private _unsubscribeAll: Subject<any>;
 
   displayedCollaborator: string[] = [
@@ -47,13 +51,14 @@ export class CollaboratorListComponent implements OnInit {
   ];
 
   collaborators!: ICollaborator[];
-  filteredCollaboratorList!: any[];
+  filteredCollaboratorList = new MatTableDataSource();
   index: any = null;
   Collaborator: any;
   step: number = 1;
   form!: FormGroup;
 
   constructor(
+    private liveAnnouncer: LiveAnnouncer,
     private router: Router,
     private collaboratorProvider: CollaboratorProvider,
     private snackbarService: SnackBarService,
@@ -65,8 +70,16 @@ export class CollaboratorListComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.initFilter();
+    await this.getCollaboratorList();
+  }
 
-    this.getCollaboratorList();
+  announceSortChange(sortState: any) {
+    console.log(sortState);
+    if (sortState.direction) {
+      this.liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
+    } else {
+      this.liveAnnouncer.announce('Sorting cleared');
+    }
   }
 
   createCollaborator() {
@@ -122,6 +135,7 @@ export class CollaboratorListComponent implements OnInit {
   async getCollaboratorList() {
     this.filteredCollaboratorList = this.collaborators =
       await this.collaboratorProvider.findAll();
+    this.filteredCollaboratorList.sort = this.sort;
   }
 
   initFilter() {
@@ -129,7 +143,7 @@ export class CollaboratorListComponent implements OnInit {
       .pipe(debounceTime(200), distinctUntilChanged())
 
       .subscribe((res) => {
-        this.filteredCollaboratorList = this.collaborators.filter(
+        this.filteredCollaboratorList.data = this.collaborators.filter(
           (collaborator) =>
             collaborator.firstNameCorporateName
               .toLocaleLowerCase()

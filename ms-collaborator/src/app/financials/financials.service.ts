@@ -38,11 +38,6 @@ export class FinancialsService {
   }
 
   async store(data: CreateFinancialsDto) {
-<<<<<<< HEAD
-=======
-
-
->>>>>>> e78919c23ddd7bf7fb2d607a2af58d7f75ab0e00
     const financial = this.financialsRepository.create(data);
     return await this.financialsRepository.save(financial);
   }
