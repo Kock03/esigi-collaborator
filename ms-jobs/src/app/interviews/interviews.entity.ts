@@ -39,5 +39,5 @@ export class InterviewsEnitiy {
   @ManyToOne(() => JobsEntity, (jobs) => jobs.interviews, {
     cascade: ['insert', 'update', 'soft-remove']
   })
-  Jobs: JobsEntity;
+  Job: JobsEntity;
 }

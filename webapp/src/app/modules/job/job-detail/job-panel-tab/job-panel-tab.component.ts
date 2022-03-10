@@ -89,7 +89,12 @@ export class JobPanelTabComponent implements OnInit {
   }
 
   editInterview(interviewId: any) {
-    this.router.navigate([`interview/${interviewId}`]);
+    const navigationExtras = {
+      state: {
+        id: this.jobId,
+      },
+    };
+    this.router.navigate([`vaga/interview/${interviewId}`], navigationExtras);
   }
 
   async deleteCollaborator(interviewId: any) {
@@ -124,9 +129,10 @@ export class JobPanelTabComponent implements OnInit {
   }
 
   navigateJobs() {
+    console.log("🚀 ~ file: job-panel-tab.component.ts ~ line 135 ~ JobPanelTabComponent ~ navigateJobs ~  this.jobId",  this.jobId)
     const navigationExtras = {
       state: {
-        id: this.jobId,
+        jobId: this.jobId,
       },
     };
     this.router.navigate(['vaga/interview/novo'], navigationExtras);

@@ -4,6 +4,7 @@ import { BehavioralInterviewsEntity } from 'src/app/behavioral-interviews/behavi
 import { ClientInterviewsEntity } from 'src/app/client-interviews/client-interviews.entity';
 import { JobsEntity } from 'src/app/jobs/jobs.entity';
 import { TechnicalInterviewsEntity } from 'src/app/technical-interviews/technical-interviews.entity';
+import { IsNull } from 'typeorm';
 
 export class CreateInterviewsDto {
   @ApiProperty()
@@ -20,5 +21,5 @@ export class CreateInterviewsDto {
 
   @ApiProperty()
   @IsOptional()
-  Jobs: JobsEntity;
+  Job: JobsEntity;
 }

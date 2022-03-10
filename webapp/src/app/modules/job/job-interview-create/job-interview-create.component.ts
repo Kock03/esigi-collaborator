@@ -19,6 +19,9 @@ import { TechnicalInterviewProvider } from 'src/providers/technicalInterview.pro
 import { ReturnProvider } from 'src/providers/return.provider';
 import { SnackBarService } from 'src/services/snackbar.service';
 import { Location } from '@angular/common';
+import { InterviewsProvider } from 'src/providers/interview.provider';
+import { IInterview } from 'src/app/interfaces/iinterview';
+import { JobPanelModel } from 'src/models/job-panel-model';
 
 @Component({
   selector: 'app-job-interview-create',
@@ -30,15 +33,17 @@ export class JobInterviewCreateComponent implements OnInit {
   technicalInterviewForm!: FormGroup;
   clientInterviewForm!: FormGroup;
   returnForm!: FormGroup;
-  jobId!: string | null;
+  jobId!: string;
   interviewId!: string | null;
   id!: any;
   get!: any;
   step: number = 1;
   selectedIndex: number = 0;
   disable = false;
-  interview: any;
+  interview: IInterview[] = [];
+  interviews: any;
   typeControl = new FormControl();
+ 
   constructor(
     private fb: FormBuilder,
     private behaviroalInterviewProvider: BehaviroalInterviewProvider,
@@ -48,30 +53,36 @@ export class JobInterviewCreateComponent implements OnInit {
     private snackbarService: SnackBarService,
     private route: ActivatedRoute,
     private _location: Location,
-    private router: Router
+    private router: Router,
+    private interviewsProvider: InterviewsProvider
   ) {
-    const getId = this.router.getCurrentNavigation()?.extras.state;
-    this.get = getId;
+    const state = this.router.getCurrentNavigation()?.extras.state;
+    console.log("🚀 ~ file: job-interview-create.component.ts ~ line 64 ~ JobInterviewCreateComponent ~ ngOnInit ~ state", state)
+    if (state){
+      this.jobId = state['jobId'];
+    }
   }
 
   async ngOnInit(): Promise<void> {
+  
+
     this.interviewId = this.route.snapshot.paramMap.get('id');
     console.log(
-      '🚀 ~ file: job-interview-create.component.ts ~ line 56 ~ JobInterviewCreateComponent ~ ngOnInit ~ this.interviewId',
       this.interviewId
     );
 
-    // if (this.interviewId !== 'novo') {
-    //   this.interview = await this.jobInterviewProvider.getDetails(
-    //     this.interviewId
-    //   );
-    //   this.initForm();
-    //   this.setFormValue();
-    // } else {
-    //   this.initForm();
-    // }
+    if (this.interviewId !== 'novo') {
+      this.initForm();
+      this.interviews = await this.interviewsProvider.findOne(
+        this.interviewId
+      );
+        this.behavioralInterviewForm.patchValue(this.interviews.BehavioralInterviews);
+        this.technicalInterviewForm.patchValue(this.interviews.TechnicalInterviews);
+        this.clientInterviewForm.patchValue(this.interviews.ClientInterviews);
+    } else {
+      this.initForm();
+    }
 
-    this.initForm();
   }
 
   initForm() {
@@ -94,10 +105,7 @@ export class JobInterviewCreateComponent implements OnInit {
       comments: ['', Validators.required],
       situational: [1, Validators.required],
       availabilityOfInitialize: ['', Validators.required],
-<<<<<<< HEAD
-=======
-      //Job: { id: this.jobId },
->>>>>>> d84010379c85048b93499d68c2350d28785937de
+      Job: { id: this.jobId },
     });
     this.technicalInterviewForm = this.fb.group({
       id: null,
@@ -110,10 +118,7 @@ export class JobInterviewCreateComponent implements OnInit {
       technicalEvaluation: ['', Validators.required],
       comments: ['', Validators.required],
       situational: [1, Validators.required],
-<<<<<<< HEAD
-=======
       //Job: { id: this.jobId },
->>>>>>> d84010379c85048b93499d68c2350d28785937de
     });
 
     this.clientInterviewForm = this.fb.group({
@@ -127,10 +132,7 @@ export class JobInterviewCreateComponent implements OnInit {
       technicalEvaluation: ['', Validators.required],
       comments: ['', Validators.required],
       situational: [1, Validators.required],
-<<<<<<< HEAD
-=======
       //Job: { id: this.jobId },
->>>>>>> d84010379c85048b93499d68c2350d28785937de
     });
 
     this.returnForm = this.fb.group({
@@ -145,29 +147,39 @@ export class JobInterviewCreateComponent implements OnInit {
       typeOdContract: [1, Validators.required],
       combinedValue: ['', Validators.required],
       initialData: ['', Validators.required],
-<<<<<<< HEAD
-    });
-  }
-
-  handleBehaviroalInterviews(){
-    
-=======
       //Job: { id: this.jobId },
     });
   }
 
-  handleBehaviroalInterviews() {
+  async handleInterviews(type: string) {
+    switch (type) {
+      case 'behavioral': {
+        if (this.interviewId == 'novo') {
+          await this.saveBehaviroalInterviews();
+        } else {
+        }
+        break;
+      }
+      case 'technical': {
+        if (this.interviewId == 'novo') {
+          await this.saveBehaviroalInterviews();
+        } else {
+        }
+        break;
+      }
 
->>>>>>> d84010379c85048b93499d68c2350d28785937de
-    // save or edit (this.interviewId)
+    }
+   
   }
 
 
-  async saveBehaviroalInterviews() {
+  async saveBehaviroalInterviews() { 
     let data = this.behavioralInterviewForm.getRawValue();
 
     try {
-      const res = await this.behaviroalInterviewProvider.store(data);
+      delete data.id;
+      const res = await this.interviewsProvider.store(data)
+      // const res = await this.behaviroalInterviewProvider.store(data);
 
       this.snackbarService.successMessage(
         'Entrevista Comportional Cadastrada Com Sucesso'

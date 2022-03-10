@@ -34,7 +34,7 @@ export class InterviewsProvider {
   findOne(id: string | null): Promise<any> {
     return new Promise((resolve, reject) => {
       this.apiGateway
-        .get(environment.JOBS_MS + 'interview/:id', { id: id })
+        .get(environment.JOBS_MS + 'interviews/:id', { id: id })
         .subscribe((response: HttpResponse<any>) => {
           resolve(response.body);
         }, reject);
@@ -54,7 +54,7 @@ export class InterviewsProvider {
   update(id: string | null, interview: any): Promise<any> {
     return new Promise((resolve, reject) => {
       this.apiGateway
-        .put(environment.JOBS_MS + 'interview/:id', { id: id }, interview)
+        .put(environment.JOBS_MS + 'interviews/:id', { id: id }, interview)
         .subscribe((response: HttpResponse<any>) => {
           resolve(response.body);
         }, reject);
@@ -64,7 +64,7 @@ export class InterviewsProvider {
   store(interview: any): Promise<any> {
     return new Promise((resolve, reject) => {
       this.apiGateway
-        .post(environment.JOBS_MS + 'interview', interview)
+        .post(environment.JOBS_MS + 'interviews', interview)
         .subscribe((response: HttpResponse<any>) => {
           resolve(response.body);
         }, reject);
@@ -74,7 +74,7 @@ export class InterviewsProvider {
   destroy(id: string | null): Promise<any> {
     return new Promise((resolve, reject) => {
       this.apiGateway
-        .delete(environment.JOBS_MS + 'interview/:id', { id: id })
+        .delete(environment.JOBS_MS + 'interviews/:id', { id: id })
         .subscribe((response: HttpResponse<any>) => {
           resolve(response.body);
         }, reject);
