@@ -1,6 +1,11 @@
 import { HttpException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { FindConditions, FindOneOptions, Repository } from 'typeorm';
+import {
+  FindConditions,
+  FindManyOptions,
+  FindOneOptions,
+  Repository,
+} from 'typeorm';
 import { SkillsEntity } from './skills.entity';
 import { CreateSkillsDto } from './dtos/create-skills.dto';
 import { UpdateSkillsDto } from './dtos/update-skills.dto';
@@ -14,11 +19,10 @@ export class SkillsService {
   ) {}
 
   async findAll() {
-    const skillsWhiteCollaborator = await this.skillsRepository
-      .createQueryBuilder('skills')
-      .getMany();
-
-    return skillsWhiteCollaborator;
+    const options: FindManyOptions = {
+      order: { createdAt: 'DESC' },
+    };
+    return await this.skillsRepository.find(options);
   }
 
   async findOneOrFail(

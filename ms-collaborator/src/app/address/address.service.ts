@@ -6,7 +6,12 @@ import {
 } from '@nestjs/common';
 import { HttpErrorByCode } from '@nestjs/common/utils/http-error-by-code.util';
 import { InjectRepository } from '@nestjs/typeorm';
-import { FindConditions, FindOneOptions, Repository } from 'typeorm';
+import {
+  FindConditions,
+  FindManyOptions,
+  FindOneOptions,
+  Repository,
+} from 'typeorm';
 import { NotFoundException } from '../exceptions/not-found-exception';
 import { AddressEntity } from './address.entity';
 import { CreateAddressDto } from './dtos/create-address.dto';
@@ -20,11 +25,10 @@ export class AddressService {
   ) {}
 
   async findAll() {
-    const addressWhiteCollaborator = await this.addressRepository
-      .createQueryBuilder('address')
-      .getMany();
-
-    return addressWhiteCollaborator;
+    const options: FindManyOptions = {
+      order: { createdAt: 'DESC' },
+    };
+    return await this.addressRepository.find(options);
   }
 
   async findOneOrFail(

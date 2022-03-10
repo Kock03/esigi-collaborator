@@ -1,7 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { NotFoundException } from 'src/exceptions/not-found-exception';
-import { Repository, FindConditions, FindOneOptions } from 'typeorm';
+import {
+  Repository,
+  FindConditions,
+  FindOneOptions,
+  FindManyOptions,
+} from 'typeorm';
 import { CreatePhoneDto } from './dto/create-phone.dto';
 import { UpdatePhoneDto } from './dto/update-phone.dto';
 import { PhoneEntity } from './phone.entity';
@@ -11,10 +16,13 @@ export class PhoneService {
   constructor(
     @InjectRepository(PhoneEntity)
     private readonly phoneRepository: Repository<PhoneEntity>,
-  ) { }
+  ) {}
 
   async findAll() {
-    return await this.phoneRepository.find();
+    const options: FindManyOptions = {
+      order: { createdAt: 'DESC' },
+    };
+    return await this.phoneRepository.find(options);
   }
 
   async findOneOrFail(

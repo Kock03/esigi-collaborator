@@ -25,7 +25,7 @@ export class BankDataController {
 
   @Get(':id')
   async show(@Param('id', new ParseUUIDPipe()) id: string) {
-    return await this.bankDataService.method(id);
+    return await this.bankDataService.findOneOrFail({ id });
   }
 
   @Post()

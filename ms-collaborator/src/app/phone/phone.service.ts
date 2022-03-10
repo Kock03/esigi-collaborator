@@ -1,6 +1,11 @@
 import { HttpException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { FindConditions, FindOneOptions, Repository } from 'typeorm';
+import {
+  FindConditions,
+  FindManyOptions,
+  FindOneOptions,
+  Repository,
+} from 'typeorm';
 import { NotFoundException } from '../exceptions/not-found-exception';
 import { CreatePhoneDto } from './dtos/create-phone.dto';
 import { UpdatePhoneDto } from './dtos/update-phone.dto';
@@ -14,11 +19,10 @@ export class PhoneService {
   ) {}
 
   async findAll() {
-    const phoneWhiteCollaborator = await this.phoneRepository
-      .createQueryBuilder('phone')
-      .getMany();
-
-    return phoneWhiteCollaborator;
+    const options: FindManyOptions = {
+      order: { createdAt: 'DESC' },
+    };
+    return await this.phoneRepository.find(options);
   }
 
   async findOneOrfail(

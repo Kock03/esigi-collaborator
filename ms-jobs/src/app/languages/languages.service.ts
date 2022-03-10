@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { FindConditions, FindOneOptions } from 'typeorm';
+import { FindConditions, FindManyOptions, FindOneOptions } from 'typeorm';
 import { Repository } from 'typeorm/repository/Repository';
 import { NotFoundException } from '../exceptions/not-found-exception';
 import { CreateLanguagesDto } from './dtos/create-languages.dto';
@@ -15,11 +15,10 @@ export class LanguagesService {
   ) {}
 
   async findAll() {
-    const languagesWhiteCollaborator = await this.languagesRepository
-      .createQueryBuilder('languages')
-      .getMany();
-
-    return languagesWhiteCollaborator;
+    const options: FindManyOptions = {
+      order: { createdAt: 'DESC' },
+    };
+    return await this.languagesRepository.find(options);
   }
 
   async findOneOrfail(

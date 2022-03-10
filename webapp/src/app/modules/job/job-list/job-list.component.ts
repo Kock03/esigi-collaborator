@@ -1,3 +1,4 @@
+import { LiveAnnouncer } from '@angular/cdk/a11y';
 import {
   Component,
   ElementRef,
@@ -5,6 +6,8 @@ import {
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
+import { MatSort, Sort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import {
   fromEvent,
@@ -33,6 +36,8 @@ export interface Job {
   encapsulation: ViewEncapsulation.None,
 })
 export class JobListComponent implements OnInit {
+  @ViewChild(MatSort) sort: MatSort = new MatSort();
+
   @ViewChild('filter', { static: true }) filter!: ElementRef;
   private _unsubscribeAll: Subject<any>;
   displayedJob: string[] = [
@@ -44,9 +49,10 @@ export class JobListComponent implements OnInit {
     'icon',
   ];
   jobs!: Job[];
-  filteredJobList!: any[];
+  filteredJobList = new MatTableDataSource();
 
   constructor(
+    private liveAnnouncer: LiveAnnouncer,
     private snackbarService: SnackBarService,
     private router: Router,
     private jobProvider: JobProvider,
@@ -61,13 +67,45 @@ export class JobListComponent implements OnInit {
     this.initFilter();
   }
 
+  // sortData(sort: any) {
+  //   const data = this.filteredJobList.data.slice();
+  //   if (!sort.active || sort.direction === '') {
+  //     this.filteredJobList.data = data;
+  //     return;
+  //   }
+
+  //   this.filteredJobList.data = data.sort((a: any, b: any) => {
+  //     const isAsc = sort.direction === 'asc';
+  //     switch (sort.active) {
+  //       case 'jobName':
+  //         return compare(a.jobName, b.jobName, isAsc);
+  //       default:
+  //         return 0;
+  //     }
+  //   });
+
+  //   function compare(a: number | string, b: number | string, isAsc: boolean) {
+  //     return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
+  //   }
+  // }
+
+  announceSortChange(sortState: any) {
+    console.log(sortState);
+    if (sortState.direction) {
+      this.liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
+    } else {
+      this.liveAnnouncer.announce('Sorting cleared');
+    }
+  }
+
   createJob() {
     this.router.navigate(['vaga/novo']);
   }
 
   async getJobList() {
     try {
-      this.filteredJobList = this.jobs = await this.jobProvider.findAll();
+      this.filteredJobList.data = this.jobs = await this.jobProvider.findAll();
+      this.filteredJobList.sort = this.sort;
     } catch (error) {
       console.error(error);
     }
@@ -86,7 +124,7 @@ export class JobListComponent implements OnInit {
       .pipe(debounceTime(200), distinctUntilChanged())
 
       .subscribe((res) => {
-        this.filteredJobList = this.jobs.filter((job) =>
+        this.filteredJobList.data = this.jobs.filter((job) =>
           job.jobName
             .toLocaleLowerCase()
             .includes(this.filter.nativeElement.value.toLocaleLowerCase())

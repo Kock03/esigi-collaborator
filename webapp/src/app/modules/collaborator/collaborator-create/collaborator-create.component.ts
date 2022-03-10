@@ -35,8 +35,8 @@ export class CollaboratorCreateComponent implements OnInit {
   urlStep!: number;
 
   validations = [
-      ['cpf', 'admissionDate'],
-      ['Dependents']
+    ['cpf', 'admissionDate'],
+    ['Dependents']
   ]
 
   get educationArray() {
@@ -70,7 +70,7 @@ export class CollaboratorCreateComponent implements OnInit {
     private router: Router,
     private snackbarService: SnackBarService,
     private route: ActivatedRoute
-  ) {}
+  ) { }
 
   async ngOnInit(): Promise<void> {
     if (sessionStorage.getItem('collaborator_tab') == undefined) {
@@ -139,7 +139,7 @@ export class CollaboratorCreateComponent implements OnInit {
       birthDate: ['2004-06-12', Validators.required],
       admissionDate: ['', Validators.required],
       email: ['davi@email.com', [Validators.email, Validators.required]],
-      cnpj: this.fb.control({ value: null, disabled: true }, [
+      cnpj: this.fb.control({ value: null, disabled: false }, [
         DocumentValidator.isValidCnpj(),
         Validators.required,
       ]),
@@ -174,7 +174,7 @@ export class CollaboratorCreateComponent implements OnInit {
       // ), 
       Dependents: this.fb.array(
         this.collaborator ? this.collaborator.Dependents : [], [Validators.required]
-      ), 
+      ),
       Educations: this.fb.array(
         this.collaborator ? this.collaborator.Educations : []
       ),
@@ -214,7 +214,7 @@ export class CollaboratorCreateComponent implements OnInit {
       this.snackbarService.showError(error.message);
     }
   }
-  handleChanges(value: any): void {}
+  handleChanges(value: any): void { }
 
   handleStep(number: number): void {
     this.step = number;
@@ -235,8 +235,8 @@ export class CollaboratorCreateComponent implements OnInit {
     const validations = this.validations[this.step - 1]
     console.log("🚀 ~ file: collaborator-create.component.ts ~ line 225 ~ CollaboratorCreateComponent ~ navigate ~ this.validations[this.step]", this.validations)
     console.log("🚀 ~ file: collaborator-create.component.ts ~ line 236 ~ CollaboratorCreateComponent ~ checkValid ~ this.collaboratorForm.controls[validations[index]]", this.collaboratorForm.controls[validations[0]])
-    for (let index = 0; index < validations.length ; index++) {
-      if  (this.collaboratorForm.controls[validations[index]].invalid) {
+    for (let index = 0; index < validations.length; index++) {
+      if (this.collaboratorForm.controls[validations[index]].invalid) {
         isValid = false;
         this.snackbarService.showAlert('Verifique os campos');
         this.collaboratorForm.markAllAsTouched();

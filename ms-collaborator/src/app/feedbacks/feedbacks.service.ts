@@ -1,6 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { FindConditions, FindOneOptions, Repository } from 'typeorm';
+import {
+  FindConditions,
+  FindManyOptions,
+  FindOneOptions,
+  Repository,
+} from 'typeorm';
 import { NotFoundException } from '../exceptions/not-found-exception';
 import { CreateFeedbacksDto } from './dto/create-feedbacks.dto';
 import { UpdateFeedbacksDto } from './dto/update-feedbacks.dto';
@@ -14,7 +19,10 @@ export class FeedbacksService {
   ) {}
 
   async findAll() {
-    return await this.feedbacksRepository.find();
+    const options: FindManyOptions = {
+      order: { createdAt: 'DESC' },
+    };
+    return await this.feedbacksRepository.find(options);
   }
 
   async findOneOrFail(
@@ -37,10 +45,10 @@ export class FeedbacksService {
   async viewFeedbacks(collaboratorId): Promise<FeedbacksEntity[]> {
     return await this.feedbacksRepository.find({
       where: {
-        collaborator: collaboratorId
+        collaborator: collaboratorId,
       },
       relations: ['collaborator'],
-  });
+    });
   }
 
   async update(id: string, data: UpdateFeedbacksDto) {

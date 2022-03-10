@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import {
   FindCondition,
   FindConditions,
+  FindManyOptions,
   FindOneOptions,
   Repository,
 } from 'typeorm';
@@ -19,6 +20,9 @@ export class TechnicalInterviewsService {
   ) {}
 
   async findAll() {
+    const options: FindManyOptions = {
+      order: { createdAt: 'DESC' },
+    };
     return await this.technicalInterviewsRepository.find();
   }
 

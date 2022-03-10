@@ -1,6 +1,11 @@
 import { HttpException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { FindConditions, FindOneOptions, Repository } from 'typeorm';
+import {
+  FindConditions,
+  FindManyOptions,
+  FindOneOptions,
+  Repository,
+} from 'typeorm';
 import { NotFoundException } from '../exceptions/not-found-exception';
 import { CreateFinancialsDto } from './dtos/create-financials.dto';
 import { UpdateFinancialsDto } from './dtos/update-financials.dto';
@@ -11,14 +16,13 @@ export class FinancialsService {
   constructor(
     @InjectRepository(FinancialsEntity)
     private readonly financialsRepository: Repository<FinancialsEntity>,
-  ) { }
+  ) {}
 
   async findAll() {
-    const financialsWhiteCollaborator = await this.financialsRepository
-      .createQueryBuilder('financials')
-      .getMany();
-
-    return financialsWhiteCollaborator;
+    const options: FindManyOptions = {
+      order: { createdAt: 'DESC' },
+    };
+    return await this.financialsRepository.find(options);
   }
 
   async findOneOrFail(
@@ -34,11 +38,8 @@ export class FinancialsService {
   }
 
   async store(data: CreateFinancialsDto) {
-
     const financial = this.financialsRepository.create(data);
     return await this.financialsRepository.save(financial);
-
-
   }
 
   async update(id: string, data: UpdateFinancialsDto) {

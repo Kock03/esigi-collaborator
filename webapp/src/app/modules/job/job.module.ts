@@ -31,6 +31,7 @@ import { JobSkillTabComponent } from './job-create/job-skill-tab/job-skill-tab.c
 import { ConfirmDialogService } from 'src/services/confirn-dialog.service';
 import { JobDialogSkill } from './job-create/job-skill-tab/job-skill-dialog.component';
 import { JobInterviewCreateComponent } from './job-interview-create/job-interview-create.component';
+import { MatSortModule } from '@angular/material/sort';
 
 const routes: Routes = [
   {
@@ -81,6 +82,7 @@ const routes: Routes = [
     MatTreeModule,
     HttpClientModule,
     NgxMaskModule,
+    MatSortModule,
   ],
   providers: [MatDatepickerModule, ConfirmDialogService],
   entryComponents: [

@@ -4,6 +4,7 @@ import { CreateBehaviorInterviewsDto } from 'src/app/behavioral-interviews/dtos/
 import {
   FindCondition,
   FindConditions,
+  FindManyOptions,
   FindOneOptions,
   Repository,
 } from 'typeorm';
@@ -19,7 +20,10 @@ export class HiringPreferencesService {
   ) {}
 
   async findAll() {
-    return await this.hiringPreferencesRepository.find();
+    const options: FindManyOptions = {
+      order: { createdAt: 'DESC' },
+    };
+    return await this.hiringPreferencesRepository.find(options);
   }
 
   async findOneOrFail(
