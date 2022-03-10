@@ -94,6 +94,10 @@ export class JobInterviewCreateComponent implements OnInit {
       comments: ['', Validators.required],
       situational: [1, Validators.required],
       availabilityOfInitialize: ['', Validators.required],
+<<<<<<< HEAD
+=======
+      //Job: { id: this.jobId },
+>>>>>>> d84010379c85048b93499d68c2350d28785937de
     });
     this.technicalInterviewForm = this.fb.group({
       id: null,
@@ -106,6 +110,10 @@ export class JobInterviewCreateComponent implements OnInit {
       technicalEvaluation: ['', Validators.required],
       comments: ['', Validators.required],
       situational: [1, Validators.required],
+<<<<<<< HEAD
+=======
+      //Job: { id: this.jobId },
+>>>>>>> d84010379c85048b93499d68c2350d28785937de
     });
 
     this.clientInterviewForm = this.fb.group({
@@ -119,6 +127,10 @@ export class JobInterviewCreateComponent implements OnInit {
       technicalEvaluation: ['', Validators.required],
       comments: ['', Validators.required],
       situational: [1, Validators.required],
+<<<<<<< HEAD
+=======
+      //Job: { id: this.jobId },
+>>>>>>> d84010379c85048b93499d68c2350d28785937de
     });
 
     this.returnForm = this.fb.group({
@@ -133,11 +145,20 @@ export class JobInterviewCreateComponent implements OnInit {
       typeOdContract: [1, Validators.required],
       combinedValue: ['', Validators.required],
       initialData: ['', Validators.required],
+<<<<<<< HEAD
     });
   }
 
   handleBehaviroalInterviews(){
     
+=======
+      //Job: { id: this.jobId },
+    });
+  }
+
+  handleBehaviroalInterviews() {
+
+>>>>>>> d84010379c85048b93499d68c2350d28785937de
     // save or edit (this.interviewId)
   }
 

@@ -13,6 +13,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { HiringPreferencesEntity } from '../hiring-preferences/hiring-preferences.entity';
+import { InterviewsEnitiy } from '../interviews/interviews.entity';
 import { Presentation } from './enums/presentation.enum';
 import { Punctuality } from './enums/punctuality.enum';
 import { Situation } from './enums/situational.enum';
@@ -62,6 +63,9 @@ export class BehavioralInterviewsEntity {
   })
   @JoinColumn()
   hiringPreference: HiringPreferencesEntity;
+
+  @OneToOne(() => InterviewsEnitiy, (interviews) => interviews.BehavioralInterviews)
+  interviews: InterviewsEnitiy;
 
   @CreateDateColumn()
   createdAt: Date;
