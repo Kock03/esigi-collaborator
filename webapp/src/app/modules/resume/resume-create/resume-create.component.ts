@@ -27,6 +27,14 @@ export class ResumeCreateComponent implements OnInit {
 
   Experience: any;
 
+  validations = [
+    ['cpf'],
+    ['Educations', 'Languages'],
+    ['Experiences'],
+    ['Skills'],
+  ];
+
+
   get educationArray() {
     return this.resumeForm.controls['Educations'] as FormArray;
   }
@@ -83,7 +91,7 @@ export class ResumeCreateComponent implements OnInit {
 
       cpf: this.fb.control(
         { value: null, disabled: false },
-        DocumentValidator.isValidCpf()
+       [  DocumentValidator.isValidCpf(), Validators.required]
       ),
 
       birthDate: ['2022-01-01', Validators.required],
@@ -110,10 +118,10 @@ export class ResumeCreateComponent implements OnInit {
       site: ['', Validators.required],
       linkedin: ['', Validators.required],
 
-      Educations: this.fb.array(this.resume ? this.resume.Educations : []),
-      Languages: this.fb.array(this.resume ? this.resume.Languages : []),
-      Experiences: this.fb.array(this.resume ? this.resume.Experiences : []),
-      Skills: this.fb.array(this.resume ? this.resume.Skills : []),
+      Educations: this.fb.array(this.resume ? this.resume.Educations : [],    [ Validators.required]),
+      Languages: this.fb.array(this.resume ? this.resume.Languages : [], [ Validators.required]),
+      Experiences: this.fb.array(this.resume ? this.resume.Experiences : [], [ Validators.required]),
+      Skills: this.fb.array(this.resume ? this.resume.Skills : [], [ Validators.required]),
     });
   }
 
@@ -130,7 +138,7 @@ export class ResumeCreateComponent implements OnInit {
       this.snackbarService.successMessage('Vaga Cadastrada Com Sucesso');
       this.router.navigate(['curriculo/lista']);
       sessionStorage.clear();
-    } catch (error) {
+    } catch (error: any) {
       console.log('ERROR 132' + error);
       this.snackbarService.showError('Falha ao Cadastrar');
     }
@@ -139,8 +147,10 @@ export class ResumeCreateComponent implements OnInit {
   navigate(direction: string) {
     if (this.step > 1 && direction === 'back') {
       this.step -= 1;
-    } else if (this.step < 5 && direction === 'next') {
+    } else if (this.checkValid() && this.step < 4 && direction === 'next') {
       this.step += 1;
+    } else {
+      this.snackbarService.showAlert('Verifique os campos');
     }
   }
 
@@ -150,8 +160,15 @@ export class ResumeCreateComponent implements OnInit {
   }
 
   handleStep(number: number): void {
-    this.step = number;
-    sessionStorage.setItem('resume_tab', this.step.toString());
+    if (!this.checkValid() && this.step < number) {
+      this.snackbarService.showAlert('Verifique os campos');
+    } else if (this.step - number < 1) {
+      this.step = number;
+      sessionStorage.setItem('resume_tab', this.step.toString());
+    } else {
+      this.step = number;
+      sessionStorage.setItem('resume_tab', this.step.toString());
+    }
   }
 
   handleChanges(value: any): void {}
@@ -166,4 +183,17 @@ export class ResumeCreateComponent implements OnInit {
       console.error(error);
     }
   }
-}
+
+    checkValid(): boolean {
+      let isValid = true;
+      const validations = this.validations[this.step - 1];
+      for (let index = 0; index < validations.length; index++) {
+        if (this.resumeForm.controls[validations[index]].invalid) {
+          isValid = false;
+    
+          this.resumeForm.markAllAsTouched();
+        }
+      }
+      return isValid;
+    }
+  }

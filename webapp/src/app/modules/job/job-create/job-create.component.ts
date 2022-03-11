@@ -84,6 +84,17 @@ export class JobCreateComponent implements OnInit {
   jobId!: string | null;
   job!: any;
 
+  validations = [
+    ['jobName'],
+    ['Knowledges'],
+    ['typeOfJob'],
+    ['requester'],
+    ['client'],
+    ['startForecast'],
+    
+
+  ]
+
   get knowledgeArray() {
     return this.jobForm.controls['Knowledges'] as FormArray;
   }
@@ -122,7 +133,7 @@ export class JobCreateComponent implements OnInit {
     }
   }
 
-  handleChanges(value: any): void {}
+
 
   initForm() {
     this.jobForm = this.fb.group({
@@ -201,10 +212,6 @@ export class JobCreateComponent implements OnInit {
     }
   }
 
-  handleStep(number: number): void {
-    this.step = number;
-    sessionStorage.setItem('job_tab', this.step.toString());
-  }
   async saveJob() {
     let data = this.jobForm.getRawValue();
 
@@ -221,6 +228,41 @@ export class JobCreateComponent implements OnInit {
     }
   }
 
+  navigate(direction: string) {
+    if (this.step > 1 && direction === 'back') {
+      this.step -= 1;
+    } else if (this.checkValid() && this.step < 2 && direction === 'next') {
+      this.step += 1;
+    } else {
+      this.snackbarService.showAlert('Verifique os campos');
+    }
+  }
+
+
+  
+
+
+
+  listJob() {
+    this.router.navigate(['vaga/lista']);
+    sessionStorage.clear();
+  }
+
+  handleStep(number: number): void {
+    if (!this.checkValid() && this.step < number) {
+      this.snackbarService.showAlert('Verifique os campos');
+    } else if (this.step - number < 1) {
+      this.step = number;
+      sessionStorage.setItem('job_tab', this.step.toString());
+    } else {
+      this.step = number;
+      sessionStorage.setItem('job_tab', this.step.toString());
+    }
+  }
+
+  handleChanges(value: any): void {}
+
+  
   async saveEditJob() {
     let data = this.jobForm.getRawValue();
     try {
@@ -233,16 +275,17 @@ export class JobCreateComponent implements OnInit {
     }
   }
 
-  listJob() {
-    this.router.navigate(['vaga/lista']);
-    sessionStorage.clear();
-  }
 
-  navigate(direction: string) {
-    if (this.step > 1 && direction === 'back') {
-      this.step -= 1;
-    } else if (this.step < 2 && direction === 'next') {
-      this.step += 1;
+checkValid(): boolean {
+  let isValid = true;
+  const validations = this.validations[this.step - 1];
+  for (let index = 0; index < validations.length; index++) {
+    if (this.jobForm.controls[validations[index]].invalid) {
+      isValid = false;
+
+      this.jobForm.markAllAsTouched();
     }
   }
+  return isValid;
+}
 }
