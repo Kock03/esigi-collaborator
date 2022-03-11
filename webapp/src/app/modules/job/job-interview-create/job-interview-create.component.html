@@ -1,13 +1,13 @@
 <div id="jobInterview" class="page">
   <div class="content-scroll" >
     <div fxLayout="row" fxLayoutAlign="space-around center"  fxLayoutAlign="start start">
-      <button (click)="backToList(this.get.id)" color="primary" mat-button>
+      <button (click)="backToList(this.jobId.id)" color="primary" mat-button>
         <mat-icon> chevron_left </mat-icon>
       </button>
       <h2>Entrevistas</h2>
     </div>
     <mat-tab-group animationDuration="0ms"  [selectedIndex]="selectedIndex">
-      <mat-tab label="Entevista Comportamental">
+      <mat-tab label="Entevista Comportamental" > 
         <form [formGroup]="behavioralInterviewForm" fxLayout="column" class="form">
           <div fxFlex="100" fxLayoutGap="16px">
             <mat-form-field fxFlex="35" appearance="outline">

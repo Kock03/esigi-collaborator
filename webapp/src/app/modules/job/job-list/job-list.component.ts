@@ -90,7 +90,6 @@ export class JobListComponent implements OnInit {
   // }
 
   announceSortChange(sortState: any) {
-    console.log(sortState);
     if (sortState.direction) {
       this.liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
     } else {

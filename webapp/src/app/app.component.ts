@@ -62,7 +62,6 @@ export class AppComponent {
       .pipe(filter((event) => event instanceof NavigationEnd))
       .subscribe((res: any) => {
         this.activeMenu = res.url.split('/')[1];
-        console.log("🚀 ~ file: app.component.ts ~ line 65 ~ AppComponent ~ .subscribe ~  this.activeMenu",  this.activeMenu)
       });
   }
 

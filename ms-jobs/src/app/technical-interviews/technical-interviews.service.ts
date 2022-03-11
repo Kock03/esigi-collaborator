@@ -41,7 +41,6 @@ export class TechnicalInterviewsService {
   }
 
   async store(data: CreateTechnicalInterviewsDto) {
-    console.log("🚀 ~ file: technical-interviews.service.ts ~ line 44 ~ TechnicalInterviewsService ~ store ~ data", data)
     const interview = this.technicalInterviewsRepository.create(data);
     return await this.technicalInterviewsRepository.save(interview);
   }

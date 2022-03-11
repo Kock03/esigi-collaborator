@@ -233,8 +233,6 @@ export class CollaboratorCreateComponent implements OnInit {
   checkValid(): boolean {
     let isValid = true;
     const validations = this.validations[this.step - 1]
-    console.log("🚀 ~ file: collaborator-create.component.ts ~ line 225 ~ CollaboratorCreateComponent ~ navigate ~ this.validations[this.step]", this.validations)
-    console.log("🚀 ~ file: collaborator-create.component.ts ~ line 236 ~ CollaboratorCreateComponent ~ checkValid ~ this.collaboratorForm.controls[validations[index]]", this.collaboratorForm.controls[validations[0]])
     for (let index = 0; index < validations.length; index++) {
       if (this.collaboratorForm.controls[validations[index]].invalid) {
         isValid = false;

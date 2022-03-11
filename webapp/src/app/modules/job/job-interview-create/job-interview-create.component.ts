@@ -33,7 +33,7 @@ export class JobInterviewCreateComponent implements OnInit {
   technicalInterviewForm!: FormGroup;
   clientInterviewForm!: FormGroup;
   returnForm!: FormGroup;
-  jobId!: string;
+  jobId!: any;
   interviewId!: string | null;
   id!: any;
   get!: any;
@@ -57,23 +57,17 @@ export class JobInterviewCreateComponent implements OnInit {
     private interviewsProvider: InterviewsProvider
   ) {
     const state = this.router.getCurrentNavigation()?.extras.state;
-    console.log(
-      '🚀 ~ file: job-interview-create.component.ts ~ line 64 ~ JobInterviewCreateComponent ~ ngOnInit ~ state',
-      state
-    );
-    if (state) {
-      this.jobId = state['jobId'];
-    }
+
+      this.jobId = state;
+    
   }
 
   async ngOnInit(): Promise<void> {
     this.interviewId = this.route.snapshot.paramMap.get('id');
-    console.log(this.interviewId);
 
     if (this.interviewId !== 'novo') {
       this.initForm();
       this.interview = await this.interviewsProvider.findOne(this.interviewId);
-      console.log("🚀 ~ file: job-interview-create.component.ts ~ line 76 ~ JobInterviewCreateComponent ~ ngOnInit ~ this.interviews", this.interview)
       this.behavioralInterviewForm.patchValue(
         this.interview.BehavioralInterviews
       );
@@ -175,18 +169,15 @@ export class JobInterviewCreateComponent implements OnInit {
 
   async saveBehaviroalInterviews() {
     let data = this.behavioralInterviewForm.getRawValue();
-    console.log(data);
     const interview = { BehavioralInterviews: data, Job: { id: this.jobId } };
-    console.log(interview);
+
     try {
       delete data.id;
       this.interview = await this.interviewsProvider.store(interview);
-      // const res = await this.behaviroalInterviewProvider.store(data);
       this.snackbarService.successMessage(
         'Entrevista Comportional Cadastrada Com Sucesso'
       );
       this.router.navigate([`vaga/interview/${this.interview.id}`]);
-      // this.nextStep();
     } catch (error) {
       console.log('ERROR 132' + error);
       this.snackbarService.showError('Falha ao Cadastrar');
@@ -196,7 +187,6 @@ export class JobInterviewCreateComponent implements OnInit {
   async saveTechnicalInterviews() {
     if(this.interviewId == 'novo'){
       let data = this.technicalInterviewForm.getRawValue();
-    console.log(data);
     const interview = { TechnicalInterviews: data, Job: { id: this.jobId } };
     try {
       delete data.id;

@@ -61,14 +61,6 @@ export class JobPanelTabComponent implements OnInit {
     this.initFilter();
   }
 
-  // async getInterviewList() {
-  //   try {
-  //     this.filteredInterviewList = this.interviews =
-  //       await this.JobProvider.findAll();
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // }
 
   async getInterviewList() {
     try {
@@ -91,7 +83,7 @@ export class JobPanelTabComponent implements OnInit {
   editInterview(interviewId: any) {
     const navigationExtras = {
       state: {
-        id: interviewId,
+        id: this.jobId,
       },
     };
     this.router.navigate([`vaga/interview/${interviewId}`], navigationExtras);
@@ -129,16 +121,20 @@ export class JobPanelTabComponent implements OnInit {
   }
 
   navigateJobs() {
-    console.log("🚀 ~ file: job-panel-tab.component.ts ~ line 135 ~ JobPanelTabComponent ~ navigateJobs ~  this.jobId",  this.jobId)
     const navigationExtras = {
       state: {
-        jobId: this.jobId,
+        id: this.jobId,
       },
     };
     this.router.navigate(['vaga/interview/novo'], navigationExtras);
   }
 
   createJob() {
+    const navigationExtras = {
+      state: {
+        id: this.jobId,
+      },
+    };
     this.router.navigate(['vaga/novo']);
   }
 
