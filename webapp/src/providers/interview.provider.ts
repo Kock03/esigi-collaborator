@@ -74,7 +74,7 @@ export class InterviewsProvider {
   destroy(id: string | null): Promise<any> {
     return new Promise((resolve, reject) => {
       this.apiGateway
-        .delete(environment.JOBS_MS + 'interviews/:id', { id: id })
+        .delete(environment.JOBS_MS + 'interviews/' + id )
         .subscribe((response: HttpResponse<any>) => {
           resolve(response.body);
         }, reject);

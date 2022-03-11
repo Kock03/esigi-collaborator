@@ -19,7 +19,6 @@ import { MatTable } from '@angular/material/table';
 import { InterviewsProvider } from 'src/providers/interview.provider';
 import { FormGroup } from '@angular/forms';
 
-
 // import { IInterview } from 'src/app/interfaces/iinterview';
 
 @Component({
@@ -48,6 +47,7 @@ export class JobPanelTabComponent implements OnInit {
   jobs!: Job[];
   job: any;
   jobId!: string | null;
+  data: any;
 
   constructor(
     private snackbarService: SnackBarService,
@@ -55,7 +55,7 @@ export class JobPanelTabComponent implements OnInit {
     private route: ActivatedRoute,
     private JobProvider: JobProvider,
     private dialogService: ConfirmDialogService,
-    private InterviewsProvider: InterviewsProvider,
+    private InterviewsProvider: InterviewsProvider
   ) {
     this._unsubscribeAll = new Subject();
   }
@@ -67,21 +67,21 @@ export class JobPanelTabComponent implements OnInit {
     this.initFilter();
   }
 
-
   async getInterviewList() {
     try {
       const interviews = await this.JobProvider.getFollowUpInterviews(
         this.jobId
       );
-      console.log("🚀 ~ file: job-panel-tab.component.ts ~ line 84 ~ JobPanelTabComponent ~ getInterviewList ~ interviews", interviews)
-     
+      console.log(
+        '🚀 ~ file: job-panel-tab.component.ts ~ line 84 ~ JobPanelTabComponent ~ getInterviewList ~ interviews',
+        interviews
+      );
 
       interviews.map((interview: any) => {
         this.interviews.push(new JobPanelModel(interview));
       });
-      
+
       this.interviewsTable.renderRows();
-      
     } catch (error) {
       console.error(error);
     }
@@ -96,7 +96,7 @@ export class JobPanelTabComponent implements OnInit {
     this.router.navigate([`vaga/interview/${interviewId}`], navigationExtras);
   }
 
-  async deleteCollaborator(interviewId: any) {
+  async deleteInterview(interviewId: any) {
     const options = {
       data: {
         title: 'Anteção',
@@ -110,14 +110,15 @@ export class JobPanelTabComponent implements OnInit {
     this.dialogService.confirmed().subscribe(async (confirmed) => {
       if (confirmed) {
         try {
-          const collaborators = await this.InterviewsProvider.destroy(
+          const interviews = await this.InterviewsProvider.destroy(
             interviewId
           );
           this.getInterviewList();
 
           this.snackbarService.successMessage(
-            'Colaborador Excluido Com Sucesso'
-          );
+            'Entrevista excluida com sucesso'
+            );
+            this.deleteRow(interviewId);
         } catch (error) {
           console.log('ERROR 132' + error);
           this.snackbarService.showError('Falha ao Excluir');
@@ -126,6 +127,11 @@ export class JobPanelTabComponent implements OnInit {
       }
     });
   }
+
+  deleteRow(id: any){
+    const index = this.data.indexOf(id);
+    this.data.splice(index, 1);
+}
 
   navigateJobs() {
     const navigationExtras = {

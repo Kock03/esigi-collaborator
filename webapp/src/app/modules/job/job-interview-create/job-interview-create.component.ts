@@ -174,6 +174,7 @@ export class JobInterviewCreateComponent implements OnInit {
     try {
       delete data.id;
       this.interview = await this.interviewsProvider.store(interview);
+      console.log(interview);
       this.snackbarService.successMessage(
         'Entrevista Comportional Cadastrada Com Sucesso'
       );
