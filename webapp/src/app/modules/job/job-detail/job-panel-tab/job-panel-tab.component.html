@@ -13,9 +13,10 @@
         <ng-container matColumnDef="nameCandidate">
           <th mat-header-cell *matHeaderCellDef>Nome do Candidato</th>
           <td mat-cell *matCellDef="let interviews">
-            {{ interviews.nameCandidate }}
+            {{ interviews.nameCandidate == null ? interviews.nameCandidateTec : interviews.nameCandidate}}
           </td>
         </ng-container>
+
 
         <ng-container matColumnDef="behavioralInterviewDate">
           <th mat-header-cell *matHeaderCellDef>
@@ -36,7 +37,7 @@
         <ng-container matColumnDef="responsible">
           <th mat-header-cell *matHeaderCellDef>Responsável</th>
           <td mat-cell *matCellDef="let interviews">
-            {{ interviews.techRecruter }}
+            {{ interviews.requester }}
           </td>
         </ng-container>
 

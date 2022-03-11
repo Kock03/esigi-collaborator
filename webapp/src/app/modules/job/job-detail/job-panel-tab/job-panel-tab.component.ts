@@ -1,6 +1,7 @@
 import {
   Component,
   ElementRef,
+  Input,
   OnInit,
   ViewChild,
   ViewEncapsulation,
@@ -16,6 +17,8 @@ import { Job } from '../../job-list/job-list.component';
 import { JobPanelModel } from 'src/models/job-panel-model';
 import { MatTable } from '@angular/material/table';
 import { InterviewsProvider } from 'src/providers/interview.provider';
+import { FormGroup } from '@angular/forms';
+
 
 // import { IInterview } from 'src/app/interfaces/iinterview';
 
@@ -28,6 +31,9 @@ import { InterviewsProvider } from 'src/providers/interview.provider';
 export class JobPanelTabComponent implements OnInit {
   @ViewChild('interviewsTable') interviewsTable!: MatTable<any>;
   @ViewChild('filter', { static: true }) filter!: ElementRef;
+  @Input('form') behavioralInterviewForm!: FormGroup;
+  @Input('form') technicalInterviewForm!: FormGroup;
+
   private _unsubscribeAll: Subject<any>;
   displayedJob: string[] = [
     'nameCandidate',
@@ -67,13 +73,14 @@ export class JobPanelTabComponent implements OnInit {
       const interviews = await this.JobProvider.getFollowUpInterviews(
         this.jobId
       );
+      console.log("🚀 ~ file: job-panel-tab.component.ts ~ line 84 ~ JobPanelTabComponent ~ getInterviewList ~ interviews", interviews)
      
+
       interviews.map((interview: any) => {
         this.interviews.push(new JobPanelModel(interview));
       });
       
       this.interviewsTable.renderRows();
-      console.log(this.interviews)
       
     } catch (error) {
       console.error(error);
