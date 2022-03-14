@@ -249,7 +249,7 @@ export class CollaboratorCreateComponent implements OnInit {
     for (let index = 0; index < validations.length; index++) {
       if (this.collaboratorForm.controls[validations[index]].invalid) {
         isValid = false;
-
+  
         this.collaboratorForm.markAllAsTouched();
       }
     }
