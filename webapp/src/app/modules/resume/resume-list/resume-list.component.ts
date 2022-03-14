@@ -117,7 +117,7 @@ export class ResumeListComponent implements OnInit {
 
     this.dialogService.open(options);
 
-    this.dialogService.confirmed().subscribe(async (confirmed) => {
+    this.dialogService.confirmed().subscribe(async confirmed => {
       if (confirmed) {
         try {
           const resumes = await this.resumeProvider.destroy(resumeId);

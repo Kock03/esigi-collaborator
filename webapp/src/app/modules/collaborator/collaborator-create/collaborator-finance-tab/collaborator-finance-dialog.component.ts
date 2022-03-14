@@ -44,7 +44,7 @@ export class PickDateAdapter extends NativeDateAdapter {
   ],
 })
 export class CollaboratorFinanceDialog {
-  @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
+  @Output() onChange: EventEmitter<any> = new EventEmitter();
 
   financeForm!: FormGroup;
 

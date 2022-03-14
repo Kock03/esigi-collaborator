@@ -3,11 +3,7 @@
     <div fxFlex="90" fxLayoutGap="16px" fxLayout="row">
       <mat-form-field appearance="outline" fxFlex="50">
         <mat-label>Habilidade</mat-label>
-        <input
-          matInput
-          placeholder="Habilidade"
-          formControlName="name"
-        />
+        <input matInput placeholder="Habilidade" formControlName="name" />
       </mat-form-field>
 
       <mat-form-field appearance="outline" fxFlex="20">
@@ -16,22 +12,16 @@
           matInput
           type="number"
           placeholder="Anos de Experiencia"
-          formControlName="yearsExperience"
-        />
+          formControlName="yearsExperience" />
       </mat-form-field>
 
       <mat-form-field fxFlex="20" appearance="outline">
         <mat-label>Periodo</mat-label>
-        <mat-select
-          matInput
-          disableRipple
-          formControlName="typeOfPeriod"
-        >
+        <mat-select matInput disableRipple formControlName="typeOfPeriod">
           <mat-option [value]="1">Mês</mat-option>
           <mat-option [value]="2">Ano</mat-option>
         </mat-select>
       </mat-form-field>
-
     </div>
 
     <div mat-dialog-actions fxLayout="row" fxFlexAlign="center">
@@ -40,8 +30,7 @@
         mat-flat-button
         color="primary"
         [disabled]="knowledgeForm.invalid"
-        (click)="saveKnowledge()"
-      >
+        (click)="saveKnowledge()">
         Salvar
       </button>
     </div>

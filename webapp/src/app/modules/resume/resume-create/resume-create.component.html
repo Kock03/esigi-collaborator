@@ -11,8 +11,7 @@
       (click)="handleStep(1)"
       fxLayout="column"
       class="tab-group"
-      [ngClass]="{ done: step > 0, active: step == 1 }"
-    >
+      [ngClass]="{ done: step > 0, active: step == 1 }">
       <p class="tab-item">Cadastro</p>
       <span class="tab-border"></span>
     </div>
@@ -20,8 +19,7 @@
       (click)="handleStep(2)"
       fxLayout="column"
       class="tab-group"
-      [ngClass]="{ done: step > 1, active: step == 2 }"
-    >
+      [ngClass]="{ done: step > 1, active: step == 2 }">
       <p class="tab-item">Educação</p>
       <span class="tab-border"></span>
     </div>
@@ -29,8 +27,7 @@
       (click)="handleStep(3)"
       fxLayout="column"
       class="tab-group"
-      [ngClass]="{ done: step > 2, active: step == 3 }"
-    >
+      [ngClass]="{ done: step > 2, active: step == 3 }">
       <p class="tab-item">Experiência</p>
       <span class="tab-border"></span>
     </div>
@@ -38,8 +35,7 @@
       (click)="handleStep(4)"
       fxLayout="column"
       class="tab-group"
-      [ngClass]="{ done: step > 3, active: step == 4 }"
-    >
+      [ngClass]="{ done: step > 3, active: step == 4 }">
       <p class="tab-item">Skills</p>
       <span class="tab-border"></span>
     </div>
@@ -49,8 +45,7 @@
       (click)="handleStep(5)"
       fxLayout="column"
       class="tab-group"
-      [ngClass]="{ done: step > 4, active: step == 5 }"
-    >
+      [ngClass]="{ done: step > 4, active: step == 5 }">
       <p class="tab-item">Candidaturas</p>
       <span class="tab-border"></span>
     </div>
@@ -59,8 +54,7 @@
       *ngIf="resumeId !== 'novo'"
       fxLayout="column"
       class="tab-group disabled"
-      [ngClass]="{ done: step > 5, active: step == 6 }"
-    >
+      [ngClass]="{ done: step > 5, active: step == 6 }">
       <p class="tab-item">Acompanhamento</p>
       <span class="tab-border"></span>
     </div>
@@ -69,32 +63,27 @@
   <app-resume-register-tab
     [hidden]="step != 1"
     [form]="resumeForm"
-    (onChange)="handleChanges($event)"
-  ></app-resume-register-tab>
+    (onChange)="handleChanges($event)"></app-resume-register-tab>
   <app-resume-education-tab
     [hidden]="step != 2"
     [educationArray]="educationArray"
     [languageArray]="languageArray"
-    (onChange)="handleChanges($event)"
-  >
+    (onChange)="handleChanges($event)">
   </app-resume-education-tab>
   <app-resume-experience-tab
     [experiencesArray]="experiencesArray"
     [hidden]="step != 3"
-    (onChange)="handleChanges($event)"
-  ></app-resume-experience-tab>
+    (onChange)="handleChanges($event)"></app-resume-experience-tab>
   <app-resume-skills-tab
     [skillArray]="skillArray"
     [hidden]="step != 4"
-    (onChange)="handleChanges($event)"
-  >
+    (onChange)="handleChanges($event)">
   </app-resume-skills-tab>
   <app-resume-application-tab
     *ngIf="resumeId !== 'novo'"
     [hidden]="step != 5"
     [form]="resumeForm"
-    (onChange)="handleChanges($event)"
-  >
+    (onChange)="handleChanges($event)">
   </app-resume-application-tab>
   <app-resume-monitoring-tab *ngIf="resumeId !== 'novo'" [hidden]="step != 6">
   </app-resume-monitoring-tab>
@@ -103,8 +92,7 @@
     class="navigation-buttons"
     fxLayoutAlign="center end"
     fxLayoutGap="16px"
-    *ngIf="resumeId == 'novo'"
-  >
+    *ngIf="resumeId === 'novo'">
     <button mat-button *ngIf="step != 1" (click)="navigate('back')">
       Voltar
     </button>
@@ -112,16 +100,14 @@
       mat-flat-button
       *ngIf="step != 4"
       (click)="navigate('next')"
-      color="primary"
-    >
+      color="primary">
       Continuar
     </button>
     <button
       mat-flat-button
       *ngIf="step == 4"
       (click)="saveResume()"
-      color="primary"
-    >
+      color="primary">
       Salvar
     </button>
   </div>
@@ -129,8 +115,7 @@
     class="navigation-buttons"
     fxLayoutAlign="center end"
     fxLayoutGap="16px"
-    *ngIf="resumeId !== 'novo'"
-  >
+    *ngIf="resumeId !== 'novo'">
     <button mat-flat-button (click)="saveEditResume()" color="primary">
       Salvar
     </button>

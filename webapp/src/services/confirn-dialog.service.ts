@@ -6,25 +6,26 @@ import { ConfirmDialogComponent } from 'src/app/components/confirm-dialog/confir
 
 @Injectable()
 export class ConfirmDialogService {
-    constructor(private dialog: MatDialog) { }
-    dialogRef!: MatDialogRef<ConfirmDialogComponent>;
+  constructor(private dialog: MatDialog) {}
+  dialogRef!: MatDialogRef<ConfirmDialogComponent>;
 
-    public open(options: any) {
-        this.dialogRef = this.dialog.open(ConfirmDialogComponent, {
-            data: {
-                title: options.data.title,
-                subtitle: options.data.subtitle,
-                domain: options.data.domain
-            },
-            panelClass: options.panelClass,
-            backdropClass: options.backdropClass
-        });
-    }
-    public confirmed(): Observable<any> {
-        return this.dialogRef.afterClosed().
-            pipe(take(1), map(res => {
-                return res;
-            })
-            );
-    }
+  public open(options: any) {
+    this.dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data: {
+        title: options.data.title,
+        subtitle: options.data.subtitle,
+        domain: options.data.domain,
+      },
+      panelClass: options.panelClass,
+      backdropClass: options.backdropClass,
+    });
+  }
+  public confirmed(): Observable<any> {
+    return this.dialogRef.afterClosed().pipe(
+      take(1),
+      map(res => {
+        return res;
+      })
+    );
+  }
 }

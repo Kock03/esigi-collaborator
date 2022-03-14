@@ -5,8 +5,13 @@
       <form [formGroup]="financeForm" fxLayout="column">
         <mat-form-field fxFlex="35" appearance="outline">
           <mat-label>Data de Inclusão</mat-label>
-          <input matInput [matDatepicker]="picker" formControlName="dateInclusion" />
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <input
+            matInput
+            [matDatepicker]="picker"
+            formControlName="dateInclusion" />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
 
@@ -32,14 +37,24 @@
 
         <mat-form-field appearance="outline">
           <mat-label>Valor</mat-label>
-          <input mask="00||00,00||000,00||0.000,00||00.000,00" matInput disableRipple formControlName="value"
+          <input
+            mask="00||00,00||000,00||0.000,00||00.000,00"
+            matInput
+            disableRipple
+            formControlName="value"
             placeholder="Valor" />
         </mat-form-field>
 
         <mat-form-field fxFlex="50" appearance="outline">
           <mat-label>Data de Pagamento</mat-label>
-          <input matInput [matDatepicker]="paypicker" formControlName="payday" placeholder="Data de Pagamento" />
-          <mat-datepicker-toggle matSuffix [for]="paypicker"></mat-datepicker-toggle>
+          <input
+            matInput
+            [matDatepicker]="paypicker"
+            formControlName="payday"
+            placeholder="Data de Pagamento" />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="paypicker"></mat-datepicker-toggle>
           <mat-datepicker #paypicker></mat-datepicker>
         </mat-form-field>
       </form>
@@ -49,7 +64,11 @@
         <button mat-flat-button mat-dialog-close (click)="onNoClick()">
           Cancelar
         </button>
-        <button color="primary" [disabled]="financeForm.invalid" mat-flat-button [mat-dialog-close]="true"
+        <button
+          color="primary"
+          [disabled]="financeForm.invalid"
+          mat-flat-button
+          [mat-dialog-close]="true"
           (click)="save()">
           Salvar
         </button>

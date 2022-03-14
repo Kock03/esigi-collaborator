@@ -183,11 +183,11 @@ export class ApiGateway {
     let stream = this.http
       .request(requestOptions.method, requestOptions.url, requestOptions)
       .pipe(
-        catchError((error) => {
+        catchError(error => {
           this.errorsSubject.next(error);
           return throwError(error);
         }),
-        catchError((error) => {
+        catchError(error => {
           return throwError(this.unwrapHttpError(error));
         }),
         finalize(() => {

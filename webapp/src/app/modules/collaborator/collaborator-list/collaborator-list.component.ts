@@ -97,7 +97,7 @@ export class CollaboratorListComponent implements OnInit {
 
     this.dialogService.open(options);
 
-    this.dialogService.confirmed().subscribe(async (confirmed) => {
+    this.dialogService.confirmed().subscribe(async confirmed => {
       if (confirmed) {
         try {
           const collaborators = await this.collaboratorProvider.destroy(

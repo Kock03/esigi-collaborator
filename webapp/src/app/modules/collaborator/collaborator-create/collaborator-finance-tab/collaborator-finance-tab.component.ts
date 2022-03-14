@@ -31,8 +31,8 @@ import { CollaboratorFinanceDialog } from './collaborator-finance-dialog.compone
   encapsulation: ViewEncapsulation.None,
 })
 export class CollaboratorFinanceTabComponent implements OnInit {
-  @Input('financeArray') financeArray!: FormArray;
-  @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
+  @Input() financeArray!: FormArray;
+  @Output() onChange: EventEmitter<any> = new EventEmitter();
   @ViewChild('financeTable') financeTable!: MatTable<any>;
 
   displayedColumns: string[] = [
@@ -53,8 +53,6 @@ export class CollaboratorFinanceTabComponent implements OnInit {
   index: any = null;
   Finance: any;
 
- 
-
   constructor(
     private fb: FormBuilder,
     public dialog: MatDialog,
@@ -69,7 +67,7 @@ export class CollaboratorFinanceTabComponent implements OnInit {
   }
 
   initObservables() {
-    this.financeArray.valueChanges.subscribe((res) => {
+    this.financeArray.valueChanges.subscribe(res => {
       const isNullIndex = this.financeArray.value.findIndex(
         (finance: any) => finance == null
       );
@@ -88,7 +86,7 @@ export class CollaboratorFinanceTabComponent implements OnInit {
       height: '550px',
     });
 
-    dialogRef.afterClosed().subscribe((finance) => {
+    dialogRef.afterClosed().subscribe(finance => {
       if (finance) {
         this.financeArray.insert(0, this.fb.group(finance));
         this.financeTable.renderRows();
@@ -104,11 +102,11 @@ export class CollaboratorFinanceTabComponent implements OnInit {
     const dialogRef = this.dialog.open(CollaboratorFinanceDialog, {
       width: '500px',
       height: '550px',
-      data: financeSelected ,
+      data: financeSelected,
     });
 
     this.index = index;
-    dialogRef.afterClosed().subscribe((finance) => {
+    dialogRef.afterClosed().subscribe(finance => {
       if (finance) {
         this.financeArray.controls[this.index].patchValue(finance);
       }
@@ -126,7 +124,7 @@ export class CollaboratorFinanceTabComponent implements OnInit {
 
     this.dialogService.open(options);
 
-    this.dialogService.confirmed().subscribe(async (confirmed) => {
+    this.dialogService.confirmed().subscribe(async confirmed => {
       if (confirmed) {
         this.financeArray.removeAt(index);
       }

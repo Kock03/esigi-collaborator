@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewEncapsulation,
+} from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 @Component({
@@ -9,13 +16,11 @@ import { FormGroup } from '@angular/forms';
 })
 export class ResumeMonitoringTabComponent implements OnInit {
   @Input('form') resumeForm!: FormGroup;
-  @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
- 
+  @Output() onChange: EventEmitter<any> = new EventEmitter();
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   next() {
     this.onChange.next(true);

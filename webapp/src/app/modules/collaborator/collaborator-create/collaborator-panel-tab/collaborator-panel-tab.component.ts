@@ -1,4 +1,12 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild, ViewEncapsulation } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+  ViewEncapsulation,
+} from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatTable } from '@angular/material/table';
 
@@ -26,7 +34,7 @@ export class CollaboratorPanelTabComponent implements OnInit {
     'endDate',
     'hoursRun',
     'manager',
-    'client'
+    'client',
   ];
   panels: Panel[] = [
     {
@@ -54,5 +62,4 @@ export class CollaboratorPanelTabComponent implements OnInit {
   //   } catch (error) {
   //     console.error(error);
   //   }
-
 }

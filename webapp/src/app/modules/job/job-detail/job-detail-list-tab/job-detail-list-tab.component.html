@@ -16,35 +16,35 @@
           </span>
           <span class="label-gray">
             <b>Data de Abertura:</b>
-            {{ job.openingDate | date: "dd/MM/yyyy" }}
+            {{ job.openingDate | date: 'dd/MM/yyyy' }}
           </span>
           <span class="label-gray">
             <b>Status da Vaga:</b>
             {{
               job.status == 1
-                ? "Processada"
+                ? 'Processada'
                 : job.status == 2
-                ? "Em Revisão"
+                ? 'Em Revisão'
                 : job.status == 3
-                ? "Fechada"
+                ? 'Fechada'
                 : job.status == 4
-                ? "Perdida"
-                : "Concluida"
+                ? 'Perdida'
+                : 'Concluida'
             }}
           </span>
           <span class="label-gray">
             <b>Tipo da Vaga:</b>
             {{
               job.typeOfJob == 1
-                ? "Aumento de Quadro"
+                ? 'Aumento de Quadro'
                 : job.typeOfJob == 2
-                ? "Promoção"
-                : "Fidelidade"
+                ? 'Promoção'
+                : 'Fidelidade'
             }}
           </span>
           <span class="label-gray">
             <b>Temporario:</b>
-            {{ job.temporary == true ? "Sim" : "Não" }}
+            {{ job.temporary == true ? 'Sim' : 'Não' }}
           </span>
           <span *ngIf="job.temporary == true" class="label-gray">
             <b>Tempo de Contrato:</b>
@@ -52,7 +52,7 @@
           </span>
           <span class="label-gray">
             <b>Previsão de Inicio:</b>
-            {{ job.startForecast | date: "dd/MM/yyyy" }}
+            {{ job.startForecast | date: 'dd/MM/yyyy' }}
           </span>
           <span class="label-gray">
             <b>Número de Vagas:</b>
@@ -62,22 +62,22 @@
             <b>Tipo de Contratação:</b>
             {{
               job.typeOfContract == 1
-                ? "CLT"
+                ? 'CLT'
                 : job.typeOfContract == 2
-                ? "PJ"
-                : "Cooperado"
+                ? 'PJ'
+                : 'Cooperado'
             }}
           </span>
           <span class="label-gray">
             <b>Local de Trabalho:</b>
             {{
               job.workplace == 1
-                ? "In Loco"
+                ? 'In Loco'
                 : job.workplace == 2
-                ? "Home Office"
+                ? 'Home Office'
                 : job.workplace == 3
-                ? "Hibrido"
-                : "Envolti"
+                ? 'Hibrido'
+                : 'Envolti'
             }}
           </span>
           <span class="label-gray">
@@ -86,10 +86,10 @@
           </span>
           <span class="label-gray">
             <b>Senioridade:</b>
-            {{ job.Seniorities.intern == true ? "Estagiário," : "" }}
-            {{ job.Seniorities.junior == true ? "Junior," : "" }}
-            {{ job.Seniorities.pleno == true ? "Pleno," : "" }}
-            {{ job.Seniorities.senior == true ? "Senior." : "" }}
+            {{ job.Seniorities.intern == true ? 'Estagiário,' : '' }}
+            {{ job.Seniorities.junior == true ? 'Junior,' : '' }}
+            {{ job.Seniorities.pleno == true ? 'Pleno,' : '' }}
+            {{ job.Seniorities.senior == true ? 'Senior.' : '' }}
           </span>
           <span class="label-gray">
             <b>Valor Minimo:</b>
@@ -101,16 +101,16 @@
           </span>
           <span class="label-gray">
             <b>Vaga:</b>
-            {{ job.publish == true ? "Publicada" : "Não Publicada" }}
+            {{ job.publish == true ? 'Publicada' : 'Não Publicada' }}
           </span>
           <span class="label-gray">
             <b>Escolaridade:</b>
             {{
               job.schooling == 1
-                ? "Ensino Superior Completo"
+                ? 'Ensino Superior Completo'
                 : job.schooling == 2
-                ? "Ensino Superior Incompleto"
-                : "Ensino Médio Completo"
+                ? 'Ensino Superior Incompleto'
+                : 'Ensino Médio Completo'
             }}
           </span>
           <span class="label-gray" *ngFor="let language of job?.Languages">
@@ -121,10 +121,10 @@
             <b>Nivel de Fluência:</b>
             {{
               language.degreeOfInfluence == 1
-                ? "Leitura e Conversação"
+                ? 'Leitura e Conversação'
                 : language.degreeOfInfluence
-                ? "Conversação e Escrita"
-                : "Escrita e Leitura"
+                ? 'Conversação e Escrita'
+                : 'Escrita e Leitura'
             }}
           </span>
           <span class="label-gray" *ngFor="let knowledge of job?.Knowledges">
@@ -134,15 +134,14 @@
           <span class="label-gray" *ngFor="let knowledge of job?.Knowledges">
             <b>Tempo de Experiência:</b>
             {{ knowledge.yearsExperience }}
-            {{ knowledge.typeOfPeriod == 1 ? "Mês" : "Anos" }}
+            {{ knowledge.typeOfPeriod == 1 ? 'Mês' : 'Anos' }}
           </span>
         </div>
         <div
           class="job-text"
           fxLayout="column"
           fxFlex="60"
-          fxLayoutAlign="space-around center" 
-        >
+          fxLayoutAlign="space-around center">
           <div fxLayout="column" class="activities-text">
             <span class="label-text">
               Quais são as principais atividades que ocolaborador irá exercer?

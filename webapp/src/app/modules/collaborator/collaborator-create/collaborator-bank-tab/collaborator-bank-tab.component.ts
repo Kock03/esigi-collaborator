@@ -21,8 +21,8 @@ import { CollaboratorBankDialog } from './collaborator-bank-dialog.component';
   encapsulation: ViewEncapsulation.None,
 })
 export class CollaboratorBankTabComponent implements OnInit {
-  @Input('bankArray') bankArray!: FormArray;
-  @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
+  @Input() bankArray!: FormArray;
+  @Output() onChange: EventEmitter<any> = new EventEmitter();
   @ViewChild('bankTable') bankTable!: MatTable<any>;
 
   data: [] = [];
@@ -39,7 +39,6 @@ export class CollaboratorBankTabComponent implements OnInit {
   index: any = null;
   bank: any;
 
-
   constructor(
     private fb: FormBuilder,
     private dialogService: ConfirmDialogService,
@@ -54,12 +53,11 @@ export class CollaboratorBankTabComponent implements OnInit {
     this.initObservables();
 
     if (this.bankArray.value.status == true) {
-    
     }
   }
 
   initObservables() {
-    this.bankArray.valueChanges.subscribe((res) => {
+    this.bankArray.valueChanges.subscribe(res => {
       const isNullIndex = this.bankArray.value.findIndex(
         (bank: any) => bank == null
       );
@@ -77,7 +75,7 @@ export class CollaboratorBankTabComponent implements OnInit {
       width: '500px',
       height: '470px',
     });
-    dialogRef.afterClosed().subscribe((bank) => {
+    dialogRef.afterClosed().subscribe(bank => {
       if (bank) {
         this.bankArray.insert(0, this.fb.group(bank));
         this.bankTable.renderRows();
@@ -96,7 +94,7 @@ export class CollaboratorBankTabComponent implements OnInit {
       data: bankSelected,
     });
     this.index = index;
-    dialogRef.afterClosed().subscribe((bank) => {
+    dialogRef.afterClosed().subscribe(bank => {
       if (bank) {
         this.checkBank(bank);
       }
@@ -109,7 +107,7 @@ export class CollaboratorBankTabComponent implements OnInit {
         (item: any) => item.status
       );
       if (activeLength.length > 1) {
-      //  TODO - Exibir mensagem que não pode um banco ativo
+        //  TODO - Exibir mensagem que não pode um banco ativo
       }
     } else {
       this.bankArray.controls[this.index].patchValue(bank);
@@ -127,7 +125,7 @@ export class CollaboratorBankTabComponent implements OnInit {
 
     this.dialogService.open(options);
 
-    this.dialogService.confirmed().subscribe(async (confirmed) => {
+    this.dialogService.confirmed().subscribe(async confirmed => {
       if (confirmed) {
         this.bankArray.removeAt(index);
       }

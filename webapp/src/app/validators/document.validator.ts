@@ -66,38 +66,37 @@ export class DocumentValidator {
     return (control: AbstractControl): Validators => {
       const cnpj = control.value;
       if (cnpj) {
-
-        let size = cnpj.length - 2
+        let size = cnpj.length - 2;
         let numbers = cnpj.substring(0, size);
         let digits = cnpj.substring(size);
         let sum = 0;
         let pos = size - 7;
-        let i = 0
+        let i = 0;
 
         if (cnpj.length != 14) {
           return false;
         }
 
         if (
-          cnpj == "00000000000000" ||
-          cnpj == "11111111111111" ||
-          cnpj == "22222222222222" ||
-          cnpj == "33333333333333" ||
-          cnpj == "44444444444444" ||
-          cnpj == "55555555555555" ||
-          cnpj == "66666666666666" ||
-          cnpj == "77777777777777" ||
-          cnpj == "88888888888888" ||
-          cnpj == "99999999999999") {
+          cnpj == '00000000000000' ||
+          cnpj == '11111111111111' ||
+          cnpj == '22222222222222' ||
+          cnpj == '33333333333333' ||
+          cnpj == '44444444444444' ||
+          cnpj == '55555555555555' ||
+          cnpj == '66666666666666' ||
+          cnpj == '77777777777777' ||
+          cnpj == '88888888888888' ||
+          cnpj == '99999999999999'
+        ) {
           return { cnpjNotValid: true };
         }
 
         for (i = size; i >= 1; i--) {
           sum += numbers.charAt(size - i) * pos--;
-          if (pos < 2)
-            pos = 9;
+          if (pos < 2) pos = 9;
         }
-        var result = sum % 11 < 2 ? 0 : 11 - sum % 11;
+        var result = sum % 11 < 2 ? 0 : 11 - (sum % 11);
         if (result != digits.charAt(0)) {
           return { cnpjNotValid: true };
         }
@@ -107,21 +106,17 @@ export class DocumentValidator {
         pos = size - 7;
         for (i = size; i >= 1; i--) {
           sum += numbers.charAt(size - i) * pos--;
-          if (pos < 2)
-            pos = 9;
+          if (pos < 2) pos = 9;
         }
-        result = sum % 11 < 2 ? 0 : 11 - sum % 11;
+        result = sum % 11 < 2 ? 0 : 11 - (sum % 11);
         if (result != digits.charAt(1)) {
-          { cnpjNotValid: true }
+          {
+            cnpjNotValid: true;
+          }
         }
         return false;
       }
       return true;
-    }
+    };
   }
 }
-
-
-
-
-

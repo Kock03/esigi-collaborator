@@ -6,24 +6,11 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { ConfirmDialogService } from 'src/services/confirn-dialog.service';
 import { ConfirmDialogComponent } from './confirm-dialog.component';
 
-
-
 @NgModule({
-  declarations: [
-      ConfirmDialogComponent
-  ],
-  imports: [
-      MatDialogModule,
-      MatButtonModule,
-      CommonModule,                                    
-      FlexLayoutModule
-  ],                             
-  entryComponents: [
-      ConfirmDialogComponent
-  ],
+  declarations: [ConfirmDialogComponent],
+  imports: [MatDialogModule, MatButtonModule, CommonModule, FlexLayoutModule],
+  entryComponents: [ConfirmDialogComponent],
   exports: [ConfirmDialogComponent],
-  providers: [ConfirmDialogService]
+  providers: [ConfirmDialogService],
 })
-export class ConfirmDialogModule {
-}
-
+export class ConfirmDialogModule {}

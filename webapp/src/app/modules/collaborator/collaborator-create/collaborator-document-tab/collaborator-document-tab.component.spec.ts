@@ -8,9 +8,8 @@ describe('CollaboratorDocumentTabComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CollaboratorDocumentTabComponent ]
-    })
-    .compileComponents();
+      declarations: [CollaboratorDocumentTabComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

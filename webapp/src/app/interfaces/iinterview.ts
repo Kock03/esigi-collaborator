@@ -1,4 +1,3 @@
-
 export interface IInterview {
     id: string;
     nameCandidate: string;

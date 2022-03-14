@@ -8,7 +8,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrls: ['./collaborator-education-tab.component.scss'],
 })
 export class CollaboratorLanguageDialog {
-  @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
+  @Output() onChange: EventEmitter<any> = new EventEmitter();
 
   languageForm!: FormGroup;
 
@@ -37,7 +37,7 @@ export class CollaboratorLanguageDialog {
   }
 
   save() {
-    const data = this.languageForm.getRawValue()
+    const data = this.languageForm.getRawValue();
     this.dialogRef.close(data);
   }
 }

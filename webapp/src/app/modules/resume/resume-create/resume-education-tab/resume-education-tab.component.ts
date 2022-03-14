@@ -27,9 +27,9 @@ import { ResumeLanguageDialog } from './resume-language-dialog.component';
   encapsulation: ViewEncapsulation.None,
 })
 export class ResumeEducationTabComponent implements OnInit {
-  @Input('educationArray') educationArray!: FormArray;
-  @Input('languageArray') languageArray!: FormArray;
-  @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
+  @Input() educationArray!: FormArray;
+  @Input() languageArray!: FormArray;
+  @Output() onChange: EventEmitter<any> = new EventEmitter();
   @ViewChild('languageTable') languageTable!: MatTable<any>;
   @ViewChild('educationTable') educationTable!: MatTable<any>;
 
@@ -58,8 +58,6 @@ export class ResumeEducationTabComponent implements OnInit {
   Education: any;
   educationList: any = [];
 
-
-
   constructor(
     private dialogService: ConfirmDialogService,
     private fb: FormBuilder,
@@ -77,7 +75,7 @@ export class ResumeEducationTabComponent implements OnInit {
   }
 
   initObservables() {
-    this.educationArray.valueChanges.subscribe((res) => {
+    this.educationArray.valueChanges.subscribe(res => {
       const isNullIndex = this.educationArray.value.findIndex(
         (education: any) => education == null
       );
@@ -89,7 +87,7 @@ export class ResumeEducationTabComponent implements OnInit {
       }
     });
 
-    this.languageArray.valueChanges.subscribe((res) => {
+    this.languageArray.valueChanges.subscribe(res => {
       const isNullIndex = this.languageArray.value.findIndex(
         (language: any) => language == null
       );
@@ -108,7 +106,7 @@ export class ResumeEducationTabComponent implements OnInit {
       height: '300px',
     });
 
-    dialogRef.afterClosed().subscribe((language) => {
+    dialogRef.afterClosed().subscribe(language => {
       if (language) {
         this.languageArray.insert(0, this.fb.group(language));
         this.languageTable.renderRows();
@@ -122,7 +120,7 @@ export class ResumeEducationTabComponent implements OnInit {
       height: '470px',
     });
 
-    dialogRef.afterClosed().subscribe((education) => {
+    dialogRef.afterClosed().subscribe(education => {
       if (education) {
         this.educationArray.insert(0, this.fb.group(education));
         this.educationTable.renderRows();
@@ -138,13 +136,13 @@ export class ResumeEducationTabComponent implements OnInit {
     const dialogRef = this.dialog.open(ResumeLanguageDialog, {
       width: '500px',
       height: '300px',
-      data: languageSelected ,
+      data: languageSelected,
     });
 
     this.index = index;
-    dialogRef.afterClosed().subscribe((language) => {
-      if(language){
-      this.languageArray.controls[this.index].patchValue(language);
+    dialogRef.afterClosed().subscribe(language => {
+      if (language) {
+        this.languageArray.controls[this.index].patchValue(language);
       }
     });
   }
@@ -160,7 +158,7 @@ export class ResumeEducationTabComponent implements OnInit {
 
     this.dialogService.open(options);
 
-    this.dialogService.confirmed().subscribe(async (confirmed) => {
+    this.dialogService.confirmed().subscribe(async confirmed => {
       if (confirmed) {
         this.languageArray.removeAt(index);
       }
@@ -175,9 +173,9 @@ export class ResumeEducationTabComponent implements OnInit {
     });
 
     this.index = index;
-    dialogRef.afterClosed().subscribe((education) => {
-      if(education){
-      this.educationArray.controls[this.index].patchValue(education);
+    dialogRef.afterClosed().subscribe(education => {
+      if (education) {
+        this.educationArray.controls[this.index].patchValue(education);
       }
     });
   }
@@ -193,7 +191,7 @@ export class ResumeEducationTabComponent implements OnInit {
 
     this.dialogService.open(options);
 
-    this.dialogService.confirmed().subscribe(async (confirmed) => {
+    this.dialogService.confirmed().subscribe(async confirmed => {
       if (confirmed) {
         this.educationArray.removeAt(index);
       }

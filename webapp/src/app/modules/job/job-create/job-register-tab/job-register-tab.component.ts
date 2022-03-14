@@ -1,7 +1,19 @@
 import { formatDate } from '@angular/common';
-import { Component, EventEmitter, Injectable, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Injectable,
+  Input,
+  OnInit,
+  Output,
+  ViewEncapsulation,
+} from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { NativeDateAdapter, DateAdapter, MAT_DATE_FORMATS } from '@angular/material/core';
+import {
+  NativeDateAdapter,
+  DateAdapter,
+  MAT_DATE_FORMATS,
+} from '@angular/material/core';
 
 export const PICK_FORMATS = {
   parse: { dateInput: { month: 'numeric', year: 'numeric', day: 'numeric' } },
@@ -36,13 +48,11 @@ export class PickDateAdapter extends NativeDateAdapter {
 })
 export class JobRegisterTabComponent implements OnInit {
   @Input('form') jobForm!: FormGroup;
-  @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
+  @Output() onChange: EventEmitter<any> = new EventEmitter();
 
   date: any;
-  
-  constructor() { }
 
-  ngOnInit(): void {
-  }
+  constructor() {}
 
+  ngOnInit(): void {}
 }

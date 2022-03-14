@@ -44,7 +44,9 @@ export class JobProvider {
   getFollowUpInterviews(id: string | null): Promise<any> {
     return new Promise((resolve, reject) => {
       this.apiGateway
-        .get(environment.JOBS_MS + 'interviews/follow-up-interviews/:id', { id: id })
+        .get(environment.JOBS_MS + 'interviews/follow-up-interviews/:id', {
+          id: id,
+        })
         .subscribe((response: HttpResponse<any>) => {
           resolve(response.body);
         }, reject);

@@ -51,7 +51,7 @@ export class PickDateAdapter extends NativeDateAdapter {
 })
 export class ResumeRegisterTabComponent implements OnInit {
   @Input('form') resumeForm!: FormGroup;
-  @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
+  @Output() onChange: EventEmitter<any> = new EventEmitter();
 
   Gender: any = ['Masculimo', 'Feminino', 'Não informado'];
   Date: any;
@@ -67,9 +67,9 @@ export class ResumeRegisterTabComponent implements OnInit {
   ngOnInit(): void {
     this.resumeId = this.route.snapshot.paramMap.get('id');
     if (this.resumeId == 'novo') {
-      this.resumeForm.valueChanges.subscribe((res) => {
+      this.resumeForm.valueChanges.subscribe(res => {
         const addressForm = this.resumeForm.controls['Address'] as FormGroup;
-        addressForm.controls['cep'].valueChanges.subscribe((res) => {});
+        addressForm.controls['cep'].valueChanges.subscribe(res => {});
       });
     }
   }

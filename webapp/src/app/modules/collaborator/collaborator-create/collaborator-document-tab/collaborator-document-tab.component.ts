@@ -26,8 +26,8 @@ import { CollaboratorDocumentDialog } from './collaborator-document-dialog.compo
   encapsulation: ViewEncapsulation.None,
 })
 export class CollaboratorDocumentTabComponent implements OnInit {
-  @Input('documentArray') documentArray!: FormArray;
-  @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
+  @Input() documentArray!: FormArray;
+  @Output() onChange: EventEmitter<any> = new EventEmitter();
   @ViewChild('documentTable') documentTable!: MatTable<any>;
 
   displayedColumns: string[] = ['name', 'file', 'icon'];
@@ -53,7 +53,7 @@ export class CollaboratorDocumentTabComponent implements OnInit {
   }
 
   initObservables() {
-    this.documentArray.valueChanges.subscribe((res) => {
+    this.documentArray.valueChanges.subscribe(res => {
       const isNullIndex = this.documentArray.value.findIndex(
         (document: any) => document == null
       );
@@ -72,7 +72,7 @@ export class CollaboratorDocumentTabComponent implements OnInit {
       height: '300px',
     });
 
-    dialogRef.afterClosed().subscribe((document) => {
+    dialogRef.afterClosed().subscribe(document => {
       if (document) {
         this.documentArray.insert(0, this.fb.group(document));
         this.documentTable.renderRows();
@@ -88,7 +88,7 @@ export class CollaboratorDocumentTabComponent implements OnInit {
     });
 
     this.index = index;
-    dialogRef.afterClosed().subscribe((document) => {
+    dialogRef.afterClosed().subscribe(document => {
       if (document) {
         this.documentArray.controls[this.index].patchValue(document);
       }
@@ -106,7 +106,7 @@ export class CollaboratorDocumentTabComponent implements OnInit {
 
     this.dialogService.open(options);
 
-    this.dialogService.confirmed().subscribe(async (confirmed) => {
+    this.dialogService.confirmed().subscribe(async confirmed => {
       if (confirmed) {
         this.documentArray.removeAt(index);
       }

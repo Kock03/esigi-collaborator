@@ -7,9 +7,9 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class CollaboratorProvider {
-  constructor(private apiGateway: ApiGateway) { }
+  constructor(private apiGateway: ApiGateway) {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   findAll(): Promise<any> {
     return new Promise((resolve, reject) => {

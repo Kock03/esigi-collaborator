@@ -18,7 +18,10 @@
           </mat-form-field>
           <mat-form-field fxFlex="33" appearance="outline">
             <mat-label>Sobrenome</mat-label>
-            <input matInput placeholder="Sobrenome" formControlName="lastName" />
+            <input
+              matInput
+              placeholder="Sobrenome"
+              formControlName="lastName" />
           </mat-form-field>
           <mat-form-field fxFlex="34" appearance="outline">
             <mat-label>Login</mat-label>
@@ -30,12 +33,22 @@
       <div fxFlex="100" fxLayoutGap="16px">
         <mat-form-field fxFlex="25" appearance="outline">
           <mat-label>CPF</mat-label>
-          <input matInput placeholder="CPF" formControlName="cpf" mask="000.000.000-00" />
+          <input
+            matInput
+            placeholder="CPF"
+            formControlName="cpf"
+            mask="000.000.000-00" />
         </mat-form-field>
         <mat-form-field fxFlex="25" appearance="outline">
           <mat-label>Data de aniversário</mat-label>
-          <input matInput [matDatepicker]="picker" formControlName="birthDate" placeholder="Data de aniversário" />
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <input
+            matInput
+            [matDatepicker]="picker"
+            formControlName="birthDate"
+            placeholder="Data de aniversário" />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
         <mat-form-field fxFlex="25" appearance="outline">
@@ -59,7 +72,12 @@
       <div fxFlex="100" fxLayoutGap="16px" formGroupName="Address">
         <mat-form-field fxFlex="25" appearance="outline">
           <mat-label>CEP </mat-label>
-          <input matInput placeholder="CEP" formControlName="cep" type="text" mask="99999-999" />
+          <input
+            matInput
+            placeholder="CEP"
+            formControlName="cep"
+            type="text"
+            mask="99999-999" />
           <mat-icon matSuffix style="cursor: pointer" (click)="getAddress()">
             search
           </mat-icon>
@@ -72,7 +90,11 @@
 
         <mat-form-field fxFlex="15" appearance="outline">
           <mat-label>Número</mat-label>
-          <input matInput placeholder="Número" formControlName="number" mask="0||00||000||0000" />
+          <input
+            matInput
+            placeholder="Número"
+            formControlName="number"
+            mask="0||00||000||0000" />
         </mat-form-field>
         <mat-form-field fxFlex="45" appearance="outline">
           <mat-label>Estado</mat-label>
@@ -83,7 +105,10 @@
       <div fxFlex="100" fxLayoutGap="16px" formGroupName="Address">
         <mat-form-field fxFlex="40" appearance="outline">
           <mat-label>Complemento</mat-label>
-          <input matInput placeholder="Complemento" formControlName="complement" />
+          <input
+            matInput
+            placeholder="Complemento"
+            formControlName="complement" />
         </mat-form-field>
 
         <mat-form-field fxFlex="20" appearance="outline">
@@ -113,17 +138,29 @@
         <div formGroupName="Phone" fxFlex="100" fxLayoutGap="16px">
           <mat-form-field fxFlex="30" appearance="outline">
             <mat-label>DDI</mat-label>
-            <input matInput placeholder="DDI" formControlName="ddi" mask="+00" />
+            <input
+              matInput
+              placeholder="DDI"
+              formControlName="ddi"
+              mask="+00" />
           </mat-form-field>
 
           <mat-form-field fxFlex="35" appearance="outline">
             <mat-label>DDD</mat-label>
-            <input matInput placeholder="DDD" formControlName="ddd" mask="(00)" />
+            <input
+              matInput
+              placeholder="DDD"
+              formControlName="ddd"
+              mask="(00)" />
           </mat-form-field>
 
           <mat-form-field fxFlex="35" appearance="outline">
             <mat-label>Telefone</mat-label>
-            <input matInput placeholder="Telefone" formControlName="phoneNumber" mask="0000-0000||00000-0000" />
+            <input
+              matInput
+              placeholder="Telefone"
+              formControlName="phoneNumber"
+              mask="0000-0000||00000-0000" />
           </mat-form-field>
         </div>
         <mat-form-field fxFlex="50" appearance="outline">

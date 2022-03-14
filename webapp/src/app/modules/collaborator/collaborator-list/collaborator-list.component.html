@@ -16,7 +16,10 @@
 
       <mat-form-field fxFlex="20" appearance="outline">
         <mat-label>Filtro</mat-label>
-        <mat-select (selectionChange)="selectList($event)" matInput disableRipple>
+        <mat-select
+          (selectionChange)="selectList($event)"
+          matInput
+          disableRipple>
           <mat-option [value]="1">Ver Todos</mat-option>
           <mat-option [value]="2">Ver Ativos</mat-option>
           <mat-option [value]="3">Ver Inativos</mat-option>
@@ -40,7 +43,7 @@
         <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by admissionDate">Data
           Admissão</th>
         <td mat-cell *matCellDef="let collaborator">
-          {{ collaborator.admissionDate | date: "dd/MM/yyyy" }}
+          {{ collaborator.admissionDate | date: 'dd/MM/yyyy' }}
         </td>
       </ng-container>
 
@@ -62,27 +65,47 @@
       <ng-container matColumnDef="status">
         <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by status">Status</th>
         <td mat-cell *matCellDef="let collaborator">
-          {{ collaborator.active == true ? "Ativo" : "Inativo" }}
+          {{ collaborator.active == true ? 'Ativo' : 'Inativo' }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="icon">
-        <th mat-header-cell *matHeaderCellDef clas="iconAdd" style="text-align: end">
-          <button class="edit-button" mat-flat-button color="primary" (click)="createCollaborator()">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          clas="iconAdd"
+          style="text-align: end">
+          <button
+            class="edit-button"
+            mat-flat-button
+            color="primary"
+            (click)="createCollaborator()">
             <mat-icon>add</mat-icon>
           </button>
         </th>
-        <td class="button-tab" mat-cell *matCellDef="let collaborator" style="text-align: end">
-          <button class="table-button" mat-button (click)="editCollaborator(collaborator.id)">
+        <td
+          class="button-tab"
+          mat-cell
+          *matCellDef="let collaborator"
+          style="text-align: end">
+          <button
+            class="table-button"
+            mat-button
+            (click)="editCollaborator(collaborator.id)">
             <mat-icon>edit</mat-icon>
           </button>
-          <button class="table-button" mat-button (click)="deleteCollaborator(collaborator.id)">
+          <button
+            class="table-button"
+            mat-button
+            (click)="deleteCollaborator(collaborator.id)">
             <mat-icon>delete</mat-icon>
           </button>
         </td>
       </ng-container>
 
-      <tr mat-header-row *matHeaderRowDef="displayedCollaborator; sticky: true"></tr>
+      <tr
+        mat-header-row
+        *matHeaderRowDef="displayedCollaborator; sticky: true"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedCollaborator"></tr>
     </table>
   </div>

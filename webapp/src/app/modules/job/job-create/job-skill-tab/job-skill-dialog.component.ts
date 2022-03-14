@@ -15,14 +15,14 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class JobDialogSkill implements OnInit {
   @Input('form') jobForm!: FormGroup;
-  @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
+  @Output() onChange: EventEmitter<any> = new EventEmitter();
 
   knowledgeForm!: FormGroup;
 
   constructor(
     public dialogRef: MatDialogRef<JobDialogSkill>,
     private fb: FormBuilder,
-    @Inject(MAT_DIALOG_DATA) public data: any 
+    @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
   ngOnInit(): void {
@@ -45,7 +45,7 @@ export class JobDialogSkill implements OnInit {
   }
 
   async saveKnowledge() {
-    const data = this.knowledgeForm.getRawValue()
+    const data = this.knowledgeForm.getRawValue();
     this.dialogRef.close(data);
   }
 }

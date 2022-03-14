@@ -5,7 +5,7 @@
         <ng-container matColumnDef="feedbackDate">
           <th mat-header-cell *matHeaderCellDef>Data</th>
           <td mat-cell *matCellDef="let feedback">
-            {{ feedback.feedbackDate | date: "dd/MM/yyyy" }}
+            {{ feedback.feedbackDate | date: 'dd/MM/yyyy' }}
           </td>
         </ng-container>
 
@@ -14,10 +14,10 @@
           <td mat-cell *matCellDef="let feedback">
             {{
               feedback.feedbackType == 1
-                ? "Profissional Desmotivado"
+                ? 'Profissional Desmotivado'
                 : feedback.feedbackType == 2
-                ? "Mudança de Cargo"
-                : "Aumento de Salário"
+                ? 'Mudança de Cargo'
+                : 'Aumento de Salário'
             }}
           </td>
         </ng-container>
@@ -34,10 +34,10 @@
           <td mat-cell *matCellDef="let feedback">
             {{
               feedback.status == 1
-                ? "Agendada"
+                ? 'Agendada'
                 : feedback.status == 2
-                ? "Concluída"
-                : "Retorno de Feedback"
+                ? 'Concluída'
+                : 'Retorno de Feedback'
             }}
           </td>
         </ng-container>
@@ -47,24 +47,28 @@
               (click)="navigateFeedback()"
               class="edit-button"
               mat-flat-button
-              color="primary"
-            >
+              color="primary">
               <mat-icon>add</mat-icon>
             </button>
           </th>
           <td class="button-tab" mat-cell *matCellDef="let feedback">
-            <button class="table-button" mat-button (click)="editFeedback(feedback.id)">
+            <button
+              class="table-button"
+              mat-button
+              (click)="editFeedback(feedback.id)">
               <mat-icon>edit</mat-icon>
             </button>
-            <button class="table-button" mat-button (click)="deleteFeedback(feedback.id)">
+            <button
+              class="table-button"
+              mat-button
+              (click)="deleteFeedback(feedback.id)">
               <mat-icon>delete</mat-icon>
             </button>
           </td>
         </ng-container>
         <tr
           mat-header-row
-          *matHeaderRowDef="displayedFeedback; sticky: true"
-        ></tr>
+          *matHeaderRowDef="displayedFeedback; sticky: true"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedFeedback"></tr>
       </table>
     </div>

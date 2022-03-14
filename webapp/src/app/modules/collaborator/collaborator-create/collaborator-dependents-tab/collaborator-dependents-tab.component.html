@@ -8,14 +8,14 @@
             <td mat-cell *matCellDef="let Dependent">
               {{
                 Dependent.type == 1
-                  ? "Conjuge"
+                  ? 'Conjuge'
                   : Dependent.type == 2
-                  ? "Filho(a)"
+                  ? 'Filho(a)'
                   : Dependent.type == 3
-                  ? "Enteado(a)"
+                  ? 'Enteado(a)'
                   : Dependent.type == 4
-                  ? "Pai"
-                  : "Mãe"
+                  ? 'Pai'
+                  : 'Mãe'
               }}
             </td>
           </ng-container>
@@ -23,7 +23,7 @@
           <ng-container matColumnDef="firstName">
             <th mat-header-cell *matHeaderCellDef>Nome</th>
             <td mat-cell *matCellDef="let Dependent">
-              {{ Dependent.firstName + " " + Dependent.lastName }}
+              {{ Dependent.firstName + ' ' + Dependent.lastName }}
             </td>
           </ng-container>
 
@@ -32,10 +32,10 @@
             <td mat-cell *matCellDef="let Dependent">
               {{
                 Dependent.gender == 1
-                  ? "Feminino"
+                  ? 'Feminino'
                   : Dependent.gender == 2
-                  ? "Masculino"
-                  : "Não Definido"
+                  ? 'Masculino'
+                  : 'Não Definido'
               }}
             </td>
           </ng-container>
@@ -43,14 +43,14 @@
           <ng-container matColumnDef="cpf">
             <th mat-header-cell *matHeaderCellDef>CPF</th>
             <td mat-cell *matCellDef="let Dependent">
-              {{ Dependent.cpf | mask: "000.000.000-00" }}
+              {{ Dependent.cpf | mask: '000.000.000-00' }}
             </td>
           </ng-container>
 
           <ng-container matColumnDef="birthDate">
             <th mat-header-cell *matHeaderCellDef>Data de Aniversario</th>
             <td mat-cell *matCellDef="let Dependent">
-              {{ Dependent.birthDate | date: "dd/MM/yyyy" }}
+              {{ Dependent.birthDate | date: 'dd/MM/yyyy' }}
             </td>
           </ng-container>
 
@@ -70,42 +70,37 @@
           </ng-container>
 
           <ng-container matColumnDef="icon">
-            <th mat-header-cell *matHeaderCellDef  style="text-align: end">
+            <th mat-header-cell *matHeaderCellDef style="text-align: end">
               <button
                 class="edit-button"
                 mat-flat-button
                 color="primary"
-                (click)="openDialog()"
-              >
+                (click)="openDialog()">
                 <mat-icon>add</mat-icon>
               </button>
             </th>
             <td
               class="button-tab"
               mat-cell
-              *matCellDef="let dependent; let index = index"
-            >
+              *matCellDef="let dependent; let index = index">
               <button
                 class="table-button"
                 mat-button
-                (click)="getDependents(dependent, index)"
-              >
+                (click)="getDependents(dependent, index)">
                 <mat-icon>edit</mat-icon>
               </button>
 
               <button
                 class="table-button"
                 mat-button
-                (click)="deleteDependents(index)"
-              >
+                (click)="deleteDependents(index)">
                 <mat-icon>delete</mat-icon>
               </button>
             </td>
           </ng-container>
           <tr
             mat-header-row
-            *matHeaderRowDef="displayedDependents; sticky: true"
-          ></tr>
+            *matHeaderRowDef="displayedDependents; sticky: true"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedDependents"></tr>
         </table>
       </div>

@@ -22,9 +22,9 @@ import { CollaboratorLanguageDialog } from './collaborator-language-dialog.compo
   encapsulation: ViewEncapsulation.None,
 })
 export class CollaboratorEducationTabComponent implements OnInit {
-  @Input('educationArray') educationArray!: FormArray;
-  @Input('languageArray') languageArray!: FormArray;
-  @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
+  @Input() educationArray!: FormArray;
+  @Input() languageArray!: FormArray;
+  @Output() onChange: EventEmitter<any> = new EventEmitter();
   @ViewChild('languageTable') languageTable!: MatTable<any>;
   @ViewChild('educationTable') educationTable!: MatTable<any>;
 
@@ -66,12 +66,12 @@ export class CollaboratorEducationTabComponent implements OnInit {
     if (this.languageArray.value.length > 0) {
       this.dataLanguage = this.languageArray.value;
     }
-     
+
     this.initObservables();
   }
 
   initObservables() {
-    this.educationArray.valueChanges.subscribe((res) => {
+    this.educationArray.valueChanges.subscribe(res => {
       const isNullIndex = this.educationArray.value.findIndex(
         (knowledge: any) => knowledge == null
       );
@@ -83,7 +83,7 @@ export class CollaboratorEducationTabComponent implements OnInit {
       }
     });
 
-    this.languageArray.valueChanges.subscribe((res) => {
+    this.languageArray.valueChanges.subscribe(res => {
       const isNullIndex = this.languageArray.value.findIndex(
         (knowledge: any) => knowledge == null
       );
@@ -102,7 +102,7 @@ export class CollaboratorEducationTabComponent implements OnInit {
       height: '300px',
     });
 
-    dialogRef.afterClosed().subscribe((language) => {
+    dialogRef.afterClosed().subscribe(language => {
       if (language) {
         this.languageArray.insert(0, this.fb.group(language));
         this.languageTable.renderRows();
@@ -116,7 +116,7 @@ export class CollaboratorEducationTabComponent implements OnInit {
       height: '470px',
     });
 
-    dialogRef.afterClosed().subscribe((education) => {
+    dialogRef.afterClosed().subscribe(education => {
       if (education) {
         this.educationArray.insert(0, this.fb.group(education));
         this.educationTable.renderRows();
@@ -136,7 +136,7 @@ export class CollaboratorEducationTabComponent implements OnInit {
     });
 
     this.index = index;
-    dialogRef.afterClosed().subscribe((language) => {
+    dialogRef.afterClosed().subscribe(language => {
       if (language) {
         this.languageArray.controls[this.index].patchValue(language);
       }
@@ -154,7 +154,7 @@ export class CollaboratorEducationTabComponent implements OnInit {
 
     this.dialogService.open(options);
 
-    this.dialogService.confirmed().subscribe(async (confirmed) => {
+    this.dialogService.confirmed().subscribe(async confirmed => {
       if (confirmed) {
         this.languageArray.removeAt(index);
       }
@@ -165,11 +165,11 @@ export class CollaboratorEducationTabComponent implements OnInit {
     const dialogRef = this.dialog.open(CollaboratorEducationDialog, {
       width: '500px',
       height: '470px',
-      data: educationSelected ,
+      data: educationSelected,
     });
 
     this.index = index;
-    dialogRef.afterClosed().subscribe((education) => {
+    dialogRef.afterClosed().subscribe(education => {
       if (education) {
         this.educationArray.controls[this.index].patchValue(education);
       }
@@ -187,7 +187,7 @@ export class CollaboratorEducationTabComponent implements OnInit {
 
     this.dialogService.open(options);
 
-    this.dialogService.confirmed().subscribe(async (confirmed) => {
+    this.dialogService.confirmed().subscribe(async confirmed => {
       if (confirmed) {
         this.educationArray.removeAt(index);
       }

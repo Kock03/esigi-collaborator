@@ -26,8 +26,8 @@ import { JobDialogSkill } from './job-skill-dialog.component';
 })
 export class JobSkillTabComponent implements OnInit {
   @Input('form') jobForm!: FormGroup;
-  @Input('knowledgeArray') knowledgeArray!: FormArray;
-  @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
+  @Input() knowledgeArray!: FormArray;
+  @Output() onChange: EventEmitter<any> = new EventEmitter();
 
   @ViewChild('knowledgeTable') knowledgeTable!: MatTable<any>;
 
@@ -43,7 +43,6 @@ export class JobSkillTabComponent implements OnInit {
     'icon',
   ];
 
-
   constructor(
     public dialog: MatDialog,
     private fb: FormBuilder,
@@ -54,12 +53,12 @@ export class JobSkillTabComponent implements OnInit {
     if (this.knowledgeArray.value.length > 0) {
       this.data = this.knowledgeArray.value;
     }
-     
+
     this.initObservables();
   }
 
   initObservables() {
-    this.knowledgeArray.valueChanges.subscribe((res) => {
+    this.knowledgeArray.valueChanges.subscribe(res => {
       const isNullIndex = this.knowledgeArray.value.findIndex(
         (knowledge: any) => knowledge == null
       );
@@ -78,7 +77,7 @@ export class JobSkillTabComponent implements OnInit {
       height: '200px',
     });
 
-    dialogRef.afterClosed().subscribe((knowledge) => {
+    dialogRef.afterClosed().subscribe(knowledge => {
       if (knowledge) {
         this.knowledgeArray.insert(0, this.fb.group(knowledge));
         this.knowledgeTable.renderRows();
@@ -90,15 +89,14 @@ export class JobSkillTabComponent implements OnInit {
     const dialogRef = this.dialog.open(JobDialogSkill, {
       width: '450px',
       height: '200px',
-      data: knowledgeSelected ,
+      data: knowledgeSelected,
     });
 
     this.index = index;
-    dialogRef.afterClosed().subscribe((knowledge) => {
-      if(knowledge){
+    dialogRef.afterClosed().subscribe(knowledge => {
+      if (knowledge) {
         this.knowledgeArray.controls[this.index].patchValue(knowledge);
       }
-     
     });
   }
 
@@ -113,7 +111,7 @@ export class JobSkillTabComponent implements OnInit {
 
     this.dialogService.open(options);
 
-    this.dialogService.confirmed().subscribe(async (confirmed) => {
+    this.dialogService.confirmed().subscribe(async confirmed => {
       if (confirmed) {
         this.knowledgeArray.removeAt(index);
       }

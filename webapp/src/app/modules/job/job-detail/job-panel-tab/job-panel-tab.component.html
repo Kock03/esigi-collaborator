@@ -68,8 +68,7 @@
               mat-flat-button
               color="primary"
               (click)="navigateJobs()"
-              style="text-align: end"
-            >
+              style="text-align: end">
               <mat-icon>add</mat-icon>
             </button>
           </th>
@@ -77,6 +76,7 @@
             class="button-tab"
             mat-cell
             *matCellDef="let interviews"
+
             style="text-align: end"
           >
             <button
@@ -91,6 +91,7 @@
               mat-button
               (click)="deleteInterview(interviews.id)"
             >
+
               <mat-icon>delete</mat-icon>
             </button>
           </td>

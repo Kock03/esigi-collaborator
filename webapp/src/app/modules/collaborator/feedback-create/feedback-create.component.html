@@ -54,12 +54,10 @@
           <input
             matInput
             [matDatepicker]="picker"
-            formControlName="feedbackDate"
-          />
+            formControlName="feedbackDate" />
           <mat-datepicker-toggle
             matSuffix
-            [for]="picker"
-          ></mat-datepicker-toggle>
+            [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
 
@@ -69,8 +67,7 @@
             matInput
             disableRipple
             formControlName="hourDate"
-            mask="00:00"
-          />
+            mask="00:00" />
         </mat-form-field>
 
         <mat-form-field appearance="outline" fxFlex="30">
@@ -78,12 +75,10 @@
           <input
             matInput
             [matDatepicker]="pickerReturn"
-            formControlName="feedbackDateRetorn"
-          />
+            formControlName="feedbackDateRetorn" />
           <mat-datepicker-toggle
             matSuffix
-            [for]="pickerReturn"
-          ></mat-datepicker-toggle>
+            [for]="pickerReturn"></mat-datepicker-toggle>
           <mat-datepicker #pickerReturn></mat-datepicker>
         </mat-form-field>
 
@@ -93,8 +88,7 @@
             matInput
             disableRipple
             formControlName="hourDateRetorn"
-            mask="00:00"
-          />
+            mask="00:00" />
         </mat-form-field>
       </div>
 
@@ -106,8 +100,7 @@
             matInput
             placeholder="Atividades"
             formControlName="managerDescription"
-            rows="5"
-          ></textarea>
+            rows="5"></textarea>
         </mat-form-field>
 
         <mat-form-field appearance="outline" fxFlex="50">
@@ -117,8 +110,7 @@
             matInput
             placeholder="Atividades"
             formControlName="improvementPoints"
-            rows="5"
-          ></textarea>
+            rows="5"></textarea>
         </mat-form-field>
       </div>
 
@@ -131,8 +123,7 @@
             matInput
             placeholder="Atividades"
             formControlName="collaboratorDescription"
-            rows="5"
-          ></textarea>
+            rows="5"></textarea>
         </mat-form-field>
         <mat-form-field appearance="outline" fxFlex="50">
           <mat-label>Compromissos</mat-label>
@@ -141,8 +132,7 @@
             matInput
             placeholder="Atividades"
             formControlName="commitment"
-            rows="5"
-          ></textarea>
+            rows="5"></textarea>
         </mat-form-field>
       </div>
     </form>
@@ -150,32 +140,28 @@
   <div
     class="navigation-buttons"
     fxLayoutAlign="center end"
-    *ngIf="feedbackId == 'novo'"
+    *ngIf="feedbackId === 'novo'"
     class="saveButton"
-    fxLayoutGap="16px"
-  >
+    fxLayoutGap="16px">
     <button
       mat-flat-button
       color="primary"
       [disabled]="this.feedbackForm.invalid"
-      (click)="saveFeedback(this.get.id)"
-    >
+      (click)="saveFeedback(this.get.id)">
       Salvar
     </button>
   </div>
   <div
-  class="navigation-buttons"
-  fxLayoutAlign="center end"
-  *ngIf="feedbackId !== 'novo'"
-  class="saveButton"
-  fxLayoutGap="16px"
->
-  <button
-    mat-flat-button
-    color="primary"
-    (click)="saveEditFeedback(this.get.id)"
-  >
-    Salvar
-  </button>
-</div>
+    class="navigation-buttons"
+    fxLayoutAlign="center end"
+    *ngIf="feedbackId !== 'novo'"
+    class="saveButton"
+    fxLayoutGap="16px">
+    <button
+      mat-flat-button
+      color="primary"
+      (click)="saveEditFeedback(this.get.id)">
+      Salvar
+    </button>
+  </div>
 </div>

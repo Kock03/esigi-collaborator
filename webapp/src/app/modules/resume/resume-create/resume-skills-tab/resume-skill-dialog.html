@@ -1,12 +1,15 @@
 <div id="collaboratorSkillDialog" class="dialog">
   <div class="content-scroll" *ngIf="skillForm">
-    <h2 class="title-dialog" mat-dialog-title>Cadastro Skills </h2>
+    <h2 class="title-dialog" mat-dialog-title>Cadastro Skills</h2>
     <mat-dialog-content class="mat-typography">
       <form [formGroup]="skillForm" fxLayout="column">
-
         <mat-form-field appearance="outline">
           <mat-label>Tecnologia</mat-label>
-          <input matInput disableRipple formControlName="technology" placeholder="Tecnologia" />
+          <input
+            matInput
+            disableRipple
+            formControlName="technology"
+            placeholder="Tecnologia" />
         </mat-form-field>
 
         <mat-form-field appearance="outline">
@@ -23,18 +26,34 @@
 
         <mat-form-field appearance="outline">
           <mat-label>Tempo de Experiência</mat-label>
-          <input matInput disableRipple formControlName="yearsExperience" placeholder="Em anos" mask="0||00" />
+          <input
+            matInput
+            disableRipple
+            formControlName="yearsExperience"
+            placeholder="Em anos"
+            mask="0||00" />
         </mat-form-field>
 
-        <mat-checkbox class="checkbox" color="primary" fxFlex="50" formControlName="currentPosition">Posição Atual
+        <mat-checkbox
+          class="checkbox"
+          color="primary"
+          fxFlex="50"
+          formControlName="currentPosition"
+          >Posição Atual
         </mat-checkbox>
-        <br>
+        <br />
       </form>
     </mat-dialog-content>
     <mat-dialog-actions>
       <div class="button-dialog">
-        <button mat-flat-button mat-dialog-close (click)="onNoClick()">Cancelar</button>
-        <button color="primary" [disabled]="skillForm.invalid" mat-flat-button [mat-dialog-close]="true" 
+        <button mat-flat-button mat-dialog-close (click)="onNoClick()">
+          Cancelar
+        </button>
+        <button
+          color="primary"
+          [disabled]="skillForm.invalid"
+          mat-flat-button
+          [mat-dialog-close]="true"
           (click)="save()">
           Salvar
         </button>
