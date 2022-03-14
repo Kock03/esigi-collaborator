@@ -7,22 +7,22 @@
   </div>
 
   <div fxLayoutAlign="space-between">
-    <form class="search" fxLayout="row">
+    <form class="search" fxLayout="row" fxLayoutGap="16px" >
       <mat-form-field appearance="outline" fxFlex="80">
         <mat-label>Buscar Colaboradores</mat-label>
         <input matInput placeholder="Colaborador" #filter matInput />
         <mat-icon matSuffix style="cursor: pointer">search</mat-icon>
       </mat-form-field>
 
-      <mat-form-field fxFlex="20" appearance="outline">
+      <mat-form-field fxFlex="20" appearance="outline" >
         <mat-label>Filtro</mat-label>
         <mat-select
           (selectionChange)="selectList($event)"
           matInput
           disableRipple>
-          <mat-option [value]="1">Ver Todos</mat-option>
-          <mat-option [value]="2">Ver Ativos</mat-option>
-          <mat-option [value]="3">Ver Inativos</mat-option>
+          <mat-option [value]="1">Todos</mat-option>
+          <mat-option [value]="2">Ativos</mat-option>
+          <mat-option [value]="3">Inativos</mat-option>
         </mat-select>
       </mat-form-field>
     </form>

@@ -239,10 +239,6 @@ export class JobCreateComponent implements OnInit {
   }
 
 
-  
-
-
-
   listJob() {
     this.router.navigate(['vaga/lista']);
     sessionStorage.clear();

@@ -34,6 +34,7 @@ export class JobInterviewCreateComponent implements OnInit {
   clientInterviewForm!: FormGroup;
   returnForm!: FormGroup;
   jobId!: any;
+  job!: string | null;
   interviewId!: string | null;
   id!: any;
   get!: any;
@@ -58,12 +59,18 @@ export class JobInterviewCreateComponent implements OnInit {
   ) {
     const state = this.router.getCurrentNavigation()?.extras.state;
 
-      this.jobId = state;
-    
+    this.jobId = state;
+    console.log(
+      '🚀 ~ file: job-interview-create.component.ts ~ line 63 ~ JobInterviewCreateComponent ~  this.jobId',
+      this.jobId
+    );
   }
 
   async ngOnInit(): Promise<void> {
     this.interviewId = this.route.snapshot.paramMap.get('id');
+    if (this.jobId !== undefined) {
+      sessionStorage.setItem('job_id', this.jobId.id);
+    }
 
     if (this.interviewId !== 'novo') {
       this.initForm();
@@ -78,7 +85,7 @@ export class JobInterviewCreateComponent implements OnInit {
     } else {
       this.initForm();
     }
-    console.log(this.interview)
+    console.log(this.interview);
   }
 
   initForm() {
@@ -101,7 +108,6 @@ export class JobInterviewCreateComponent implements OnInit {
       comments: [''],
       situational: [1, Validators.required],
       availabilityOfInitialize: ['', Validators.required],
-   
     });
     this.technicalInterviewForm = this.fb.group({
       nameCandidate: ['', Validators.required],
@@ -116,7 +122,7 @@ export class JobInterviewCreateComponent implements OnInit {
     });
 
     this.clientInterviewForm = this.fb.group({
-     nameCandidate: ['', Validators.required],
+      nameCandidate: ['', Validators.required],
       evaluator: ['', Validators.required],
       clientInterviewDate: ['', Validators.required],
       hourInterview: ['', Validators.required],
@@ -125,7 +131,6 @@ export class JobInterviewCreateComponent implements OnInit {
       technicalEvaluation: ['', Validators.required],
       comments: ['', Validators.required],
       situational: [1, Validators.required],
-
     });
 
     this.returnForm = this.fb.group({
@@ -140,22 +145,20 @@ export class JobInterviewCreateComponent implements OnInit {
       typeOdContract: [1, Validators.required],
       combinedValue: ['', Validators.required],
       initialData: ['', Validators.required],
-
     });
   }
 
   async handleInterviews(type: string) {
     switch (type) {
       case 'behavioral': {
+        await this.saveBehaviroalInterviews();
 
-          await this.saveBehaviroalInterviews();
-      
         break;
       }
       case 'technical': {
         await this.saveTechnicalInterviews();
         break;
-      } 
+      }
       case 'client': {
         await this.saveClientInterviews();
         break;
@@ -164,101 +167,112 @@ export class JobInterviewCreateComponent implements OnInit {
   }
 
   async saveBehaviroalInterviews() {
-    if(this.interviewId == 'novo') {
+    if (this.interviewId == 'novo') {
       let data = this.behavioralInterviewForm.getRawValue();
-      const interview = { BehavioralInterviews: data, Job: this.jobId  };
-  
+      const interview = { BehavioralInterviews: data, Job: this.jobId };
+
       try {
         delete data.id;
         this.interview = await this.interviewsProvider.store(interview);
         console.log(interview);
         this.snackbarService.successMessage(
-          'Entrevista Comportamental Cadastrada Com Sucesso'
+          'Entrevista Comportamental Cadastrada Com Sucesso!'
         );
 
-
-        const interviewId = this.interview.id
+        const interviewId = this.interview.id;
         this.router.navigate([`vaga/detalhe/${this.jobId.id}`]);
-      console.log(this.interview.id)
+        console.log(this.interview.id);
       } catch (error) {
         console.log('ERROR 132' + error);
         this.snackbarService.showError('Falha ao Cadastrar');
       }
-
-    }
-
-    else{
+    } else {
       let behavioralInterviewForm = this.behavioralInterviewForm.getRawValue();
-    const interview =  {
-      ...this.interview,
-      BehavioralInterviews: {...behavioralInterviewForm},
+      const interview = {
+        ...this.interview,
+        BehavioralInterviews: { ...behavioralInterviewForm },
+      };
+      try {
+        await this.interviewsProvider.update(interview);
+        this.snackbarService.successMessage(
+          'Entrevista Atualizada Com Sucesso!'
+        );
+        this.selectedIndex = this.selectedIndex + 1;
+      } catch (error) {
+        console.log('ERROR 132' + error);
+        this.snackbarService.showError('Falha ao Cadastrar');
+      }
     }
-    try {
-      await this.interviewsProvider.update(interview);
-      this.snackbarService.successMessage(
-        'Entrevista Comportamental Cadastrada Com Sucesso'
-      );
-      this.selectedIndex = this.selectedIndex + 1;
-    } catch (error) {
-      console.log('ERROR 132' + error);
-      this.snackbarService.showError('Falha ao Cadastrar');
-    }
-    }
- 
   }
 
   async saveTechnicalInterviews() {
-    if(this.interviewId == 'novo'){
+    if (this.interviewId == 'novo') {
       let data = this.technicalInterviewForm.getRawValue();
-    const interview = { TechnicalInterviews: data, Job:  this.jobId };
-    try {
-      delete data.id;
-      await this.interviewsProvider.store(interview);
-      this.snackbarService.successMessage(
-        'Entrevista Técnica Cadastrada Com Sucesso'
-      );
-      this.router.navigate([`vaga/detalhe/${this.jobId.id}`]);
-      this.selectedIndex = this.selectedIndex + 1;
-    } catch (error) {
-      console.log('ERROR 132' + error);
-      this.snackbarService.showError('Falha ao Cadastrar');
-    }
-    }
-    else{
+      const interview = { TechnicalInterviews: data, Job: this.jobId };
+      try {
+        delete data.id;
+        await this.interviewsProvider.store(interview);
+        this.snackbarService.successMessage(
+          'Entrevista Técnica Cadastrada Com Sucesso!'
+        );
+        this.router.navigate([`vaga/detalhe/${this.jobId.id}`]);
+        this.selectedIndex = this.selectedIndex + 1;
+      } catch (error) {
+        console.log('ERROR 132' + error);
+        this.snackbarService.showError('Falha ao Cadastrar');
+      }
+    } else {
       let technicalInterviewForm = this.technicalInterviewForm.getRawValue();
-    const interview =  {
-      ...this.interview,
-      TechnicalInterviews: {...technicalInterviewForm},
-    }
-    try {
-      await this.interviewsProvider.update(interview);
-      this.snackbarService.successMessage(
-        'Entrevista Técnica Cadastrada Com Sucesso'
-      );
-      this.selectedIndex = this.selectedIndex + 1;
-    } catch (error) {
-      console.log('ERROR 132' + error);
-      this.snackbarService.showError('Falha ao Cadastrar');
-    }
+      const interview = {
+        ...this.interview,
+        TechnicalInterviews: { ...technicalInterviewForm },
+      };
+      try {
+        await this.interviewsProvider.update(interview);
+        this.snackbarService.successMessage(
+          'Entrevista Atualizada Com Sucesso!'
+        );
+        this.selectedIndex = this.selectedIndex + 1;
+      } catch (error) {
+        console.log('ERROR 132' + error);
+        this.snackbarService.showError('Falha ao Cadastrar');
+      }
     }
   }
 
-
   async saveClientInterviews() {
-    let clientInterviewForm = this.clientInterviewForm.getRawValue();
-    const interview =  {
-      ...this.interview,
-      ClientInterviews: {...clientInterviewForm},
-    }
-    try {
-      await this.interviewsProvider.update(interview);
-      this.snackbarService.successMessage(
-        'Entrevista Cliente Cadastrada Com Sucesso'
-      );
-      this.selectedIndex = this.selectedIndex + 1;
-    } catch (error) {
-      console.log('ERROR 132' + error);
-      this.snackbarService.showError('Falha ao Cadastrar');
+    if (this.interviewId == 'novo') {
+      let clientInterviewForm = this.clientInterviewForm.getRawValue();
+      const interview = {
+        ...this.interview,
+        ClientInterviews: { ...clientInterviewForm },
+      };
+      try {
+        await this.interviewsProvider.update(interview);
+        this.snackbarService.successMessage(
+          'Entrevista de Cliente Cadastrada Com Sucesso!'
+        );
+        this.selectedIndex = this.selectedIndex + 1;
+      } catch (error) {
+        console.log('ERROR 132' + error);
+        this.snackbarService.showError('Falha ao Cadastrar');
+      }
+    } else {
+      let clientInterviewForm = this.clientInterviewForm.getRawValue();
+      const interview = {
+        ...this.interview,
+        ClientInterviews: { ...clientInterviewForm },
+      };
+      try {
+        await this.interviewsProvider.update(interview);
+        this.snackbarService.successMessage(
+          'Entrevista Atualizada Com Sucesso!'
+        );
+        this.selectedIndex = this.selectedIndex + 1;
+      } catch (error) {
+        console.log('ERROR 132' + error);
+        this.snackbarService.showError('Falha ao Cadastrar');
+      }
     }
   }
 
@@ -288,7 +302,10 @@ export class JobInterviewCreateComponent implements OnInit {
     }
   }
 
-  backToList(jobId: string) {
+  backToList() {
+    const jobId = sessionStorage.getItem('job_id');
+    console.log();
     this.router.navigate([`vaga/detalhe/${jobId}`]);
+    sessionStorage.removeItem('job_id');
   }
 }
