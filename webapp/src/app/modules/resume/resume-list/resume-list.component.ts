@@ -134,7 +134,7 @@ export class ResumeListComponent implements OnInit {
 
   async getResumeList() {
     try {
-      this.filteredResumeList = this.resumes =
+      this.filteredResumeList.data = this.resumes =
         await this.resumeProvider.findAll();
       this.filteredResumeList.sort = this.sort;
     } catch (error) {

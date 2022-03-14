@@ -69,8 +69,9 @@ export class CollaboratorListComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
-    this.initFilter();
     await this.getCollaboratorList();
+    this.initFilter();
+  
   }
 
   announceSortChange(sortState: any) {
@@ -133,7 +134,8 @@ export class CollaboratorListComponent implements OnInit {
   }
 
   async getCollaboratorList() {
-    this.filteredCollaboratorList = this.collaborators =
+    this.filteredCollaboratorList.data = this.collaborators =
+   
       await this.collaboratorProvider.findAll();
     this.filteredCollaboratorList.sort = this.sort;
   }

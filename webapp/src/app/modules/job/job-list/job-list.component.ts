@@ -67,27 +67,7 @@ export class JobListComponent implements OnInit {
     this.initFilter();
   }
 
-  // sortData(sort: any) {
-  //   const data = this.filteredJobList.data.slice();
-  //   if (!sort.active || sort.direction === '') {
-  //     this.filteredJobList.data = data;
-  //     return;
-  //   }
 
-  //   this.filteredJobList.data = data.sort((a: any, b: any) => {
-  //     const isAsc = sort.direction === 'asc';
-  //     switch (sort.active) {
-  //       case 'jobName':
-  //         return compare(a.jobName, b.jobName, isAsc);
-  //       default:
-  //         return 0;
-  //     }
-  //   });
-
-  //   function compare(a: number | string, b: number | string, isAsc: boolean) {
-  //     return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
-  //   }
-  // }
 
   announceSortChange(sortState: any) {
     if (sortState.direction) {

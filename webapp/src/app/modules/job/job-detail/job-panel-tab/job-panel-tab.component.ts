@@ -15,7 +15,7 @@ import { JobProvider } from 'src/providers/job.provider';
 import { ConfirmDialogService } from 'src/services/confirn-dialog.service';
 import { Job } from '../../job-list/job-list.component';
 import { JobPanelModel } from 'src/models/job-panel-model';
-import { MatTable } from '@angular/material/table';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { InterviewsProvider } from 'src/providers/interview.provider';
 import { FormGroup } from '@angular/forms';
 
@@ -43,7 +43,7 @@ export class JobPanelTabComponent implements OnInit {
     'icon',
   ];
   interviews: IInterview[] = [];
-  filteredInterviewList!: any[];
+  filteredInterviewList = new MatTableDataSource();
   jobs!: Job[];
   job: any;
   jobId!: string | null;
@@ -63,7 +63,6 @@ export class JobPanelTabComponent implements OnInit {
   async ngOnInit() {
     this.jobId = this.route.snapshot.paramMap.get('id');
     this.getInterviewList();
-    this.filteredInterviewList = this.interviews;
     this.initFilter();
   }
 
@@ -72,11 +71,6 @@ export class JobPanelTabComponent implements OnInit {
       const interviews = await this.JobProvider.getFollowUpInterviews(
         this.jobId
       );
-      console.log(
-        '🚀 ~ file: job-panel-tab.component.ts ~ line 84 ~ JobPanelTabComponent ~ getInterviewList ~ interviews',
-        interviews
-      );
-
       interviews.map((interview: any) => {
         this.interviews.push(new JobPanelModel(interview));
       });
@@ -154,7 +148,7 @@ export class JobPanelTabComponent implements OnInit {
       .pipe(debounceTime(200), distinctUntilChanged())
 
       .subscribe(res => {
-        this.filteredInterviewList = this.interviews.filter(interview =>
+        this.filteredInterviewList.data = this.interviews.filter(interview =>
           interview.nameCandidate
             .toLocaleLowerCase()
             .includes(this.filter.nativeElement.value.toLocaleLowerCase())
