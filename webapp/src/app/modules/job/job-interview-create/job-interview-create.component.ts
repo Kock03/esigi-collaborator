@@ -119,6 +119,7 @@ export class JobInterviewCreateComponent implements OnInit {
       technicalEvaluation: ['', Validators.required],
       comments: ['', Validators.required],
       situational: [1, Validators.required],
+      //Job: { id: this.jobId },
     });
 
     this.clientInterviewForm = this.fb.group({
@@ -146,6 +147,9 @@ export class JobInterviewCreateComponent implements OnInit {
       combinedValue: ['', Validators.required],
       initialData: ['', Validators.required],
     });
+
+
+
   }
 
   async handleInterviews(type: string) {
