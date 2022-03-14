@@ -110,28 +110,25 @@ export class JobPanelTabComponent implements OnInit {
     this.dialogService.confirmed().subscribe(async (confirmed) => {
       if (confirmed) {
         try {
-          const interviews = await this.InterviewsProvider.destroy(
-            interviewId
-          );
-          this.getInterviewList();
+          const interviews = await this.InterviewsProvider.destroy(interviewId);
 
+          this.interviews = [];
+          this.getInterviewList()
           this.snackbarService.successMessage(
             'Entrevista excluida com sucesso'
-            );
-            this.deleteRow(interviewId);
+          );
         } catch (error) {
           console.log('ERROR 132' + error);
           this.snackbarService.showError('Falha ao Excluir');
-          this.getInterviewList();
         }
       }
     });
   }
 
-  deleteRow(id: any){
+  deleteRow(id: any) {
     const index = this.data.indexOf(id);
     this.data.splice(index, 1);
-}
+  }
 
   navigateJobs() {
     const navigationExtras = {
@@ -161,6 +158,7 @@ export class JobPanelTabComponent implements OnInit {
             .toLocaleLowerCase()
             .includes(this.filter.nativeElement.value.toLocaleLowerCase())
         );
+        
       });
   }
 }

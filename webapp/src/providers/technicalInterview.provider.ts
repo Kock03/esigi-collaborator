@@ -31,17 +31,17 @@ export class TechnicalInterviewProvider {
     }
 
 
-    update(technicalInterview: any): Promise<any> {
+    update(id: string | null, technicalInterview: any): Promise<any> {
         return new Promise((resolve, reject) => {
-            this.apiGateway.put(environment.JOBS_MS + 'technical-interviews', technicalInterview).subscribe((response: HttpResponse<any>) => {
+            this.apiGateway.put(environment.JOBS_MS +'technical-interviews/:id', { id: id }, technicalInterview).subscribe((response: HttpResponse<any>) => {
                 resolve(response.body);
             }, reject);
         });
     }
 
-    store(technicalInterview: any): Promise<any> {
+    store(id: string | null, technicalInterview: any): Promise<any> {
         return new Promise((resolve, reject) => {
-            this.apiGateway.post(environment.JOBS_MS + 'technical-interviews', technicalInterview).subscribe((response: HttpResponse<any>) => {
+            this.apiGateway.post(environment.JOBS_MS + 'technical-interviews/:id', { id: id }, technicalInterview).subscribe((response: HttpResponse<any>) => {
                 resolve(response.body);
             }, reject);
         });
