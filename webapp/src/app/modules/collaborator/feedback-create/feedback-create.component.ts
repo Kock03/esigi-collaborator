@@ -76,6 +76,11 @@ export class FeedbackCreateComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.feedbackId = this.route.snapshot.paramMap.get('id');
+
+    if (this.get !== undefined) {
+      sessionStorage.setItem('collaborator_id', this.get.id);
+    }
+
     this.initForm();
     if (this.feedbackId !== 'novo') {
       await this.getFeedback();
@@ -122,15 +127,19 @@ export class FeedbackCreateComponent implements OnInit {
     }
   }
 
-  listFeedback(collaboratorId: any) {
-    this.router.navigate([`colaborador/${collaboratorId}`]);
+  listFeedback() {
+    const jobId = sessionStorage.getItem('collaborator_id');
+    this.router.navigate([`colaborador/${jobId}`]);
+    sessionStorage.removeItem('collaborator_id');
   }
 
-  async saveFeedback(collaboratorId: any) {
+  async saveFeedback() {
     let data = this.feedbackForm.getRawValue();
     try {
       const feedback = await this.feedbackProvider.store(data);
-      this.router.navigate([`colaborador/${collaboratorId}`]);
+      const jobId = sessionStorage.getItem('collaborator_id');
+    this.router.navigate([`colaborador/${jobId}`]);
+    sessionStorage.removeItem('collaborator_id');
       this.snackBarService.showAlert('Feedbcack cadastrado com sucesso!');
     } catch (error) {
       console.log('ERROR 132' + error);
@@ -152,12 +161,14 @@ export class FeedbackCreateComponent implements OnInit {
     }
   }
 
-  async saveEditFeedback(collaboratorId: any) {
+  async saveEditFeedback() {
     let data = this.feedbackForm.getRawValue();
     try {
       const job = await this.feedbackProvider.update(this.feedbackId, data);
       this.snackBarService.successMessage('Feedbakc atualizado com sucesso');
-      this.router.navigate([`colaborador/${collaboratorId}`]);
+      const jobId = sessionStorage.getItem('collaborator_id');
+      this.router.navigate([`colaborador/${jobId}`]);
+      sessionStorage.removeItem('collaborator_id');
     } catch (error) {
       console.error(error);
     }

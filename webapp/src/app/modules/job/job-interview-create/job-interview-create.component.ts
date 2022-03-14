@@ -60,10 +60,6 @@ export class JobInterviewCreateComponent implements OnInit {
     const state = this.router.getCurrentNavigation()?.extras.state;
 
     this.jobId = state;
-    console.log(
-      '🚀 ~ file: job-interview-create.component.ts ~ line 63 ~ JobInterviewCreateComponent ~  this.jobId',
-      this.jobId
-    );
   }
 
   async ngOnInit(): Promise<void> {
@@ -85,7 +81,6 @@ export class JobInterviewCreateComponent implements OnInit {
     } else {
       this.initForm();
     }
-    console.log(this.interview);
   }
 
   initForm() {
@@ -178,14 +173,14 @@ export class JobInterviewCreateComponent implements OnInit {
       try {
         delete data.id;
         this.interview = await this.interviewsProvider.store(interview);
-        console.log(interview);
         this.snackbarService.successMessage(
           'Entrevista Comportamental Cadastrada Com Sucesso!'
         );
 
         const interviewId = this.interview.id;
-        this.router.navigate([`vaga/detalhe/${this.jobId.id}`]);
-        console.log(this.interview.id);
+        const jobId = sessionStorage.getItem('job_id');
+        this.router.navigate([`vaga/detalhe/${jobId}`]);
+        sessionStorage.removeItem('job_id');
       } catch (error) {
         console.log('ERROR 132' + error);
         this.snackbarService.showError('Falha ao Cadastrar');
@@ -219,7 +214,9 @@ export class JobInterviewCreateComponent implements OnInit {
         this.snackbarService.successMessage(
           'Entrevista Técnica Cadastrada Com Sucesso!'
         );
-        this.router.navigate([`vaga/detalhe/${this.jobId.id}`]);
+        const jobId = sessionStorage.getItem('job_id');
+    this.router.navigate([`vaga/detalhe/${jobId}`]);
+    sessionStorage.removeItem('job_id');
         this.selectedIndex = this.selectedIndex + 1;
       } catch (error) {
         console.log('ERROR 132' + error);
@@ -287,7 +284,9 @@ export class JobInterviewCreateComponent implements OnInit {
       await this.ReturnProvider.store(data);
 
       this.snackbarService.successMessage('Retorno Cadastrada Com Sucesso');
-      this.router.navigate(['vaga/lista']);
+      const jobId = sessionStorage.getItem('job_id');
+      this.router.navigate([`vaga/detalhe/${jobId}`]);
+      sessionStorage.removeItem('job_id');
     } catch (error) {
       console.log('ERROR 132' + error);
       this.snackbarService.showError('Falha ao Cadastrar');
@@ -308,7 +307,6 @@ export class JobInterviewCreateComponent implements OnInit {
 
   backToList() {
     const jobId = sessionStorage.getItem('job_id');
-    console.log();
     this.router.navigate([`vaga/detalhe/${jobId}`]);
     sessionStorage.removeItem('job_id');
   }

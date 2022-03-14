@@ -1,6 +1,6 @@
 <div class="page" id="feedbackTab">
   <div fxLayout="row" fxLayoutAlign="start start">
-    <button (click)="listFeedback(this.get.id)" color="primary" mat-button>
+    <button (click)="listFeedback()" color="primary" mat-button>
       <mat-icon> chevron_left </mat-icon>
     </button>
     <h2>Feedback</h2>
@@ -147,7 +147,7 @@
       mat-flat-button
       color="primary"
       [disabled]="this.feedbackForm.invalid"
-      (click)="saveFeedback(this.get.id)">
+      (click)="saveFeedback()">
       Salvar
     </button>
   </div>
@@ -160,7 +160,7 @@
     <button
       mat-flat-button
       color="primary"
-      (click)="saveEditFeedback(this.get.id)">
+      (click)="saveEditFeedback()">
       Salvar
     </button>
   </div>
