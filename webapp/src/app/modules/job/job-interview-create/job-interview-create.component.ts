@@ -78,7 +78,6 @@ export class JobInterviewCreateComponent implements OnInit {
     } else {
       this.initForm();
     }
-    console.log(this.interview)
   }
 
   initForm() {
@@ -101,7 +100,7 @@ export class JobInterviewCreateComponent implements OnInit {
       comments: [''],
       situational: [1, Validators.required],
       availabilityOfInitialize: ['', Validators.required],
-   
+      Job: { id: this.jobId },
     });
     this.technicalInterviewForm = this.fb.group({
       nameCandidate: ['', Validators.required],
@@ -113,6 +112,7 @@ export class JobInterviewCreateComponent implements OnInit {
       technicalEvaluation: ['', Validators.required],
       comments: ['', Validators.required],
       situational: [1, Validators.required],
+      //Job: { id: this.jobId },
     });
 
     this.clientInterviewForm = this.fb.group({
@@ -125,7 +125,7 @@ export class JobInterviewCreateComponent implements OnInit {
       technicalEvaluation: ['', Validators.required],
       comments: ['', Validators.required],
       situational: [1, Validators.required],
-
+      //Job: { id: this.jobId },
     });
 
     this.returnForm = this.fb.group({
@@ -140,16 +140,20 @@ export class JobInterviewCreateComponent implements OnInit {
       typeOdContract: [1, Validators.required],
       combinedValue: ['', Validators.required],
       initialData: ['', Validators.required],
-
+      //Job: { id: this.jobId },
     });
+
+
+
   }
 
   async handleInterviews(type: string) {
     switch (type) {
       case 'behavioral': {
-
+        if (this.interviewId == 'novo') {
           await this.saveBehaviroalInterviews();
-      
+        } else {
+        }
         break;
       }
       case 'technical': {
@@ -164,60 +168,32 @@ export class JobInterviewCreateComponent implements OnInit {
   }
 
   async saveBehaviroalInterviews() {
-    if(this.interviewId == 'novo') {
-      let data = this.behavioralInterviewForm.getRawValue();
-      const interview = { BehavioralInterviews: data, Job: this.jobId  };
-  
-      try {
-        delete data.id;
-        this.interview = await this.interviewsProvider.store(interview);
-        console.log(interview);
-        this.snackbarService.successMessage(
-          'Entrevista Comportamental Cadastrada Com Sucesso'
-        );
+    let data = this.behavioralInterviewForm.getRawValue();
+    const interview = { BehavioralInterviews: data, Job: { id: this.jobId } };
 
-
-        const interviewId = this.interview.id
-        this.router.navigate([`vaga/detalhe/${this.jobId.id}`]);
-      console.log(this.interview.id)
-      } catch (error) {
-        console.log('ERROR 132' + error);
-        this.snackbarService.showError('Falha ao Cadastrar');
-      }
-
-    }
-
-    else{
-      let behavioralInterviewForm = this.behavioralInterviewForm.getRawValue();
-    const interview =  {
-      ...this.interview,
-      BehavioralInterviews: {...behavioralInterviewForm},
-    }
     try {
-      await this.interviewsProvider.update(interview);
+      delete data.id;
+      this.interview = await this.interviewsProvider.store(interview);
       this.snackbarService.successMessage(
-        'Entrevista Comportamental Cadastrada Com Sucesso'
+        'Entrevista Comportional Cadastrada Com Sucesso'
       );
-      this.selectedIndex = this.selectedIndex + 1;
+      this.router.navigate([`vaga/interview/${this.interview.id}`]);
     } catch (error) {
       console.log('ERROR 132' + error);
       this.snackbarService.showError('Falha ao Cadastrar');
     }
-    }
- 
   }
 
   async saveTechnicalInterviews() {
     if(this.interviewId == 'novo'){
       let data = this.technicalInterviewForm.getRawValue();
-    const interview = { TechnicalInterviews: data, Job:  this.jobId };
+    const interview = { TechnicalInterviews: data, Job: { id: this.jobId } };
     try {
       delete data.id;
       await this.interviewsProvider.store(interview);
       this.snackbarService.successMessage(
         'Entrevista Técnica Cadastrada Com Sucesso'
       );
-      this.router.navigate([`vaga/detalhe/${this.jobId.id}`]);
       this.selectedIndex = this.selectedIndex + 1;
     } catch (error) {
       console.log('ERROR 132' + error);
@@ -242,7 +218,6 @@ export class JobInterviewCreateComponent implements OnInit {
     }
     }
   }
-
 
   async saveClientInterviews() {
     let clientInterviewForm = this.clientInterviewForm.getRawValue();
