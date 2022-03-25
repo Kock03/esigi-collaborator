@@ -216,7 +216,6 @@ export class CollaboratorCreateComponent implements OnInit {
       sessionStorage.clear();
     } catch (error: any) {
       console.log('ERROR 132' + error);
-      this.snackbarService.showError(error.message);
     }
   }
   handleChanges(value: any): void { }
