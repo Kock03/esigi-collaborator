@@ -56,6 +56,7 @@ export class CollaboratorListComponent implements OnInit {
   Collaborator: any;
   step: number = 1;
   form!: FormGroup;
+  firstNameCorporateName = '';
 
   constructor(
     private liveAnnouncer: LiveAnnouncer,
@@ -72,6 +73,21 @@ export class CollaboratorListComponent implements OnInit {
     await this.getCollaboratorList();
     this.initFilter();
   
+  }
+
+  search() {
+   const params = `firstNameCorporateName=${this.firstNameCorporateName}`;
+    this.searchCollaborators(params);
+  }
+
+  
+  async searchCollaborators(query?: string) {
+    try {
+      this.collaborators = await this.collaboratorProvider.findByName(query);
+      console.log(this.collaborators);
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   announceSortChange(sortState: any) {
@@ -139,18 +155,23 @@ export class CollaboratorListComponent implements OnInit {
     this.filteredCollaboratorList.sort = this.sort;
   }
 
+
   initFilter() {
     fromEvent(this.filter.nativeElement, 'keyup')
       .pipe(debounceTime(200), distinctUntilChanged())
 
       .subscribe((res) => {
         this.filteredCollaboratorList.data = this.collaborators.filter(
-          (collaborator) =>
-            collaborator.firstNameCorporateName
+          (collaborator) =>         
+          collaborator.firstNameCorporateName
               .toLocaleLowerCase()
               .includes(this.filter.nativeElement.value.toLocaleLowerCase())
-        );
+              
+        )
+        const params = `firstNameCorporateName=${this.filter.nativeElement.value}`;
+        this.searchCollaborators(params);
       });
+   
   }
 
   editCollaborator(collaboratorId: any) {

@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { FindManyOptions } from 'typeorm';
+import { FindManyOptions, Like } from 'typeorm';
 import { FindConditions } from 'typeorm/find-options/FindConditions';
 import { FindOneOptions } from 'typeorm/find-options/FindOneOptions';
 import { Repository } from 'typeorm/repository/Repository';
@@ -21,6 +21,13 @@ export class JobsService {
       order: { createdAt: 'DESC' },
     };
     return await this.jobsRepository.find(options);
+  }
+
+  findByName(query): Promise<JobsEntity[]> {
+    return this.jobsRepository.find({
+      where: [
+        { jobName: Like(`${query.jobName}%`) },]
+    });
   }
 
   async findOneOrFail(

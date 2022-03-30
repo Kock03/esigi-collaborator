@@ -7,6 +7,7 @@ import {
   ParseUUIDPipe,
   Post,
   Put,
+  Query,
 } from '@nestjs/common';
 import { CreateResumesDto } from './dto/create-resumes.dto';
 import { UpdateResumesDto } from './dto/update-resumes.dto';
@@ -26,6 +27,11 @@ export class ResumesController {
     return await this.resumesService.findOneOrFail({ id });
   }
 
+  @Get('find/name')
+  async findByName(@Query() query: any) {
+    return this.resumesService.findByName(query);
+  }
+  
   @Post()
   async store(@Body() body: CreateResumesDto) {
     return await this.resumesService.store(body);
