@@ -75,11 +75,6 @@ export class CollaboratorListComponent implements OnInit {
   
   }
 
-  search() {
-   const params = `firstNameCorporateName=${this.firstNameCorporateName}`;
-    this.searchCollaborators(params);
-  }
-
   
   async searchCollaborators(query?: string) {
     try {

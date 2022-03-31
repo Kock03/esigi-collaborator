@@ -59,6 +59,16 @@ export class ResumeListComponent implements OnInit {
     this.initFilter();
   }
 
+  async searchResumes(query?: string) {
+    try {
+      this.resumes = await this.resumeProvider.findByName(query);
+      console.log(this.resumes);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+
   async selectList(ev: any) {
     if (ev.value == 1) {
       return (this.filteredResumeList = this.resumes =
@@ -151,7 +161,9 @@ export class ResumeListComponent implements OnInit {
           resume.firstName
             .toLocaleLowerCase()
             .includes(this.filter.nativeElement.value.toLocaleLowerCase())
-        );
+        )
+        const params = `firstName=${this.filter.nativeElement.value}`;
+        this.searchResumes(params);
       });
   }
 }
