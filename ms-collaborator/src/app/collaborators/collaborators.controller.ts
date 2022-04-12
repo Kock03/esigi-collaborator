@@ -16,6 +16,7 @@ import { Observable } from 'rxjs';
 import { CollaboratorsService } from './collaborators.service';
 import { CreateCollaboratorsDto } from './dtos/create-collaborators.dto';
 import { UpdateCollaboratorsDto } from './dtos/update-collaborators.dto';
+import { ICollaborators } from './interfaces/i-collaborators.interfaces';
 
 @Controller('/api/v1/collaborators')
 export class CollaboratorsController {
@@ -26,6 +27,10 @@ export class CollaboratorsController {
     return await this.collaboratorsService.findAll();
   }
 
+  @Post('/list')
+  async findCollaboratorsListById(@Body() body: ICollaborators) {
+    return await this.collaboratorsService.findCollaboratorsListById(body.idList);
+  }
 
   @Post()
   async store(@Body() body: CreateCollaboratorsDto) {
@@ -47,8 +52,6 @@ export class CollaboratorsController {
   async findByName(@Query() query: any) {
     return this.collaboratorsService.findByName(query);
   }
-
-
 
   @Get('list/active')
   async findActive() {

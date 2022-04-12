@@ -5,6 +5,7 @@ import {
   FindConditions,
   FindManyOptions,
   FindOneOptions,
+  In,
   Like,
   Repository,
 } from 'typeorm';
@@ -28,6 +29,13 @@ export class CollaboratorsService {
       order: { createdAt: 'DESC' },
     };
     return await this.collaboratorsRepository.find(options);
+  }
+
+  async findCollaboratorsListById(idList: string[]) {
+    return await this.collaboratorsRepository.find({
+      select: ['id', 'firstNameCorporateName', 'lastNameFantasyName'],
+      where: { id: In(idList) }
+    })
   }
 
   async findInactive() {
