@@ -117,7 +117,7 @@ export class CollaboratorBankTabComponent implements OnInit {
   deleteBank(index: number) {
     const options = {
       data: {
-        title: 'Anteção',
+        title: 'Atenção',
         subtitle: 'Você tem certeza que deseja excluir essas informações?',
       },
       panelClass: 'confirm-modal',

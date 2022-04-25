@@ -150,7 +150,7 @@ export class ResumeEducationTabComponent implements OnInit {
   deleteLanguage(index: number) {
     const options = {
       data: {
-        title: 'Anteção',
+        title: 'Atenção',
         subtitle: 'Você tem certeza que deseja excluir essas informações?',
       },
       panelClass: 'confirm-modal',
@@ -183,7 +183,7 @@ export class ResumeEducationTabComponent implements OnInit {
   deleteEducation(index: number) {
     const options = {
       data: {
-        title: 'Anteção',
+        title: 'Atenção',
         subtitle: 'Você tem certeza que deseja excluir essas informações?',
       },
       panelClass: 'confirm-modal',

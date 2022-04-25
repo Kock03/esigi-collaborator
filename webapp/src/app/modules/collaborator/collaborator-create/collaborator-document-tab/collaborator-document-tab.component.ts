@@ -98,7 +98,7 @@ export class CollaboratorDocumentTabComponent implements OnInit {
   deleteDocument(index: number) {
     const options = {
       data: {
-        title: 'Anteção',
+        title: 'Atenção',
         subtitle: 'Você tem certeza que deseja excluir essas informações?',
       },
       panelClass: 'confirm-modal',

@@ -146,7 +146,7 @@ export class CollaboratorEducationTabComponent implements OnInit {
   deleteLanguage(index: number) {
     const options = {
       data: {
-        title: 'Anteção',
+        title: 'Atenção',
         subtitle: 'Você tem certeza que deseja excluir essas informações?',
       },
       panelClass: 'confirm-modal',
@@ -179,7 +179,7 @@ export class CollaboratorEducationTabComponent implements OnInit {
   deleteEducation(index: number) {
     const options = {
       data: {
-        title: 'Anteção',
+        title: 'Atenção',
         subtitle: 'Você tem certeza que deseja excluir essas informações?',
       },
       panelClass: 'confirm-modal',

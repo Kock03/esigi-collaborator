@@ -100,7 +100,7 @@ export class CollaboratorListComponent implements OnInit {
   async deleteCollaborator(collaboratorId: any) {
     const options = {
       data: {
-        title: 'Anteção',
+        title: 'Atenção',
         subtitle: 'Você tem certeza que deseja excluir este colaborador?',
       },
       panelClass: 'confirm-modal',

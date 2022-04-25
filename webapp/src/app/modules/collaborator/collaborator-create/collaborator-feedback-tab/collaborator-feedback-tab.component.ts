@@ -84,7 +84,7 @@ export class CollaboratorFeedbackTabComponent implements OnInit {
   async deleteFeedback(feedbackId: any) {
     const options = {
       data: {
-        title: 'Anteção',
+        title: 'Atenção',
         subtitle: 'Você tem certeza que deseja excluir este Feedback?',
       },
       panelClass: 'confirm-modal',

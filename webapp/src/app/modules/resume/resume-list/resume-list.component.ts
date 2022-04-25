@@ -119,7 +119,7 @@ export class ResumeListComponent implements OnInit {
   async deleteResume(resumeId: any) {
     const options = {
       data: {
-        title: 'Anteção',
+        title: 'Atenção',
         subtitle: 'Você tem certeza que deseja excluir este currículo?',
       },
       panelClass: 'confirm-modal',
