@@ -41,12 +41,6 @@ export class AppComponent {
       selected: false,
       action: 'curriculo/lista',
     },
-    {
-      name: 'Configurações',
-      icon: 'manage_accounts',
-      selected: false,
-      action: 'setting/novo',
-    },
   ];
 
   collaboratorId!: string | null;

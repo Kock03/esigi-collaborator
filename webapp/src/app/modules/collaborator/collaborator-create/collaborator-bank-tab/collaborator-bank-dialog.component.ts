@@ -13,7 +13,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
   selector: 'collaborator-bank-dialog',
   templateUrl: 'collaborator-bank-dialog.html',
   styleUrls: ['./collaborator-bank-tab.component.scss'],
-  encapsulation: ViewEncapsulation.None,
+    encapsulation: ViewEncapsulation.None,
 })
 export class CollaboratorBankDialog {
   @Input('form') collaboratorForm!: FormGroup;
