@@ -5,6 +5,8 @@ import {
   FindConditions,
   FindManyOptions,
   FindOneOptions,
+  In,
+  Like,
   Repository,
 } from 'typeorm';
 import { ConflictException } from '../exceptions/conflict.exception';
@@ -29,6 +31,13 @@ export class CollaboratorsService {
     return await this.collaboratorsRepository.find(options);
   }
 
+  async findCollaboratorsListById(idList: string[]) {
+    return await this.collaboratorsRepository.find({
+      select: ['id', 'firstNameCorporateName', 'lastNameFantasyName'],
+      where: { id: In(idList) }
+    })
+  }
+
   async findInactive() {
     return await this.collaboratorsRepository
       .createQueryBuilder('collaborators')
@@ -41,6 +50,13 @@ export class CollaboratorsService {
       .createQueryBuilder('collaborators')
       .where('collaborators.active =true')
       .getMany();
+  }
+
+  findByName(query): Promise<CollaboratorsEntity[]> {
+    return this.collaboratorsRepository.find({
+      where: [
+        { firstNameCorporateName: Like(`${query.firstNameCorporateName}%`) },]
+    });
   }
 
   async findOneOrFail(

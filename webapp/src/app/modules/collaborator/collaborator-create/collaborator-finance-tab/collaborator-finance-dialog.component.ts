@@ -62,7 +62,6 @@ export class CollaboratorFinanceDialog {
 
   initForm(): void {
     this.financeForm = this.fb.group({
-      id: [null],
       dateInclusion: [null, Validators.required],
       contractType: [null, Validators.required],
       reason: [null, Validators.required],

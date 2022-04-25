@@ -10,6 +10,7 @@ import {
   FindConditions,
   FindOneOptions,
   FindManyOptions,
+  Like,
 } from 'typeorm';
 import { CreateResumesDto } from './dto/create-resumes.dto';
 import { UpdateResumesDto } from './dto/update-resumes.dto';
@@ -38,6 +39,14 @@ export class ResumesService {
     } catch (error) {
       throw new NotFoundException();
     }
+  }
+
+  
+  findByName(query): Promise<ResumesEntity[]> {
+    return this.resumesRepository.find({
+      where: [
+        { firstName: Like(`${query.firstName}%`) },]
+    });
   }
 
   async store(data: CreateResumesDto) {

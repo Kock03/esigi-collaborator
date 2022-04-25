@@ -90,6 +90,15 @@ export class JobListComponent implements OnInit {
     }
   }
 
+  async searchJobs(query?: string) {
+    try {
+      this.jobs = await this.jobProvider.findByName(query);
+      console.log(this.jobs);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   viewDetail(jobId: any) {
     this.router.navigate([`vaga/detalhe/${jobId}`]);
   }
@@ -107,7 +116,9 @@ export class JobListComponent implements OnInit {
           job.jobName
             .toLocaleLowerCase()
             .includes(this.filter.nativeElement.value.toLocaleLowerCase())
-        );
+        )
+        const params = `jobName=${this.filter.nativeElement.value}`;
+        this.searchJobs(params);
       });
   }
 

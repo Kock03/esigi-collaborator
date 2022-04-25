@@ -9,6 +9,7 @@ import {
   ParseUUIDPipe,
   Post,
   Put,
+  Query,
 } from '@nestjs/common';
 import { CreateJobsDto } from './dtos/create-jobs.dto';
 import { UpdateJobsDto } from './dtos/update-jobs.dto';
@@ -26,6 +27,11 @@ export class JobsController {
   @Get(':id')
   async show(@Param('id', new ParseUUIDPipe()) id: string) {
     return await this.jobsService.findOneOrFail({ id });
+  }
+
+  @Get('find/name')
+  async findByName(@Query() query: any) {
+    return this.jobsService.findByName(query);
   }
 
   // @Get('interviews/:id')

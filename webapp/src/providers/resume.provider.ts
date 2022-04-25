@@ -21,6 +21,15 @@ export class ResumeProvider {
     });
   }
 
+  findByName(query: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.apiGateway.get(environment.RESUME_MS + `resumes/find/name?${query}`)
+        .subscribe((response: HttpResponse<any>) => {
+          resolve(response.body);
+        }, reject);
+    });
+  }
+
   findOne(id: string | null): Promise<any> {
     return new Promise((resolve, reject) => {
       this.apiGateway
