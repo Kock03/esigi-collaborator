@@ -38,6 +38,13 @@ export class CollaboratorsService {
     })
   }
 
+  async shortListCollaborators(){
+    return await this.collaboratorsRepository.find({
+      select: ['id', 'firstNameCorporateName', 'lastNameFantasyName'],
+      where: { active: true },
+    });
+  }
+
   async findInactive() {
     return await this.collaboratorsRepository
       .createQueryBuilder('collaborators')
@@ -64,7 +71,9 @@ export class CollaboratorsService {
 
     options?: FindOneOptions<CollaboratorsEntity>,
   ) {
+    options = { relations: ['Financials', 'Address', 'BankData', 'Dependents', 'Documents', 'Educations','Feedbacks','Languages', 'Phone', 'Skills'] };
     try {
+     
       return await this.collaboratorsRepository.findOneOrFail(
         conditions,
         options,

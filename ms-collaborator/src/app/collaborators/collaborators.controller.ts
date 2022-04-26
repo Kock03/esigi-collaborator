@@ -42,6 +42,11 @@ export class CollaboratorsController {
     return await this.collaboratorsService.findOneOrFail({ id });
   }
 
+  @Get('/short/list/collaborators')
+  async shortListCollaborators() {
+    return await this.collaboratorsService.shortListCollaborators();
+  }
+  
   @Get('list/inactive')
   async findInactive() {
     return await this.collaboratorsService.findInactive();
