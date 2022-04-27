@@ -1,0 +1,123 @@
+<div id="CollaboradorDependentsDialog" class="dialog">
+  <div class="content-scroll" *ngIf="dependentForm">
+    <h2 class="title-dialog" mat-dialog-title>Cadastro Dependentes</h2>
+    <mat-dialog-content class="mat-typography">
+      <form [formGroup]="dependentForm" fxLayout="column">
+        <mat-form-field appearance="outline">
+          <mat-label>Tipo</mat-label>
+          <mat-select formControlName="type">
+            <mat-option [value]="1">Conjuge</mat-option>
+            <mat-option [value]="2">Filho(a)</mat-option>
+            <mat-option [value]="3">Enteado(a)</mat-option>
+            <mat-option [value]="4">Pai</mat-option>
+            <mat-option [value]="5">Mãe</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Nome</mat-label>
+          <input
+            matInput
+            disableRipple
+            formControlName="firstName"
+            placeholder="Nome" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Sobrenome</mat-label>
+          <input
+            matInput
+            disableRipple
+            formControlName="lastName"
+            placeholder="Sobrenome" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Sexo</mat-label>
+          <mat-select formControlName="gender">
+            <mat-option [value]="1">Feminino</mat-option>
+            <mat-option [value]="2">Masculino</mat-option>
+            <mat-option [value]="3">Não Definido</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>CPF</mat-label>
+          <input
+            matInput
+            disableRipple
+            formControlName="cpf"
+            mask="000.000.000-00"
+            placeholder="CPF" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Data de Aniversario</mat-label>
+          <input
+            matInput
+            [matDatepicker]="picker"
+            formControlName="birthDate"
+            placeholder="Data Aniversário" />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>DDI</mat-label>
+          <input
+            matInput
+            disableRipple
+            formControlName="ddi"
+            mask="+00"
+            placeholder="DDI" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>DDD</mat-label>
+          <input
+            matInput
+            disableRipple
+            formControlName="ddd"
+            mask="(00)"
+            placeholder="DDD" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Telefone</mat-label>
+          <input
+            matInput
+            disableRipple
+            formControlName="phoneNumber"
+            mask="0000-0000||00000-0000"
+            placeholder="Número" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input
+            matInput
+            disableRipple
+            formControlName="email"
+            placeholder="Email" />
+        </mat-form-field>
+      </form>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+      <div class="button-dialog">
+        <button mat-flat-button mat-dialog-close (click)="onNoClick()">
+          Cancelar
+        </button>
+        <button
+          mat-flat-button
+          [mat-dialog-close]="true"
+          color="primary"
+          [disabled]="dependentForm.invalid"
+          (click)="save()">
+          Salvar
+        </button>
+      </div>
+    </mat-dialog-actions>
+  </div>
+</div>

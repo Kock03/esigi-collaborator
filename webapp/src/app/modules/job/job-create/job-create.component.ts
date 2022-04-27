@@ -1,23 +1,55 @@
+import { DatePipe, formatDate } from '@angular/common';
+
 import { HttpClient } from '@angular/common/http';
 import {
   Component,
   EventEmitter,
+  Injectable,
   Input,
   OnInit,
   Output,
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+import {
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import {
+  DateAdapter,
+  MAT_DATE_FORMATS,
+  NativeDateAdapter,
+} from '@angular/material/core';
+
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { JobProvider } from 'src/providers/job.provider';
+import { SnackBarService } from 'src/services/snackbar.service';
 
-export interface Knowledge {
-  name: string;
-  yearsExperience: number;
-  typeOfPeriod: number;
+export const PICK_FORMATS = {
+  parse: { dateInput: { month: 'numeric', year: 'numeric', day: 'numeric' } },
+  display: {
+    dateInput: 'input',
+    monthYearLabel: { year: 'numeric', month: 'numeric' },
+    dateA11yLabel: { year: 'numeric', month: 'numeric', day: 'numeric' },
+    monthYearA11yLabel: { year: 'numeric', month: 'numeric' },
+  },
+};
+
+@Injectable()
+export class PickDateAdapter extends NativeDateAdapter {
+  override format(date: Date, displayFormat: Object): string {
+    if (displayFormat === 'input') {
+      return formatDate(date, 'dd-MM-yyyy', this.locale);
+    } else {
+      return date.toDateString();
+    }
+  }
 }
 
 @Component({
@@ -25,6 +57,10 @@ export interface Knowledge {
   templateUrl: './job-create.component.html',
   styleUrls: ['./job-create.component.scss'],
   encapsulation: ViewEncapsulation.None,
+  providers: [
+    { provide: DateAdapter, useClass: PickDateAdapter },
+    { provide: MAT_DATE_FORMATS, useValue: PICK_FORMATS },
+  ],
 })
 export class JobCreateComponent implements OnInit {
   @ViewChild('knowledgeTable') knowledgeTable!: MatTable<any>;
@@ -36,35 +72,73 @@ export class JobCreateComponent implements OnInit {
     'icon',
   ];
 
-  get knowledgeArray() {
-    return this.jobForm.controls['Knowledges'] as FormArray;
-  }
-
+  Date: any;
   jobForm!: FormGroup;
   step: number = 1;
-  selectedIndex: number = 0;
-  disable = false;
+
   checked = false;
 
   index: any = null;
   Knowledge: any;
+
+  jobId!: string | null;
+  job!: any;
+
+  validations = [
+    ['jobName'],
+    ['Knowledges'],
+    ['typeOfJob'],
+    ['requester'],
+    ['client'],
+    ['startForecast'],
+    
+
+  ]
+
+  get knowledgeArray() {
+    return this.jobForm.controls['Knowledges'] as FormArray;
+  }
 
   constructor(
     private fb: FormBuilder,
     public dialog: MatDialog,
     private jobProvider: JobProvider,
     private http: HttpClient,
-    private router: Router
+    private snackbarService: SnackBarService,
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
-  ngOnInit(): void {
-    this.initForm();
+  async ngOnInit(): Promise<void> {
+    this.jobId = this.route.snapshot.paramMap.get('id');
+    if (sessionStorage.getItem('job_tab') == undefined) {
+      sessionStorage.setItem('job_tab', '1');
+    }
+    this.step = JSON.parse(sessionStorage.getItem('job_tab')!);
+
+    if (this.jobId !== 'novo') {
+      await this.getJob();
+      this.initForm();
+      this.setFormValue();
+    } else {
+      this.initForm();
+    }
   }
+
+  async getJob() {
+    try {
+      this.job = await this.jobProvider.findOne(this.jobId);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+
 
   initForm() {
     this.jobForm = this.fb.group({
       requester: [
-        'Wellington',
+        '',
         [
           Validators.required,
           Validators.minLength(4),
@@ -74,7 +148,7 @@ export class JobCreateComponent implements OnInit {
       status: [1, Validators.required],
       publish: [false],
       client: [
-        'Ambev',
+        '',
         [
           Validators.required,
           Validators.minLength(1),
@@ -83,9 +157,9 @@ export class JobCreateComponent implements OnInit {
       ],
       typeOfJob: [1, Validators.required],
       temporary: [false],
-      monthTime: ['', Validators.required],
+      monthTime: [''],
       jobName: [
-        'Programador React',
+        '',
         [
           Validators.required,
           Validators.minLength(8),
@@ -99,16 +173,23 @@ export class JobCreateComponent implements OnInit {
       ],
       typeOfContract: [1, Validators.required],
       workplace: [1, Validators.required],
-      workingDay: ['2 horas', [Validators.required, Validators.maxLength(50), Validators.minLength(5)]],
+      workingDay: [
+        '',
+        [
+          Validators.required,
+          Validators.maxLength(50),
+          Validators.minLength(5),
+        ],
+      ],
       minimumValue: [1, Validators.required],
       maximumValue: [1, Validators.required],
       openingDate: [new Date(), Validators.required],
       schooling: [1, Validators.required],
-      collaboratorActivities: ['a', Validators.required],
-      skills: ['a', Validators.required],
-      attitudes: ['a', Validators.required],
+      collaboratorActivities: ['', Validators.required],
+      skills: ['', Validators.required],
+      attitudes: ['', Validators.required],
       Languages: this.fb.group({
-        languageName: ['Russo',[Validators.required, Validators.maxLength(20)]],
+        languageName: ['', [Validators.required, Validators.maxLength(20)]],
         degreeOfInfluence: [1, Validators.required],
       }),
       Seniorities: this.fb.group({
@@ -117,89 +198,90 @@ export class JobCreateComponent implements OnInit {
         pleno: [false],
         senior: [false],
       }),
-      Knowledges: this.fb.array([]),
+      Knowledges: this.fb.array(this.job ? this.job.Knowledges : []),
     });
   }
 
-  openDialog() {
-    const dialogRef = this.dialog.open(JobDialogSkill, {
-      width: '450px',
-      height: '200px',
-    });
-
-    dialogRef.afterClosed().subscribe((knowledge) => {
-      this.knowledgeArray.insert(0, this.fb.group(knowledge)),
-        this.knowledgeTable.renderRows();
-    });
-  }
-
-  nextStep() {
-    if (this.selectedIndex != 1) {
-      this.selectedIndex = this.selectedIndex + 1;
-    }
-  }
-
-  previousStep() {
-    if (this.selectedIndex != 0) {
-      this.selectedIndex = this.selectedIndex - 1;
+  setFormValue() {
+    if (this.job) {
+      this.jobForm.patchValue(this.job);
+      if (this.job.Languages[0]) {
+        const languages = this.jobForm.controls['Languages'] as FormGroup;
+        languages.patchValue(this.job.Languages[0]);
+      }
     }
   }
 
   async saveJob() {
     let data = this.jobForm.getRawValue();
-    console.log(
-      '🚀 ~ file: job-create.component.ts ~ line 84 ~ JobCreateComponent ~ saveCustomer ~ data',
-      data
-    );
 
     try {
+      data.Languages = new Array(data.Languages);
       const jobs = await this.jobProvider.store(data);
+
+      this.snackbarService.successMessage('Vaga Cadastrada Com Sucesso');
+      this.router.navigate(['vaga/lista']);
+      sessionStorage.clear();
     } catch (error) {
       console.log('ERROR 132' + error);
+      this.snackbarService.showError('Falha ao Cadastrar');
     }
   }
 
-  deleteKnowledge(index: number) {
-    this.knowledgeArray.removeAt(index);
+  navigate(direction: string) {
+    if (this.step > 1 && direction === 'back') {
+      this.step -= 1;
+    } else if (this.checkValid() && this.step < 2 && direction === 'next') {
+      this.step += 1;
+    } else {
+      this.snackbarService.showAlert('Verifique os campos');
+    }
   }
 
-  listJob(){
-    this.router.navigate(['vaga/lista'])
+
+  listJob() {
+    this.router.navigate(['vaga/lista']);
+    sessionStorage.clear();
   }
+
+  handleStep(number: number): void {
+    if (!this.checkValid() && this.step < number) {
+      this.snackbarService.showAlert('Verifique os campos');
+    } else if (this.step - number < 1) {
+      this.step = number;
+      sessionStorage.setItem('job_tab', this.step.toString());
+    } else {
+      this.step = number;
+      sessionStorage.setItem('job_tab', this.step.toString());
+    }
+  }
+
+  handleChanges(value: any): void {}
+
+  
+  async saveEditJob() {
+    let data = this.jobForm.getRawValue();
+    try {
+      data.Languages = new Array(data.Languages);
+      const job = await this.jobProvider.update(this.jobId, data);
+      this.snackbarService.successMessage('Vaga atualizada com sucesso');
+      this.router.navigate(['vaga/lista']);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+
+checkValid(): boolean {
+  let isValid = true;
+  const validations = this.validations[this.step - 1];
+  for (let index = 0; index < validations.length; index++) {
+    if (this.jobForm.controls[validations[index]].invalid) {
+      isValid = false;
+
+      this.jobForm.markAllAsTouched();
+    }
+  }
+  return isValid;
 }
-
-@Component({
-  selector: 'job-dialog-skill',
-  templateUrl: 'job-dialog-skill.html',
-})
-export class JobDialogSkill implements OnInit {
-  @Input('form') jobForm!: FormGroup;
-  @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
-
-  knowledgeForm!: FormGroup;
-
-  constructor(
-    public dialogRef: MatDialogRef<JobDialogSkill>,
-    private fb: FormBuilder
-  ) {}
-
-  ngOnInit(): void {
-    this.initForm();
-  }
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-
-  initForm(): void {
-    this.knowledgeForm = this.fb.group({
-      name: ['', [Validators.required, Validators.maxLength(20)]],
-      yearsExperience: [1, Validators.required],
-      typeOfPeriod: [1, Validators.required],
-    });
-  }
-
- async saveKnowledge() {
-    this.dialogRef.close(this.knowledgeForm.getRawValue());
-  }
 }

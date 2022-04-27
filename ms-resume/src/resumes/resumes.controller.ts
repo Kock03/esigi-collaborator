@@ -7,14 +7,15 @@ import {
   ParseUUIDPipe,
   Post,
   Put,
+  Query,
 } from '@nestjs/common';
-import { CreateResumesDto } from './dto/create-resumes-dto';
-import { UpdateResumesDto } from './dto/update-resumes-dto';
+import { CreateResumesDto } from './dto/create-resumes.dto';
+import { UpdateResumesDto } from './dto/update-resumes.dto';
 import { ResumesService } from './resumes.service';
 
 @Controller('/api/v1/resumes')
 export class ResumesController {
-  constructor(private readonly resumesService: ResumesService) {}
+  constructor(private readonly resumesService: ResumesService) { }
 
   @Get()
   async index() {
@@ -26,10 +27,14 @@ export class ResumesController {
     return await this.resumesService.findOneOrFail({ id });
   }
 
+  @Get('find/name')
+  async findByName(@Query() query: any) {
+    return this.resumesService.findByName(query);
+  }
+  
   @Post()
   async store(@Body() body: CreateResumesDto) {
     return await this.resumesService.store(body);
-    console.log("🚀 ~ file: resumes.controller.ts ~ line 32 ~ ResumesController ~ store ~ body", body)
   }
 
   @Put(':id')

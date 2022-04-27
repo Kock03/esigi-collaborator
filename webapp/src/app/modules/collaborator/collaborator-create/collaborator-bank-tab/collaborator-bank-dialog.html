@@ -1,59 +1,94 @@
-<div id="collaboratorBankDialog" class="dialog">
-    <div class="content-scroll" *ngIf="bankForm">
-      <h2 class="title-dialog" mat-dialog-title>Cadastro Bancário</h2>
-      <mat-dialog-content class="mat-typography">
-        <form [formGroup]="bankForm"  fxLayout="column">
-          
-            <mat-form-field appearance="outline">
-                <mat-label>Banco</mat-label>
-                <input matInput disableRipple formControlName="bank"/>
-              </mat-form-field>
+<div id="collaboratorBankDialog">
+  <div class="content-scroll" *ngIf="bankForm">
+    <h2 class="title-dialog" mat-dialog-title>Cadastro Bancário</h2>
+    <mat-dialog-content class="mat-typography">
+      <form [formGroup]="bankForm" fxLayout="column">
+        <mat-form-field appearance="outline">
+          <mat-label>Banco</mat-label>
+          <input
+            matInput
+            disableRipple
+            formControlName="bank"
+            placeholder="Banco" />
+        </mat-form-field>
 
-            <div fxLayout="row" fxFlex="100" fxLayoutGap="16px">
-              <mat-form-field fxFlex="75" appearance="outline">
-                <mat-label>Agência</mat-label>
-                <input matInput disableRipple formControlName="agency"/>
-              </mat-form-field>
+        <div fxLayout="row" fxFlex="100" fxLayoutGap="16px">
+          <mat-form-field appearance="outline" fxFlex="75">
+            <mat-label>Tipo da Conta</mat-label>
+            <mat-select formControlName="accountType">
+              <mat-option [value]="1">Conta Corrente</mat-option>
+              <mat-option [value]="2">Conta Salário</mat-option>
+              <mat-option [value]="3">Conta Poupança</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <br />
+          <mat-checkbox
+            class="checkbox"
+            color="primary"
+            fxFlex="25"
+            formControlName="status">
+            Ativa
+          </mat-checkbox>
+        </div>
+        <div fxLayout="row" fxFlex="100" fxLayoutGap="16px">
+          <mat-form-field fxFlex="75" appearance="outline">
+            <mat-label>Agência</mat-label>
+            <input
+              matInput
+              disableRipple
+              formControlName="agency"
+              mask="0000"
+              placeholder="Agência" />
+          </mat-form-field>
 
-              <mat-form-field fxFlex="25" appearance="outline">
-                <mat-label>Digito</mat-label>
-                <input matInput disableRipple formControlName="digit"/>
-              </mat-form-field>
-            </div>
+          <mat-form-field fxFlex="25" appearance="outline">
+            <mat-label>Digito</mat-label>
+            <input
+              matInput
+              disableRipple
+              formControlName="digit"
+              mask="0"
+              placeholder="Digito" />
+          </mat-form-field>
+        </div>
 
-              <mat-form-field  appearance="outline">
-                <mat-label>Tipo da Conta</mat-label>
-                <mat-select
-                  formControlName="accountType"
-                >
-                <mat-option [value]="1">Conta Corrente</mat-option>
-                <mat-option [value]="2">Conta Salário</mat-option>
-                <mat-option [value]="3">Conta Poupança</mat-option>
-                </mat-select>
-              </mat-form-field>
-          
-             
-            <div fxLayout="row" fxFlex="100" fxLayoutGap="16px">
-              <mat-form-field fxFlex="75" appearance="outline">
-                <mat-label>Número Conta</mat-label>
-                <input matInput disableRipple formControlName="accountNumber"/>
-              </mat-form-field>
-   
-        
-              <mat-form-field fxFlex="25" appearance="outline">
-                <mat-label>Digito</mat-label>
-                <input matInput disableRipple formControlName="bankAccountDigit"/>
-              </mat-form-field>
-             </div>
-        </form>
-      </mat-dialog-content>
-      <mat-dialog-actions>
-        <div class="button-dialog">
-        <button mat-flat-button mat-dialog-close (click)="onNoClick()">Cancelar</button>
-        <button mat-flat-button [mat-dialog-close]="true" color="primary" [disabled]="bankForm.invalid" (click)="save()">
+        <div fxLayout="row" fxFlex="100" fxLayoutGap="16px">
+          <mat-form-field fxFlex="75" appearance="outline">
+            <mat-label>Número Conta</mat-label>
+            <input
+              matInput
+              disableRipple
+              formControlName="accountNumber"
+              mask="00000"
+              placeholder="Número Conta" />
+          </mat-form-field>
+
+          <mat-form-field fxFlex="25" appearance="outline">
+            <mat-label>Digito</mat-label>
+            <input
+              matInput
+              disableRipple
+              formControlName="bankAccountDigit"
+              mask="0"
+              placeholder="Digito" />
+          </mat-form-field>
+        </div>
+      </form>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+      <div class="button-dialog">
+        <button mat-flat-button mat-dialog-close (click)="onNoClick()">
+          Cancelar
+        </button>
+        <button
+          mat-flat-button
+          [mat-dialog-close]="true"
+          color="primary"
+          [disabled]="bankForm.invalid"
+          (click)="save()">
           Salvar
         </button>
       </div>
-      </mat-dialog-actions>
-    </div>
+    </mat-dialog-actions>
   </div>
+</div>

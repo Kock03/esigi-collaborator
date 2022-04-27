@@ -1,25 +1,59 @@
-import { IsNotEmpty } from "class-validator";
-
+import { ApiProperty } from '@nestjs/swagger';
+import {
+  IsNotEmpty,
+  IsOptional,
+  IsString,
+  Length,
+  MaxLength,
+  MinLength,
+} from 'class-validator';
 export class UpdateAddressDto {
-
-  @IsNotEmpty()
+  @ApiProperty()
+  @IsOptional()
+  @IsString()
+  @MinLength(8)
+  @MaxLength(8)
   cep: string;
 
-  @IsNotEmpty()
+  @ApiProperty()
+  @IsOptional()
+  @IsString()
+  @MinLength(1)
+  @MaxLength(10)
   number: string;
 
-  @IsNotEmpty()
+  @ApiProperty()
+  @IsOptional()
+  @IsString()
+  @MinLength(3)
+  @MaxLength(60)
   street: string;
 
-  @IsNotEmpty()
+  @ApiProperty()
+  @IsOptional()
+  @IsString()
+  @MinLength(3)
+  @MaxLength(60)
   district: string;
 
-  @IsNotEmpty()
+  @ApiProperty()
+  @IsOptional()
+  @IsString()
+  @MinLength(3)
+  @MaxLength(60)
   state: string;
 
-  @IsNotEmpty()
+  @ApiProperty()
+  @IsOptional()
+  @IsString()
+  @MinLength(3)
+  @MaxLength(60)
   city: string;
-  
-  @IsNotEmpty()
+
+  @ApiProperty()
+  @IsOptional()
+  @IsString()
+  @MinLength(3)
+  @MaxLength(60)
   complement: string;
 }

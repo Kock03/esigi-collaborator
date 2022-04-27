@@ -1,24 +1,18 @@
 #collaboratorDocumentTab {
   padding-bottom: 10px;
-  max-width: 800px;
+  max-width: 1220px;
 
   table {
     width: 100%;
 
   }
 
-  .edit-button {
-    height: 40px;
-    margin-top: 25px;
-    margin-left: 10px;
-  }
-
-
   .envolti-table {
     overflow: auto;
     max-height: 300px;
     width: 100%;
     margin-top: 20px;
+    border-radius: 10px;
 
 
     .mat-column-icon {

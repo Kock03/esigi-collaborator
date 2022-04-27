@@ -1,21 +1,44 @@
-import { IsNotEmpty } from "class-validator";
-import { CollaboratorsEntity } from "src/app/collaborators/collaborators.entity";
-import { Schooling } from "./schooling.enum";
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import {
+  IsEnum,
+  IsNotEmpty,
+  IsNumber,
+  IsObject,
+  IsString,
+  MaxLength,
+  MinLength,
+} from 'class-validator';
+import { CollaboratorsEntity } from 'src/app/collaborators/collaborators.entity';
+import { Schooling } from './schooling.enum';
+import { Situation } from './situation.enum';
 
-export class CreateEducationsDto{
-     
-    @IsNotEmpty()
-    course: string;
-  
-    @IsNotEmpty()
-    schooling: Schooling
+export class CreateEducationsDto {
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsString()
+  @MinLength(3)
+  @MaxLength(70)
+  course: string;
 
-    @IsNotEmpty()
-    institution: string;
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsEnum(Schooling)
+  schooling: Schooling;
 
-    @IsNotEmpty()
-    situation: Situation;
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsString()
+  @MinLength(10)
+  @MaxLength(100)
+  institution: string;
 
-    @IsNotEmpty()
-    collaborator: CollaboratorsEntity;
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsEnum(Situation)
+  situation: Situation;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsObject()
+  Collaborator: CollaboratorsEntity;
 }

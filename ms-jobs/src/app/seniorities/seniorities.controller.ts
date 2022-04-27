@@ -20,7 +20,6 @@ export class SenioritiesController {
 
     @Post()
     async store(@Body() body: CreateSenioritiesDto){
-        console.log("🚀 ~ file: jobs.controller.ts ~ line 22 ~ SenioritiesController ~ store ~ body", body)
         return await this.senioritiesService.store(body);
     }
 

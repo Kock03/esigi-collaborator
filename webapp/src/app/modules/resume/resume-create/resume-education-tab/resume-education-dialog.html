@@ -1,50 +1,63 @@
 <div id="resumeEducationDialog" class="dialog">
-    <div class="content-scroll" *ngIf="educationForm">
-      <h2 mat-dialog-title class="title-dialog">Escolaridade</h2>
-      <mat-dialog-content class="mat-typography">
-        <form [formGroup]="educationForm"  fxLayout="column">
+  <div class="content-scroll" *ngIf="educationForm">
+    <h2 mat-dialog-title class="title-dialog">Escolaridade</h2>
+    <mat-dialog-content class="mat-typography">
+      <form [formGroup]="educationForm" fxLayout="column">
+        <mat-form-field appearance="outline">
+          <mat-label>Escolaridade</mat-label>
+          <mat-select formControlName="schooling">
+            <mat-option [value]="1">Ensino Fundamental</mat-option>
+            <mat-option [value]="2">Ensino Médio</mat-option>
+            <mat-option [value]="3">Ensino Superior</mat-option>
+          </mat-select>
+        </mat-form-field>
 
-            <mat-form-field appearance="outline">
-                <mat-label>Escolaridade</mat-label>
-                <mat-select
-                  formControlName="schooling"
-                >
-                <mat-option [value]="1">Ensino Fundamental</mat-option>
-                <mat-option [value]="2">Ensino Médio</mat-option>
-                <mat-option [value]="3">Ensino Superior</mat-option>
-                </mat-select>
-              </mat-form-field>
-          
-            <mat-form-field appearance="outline">
-                <mat-label>Curso</mat-label>
-                <input matInput disableRipple formControlName="course"/>
-              </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Curso</mat-label>
+          <input
+            matInput
+            disableRipple
+            formControlName="course"
+            placeholder="Curso" />
+        </mat-form-field>
 
-              <mat-form-field  appearance="outline">
-                <mat-label>Instituição</mat-label>
-                <input matInput disableRipple formControlName="institution"/>
-              </mat-form-field>
-  
-              <mat-form-field appearance="outline">
-                <mat-label>Situação</mat-label>
-                <mat-select
-                  formControlName="situation"
-                >
-                <mat-option [value]="1">Parado</mat-option>
-                <mat-option [value]="2">Completo</mat-option>
-                <mat-option [value]="3">Em andamento</mat-option>
-                </mat-select>
-              </mat-form-field>
-              
-        </form>
-      </mat-dialog-content>
-      <mat-dialog-actions >
-        <div class="button-dialog">
-        <button fxFlexAlign="center center" mat-flat-button mat-dialog-close (click)="onNoClick()">Cancelar</button>
-        <button [disabled]="educationForm.invalid" mat-flat-button color="primary" [mat-dialog-close]="true" (click)="save()">
+        <mat-form-field appearance="outline">
+          <mat-label>Instituição</mat-label>
+          <input
+            matInput
+            disableRipple
+            formControlName="institution"
+            placeholder="Instituição" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Situação</mat-label>
+          <mat-select formControlName="situation">
+            <mat-option [value]="1">Parado</mat-option>
+            <mat-option [value]="2">Completo</mat-option>
+            <mat-option [value]="3">Em andamento</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </form>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+      <div class="button-dialog">
+        <button
+          fxFlexAlign="center center"
+          mat-flat-button
+          mat-dialog-close
+          (click)="onNoClick()">
+          Cancelar
+        </button>
+        <button
+          [disabled]="educationForm.invalid"
+          mat-flat-button
+          color="primary"
+          [mat-dialog-close]="true"
+          (click)="save()">
           Salvar
         </button>
       </div>
-      </mat-dialog-actions>
-    </div>
+    </mat-dialog-actions>
   </div>
+</div>

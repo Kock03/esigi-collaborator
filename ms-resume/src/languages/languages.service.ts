@@ -1,8 +1,14 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository, FindConditions, FindOneOptions } from 'typeorm';
-import { CreateLanguagesDto } from './dto/create-languages-dto';
-import { UpdateLanguagesDto } from './dto/update-languages-dto';
+import { NotFoundException } from 'src/exceptions/not-found-exception';
+import {
+  Repository,
+  FindConditions,
+  FindOneOptions,
+  FindManyOptions,
+} from 'typeorm';
+import { CreateLanguagesDto } from './dto/create-languages.dto';
+import { UpdateLanguagesDto } from './dto/update-languages.dto';
 import { LanguagesEntity } from './languages.entity';
 
 @Injectable()
@@ -13,6 +19,9 @@ export class IdiomsService {
   ) {}
 
   async findAll() {
+    const options: FindManyOptions = {
+      order: { createdAt: 'DESC' },
+    };
     return await this.languagesRepository.find();
   }
 
@@ -22,8 +31,8 @@ export class IdiomsService {
   ) {
     try {
       return await this.languagesRepository.findOneOrFail(conditions, options);
-    } catch (error) {
-      throw new NotFoundException(error.message);
+    } catch {
+      throw new NotFoundException();
     }
   }
 
@@ -32,14 +41,21 @@ export class IdiomsService {
     return await this.languagesRepository.save(languages);
   }
 
-  async update(id: string, updateDto: UpdateLanguagesDto) {
-    const languages = await this.languagesRepository.findOneOrFail({ id });
-    this.languagesRepository.merge(languages, updateDto);
-    return this.languagesRepository.save(languages);
+  async update(id: string, data: UpdateLanguagesDto) {
+    try {
+      const languages = await this.languagesRepository.findOneOrFail({ id });
+    } catch {
+      throw new NotFoundException();
+    }
+    return await this.languagesRepository.save({ id: id, ...data });
   }
 
   async destroy(id: string) {
-    await this.languagesRepository.findOneOrFail({ id });
+    try {
+      await this.languagesRepository.findOneOrFail({ id });
+    } catch {
+      throw new NotFoundException();
+    }
     return await this.languagesRepository.softDelete({ id });
   }
 }

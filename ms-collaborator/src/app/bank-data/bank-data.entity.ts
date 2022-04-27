@@ -7,8 +7,12 @@ import {
   DeleteDateColumn,
   PrimaryGeneratedColumn,
   OneToOne,
+  ManyToOne,
+  BeforeInsert,
+  BeforeUpdate,
   JoinColumn,
 } from 'typeorm';
+import { EventListenerTypes } from 'typeorm/metadata/types/EventListenerTypes';
 import { AccountTypes } from './dtos/account-types.enum';
 
 @Entity({ name: 'bank_data' })
@@ -16,36 +20,43 @@ export class BankDataEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ name: 'bank' })
+  @Column()
   bank: string;
 
-  @Column({ name: 'agency' })
+  @Column()
   agency: string;
 
-  @Column({ name: 'account_typet' })
+  @Column()
   accountType: AccountTypes;
 
-  @Column({ name: 'account_number', type: 'int' })
-  accountNumber: number;
+  @Column()
+  accountNumber: string;
 
-  @Column({ name: 'digit', type: 'int' })
-  digit: number;
+  @Column()
+  digit: string;
 
-  @Column({ name: 'bank_account_digit', type: 'int' })
-  bankAccountDigit: number;
+  @Column()
+  bankAccountDigit: string;
 
+  @Column()
+  status: boolean;
 
-  @OneToOne(() => CollaboratorsEntity)
+  @ManyToOne(
+    () => CollaboratorsEntity,
+    (collaborator) => collaborator.BankData,
+    {
+      cascade: ['update'],
+    },
+  )
   @JoinColumn()
-  Collaborator: CollaboratorsEntity;
+  collaborator: CollaboratorsEntity;
 
-  @CreateDateColumn({ name: 'created_at', type: 'datetime' })
+  @CreateDateColumn({ type: 'datetime' })
   createdAt: Date;
 
   @UpdateDateColumn({ name: 'updated_at', type: 'datetime' })
   updatedAt: Date;
 
-  @DeleteDateColumn({ name: 'deleted_at', type: 'datetime' })
+  @DeleteDateColumn({ type: 'datetime' })
   deletedAt: Date;
-
 }

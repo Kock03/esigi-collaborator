@@ -16,7 +16,7 @@ import { FinancialsService } from './financials.service';
 
 @Controller('/api/v1/financials')
 export class FinancialsController {
-  constructor(private readonly financialsService: FinancialsService) {}
+  constructor(private readonly financialsService: FinancialsService) { }
 
   @Get()
   async index() {
@@ -38,6 +38,7 @@ export class FinancialsController {
     @Param('id', new ParseUUIDPipe()) id: string,
     @Body() body: UpdateFinancialsDto,
   ) {
+
     return await this.financialsService.update(id, body);
   }
 

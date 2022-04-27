@@ -1,6 +1,12 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { HttpException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { FindConditions, FindOneOptions, Repository } from 'typeorm';
+import {
+  FindConditions,
+  FindManyOptions,
+  FindOneOptions,
+  Repository,
+} from 'typeorm';
+import { NotFoundException } from '../exceptions/not-found-exception';
 import { CreatePhoneDto } from './dtos/create-phone.dto';
 import { UpdatePhoneDto } from './dtos/update-phone.dto';
 import { PhoneEntity } from './phone.entity';
@@ -13,23 +19,21 @@ export class PhoneService {
   ) {}
 
   async findAll() {
-    const phoneWhiteCollaborator = await this.phoneRepository
-    .createQueryBuilder('phone')
-    .getMany();
-
-    return phoneWhiteCollaborator;
+    const options: FindManyOptions = {
+      order: { createdAt: 'DESC' },
+    };
+    return await this.phoneRepository.find(options);
   }
 
   async findOneOrfail(
     conditions: FindConditions<PhoneEntity>,
     options?: FindOneOptions<PhoneEntity>,
-     
   ) {
-    options = { relations: ['Collaborator']};
+    options = { relations: ['Collaborator'] };
     try {
       return await this.phoneRepository.findOneOrFail(conditions, options);
-    } catch (error) {
-      throw new NotFoundException(error.message);
+    } catch {
+      throw new NotFoundException();
     }
   }
 
@@ -38,14 +42,20 @@ export class PhoneService {
     return await this.phoneRepository.save(phone);
   }
 
-  async update(id: string, phoneDto: UpdatePhoneDto) {
-    const phone = await this.phoneRepository.findOneOrFail({id});
-    this.phoneRepository.merge(phone, phoneDto);
-    return await this.phoneRepository.save(phone);
+  async update(id: string, data: UpdatePhoneDto) {
+    const phone = await this.phoneRepository.findOneOrFail({ id });
+    if (!phone) {
+      throw new NotFoundException();
+    }
+    return await this.phoneRepository.save({ id: id, ...data });
   }
 
   async destroy(id: string) {
-    await this.phoneRepository.findOneOrFail({ id });
+    try {
+      await this.phoneRepository.findOneOrFail({ id });
+    } catch {
+      throw new NotFoundException();
+    }
     return await this.phoneRepository.softDelete({ id });
   }
 }

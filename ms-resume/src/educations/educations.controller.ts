@@ -8,13 +8,13 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
-import { CreateSchoolingDto } from './dto/create-schooling-dto';
-import { UpdateSchoolingDto } from './dto/update-schooling-dto';
+import { CreateSchoolingDto } from './dto/create-schooling.dto';
+import { UpdateSchoolingDto } from './dto/update-schooling.dto';
 import { EducationsService } from './educations.service';
 
 @Controller('api/v1/educations')
 export class EducationsController {
-  constructor(private readonly educationsService: EducationsService) {}
+  constructor(private readonly educationsService: EducationsService) { }
 
   @Get()
   async index() {

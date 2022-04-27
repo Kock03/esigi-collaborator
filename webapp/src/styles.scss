@@ -1,6 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 @import "../src/app/layout/themes/table.scss";
 
+@import "../src/app/layout/themes/snack-bar.scss";
+
 html,
 body {
   margin: 0;
@@ -100,7 +102,23 @@ html {
   height: 100%;
 
   mat-icon {
-    color: #673ab7;
+    color: #753BBD;
+  }
+}
+
+.confirm-modal {
+  mat-dialog-container {
+    min-width: 300px;
+    max-width: 320px;
+    width: 100%;
+    border-radius: 10px;
+    border: 2px solid #673ab7;
+    p {
+      letter-spacing: 0.25px;
+    }
+    button.delete {
+      color: #673ab7;
+    }
   }
 }
 

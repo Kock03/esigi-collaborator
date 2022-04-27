@@ -1,24 +1,65 @@
-import { IsNotEmpty } from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
+import {
+  IsBoolean,
+  IsEnum,
+  IsNotEmpty,
+  IsNumber,
+  IsOptional,
+  IsString,
+  Length,
+  MaxLength,
+  MinLength,
+} from 'class-validator';
+import { CollaboratorsEntity } from 'src/app/collaborators/collaborators.entity';
 import { AccountTypes } from './account-types.enum';
 
 export class UpdateBankDataDto {
-
-  @IsNotEmpty()
+  @ApiProperty()
+  @IsOptional()
+  @IsString()
+  @MinLength(3)
+  @MaxLength(30)
   bank: string;
-  
-  @IsNotEmpty()
+
+  @ApiProperty()
+  @IsOptional()
+  @IsString()
+  @MinLength(4)
+  @MaxLength(4)
   agency: string;
 
- @IsNotEmpty()
-  digit: number;
+  @ApiProperty()
+  @IsOptional()
+  @IsNumber()
+  @MinLength(1)
+  @MaxLength(1)
+  digit: string;
 
-  @IsNotEmpty()
+  @ApiProperty()
+  @IsOptional()
+  @IsEnum(AccountTypes)
   accountType: AccountTypes;
 
-  @IsNotEmpty()
-  accountNumber: number;
+  @ApiProperty()
+  @IsOptional()
+  @IsNumber()
+  @MinLength(9)
+  @MaxLength(9)
+  accountNumber: string;
 
+  @ApiProperty()
+  @IsOptional()
+  @IsNumber()
+  @MinLength(4)
+  @MaxLength(4)
+  bankAccountDigit: string;
+
+  @ApiProperty()
   @IsNotEmpty()
-  AccountDigit: number;
- 
+  @IsBoolean()
+  isActive: boolean;
+
+  @ApiProperty()
+  @IsOptional()
+  status: boolean;
 }

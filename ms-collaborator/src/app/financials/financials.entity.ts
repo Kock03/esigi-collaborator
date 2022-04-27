@@ -8,37 +8,56 @@ import {
   DeleteDateColumn,
   OneToOne,
   JoinColumn,
-  
   ManyToOne,
+  BeforeInsert,
+  BeforeUpdate,
 } from 'typeorm';
+import { Reasons } from './dtos/contract-reasons.enum';
 import { ContractTypes } from './dtos/contract-types.enum';
 
-@Entity({ name: 'financials' })
+@Entity()
 export class FinancialsEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({name: 'contract_type', type: 'int'})
+  @Column({ name: 'contract_type', type: 'int' })
   contractType: ContractTypes;
 
-  @Column({ name: 'value' })
+  @Column()
   value: number;
 
-  @Column({ name: 'reason', type: 'int' })
+  @Column({ type: 'int' })
   reason: Reasons;
+
+  @Column()
+  payday: Date;
+
+  @Column()
+  dateInclusion: Date;
+
+  @Column({ type: 'double', nullable: true })
+  monthlyValue: number;
 
   @ManyToOne(
     () => CollaboratorsEntity,
-    (collaborator) => collaborator.Financials,{ onDelete: "CASCADE" }
-  ) // specify inverse side as a second parameter
+    (collaborator) => collaborator.Financials,
+    { onDelete: 'CASCADE'},
+  )
   Collaborator: CollaboratorsEntity;
 
-  @CreateDateColumn({ name: 'date_inclusion' })
-  dateInclusion: Date;
+  @CreateDateColumn()
+  createdAt: Date;
 
   @UpdateDateColumn({ name: 'updated_at', type: 'datetime' })
   updatedAt: Date;
 
-  @DeleteDateColumn({ name: 'deleted_at', type: 'datetime' })
+  @DeleteDateColumn()
   deletedAt: Date;
+
+  @BeforeInsert()
+  @BeforeUpdate()
+  monthlyValueCalculation() {
+    this.monthlyValue = this.value * 170
+  }
+
 }

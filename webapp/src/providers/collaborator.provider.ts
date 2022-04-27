@@ -7,36 +7,67 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class CollaboratorProvider {
-  constructor(private apiGateway: ApiGateway) {}
+  constructor(private apiGateway: ApiGateway) { }
 
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void { }
 
   findAll(): Promise<any> {
     return new Promise((resolve, reject) => {
       this.apiGateway
-        .get(environment.COLLABORATOR_MS +'collaborators')
+        .get(environment.COLLABORATOR_MS + 'collaborators')
         .subscribe((response: HttpResponse<any>) => {
           resolve(response.body);
         }, reject);
     });
   }
 
-  findOne(id: string): Promise<any> {
+  findInactive(): Promise<any> {
     return new Promise((resolve, reject) => {
       this.apiGateway
-        .get('collaborators', { id: id })
+        .get(environment.COLLABORATOR_MS + 'collaborators/list/inactive')
         .subscribe((response: HttpResponse<any>) => {
           resolve(response.body);
         }, reject);
     });
   }
 
-  update(collaborator: any): Promise<any> {
+  findActive(): Promise<any> {
     return new Promise((resolve, reject) => {
       this.apiGateway
-        .put(environment.COLLABORATOR_MS + 'collaborators', collaborator)
+        .get(environment.COLLABORATOR_MS + 'collaborators/list/active')
+        .subscribe((response: HttpResponse<any>) => {
+          resolve(response.body);
+        }, reject);
+    });
+  }
+
+  findByName(query: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.apiGateway.get(environment.COLLABORATOR_MS + `collaborators/find/name?${query}`)
+        .subscribe((response: HttpResponse<any>) => {
+          resolve(response.body);
+        }, reject);
+    });
+  }
+
+  findOne(id: string | null): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.apiGateway
+        .get(environment.COLLABORATOR_MS + 'collaborators/:id', { id: id })
+        .subscribe((response: HttpResponse<any>) => {
+          resolve(response.body);
+        }, reject);
+    });
+  }
+
+  update(id: string | null, collaborator: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.apiGateway
+        .put(
+          environment.COLLABORATOR_MS + 'collaborators/:id',
+          { id: id },
+          collaborator
+        )
         .subscribe((response: HttpResponse<any>) => {
           resolve(response.body);
         }, reject);
@@ -47,16 +78,17 @@ export class CollaboratorProvider {
     return new Promise((resolve, reject) => {
       this.apiGateway
         .post(environment.COLLABORATOR_MS + 'collaborators', collaborator)
+
         .subscribe((response: HttpResponse<any>) => {
           resolve(response.body);
         }, reject);
     });
   }
 
-  destroy(collaborator: any): Promise<any> {
+  destroy(collaboratorId: string): Promise<any> {
     return new Promise((resolve, reject) => {
       this.apiGateway
-        .delete(environment.COLLABORATOR_MS + 'collaborators', collaborator)
+        .delete(environment.COLLABORATOR_MS + 'collaborators/' + collaboratorId)
         .subscribe((response: HttpResponse<any>) => {
           resolve(response.body);
         }, reject);

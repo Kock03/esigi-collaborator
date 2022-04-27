@@ -14,7 +14,9 @@ import {
   MatDialogRef,
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
-import { MatList } from '@angular/material/list';
+import { ActivatedRoute } from '@angular/router';
+import { ConfirmDialogService } from 'src/services/confirn-dialog.service';
+import { ResumeDialogExperience } from './resume-experience-dialog.component';
 
 export interface Experience {
   office: string;
@@ -36,37 +38,39 @@ export interface Experience {
   encapsulation: ViewEncapsulation.None,
 })
 export class ResumeExperienceTabComponent implements OnInit {
-  @Input('form') resumeForm!: FormGroup;
-  @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
+  @Input() experiencesArray!: FormArray;
+  @Output() onChange: EventEmitter<any> = new EventEmitter();
 
   Experience: any;
+  experienceList: any[] = [];
   experienceForm!: FormGroup;
   index: any = null;
+  resumeId!: any;
 
-  // constructor(private dialog: MatDialog,) { }
-
-  constructor(private fb: FormBuilder, public dialog: MatDialog) {}
+  constructor(
+    private dialogService: ConfirmDialogService,
+    private fb: FormBuilder,
+    public dialog: MatDialog,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
-    this.initForm();
+    if (this.experiencesArray.value.length > 0) {
+      this.experienceList = this.experiencesArray.value;
+    }
   }
 
-  get experiencesArray() {
-    return this.resumeForm.controls['Experiences'] as FormArray;
-  }
-
-  initForm(): void {
-    this.experienceForm = this.fb.group({
-      office: ['', Validators.required],
-      companyName: ['', Validators.required],
-      locality: [''],
-      active: [false],
-      startMonth: ['', Validators.required],
-      startYear: ['', Validators.required],
-      terminusMonth: ['', Validators.required],
-      terminusYear: ['', Validators.required],
-      sector: ['', Validators.required],
-      description: ['', Validators.required],
+  initObservables() {
+    this.experiencesArray.valueChanges.subscribe(res => {
+      const isNullIndex = this.experiencesArray.value.findIndex(
+        (experience: any) => experience == null
+      );
+      if (isNullIndex !== -1) {
+        this.experiencesArray.removeAt(isNullIndex);
+      }
+      if (res) {
+        this.experienceList = this.experiencesArray.value;
+      }
     });
   }
 
@@ -76,8 +80,11 @@ export class ResumeExperienceTabComponent implements OnInit {
       height: '620px',
     });
 
-    dialogRef.afterClosed().subscribe((experience) => {
-      this.experiencesArray.insert(0, this.fb.group(experience));
+    dialogRef.afterClosed().subscribe(experience => {
+      if (experience) {
+        this.experiencesArray.insert(0, this.fb.group(experience));
+        this.experienceList.push(experience);
+      }
     });
   }
 
@@ -86,75 +93,36 @@ export class ResumeExperienceTabComponent implements OnInit {
   }
 
   deleteExperience(index: number) {
-    this.experiencesArray.removeAt(index);
+    const options = {
+      data: {
+        title: 'Atenção',
+        subtitle: 'Você tem certeza que deseja excluir essas informações?',
+      },
+      panelClass: 'confirm-modal',
+    };
+
+    this.dialogService.open(options);
+
+    this.dialogService.confirmed().subscribe(async confirmed => {
+      if (confirmed) {
+        this.experiencesArray.removeAt(index);
+        this.experienceList.splice(index, 1);
+      }
+    });
   }
 
   getExperience(experienceSelected: any, index: number) {
     const dialogRef = this.dialog.open(ResumeDialogExperience, {
       width: '500px',
       height: '620px',
-      data: { experienceSelected },
+      data: experienceSelected,
     });
 
     this.index = index;
-    dialogRef.afterClosed().subscribe((experience) => {
-      this.experiencesArray.controls[this.index].setValue(experience);
+    dialogRef.afterClosed().subscribe(experience => {
+      if (experience) {
+        this.experiencesArray.controls[this.index].patchValue(experience);
+      }
     });
-  }
-}
-
-@Component({
-  selector: 'resume-dialog-experience',
-  templateUrl: 'resume-dialog-experience.html',
-  styleUrls: ['./resume-experience-tab.component.scss'],
-})
-export class ResumeDialogExperience {
-  @Input('form') resumeForm!: FormGroup;
-  @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
-
-  experienceForm!: FormGroup;
-
-  constructor(
-    @Inject(MAT_DIALOG_DATA) public data: { experienceSelected: any },
-    public dialogRef: MatDialogRef<ResumeDialogExperience>,
-    private fb: FormBuilder
-  ) {}
-
-  ngOnInit(): void {
-    this.initForm();
-  }
-
-  initForm(): void {
-    this.experienceForm = this.fb.group({
-      office: ['Gerente de operações', Validators.required],
-      companyName: ['ENVOLTI Sistemas de Comunicação', Validators.required],
-      locality: ['Blumenau'],
-      active: [false],
-      startMonth: ['11', Validators.required],
-      startYear: ['2016', Validators.required],
-      terminusMonth: ['01', Validators.required],
-      terminusYear: ['2021', Validators.required],
-      sector: ['Comercial', Validators.required],
-      description: [
-        'Define o direcionamento estratégico com o cliente',
-        Validators.required,
-      ],
-    });
-
-    if (this.data && this.data.experienceSelected) {
-      this.experienceForm.patchValue(this.data.experienceSelected);
-    }
-  }
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-
-  save() {
-    this.dialogRef.close(this.experienceForm.value);
-  }
-
-  async saveExperience() {
-    this.dialogRef.close(this.experienceForm.getRawValue());
   }
 }

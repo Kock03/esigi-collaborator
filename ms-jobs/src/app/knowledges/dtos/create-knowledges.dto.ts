@@ -1,19 +1,35 @@
-import { IsNotEmpty } from "class-validator";
-import { JobsEntity } from "src/app/jobs/jobs.entity";
-import { TypeOfPeriod } from "./typeOfPeriod.enum";
+import { ApiProperty } from '@nestjs/swagger';
+import {
+  IsEnum,
+  IsNotEmpty,
+  IsNumber,
+  IsOptional,
+  IsString,
+  MaxLength,
+  MinLength,
+} from 'class-validator';
+import { JobsEntity } from 'src/app/jobs/jobs.entity';
+import { TypeOfPeriod } from './type-of-period.enum';
 
 export class CreateKnowledgesDto {
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsString()
+  @MinLength(3)
+  @MaxLength(80)
+  name: string;
 
-    @IsNotEmpty()
-    name: string;
-  
-    @IsNotEmpty()
-    yearsExperience: number;
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsNumber()
+  yearsExperience: number;
 
-    @IsNotEmpty()
-    Job: JobsEntity;
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsEnum(TypeOfPeriod)
+  typeOfPeriod: TypeOfPeriod;
 
-    @IsNotEmpty()
-    typeOfPeriod: TypeOfPeriod;
-
+  @ApiProperty()
+  @IsNotEmpty()
+  Job: JobsEntity;
 }

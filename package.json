@@ -7,22 +7,27 @@
     "install:jobs": "cd ms-jobs && npm install",
     "install:resume": "cd ms-resume && npm install",
     "install:webapp": "cd webapp && npm install",
-    "start": "concurrently --kill-others-on-fail \"npm run start:collaborator\" \"npm run start:jobs\"  \"npm run start:resume\"  \"npm run start:webapp\"",
-    "start:collaborator": "cd ms-collaborator && npm run start:dev",
+    "start": "concurrently --kill-others-on-fail \"npm run start:jobs\" \"npm run start:collaborator\"  \"npm run start:resume\"  \"npm run start:webapp\"",
     "start:jobs": "cd ms-jobs && npm run start:dev",
+    "start:collaborator": "cd ms-collaborator && npm run start:dev",
     "start:resume": "cd ms-resume && npm run start:dev",
     "start:webapp": "cd webapp && npm run start"
   },
   "private": true,
   "dependencies": {
+    "@angular/cli": "^13.2.1",
+    "@nestjs/swagger": "^5.2.0",
     "@nestjs/typeorm": "^8.0.3",
+    "angular2-text-mask": "^9.0.0",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.13.2",
     "mysql2": "^2.3.3",
     "ngx-mask": "^13.1.1",
+    "swagger-ui-express": "^4.3.0",
     "typeorm": "^0.2.41"
   },
   "devDependencies": {
-    "concurrently": "^5.3.0"
+    "@types/node": "^17.0.14",
+    "concurrently": "^7.0.0"
   }
 }

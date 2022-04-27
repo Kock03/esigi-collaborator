@@ -8,18 +8,11 @@ import {
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
-
-export interface Bank {
-  bank: string;
-  agency: string;
-  accountType: string;
-  accountNumber: string;
-  digit: string;
-  bankAccountDigit: string;
-}
+import { ConfirmDialogService } from 'src/services/confirn-dialog.service';
+import { CollaboratorBankDialog } from './collaborator-bank-dialog.component';
 
 @Component({
   selector: 'app-collaborator-bank-tab',
@@ -28,68 +21,65 @@ export interface Bank {
   encapsulation: ViewEncapsulation.None,
 })
 export class CollaboratorBankTabComponent implements OnInit {
-  @Input('form') collaboratorForm!: FormGroup;
-  @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
+  @Input() bankArray!: FormArray;
+  @Output() onChange: EventEmitter<any> = new EventEmitter();
   @ViewChild('bankTable') bankTable!: MatTable<any>;
+
+  data: [] = [];
 
   displayedBank: string[] = [
     'bank',
     'agency',
     'accountType',
     'account',
+    'status',
     'icon',
   ];
 
-  banks: Bank[] = [
-    {
-      bank: 'Banco do Brasil',
-      agency: '',
-      accountType: 'Conta Corrente',
-      accountNumber: '',
-      digit: '',
-      bankAccountDigit: '',
-    },
-  ];
-
-  selectedIndex = 0;
-
-  bankForm!: FormGroup;
-
   index: any = null;
-  Bank: any;
+  bank: any;
 
-  get bankArray() {
-    return this.collaboratorForm.controls['BankData'] as FormArray;
-  }
-
-  constructor(private fb: FormBuilder,public dialog: MatDialog) {}
+  constructor(
+    private fb: FormBuilder,
+    private dialogService: ConfirmDialogService,
+    public dialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
-    this.initForm();
+    if (this.bankArray.value.length > 0) {
+      this.data = this.bankArray.value;
+    }
+
+    this.initObservables();
+
+    if (this.bankArray.value.status == true) {
+    }
   }
+
+  initObservables() {
+    this.bankArray.valueChanges.subscribe(res => {
+      const isNullIndex = this.bankArray.value.findIndex(
+        (bank: any) => bank == null
+      );
+      if (isNullIndex !== -1) {
+        this.bankArray.removeAt(isNullIndex);
+      }
+      if (res) {
+        this.data = this.bankArray.value;
+      }
+    });
+  }
+
   openDialog() {
     const dialogRef = this.dialog.open(CollaboratorBankDialog, {
       width: '500px',
       height: '470px',
     });
-
-    dialogRef.afterClosed().subscribe((bank) => {
-      if(bank){
+    dialogRef.afterClosed().subscribe(bank => {
+      if (bank) {
         this.bankArray.insert(0, this.fb.group(bank));
         this.bankTable.renderRows();
       }
-    });
-  }
-
-
-  initForm(): void {
-    this.bankForm = this.fb.group({
-      bank: ['Banco do Brasil', Validators.required],
-      agency: ['5464645', Validators.required],
-      accountType: ['Conta Corrente', Validators.required],
-      accountNumber: ['4365634', Validators.required],
-      digit: ['4', Validators.required],
-      bankAccountDigit: ['4', Validators.required],
     });
   }
 
@@ -97,80 +87,48 @@ export class CollaboratorBankTabComponent implements OnInit {
     this.onChange.next(true);
   }
 
-  saveBank() {
-    const data = this.bankForm.getRawValue();
-    this.bankArray.insert(0, this.fb.group(data));
-    this.bankTable.renderRows();
-    this.bankForm.reset();
-  }
-
   getBank(bankSelected: any, index: number) {
     const dialogRef = this.dialog.open(CollaboratorBankDialog, {
       width: '500px',
       height: '470px',
-      data: { bankSelected },
-
+      data: bankSelected,
     });
     this.index = index;
-    dialogRef.afterClosed().subscribe((bank) => {
-      this.bankArray.controls[this.index].setValue(bank);
+    dialogRef.afterClosed().subscribe(bank => {
+      if (bank) {
+        this.checkBank(bank);
+      }
     });
-
   }
 
-  editbank() {
-    this.bankArray.at(this.index).setValue(this.bankForm.getRawValue());
-    this.bankTable.renderRows();
-    this.bankForm.reset();
-    this.index = null;
-  }
-
-  deleteBank(index: number) {
-    this.bankArray.removeAt(index);
-  }
-}
-
-@Component({
-  selector: 'collaborator-bank-dialog',
-  templateUrl: 'collaborator-bank-dialog.html',
-})
-export class CollaboratorBankDialog{
-  @Input('form') collaboratorForm!: FormGroup;
-  @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
-
-  bankForm!: FormGroup;
-
-
-  constructor(
-    public dialogRef: MatDialogRef<CollaboratorBankDialog>,
-    private fb: FormBuilder,
-    @Inject(MAT_DIALOG_DATA) public data: { bankSelected: any}
-  ) {}
-
-  ngOnInit(): void {
-    this.initForm();
-  }
-
-  initForm(): void {
-    this.bankForm = this.fb.group({
-      bank: ['Bradesco', [Validators.required, Validators.maxLength(50)]],
-      agency: ['1111', [Validators.required, Validators.maxLength(4)]],
-      accountType: [1, Validators.required],
-      accountNumber: ['11111', [Validators.required, Validators.maxLength(5)]],
-      digit: ['1', [Validators.required, Validators.maxLength(1)]],
-      bankAccountDigit: ['1',  [Validators.required, Validators.maxLength(1)]],
-    });
-    if (this.data && this.data.bankSelected) {
-      this.bankForm.patchValue(this.data.bankSelected)
+  checkBank(bank: any) {
+    if (bank.status) {
+      const activeLength = this.bankArray.value.filter(
+        (item: any) => item.status
+      );
+      if (activeLength.length > 1) {
+        //  TODO - Exibir mensagem que não pode um banco ativo
+      }
+    } else {
+      this.bankArray.controls[this.index].patchValue(bank);
     }
   }
 
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
+  deleteBank(index: number) {
+    const options = {
+      data: {
+        title: 'Atenção',
+        subtitle: 'Você tem certeza que deseja excluir essas informações?',
+      },
+      panelClass: 'confirm-modal',
+    };
 
-  save() {
-    this.dialogRef.close(this.bankForm.getRawValue());
-  }
+    this.dialogService.open(options);
 
+    this.dialogService.confirmed().subscribe(async confirmed => {
+      if (confirmed) {
+        this.bankArray.removeAt(index);
+      }
+    });
+  }
 }

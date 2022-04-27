@@ -1,6 +1,8 @@
+import { formatDate } from '@angular/common';
 import {
   Component,
   EventEmitter,
+  Injectable,
   Input,
   OnInit,
   Output,
@@ -13,13 +15,35 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+
+import {
+  DateAdapter,
+  MAT_DATE_FORMATS,
+  NativeDateAdapter,
+} from '@angular/material/core';
+import { ActivatedRoute } from '@angular/router';
 import { ApiGateway } from 'src/api-gateway';
 import { CepService } from 'src/services/cep.service';
 
+export const PICK_FORMATS = {
+  parse: { dateInput: { month: 'numeric', year: 'numeric', day: 'numeric' } },
+  display: {
+    dateInput: 'input',
+    monthYearLabel: { year: 'numeric', month: 'numeric' },
+    dateA11yLabel: { year: 'numeric', month: 'numeric', day: 'numeric' },
+    monthYearA11yLabel: { year: 'numeric', month: 'numeric' },
+  },
+};
 
-export interface collaboratorTypes {
-  id: number;
-  name: string;
+@Injectable()
+export class PickDateAdapter extends NativeDateAdapter {
+  override format(date: Date, displayFormat: Object): string {
+    if (displayFormat === 'input') {
+      return formatDate(date, 'dd-MM-yyyy', this.locale);
+    } else {
+      return date.toDateString();
+    }
+  }
 }
 
 @Component({
@@ -27,43 +51,42 @@ export interface collaboratorTypes {
   templateUrl: './collaborator-register-tab.component.html',
   styleUrls: ['./collaborator-register-tab.component.scss'],
   encapsulation: ViewEncapsulation.None,
+  providers: [
+    { provide: DateAdapter, useClass: PickDateAdapter },
+    { provide: MAT_DATE_FORMATS, useValue: PICK_FORMATS },
+  ],
 })
 export class CollaboratorRegisterTabComponent implements OnInit {
   @Input('form') collaboratorForm!: FormGroup;
-  @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
+  @Output() onChange: EventEmitter<any> = new EventEmitter();
 
   selectedFile: any;
-
-  onFileSelected(changes: any): void{
-    this.selectedFile = changes.target.files[0]
-  }
+  date: any;
+  url: any;
+  collaboratorId!: string | null;
+  collaborator!: any;
 
   typeControl = new FormControl();
 
-  types: collaboratorTypes[] = [
-    { id: 1, name: 'CLT' },
-    { id: 2, name: 'PJ' },
-    { id: 3, name: 'Cooperado' },
-  ];
-
-  Office: any = [
-    'Desenvolvedor NodeJS',
-    'Desenvolvedor Angular',
-    'Desenvolvedor React',
-  ];
-
-  constructor(private fb: FormBuilder, private cepService: CepService) {}
+  constructor(
+    private fb: FormBuilder,
+    private cepService: CepService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
-   
-    this.collaboratorForm.valueChanges.subscribe((res) => {
-      const addressForm = this.collaboratorForm.controls[
-        'Address'
-      ] as FormGroup;
+    this.collaboratorId = this.route.snapshot.paramMap.get('id');
+    this.url =
+      'https://st.depositphotos.com/1734074/4228/v/450/depositphotos_42286141-stock-illustration-vector-man-with-mustache-in.jpg';
+    if (this.collaboratorId == 'novo') {
+      this.collaboratorForm.valueChanges.subscribe(res => {
+        const addressForm = this.collaboratorForm.controls[
+          'Address'
+        ] as FormGroup;
 
-      addressForm.controls['cep'].valueChanges.subscribe((res) => {
+        addressForm.controls['cep'].valueChanges.subscribe(res => {});
       });
-    });
+    }
   }
 
   ngAfterViewInit(): void {}
@@ -81,13 +104,8 @@ export class CollaboratorRegisterTabComponent implements OnInit {
 
   async getAddress() {
     const address = this.collaboratorForm.controls['Address'].value;
-    console.log(address.cep);
     const district = await this.cepService.findDistrict(
       address.cep.replace('-', '')
-    );
-    console.log(
-      '🚀 ~ file: collaborator-register-tab.component.ts ~ line 75 ~ CollaboratorRegisterTabComponent ~ getAddress ~ district',
-      district
     );
 
     if (district.erro) {
@@ -101,6 +119,24 @@ export class CollaboratorRegisterTabComponent implements OnInit {
         state: district.uf,
         district: district.bairro,
       });
+    }
+  }
+
+  fileChanged(file: any) {
+    const reader = new FileReader();
+    reader.readAsDataURL(file.target.files[0]);
+    reader.onload = _file => {
+      this.url = reader.result;
+      this.collaboratorForm.patchValue({
+        photo: reader.result,
+      });
+    };
+  }
+  collaboratorIsActive() {
+    if (this.collaborator.active == true) {
+      this.collaborator.active = 'ativo';
+    } else {
+      this.collaborator.active = 'inativo';
     }
   }
 }

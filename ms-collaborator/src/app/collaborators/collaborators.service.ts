@@ -1,51 +1,136 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { HttpException, Injectable, UploadedFile } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { FindConditions, FindOneOptions, Repository } from 'typeorm';
+import { DocumentValidator } from 'src/app/validators/document.validator';
+import {
+  FindConditions,
+  FindManyOptions,
+  FindOneOptions,
+  In,
+  Like,
+  Repository,
+} from 'typeorm';
+import { ConflictException } from '../exceptions/conflict.exception';
+import { NotFoundException } from '../exceptions/not-found-exception';
 import { CollaboratorsEntity } from './collaborators.entity';
 import { CreateCollaboratorsDto } from './dtos/create-collaborators.dto';
+import { UpdateCollaboratorsDto } from './dtos/update-collaborators.dto';
+import { DocumentsBadRequestExcpetion } from '../exceptions/documents-bad-request.exception';
+import { BadRequestException } from '../exceptions/bad-request.exception';
 
 @Injectable()
 export class CollaboratorsService {
   constructor(
     @InjectRepository(CollaboratorsEntity)
     private readonly collaboratorsRepository: Repository<CollaboratorsEntity>,
-  ) { }
+  ) {}
 
   async findAll() {
-    const collaboratorsWhiteAll = await this.collaboratorsRepository
-      .createQueryBuilder('collaborators')
-      .getMany();
+    const options: FindManyOptions = {
+      order: { createdAt: 'DESC' },
+    };
+    return await this.collaboratorsRepository.find(options);
+  }
 
-    return collaboratorsWhiteAll;
+  async findCollaboratorsListById(idList: string[]) {
+    return await this.collaboratorsRepository.find({
+      select: ['id', 'firstNameCorporateName', 'lastNameFantasyName'],
+      where: { id: In(idList) }
+    })
+  }
+
+  async shortListCollaborators(){
+    return await this.collaboratorsRepository.find({
+      select: ['id', 'firstNameCorporateName', 'lastNameFantasyName'],
+      where: { active: true },
+    });
+  }
+
+  async findInactive() {
+    return await this.collaboratorsRepository
+      .createQueryBuilder('collaborators')
+      .where('collaborators.active =false')
+      .getMany();
+  }
+
+  async findActive() {
+    return await this.collaboratorsRepository
+      .createQueryBuilder('collaborators')
+      .where('collaborators.active =true')
+      .getMany();
+  }
+
+  findByName(query): Promise<CollaboratorsEntity[]> {
+    return this.collaboratorsRepository.find({
+      where: [
+        { firstNameCorporateName: Like(`${query.firstNameCorporateName}%`) },]
+    });
   }
 
   async findOneOrFail(
     conditions: FindConditions<CollaboratorsEntity>,
-    options?: FindOneOptions<CollaboratorsEntity>,) {
-    options = { relations: ['BankData','Educations','Languages','Documents','Skills','Phone','Address', 'Financials'] }
+
+    options?: FindOneOptions<CollaboratorsEntity>,
+  ) {
+    options = { relations: ['Financials', 'Address', 'BankData', 'Dependents', 'Documents', 'Educations','Feedbacks','Languages', 'Phone', 'Skills'] };
     try {
+     
       return await this.collaboratorsRepository.findOneOrFail(
         conditions,
         options,
       );
     } catch (error) {
-      throw new NotFoundException(error.message);
+      throw new NotFoundException();
     }
   }
 
   async store(data: CreateCollaboratorsDto) {
-    const collaborator = this.collaboratorsRepository.create(data);
-    return await this.collaboratorsRepository.save(collaborator);
+    if (data.cpf) {
+      const invalidCpf = DocumentValidator.isValidCpf(data.cpf);
+      if (invalidCpf) {
+        throw new DocumentsBadRequestExcpetion();
+      }
+    }
+    if (data.cnpj) {
+      const invalidCnpj = DocumentValidator.isValidCnpj(data.cnpj);
+      if (invalidCnpj) {
+        throw new DocumentsBadRequestExcpetion();
+      }
+    }
+
+    if (data.cpf === null && data.cnpj === null) {
+      throw new DocumentsBadRequestExcpetion();
+    } else {
+      try {
+        const collaborator = this.collaboratorsRepository.create(data);
+        return await this.collaboratorsRepository.save(collaborator);
+      } catch (error) {
+        throw new HttpException(JSON.stringify(error), 400);
+      }
+    }
   }
 
-  async update(id: string, data: CreateCollaboratorsDto) {
-    const collaborator = await this.collaboratorsRepository.findOneOrFail({ id });
-    this.collaboratorsRepository.merge(collaborator, data);
-    return await this.collaboratorsRepository.save(collaborator);
+  async update(id: string, data: UpdateCollaboratorsDto) {
+    const activeBanks = data.BankData.filter((bank) => bank.status);
+    if (activeBanks.length > 1) {
+      throw new BadRequestException('Existem mais de um banco ativo');
+    }
+    try {
+      const collaborator = await this.collaboratorsRepository.findOneOrFail({
+        id,
+      });
+    } catch {
+      throw new NotFoundException();
+    }
+
+    return await this.collaboratorsRepository.save({ id: id, ...data });
   }
 
   async destroy(id: string) {
-    this.collaboratorsRepository.findOneOrFail({ id });
+    try {
+      await this.collaboratorsRepository.findOneOrFail({ id });
+    } catch {
+      throw new NotFoundException();
+    }
     return await this.collaboratorsRepository.softDelete({ id });
   }
 }

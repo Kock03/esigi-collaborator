@@ -1,62 +1,119 @@
-import { HttpException, Injectable, NotFoundException } from "@nestjs/common";
-import { InjectRepository } from "@nestjs/typeorm";
-import { FindConditions } from "typeorm/find-options/FindConditions";
-import { FindOneOptions } from "typeorm/find-options/FindOneOptions";
-import { Repository } from "typeorm/repository/Repository";
-import { CreateJobsDto } from "./dtos/create-jobs.dto";
-import { UpdateJobsDto } from "./dtos/update-jobs.dto";
-import { JobsEntity } from "./jobs.entity";
+import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { FindManyOptions, Like } from 'typeorm';
+import { FindConditions } from 'typeorm/find-options/FindConditions';
+import { FindOneOptions } from 'typeorm/find-options/FindOneOptions';
+import { Repository } from 'typeorm/repository/Repository';
+import { NotFoundException } from '../exceptions/not-found-exception';
+import { CreateJobsDto } from './dtos/create-jobs.dto';
+import { UpdateJobsDto } from './dtos/update-jobs.dto';
+import { JobsEntity } from './jobs.entity';
 
 @Injectable()
 export class JobsService {
+  constructor(
+    @InjectRepository(JobsEntity)
+    private readonly jobsRepository: Repository<JobsEntity>,
+  ) {}
 
-    constructor(
-        @InjectRepository(JobsEntity)
+  async findAll() {
+    const options: FindManyOptions = {
+      order: { createdAt: 'DESC' },
+    };
+    return await this.jobsRepository.find(options);
+  }
 
-        private readonly jobsRepository: Repository<JobsEntity>) { }
+  findByName(query): Promise<JobsEntity[]> {
+    return this.jobsRepository.find({
+      where: [
+        { jobName: Like(`${query.jobName}%`) },]
+    });
+  }
 
+  async findOneOrFail(
+    conditions: FindConditions<JobsEntity>,
+    options?: FindOneOptions<JobsEntity>,
+  ) {
+    options = {
+      relations: ['Returns'],
+    };
 
-
-
-    async findAll() {
-        const jobsWhiteAll = await this.jobsRepository
-            .createQueryBuilder('jobs')
-            .getMany();
-
-        return jobsWhiteAll;
+    try {
+      return await this.jobsRepository.findOneOrFail(conditions, options);
+    } catch (error) {
+      throw new NotFoundException();
     }
+  }
 
-    async findOneOrFail(
-        conditions: FindConditions<JobsEntity>,
-        options?: FindOneOptions<JobsEntity>) {
-        options = { relations: ['Knowledges', 'Senorities','Languages'] }
+  // async findInterviewsList(
+  //   conditions: FindConditions<JobsEntity>,
+  //   options?: FindOneOptions<JobsEntity>,
+  // ) {
+  //   options = {
+  //     relations: ['interviews'],
+  //   };
 
-        try {
-            return await this.jobsRepository.findOneOrFail(conditions, options);
-        } catch (error) {
-            throw new NotFoundException(error.Message);
-        }
+  //   const job = await this.jobsRepository.findOneOrFail(conditions, options);
+
+  //   try {
+  //     const job = await this.jobsRepository.findOneOrFail(conditions, options);
+  //     const interviewsQuantity = job.interviews.length;
+  //     const interviews = new Array();
+
+  //     let quantity = 0;
+
+  //     quantity = interviewsQuantity;
+  //     for (let index = 0; index < quantity; index++) {
+  //       const interview = {
+  //         name: {
+  //           candidate:
+  //             job.interviews[index]?.behaviroalInterviews.nameCandidate,
+  //         },
+  //         behavioral: {
+  //           behavioralInterviewDate:
+  //             job.interviews[index]?.behaviroalInterviews
+  //               .behavioralInterviewDate,
+  //         },
+  //         technical: {
+  //           technicalInterviewDate:
+  //             job.interviews[index]?.technicalInterviews.technicalInterviewDate,
+  //         },
+  //       };
+  //       interviews.push(interview);
+  //     }
+
+  //     const jobInterviews = {
+  //       requester: job.requester,
+  //       status: job.status,
+  //       interviews,
+  //     };
+  //     return jobInterviews;
+  //   } catch (error) {
+  //     console.log(error);
+  //     throw new NotFoundException();
+  //   }
+  // }
+
+  async store(data: CreateJobsDto) {
+    const job = this.jobsRepository.create(data);
+    return await this.jobsRepository.save(job);
+  }
+
+  async update(id: string, data: UpdateJobsDto) {
+    try {
+      const job = await this.jobsRepository.findOneOrFail({ id });
+    } catch {
+      throw new NotFoundException();
     }
+    return await this.jobsRepository.save({ id: id, ...data });
+  }
 
-    async store(data: CreateJobsDto) {
-        const job = this.jobsRepository.create(data);
-        return await this.jobsRepository.save(job);
+  async destroy(id: string) {
+    try {
+      await this.jobsRepository.findOneOrFail({ id });
+    } catch (error) {
+      throw new NotFoundException();
     }
-
-    async update(id: string, data: UpdateJobsDto) {
-        const job = await this.jobsRepository.findOneOrFail({ id });
-        this.jobsRepository.merge(job, data);
-        return await this.jobsRepository.save(job);
-    }
-
-    async destroy(id: string) {
-
-        try {
-            await this.jobsRepository.findOneOrFail({ id });
-        } catch (error) {
-            throw new HttpException('Registro não existe ou invalido', 404)
-        }
-
-        return await this.jobsRepository.softRemove({ id });
-    }
+    return await this.jobsRepository.softDelete({ id });
+  }
 }

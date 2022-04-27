@@ -14,25 +14,24 @@ export class PhoneEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ name: 'phone_number' })
+  @Column()
   phoneNumber: string;
 
-  @Column({ name: 'ddd', length: 2 })
+  @Column({ length: 2 })
   ddd: string;
 
-  @Column({ name: 'ddi', length: 3 })
+  @Column({ length: 3 })
   ddi: string;
 
-  @OneToOne(() => CollaboratorsEntity, collaborator => collaborator.Phone) // specify inverse side as a second parameter
+  @OneToOne(() => CollaboratorsEntity, (collaborator) => collaborator.Phone)
   Collaborator: CollaboratorsEntity;
 
-  @CreateDateColumn({ name: 'created_at', type: 'datetime' })
+  @CreateDateColumn({ type: 'datetime' })
   createdAt: Date;
 
   @UpdateDateColumn({ name: 'updated_at', type: 'datetime' })
   updatedAt: Date;
 
-  @DeleteDateColumn({ name: 'deleted_at', type: 'datetime' })
+  @DeleteDateColumn({ type: 'datetime' })
   deletedAt: Date;
-
 }

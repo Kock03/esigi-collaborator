@@ -19,7 +19,6 @@ export class KnowledgesController {
 
     @Post()
     async store(@Body() body: CreateKnowledgesDto){
-        console.log("🚀 ~ file: jobs.controller.ts ~ line 22 ~ KnowledgesController ~ store ~ body", body)
         return await this.KnowledgesService.store(body);
     }
 

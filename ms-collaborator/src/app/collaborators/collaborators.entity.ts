@@ -13,116 +13,152 @@ import { AddressEntity } from 'src/app/address/address.entity';
 import { PhoneEntity } from 'src/app/phone/phone.entity';
 import { BankDataEntity } from 'src/app/bank-data/bank-data.entity';
 import { SkillsEntity } from 'src/app/skills/skills.entity';
-import { CollaboratorTypes } from './dtos/collaborator-types.enum';
+import { CollaboratorTypes } from './dtos/types.enum';
 import { FinancialsEntity } from 'src/app/financials/financials.entity';
 import { DocumentsEntity } from '../documents/documents.entity';
 import { LanguagesEntity } from '../languages/languages.entity';
 import { EducationsEntity } from '../educations/educations.entity';
+import { MaritalStatus } from './dtos/Marital-status.enum';
+import { DependentsEntity } from '../dependents/dependents.entity';
+import { FeedbacksEntity } from '../feedbacks/feedbacks.entity';
+import { Gender } from './dtos/gender.enum';
 
 @Entity({ name: 'collaborators' })
 export class CollaboratorsEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ name: 'firstname_corporatename' })
+  @Column()
   firstNameCorporateName: string;
 
-  @Column({ name: 'lastname_fantasyname' })
+  @Column()
   lastNameFantasyName: string;
 
-  @Column({ name: 'login' })
+  @Column()
   login: string;
 
-  @Column({ name: 'gender', type: 'int' })
+  @Column({ type: 'int' })
   gender: Gender;
 
-  @Column({ name: 'office' })
+  @Column({ type: 'int' })
+  maritalStatus: MaritalStatus;
+
+  @Column()
   office: string;
 
-  @Column({ name: 'collaborator_types' })
+  @Column()
   collaboratorTypes: CollaboratorTypes;
 
-  @Column({ name: 'cpf', unique: true, length: 11})
+  @Column({ unique: true, length: 11, nullable: true })
   cpf: string;
 
-  @Column({ name: 'birth_date' })
+  @Column()
   birthDate: Date;
 
-  @Column({ name: 'email' })
+  @Column()
   email: string;
 
-  @Column({ name: 'cnpj', length: 14 })
+  @Column()
+  active: boolean;
+
+  @Column()
+  admissionDate: Date;
+
+  @Column({ unique: true, length: 14, nullable: true })
   cnpj: string;
 
-  @Column({ name: 'state_registration' })
+  @Column({ nullable: true })
   stateRegistration: string;
 
-  @Column({ name: 'municipal_inscription' })
+  @Column({ nullable: true })
   municipalInscription: string;
 
-  @Column({ name: 'site' })
+  @Column()
   site: string;
 
-  @Column({ name: 'linkedin'})
+  @Column()
   linkedin: string;
 
-  @Column({ name: 'photo', type: 'blob', nullable: true })
-  photo: string;
+  @Column({ nullable: true })
+  photo: Buffer;
 
   @OneToOne(() => AddressEntity, {
     cascade: ['insert', 'update', 'remove'],
-    orphanedRowAction: 'delete',
+    orphanedRowAction: 'delete'
   })
   @JoinColumn()
   Address: AddressEntity;
 
   @OneToMany(() => SkillsEntity, (skills) => skills.Collaborator, {
     cascade: ['insert', 'update', 'remove'],
-    orphanedRowAction: 'delete',
+    orphanedRowAction: 'delete'
   })
+  @JoinColumn()
   Skills: SkillsEntity[];
+
+  @OneToMany(() => FeedbacksEntity, (feed) => feed.Collaborator, {
+    cascade: ['insert', 'update', 'remove'],
+    orphanedRowAction: 'delete'
+  })
+  @JoinColumn()
+  Feedbacks: FeedbacksEntity[];
 
   @OneToMany(() => DocumentsEntity, (documents) => documents.Collaborator, {
     cascade: ['insert', 'update', 'remove'],
-    orphanedRowAction: 'delete',
+    orphanedRowAction: 'delete'
   })
+  @JoinColumn()
   Documents: DocumentsEntity[];
 
   @OneToMany(() => LanguagesEntity, (languages) => languages.Collaborator, {
-    cascade: ['insert', 'update', 'remove'],
-    orphanedRowAction: 'delete',
+    cascade: ['insert', 'update', 'soft-remove'],
+    orphanedRowAction: 'delete'
   })
+  @JoinColumn()
   Languages: LanguagesEntity[];
 
   @OneToMany(() => EducationsEntity, (educations) => educations.Collaborator, {
     cascade: ['insert', 'update', 'remove'],
-    orphanedRowAction: 'delete',
+    orphanedRowAction: 'delete'
   })
+  @JoinColumn()
   Educations: EducationsEntity[];
 
   @OneToOne(() => PhoneEntity, {
     cascade: ['insert', 'update', 'remove'],
-    orphanedRowAction: 'delete',
+    orphanedRowAction: 'delete'
   })
   @JoinColumn()
   Phone: PhoneEntity;
 
-  @OneToOne(() => BankDataEntity, bank => bank.Collaborator)
-  BankData: BankDataEntity;
+  @OneToMany(() => BankDataEntity, (bank) => bank.collaborator, {
+    cascade: ['insert', 'update', 'remove'],
+    orphanedRowAction: 'delete'
+  })
+  @JoinColumn()
+  BankData: BankDataEntity[];
 
   @OneToMany(() => FinancialsEntity, (Financials) => Financials.Collaborator, {
     cascade: ['insert', 'update', 'remove'],
-    orphanedRowAction: 'delete',
+    orphanedRowAction: 'delete'
   })
   @JoinColumn()
   Financials: FinancialsEntity[];
 
-  @CreateDateColumn({ name: 'created_at' })
+  @OneToMany(() => DependentsEntity, (Dependents) => Dependents.Collaborator, {
+    cascade: ['insert', 'update', 'remove'],
+    orphanedRowAction: 'delete',
+    nullable: true,
+  })
+  @JoinColumn()
+  Dependents: DependentsEntity[];
+
+  @CreateDateColumn()
   createdAt: Date;
 
-  @UpdateDateColumn({ name: 'updated_at' })
+  @UpdateDateColumn({ name: 'updated_at', type: 'datetime' })
   updatedAt: Date;
 
-  @DeleteDateColumn({ name: 'deleted_at' })
+  @DeleteDateColumn()
   deletedAt: Date;
 }

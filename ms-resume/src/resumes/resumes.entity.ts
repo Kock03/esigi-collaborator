@@ -35,7 +35,7 @@ export class ResumesEntity {
   @Column({ name: 'login', length: 40 })
   login: string;
 
-  @Column({ name: 'cpf', unique: true, length: 11 })
+  @Column({ name: 'cpf', unique: true, length: 11, nullable: true })
   cpf: string;
 
   @CreateDateColumn({ name: 'birth_date', type: 'datetime' })
@@ -63,26 +63,30 @@ export class ResumesEntity {
 
   @OneToMany(() => EducationsEntity, (educations) => educations.resume, {
     cascade: ['insert', 'update', 'soft-remove'],
+    eager: true,
   })
   @JoinColumn()
   Educations: EducationsEntity[];
 
   @OneToMany(() => ExperiencesEntity, (experiences) => experiences.resume, {
     cascade: ['insert', 'update', 'soft-remove'],
+    eager: true,
   })
   @JoinColumn()
   Experiences: ExperiencesEntity[];
 
   @OneToMany(() => SkillsEntity, (skills) => skills.resume, {
     cascade: ['insert', 'update', 'soft-remove'],
+    eager: true,
   })
   @JoinColumn()
   Skills: SkillsEntity[];
 
   @OneToMany(() => LanguagesEntity, (languages) => languages.resume, {
     cascade: ['insert', 'update', 'soft-remove'],
+    orphanedRowAction: 'delete',
+    eager: true,
   })
-  @JoinColumn()
   Languages: LanguagesEntity[];
 
   @Column({ name: 'email', length: 100, unique: true })

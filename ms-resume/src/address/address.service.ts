@@ -1,9 +1,15 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { FindConditions, FindOneOptions, Repository } from 'typeorm';
+import { NotFoundException } from 'src/exceptions/not-found-exception';
+import {
+  FindConditions,
+  FindManyOptions,
+  FindOneOptions,
+  Repository,
+} from 'typeorm';
 import { AddressEntity } from './address.entity';
-import { CreateAddressDto } from './dto/create-address-dto';
-import { UpdateAddressDto } from './dto/update-address-dto';
+import { CreateAddressDto } from './dto/create-address.dto';
+import { UpdateAddressDto } from './dto/update-address.dto';
 
 @Injectable()
 export class AddressService {
@@ -13,7 +19,10 @@ export class AddressService {
   ) {}
 
   async findAll() {
-    return await this.addressRepository.find();
+    const options: FindManyOptions = {
+      order: { createdAt: 'DESC' },
+    };
+    return await this.addressRepository.find(options);
   }
 
   async findOneOrFail(
@@ -22,8 +31,8 @@ export class AddressService {
   ) {
     try {
       return await this.addressRepository.findOneOrFail(conditions, options);
-    } catch (error) {
-      throw new NotFoundException(error.message);
+    } catch {
+      throw new NotFoundException();
     }
   }
 
@@ -32,14 +41,21 @@ export class AddressService {
     return await this.addressRepository.save(address);
   }
 
-  async update(id: string, updateDto: UpdateAddressDto) {
-    const address = await this.addressRepository.findOneOrFail({ id });
-    this.addressRepository.merge(address, updateDto);
-    return this.addressRepository.save(address);
+  async update(id: string, data: UpdateAddressDto) {
+    try {
+      const address = await this.addressRepository.findOneOrFail({ id });
+    } catch {
+      throw new NotFoundException();
+    }
+    return await this.addressRepository.save({ id: id, ...data });
   }
 
   async destroy(id: string) {
-    await this.addressRepository.findOne({ id });
+    try {
+      await this.addressRepository.findOne({ id });
+    } catch {
+      throw new NotFoundException();
+    }
     return await this.addressRepository.softDelete({ id });
   }
 }

@@ -37,7 +37,7 @@ export class BankDataController {
   async update(
     @Param('id', new ParseUUIDPipe()) id: string,
     @Body() body: UpdateBankDataDto,
-) {
+  ) {
     return await this.bankDataService.update(id, body);
   }
 

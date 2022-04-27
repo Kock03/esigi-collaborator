@@ -1,35 +1,45 @@
-import { Column, CreateDateColumn, DeleteDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
-import { CollaboratorsEntity } from "../collaborators/collaborators.entity";
-import { Schooling } from "./dtos/schooling.enum";
+import {
+  Column,
+  CreateDateColumn,
+  DeleteDateColumn,
+  Entity,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
+import { CollaboratorsEntity } from '../collaborators/collaborators.entity';
+import { Schooling } from './dtos/schooling.enum';
+import { Situation } from './dtos/situation.enum';
 
-@Entity({name:'educations'})
-export class EducationsEntity{
+@Entity({ name: 'educations' })
+export class EducationsEntity {
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
-    @PrimaryGeneratedColumn('uuid')
-    id: string;
-  
-    @Column({ name: 'schooling' })
-    schooling: Schooling;
+  @Column({ type: 'int' })
+  schooling: Schooling;
 
-    @Column({ name: 'course' })
-    course: string;
+  @Column()
+  course: string;
 
-    @Column({ name: 'institution'})
-    institution: string;
+  @Column()
+  institution: string;
 
-    @Column({ name: 'situation', type:'int'})
-    situation: Situation;
+  @Column({ type: 'int' })
+  situation: Situation;
 
-    @ManyToOne(() => CollaboratorsEntity, collaborator => collaborator.Educations)
-    Collaborator: CollaboratorsEntity;
+  @ManyToOne(
+    () => CollaboratorsEntity,
+    (collaborator) => collaborator.Educations,
+  )
+  Collaborator: CollaboratorsEntity;
 
-    @CreateDateColumn({ name: 'created_at' })
-    createdAt: Date;
-  
-    @UpdateDateColumn({ name: 'updated_at' })
-    updatedAt: Date;
-  
-    @DeleteDateColumn({ name: 'deleted_at' })
-    deletedAt: Date;
+  @CreateDateColumn()
+  createdAt: Date;
 
+  @UpdateDateColumn({ name: 'updated_at', type: 'datetime' })
+  updatedAt: Date;
+
+  @DeleteDateColumn()
+  deletedAt: Date;
 }

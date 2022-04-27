@@ -12,14 +12,19 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { HttpClientModule } from '@angular/common/http';
-import {MatListModule} from '@angular/material/list';
-
+import { MatListModule } from '@angular/material/list';
 
 import { NgxMaskModule, IConfig } from 'ngx-mask';
+import { SnackBarComponent } from './components/snack-bar/snack-bar.component';
+import { SnackBarService } from 'src/services/snackbar.service';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+import { ConfirmDialogService } from 'src/services/confirn-dialog.service';
+import { ConfirmDialogModule } from './components/confirm-dialog/confirm-dialog.module';
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, SnackBarComponent],
   imports: [
     NgxMaskModule.forRoot(),
     BrowserModule,
@@ -34,8 +39,10 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
     MatDividerModule,
     HttpClientModule,
     MatListModule,
+    ConfirmDialogModule,
+    MatSnackBarModule,
   ],
-  providers: [],
+  providers: [SnackBarService, ConfirmDialogService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -16,11 +16,8 @@ import {
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
-
-export interface document {
-  name: string;
-  file: string;
-}
+import { ConfirmDialogService } from 'src/services/confirn-dialog.service';
+import { CollaboratorDocumentDialog } from './collaborator-document-dialog.component';
 
 @Component({
   selector: 'app-collaborator-document-tab',
@@ -29,31 +26,44 @@ export interface document {
   encapsulation: ViewEncapsulation.None,
 })
 export class CollaboratorDocumentTabComponent implements OnInit {
-  @Input('form') collaboratorForm!: FormGroup;
-  @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
+  @Input() documentArray!: FormArray;
+  @Output() onChange: EventEmitter<any> = new EventEmitter();
   @ViewChild('documentTable') documentTable!: MatTable<any>;
 
   displayedColumns: string[] = ['name', 'file', 'icon'];
-  documents: document[] = [
-    {
-      name: 'RG',
-      file: '',
-    },
-  ];
 
   selectedIndex = 0;
   documentForm!: FormGroup;
   index: any = null;
   Document: any;
+  data: [] = [];
 
-  get documentArray() {
-    return this.collaboratorForm.controls['Documents'] as FormArray;
-  }
-
-  constructor(private fb: FormBuilder, public dialog: MatDialog) {}
+  constructor(
+    private fb: FormBuilder,
+    public dialog: MatDialog,
+    private dialogService: ConfirmDialogService
+  ) {}
 
   ngOnInit(): void {
-    this.initForm();
+    if (this.documentArray.value.length > 0) {
+      this.data = this.documentArray.value;
+    }
+
+    this.initObservables();
+  }
+
+  initObservables() {
+    this.documentArray.valueChanges.subscribe(res => {
+      const isNullIndex = this.documentArray.value.findIndex(
+        (document: any) => document == null
+      );
+      if (isNullIndex !== -1) {
+        this.documentArray.removeAt(isNullIndex);
+      }
+      if (res) {
+        this.data = this.documentArray.value;
+      }
+    });
   }
 
   openDialog() {
@@ -62,11 +72,7 @@ export class CollaboratorDocumentTabComponent implements OnInit {
       height: '300px',
     });
 
-    dialogRef.afterClosed().subscribe((document) => {
-      console.log(
-        '🚀 ~ file: collaborator-document-tab.component.ts ~ line 60 ~ CollaboratorDocumentTabComponent ~ dialogRef.afterClosed ~ document',
-        document
-      );
+    dialogRef.afterClosed().subscribe(document => {
       if (document) {
         this.documentArray.insert(0, this.fb.group(document));
         this.documentTable.renderRows();
@@ -74,77 +80,36 @@ export class CollaboratorDocumentTabComponent implements OnInit {
     });
   }
 
-  initForm(): void {
-    this.documentForm = this.fb.group({
-      name: [''],
-      file: [''],
-    });
-  }
-
   getDocument(documentSelected: any, index: number) {
     const dialogRef = this.dialog.open(CollaboratorDocumentDialog, {
       width: '500px',
       height: '300px',
-      data: { documentSelected },
+      data: documentSelected,
     });
 
     this.index = index;
-    dialogRef.afterClosed().subscribe((document) => {
-      this.documentArray.controls[this.index].setValue(document);
+    dialogRef.afterClosed().subscribe(document => {
+      if (document) {
+        this.documentArray.controls[this.index].patchValue(document);
+      }
     });
   }
 
   deleteDocument(index: number) {
-    this.documentArray.removeAt(index);
-  }
-}
+    const options = {
+      data: {
+        title: 'Atenção',
+        subtitle: 'Você tem certeza que deseja excluir essas informações?',
+      },
+      panelClass: 'confirm-modal',
+    };
 
-@Component({
-  selector: 'collaborator-document-dialog',
-  templateUrl: 'collaborator-document-dialog.html',
-  styleUrls: ['./collaborator-document-tab.component.scss'],
-})
-export class CollaboratorDocumentDialog {
-  @Input('form') collaboratorForm!: FormGroup;
-  @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
+    this.dialogService.open(options);
 
-  documentForm!: FormGroup;
-
-  constructor(
-    public dialogRef: MatDialogRef<CollaboratorDocumentDialog>,
-    private fb: FormBuilder,
-    @Inject(MAT_DIALOG_DATA) public data: { documentSelected: any }
-  ) {}
-
-
-
-  ngOnInit(): void {
-    this.initForm();
-  }
-
-  initForm(): void {
-    this.documentForm = this.fb.group({
-      name: ['RG', Validators.required],
-      file: [''],
+    this.dialogService.confirmed().subscribe(async confirmed => {
+      if (confirmed) {
+        this.documentArray.removeAt(index);
+      }
     });
-
-    if (this.data && this.data.documentSelected) {
-      this.documentForm.patchValue(this.data.documentSelected);
-    }
-  }
-
-  onFileSelected(event: any) {
-    if (event.target.files.length > 0) {
-      const file = event.target.files[0];
-
-    }
-  }
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-
-  async save() {
-    this.dialogRef.close(this.documentForm.getRawValue());
   }
 }

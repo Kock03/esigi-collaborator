@@ -1,0 +1,56 @@
+<div id="jobDetail" class="page">
+  <div fxLayout="row" fxLayoutAlign="start start">
+    <button (click)="backToList()" color="primary" mat-button>
+      <mat-icon> chevron_left </mat-icon>
+    </button>
+    <h2 *ngIf="this.step == 1" class="title">Descrição da Vaga</h2>
+    <h2 *ngIf="this.step == 2" class="title">Cadastro de Entrevistas</h2>
+    <h2 *ngIf="this.step == 3" class="title">Acompanhamento de Entrevistas</h2>
+  </div>
+
+  <div fxLayout="row" class="tab" fxLayoutGap="16px">
+    <div
+      fxLayout="column"
+      class="tab-group"
+      (click)="handleStep(1)"
+      [ngClass]="{ done: step > 0, active: step == 1 }">
+      <p class="tab-item">Vaga</p>
+      <span class="tab-border"></span>
+    </div>
+    <div
+      fxLayout="column"
+      class="tab-group"
+      (click)="handleStep(2)"
+      [ngClass]="{ done: step > 1, active: step == 2 }">
+      <p class="tab-item">Acompanhamento</p>
+      <span class="tab-border"></span>
+    </div>
+  </div>
+
+  <app-job-detail-list-tab
+    [hidden]="step != 1"
+    (onChange)="handleChanges($event)">
+  </app-job-detail-list-tab>
+  <app-job-panel-tab [hidden]="step != 2" (onChange)="handleChanges($event)">
+  </app-job-panel-tab>
+
+  <div class="navigation-buttons" fxLayoutAlign="center end" fxLayoutGap="16px">
+    <button mat-flat-button *ngIf="step == 1" (click)="navigate('back')">
+      Voltar
+    </button>
+    <button
+      mat-flat-button
+      *ngIf="step == 2"
+      (click)="navigate('back')"
+      color="primary">
+      Voltar
+    </button>
+    <button
+      mat-flat-button
+      *ngIf="step != 2"
+      (click)="navigate('next')"
+      color="primary">
+      Continuar
+    </button>
+  </div>
+</div>

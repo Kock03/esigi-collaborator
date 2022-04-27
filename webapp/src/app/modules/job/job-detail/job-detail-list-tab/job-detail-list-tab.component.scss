@@ -1,0 +1,68 @@
+#jobList {
+  .mat-list-item {
+    height: auto !important;
+  }
+
+  .list-group {
+    margin-top: 16px;
+
+  }
+
+  .label-office {
+    font-style: bold;
+    font-size: 20px;
+  }
+
+  .label-gray {
+    color: rgb(125, 123, 123);
+    font-size: 15px;
+  }
+
+  .label-text {
+    color: black;
+    font-size: 17px;
+  }
+
+  .span-text {
+    color: rgb(125, 123, 123);
+    font-size: 15px;
+  }
+
+  .text-div{
+    height: 100%;
+    
+  }
+  
+  .job-text{
+    height: 100%;
+    width: 100%;
+  }
+  
+  .activities-text{
+    margin-left: 200px;
+  }
+
+  .knowledges-text{
+    margin-left: 190px;
+  }
+
+
+  .list-group-item {
+    border-style: groove;
+    border-radius: 10px;
+    border-color: #ff6a39;
+    width: 100% !important;
+    padding: 15px;
+    margin-bottom: 16px;
+  }
+
+  .mat.list.item {
+    padding: 0 !important;
+    height: 100% !important;
+    max-height: 600px;
+  }
+
+  .mat-icon-list {
+    margin-top: 100px;
+  }
+}

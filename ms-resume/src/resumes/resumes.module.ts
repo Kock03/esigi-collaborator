@@ -12,10 +12,9 @@ import { EducationsEntity } from 'src/educations/educations.entity';
 import { ExperiencesEntity } from 'src/experiences/experiences.entity';
 
 @Module({
+  imports: [TypeOrmModule.forFeature([ResumesEntity])],
   controllers: [ResumesController],
-  providers: [ResumesService, PhoneService, AddressService],
-  imports: [
-    TypeOrmModule.forFeature([ResumesEntity, AddressEntity, PhoneEntity, LanguagesEntity, EducationsEntity, ExperiencesEntity]),
-  ],
+  providers: [ResumesService],
+
 })
 export class ResumesModule {}

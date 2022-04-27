@@ -1,0 +1,31 @@
+#jobPanel {
+  max-width: 1220px;
+
+  .envolti-table {
+    overflow: auto;
+    max-height: 350px;
+    border-radius: 10px;
+
+    .mat-column-icon {
+      width: 50px;
+    }
+
+    .button-tab {
+      white-space: nowrap;
+      overflow: hidden;
+    }
+
+
+  }
+
+  .search {
+    width: 100%;
+    max-width: 1220px;
+    margin-right: 5px;
+
+    mat-form-field {
+      width: 100%;
+    }
+  }
+
+}

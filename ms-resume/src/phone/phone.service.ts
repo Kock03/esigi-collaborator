@@ -1,8 +1,14 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository, FindConditions, FindOneOptions } from 'typeorm';
-import { CreatePhoneDto } from './dto/create-phone-dto';
-import { UpdatePhoneDto } from './dto/update-phone-dto';
+import { NotFoundException } from 'src/exceptions/not-found-exception';
+import {
+  Repository,
+  FindConditions,
+  FindOneOptions,
+  FindManyOptions,
+} from 'typeorm';
+import { CreatePhoneDto } from './dto/create-phone.dto';
+import { UpdatePhoneDto } from './dto/update-phone.dto';
 import { PhoneEntity } from './phone.entity';
 
 @Injectable()
@@ -13,7 +19,10 @@ export class PhoneService {
   ) {}
 
   async findAll() {
-    return await this.phoneRepository.find();
+    const options: FindManyOptions = {
+      order: { createdAt: 'DESC' },
+    };
+    return await this.phoneRepository.find(options);
   }
 
   async findOneOrFail(
@@ -23,7 +32,7 @@ export class PhoneService {
     try {
       return await this.phoneRepository.findOneOrFail(conditions, options);
     } catch (error) {
-      throw new NotFoundException(error.message);
+      throw new NotFoundException();
     }
   }
 
@@ -32,14 +41,21 @@ export class PhoneService {
     return await this.phoneRepository.save(phone);
   }
 
-  async update(id: string, updateDto: UpdatePhoneDto) {
-    const phone = await this.phoneRepository.findOneOrFail({ id });
-    this.phoneRepository.merge(phone, updateDto);
-    return await this.phoneRepository.save(phone);
+  async update(id: string, data: UpdatePhoneDto) {
+    try {
+      const phone = await this.phoneRepository.findOneOrFail({ id });
+    } catch {
+      throw new NotFoundException();
+    }
+    return await this.phoneRepository.save({ id: id, ...data });
   }
 
   async destroy(id: string) {
-    await this.phoneRepository.findOne({ id });
+    try {
+      await this.phoneRepository.findOne({ id });
+    } catch {
+      throw new NotFoundException();
+    }
     return await this.phoneRepository.softDelete({ id });
   }
 }

@@ -8,9 +8,8 @@ describe('CollaboratorPanelTabComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CollaboratorPanelTabComponent ]
-    })
-    .compileComponents();
+      declarations: [CollaboratorPanelTabComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

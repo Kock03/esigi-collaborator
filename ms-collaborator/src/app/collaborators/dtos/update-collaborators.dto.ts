@@ -1,5 +1,17 @@
-import { Optional } from '@nestjs/common';
-import { IsNotEmpty, IsOptional } from 'class-validator';
+import {
+  IsArray,
+  IsBoolean,
+  IsEmail,
+  IsEnum,
+  IsNotEmpty,
+  IsNumber,
+  IsObject,
+  IsOptional,
+  IsString,
+  Length,
+  MaxLength,
+  MinLength,
+} from 'class-validator';
 import { AddressEntity } from 'src/app/address/address.entity';
 import { BankDataEntity } from 'src/app/bank-data/bank-data.entity';
 import { DocumentsEntity } from 'src/app/documents/documents.entity';
@@ -8,75 +20,166 @@ import { FinancialsEntity } from 'src/app/financials/financials.entity';
 import { LanguagesEntity } from 'src/app/languages/languages.entity';
 import { PhoneEntity } from 'src/app/phone/phone.entity';
 import { SkillsEntity } from 'src/app/skills/skills.entity';
-import { CollaboratorTypes } from './collaborator-types.enum';
+import { CollaboratorTypes } from './types.enum';
+import { MaritalStatus } from './Marital-status.enum';
+import { DependentsEntity } from 'src/app/dependents/dependents.entity';
+import { FeedbacksEntity } from 'src/app/feedbacks/feedbacks.entity';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { Gender } from './gender.enum';
 
 export class UpdateCollaboratorsDto {
-  @IsNotEmpty()
+  @ApiProperty()
+  @IsOptional()
+  @IsString()
+  @MinLength(4)
+  @MaxLength(100)
   firstNameCorporateName: string;
 
-  @IsNotEmpty()
+  @ApiProperty()
+  @IsOptional()
+  @IsString()
+  @MinLength(4)
+  @MaxLength(100)
   lastNameFantasyName: string;
 
-  @IsNotEmpty()
+  @ApiProperty()
+  @IsOptional()
+  @IsString()
+  @MinLength(5)
+  @MaxLength(70)
   login: string;
 
-  @IsNotEmpty()
+  @ApiProperty()
+  @IsOptional()
+  @IsEnum(Gender)
   gender: Gender;
 
-  @IsNotEmpty()
+  @ApiProperty()
+  @IsOptional()
+  @IsString()
+  @MinLength(5)
+  @MaxLength(200)
   office: string;
 
-  @IsNotEmpty()
+  @ApiProperty()
+  @IsOptional()
+  @IsEnum(CollaboratorTypes)
   collaboratorTypes: CollaboratorTypes;
 
-  @IsNotEmpty()
+  @ApiProperty()
+  @IsOptional()
+  @MinLength(11)
+  @MaxLength(11)
   cpf: string;
 
-  @IsNotEmpty()
+  @ApiProperty()
+  @IsOptional()
+  @IsEnum(MaritalStatus)
+  maritalStatus: MaritalStatus;
+
+  @ApiProperty()
+  @IsOptional()
   birthDate: Date;
 
-  @IsNotEmpty()
+  @ApiProperty()
+  @IsOptional()
+  @IsBoolean()
+  active: boolean;
+
+  @ApiProperty()
+  @IsOptional()
+  admissionDate: Date;
+
+  @ApiProperty()
+  @IsOptional()
+  @IsEmail()
+  @MinLength(10)
+  @MaxLength(100)
   email: string;
 
-  @IsNotEmpty()
+  @ApiProperty()
+  @IsOptional()
+  @MinLength(14)
+  @MaxLength(14)
   cnpj: string;
 
-  @IsNotEmpty()
+  @ApiProperty()
+  @IsOptional()
+  @IsString()
+  @MinLength(12)
+  @MaxLength(12)
   stateRegistration: string;
 
-  @IsNotEmpty()
+  @ApiProperty()
+  @IsOptional()
+  @IsString()
+  @MinLength(12)
+  @MaxLength(12)
   municipalInscription: string;
 
-  @IsNotEmpty()
+  @ApiProperty()
+  @IsOptional()
+  @IsString()
+  @MinLength(5)
+  @MaxLength(70)
   site: string;
 
-  @IsNotEmpty()
-  photo: string;
+  @ApiProperty()
+  @IsOptional()
+  @IsString()
+  @MinLength(5)
+  @MaxLength(70)
+  linkedin: string;
 
+  @ApiProperty()
+  @IsOptional()
+  photo: Buffer;
+
+  @ApiProperty()
   @IsOptional()
   Address: AddressEntity;
 
-  @IsOptional()
-  linkedin: string;
-
+  @ApiProperty()
   @IsOptional()
   Phone: PhoneEntity;
-  
+
+  @ApiPropertyOptional()
   @IsOptional()
+  @IsArray()
   Skills: SkillsEntity[];
-  
+
+  @ApiPropertyOptional()
   @IsOptional()
+  @IsArray()
   Documents: DocumentsEntity[];
 
+  @ApiPropertyOptional()
   @IsOptional()
+  @IsArray()
   Languages: LanguagesEntity[];
 
+  @ApiPropertyOptional()
   @IsOptional()
+  @IsArray()
   Educations: EducationsEntity[];
 
+  @ApiPropertyOptional()
   @IsOptional()
-  BankData: BankDataEntity;
+  @IsArray()
+  BankData: BankDataEntity[];
 
+  @ApiPropertyOptional()
   @IsOptional()
+  @IsArray()
   Financials: FinancialsEntity[];
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsArray()
+  Dependents: DependentsEntity[];
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsArray()
+  Feedbacks: FeedbacksEntity[];
 }

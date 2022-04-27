@@ -21,9 +21,7 @@ export class LanguagesEntity {
   @Column({ type: 'int' })
   degreeOfInfluence: Fluency;
 
-  @ManyToOne(() => ResumesEntity, (resumes) => resumes.Languages, {
-    eager: true,
-  })
+  @ManyToOne(() => ResumesEntity, (resumes) => resumes.Languages)
   resume: ResumesEntity;
 
   @CreateDateColumn({ name: 'created_at', type: 'datetime' })

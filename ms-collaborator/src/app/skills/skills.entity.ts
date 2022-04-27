@@ -8,35 +8,36 @@ import {
   PrimaryGeneratedColumn,
   ManyToOne,
 } from 'typeorm';
+import { Seniority } from './dtos/seniority.enun';
 
 @Entity({ name: 'skills' })
 export class SkillsEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ name: 'tecnology' })
-  tecnology: string;
 
-  @Column({ type:'int'})
-  seniority: Senioridade;
+  @Column({ name: 'technology' })
+  technology: string;
 
-  @Column({ name: 'years_experience' })
+
+  @Column({ type: 'int' })
+  seniority: Seniority;
+
+  @Column()
   yearsExperience: number;
 
-  @Column({ name: 'current_position' })
+  @Column()
   currentPosition: boolean;
 
-  @ManyToOne(() => CollaboratorsEntity, collaborators => collaborators.Skills)
+  @ManyToOne(() => CollaboratorsEntity, (collaborators) => collaborators.Skills)
   Collaborator: CollaboratorsEntity;
 
-
-  @CreateDateColumn({ name: 'created_at', type: 'datetime' })
+  @CreateDateColumn({ type: 'datetime' })
   createdAt: Date;
 
   @UpdateDateColumn({ name: 'updated_at', type: 'datetime' })
   updatedAt: Date;
 
-  @DeleteDateColumn({ name: 'deleted_at', type: 'datetime' })
+  @DeleteDateColumn({ type: 'datetime' })
   deletedAt: Date;
-
 }

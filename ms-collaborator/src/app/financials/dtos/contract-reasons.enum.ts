@@ -1,4 +1,4 @@
-enum Reasons{
+export enum Reasons {
     Contratação = 1,
     Reconhecimento = 2,
     TempoDeCasa = 3,

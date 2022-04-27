@@ -9,41 +9,71 @@ import {
   ParseUUIDPipe,
   Post,
   Put,
+  Query,
+  Req,
 } from '@nestjs/common';
+import { Observable } from 'rxjs';
 import { CollaboratorsService } from './collaborators.service';
 import { CreateCollaboratorsDto } from './dtos/create-collaborators.dto';
 import { UpdateCollaboratorsDto } from './dtos/update-collaborators.dto';
+import { ICollaborators } from './interfaces/i-collaborators.interfaces';
 
 @Controller('/api/v1/collaborators')
 export class CollaboratorsController {
-  constructor(private readonly collaboratorsRepository: CollaboratorsService) {}
+  constructor(private readonly collaboratorsService: CollaboratorsService) { }
 
   @Get()
   async index() {
-    return await this.collaboratorsRepository.findAll();
+    return await this.collaboratorsService.findAll();
+  }
+
+  @Post('/list')
+  async findCollaboratorsListById(@Body() body: ICollaborators) {
+    return await this.collaboratorsService.findCollaboratorsListById(body.idList);
   }
 
   @Post()
   async store(@Body() body: CreateCollaboratorsDto) {
-    console.log("🚀 ~ file: collaborators.controller.ts ~ line 28 ~ CollaboratorsController ~ store ~ body", body)
-    return await this.collaboratorsRepository.store(body);
+    return await this.collaboratorsService.store(body);
   }
 
   @Get(':id')
   async show(@Param('id', new ParseUUIDPipe()) id: string) {
-    return await this.collaboratorsRepository.findOneOrFail({ id });
+    return await this.collaboratorsService.findOneOrFail({ id });
+  }
+
+  @Get('/short/list/collaborators')
+  async shortListCollaborators() {
+    return await this.collaboratorsService.shortListCollaborators();
+  }
+  
+  @Get('list/inactive')
+  async findInactive() {
+    return await this.collaboratorsService.findInactive();
+  }
+
+  
+  @Get('find/name')
+  async findByName(@Query() query: any) {
+    return this.collaboratorsService.findByName(query);
+  }
+
+  @Get('list/active')
+  async findActive() {
+    return await this.collaboratorsService.findActive();
   }
 
   @Put(':id')
   async update(
     @Param('id', new ParseUUIDPipe()) id: string,
-    @Body() body: UpdateCollaboratorsDto,) {
-    return await this.collaboratorsRepository.update(id, body);
+    @Body() body: UpdateCollaboratorsDto,
+  ) {
+    return await this.collaboratorsService.update(id, body);
   }
 
   @Delete(':id')
   @HttpCode(HttpStatus.NO_CONTENT)
   async destroy(@Param('id', new ParseUUIDPipe()) id: string) {
-    return await this.collaboratorsRepository.destroy(id);
+    return await this.collaboratorsService.destroy(id);
   }
 }

@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { BreakpointObserver, LayoutModule } from '@angular/cdk/layout';
-import { NavigationEnd, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
 
 @Component({
@@ -20,36 +20,42 @@ export class AppComponent {
       name: 'Home',
       icon: 'home',
       selected: false,
-      action: '/home',
+      action: 'home',
     },
     {
       name: 'Colaborador',
       icon: 'person',
       selected: false,
-      action: '/colaborador/novo',
+      action: 'colaborador/lista',
     },
     {
       name: 'Vagas',
       icon: 'work',
       selected: false,
-      action: '/vaga/lista',
+      action: 'vaga/lista',
     },
 
     {
       name: 'Curriculo',
       icon: 'description',
       selected: false,
-      action: '/curriculo/novo',
+      action: 'curriculo/lista',
     },
   ];
 
-  constructor(private observer: BreakpointObserver, private router: Router) {}
+  collaboratorId!: string | null;
+
+  constructor(
+    private observer: BreakpointObserver,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     this.router.events
-      .pipe(filter((event) => event instanceof NavigationEnd))
+      .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe((res: any) => {
-        this.activeMenu = res.url;
+        this.activeMenu = res.url.split('/')[1];
       });
   }
 

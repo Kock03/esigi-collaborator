@@ -1,25 +1,20 @@
-    #collaboratorCreate {
+#collaboratorCreate {
+  .tab-group {
+    width: 100%;
+    cursor: pointer;
+  }
 
+  .tab-item {
+    white-space: nowrap;
+    overflow: hidden;
+  }
 
-      .tab-group {
-        width: 100%;
-      }
+  .content-scroll {
+    overflow: auto;
+    height: calc(100vh - 280px);
+  }
 
-      .tab-item {
-        white-space: nowrap;
-        overflow: hidden;
-      }
-
-      .content-scroll {
-        overflow: auto;
-        height: calc(100vh - 280px);
-
-      }
-
-      .navigation-buttons{
-        margin-top: 8px;
-      }
-
-  
-
-    }
+  .title {
+    margin: 0 !important;
+  }
+}

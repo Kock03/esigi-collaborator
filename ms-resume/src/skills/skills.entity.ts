@@ -27,13 +27,11 @@ export class SkillsEntity {
   @Column()
   currentPosition: boolean;
 
-  @ManyToOne(() => ResumesEntity, (resumes) => resumes.Skills, {
-    eager: true,
-  })
+  @ManyToOne(() => ResumesEntity, (resumes) => resumes.Skills, {})
   resume: ResumesEntity;
 
   @CreateDateColumn({ name: 'date_inclusion' })
-  dateInclusion: Date;
+  createdAt: Date;
 
   @UpdateDateColumn({ name: 'updated_at', type: 'datetime' })
   updatedAt: Date;

@@ -1,11 +1,13 @@
 <div id="collaboratorFinanceTab" class="tab">
-  <div class="content-scroll" *ngIf="collaboratorForm">
+  <div class="content-scroll" *ngIf="financeArray">
     <div fxLayout="row">
       <div class="envolti-table mat-elevation-z4" fxLayout="column">
-        <table mat-table [dataSource]="collaboratorForm.controls['Financials'].value" #financeTable>
+        <table mat-table [dataSource]="data" #financeTable>
           <ng-container matColumnDef="data">
             <th mat-header-cell *matHeaderCellDef>Data de inclusão</th>
-            <td mat-cell *matCellDef="let finance">{{ finance.dateInclusion }}</td>
+            <td mat-cell *matCellDef="let finance">
+              {{ finance.dateInclusion | date: 'dd/MM/yyyy' }}
+            </td>
           </ng-container>
 
           <ng-container matColumnDef="type">
@@ -13,12 +15,12 @@
             <td mat-cell *matCellDef="let finance">
               {{
                 finance.contractType == 1
-                  ? "CLT"
+                  ? 'CLT'
                   : finance.contractType == 2
-                  ? "PJ"
-                  :  finance.contractType == 3
-                  ? "Cooperado"
-                  : "Estagiário"
+                  ? 'PJ'
+                  : finance.contractType == 3
+                  ? 'Cooperado'
+                  : 'Estagiário'
               }}
             </td>
           </ng-container>
@@ -28,47 +30,66 @@
             <td mat-cell *matCellDef="let finance">
               {{
                 finance.reason == 1
-                  ? "Contratação"
+                  ? 'Contratação'
                   : finance.reason == 2
-                  ? "Reconhecimento"
-                  :  finance.reason == 3
-                  ? "Tempo de Casa"
-                  : "Retenção"
+                  ? 'Reconhecimento'
+                  : finance.reason == 3
+                  ? 'Tempo de Casa'
+                  : 'Retenção'
               }}
             </td>
           </ng-container>
 
           <ng-container matColumnDef="value">
             <th mat-header-cell *matHeaderCellDef>Valor</th>
-            <td mat-cell *matCellDef="let finance">{{ finance.value }}</td>
+            <td mat-cell *matCellDef="let finance">
+              {{ finance.value | currency: 'BRL' }}
+            </td>
           </ng-container>
 
           <ng-container matColumnDef="monthlyValue">
             <th mat-header-cell *matHeaderCellDef>Valor Mensal</th>
-            <td mat-cell *matCellDef="let finance">{{ finance.monthlyValue }}</td>
+            <td mat-cell *matCellDef="let finance">
+              {{ finance.monthlyValue | currency: 'BRL' }}
+            </td>
           </ng-container>
 
           <ng-container matColumnDef="icon">
-            <th mat-header-cell *matHeaderCellDef></th>
-            <td class="button-tab " mat-cell *matCellDef="let finance; let index = index">
-              <button class="table-button" mat-button (click)="getFinance(finance, index)">
+            <th mat-header-cell *matHeaderCellDef style="text-align: end">
+              <button
+                class="edit-button"
+                mat-flat-button
+                color="primary"
+                (click)="openDialog()">
+                <mat-icon>add</mat-icon>
+              </button>
+            </th>
+            <td
+              class="button-tab"
+              mat-cell
+              *matCellDef="let finance; let index = index">
+              <button
+                class="table-button"
+                mat-button
+                (click)="getFinance(finance, index)">
                 <mat-icon>edit</mat-icon>
               </button>
 
-              <button class="table-button" mat-button (click)="deleteFinance(index)">
+              <button
+                class="table-button"
+                mat-button
+                (click)="deleteFinance(index)">
                 <mat-icon>delete</mat-icon>
               </button>
             </td>
           </ng-container>
 
-          <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+          <tr
+            mat-header-row
+            *matHeaderRowDef="displayedColumns; sticky: true"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
         </table>
       </div>
-
-      <button fxFlex="5" class="edit-button" mat-flat-button color="primary" (click)="openDialog()">
-        <mat-icon>add</mat-icon>
-      </button>
     </div>
   </div>
 </div>

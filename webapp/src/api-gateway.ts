@@ -148,7 +148,6 @@ export class ApiGateway {
   ): Observable<any> {
     options.method = options.method || RequestMethod.Get;
     options.url = options.url || '';
-    console.log("🚀 ~ file: api-gateway.ts ~ line 151 ~ ApiGateway ~  options.url",  options.url)
     options.headers = options.headers || new HttpHeaders();
     options.params = options.params || {};
     options.data = options.data || {};
@@ -170,7 +169,6 @@ export class ApiGateway {
 
       observe: 'response' as 'response',
     };
-    console.log("🚀 ~ file: api-gateway.ts ~ line 172 ~ ApiGateway ~ requestOptions", requestOptions)
 
     let isCommand =
       showLoading === true || options.method !== RequestMethod.Get;
@@ -185,11 +183,11 @@ export class ApiGateway {
     let stream = this.http
       .request(requestOptions.method, requestOptions.url, requestOptions)
       .pipe(
-        catchError((error) => {
+        catchError(error => {
           this.errorsSubject.next(error);
           return throwError(error);
         }),
-        catchError((error) => {
+        catchError(error => {
           return throwError(this.unwrapHttpError(error));
         }),
         finalize(() => {
@@ -286,7 +284,6 @@ export class ApiGateway {
         }, 2000);
       } else if (!excepetion.code) {
       } else {
-        console.log('error: ' + excepetion);
       }
       return error;
     } catch (jsonError) {

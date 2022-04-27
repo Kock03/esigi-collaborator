@@ -1,28 +1,64 @@
-#jobList{
-    max-width: 1200px;
+#jobList {
+  max-width: 1200px;
+  padding-bottom: 10px;
 
-    
-  .envolti-table {
-    padding-bottom: 10px;
-    overflow: auto;
-    max-height: 350px;
+  table {
+    width: 100%;
   }
 
-  .new-btn{
-      height: 40px;
-      width: 100%;
-      max-width: 100px;
-      margin-top: 8px;
+  .envolti-table {
+    overflow: auto;
+    max-height: 300px;
+    width: 100%;
+    margin-top: 20px;
+    border-radius: 10px;
+
+    .mat-column-iconAdd {
+      width: 50px;
+      padding-right: 5px !important;
+    }
+
+    .mat-column-link {
+      width: 30px;
+    }
+
+    .button-tab {
+      white-space: nowrap;
+      overflow: hidden;
+    }
+  }
+
+  .new-btn {
+    height: 40px;
+    width: 100%;
+    max-width: 100px;
+    margin-top: 8px;
   }
 
   .search {
     width: 100%;
-    max-width: 1000px;
+    max-width: 1200px;
     margin-right: 5px;
-    mat-form-field{
+    mat-form-field {
       width: 100%;
     }
   }
 
-  
+  .job-button {
+    background: none !important;
+    border: none;
+    padding: 0 !important;
+    font-size: 14px;
+    color: #673ab7;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+  .mat-sort-header-arrow {
+    color: white !important;
+  }
+  // .iconAdd{
+  //   display: block;
+  //   margin: auto;
+  // }
 }

@@ -1,6 +1,18 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  HttpCode,
+  HttpException,
+  HttpStatus,
+  Injectable,
+} from '@nestjs/common';
+import { HttpErrorByCode } from '@nestjs/common/utils/http-error-by-code.util';
 import { InjectRepository } from '@nestjs/typeorm';
-import { FindConditions, FindOneOptions, Repository } from 'typeorm';
+import {
+  FindConditions,
+  FindManyOptions,
+  FindOneOptions,
+  Repository,
+} from 'typeorm';
+import { NotFoundException } from '../exceptions/not-found-exception';
 import { AddressEntity } from './address.entity';
 import { CreateAddressDto } from './dtos/create-address.dto';
 import { UpdateAddressDto } from './dtos/update-address.dto';
@@ -13,22 +25,21 @@ export class AddressService {
   ) {}
 
   async findAll() {
-    const addressWhiteCollaborator = await this.addressRepository
-    .createQueryBuilder('address')
-    .getMany();
-
-    return addressWhiteCollaborator;
+    const options: FindManyOptions = {
+      order: { createdAt: 'DESC' },
+    };
+    return await this.addressRepository.find(options);
   }
 
   async findOneOrFail(
     conditions: FindConditions<AddressEntity>,
     options?: FindOneOptions<AddressEntity>,
   ) {
-    options = { relations: ['Collaborator']};
+    options = { relations: ['Collaborator'] };
     try {
       return await this.addressRepository.findOneOrFail(conditions, options);
-    } catch (error) {
-      throw new NotFoundException(error.message);
+    } catch {
+      throw new NotFoundException();
     }
   }
 
@@ -38,13 +49,20 @@ export class AddressService {
   }
 
   async update(id: string, data: UpdateAddressDto) {
-    const address = await this.addressRepository.findOneOrFail(id);
-    this.addressRepository.merge(address, data);
-    return await this.addressRepository.save(address);
+    try {
+      await this.addressRepository.findOneOrFail({ id });
+    } catch {
+      throw new NotFoundException();
+    }
+    return await this.addressRepository.save({ id: id, ...data });
   }
 
   async destroy(id: string) {
-    await this.addressRepository.findOneOrFail({ id });
+    try {
+      await this.addressRepository.findOneOrFail({ id });
+    } catch {
+      throw new NotFoundException();
+    }
     return await this.addressRepository.softDelete({ id });
   }
 }

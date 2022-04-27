@@ -1,6 +1,12 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { HttpException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { FindConditions, FindOneOptions, Repository } from 'typeorm';
+import {
+  FindConditions,
+  FindManyOptions,
+  FindOneOptions,
+  Repository,
+} from 'typeorm';
+import { NotFoundException } from '../exceptions/not-found-exception';
 import { CreateFinancialsDto } from './dtos/create-financials.dto';
 import { UpdateFinancialsDto } from './dtos/update-financials.dto';
 import { FinancialsEntity } from './financials.entity';
@@ -13,22 +19,21 @@ export class FinancialsService {
   ) {}
 
   async findAll() {
-    const financialsWhiteCollaborator = await this.financialsRepository
-    .createQueryBuilder('financials')
-    .getMany();
-
-    return financialsWhiteCollaborator;
+    const options: FindManyOptions = {
+      order: { createdAt: 'DESC' },
+    };
+    return await this.financialsRepository.find(options);
   }
 
   async findOneOrFail(
     conditions: FindConditions<FinancialsEntity>,
     options?: FindOneOptions<FinancialsEntity>,
   ) {
-    options = { relations: ['Collaborator']};
+    options = { relations: ['Collaborator'] };
     try {
       return await this.financialsRepository.findOneOrFail(conditions, options);
-    } catch (error) {
-      throw new NotFoundException(error.message);
+    } catch {
+      throw new NotFoundException();
     }
   }
 
@@ -38,13 +43,19 @@ export class FinancialsService {
   }
 
   async update(id: string, data: UpdateFinancialsDto) {
-    const financial = await this.financialsRepository.findOneOrFail({id});
-    this.financialsRepository.merge(financial, data);
-    return await this.financialsRepository.save(financial);
+    const financial = await this.financialsRepository.findOneOrFail({ id });
+    if (!financial) {
+      throw new NotFoundException();
+    }
+    return await this.financialsRepository.save({ id: id, ...data });
   }
 
   async destroy(id: string) {
-    await this.financialsRepository.findOneOrFail({ id });
+    try {
+      await this.financialsRepository.findOneOrFail({ id });
+    } catch {
+      throw new NotFoundException();
+    }
     return await this.financialsRepository.softDelete({ id });
   }
 }

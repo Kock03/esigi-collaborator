@@ -1,18 +1,10 @@
 #collaboratorEducationTab {
   padding-bottom: 10px;
-  max-width: 800px;
+  max-width: 1220px;
 
   table {
     width: 100%;
-
   }
-
-  .edit-button {
-    height: 40px;
-    margin-top: 25px;
-    margin-left: 10px;
-  }
-
   .form-tab {
     margin-top: 20px;
   }
@@ -20,9 +12,9 @@
   .envolti-table {
     margin-top: 20px;
     overflow: auto;
-    max-height: 150px;
+    max-height: calc(100% - 200px);
     width: 100%;
-
+    border-radius: 10px;
 
     .mat-column-icon {
       width: 50px;
@@ -32,29 +24,40 @@
       white-space: nowrap;
       overflow: hidden;
     }
-
   }
 
-  .mat-tab-label-active{
+  .mat-tab-label-active {
     border-bottom: 2px solid #673ab7;
     opacity: 1 !important;
   }
 
   .mat-ink-bar {
-    height: 0px!important;
-   }
+    height: 0px !important;
+  }
 
   .lenguange-form {
     margin-top: 20px;
   }
-
 }
 
-.button-dialog{
-  margin-left: 140px;
+
+
+#collaboratorEducationDialog{
+  .button-dialog {
+    margin-left: 140px;
+  }
   
+  .title-dialog {
+    text-align: center;
+  }
 }
 
-.title-dialog{
-  text-align: center;
+#collaboratorLanguageDialog{
+  .button-dialog {
+    margin-left: 140px;
+  }
+  
+  .title-dialog {
+    text-align: center;
+  }
 }

@@ -1,7 +1,9 @@
+import { formatDate } from '@angular/common';
 import {
   Component,
   EventEmitter,
   Inject,
+  Injectable,
   Input,
   OnInit,
   Output,
@@ -9,17 +11,18 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+
+import {
+  DateAdapter,
+  MAT_DATE_FORMATS,
+  NativeDateAdapter,
+} from '@angular/material/core';
+
+import { MatDialog } from '@angular/material/dialog';
+
 import { MatTable } from '@angular/material/table';
-
-export interface finance {
-  dateInclusion: string;
-  contractType: string,
-  reason: string;
-  value: string;
-}
-
-
+import { ConfirmDialogService } from 'src/services/confirn-dialog.service';
+import { CollaboratorFinanceDialog } from './collaborator-finance-dialog.component';
 
 @Component({
   selector: 'app-collaborator-finance-tab',
@@ -28,21 +31,20 @@ export interface finance {
   encapsulation: ViewEncapsulation.None,
 })
 export class CollaboratorFinanceTabComponent implements OnInit {
-  @Input('form') collaboratorForm!: FormGroup;
-  @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
+  @Input() financeArray!: FormArray;
+  @Output() onChange: EventEmitter<any> = new EventEmitter();
   @ViewChild('financeTable') financeTable!: MatTable<any>;
 
-  displayedColumns: string[] = ['data', 'type', 'reason', 'value', 'monthlyValue', 'icon'];
- 
-  financials: finance[] = [
-    {
-      dateInclusion: '',
-      contractType: '',
-      reason: 'Contratação',
-      value: '',
-    },
+  displayedColumns: string[] = [
+    'data',
+    'type',
+    'reason',
+    'value',
+    'monthlyValue',
+    'icon',
   ];
 
+  data: [] = [];
 
   selectedIndex = 0;
 
@@ -51,24 +53,41 @@ export class CollaboratorFinanceTabComponent implements OnInit {
   index: any = null;
   Finance: any;
 
-  get financeArray() {
-    return this.collaboratorForm.controls['Financials'] as FormArray;
-  }
-
-  constructor(private fb: FormBuilder, public dialog: MatDialog) {}
+  constructor(
+    private fb: FormBuilder,
+    public dialog: MatDialog,
+    private dialogService: ConfirmDialogService
+  ) {}
 
   ngOnInit(): void {
-    this.initForm();
+    if (this.financeArray.value.length > 0) {
+      this.data = this.financeArray.value;
+    }
+    this.initObservables();
+  }
+
+  initObservables() {
+    this.financeArray.valueChanges.subscribe(res => {
+      const isNullIndex = this.financeArray.value.findIndex(
+        (finance: any) => finance == null
+      );
+      if (isNullIndex !== -1) {
+        this.financeArray.removeAt(isNullIndex);
+      }
+      if (res) {
+        this.data = this.financeArray.value;
+      }
+    });
   }
 
   openDialog() {
     const dialogRef = this.dialog.open(CollaboratorFinanceDialog, {
       width: '500px',
-      height: '500px',
+      height: '550px',
     });
 
-    dialogRef.afterClosed().subscribe((finance) => {
-      if(finance){
+    dialogRef.afterClosed().subscribe(finance => {
+      if (finance) {
         this.financeArray.insert(0, this.fb.group(finance));
         this.financeTable.renderRows();
       }
@@ -79,75 +98,36 @@ export class CollaboratorFinanceTabComponent implements OnInit {
     this.onChange.next(true);
   }
 
-  initForm(): void {
-    this.financeForm = this.fb.group({
-      dateInclusion: [''],
-      contractType: [],
-      reason: [],
-      value: [''],
-    });
-  }
-
   getFinance(financeSelected: any, index: number) {
     const dialogRef = this.dialog.open(CollaboratorFinanceDialog, {
       width: '500px',
-      height: '620px',
-      data: { financeSelected },
-         
+      height: '550px',
+      data: financeSelected,
     });
 
     this.index = index;
-    dialogRef.afterClosed().subscribe((finance) => {
-      this.financeArray.controls[this.index].setValue(finance);
+    dialogRef.afterClosed().subscribe(finance => {
+      if (finance) {
+        this.financeArray.controls[this.index].patchValue(finance);
+      }
     });
-
   }
 
   deleteFinance(index: number) {
-    this.financeArray.removeAt(index);
-  }
-}
+    const options = {
+      data: {
+        title: 'Atenção',
+        subtitle: 'Você tem certeza que deseja excluir essas informações?',
+      },
+      panelClass: 'confirm-modal',
+    };
 
-@Component({
-  selector: 'collaborator-finance-dialog',
-  templateUrl: 'collaborator-finance-dialog.html',
-})
-export class CollaboratorFinanceDialog{
-  @Input('form') collaboratorForm!: FormGroup;
-  @Output('onChange') onChange: EventEmitter<any> = new EventEmitter();
+    this.dialogService.open(options);
 
-  financeForm!: FormGroup;
-
-
-  constructor(
-    public dialogRef: MatDialogRef<CollaboratorFinanceDialog>,
-    private fb: FormBuilder,
-    @Inject(MAT_DIALOG_DATA) public data: { financeSelected: any}
-  ) {}
-
-  ngOnInit(): void {
-    this.initForm();
-  }
-
-  initForm(): void {
-    this.financeForm = this.fb.group({
-      dateInclusion: ['2022-01-01', Validators.required],
-      contractType: [1, Validators.required],
-      reason: [1 , Validators.required],
-      value: ['3400000', Validators.required],
+    this.dialogService.confirmed().subscribe(async confirmed => {
+      if (confirmed) {
+        this.financeArray.removeAt(index);
+      }
     });
-    if (this.data && this.data.financeSelected) {
-     
-      this.financeForm.patchValue(this.data.financeSelected)
-      
-    }
-  }
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-
- async save() {
-    this.dialogRef.close(this.financeForm.getRawValue());
   }
 }
