@@ -51,7 +51,7 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
     ConfirmDialogModule,
     MatSnackBarModule,
   ],
-  providers: [SnackBarService, ConfirmDialogService,  { provide: LOCALE_ID, useValue: 'pt' },],
+  providers: [SnackBarService, ConfirmDialogService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
