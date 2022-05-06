@@ -11,19 +11,19 @@
 
         <div fxFlex="100" fxLayoutGap="16px" fxFlexAlign="end">
           <mat-form-field fxFlex="30" appearance="outline">
-            <mat-label>Tipo de Colaborador</mat-label>
+            <mat-label>{{'collaborator.colaborator_create.collaborator_type.name'|translate}}</mat-label>
             <mat-select
               matInput
               disableRipple
               formControlName="collaboratorTypes">
-              <mat-option [value]="1">CLT</mat-option>
-              <mat-option [value]="2">PJ</mat-option>
-              <mat-option [value]="3">Cooperado</mat-option>
+              <mat-option [value]="1">{{'collaborator.colaborator_create.collaborator_type.clt'|translate}}</mat-option>
+              <mat-option [value]="2">{{'collaborator.colaborator_create.collaborator_type.pj'|translate}}</mat-option>
+              <mat-option [value]="3">{{'collaborator.colaborator_create.collaborator_type.cooperated'|translate}}</mat-option>
             </mat-select>
           </mat-form-field>
 
           <mat-form-field fxFlex="35" appearance="outline">
-            <mat-label>Cargo</mat-label>
+            <mat-label>{{'generic.office'|translate}}</mat-label>
             <input matInput placeholder="Cargo" formControlName="office" />
           </mat-form-field>
 
@@ -57,10 +57,10 @@
         </mat-form-field>
 
         <mat-form-field fxFlex="30" appearance="outline">
-          <mat-label>Sexo</mat-label>
+          <mat-label>{{'generic.gender.name'|translate}}</mat-label>
           <mat-select matInput disableRipple formControlName="gender">
-            <mat-option [value]="1">Masculino</mat-option>
-            <mat-option [value]="2">Feminino</mat-option>
+            <mat-option [value]="1">{{'generic.gender.feminine'|translate}}</mat-option>
+            <mat-option [value]="2">{{'generic.gender.masculine'|translate}}</mat-option>
           </mat-select>
         </mat-form-field>
 
@@ -68,7 +68,7 @@
           fxFlex="35"
           appearance="outline"
           *ngIf="collaboratorForm.controls['collaboratorTypes'].value !== 2">
-          <mat-label>CPF</mat-label>
+          <mat-label>{{'generic.cpf'|translate}}</mat-label>
           <input
             matInput
             placeholder="CPF"
@@ -80,7 +80,7 @@
           fxFlex="35"
           appearance="outline"
           *ngIf="collaboratorForm.controls['collaboratorTypes'].value == 2">
-          <mat-label>CNPJ</mat-label>
+          <mat-label>{{'collaborator.colaborator_create.cnpj'|translate}}</mat-label>
           <input
             matInput
             placeholder="CNPJ"
@@ -92,7 +92,7 @@
           *ngIf="collaboratorForm.controls['collaboratorTypes'].value !== 2"
           fxFlex="30"
           appearance="outline">
-          <mat-label>Data Aniversário</mat-label>
+          <mat-label>{{'generic.birth_date'|translate}}</mat-label>
           <input
             matInput
             [matDatepicker]="picker"
@@ -107,17 +107,17 @@
 
       <div fxFlex="100" fxLayoutGap="16px">
         <mat-form-field fxFlex="25" appearance="outline">
-          <mat-label>Estado Civil</mat-label>
+          <mat-label>{{'collaborator.colaborator_create.marital_status.name'|translate}}</mat-label>
           <mat-select matInput formControlName="maritalStatus">
-            <mat-option [value]="1">Solteiro</mat-option>
-            <mat-option [value]="2">Casado</mat-option>
-            <mat-option [value]="3">Viúvo</mat-option>
-            <mat-option [value]="4">União estável</mat-option>
+            <mat-option [value]="1">{{'collaborator.colaborator_create.marital_status.single'|translate}}</mat-option>
+            <mat-option [value]="2">{{'collaborator.colaborator_create.marital_status.married'|translate}}</mat-option>
+            <mat-option [value]="3">{{'collaborator.colaborator_create.marital_status.widower'|translate}}</mat-option>
+            <mat-option [value]="4">{{'collaborator.colaborator_create.marital_status.stable_union'|translate}}</mat-option>
           </mat-select>
         </mat-form-field>
 
         <mat-form-field fxFlex="30" appearance="outline">
-          <mat-label>Data Admissão</mat-label>
+          <mat-label>{{'generic.admission_date'|translate}}</mat-label>
           <input
             matInput
             [matDatepicker]="picker"
@@ -135,11 +135,11 @@
           fxFlex="10"
           formControlName="active"
           fxLayoutAlign="center center"
-          >Ativo</mat-checkbox
+          >{{'generic.active'|translate}}</mat-checkbox
         >
         <div formGroupName="Phone" fxFlex="100" fxLayoutGap="16px">
           <mat-form-field fxFlex="15" appearance="outline">
-            <mat-label>DDI</mat-label>
+            <mat-label>{{'generic.phone.ddi'|translate}}</mat-label>
             <input
               matInput
               placeholder="DDI"
@@ -148,7 +148,7 @@
           </mat-form-field>
 
           <mat-form-field fxFlex="15" appearance="outline">
-            <mat-label>DDD</mat-label>
+            <mat-label>{{'generic.phone.ddd'|translate}}</mat-label>
             <input
               matInput
               placeholder="DDD"
@@ -157,7 +157,7 @@
           </mat-form-field>
 
           <mat-form-field fxFlex="70" appearance="outline">
-            <mat-label>Telefone</mat-label>
+            <mat-label>{{'generic.phone.phone_number'|translate}}</mat-label>
             <input
               matInput
               placeholder="Telefone"
@@ -172,7 +172,7 @@
           fxFlex="20"
           appearance="outline"
           *ngIf="collaboratorForm.controls['collaboratorTypes'].value == 2">
-          <mat-label>Inscrição Estadual</mat-label>
+          <mat-label>{{'collaborator.colaborator_create.state_registration'|translate}}</mat-label>
           <input
             matInput
             placeholder="Inscrição Estadual"
@@ -183,7 +183,7 @@
           fxFlex="30"
           appearance="outline"
           *ngIf="collaboratorForm.controls['collaboratorTypes'].value == 2">
-          <mat-label>Inscrição municipal</mat-label>
+          <mat-label>{{'collaborator.colaborator_create.municipal_inscription'|translate}}l</mat-label>
           <input
             matInput
             placeholder="Inscrição municipal"
@@ -194,7 +194,7 @@
           *ngIf="collaboratorForm.controls['collaboratorTypes'].value == 2"
           fxFlex="50"
           appearance="outline">
-          <mat-label>Data Aniversário</mat-label>
+          <mat-label>{{'generic.birth_date'|translate}}</mat-label>
           <input
             matInput
             [matDatepicker]="picker"
@@ -209,7 +209,7 @@
 
       <div fxFlex="100" fxLayoutGap="16px" formGroupName="Address">
         <mat-form-field fxFlex="25" appearance="outline">
-          <mat-label>CEP </mat-label>
+          <mat-label>{{'collaborator.colaborator_create.address.cep'|translate}} </mat-label>
           <input
             matInput
             placeholder="CEP"
@@ -222,12 +222,12 @@
         </mat-form-field>
 
         <mat-form-field fxFlex="40" appearance="outline">
-          <mat-label>Rua</mat-label>
+          <mat-label>{{'collaborator.colaborator_create.address.street'|translate}}</mat-label>
           <input matInput placeholder="Rua" formControlName="street" />
         </mat-form-field>
 
         <mat-form-field fxFlex="15" appearance="outline">
-          <mat-label>Número</mat-label>
+          <mat-label>{{'collaborator.colaborator_create.address.number'|translate}}</mat-label>
           <input
             type="number"
             matInput
@@ -235,14 +235,14 @@
             formControlName="number" />
         </mat-form-field>
         <mat-form-field fxFlex="45" appearance="outline">
-          <mat-label>Estado</mat-label>
+          <mat-label>{{'collaborator.colaborator_create.address.state'|translate}}</mat-label>
           <input matInput placeholder="Estado" formControlName="state" />
         </mat-form-field>
       </div>
 
       <div fxFlex="100" fxLayoutGap="16px" formGroupName="Address">
         <mat-form-field fxFlex="40" appearance="outline">
-          <mat-label>Complemento</mat-label>
+          <mat-label>{{'collaborator.colaborator_create.address.complement'|translate}}</mat-label>
           <input
             matInput
             placeholder="Complemento"
@@ -250,36 +250,36 @@
         </mat-form-field>
 
         <mat-form-field fxFlex="20" appearance="outline">
-          <mat-label>Bairro</mat-label>
+          <mat-label>{{'collaborator.colaborator_create.address.district'|translate}}</mat-label>
           <input matInput placeholder="Bairro" formControlName="district" />
         </mat-form-field>
 
         <mat-form-field fxFlex="40" appearance="outline">
-          <mat-label>Cidade</mat-label>
+          <mat-label>{{'collaborator.colaborator_create.address.city'|translate}}</mat-label>
           <input matInput placeholder="Cidade" formControlName="city" />
         </mat-form-field>
       </div>
 
       <div fxFlex="100" fxLayoutGap="16px">
         <mat-form-field fxFlex="50" appearance="outline">
-          <mat-label>Email</mat-label>
+          <mat-label>{{'generic.email'|translate}}</mat-label>
           <input matInput placeholder="Email" formControlName="email" />
         </mat-form-field>
 
         <mat-form-field fxFlex="50" appearance="outline">
-          <mat-label>Site</mat-label>
+          <mat-label>{{'collaborator.colaborator_create.site'|translate}}</mat-label>
           <input matInput placeholder="Site" formControlName="site" />
         </mat-form-field>
       </div>
 
       <div fxFlex="100" fxLayoutGap="16px">
         <mat-form-field fxFlex="50" appearance="outline">
-          <mat-label>Login</mat-label>
+          <mat-label>{{'collaborator.colaborator_create.site'|translate}}</mat-label>
           <input matInput placeholder="Login" formControlName="login" />
         </mat-form-field>
 
         <mat-form-field fxFlex="50" appearance="outline">
-          <mat-label>Linkedin</mat-label>
+          <mat-label>{{'collaborator.colaborator_create.linkedIn'|translate}}</mat-label>
           <input matInput placeholder="Linkedin" formControlName="linkedin" />
         </mat-form-field>
       </div>

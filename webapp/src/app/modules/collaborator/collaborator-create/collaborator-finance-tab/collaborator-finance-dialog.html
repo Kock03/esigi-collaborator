@@ -1,10 +1,10 @@
 <div id="collaboratorFinanceDialog" class="dialog">
   <div class="content-scroll" *ngIf="financeForm">
-    <h2 mat-dialog-title class="title-dialog">Cadastro Financeiro</h2>
+    <h2 mat-dialog-title class="title-dialog">{{'collaborator.colaborator_create.finance.financial_register' | translate}}</h2>
     <mat-dialog-content class="mat-typography">
       <form [formGroup]="financeForm" fxLayout="column">
         <mat-form-field fxFlex="35" appearance="outline">
-          <mat-label>Data de Inclusão</mat-label>
+          <mat-label>{{'collaborator.colaborator_create.finance.date_inclusion' | translate}}</mat-label>
           <input
             matInput
             [matDatepicker]="picker"

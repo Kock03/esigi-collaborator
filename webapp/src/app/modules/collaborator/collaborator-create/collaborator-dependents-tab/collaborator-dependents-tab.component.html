@@ -4,7 +4,7 @@
       <div class="envolti-table mat-elevation-z8" fxLayout="column">
         <table mat-table [dataSource]="data" #dependentTable>
           <ng-container matColumnDef="type">
-            <th mat-header-cell *matHeaderCellDef>Tipo</th>
+            <th mat-header-cell *matHeaderCellDef>{{'collaborator.colaborator_create.dependents.type.name' | translate}}</th>
             <td mat-cell *matCellDef="let Dependent">
               {{
                 Dependent.type == 1
@@ -21,14 +21,14 @@
           </ng-container>
 
           <ng-container matColumnDef="firstName">
-            <th mat-header-cell *matHeaderCellDef>Nome</th>
+            <th mat-header-cell *matHeaderCellDef>{{'generic.name' | translate}}</th>
             <td mat-cell *matCellDef="let Dependent">
               {{ Dependent.firstName + ' ' + Dependent.lastName }}
             </td>
           </ng-container>
 
           <ng-container matColumnDef="gender">
-            <th mat-header-cell *matHeaderCellDef>Sexo</th>
+            <th mat-header-cell *matHeaderCellDef>{{'generic.gender.name' | translate}}</th>
             <td mat-cell *matCellDef="let Dependent">
               {{
                 Dependent.gender == 1
@@ -41,21 +41,21 @@
           </ng-container>
 
           <ng-container matColumnDef="cpf">
-            <th mat-header-cell *matHeaderCellDef>CPF</th>
+            <th mat-header-cell *matHeaderCellDef>{{'generic.cpf' | translate}}</th>
             <td mat-cell *matCellDef="let Dependent">
               {{ Dependent.cpf | mask: '000.000.000-00' }}
             </td>
           </ng-container>
 
           <ng-container matColumnDef="birthDate">
-            <th mat-header-cell *matHeaderCellDef>Data de Aniversario</th>
+            <th mat-header-cell *matHeaderCellDef>{{'generic.birth_date' | translate}}</th>
             <td mat-cell *matCellDef="let Dependent">
               {{ Dependent.birthDate | date: 'dd/MM/yyyy' }}
             </td>
           </ng-container>
 
           <ng-container matColumnDef="phoneNumber">
-            <th mat-header-cell *matHeaderCellDef>Telefone</th>
+            <th mat-header-cell *matHeaderCellDef>{{'generic.phone.phone_number' | translate}}</th>
             <td mat-cell *matCellDef="let Dependent">
               +{{ Dependent.ddi }} ({{ Dependent.ddd }})
               {{ Dependent.phoneNumber }}
@@ -63,7 +63,7 @@
           </ng-container>
 
           <ng-container matColumnDef="email">
-            <th mat-header-cell *matHeaderCellDef>Email</th>
+            <th mat-header-cell *matHeaderCellDef>{{'generic.email' | translate}}</th>
             <td mat-cell *matCellDef="let Dependent">
               {{ Dependent.email }}
             </td>

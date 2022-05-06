@@ -1,8 +1,142 @@
 {
-  "sidenav": {
-    "home": "Início",
-    "collaborator": "Colaborador",
-    "jobs": "Vagas",
-    "resume": "Currículo"
-  }
+    "sidenav": {
+        "home": "Início",
+        "collaborator": "Colaborador",
+        "jobs": "Vagas",
+        "resume": "Currículo"
+    },
+    "collaborator": {
+        "colaborator_list": {
+            "collaborators": "Colaboradores",
+            "search_collaborators": "Buscar Colaboradores",
+            "filter": {
+                "name": "Filtro",
+                "all": "Todos",
+                "inactive": "Inativo"
+            }
+        },
+        "colaborator_create": {
+            "corporate_name": "Razão Social",
+            "login": "Login",
+            "marital_status": {
+                "name": "Estado civil",
+                "single": "Solteiro",
+                "married": "Casado",
+                "widower": "Viúvo",
+                "stable_union": "União Estável"
+            },
+            "collaborator_type": {
+                "name": "Tipo de Colaborador",
+                "clt": "CLT",
+                "pj": "PJ",
+                "cooperated": "Cooperado"
+            },
+            "active": "Ativo",
+            "cnpj": "CNPJ",
+            "state_registration": "Inscrição Estadual",
+            "municipal_inscription": "Inscrição Municipal",
+            "site": "Site",
+            "linkedIn": "LinkedIn",
+            "photo": "Foto",
+            "address": {
+                "cep": "CEP",
+                "number": "Número",
+                "complement": "Complemento",
+                "street": "Rua",
+                "city": "Cidade",
+                "district": "Bairro",
+                "state": "Estado"
+            },
+            "dependents": {
+                "dependent_registration": "Cadastro Dependentes",
+                "type": {
+                    "name": "Tipo",
+                    "spouse": "Cônjuge",
+                    "son": "Filho",
+                    "stepson": "Enteado",
+                    "dad": "Pai",
+                    "mom": "Mãe"
+                }
+            },
+            "education": {
+                "name": "Educação",
+                "schooling": {
+                    "name": "Escolaridade",
+                    "type": {
+                        "elementary_school": "Ensino Fundamental",
+                        "high_school": "Ensino Médio",
+                        "university_education": "Ensino Superior"
+                    },
+                    "situation": {
+                        "name": "Situação",
+                        "stop": "Parado",
+                        "complete": "Completo",
+                        "in_progress": "Em Andamento"
+                    },
+                    "course": "Curso",
+                    "institution": "Instituição"
+                },
+                "languages": {
+                    "name": "Idiomas",
+                    "fluency": {
+                        "name": "Grau de Fluência",
+                        "all_options": "Leitura, Escrita e Conversação",
+                        "writing": "Escrita",
+                        "reading": "Leitura",
+                        "conversation": "Conversação",
+                        "writing_and_reading": "Escrita e Leitura",
+                        "writing_and_conversation":"Escrita e Conversação"
+                    }
+                }
+            },
+            "bank":{
+                "bank_registration": "Cadastro Bancário",
+                "name": "Banco",
+                "agency": "Agência",
+                "type": {
+                    "name": "Tipo de Conta",
+                    "checking_account": "Conta Corrente",
+                    "salary_account": "Conta Salário",
+                    "savings_account": "Conta Poupança"
+                },
+                "account_number": "Número Conta",
+                "digit": "Digito"
+            },
+            "finance":{
+                "financial_register": "Cadastro Financeiro",
+                "date_inclusion": " Data de Inclusão",
+                "type":{
+                    "name": "Tipo de Contrato"
+                },
+                "reason":{
+                    "name": "Motivo"
+                },
+                "value": "Valor",
+                "monthly_value": "Valor Mensal"
+            }
+        }
+    },
+    "generic": {
+        "gender": {
+            "name": "Sexo",
+            "feminine": "Feminino",
+            "masculine": "Masculino",
+            "undefined": "Não Definido"
+        },
+        "cpf": "CPF",
+        "name": "Nome",
+        "active": "Ativo",
+        "admission_date": "Data Admissão",
+        "office": "Posição",
+        "current_client": "Cliente Atual",
+        "status": "Status",
+        "birth_date": "Data Aniversário",
+        "email": "Email",
+        "phone": {
+            "phone_number": "Telefone",
+            "ddd": "DDD",
+            "ddi": "DDI"
+        },
+        "last_name": "Sobrenome"
+    }
 }

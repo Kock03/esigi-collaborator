@@ -1,10 +1,10 @@
 <div id="collaboratorLanguageDialog">
   <div class="content-scroll" *ngIf="languageForm">
-    <h2 mat-dialog-title class="title-dialog">Idioma</h2>
+    <h2 mat-dialog-title class="title-dialog">{{'collaborator.colaborator_create.education.languages.name' | translate}}</h2>
     <mat-dialog-content class="mat-typography">
       <form [formGroup]="languageForm" fxLayout="column">
         <mat-form-field appearance="outline">
-          <mat-label>Idioma</mat-label>
+          <mat-label>{{'collaborator.colaborator_create.education.languages.name' | translate}}</mat-label>
           <input
             matInput
             disableRipple
@@ -13,14 +13,14 @@
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-label>Grau de Fluência</mat-label>
+          <mat-label>{{'collaborator.colaborator_create.education.languages.fluency.name' | translate}}</mat-label>
           <mat-select formControlName="degreeOfInfluence">
-            <mat-option [value]="1">Leitura, Escrita e Conversação</mat-option>
-            <mat-option [value]="2">Escrita</mat-option>
-            <mat-option [value]="3">Leitura</mat-option>
-            <mat-option [value]="4">Conversação</mat-option>
-            <mat-option [value]="5">Escrita e Leitura</mat-option>
-            <mat-option [value]="6">Escrita e Conversação</mat-option>
+            <mat-option [value]="1">{{'collaborator.colaborator_create.education.languages.fluency.all_options' | translate}}</mat-option>
+            <mat-option [value]="2">{{'collaborator.colaborator_create.education.languages.fluency.writing' | translate}}</mat-option>
+            <mat-option [value]="3">{{'collaborator.colaborator_create.education.languages.fluency.reading' | translate}}</mat-option>
+            <mat-option [value]="4">{{'collaborator.colaborator_create.education.languages.fluency.conversation' | translate}}</mat-option>
+            <mat-option [value]="5">{{'collaborator.colaborator_create.education.languages.fluency.writing_and_reading' | translate}}</mat-option>
+            <mat-option [value]="6">{{'collaborator.colaborator_create.education.languages.fluency.writing_and_conversation' | translate}}</mat-option>
           </mat-select>
         </mat-form-field>
       </form>

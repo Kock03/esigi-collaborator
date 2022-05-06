@@ -2,7 +2,7 @@
   <div class="content-scroll">
     <mat-tab-group animationDuration="0">
       <mat-tab label="Escolaridade">
-        <ng-template mat-tab-label> Escolaridade </ng-template>
+        <ng-template mat-tab-label> {{'collaborator.colaborator_create.education.schooling.name' | translate}} </ng-template>
         <div fxLayout="row" *ngIf="educationArray">
           <div class="envolti-table mat-elevation-z8" fxLayout="column">
             <table
@@ -10,28 +10,28 @@
               [dataSource]="educationArray.value"
               #educationTable>
               <ng-container matColumnDef="schooling">
-                <th mat-header-cell *matHeaderCellDef>Escolaridade</th>
+                <th mat-header-cell *matHeaderCellDef>{{'collaborator.colaborator_create.education.schooling.name' | translate}}</th>
                 <td mat-cell *matCellDef="let education">
                   {{ getLabel('schooling', education) }}
                 </td>
               </ng-container>
 
               <ng-container matColumnDef="situation">
-                <th mat-header-cell *matHeaderCellDef>Situação</th>
+                <th mat-header-cell *matHeaderCellDef>{{'collaborator.colaborator_create.education.schooling.situation.name' | translate}}</th>
                 <td mat-cell *matCellDef="let education">
                   {{ getLabel('situation', education) }}
                 </td>
               </ng-container>
 
               <ng-container matColumnDef="course">
-                <th mat-header-cell *matHeaderCellDef>Curso</th>
+                <th mat-header-cell *matHeaderCellDef>{{'collaborator.colaborator_create.education.schooling.course' | translate}}</th>
                 <td mat-cell *matCellDef="let education">
                   {{ education.course }}
                 </td>
               </ng-container>
 
               <ng-container matColumnDef="institution">
-                <th mat-header-cell *matHeaderCellDef>Instituição</th>
+                <th mat-header-cell *matHeaderCellDef>{{'collaborator.colaborator_create.education.schooling.institution' | translate}}</th>
                 <td mat-cell *matCellDef="let education">
                   {{ education.institution }}
                 </td>
@@ -78,7 +78,7 @@
       </mat-tab>
 
       <mat-tab label="Idiomas">
-        <ng-template mat-tab-label> Idiomas </ng-template>
+        <ng-template mat-tab-label> {{'collaborator.colaborator_create.education.languages.name' | translate}} </ng-template>
         <div fxLayout="row">
           <div class="envolti-table mat-elevation-z8" fxLayout="column">
             <table #languageTable mat-table [dataSource]="languageArray.value">
@@ -90,7 +90,7 @@
               </ng-container>
 
               <ng-container matColumnDef="fluency">
-                <th mat-header-cell *matHeaderCellDef>Fluência</th>
+                <th mat-header-cell *matHeaderCellDef>{{'collaborator.colaborator_create.education.languages.fluency.name' | translate}}</th>
                 <td mat-cell *matCellDef="let language">
                   {{
                     language.degreeOfInfluence == 1
