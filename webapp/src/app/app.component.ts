@@ -3,6 +3,7 @@ import { MatSidenav } from '@angular/material/sidenav';
 import { BreakpointObserver, LayoutModule } from '@angular/cdk/layout';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
@@ -48,10 +49,15 @@ export class AppComponent {
   constructor(
     private observer: BreakpointObserver,
     private router: Router,
-    private route: ActivatedRoute
-  ) {}
+    private route: ActivatedRoute,
+    public translateService: TranslateService
+  ) {
+    translateService.addLangs(['en-US', 'pt-BR']);
+  }
 
   ngOnInit(): void {
+    this.translateService.setDefaultLang('pt-BR');
+    this.translateService.use('pt-BR');
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe((res: any) => {

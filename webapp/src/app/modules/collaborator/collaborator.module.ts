@@ -38,6 +38,7 @@ import { CollaboratorSkillDialog } from './collaborator-create/collaborator-skil
 import { CollaboratorDocumentDialog } from './collaborator-create/collaborator-document-tab/collaborator-document-dialog.component';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSortModule } from '@angular/material/sort';
+import { TranslateModule } from '@ngx-translate/core';
 
 const routes: Routes = [
   {
@@ -88,6 +89,7 @@ const routes: Routes = [
     MatButtonModule,
     MatSelectModule,
     MatDatepickerModule,
+    TranslateModule.forChild(),
     MatTableModule,
     MatCheckboxModule,
     MatNativeDateModule,
