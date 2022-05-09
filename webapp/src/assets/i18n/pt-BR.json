@@ -108,13 +108,7 @@
                 "name":"Financeiro",
                 "financial_register": "Cadastro Financeiro",
                 "date_inclusion": " Data de Inclusão",
-                "type": {
-                    "name": "Tipo de Contrato",
-                    "clt": "CLT",
-                    "pj": "PJ",
-                    "cooperated": "Cooperado",
-                    "intern": "Estagiário"
-                },
+                "type": "Tipo de Contrato",
                 "reason": {
                     "name": "Motivo",
                     "hiring": "Contratação",
@@ -174,6 +168,52 @@
             }
         }
     },
+    "job":{
+        "job_list":{
+            "search_jobs":"Buscar Vagas",
+            "name":"Nome da Vaga",
+            "request":"Solicitante",
+            "opening_date":"Data de Abertura",
+            "status":{}    
+        },
+        "job_interview_list_create":{
+            "name":"Entrevistas",
+            "name_candidate":"Nome do Candidato",
+            "tech_recruter":"TechRecruter",
+            "hour_interview":"Horário da Entrevista",
+            "presentation" :{
+                "name":"Apresentação"
+            },
+            "salary_expectation":"Pretenção Salarial",
+            "hiring_preference":"Preferência de Contratação",
+            "punctuality":{
+                "name":"Pontualidade",
+                "one_off":"Pontual",
+                "late_5_minutes":"Atrasado 5 minutos",
+                "more_than_5_minutes_late":"Atrasado mais de 5 minutos",
+                "did_not_attend":"Não Compareceu"
+            },
+            "situational":{
+                "name":"Situação",
+                "okay":"Aprovado",
+                "approved_with_ reservations":"Aprovado com Ressalvas",
+                "disapproved":"Reprovado",
+                "failed_with_reservations":"Reprovado com Ressalvas"
+            },
+            "behavioral_assessment":"Avaliação Comportamental",
+            "comments":"Observações",
+            "availability_of_initialize":"Disponibilidade de Inicio",
+            "evaluator":"Avaliador",
+            "technical_interview_date":"Data da Entrevista",
+            "technical_evaluation":"Avaliação Técnica",
+            "job_profile":"Perfil da Vaga",
+            "behavioral_evaluation_coment":"Avaliação Comportamental"
+
+
+
+
+        }
+    },
     "generic": {
         "gender": {
             "name": "Sexo",
@@ -199,7 +239,13 @@
         "last_name": "Sobrenome",
         "project":"Projeto",
         "register":"Cadastro",
-        "accompaniment":"Acompanhamento"
+        "accompaniment":"Acompanhamento",
+        "client": "Cliente",
+        "clt": "CLT",
+        "pj": "PJ",
+        "cooperated": "Cooperado",
+        "intern": "Estagiário"
+
         
 
     }
