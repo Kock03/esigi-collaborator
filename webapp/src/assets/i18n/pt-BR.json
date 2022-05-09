@@ -48,6 +48,7 @@
                 "state": "Estado"
             },
             "dependents": {
+                "name":"Dependentes",
                 "dependent_registration": "Cadastro Dependentes",
                 "type": {
                     "name": "Tipo",
@@ -85,11 +86,12 @@
                         "reading": "Leitura",
                         "conversation": "Conversação",
                         "writing_and_reading": "Escrita e Leitura",
-                        "writing_and_conversation":"Escrita e Conversação"
+                        "writing_and_conversation": "Escrita e Conversação"
                     }
                 }
             },
-            "bank":{
+            "bank": {
+                "bank_data":"Dados Bancários",
                 "bank_registration": "Cadastro Bancário",
                 "name": "Banco",
                 "agency": "Agência",
@@ -102,17 +104,73 @@
                 "account_number": "Número Conta",
                 "digit": "Digito"
             },
-            "finance":{
+            "finance": {
+                "name":"Financeiro",
                 "financial_register": "Cadastro Financeiro",
                 "date_inclusion": " Data de Inclusão",
-                "type":{
-                    "name": "Tipo de Contrato"
+                "type": {
+                    "name": "Tipo de Contrato",
+                    "clt": "CLT",
+                    "pj": "PJ",
+                    "cooperated": "Cooperado",
+                    "intern": "Estagiário"
                 },
-                "reason":{
-                    "name": "Motivo"
+                "reason": {
+                    "name": "Motivo",
+                    "hiring": "Contratação",
+                    "recognition": "Reconhecimento",
+                    "home_time": "Tempo de casa",
+                    "retention": "Retenção"
                 },
                 "value": "Valor",
                 "monthly_value": "Valor Mensal"
+            },
+            "skills": {
+                "name":"Skills",
+                "technology": "Tecnologia",
+                "current_position": "Posição Atual",
+                "time_experience": "Tempo de experiência (anos)",
+                "seniority": {
+                    "name": "Senioridade",
+                    "senior": "Senior",
+                    "full": "Pleno",
+                    "junior": "Junior",
+                    "apprentice": "Aprendiz",
+                    "specialist": "Especialista",
+                    "architect": "Arquiteto"
+                }
+            },
+            "documents": {
+                "name": "Documentos",
+                "document_registration": "Cadastro de Documento",
+                "document_name": "Nome"
+            },
+            "feedbacks": {
+                "name": "Feedback",
+                "feedback_date": "Data Feedback",
+                "feedback_type": {
+                    "name": "Tipo de Feedback",
+                    "unmotivated_professional": "Profissional Desmotivado",
+                    "change_of_position": "Mudança de Cargo",
+                    "salary_increase": "Aumento de Salário"
+                },
+                "reason": {
+                    "management_request": "Solicitação Gestão",
+                    "customer_request": "Solicitação Cliente",
+                    "contributor_request": "Solicitação Colaborador"
+                },
+                "manager": "Gestor",
+                "status": {
+                    "scheduled": "Agendada",
+                    "completed": "Concluída",
+                    "feedback_return": "Retorno de Feedback"
+                },
+                "hour":"Hora",
+                "feedback_date_retorn":"Data Retorno Feedback",
+                "management":"Gestão",
+                "description":"Descrição",
+                "improvement_points":"Pontos de Melhoria",
+                "commitments":"Compromissos"    
             }
         }
     },
@@ -132,11 +190,17 @@
         "status": "Status",
         "birth_date": "Data Aniversário",
         "email": "Email",
+        "reason": "Motivo",
         "phone": {
             "phone_number": "Telefone",
             "ddd": "DDD",
             "ddi": "DDI"
         },
-        "last_name": "Sobrenome"
+        "last_name": "Sobrenome",
+        "project":"Projeto",
+        "register":"Cadastro",
+        "accompaniment":"Acompanhamento"
+        
+
     }
 }

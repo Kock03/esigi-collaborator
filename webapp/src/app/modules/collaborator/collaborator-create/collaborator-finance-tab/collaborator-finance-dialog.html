@@ -16,27 +16,27 @@
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-label>Tipo de Contrato</mat-label>
+          <mat-label>{{'collaborator.colaborator_create.finance.type.name' | translate}}</mat-label>
           <mat-select formControlName="contractType">
-            <mat-option [value]="1">CLT</mat-option>
-            <mat-option [value]="2">PJ</mat-option>
-            <mat-option [value]="3">Cooperado</mat-option>
-            <mat-option [value]="4">Estagiário</mat-option>
+            <mat-option [value]="1">{{'collaborator.colaborator_create.finance.type.clt' | translate}}</mat-option>
+            <mat-option [value]="2">{{'collaborator.colaborator_create.finance.type.pj' | translate}}</mat-option>
+            <mat-option [value]="3">{{'collaborator.colaborator_create.finance.type.cooperated' | translate}}</mat-option>
+            <mat-option [value]="4">{{'collaborator.colaborator_create.finance.type.intern' | translate}}</mat-option>
           </mat-select>
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-label>Motivo</mat-label>
+          <mat-label>{{'collaborator.colaborator_create.finance.reason.name' | translate}}</mat-label>
           <mat-select formControlName="reason">
-            <mat-option [value]="1">Contratação</mat-option>
-            <mat-option [value]="2">Reconhecimento</mat-option>
-            <mat-option [value]="3">Tempo De Casa</mat-option>
-            <mat-option [value]="4">Retenção</mat-option>
+            <mat-option [value]="1">{{'collaborator.colaborator_create.finance.reason.hiring' | translate}}</mat-option>
+            <mat-option [value]="2">{{'collaborator.colaborator_create.finance.reason.recognition' | translate}}</mat-option>
+            <mat-option [value]="3">{{'collaborator.colaborator_create.finance.reason.home_time' | translate}}</mat-option>
+            <mat-option [value]="4">{{'collaborator.colaborator_create.finance.reason.retention' | translate}}</mat-option>
           </mat-select>
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-label>Valor</mat-label>
+          <mat-label>{{'collaborator.colaborator_create.finance.value' | translate}}</mat-label>
           <input
             mask="00||00,00||000,00||0.000,00||00.000,00"
             matInput
@@ -46,7 +46,7 @@
         </mat-form-field>
 
         <mat-form-field fxFlex="50" appearance="outline">
-          <mat-label>Data de Pagamento</mat-label>
+          <mat-label>{{'collaborator.colaborator_create.finance.monthly_value' | translate}}</mat-label>
           <input
             matInput
             [matDatepicker]="paypicker"

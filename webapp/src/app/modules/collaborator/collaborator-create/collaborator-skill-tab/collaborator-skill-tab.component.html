@@ -4,13 +4,13 @@
       <div class="envolti-table mat-elevation-z8" fxLayout="column">
         <table mat-table [dataSource]="data" #skillTable>
           <ng-container matColumnDef="technology">
-            <th mat-header-cell *matHeaderCellDef>Tecnologia</th>
+            <th mat-header-cell *matHeaderCellDef>{{'collaborator.colaborator_create.skills.technology'|translate}}</th>
             <td mat-cell *matCellDef="let skill">{{ skill.technology }}</td>
           </ng-container>
 
           <ng-container matColumnDef="time">
             <th mat-header-cell *matHeaderCellDef>
-              Tempo de experiencia(anos)
+              {{'collaborator.colaborator_create.skills.time_experience'|translate}}
             </th>
             <td mat-cell *matCellDef="let skill">
               {{ skill.yearsExperience }}
@@ -18,7 +18,7 @@
           </ng-container>
 
           <ng-container matColumnDef="level">
-            <th mat-header-cell *matHeaderCellDef>Senioridade</th>
+            <th mat-header-cell *matHeaderCellDef>{{'collaborator.colaborator_create.skills.seniority.name'|translate}}</th>
             <td mat-cell *matCellDef="let skill">
               {{
                 skill.seniority == 1
