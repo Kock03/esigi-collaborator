@@ -160,7 +160,7 @@
             "behavioral_evaluation_coment": "Avaliação Comportamental"
         }
     },
-    "resume": {
+    "resumes": {
         "resume_list": {
             "search_resumes": "Buscar Currículos",
             "filter": "Filtro",
@@ -170,7 +170,8 @@
             "job": "Vaga",
             "stopped": "Parado"
         },
-        "resume_register": {
+        "resume_experience": {
+            "experience_registration": "Cadastro de experiência"
         }
     },
     "generic": {
@@ -228,6 +229,8 @@
                 }
             }
         },
+        "start_date": "Login",
+        "end-_date": "LinkedIn",
         "login": "Login",
         "linkedIn": "LinkedIn",
         "cpf": "CPF",
