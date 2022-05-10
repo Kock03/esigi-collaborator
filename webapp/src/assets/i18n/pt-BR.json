@@ -40,37 +40,6 @@
                     "mom": "Mãe"
                 }
             },
-            "education": {
-                "name": "Educação",
-                "schooling": {
-                    "name": "Escolaridade",
-                    "type": {
-                        "elementary_school": "Ensino Fundamental",
-                        "high_school": "Ensino Médio",
-                        "university_education": "Ensino Superior"
-                    },
-                    "situation": {
-                        "name": "Situação",
-                        "stop": "Parado",
-                        "complete": "Completo",
-                        "in_progress": "Em Andamento"
-                    },
-                    "course": "Curso",
-                    "institution": "Instituição"
-                },
-                "languages": {
-                    "name": "Idiomas",
-                    "fluency": {
-                        "name": "Grau de Fluência",
-                        "all_options": "Leitura, Escrita e Conversação",
-                        "writing": "Escrita",
-                        "reading": "Leitura",
-                        "conversation": "Conversação",
-                        "writing_and_reading": "Escrita e Leitura",
-                        "writing_and_conversation": "Escrita e Conversação"
-                    }
-                }
-            },
             "bank": {
                 "bank_data": "Dados Bancários",
                 "bank_registration": "Cadastro Bancário",
@@ -226,6 +195,37 @@
             "city": "Cidade",
             "district": "Bairro",
             "state": "Estado"
+        },
+        "education": {
+            "name": "Educação",
+            "schooling": {
+                "name": "Escolaridade",
+                "type": {
+                    "elementary_school": "Ensino Fundamental",
+                    "high_school": "Ensino Médio",
+                    "university_education": "Ensino Superior"
+                },
+                "situation": {
+                    "name": "Situação",
+                    "stop": "Parado",
+                    "complete": "Completo",
+                    "in_progress": "Em Andamento"
+                },
+                "course": "Curso",
+                "institution": "Instituição"
+            },
+            "languages": {
+                "name": "Idiomas",
+                "fluency": {
+                    "name": "Grau de Fluência",
+                    "all_options": "Leitura, Escrita e Conversação",
+                    "writing": "Escrita",
+                    "reading": "Leitura",
+                    "conversation": "Conversação",
+                    "writing_and_reading": "Escrita e Leitura",
+                    "writing_and_conversation": "Escrita e Conversação"
+                }
+            }
         },
         "login": "Login",
         "linkedIn": "LinkedIn",
