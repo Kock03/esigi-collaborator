@@ -69,12 +69,6 @@
                 "value": "Valor",
                 "monthly_value": "Valor Mensal"
             },
-            "skills": {
-                "name": "Skills",
-                "technology": "Tecnologia",
-                "current_position": "Posição Atual",
-                "time_experience": "Tempo de experiência (anos)"
-            },
             "documents": {
                 "name": "Documentos",
                 "document_registration": "Cadastro de Documento",
@@ -199,7 +193,6 @@
             "sector": "Setor",
             "description": "Descrição"
         }
-
     },
     "job_interview_list": {
         "search_jobs": "Buscar Entrvistas",
@@ -304,6 +297,13 @@
                     "writing_and_conversation": "Escrita e Conversação"
                 }
             }
+        },
+        "skills": {
+            "skill_registration": "Cadastro de Skill",
+            "name": "Skills",
+            "technology": "Tecnologia",
+            "current_position": "Posição Atual",
+            "time_experience": "Tempo de experiência (anos)"
         },
         "responsibility": "Cargo",
         "start_date": "Início:",
