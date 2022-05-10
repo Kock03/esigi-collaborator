@@ -73,16 +73,7 @@
                 "name": "Skills",
                 "technology": "Tecnologia",
                 "current_position": "Posição Atual",
-                "time_experience": "Tempo de experiência (anos)",
-                "seniority": {
-                    "name": "Senioridade",
-                    "senior": "Senior",
-                    "full": "Pleno",
-                    "junior": "Junior",
-                    "apprentice": "Aprendiz",
-                    "specialist": "Especialista",
-                    "architect": "Arquiteto"
-                }
+                "time_experience": "Tempo de experiência (anos)"
             },
             "documents": {
                 "name": "Documentos",
@@ -121,10 +112,40 @@
     "job": {
         "job_list": {
             "search_jobs": "Buscar Vagas",
+            "name": "Nome da Vaga"
+        },
+        "job_create": {
+            "status": {
+                "processed": "Processada",
+                "in_revision": "Em Revisão",
+                "closed": "Fechada",
+                "lost": "Perdida",
+                "completed": "Concluída"
+            },
+            "type_of_job": {
+                "name": "Tipo de Vaga",
+                "staff_increase": "Aumento de Quadro",
+                "promotion": "Promoção",
+                "faithfulness": "Fidelidade"
+            },
+            "temporary": "Temporário",
+            "month_time": "Tempo de Contrato",
             "name": "Nome da Vaga",
-            "request": "Solicitante",
-            "opening_date": "Data de Abertura",
-            "status": {}
+            "start_forecast": "Previsão de Inicio",
+            "job_number": "Número de Vagas",
+            "type_of_contract": "Tipo de Contratação",
+            "workplace": {
+                "name": "Local de Trabalho",
+                "in_loco": "In Loco",
+                "home_office": "Home Office",
+                "hybrid": "híbrido",
+                "envolti": "Envolti"
+            },
+            "working_day": "Jornada de Trabaho",
+            "minimum_value": "Valor Mínimo",
+            "maximum_value": "Valor Máximo",
+            "post_vacancy": "Publicar Vaga",
+            "opening_date": "Data de Abertura"
         },
         "job_interview_list_create": {
             "name": "Entrevistas",
@@ -173,6 +194,55 @@
         "resume_experience": {
             "experience_registration": "Cadastro de experiência"
         }
+    },
+    "job_interview_list": {
+        "search_jobs": "Buscar Entrvistas",
+        "technical_interview_date": "Data da Entrevista Técnica",
+        "behavioral_interview_date": "Data Entrevista Comportamental",
+        "requester": "Responsável"
+    },
+    "job_interview_create": {
+        "name": "Entrevistas",
+        "name_candidate": "Nome do Candidato",
+        "tech_recruter": "TechRecruter",
+        "hour_interview": "Horário da Entrevista",
+        "presentation": {
+            "name": "Apresentação",
+            "presentable": "Apresentável",
+            "unpresentable": "Não Apresentável"
+        },
+        "salary_expectation": "Pretenção Salarial",
+        "hiring_preference": "Preferência de Contratação",
+        "punctuality": {
+            "name": "Pontualidade",
+            "one_off": "Pontual",
+            "late_5_minutes": "Atrasado 5 minutos",
+            "more_than_5_minutes_late": "Atrasado mais de 5 minutos",
+            "did_not_attend": "Não Compareceu"
+        },
+        "situational": {
+            "name": "Situação",
+            "okay": "Aprovado",
+            "approved_with_reservations": "Aprovado com Ressalvas",
+            "disapproved": "Reprovado",
+            "failed_with_reservations": "Reprovado com Ressalvas"
+        },
+        "comments": "Observações",
+        "availability_of_initialize": "Disponibilidade de Inicio",
+        "evaluator": "Avaliador",
+        "interview_date": "Data da Entrevista",
+        "technical_evaluation": "Avaliação Técnica",
+        "job_profile": "Perfil da Vaga",
+        "date_of_return": "Data da Devolutiva",
+        "behavioral_evaluation": "Avaliação Comportamental",
+        "return_of_candidate": "Retorno do Candidato",
+        "reason": {
+            "wage": "Salário",
+            "hiring_model": "Modelo de Contratação"
+        },
+        "type_od_contract": "Tipo de Contratação",
+        "combined_value": "Valor Fechado",
+        "initial_data": "Data de Inicio"
     },
     "generic": {
         "marital_status": {
@@ -258,6 +328,17 @@
         "clt": "CLT",
         "pj": "PJ",
         "cooperated": "Cooperado",
-        "intern": "Estagiário"
+        "intern": "Estagiário",
+        "request": "Solicitante",
+        "opening_date": "Data de Abertura",
+        "seniority": {
+            "name": "Senioridade",
+            "senior": "Senior",
+            "full": "Pleno",
+            "junior": "Junior",
+            "apprentice": "Aprendiz",
+            "specialist": "Especialista",
+            "architect": "Arquiteto"
+        }
     }
 }
