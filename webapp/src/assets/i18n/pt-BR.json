@@ -17,14 +17,6 @@
         },
         "colaborator_create": {
             "corporate_name": "Razão Social",
-            "login": "Login",
-            "marital_status": {
-                "name": "Estado civil",
-                "single": "Solteiro",
-                "married": "Casado",
-                "widower": "Viúvo",
-                "stable_union": "União Estável"
-            },
             "collaborator_type": {
                 "name": "Tipo de Colaborador",
                 "clt": "CLT",
@@ -35,18 +27,7 @@
             "cnpj": "CNPJ",
             "state_registration": "Inscrição Estadual",
             "municipal_inscription": "Inscrição Municipal",
-            "site": "Site",
-            "linkedIn": "LinkedIn",
             "photo": "Foto",
-            "address": {
-                "cep": "CEP",
-                "number": "Número",
-                "complement": "Complemento",
-                "street": "Rua",
-                "city": "Cidade",
-                "district": "Bairro",
-                "state": "Estado"
-            },
             "dependents": {
                 "name": "Dependentes",
                 "dependent_registration": "Cadastro Dependentes",
@@ -57,37 +38,6 @@
                     "stepson": "Enteado",
                     "dad": "Pai",
                     "mom": "Mãe"
-                }
-            },
-            "education": {
-                "name": "Educação",
-                "schooling": {
-                    "name": "Escolaridade",
-                    "type": {
-                        "elementary_school": "Ensino Fundamental",
-                        "high_school": "Ensino Médio",
-                        "university_education": "Ensino Superior"
-                    },
-                    "situation": {
-                        "name": "Situação",
-                        "stop": "Parado",
-                        "complete": "Completo",
-                        "in_progress": "Em Andamento"
-                    },
-                    "course": "Curso",
-                    "institution": "Instituição"
-                },
-                "languages": {
-                    "name": "Idiomas",
-                    "fluency": {
-                        "name": "Grau de Fluência",
-                        "all_options": "Leitura, Escrita e Conversação",
-                        "writing": "Escrita",
-                        "reading": "Leitura",
-                        "conversation": "Conversação",
-                        "writing_and_reading": "Escrita e Leitura",
-                        "writing_and_conversation": "Escrita e Conversação"
-                    }
                 }
             },
             "bank": {
@@ -162,8 +112,7 @@
     "job": {
         "job_list": {
             "search_jobs": "Buscar Vagas",
-            "name": "Nome da Vaga",
-            "status": {}
+            "name": "Nome da Vaga"
         },
         "job_create": {
             "status": {
@@ -185,17 +134,65 @@
             "start_forecast": "Previsão de Inicio",
             "job_number": "Número de Vagas",
             "type_of_contract": "Tipo de Contratação",
-            "workplace":{
-                "name":"Local de Trabalho",
-                "in_loco":"In Loco",
-                "home_office":"Home Office",
-                "hybrid":"híbrido",
-                "envolti":"Envolti"
+            "workplace": {
+                "name": "Local de Trabalho",
+                "in_loco": "In Loco",
+                "home_office": "Home Office",
+                "hybrid": "híbrido",
+                "envolti": "Envolti"
             },
-            "working_day":"Jornada de Trabaho",
-            "minimum_value":"Valor Mínimo",
-            "maximum_value":"Valor Máximo",
-            "post_vacancy":"Publicar Vaga"
+            "working_day": "Jornada de Trabaho",
+            "minimum_value": "Valor Mínimo",
+            "maximum_value": "Valor Máximo",
+            "post_vacancy": "Publicar Vaga",
+            "opening_date": "Data de Abertura"
+        },
+        "job_interview_list_create": {
+            "name": "Entrevistas",
+            "name_candidate": "Nome do Candidato",
+            "tech_recruter": "TechRecruter",
+            "hour_interview": "Horário da Entrevista",
+            "presentation": {
+                "name": "Apresentação"
+            },
+            "salary_expectation": "Pretenção Salarial",
+            "hiring_preference": "Preferência de Contratação",
+            "punctuality": {
+                "name": "Pontualidade",
+                "one_off": "Pontual",
+                "late_5_minutes": "Atrasado 5 minutos",
+                "more_than_5_minutes_late": "Atrasado mais de 5 minutos",
+                "did_not_attend": "Não Compareceu"
+            },
+            "situational": {
+                "name": "Situação",
+                "okay": "Aprovado",
+                "approved_with_ reservations": "Aprovado com Ressalvas",
+                "disapproved": "Reprovado",
+                "failed_with_reservations": "Reprovado com Ressalvas"
+            },
+            "behavioral_assessment": "Avaliação Comportamental",
+            "comments": "Observações",
+            "availability_of_initialize": "Disponibilidade de Inicio",
+            "evaluator": "Avaliador",
+            "technical_interview_date": "Data da Entrevista",
+            "technical_evaluation": "Avaliação Técnica",
+            "job_profile": "Perfil da Vaga",
+            "behavioral_evaluation_coment": "Avaliação Comportamental"
+        }
+    },
+    "resumes": {
+        "resume_list": {
+            "search_resumes": "Buscar Currículos",
+            "filter": "Filtro",
+            "all": "Todos",
+            "client": "Cliente",
+            "process": "Processar",
+            "job": "Vaga",
+            "stopped": "Parado"
+        },
+        "resume_experience": {
+            "experience_registration": "Cadastro de experiência"
         }
     },
     "job_interview_list": {
@@ -248,14 +245,67 @@
         "initial_data": "Data de Inicio"
     },
     "generic": {
+        "marital_status": {
+            "name": "Estado civil",
+            "single": "Solteiro",
+            "married": "Casado",
+            "widower": "Viúvo",
+            "stable_union": "União Estável"
+        },
         "gender": {
             "name": "Sexo",
             "feminine": "Feminino",
             "masculine": "Masculino",
             "undefined": "Não Definido"
         },
+        "address": {
+            "cep": "CEP",
+            "number": "Número",
+            "complement": "Complemento",
+            "street": "Rua",
+            "city": "Cidade",
+            "district": "Bairro",
+            "state": "Estado"
+        },
+        "education": {
+            "name": "Educação",
+            "schooling": {
+                "name": "Escolaridade",
+                "type": {
+                    "elementary_school": "Ensino Fundamental",
+                    "high_school": "Ensino Médio",
+                    "university_education": "Ensino Superior"
+                },
+                "situation": {
+                    "name": "Situação",
+                    "stop": "Parado",
+                    "complete": "Completo",
+                    "in_progress": "Em Andamento"
+                },
+                "course": "Curso",
+                "institution": "Instituição"
+            },
+            "languages": {
+                "name": "Idiomas",
+                "one_language": "Idioma",
+                "fluency": {
+                    "name": "Grau de Fluência",
+                    "all_options": "Leitura, Escrita e Conversação",
+                    "writing": "Escrita",
+                    "reading": "Leitura",
+                    "conversation": "Conversação",
+                    "writing_and_reading": "Escrita e Leitura",
+                    "writing_and_conversation": "Escrita e Conversação"
+                }
+            }
+        },
+        "start_date": "Login",
+        "end-_date": "LinkedIn",
+        "login": "Login",
+        "linkedIn": "LinkedIn",
         "cpf": "CPF",
         "name": "Nome",
+        "site": "Site",
         "active": "Ativo",
         "admission_date": "Data Admissão",
         "office": "Posição",

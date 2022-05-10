@@ -2,7 +2,7 @@
   <div class="content-scroll">
     <mat-tab-group animationDuration="0">
       <mat-tab label="Escolaridade">
-        <ng-template mat-tab-label> {{'collaborator.colaborator_create.education.schooling.name' | translate}} </ng-template>
+        <ng-template mat-tab-label> {{'generic.education.schooling.name'|translate}} </ng-template>
         <div fxLayout="row" *ngIf="educationArray">
           <div class="envolti-table mat-elevation-z8" fxLayout="column">
             <table
@@ -10,7 +10,7 @@
               [dataSource]="educationArray.value"
               #educationTable>
               <ng-container matColumnDef="schooling">
-                <th mat-header-cell *matHeaderCellDef>{{'collaborator.colaborator_create.education.schooling.name' | translate}}</th>
+                <th mat-header-cell *matHeaderCellDef>{{'generic.education.schooling.name'|translate}}</th>
                 <td mat-cell *matCellDef="let education">
                   {{ getLabel('schooling', education) }}
                 </td>
