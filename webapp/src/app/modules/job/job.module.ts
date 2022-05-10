@@ -32,6 +32,7 @@ import { ConfirmDialogService } from 'src/services/confirn-dialog.service';
 import { JobDialogSkill } from './job-create/job-skill-tab/job-skill-dialog.component';
 import { JobInterviewCreateComponent } from './job-interview-create/job-interview-create.component';
 import { MatSortModule } from '@angular/material/sort';
+import { TranslateModule } from '@ngx-translate/core';
 
 const routes: Routes = [
   {
@@ -64,6 +65,7 @@ const routes: Routes = [
   ],
   imports: [
     RouterModule.forChild(routes),
+    TranslateModule.forChild(),
     CommonModule,
     MatTabsModule,
     ReactiveFormsModule,
