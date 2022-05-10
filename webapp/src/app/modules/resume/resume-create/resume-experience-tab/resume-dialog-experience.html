@@ -1,15 +1,15 @@
 <div id="resumeExperiencDialog" class="dialog">
   <div class="content-scroll" *ngIf="experienceForm">
-    <h2 class="title" mat-dialog-title>Cadastro de experiência</h2>
+    <h2 class="title" mat-dialog-title>{{'resumes.resume_experience.experience_registration'|translate}}</h2>
     <mat-dialog-content class="mat-typography">
       <form [formGroup]="experienceForm" fxLayout="column">
         <div fxFlex="100" fxLayoutGap="16px">
           <mat-form-field fxFlex="50" appearance="outline">
-            <mat-label>Cargo</mat-label>
+            <mat-label>{{'generic.responsibility'|translate}}</mat-label>
             <input matInput placeholder="Cargo" formControlName="office" />
           </mat-form-field>
           <mat-form-field fxFlex="50" appearance="outline">
-            <mat-label>Nome da empresa </mat-label>
+            <mat-label>{{'resumes.resume_experience.company_name'|translate}} </mat-label>
             <input
               matInput
               placeholder="Nome da empresa"
@@ -18,7 +18,7 @@
         </div>
         <div fxFlex="100" fxLayoutGap="16px">
           <mat-form-field fxFlex="50" appearance="outline">
-            <mat-label>Localidade</mat-label>
+            <mat-label>{{'resumes.resume_experience.locality'|translate}}</mat-label>
             <input
               matInput
               placeholder="Localidade"
@@ -30,12 +30,12 @@
             color="primary"
             fxFlex="50"
             formControlName="active"
-            >Trabalho atual</mat-checkbox
+            >{{'resumes.resume_experience.current_job'|translate}}</mat-checkbox
           >
         </div>
         <div fxFlex="100" fxLayoutGap="16px">
           <mat-form-field fxFlex="50" appearance="outline">
-            <mat-label>Data de início: mês</mat-label>
+            <mat-label>{{'generic.start_date_month'|translate}}</mat-label>
             <input
               matInput
               placeholder="Data de início: mês"
@@ -43,7 +43,7 @@
               formControlName="startMonth" />
           </mat-form-field>
           <mat-form-field fxFlex="50" appearance="outline">
-            <mat-label>Data de início: ano</mat-label>
+            <mat-label>{{'generic.start_date_year'|translate}}</mat-label>
             <input
               matInput
               placeholder="Data de início: ano"
@@ -54,7 +54,7 @@
 
         <div fxFlex="100" fxLayoutGap="16px">
           <mat-form-field fxFlex="50" appearance="outline">
-            <mat-label>Data de término: mês</mat-label>
+            <mat-label>{{'generic.end_date_month'|translate}}</mat-label>
             <input
               matInput
               placeholder="Data de término: mês"
@@ -62,7 +62,7 @@
               formControlName="terminusMonth" />
           </mat-form-field>
           <mat-form-field fxFlex="50" appearance="outline">
-            <mat-label>Data de término: ano</mat-label>
+            <mat-label>{{'generic.end_date_year'|translate}}</mat-label>
             <input
               matInput
               placeholder="Data de término: ano"
@@ -72,7 +72,7 @@
         </div>
         <div fxFlex="100" fxLayoutGap="16px">
           <mat-form-field fxFlex="100" appearance="outline">
-            <mat-label>Setor</mat-label>
+            <mat-label>{{'resumes.resume_experience.sector'|translate}}</mat-label>
             <input matInput placeholder="Setor" formControlName="sector" />
           </mat-form-field>
         </div>
@@ -81,7 +81,7 @@
             fxFlex="100"
             class="example-full-width"
             appearance="outline">
-            <mat-label>Descrição</mat-label>
+            <mat-label>{{'resumes.resume_experience.description'|translate}}</mat-label>
             <textarea
               matInput
               placeholder="Ex: contribuir para a melhoria contínua do serviço..."

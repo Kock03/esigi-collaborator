@@ -218,8 +218,14 @@
             "stopped": "Parado"
         },
         "resume_experience": {
-            "experience_registration": "Cadastro de experiência"
+            "experience_registration": "Cadastro de experiência",
+            "company_name": "Nome da empresa",
+            "locality": "Localidade",
+            "current_job": "Trabalho atual",
+            "sector": "Setor",
+            "description": "Descrição"
         }
+
     },
     "generic": {
         "marital_status": {
@@ -277,8 +283,13 @@
                 }
             }
         },
+        "responsibility": "Cargo",
         "start_date": "Início:",
         "end_date": "Término:",
+        "start_date_month": "Data de início: mês",
+        "start_date_year": "Data de início: mês",
+        "end_date_month": "Data de início: ano",
+        "end_date_year": "Data de início: ano",
         "login": "Login",
         "linkedIn": "LinkedIn",
         "cpf": "CPF",
