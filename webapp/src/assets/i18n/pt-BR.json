@@ -48,7 +48,7 @@
                 "state": "Estado"
             },
             "dependents": {
-                "name":"Dependentes",
+                "name": "Dependentes",
                 "dependent_registration": "Cadastro Dependentes",
                 "type": {
                     "name": "Tipo",
@@ -91,7 +91,7 @@
                 }
             },
             "bank": {
-                "bank_data":"Dados Bancários",
+                "bank_data": "Dados Bancários",
                 "bank_registration": "Cadastro Bancário",
                 "name": "Banco",
                 "agency": "Agência",
@@ -105,7 +105,7 @@
                 "digit": "Digito"
             },
             "finance": {
-                "name":"Financeiro",
+                "name": "Financeiro",
                 "financial_register": "Cadastro Financeiro",
                 "date_inclusion": " Data de Inclusão",
                 "type": {
@@ -126,7 +126,7 @@
                 "monthly_value": "Valor Mensal"
             },
             "skills": {
-                "name":"Skills",
+                "name": "Skills",
                 "technology": "Tecnologia",
                 "current_position": "Posição Atual",
                 "time_experience": "Tempo de experiência (anos)",
@@ -165,42 +165,51 @@
                     "completed": "Concluída",
                     "feedback_return": "Retorno de Feedback"
                 },
-                "hour":"Hora",
-                "feedback_date_retorn":"Data Retorno Feedback",
-                "management":"Gestão",
-                "description":"Descrição",
-                "improvement_points":"Pontos de Melhoria",
-                "commitments":"Compromissos"    
+                "hour": "Hora",
+                "feedback_date_retorn": "Data Retorno Feedback",
+                "management": "Gestão",
+                "description": "Descrição",
+                "improvement_points": "Pontos de Melhoria",
+                "commitments": "Compromissos"
             }
         }
     },
-    "generic": {
-        "gender": {
-            "name": "Sexo",
-            "feminine": "Feminino",
-            "masculine": "Masculino",
-            "undefined": "Não Definido"
+    "resume": {
+        "resume_list": {
+            "search_resumes": "Buscar Currículos",
+            "filter": "Filtro",
+            "all": "Todos",
+            "client": "Cliente",
+            "process": "Processar",
+            "job": "Vaga",
+            "stopped": "Parado"
         },
-        "cpf": "CPF",
-        "name": "Nome",
-        "active": "Ativo",
-        "admission_date": "Data Admissão",
-        "office": "Posição",
-        "current_client": "Cliente Atual",
-        "status": "Status",
-        "birth_date": "Data Aniversário",
-        "email": "Email",
-        "reason": "Motivo",
-        "phone": {
-            "phone_number": "Telefone",
-            "ddd": "DDD",
-            "ddi": "DDI"
-        },
-        "last_name": "Sobrenome",
-        "project":"Projeto",
-        "register":"Cadastro",
-        "accompaniment":"Acompanhamento"
-        
-
+        "generic": {
+            "gender": {
+                "name": "Sexo",
+                "feminine": "Feminino",
+                "masculine": "Masculino",
+                "undefined": "Não Definido"
+            },
+            "cpf": "CPF",
+            "name": "Nome",
+            "active": "Ativo",
+            "admission_date": "Data Admissão",
+            "office": "Posição",
+            "current_client": "Cliente Atual",
+            "status": "Status",
+            "birth_date": "Data Aniversário",
+            "email": "Email",
+            "reason": "Motivo",
+            "phone": {
+                "phone_number": "Telefone",
+                "ddd": "DDD",
+                "ddi": "DDI"
+            },
+            "last_name": "Sobrenome",
+            "project": "Projeto",
+            "register": "Cadastro",
+            "accompaniment": "Acompanhamento"
+        }
     }
 }

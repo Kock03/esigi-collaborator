@@ -33,6 +33,7 @@ import { ResumeDialogExperience } from './resume-create/resume-experience-tab/re
 import { ResumeEducationDialog } from './resume-create/resume-education-tab/resume-education-dialog.component';
 import { ResumeLanguageDialog } from './resume-create/resume-education-tab/resume-language-dialog.component';
 import { MatSortModule } from '@angular/material/sort';
+import { TranslateModule } from '@ngx-translate/core';
 
 const routes: Routes = [
   {
@@ -69,6 +70,7 @@ const routes: Routes = [
     ReactiveFormsModule,
     FlexLayoutModule,
     MatFormFieldModule,
+    TranslateModule.forChild(),
     MatSelectModule,
     HttpClientModule,
     NgxMaskModule,
@@ -82,6 +84,7 @@ const routes: Routes = [
     MatListModule,
     MatDatepickerModule,
     MatSortModule,
+    
   ],
   providers: [MatDatepickerModule],
   entryComponents: [
