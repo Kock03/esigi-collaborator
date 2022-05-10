@@ -17,14 +17,6 @@
         },
         "colaborator_create": {
             "corporate_name": "Razão Social",
-            "login": "Login",
-            "marital_status": {
-                "name": "Estado civil",
-                "single": "Solteiro",
-                "married": "Casado",
-                "widower": "Viúvo",
-                "stable_union": "União Estável"
-            },
             "collaborator_type": {
                 "name": "Tipo de Colaborador",
                 "clt": "CLT",
@@ -35,18 +27,7 @@
             "cnpj": "CNPJ",
             "state_registration": "Inscrição Estadual",
             "municipal_inscription": "Inscrição Municipal",
-            "site": "Site",
-            "linkedIn": "LinkedIn",
             "photo": "Foto",
-            "address": {
-                "cep": "CEP",
-                "number": "Número",
-                "complement": "Complemento",
-                "street": "Rua",
-                "city": "Cidade",
-                "district": "Bairro",
-                "state": "Estado"
-            },
             "dependents": {
                 "name": "Dependentes",
                 "dependent_registration": "Cadastro Dependentes",
@@ -219,17 +200,38 @@
             "process": "Processar",
             "job": "Vaga",
             "stopped": "Parado"
+        },
+        "resume_register": {
         }
     },
-        "generic": {
+    "generic": {
+        "marital_status": {
+            "name": "Estado civil",
+            "single": "Solteiro",
+            "married": "Casado",
+            "widower": "Viúvo",
+            "stable_union": "União Estável"
+        },
         "gender": {
             "name": "Sexo",
             "feminine": "Feminino",
             "masculine": "Masculino",
             "undefined": "Não Definido"
         },
+        "address": {
+            "cep": "CEP",
+            "number": "Número",
+            "complement": "Complemento",
+            "street": "Rua",
+            "city": "Cidade",
+            "district": "Bairro",
+            "state": "Estado"
+        },
+        "login": "Login",
+        "linkedIn": "LinkedIn",
         "cpf": "CPF",
         "name": "Nome",
+        "site": "Site",
         "active": "Ativo",
         "admission_date": "Data Admissão",
         "office": "Posição",
