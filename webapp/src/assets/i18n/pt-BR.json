@@ -216,6 +216,7 @@
             },
             "languages": {
                 "name": "Idiomas",
+                "one_language": "Idioma",
                 "fluency": {
                     "name": "Grau de Fluência",
                     "all_options": "Leitura, Escrita e Conversação",
