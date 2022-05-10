@@ -229,8 +229,8 @@
                 }
             }
         },
-        "start_date": "Login",
-        "end-_date": "LinkedIn",
+        "start_date": "Início:",
+        "end_date": "Término:",
         "login": "Login",
         "linkedIn": "LinkedIn",
         "cpf": "CPF",
