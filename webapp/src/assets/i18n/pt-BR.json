@@ -219,38 +219,38 @@
             "process": "Processar",
             "job": "Vaga",
             "stopped": "Parado"
-        },
-        "generic": {
-            "gender": {
-                "name": "Sexo",
-                "feminine": "Feminino",
-                "masculine": "Masculino",
-                "undefined": "Não Definido"
-            },
-            "cpf": "CPF",
-            "name": "Nome",
-            "active": "Ativo",
-            "admission_date": "Data Admissão",
-            "office": "Posição",
-            "current_client": "Cliente Atual",
-            "status": "Status",
-            "birth_date": "Data Aniversário",
-            "email": "Email",
-            "reason": "Motivo",
-            "phone": {
-                "phone_number": "Telefone",
-                "ddd": "DDD",
-                "ddi": "DDI"
-            },
-            "last_name": "Sobrenome",
-            "project": "Projeto",
-            "register": "Cadastro",
-            "accompaniment": "Acompanhamento",
-            "client": "Cliente",
-            "clt": "CLT",
-            "pj": "PJ",
-            "cooperated": "Cooperado",
-            "intern": "Estagiário"
         }
+    },
+        "generic": {
+        "gender": {
+            "name": "Sexo",
+            "feminine": "Feminino",
+            "masculine": "Masculino",
+            "undefined": "Não Definido"
+        },
+        "cpf": "CPF",
+        "name": "Nome",
+        "active": "Ativo",
+        "admission_date": "Data Admissão",
+        "office": "Posição",
+        "current_client": "Cliente Atual",
+        "status": "Status",
+        "birth_date": "Data Aniversário",
+        "email": "Email",
+        "reason": "Motivo",
+        "phone": {
+            "phone_number": "Telefone",
+            "ddd": "DDD",
+            "ddi": "DDI"
+        },
+        "last_name": "Sobrenome",
+        "project": "Projeto",
+        "register": "Cadastro",
+        "accompaniment": "Acompanhamento",
+        "client": "Cliente",
+        "clt": "CLT",
+        "pj": "PJ",
+        "cooperated": "Cooperado",
+        "intern": "Estagiário"
     }
 }
