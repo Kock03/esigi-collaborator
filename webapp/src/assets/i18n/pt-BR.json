@@ -139,33 +139,15 @@
             "minimum_value": "Valor Mínimo",
             "maximum_value": "Valor Máximo",
             "post_vacancy": "Publicar Vaga",
-            "opening_date": "Data de Abertura",
-            "skills": {
-                "schooling": {
-                    "complete_higher_education": "Ensino Superior Completo",
-                    "incomplete_higher_education": "Ensino Superior Incompleto",
-                    "complete_high_school": "Ensino Médio Completo"
-                },
-                "collaborator_activities":"Quais são as principais atividades que ocolaborador irá exercer?",
-                "desired_experience":"Experiência Desejada",
-                "required_behavior":"Comportamento e/ou competências necessárias"
-            }
+            "opening_date": "Data de Abertura"
         },
-        "job_interview_list": {
-            "search_jobs": "Buscar Entrvistas",
-            "technical_interview_date": "Data da Entrevista Técnica",
-            "behavioral_interview_date": "Data Entrevista Comportamental",
-            "requester": "Responsável"
-        },
-        "job_interview_create": {
+        "job_interview_list_create": {
             "name": "Entrevistas",
             "name_candidate": "Nome do Candidato",
             "tech_recruter": "TechRecruter",
             "hour_interview": "Horário da Entrevista",
             "presentation": {
-                "name": "Apresentação",
-                "presentable": "Apresentável",
-                "unpresentable": "Não Apresentável"
+                "name": "Apresentação"
             },
             "salary_expectation": "Pretenção Salarial",
             "hiring_preference": "Preferência de Contratação",
@@ -179,26 +161,18 @@
             "situational": {
                 "name": "Situação",
                 "okay": "Aprovado",
-                "approved_with_reservations": "Aprovado com Ressalvas",
+                "approved_with_ reservations": "Aprovado com Ressalvas",
                 "disapproved": "Reprovado",
                 "failed_with_reservations": "Reprovado com Ressalvas"
             },
+            "behavioral_assessment": "Avaliação Comportamental",
             "comments": "Observações",
             "availability_of_initialize": "Disponibilidade de Inicio",
             "evaluator": "Avaliador",
-            "interview_date": "Data da Entrevista",
+            "technical_interview_date": "Data da Entrevista",
             "technical_evaluation": "Avaliação Técnica",
             "job_profile": "Perfil da Vaga",
-            "date_of_return": "Data da Devolutiva",
-            "behavioral_evaluation": "Avaliação Comportamental",
-            "return_of_candidate": "Retorno do Candidato",
-            "reason": {
-                "wage": "Salário",
-                "hiring_model": "Modelo de Contratação"
-            },
-            "type_od_contract": "Tipo de Contratação",
-            "combined_value": "Valor Fechado",
-            "initial_data": "Data de Inicio"
+            "behavioral_evaluation_coment": "Avaliação Comportamental"
         }
     },
     "resumes": {
@@ -218,7 +192,63 @@
             "current_job": "Trabalho atual",
             "sector": "Setor",
             "description": "Descrição"
+        },
+        "resume_application": {
+            "experience_registration": "Cadastro de experiência",
+            "company_name": "Nome da empresa",
+            "locality": "Localidade",
+            "current_job": "Trabalho atual",
+            "sector": "Setor",
+            "description": "Descrição"
         }
+    },
+    "job_interview_list": {
+        "search_jobs": "Buscar Entrvistas",
+        "technical_interview_date": "Data da Entrevista Técnica",
+        "behavioral_interview_date": "Data Entrevista Comportamental"
+    },
+    "job_interview_create": {
+        "name": "Entrevistas",
+        "name_candidate": "Nome do Candidato",
+        "tech_recruter": "TechRecruter",
+        "hour_interview": "Horário da Entrevista",
+        "presentation": {
+            "name": "Apresentação",
+            "presentable": "Apresentável",
+            "unpresentable": "Não Apresentável"
+        },
+        "salary_expectation": "Pretenção Salarial",
+        "hiring_preference": "Preferência de Contratação",
+        "punctuality": {
+            "name": "Pontualidade",
+            "one_off": "Pontual",
+            "late_5_minutes": "Atrasado 5 minutos",
+            "more_than_5_minutes_late": "Atrasado mais de 5 minutos",
+            "did_not_attend": "Não Compareceu"
+        },
+        "situational": {
+            "name": "Situação",
+            "okay": "Aprovado",
+            "approved_with_reservations": "Aprovado com Ressalvas",
+            "disapproved": "Reprovado",
+            "failed_with_reservations": "Reprovado com Ressalvas"
+        },
+        "comments": "Observações",
+        "availability_of_initialize": "Disponibilidade de Inicio",
+        "evaluator": "Avaliador",
+        "interview_date": "Data da Entrevista",
+        "technical_evaluation": "Avaliação Técnica",
+        "job_profile": "Perfil da Vaga",
+        "date_of_return": "Data da Devolutiva",
+        "behavioral_evaluation": "Avaliação Comportamental",
+        "return_of_candidate": "Retorno do Candidato",
+        "reason": {
+            "wage": "Salário",
+            "hiring_model": "Modelo de Contratação"
+        },
+        "type_od_contract": "Tipo de Contratação",
+        "combined_value": "Valor Fechado",
+        "initial_data": "Data de Inicio"
     },
     "generic": {
         "marital_status": {
@@ -271,8 +301,7 @@
                     "reading": "Leitura",
                     "conversation": "Conversação",
                     "writing_and_reading": "Escrita e Leitura",
-                    "writing_and_conversation": "Escrita e Conversação",
-                    "reading_and_conversation": "Leitura e Conversação"
+                    "writing_and_conversation": "Escrita e Conversação"
                 }
             }
         },
@@ -283,7 +312,10 @@
             "current_position": "Posição Atual",
             "time_experience": "Tempo de experiência (anos)"
         },
+        "application_date": "Data Candidatura",
+        "return_date": "Data devolutiva",
         "responsibility": "Cargo",
+        "requester": "Responsável",
         "start_date": "Início:",
         "end_date": "Término:",
         "start_date_month": "Data de início: mês",
