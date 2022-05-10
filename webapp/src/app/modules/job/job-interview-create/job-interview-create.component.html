@@ -8,7 +8,7 @@
       <button (click)="backToList()" color="primary" mat-button>
         <mat-icon> chevron_left </mat-icon>
       </button>
-      <h2>Entrevistas</h2>
+      <h2>{{'job.job_interview_create.name' | translate}}</h2>
     </div>
     <mat-tab-group animationDuration="0ms" [selectedIndex]="selectedIndex">
       <mat-tab label="Entevista Comportamental">
@@ -19,7 +19,7 @@
         >
           <div fxFlex="100" fxLayoutGap="16px">
             <mat-form-field fxFlex="35" appearance="outline">
-              <mat-label>Nome do Candidato</mat-label>
+              <mat-label>{{'job.job_interview_create.name_candidate' | translate}}</mat-label>
               <input
                 placeholder="Nome do Candidato"
                 matInput
@@ -29,12 +29,12 @@
             </mat-form-field>
 
             <mat-form-field fxFlex="35" appearance="outline">
-              <mat-label>TechRecruter</mat-label>
+              <mat-label>{{'job.job_interview_create.tech_recruter' | translate}}</mat-label>
               <input matInput formControlName="techRecruter" />
             </mat-form-field>
 
             <mat-form-field fxFlex="30" appearance="outline">
-              <mat-label>Data da Entrevista</mat-label>
+              <mat-label>{{'job.job_interview_create.interview_date' | translate}}</mat-label>
               <input
                 matInput
                 [matDatepicker]="behavioralDate"
@@ -49,39 +49,39 @@
           </div>
           <div fxFlex="100" fxLayoutGap="16px">
             <mat-form-field fxFlex="20" appearance="outline">
-              <mat-label>Horário da Entrevista</mat-label>
+              <mat-label>{{'job.job_interview_create.hour_interview' | translate}}</mat-label>
               <input matInput formControlName="hourInterview" mask="00:00" />
             </mat-form-field>
 
             <mat-form-field fxFlex="40" appearance="outline">
-              <mat-label>Pontualidade</mat-label>
+              <mat-label>{{'job.job_interview_create.punctuality.name' | translate}}</mat-label>
               <mat-select matInput disableRipple formControlName="punctuality">
-                <mat-option [value]="1">Pontual</mat-option>
-                <mat-option [value]="2">Atrasado 5 minutos</mat-option>
-                <mat-option [value]="3">Atrasado mais de 5 minutos</mat-option>
-                <mat-option [value]="4">Não Compareceu</mat-option>
+                <mat-option [value]="1">{{'job.job_interview_create.punctuality.one_off' | translate}}</mat-option>
+                <mat-option [value]="2">{{'job.job_interview_create.punctuality.late_5_minutes' | translate}}</mat-option>
+                <mat-option [value]="3">{{'job.job_interview_create.punctuality.more_than_5_minutes_late' | translate}}</mat-option>
+                <mat-option [value]="4">{{'job.job_interview_create.punctuality.did_not_attend' | translate}}</mat-option>
               </mat-select>
             </mat-form-field>
 
             <mat-form-field fxFlex="40" appearance="outline">
-              <mat-label>Apresentação</mat-label>
+              <mat-label>{{'job.job_interview_create.presentation.name' | translate}}</mat-label>
               <mat-select matInput disableRipple formControlName="presentation">
-                <mat-option [value]="1">Apresentavel</mat-option>
-                <mat-option [value]="2">Não Apresentavel</mat-option>
+                <mat-option [value]="1">{{'job.job_interview_create.presentation.presentable' | translate}}</mat-option>
+                <mat-option [value]="2">{{'job.job_interview_create.presentation.unpresentable' | translate}}</mat-option>
               </mat-select>
             </mat-form-field>
           </div>
 
           <div fxFlex="100" fxLayoutGap="16px">
             <mat-form-field fxFlex="30" appearance="outline">
-              <mat-label>Pretenção Salarial</mat-label>
+              <mat-label>{{'job.job_interview_create.salary_expectation' | translate}}</mat-label>
               <input matInput formControlName="salaryExpectation" />
             </mat-form-field>
 
             <div class="checkbox-section" fxFlex="70">
               <section fxLayout="column">
                 <span class="text" fxLayoutAlign="start"
-                  >Preferência de Contratação</span
+                  >{{'job.job_interview_create.hiring_preference' | translate}}</span
                 >
                 <div
                   fxLayout="row"
@@ -89,19 +89,19 @@
                   formGroupName="hiringPreference"
                 >
                   <mat-checkbox color="primary" formControlName="intern"
-                    >Estagiário(a)</mat-checkbox
+                    >{{'generic.intern' | translate}}</mat-checkbox
                   >
 
                   <mat-checkbox color="primary" formControlName="naturalPerson"
-                    >CLT</mat-checkbox
+                    >{{'generic.clt' | translate}}</mat-checkbox
                   >
 
                   <mat-checkbox color="primary" formControlName="legalPerson"
-                    >Pessoa Juridica</mat-checkbox
+                    >{{'generic.pj' | translate}}</mat-checkbox
                   >
 
                   <mat-checkbox color="primary" formControlName="cooperative"
-                    >Cooperado</mat-checkbox
+                    >{{'generic.cooperated' | translate}}</mat-checkbox
                   >
                 </div>
               </section>
@@ -109,7 +109,7 @@
           </div>
           <div fxFlex="100" fxLayoutGap="16px">
             <mat-form-field fxFlex="50" appearance="outline">
-              <mat-label>Avaliação Comportamental</mat-label>
+              <mat-label>{{'job.job_interview_create.behavioral_evaluation' | translate}}</mat-label>
               <textarea
                 class="text-area"
                 matInput
@@ -120,7 +120,7 @@
 
             </mat-form-field>
             <mat-form-field fxFlex="50" appearance="outline">
-              <mat-label>Observações</mat-label>
+              <mat-label>{{'job.job_interview_create.comments' | translate}}</mat-label>
               <textarea
                 class="text-area"
                 matInput
@@ -132,17 +132,17 @@
           </div>
           <div fxFlex="100" fxLayoutGap="16px">
             <mat-form-field fxFlex="40" appearance="outline">
-              <mat-label>Situação</mat-label>
+              <mat-label>{{'job.job_interview_create.situational.name' | translate}}</mat-label>
               <mat-select matInput disableRipple formControlName="situational">
-                <mat-option [value]="1">Aprovado</mat-option>
-                <mat-option [value]="2">Aprovado com Resalvas</mat-option>
-                <mat-option [value]="3">Reprovado</mat-option>
-                <mat-option [value]="4">Reprovado com Resalvas</mat-option>
+                <mat-option [value]="1">{{'job.job_interview_create.situational.okay' | translate}}</mat-option>
+                <mat-option [value]="2"> {{'job.job_interview_create.situational.approved_with_reservations' | translate}}</mat-option>
+                <mat-option [value]="3">{{'job.job_interview_create.situational.disapproved' | translate}}</mat-option>
+                <mat-option [value]="4">{{'job.job_interview_create.situational.failed_with_reservations' | translate}}</mat-option>
               </mat-select>
             </mat-form-field>
 
             <mat-form-field fxFlex="40" appearance="outline">
-              <mat-label>Disponibilidade de Inicio</mat-label>
+              <mat-label>{{'job.job_interview_create.availability_of_initialize' | translate}}</mat-label>
               <input matInput formControlName="availabilityOfInitialize" />
             </mat-form-field>
             <div fxLayoutAlign="center" fxFlex="20">
@@ -168,7 +168,7 @@
         >
           <div fxFlex="100" fxLayoutGap="16px">
             <mat-form-field fxFlex="35" appearance="outline">
-              <mat-label>Nome do Candidato</mat-label>
+              <mat-label>{{'job.job_interview_create.name_candidate' | translate}}</mat-label>
               <input
                 placeholder="Nome do Candidato"
                 matInput
@@ -178,12 +178,12 @@
             </mat-form-field>
 
             <mat-form-field fxFlex="35" appearance="outline">
-              <mat-label>Avaliador</mat-label>
+              <mat-label>{{'job.job_interview_create.evaluator' | translate}}</mat-label>
               <input matInput formControlName="evaluator" />
             </mat-form-field>
 
             <mat-form-field fxFlex="30" appearance="outline">
-              <mat-label>Data da Entrevista</mat-label>
+              <mat-label>{{'job.job_interview_create.interview_date' | translate}}</mat-label>
               <input
                 matInput
                 [matDatepicker]="technicalDate"
@@ -198,24 +198,24 @@
           </div>
           <div fxFlex="100" fxLayoutGap="16px">
             <mat-form-field fxFlex="50" appearance="outline">
-              <mat-label>Horário da Entrevista</mat-label>
+              <mat-label>{{'job.job_interview_create.hour_interview' | translate}}</mat-label>
               <input matInput formControlName="hourInterview" mask="00:00" />
             </mat-form-field>
 
             <mat-form-field fxFlex="50" appearance="outline">
-              <mat-label>Pontualidade</mat-label>
+              <mat-label>{{'job.job_interview_create.punctuality.name' | translate}}</mat-label>
               <mat-select matInput disableRipple formControlName="punctuality">
-                <mat-option [value]="1">Pontual</mat-option>
-                <mat-option [value]="2">Atrasado 5 minutos</mat-option>
-                <mat-option [value]="3">Atrasado mais de 5 minutos</mat-option>
-                <mat-option [value]="4">Não Compareceu</mat-option>
+                <mat-option [value]="1">{{'job.job_interview_create.punctuality.one_off' | translate}}</mat-option>
+                <mat-option [value]="2">{{'job.job_interview_create.punctuality.late_5_minutes' | translate}}</mat-option>
+                <mat-option [value]="3">{{'job.job_interview_create.punctuality.more_than_5_minutes_late' | translate}}</mat-option>
+                <mat-option [value]="4">{{'job.job_interview_create.punctuality.did_not_attend' | translate}}</mat-option>
               </mat-select>
             </mat-form-field>
           </div>
 
           <div fxFlex="100" fxLayoutGap="16px">
             <mat-form-field fxFlex="50" appearance="outline">
-              <mat-label>Avaliação Técnica</mat-label>
+              <mat-label>{{'job.job_interview_create.technical_evaluation' | translate}}</mat-label>
               <textarea
                 class="text-area"
                 matInput
@@ -224,7 +224,7 @@
               ></textarea>
             </mat-form-field>
             <mat-form-field fxFlex="50" appearance="outline">
-              <mat-label>Observações</mat-label>
+              <mat-label>{{'job.job_interview_create.comments' | translate}}</mat-label>
               <textarea
                 class="text-area"
                 matInput
@@ -235,18 +235,18 @@
           </div>
           <div fxFlex="100" fxLayoutGap="16px">
             <mat-form-field fxFlex="40" appearance="outline">
-              <mat-label>Situação</mat-label>
+              <mat-label>{{'job.job_interview_create.situational.name' | translate}}</mat-label>
               <mat-select matInput disableRipple formControlName="situational">
-                <mat-option [value]="1">Aprovado</mat-option>
-                <mat-option [value]="2">Aprovado com Resalvas</mat-option>
-                <mat-option [value]="3">Reprovado</mat-option>
-                <mat-option [value]="4">Reprovado com Resalvas</mat-option>
+                <mat-option [value]="1">{{'job.job_interview_create.situational.okay' | translate}}</mat-option>
+                <mat-option [value]="2">{{'job.job_interview_create.situational.approved_with_reservations' | translate}}</mat-option>
+                <mat-option [value]="3">{{'job.job_interview_create.situational.disapproved' | translate}}</mat-option>
+                <mat-option [value]="4">{{'job.job_interview_create.situational.failed_with_reservations' | translate}}</mat-option>
               </mat-select>
             </mat-form-field>
 
             <div class="job-checkbox" fxFlex="40" fxLayoutAlign="center">
               <mat-checkbox color="primary" formControlName="jobProfile"
-                >Perfil da Vaga</mat-checkbox
+                >{{'job.job_interview_create.job_profile' | translate}}</mat-checkbox
               >
             </div>
 
@@ -269,7 +269,7 @@
         <form [formGroup]="clientInterviewForm" fxLayout="column" class="form">
           <div fxFlex="100" fxLayoutGap="16px">
             <mat-form-field fxFlex="35" appearance="outline">
-              <mat-label>Nome do Candidato</mat-label>
+              <mat-label>{{'job.job_interview_create.name_candidate' | translate}}</mat-label>
               <input
                 placeholder="Nome do Candidato"
                 matInput
@@ -279,12 +279,12 @@
             </mat-form-field>
 
             <mat-form-field fxFlex="35" appearance="outline">
-              <mat-label>Avaliador</mat-label>
+              <mat-label>{{'job.job_interview_create.evaluator' | translate}}</mat-label>
               <input matInput formControlName="evaluator" />
             </mat-form-field>
 
             <mat-form-field fxFlex="30" appearance="outline">
-              <mat-label>Data da Entrevista</mat-label>
+              <mat-label>{{'job.job_interview_create.interview_date' | translate}}</mat-label>
               <input
                 matInput
                 [matDatepicker]="clientDate"
@@ -299,24 +299,24 @@
           </div>
           <div fxFlex="100" fxLayoutGap="16px">
             <mat-form-field fxFlex="50" appearance="outline">
-              <mat-label>Horário da Entrevista</mat-label>
+              <mat-label>{{'job.job_interview_create.hour_interview' | translate}}</mat-label>
               <input matInput formControlName="hourInterview" mask="00:00" />
             </mat-form-field>
 
             <mat-form-field fxFlex="50" appearance="outline">
-              <mat-label>Pontualidade</mat-label>
+              <mat-label>{{'job.job_interview_create.punctuality.name' | translate}}</mat-label>
               <mat-select matInput disableRipple formControlName="punctuality">
-                <mat-option [value]="1">Pontual</mat-option>
-                <mat-option [value]="2">Atrasado 5 minutos</mat-option>
-                <mat-option [value]="3">Atrasado mais de 5 minutos</mat-option>
-                <mat-option [value]="4">Não Compareceu</mat-option>
+                <mat-option [value]="1">{{'job.job_interview_create.punctuality.one_off' | translate}}</mat-option>
+                <mat-option [value]="2">{{'job.job_interview_create.punctuality.late_5_minutes' | translate}}</mat-option>
+                <mat-option [value]="3">{{'job.job_interview_create.punctuality.more_than_5_minutes_late' | translate}}</mat-option>
+                <mat-option [value]="4">{{'job.job_interview_create.punctuality.did_not_attend' | translate}}</mat-option>
               </mat-select>
             </mat-form-field>
           </div>
 
           <div fxFlex="100" fxLayoutGap="16px">
             <mat-form-field fxFlex="50" appearance="outline">
-              <mat-label>Avaliação Técnica</mat-label>
+              <mat-label>{{'job.job_interview_create.technical_evaluation' | translate}}</mat-label>
               <textarea
                 class="text-area"
                 matInput
@@ -325,7 +325,7 @@
               ></textarea>
             </mat-form-field>
             <mat-form-field fxFlex="50" appearance="outline">
-              <mat-label>Observações</mat-label>
+              <mat-label>{{'job.job_interview_create.comments' | translate}}</mat-label>
               <textarea
                 class="text-area"
                 matInput
@@ -336,18 +336,18 @@
           </div>
           <div fxFlex="100" fxLayoutGap="16px">
             <mat-form-field fxFlex="40" appearance="outline">
-              <mat-label>Situação</mat-label>
+              <mat-label>{{'job.job_interview_create.situational.name' | translate}}</mat-label>
               <mat-select matInput disableRipple formControlName="situational">
-                <mat-option [value]="1">Aprovado</mat-option>
-                <mat-option [value]="2">Aprovado com Resalvas</mat-option>
-                <mat-option [value]="3">Reprovado</mat-option>
-                <mat-option [value]="4">Reprovado com Resalvas</mat-option>
+                <mat-option [value]="1">{{'job.job_interview_create.situational.okay' | translate}}</mat-option>
+                <mat-option [value]="2">{{'job.job_interview_create.situational.approved_with_reservations' | translate}}</mat-option>
+                <mat-option [value]="3">{{'job.job_interview_create.situational.disapproved' | translate}}</mat-option>
+                <mat-option [value]="4">{{'job.job_interview_create.situational.failed_with_reservations' | translate}}</mat-option>
               </mat-select>
             </mat-form-field>
 
             <div class="job-checkbox" fxFlex="40" fxLayoutAlign="center">
               <mat-checkbox color="primary" formControlName="jobProfile"
-                >Perfil da Vaga</mat-checkbox
+                >{{'job.job_interview_create.job_profile' | translate}}</mat-checkbox
               >
             </div>
 
@@ -370,7 +370,7 @@
         <form [formGroup]="returnForm" fxLayout="column" class="form">
           <div fxFlex="100" fxLayoutGap="16px">
             <mat-form-field fxFlex="50" appearance="outline">
-              <mat-label>Nome do Candidato</mat-label>
+              <mat-label>{{'job.job_interview_create.name_candidate' | translate}}</mat-label>
               <input
                 placeholder="Nome do Candidato"
                 matInput
@@ -379,7 +379,7 @@
               />
             </mat-form-field>
             <mat-form-field fxFlex="50" appearance="outline">
-              <mat-label>Data da Devolutiva</mat-label>
+              <mat-label>{{'job.job_interview_create.date_of_return' | translate}}</mat-label>
               <input
                 matInput
                 [matDatepicker]="dateOfReturn"
@@ -394,35 +394,35 @@
           </div>
           <div fxFlex="100" fxLayoutGap="16px">
             <mat-form-field fxFlex="50" appearance="outline">
-              <mat-label>Avaliação Comportamental</mat-label>
+              <mat-label>{{'job.job_interview_create.behavioral_evaluation' | translate}}</mat-label>
               <mat-select
                 matInput
                 disableRipple
                 formControlName="behavioralEvaluation"
               >
-                <mat-option [value]="1">Aprovado</mat-option>
-                <mat-option [value]="2">Aprovado com Resalvas</mat-option>
-                <mat-option [value]="3">Reprovado</mat-option>
-                <mat-option [value]="4">Reprovado com Resalvas</mat-option>
+                <mat-option [value]="1">{{'job.job_interview_create.situational.okay' | translate}}</mat-option>
+                <mat-option [value]="2">{{'job.job_interview_create.situational.approved_with_reservations' | translate}}</mat-option>
+                <mat-option [value]="3">{{'job.job_interview_create.situational.disapproved' | translate}}</mat-option>
+                <mat-option [value]="4">{{'job.job_interview_create.situational.failed_with_reservations' | translate}}</mat-option>
               </mat-select>
             </mat-form-field>
             <mat-form-field fxFlex="50" appearance="outline">
-              <mat-label>Avaliação Técnica</mat-label>
+              <mat-label>{{'job.job_interview_create.technical_evaluation' | translate}}</mat-label>
               <mat-select
                 matInput
                 disableRipple
                 formControlName="technicalEvaluation"
               >
-                <mat-option [value]="1">Aprovado</mat-option>
-                <mat-option [value]="2">Aprovado com Resalvas</mat-option>
-                <mat-option [value]="3">Reprovado</mat-option>
-                <mat-option [value]="4">Reprovado com Resalvas</mat-option>
+                <mat-option [value]="1">{{'job.job_interview_create.situational.okay' | translate}}</mat-option>
+                <mat-option [value]="2">{{'job.job_interview_create.situational.approved_with_reservations' | translate}}</mat-option>
+                <mat-option [value]="3">{{'job.job_interview_create.situational.disapproved' | translate}}</mat-option>
+                <mat-option [value]="4">{{'job.job_interview_create.situational.failed_with_reservations' | translate}}</mat-option>
               </mat-select>
             </mat-form-field>
           </div>
           <div fxFlex="100" fxLayoutGap="16px">
             <mat-form-field fxFlex="50" appearance="outline">
-              <mat-label>Avaliação Comportamental</mat-label>
+              <mat-label>{{'job.job_interview_create.behavioral_evaluation | translate}}</mat-label>
               <textarea
                 class="text-area"
                 matInput
@@ -431,7 +431,7 @@
               ></textarea>
             </mat-form-field>
             <mat-form-field fxFlex="50" appearance="outline">
-              <mat-label>Avaliação Técnica</mat-label>
+              <mat-label>{{'job.job_interview_create.technical_evaluation' | translate}}</mat-label>
               <textarea
                 class="text-area"
                 matInput
@@ -443,32 +443,32 @@
           <div fxFlex="100" fxLayoutGap="16px">
             <div class="job-checkbox" fxFlex="20" appearance="outline">
               <mat-checkbox color="primary" formControlName="returnOfCandidate"
-                >Retorno do Candidato</mat-checkbox
+                >{{'job.job_interview_create.return_of_candidate' | translate}}</mat-checkbox
               >
             </div>
 
             <mat-form-field fxFlex="20" appearance="outline">
-              <mat-label>Motivo</mat-label>
+              <mat-label>{{'generic.reason' | translate}}</mat-label>
               <mat-select matInput disableRipple formControlName="reason">
-                <mat-option [value]="1">Salario</mat-option>
-                <mat-option [value]="2">Modelo de Contratação</mat-option>
+                <mat-option [value]="1">{{'job.job_interview_create.wage' | translate}}</mat-option>
+                <mat-option [value]="2">{{'job.job_interview_create.hiring_model' | translate}}</mat-option>
               </mat-select>
             </mat-form-field>
 
             <mat-form-field fxFlex="30" appearance="outline">
-              <mat-label>Tipo de Contratação</mat-label>
+              <mat-label>{{'job.job_interview_create.type_od_contract' | translate}}</mat-label>
               <mat-select
                 matInput
                 disableRipple
                 formControlName="typeOdContract"
               >
-                <mat-option [value]="1">CLT</mat-option>
-                <mat-option [value]="2">PJ</mat-option>
-                <mat-option [value]="3">Cooperado</mat-option>
+                <mat-option [value]="1">{{'generic.clt' | translate}}</mat-option>
+                <mat-option [value]="2">{{'generic.pj' | translate}}</mat-option>
+                <mat-option [value]="3">{{'generic.cooperated' | translate}}</mat-option>
               </mat-select>
             </mat-form-field>
             <mat-form-field fxFlex="40" appearance="outline">
-              <mat-label>Valor Fechado</mat-label>
+              <mat-label>{{'job.job_interview_create.combined_value' | translate}}</mat-label>
               <input
                 placeholder="Valor"
                 matInput
@@ -477,7 +477,7 @@
               />
             </mat-form-field>
             <mat-form-field fxFlex="40" appearance="outline">
-              <mat-label>Data de Inicio</mat-label>
+              <mat-label>{{'job.job_interview_create.initial_data' | translate}}</mat-label>
               <input
                 matInput
                 [matDatepicker]="initialData"
