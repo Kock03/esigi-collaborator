@@ -14,26 +14,18 @@ export class CollaboratorDependentsProvider {
     findAll(): Promise<any> {
         return new Promise((resolve, reject) => {
             this.apiGateway
-                .get(environment.COLLABORATOR_MS + 'collaborators')
+                .get(environment.COLLABORATOR_MS + 'dependents')
                 .subscribe((response: HttpResponse<any>) => {
                     resolve(response.body);
                 }, reject);
         });
     }
 
-    findByName(query: any): Promise<any> {
-        return new Promise((resolve, reject) => {
-            this.apiGateway.get(environment.COLLABORATOR_MS + `collaborators/find/name?${query}`)
-                .subscribe((response: HttpResponse<any>) => {
-                    resolve(response.body);
-                }, reject);
-        });
-    }
 
     findOne(id: string | null): Promise<any> {
         return new Promise((resolve, reject) => {
             this.apiGateway
-                .get(environment.COLLABORATOR_MS + 'collaborators/:id', { id: id })
+                .get(environment.COLLABORATOR_MS + 'dependents/:id', { id: id })
                 .subscribe((response: HttpResponse<any>) => {
                     resolve(response.body);
                 }, reject);
@@ -43,7 +35,7 @@ export class CollaboratorDependentsProvider {
     update(id: string | null, collaborator: any): Promise<any> {
         return new Promise((resolve, reject) => {
             this.apiGateway
-                .put(environment.COLLABORATOR_MS + 'collaborators/:id', { id: id }, collaborator)
+                .put(environment.COLLABORATOR_MS + 'dependents/:id', { id: id }, collaborator)
                 .subscribe((response: HttpResponse<any>) => {
                     resolve(response.body);
                 }, reject);
@@ -53,7 +45,7 @@ export class CollaboratorDependentsProvider {
     store(collaborator: any): Promise<any> {
         return new Promise((resolve, reject) => {
             this.apiGateway
-                .post(environment.COLLABORATOR_MS + 'collaborators', collaborator)
+                .post(environment.COLLABORATOR_MS + 'dependents', collaborator)
                 .subscribe((response: HttpResponse<any>) => {
                     resolve(response.body);
                 }, reject);
@@ -63,7 +55,7 @@ export class CollaboratorDependentsProvider {
     destroy(id: string | null): Promise<any> {
         return new Promise((resolve, reject) => {
             this.apiGateway
-                .delete(environment.COLLABORATOR_MS + 'collaborators/:id', { id: id })
+                .delete(environment.COLLABORATOR_MS + 'dependents/:id', { id: id })
                 .subscribe((response: HttpResponse<any>) => {
                     resolve(response.body);
                 }, reject);

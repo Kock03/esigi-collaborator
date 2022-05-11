@@ -14,16 +14,7 @@ export class CollaboratorDocumentProvider {
     findAll(): Promise<any> {
         return new Promise((resolve, reject) => {
             this.apiGateway
-                .get(environment.COLLABORATOR_MS + 'collaborators')
-                .subscribe((response: HttpResponse<any>) => {
-                    resolve(response.body);
-                }, reject);
-        });
-    }
-
-    findByName(query: any): Promise<any> {
-        return new Promise((resolve, reject) => {
-            this.apiGateway.get(environment.COLLABORATOR_MS + `collaborators/find/name?${query}`)
+                .get(environment.COLLABORATOR_MS + 'documents')
                 .subscribe((response: HttpResponse<any>) => {
                     resolve(response.body);
                 }, reject);
@@ -33,7 +24,7 @@ export class CollaboratorDocumentProvider {
     findOne(id: string | null): Promise<any> {
         return new Promise((resolve, reject) => {
             this.apiGateway
-                .get(environment.COLLABORATOR_MS + 'collaborators/:id', { id: id })
+                .get(environment.COLLABORATOR_MS + 'documents/:id', { id: id })
                 .subscribe((response: HttpResponse<any>) => {
                     resolve(response.body);
                 }, reject);
@@ -43,7 +34,7 @@ export class CollaboratorDocumentProvider {
     update(id: string | null, collaborator: any): Promise<any> {
         return new Promise((resolve, reject) => {
             this.apiGateway
-                .put(environment.COLLABORATOR_MS + 'collaborators/:id', { id: id }, collaborator)
+                .put(environment.COLLABORATOR_MS + 'documents/:id', { id: id }, collaborator)
                 .subscribe((response: HttpResponse<any>) => {
                     resolve(response.body);
                 }, reject);
@@ -53,7 +44,7 @@ export class CollaboratorDocumentProvider {
     store(collaborator: any): Promise<any> {
         return new Promise((resolve, reject) => {
             this.apiGateway
-                .post(environment.COLLABORATOR_MS + 'collaborators', collaborator)
+                .post(environment.COLLABORATOR_MS + 'documents', collaborator)
                 .subscribe((response: HttpResponse<any>) => {
                     resolve(response.body);
                 }, reject);
@@ -63,7 +54,7 @@ export class CollaboratorDocumentProvider {
     destroy(id: string | null): Promise<any> {
         return new Promise((resolve, reject) => {
             this.apiGateway
-                .delete(environment.COLLABORATOR_MS + 'collaborators/:id', { id: id })
+                .delete(environment.COLLABORATOR_MS + 'documents/:id', { id: id })
                 .subscribe((response: HttpResponse<any>) => {
                     resolve(response.body);
                 }, reject);
