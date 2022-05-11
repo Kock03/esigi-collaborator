@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { debounceTime, distinctUntilChanged, fromEvent, Subject } from 'rxjs';
-import { ResumeProvider } from 'src/providers/resume.provider';
+import { ResumeProvider } from 'src/providers/resume-providers/resume.provider';
 
 import { ResumeCreateComponent } from '../resume-create/resume-create.component';
 import { ResumeRegisterTabComponent } from '../resume-create/resume-register-tab/resume-register-tab.component';
