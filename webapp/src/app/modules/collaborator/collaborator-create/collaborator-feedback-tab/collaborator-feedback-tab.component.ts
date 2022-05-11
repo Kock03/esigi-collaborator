@@ -13,7 +13,7 @@ import { MatTable } from '@angular/material/table';
 import { ActivatedRoute, Router, RoutesRecognized } from '@angular/router';
 import { ICollaborator } from 'src/app/interfaces/icollaborator';
 import { IFeedback } from 'src/app/interfaces/ifeedback';
-import { CollaboratorProvider } from 'src/providers/collaborator.provider';
+import { CollaboratorProvider } from 'src/providers/collaborator-providers/collaborator.provider';
 import { FeedbackProvider } from 'src/providers/feedback.provider';
 import { ConfirmDialogService } from 'src/services/confirn-dialog.service';
 import { SnackBarService } from 'src/services/snackbar.service';

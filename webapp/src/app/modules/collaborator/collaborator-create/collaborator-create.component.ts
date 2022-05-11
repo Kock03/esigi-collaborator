@@ -6,7 +6,7 @@ import { ActivatedRoute, Router, RoutesRecognized } from '@angular/router';
 import { filter, pairwise } from 'rxjs';
 
 import { DocumentValidator } from 'src/app/validators/document.validator';
-import { CollaboratorProvider } from 'src/providers/collaborator.provider';
+import { CollaboratorProvider } from 'src/providers/collaborator-providers/collaborator.provider';
 import { SnackBarService } from 'src/services/snackbar.service';
 
 @Component({
