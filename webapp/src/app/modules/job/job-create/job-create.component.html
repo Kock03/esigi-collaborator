@@ -12,7 +12,7 @@
       fxLayout="column"
       class="tab-group"
       [ngClass]="{ done: step > 0, active: step == 1 }">
-      <p class="tab-item">Cadastro</p>
+      <p class="tab-item">{{'job.job_create.register' | translate}}</p>
       <span class="tab-border"></span>
     </div>
     <div
@@ -20,7 +20,7 @@
       fxLayout="column"
       class="tab-group"
       [ngClass]="{ done: step > 1, active: step == 2 }">
-      <p class="tab-item">Conhecimentos</p>
+      <p class="tab-item">{{'job.job_create.skills.register' | translate}}</p>
       <span class="tab-border"></span>
     </div>
   </div>
