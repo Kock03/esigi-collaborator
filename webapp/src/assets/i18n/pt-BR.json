@@ -72,6 +72,7 @@
             "documents": {
                 "name": "Documentos",
                 "document_registration": "Cadastro de Documento",
+                "read": "Ler",
                 "document_name": "Nome"
             },
             "feedbacks": {

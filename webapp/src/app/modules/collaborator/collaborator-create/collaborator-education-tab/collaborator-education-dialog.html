@@ -1,19 +1,19 @@
 <div id="collaboratorEducationDialog" class="dialog">
   <div class="content-scroll" *ngIf="educationForm">
-    <h2 mat-dialog-title class="title-dialog">{{'collaborator.colaborator_create.education.schooling.name' | translate}}</h2>
+    <h2 mat-dialog-title class="title-dialog">{{'generic.education.schooling.name' | translate}}</h2>
     <mat-dialog-content class="mat-typography">
       <form [formGroup]="educationForm" fxLayout="column">
         <mat-form-field appearance="outline">
-          <mat-label>{{'collaborator.colaborator_create.education.schooling.name' | translate}}</mat-label>
+          <mat-label>{{'generic.education.schooling.name' | translate}}</mat-label>
           <mat-select formControlName="schooling">
-            <mat-option [value]="1">{{'collaborator.colaborator_create.education.schooling.type.elementary_school' | translate}}</mat-option>
-            <mat-option [value]="2">{{'collaborator.colaborator_create.education.schooling.type.high_school' | translate}}</mat-option>
-            <mat-option [value]="3">{{'collaborator.colaborator_create.education.schooling.type.university_education' | translate}}</mat-option>
+            <mat-option [value]="1">{{'generic.education.schooling.type.elementary_school' | translate}}</mat-option>
+            <mat-option [value]="2">{{'generic.education.schooling.type.high_school' | translate}}</mat-option>
+            <mat-option [value]="3">{{'generic.education.schooling.type.university_education' | translate}}</mat-option>
           </mat-select>
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-label>{{'collaborator.colaborator_create.education.schooling.course' | translate}}</mat-label>
+          <mat-label>{{'generic.education.schooling.course' | translate}}</mat-label>
           <input
             matInput
             disableRipple
@@ -22,7 +22,7 @@
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-label>{{'collaborator.colaborator_create.education.schooling.institution' | translate}}</mat-label>
+          <mat-label>{{'generic.education.schooling.institution' | translate}}</mat-label>
           <input
             matInput
             disableRipple
@@ -31,11 +31,11 @@
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-label>{{'collaborator.colaborator_create.education.schooling.situation.name' | translate}}</mat-label>
+          <mat-label>{{'generic.education.schooling.situation.name' | translate}}</mat-label>
           <mat-select formControlName="situation">
-            <mat-option [value]="1">{{'collaborator.colaborator_create.education.schooling.situation.stop' | translate}}</mat-option>
-            <mat-option [value]="2">{{'collaborator.colaborator_create.education.schooling.situation.complete' | translate}}</mat-option>
-            <mat-option [value]="3">{{'collaborator.colaborator_create.education.schooling.situation.in_progress' | translate}}</mat-option>
+            <mat-option [value]="1">{{'generic.education.schooling.situation.stop' | translate}}</mat-option>
+            <mat-option [value]="2">{{'generic.education.schooling.situation.complete' | translate}}</mat-option>
+            <mat-option [value]="3">{{'generic.education.schooling.situation.in_progress' | translate}}</mat-option>
           </mat-select>
         </mat-form-field>
       </form>
