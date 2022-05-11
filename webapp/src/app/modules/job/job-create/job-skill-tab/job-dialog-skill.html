@@ -25,13 +25,13 @@
     </div>
 
     <div mat-dialog-actions fxLayout="row" fxFlexAlign="center">
-      <button mat-flat-button (click)="onNoClick()">Cancelar</button>
+      <button mat-flat-button (click)="onNoClick()">{{'generic.cancel_button' | translate}}</button>
       <button
         mat-flat-button
         color="primary"
         [disabled]="knowledgeForm.invalid"
         (click)="saveKnowledge()">
-        Salvar
+        {{'generic.save_button' | translate}}
       </button>
     </div>
   </form>

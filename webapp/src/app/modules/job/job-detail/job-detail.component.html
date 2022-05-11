@@ -36,21 +36,21 @@
 
   <div class="navigation-buttons" fxLayoutAlign="center end" fxLayoutGap="16px">
     <button mat-flat-button *ngIf="step == 1" (click)="navigate('back')">
-      Voltar
+      {{'generic.back_button' | translate}}
     </button>
     <button
       mat-flat-button
       *ngIf="step == 2"
       (click)="navigate('back')"
       color="primary">
-      Voltar
+      {{'generic.back_button' | translate}}
     </button>
     <button
       mat-flat-button
       *ngIf="step != 2"
       (click)="navigate('next')"
       color="primary">
-      Continuar
+      {{'generic.continue_button' | translate}}
     </button>
   </div>
 </div>

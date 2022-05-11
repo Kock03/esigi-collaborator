@@ -3,7 +3,7 @@
     <button (click)="listJob()" color="primary" mat-button>
       <mat-icon> chevron_left </mat-icon>
     </button>
-    <h2>Vagas</h2>
+    <h2>{{'sidenav.jobs' | translate}}</h2>
   </div>
 
   <div fxLayout="row" class="tab" fxLayoutGap="16px">
@@ -44,14 +44,14 @@
     fxLayoutGap="16px"
     *ngIf="jobId === 'novo'">
     <button mat-button *ngIf="step != 1" (click)="navigate('back')">
-      Voltar
+      {{'generic.back_button' | translate}}
     </button>
     <button
       mat-flat-button
       *ngIf="step != 2"
       (click)="navigate('next')"
       color="primary">
-      Continuar
+      {{'generic.continue_button' | translate}}
     </button>
     <button
       mat-flat-button
@@ -59,7 +59,7 @@
       color="primary"
       (click)="saveJob()"
       [disabled]="jobForm.invalid">
-      Salvar
+      {{'generic.save_button' | translate}}
     </button>
   </div>
   <div
@@ -68,7 +68,7 @@
     fxLayoutGap="16px"
     *ngIf="jobId !== 'novo'">
     <button mat-flat-button color="primary" (click)="saveEditJob()">
-      Salvar
+      {{'generic.save_button' | translate}}
     </button>
   </div>
 </div>

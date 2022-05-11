@@ -24,9 +24,7 @@
               formControlName="lastName" />
           </mat-form-field>
           <mat-form-field fxFlex="34" appearance="outline">
-            <mat-label>{{
-              'resume.resume_register.login' | translate
-            }}</mat-label>
+            <mat-label>{{ 'generic.login' | translate }}</mat-label>
             <input matInput placeholder="Login" formControlName="login" />
           </mat-form-field>
         </div>
@@ -169,7 +167,9 @@
           </mat-form-field>
 
           <mat-form-field fxFlex="35" appearance="outline">
-            <mat-label>{{'generic.phone.phone_number'|translate}}</mat-label>
+            <mat-label>{{
+              'generic.phone.phone_number' | translate
+            }}</mat-label>
             <input
               matInput
               placeholder="Telefone"
