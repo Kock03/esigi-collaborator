@@ -54,12 +54,8 @@
         <mat-form-field fxFlex="25" appearance="outline">
           <mat-label>Sexo</mat-label>
           <mat-select matInput disableRipple formControlName="gender">
-            <mat-option [value]="1">{{
-              'generic.masculine' | translate
-            }}</mat-option>
-            <mat-option [value]="2">{{
-              'generic.feminine' | translate
-            }}</mat-option>
+            <mat-option [value]="1">{{ "generic.gender.masculine" | translate }}</mat-option>
+            <mat-option [value]="2">{{ "generic.gender.feminine" | translate }}</mat-option>
           </mat-select>
         </mat-form-field>
         <mat-form-field fxFlex="25" appearance="outline">
