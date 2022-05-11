@@ -14,7 +14,7 @@ export class ResumeEducationProvider {
     findAll(): Promise<any> {
         return new Promise((resolve, reject) => {
             this.apiGateway
-                .get(environment.RESUME_MS + 'resumes')
+                .get(environment.RESUME_MS + 'educations')
                 .subscribe((response: HttpResponse<any>) => {
                     resolve(response.body);
                 }, reject);
@@ -23,7 +23,7 @@ export class ResumeEducationProvider {
 
     findByName(query: any): Promise<any> {
         return new Promise((resolve, reject) => {
-            this.apiGateway.get(environment.RESUME_MS + `resumes/find/name?${query}`)
+            this.apiGateway.get(environment.RESUME_MS + `educations/find/name?${query}`)
                 .subscribe((response: HttpResponse<any>) => {
                     resolve(response.body);
                 }, reject);
@@ -33,27 +33,27 @@ export class ResumeEducationProvider {
     findOne(id: string | null): Promise<any> {
         return new Promise((resolve, reject) => {
             this.apiGateway
-                .get(environment.RESUME_MS + 'resumes/:id', { id: id })
+                .get(environment.RESUME_MS + 'educations/:id', { id: id })
                 .subscribe((response: HttpResponse<any>) => {
                     resolve(response.body);
                 }, reject);
         });
     }
 
-    update(id: string | null, resume: any): Promise<any> {
+    update(id: string | null, education: any): Promise<any> {
         return new Promise((resolve, reject) => {
             this.apiGateway
-                .put(environment.RESUME_MS + 'resumes/:id', { id: id }, resume)
+                .put(environment.RESUME_MS + 'educations/:id', { id: id }, education)
                 .subscribe((response: HttpResponse<any>) => {
                     resolve(response.body);
                 }, reject);
         });
     }
 
-    store(resume: any): Promise<any> {
+    store(education: any): Promise<any> {
         return new Promise((resolve, reject) => {
             this.apiGateway
-                .post(environment.RESUME_MS + 'resumes', resume)
+                .post(environment.RESUME_MS + 'educations', education)
                 .subscribe((response: HttpResponse<any>) => {
                     resolve(response.body);
                 }, reject);
@@ -63,7 +63,7 @@ export class ResumeEducationProvider {
     destroy(id: string | null): Promise<any> {
         return new Promise((resolve, reject) => {
             this.apiGateway
-                .delete(environment.RESUME_MS + 'resumes/:id', { id: id })
+                .delete(environment.RESUME_MS + 'educations/:id', { id: id })
                 .subscribe((response: HttpResponse<any>) => {
                     resolve(response.body);
                 }, reject);
