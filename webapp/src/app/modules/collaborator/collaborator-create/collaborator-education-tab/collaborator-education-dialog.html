@@ -47,7 +47,7 @@
           mat-flat-button
           mat-dialog-close
           (click)="onNoClick()">
-          Cancelar
+          {{'generic.cancel_button' | translate}}
         </button>
         <button
           [disabled]="educationForm.invalid"
@@ -55,7 +55,7 @@
           color="primary"
           [mat-dialog-close]="true"
           (click)="save()">
-          Salvar
+          {{'generic.save_button' | translate}}
         </button>
       </div>
     </mat-dialog-actions>

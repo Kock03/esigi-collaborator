@@ -2,12 +2,12 @@
   <form [formGroup]="knowledgeForm" fxLayout="column">
     <div fxFlex="90" fxLayoutGap="16px" fxLayout="row">
       <mat-form-field appearance="outline" fxFlex="50">
-        <mat-label>{{'generic.skills.name' | translate}}</mat-label>
+        <mat-label>{{'job.job_create.skills.name' | translate}}</mat-label>
         <input matInput placeholder="Habilidade" formControlName="name" />
       </mat-form-field>
 
       <mat-form-field appearance="outline" fxFlex="20">
-        <mat-label>{{'job.job_create.skills.time_experience' | translate}}</mat-label>
+        <mat-label>{{'generic.skills.time_experience' | translate}}</mat-label>
         <input
           matInput
           type="number"
@@ -16,10 +16,10 @@
       </mat-form-field>
 
       <mat-form-field fxFlex="20" appearance="outline">
-        <mat-label>Periodo</mat-label>
+        <mat-label>{{'job.job_create.skills.type_of_period.name' | translate}}</mat-label>
         <mat-select matInput disableRipple formControlName="typeOfPeriod">
-          <mat-option [value]="1">Mês</mat-option>
-          <mat-option [value]="2">Ano</mat-option>
+          <mat-option [value]="1">{{'job.job_create.skills.type_of_period.month' | translate}}</mat-option>
+          <mat-option [value]="2">{{'job.job_create.skills.type_of_period.year' | translate}}</mat-option>
         </mat-select>
       </mat-form-field>
     </div>

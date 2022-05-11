@@ -104,11 +104,14 @@
         }
     },
     "job": {
+        "name": "Vaga",
+        "job_description": "Descrição da Vaga",
         "job_list": {
             "search_jobs": "Buscar Vagas",
             "name": "Nome da Vaga"
         },
         "job_create": {
+            "register": "Cadastro",
             "status": {
                 "processed": "Processada",
                 "in_revision": "Em Revisão",
@@ -141,6 +144,8 @@
             "post_vacancy": "Publicar Vaga",
             "opening_date": "Data de Abertura",
             "skills": {
+                "register": "Conhecimentos",
+                "name": "Habilidades",
                 "schooling": {
                     "complete_higher_education": "Ensino Superior Completo",
                     "incomplete_higher_education": "Ensino Superior Incompleto",
@@ -148,7 +153,12 @@
                 },
                 "collaborator_activities": "Quais são as principais atividades que ocolaborador irá exercer?",
                 "desired_experience": "Experiência Desejada",
-                "required_behavior": "Comportamento e/ou competências necessárias"
+                "required_behavior": "Comportamento e/ou competências necessárias",
+                "type_of_period": {
+                    "name": "Período",
+                    "year": "ano",
+                    "month": "Mês"
+                }
             }
         },
         "job_interview_list": {
@@ -157,6 +167,8 @@
             "behavioral_interview_date": "Data Entrevista Comportamental"
         },
         "job_interview_create": {
+            "interview_registration": "Cadastro de Entrevistas",
+            "interview_follow_up": "Acompanhamento de Entrevistas",
             "name": "Entrevistas",
             "name_candidate": "Nome do Candidato",
             "tech_recruter": "TechRecruter",
@@ -278,7 +290,8 @@
                     "reading": "Leitura",
                     "conversation": "Conversação",
                     "writing_and_reading": "Escrita e Leitura",
-                    "writing_and_conversation": "Escrita e Conversação"
+                    "writing_and_conversation": "Escrita e Conversação",
+                    "reading_and_conversation": "Leitura e Conversação"
                 }
             }
         },
@@ -287,13 +300,15 @@
             "name": "Skills",
             "technology": "Tecnologia",
             "current_position": "Posição Atual",
-            "time_experience": "Tempo de experiência",
-            "type_of_period": {
-                "name": "Período",
-                "year": "ano",
-                "month": "Mês"
-            }
+            "time_experience": "Tempo de experiência"
         },
+        "back_button": "Voltar",
+        "save_button": "Salvar",
+        "cancel_button": "Cancelar",
+        "edit_button": "Editar",
+        "continue_button": "Continuar",
+        "delete_button": "Deletar",
+        "ok_button": "OK",
         "application_date": "Data Candidatura",
         "return_date": "Data devolutiva",
         "responsibility": "Cargo",

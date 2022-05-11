@@ -153,7 +153,7 @@
                 (click)="handleInterviews('behavioral')"
                 [disabled]="behavioralInterviewForm.invalid"
               >
-                Salvar
+              {{'generic.save_button' | translate}}
               </button>
             </div>
           </div>
@@ -258,7 +258,7 @@
                 (click)="handleInterviews('technical')"
                 [disabled]="technicalInterviewForm.invalid"
               >
-                Salvar
+              {{'generic.save_button' | translate}}
               </button>
             </div>
           </div>
@@ -359,7 +359,7 @@
                 (click)="handleInterviews('client')"
                 [disabled]="clientInterviewForm.invalid"
               >
-                Salvar
+              {{'generic.save_button' | translate}}
               </button>
             </div>
           </div>
@@ -422,7 +422,7 @@
           </div>
           <div fxFlex="100" fxLayoutGap="16px">
             <mat-form-field fxFlex="50" appearance="outline">
-              <mat-label>{{'job.job_interview_create.behavioral_evaluation | translate}}</mat-label>
+              <mat-label>{{'job.job_interview_create.behavioral_evaluation' | translate}}</mat-label>
               <textarea
                 class="text-area"
                 matInput
@@ -450,8 +450,8 @@
             <mat-form-field fxFlex="20" appearance="outline">
               <mat-label>{{'generic.reason' | translate}}</mat-label>
               <mat-select matInput disableRipple formControlName="reason">
-                <mat-option [value]="1">{{'job.job_interview_create.wage' | translate}}</mat-option>
-                <mat-option [value]="2">{{'job.job_interview_create.hiring_model' | translate}}</mat-option>
+                <mat-option [value]="1">{{'job.job_interview_create.reason.wage' | translate}}</mat-option>
+                <mat-option [value]="2">{{'job.job_interview_create.reason.hiring_model' | translate}}</mat-option>
               </mat-select>
             </mat-form-field>
 
@@ -498,7 +498,7 @@
                 (click)="saveReturns()"
                 [disabled]="returnForm.invalid"
               >
-                Salvar
+              {{'generic.save_button' | translate}}
               </button>
             </div>
           </div>

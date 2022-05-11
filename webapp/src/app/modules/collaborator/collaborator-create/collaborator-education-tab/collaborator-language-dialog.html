@@ -27,14 +27,14 @@
     </mat-dialog-content>
     <mat-dialog-actions>
       <div class="button-dialog">
-        <button mat-flat-button mat-dialog-close>Cancelar</button>
+        <button mat-flat-button mat-dialog-close>{{'generic.cancel_button' | translate}}</button>
         <button
           mat-flat-button
           [mat-dialog-close]="true"
           color="primary"
           (click)="save()"
           [disabled]="languageForm.invalid">
-          Salvar
+          {{'generic.save_button' | translate}}
         </button>
       </div>
     </mat-dialog-actions>
