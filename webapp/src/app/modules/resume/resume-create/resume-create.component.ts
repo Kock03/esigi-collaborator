@@ -8,7 +8,7 @@ import {
   MatDialogRef,
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
-import { ResumeProvider } from 'src/providers/resume.provider';
+import { ResumeProvider } from 'src/providers/resume-providers/resume.provider';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SnackBarService } from 'src/services/snackbar.service';
 import { ThisReceiver } from '@angular/compiler';
