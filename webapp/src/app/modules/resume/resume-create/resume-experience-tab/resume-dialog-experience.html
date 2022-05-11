@@ -97,7 +97,7 @@
           mat-flat-button
           mat-dialog-close
           (click)="onNoClick()">
-          Cancelar
+          {{'generic.cancel_button' | translate}}
         </button>
         <button
           class="save-button"
@@ -106,7 +106,7 @@
           [mat-dialog-close]="true"
           (click)="saveExperience()"
           [disabled]="experienceForm.invalid">
-          Salvar
+          {{'generic.delete_button' | translate}}
         </button>
       </div>
     </mat-dialog-actions>

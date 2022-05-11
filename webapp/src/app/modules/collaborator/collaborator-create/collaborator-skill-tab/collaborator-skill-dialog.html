@@ -4,7 +4,7 @@
     <mat-dialog-content class="mat-typography">
       <form [formGroup]="skillForm" fxLayout="column">
         <mat-form-field appearance="outline">
-          <mat-label>{{'collaborator.colaborator_create.skills.technology'|translate}}</mat-label>
+          <mat-label>{{'generic.skills.technology'|translate}}</mat-label>
           <input
             matInput
             disableRipple
@@ -13,19 +13,19 @@
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-label>{{'collaborator.colaborator_create.skills.seniority.name'|translate}}</mat-label>
+          <mat-label>{{'generic.seniority.name'|translate}}}</mat-label>
           <mat-select formControlName="seniority">
-            <mat-option [value]="1">{{'collaborator.colaborator_create.skills.seniority.senior'|translate}}</mat-option>
-            <mat-option [value]="2">{{'collaborator.colaborator_create.skills.seniority.full'|translate}}</mat-option>
-            <mat-option [value]="3">{{'collaborator.colaborator_create.skills.seniority.junior'|translate}}</mat-option>
-            <mat-option [value]="4">{{'collaborator.colaborator_create.skills.seniority.apprentice'|translate}}</mat-option>
-            <mat-option [value]="5">{{'collaborator.colaborator_create.skills.seniority.specialist'|translate}}</mat-option>
-            <mat-option [value]="6">{{'collaborator.colaborator_create.skills.seniority.architect'|translate}}</mat-option>
+            <mat-option [value]="1">{{'generic.seniority.senior'|translate}}</mat-option>
+            <mat-option [value]="2">{{'generic.seniority.full'|translate}}</mat-option>
+            <mat-option [value]="3">{{'generic.seniority.junior'|translate}}</mat-option>
+            <mat-option [value]="4">{{'generic.seniority.apprentice'|translate}}</mat-option>
+            <mat-option [value]="5">{{'generic.seniority.specialist'|translate}}</mat-option>
+            <mat-option [value]="6">{{'generic.seniority.architect'|translate}}</mat-option>
           </mat-select>
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-label> {{'collaborator.colaborator_create.skills.time_experience'|translate}}</mat-label>
+          <mat-label>  {{'generic.skills.time_experience'|translate}}</mat-label>
           <input
             matInput
             disableRipple
@@ -39,7 +39,7 @@
           color="primary"
           fxFlex="50"
           formControlName="currentPosition"
-          >{{'collaborator.colaborator_create.skills.current_position'|translate}}
+          >{{'generic.skills.current_position'|translate}}
         </mat-checkbox>
         <br />
       </form>
@@ -47,7 +47,7 @@
     <mat-dialog-actions>
       <div class="button-dialog">
         <button mat-flat-button mat-dialog-close (click)="onNoClick()">
-          Cancelar
+          {{'generic.cancel_button' | translate}}
         </button>
         <button
           color="primary"
@@ -55,7 +55,7 @@
           mat-flat-button
           [mat-dialog-close]="true"
           (click)="save()">
-          Salvar
+          {{'generic.save_button' | translate}}
         </button>
       </div>
     </mat-dialog-actions>

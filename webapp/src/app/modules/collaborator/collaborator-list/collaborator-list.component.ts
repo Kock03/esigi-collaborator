@@ -19,7 +19,7 @@ import {
   fromEvent,
   Subject,
 } from 'rxjs';
-import { CollaboratorProvider } from 'src/providers/collaborator.provider';
+import { CollaboratorProvider } from 'src/providers/collaborator-providers/collaborator.provider';
 import { CollaboratorCreateComponent } from '../collaborator-create/collaborator-create.component';
 import { CollaboratorRegisterTabComponent } from '../collaborator-create/collaborator-register-tab/collaborator-register-tab.component';
 import { ConfirmDialogService } from 'src/services/confirn-dialog.service';

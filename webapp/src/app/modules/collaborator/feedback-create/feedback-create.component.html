@@ -21,9 +21,9 @@
         <mat-form-field appearance="outline" fxFlex="25">
           <mat-label>{{'generic.reason' | translate}}</mat-label>
           <mat-select formControlName="reason">
-            <mat-option [value]="1">{{'collaborator.colaborator_create.feedbacks.feedback_type.management_request'|translate}}</mat-option>
-            <mat-option [value]="2">{{'collaborator.colaborator_create.feedbacks.feedback_type.customer_request'|translate}}</mat-option>
-            <mat-option [value]="3">{{'collaborator.colaborator_create.feedbacks.feedback_type.contributor_requestFF'|translate}}</mat-option>
+            <mat-option [value]="1">{{'collaborator.colaborator_create.feedbacks.reason.management_request'|translate}}</mat-option>
+            <mat-option [value]="2">{{'collaborator.colaborator_create.feedbacks.reason.customer_request'|translate}}</mat-option>
+            <mat-option [value]="3">{{'collaborator.colaborator_create.feedbacks.reason.contributor_request'|translate}}</mat-option>
           </mat-select>
         </mat-form-field>
 
@@ -148,7 +148,7 @@
       color="primary"
       [disabled]="this.feedbackForm.invalid"
       (click)="saveFeedback()">
-      Salvar
+      {{'generic.save_button' | translate}}
     </button>
   </div>
   <div
@@ -161,7 +161,7 @@
       mat-flat-button
       color="primary"
       (click)="saveEditFeedback()">
-      Salvar
+      {{'generic.save_button' | translate}}
     </button>
   </div>
 </div>
