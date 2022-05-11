@@ -97,7 +97,6 @@
 
   <app-collaborator-dependents-tab
     *ngIf="collaboratorForm"
-    [dependentsArray]="dependentsArray"
     [hidden]="step != 2"
     [form]="collaboratorForm"
     (onChange)="handleChanges($event)">
@@ -106,33 +105,28 @@
     *ngIf="collaboratorForm"
     [hidden]="step != 3"
     [form]="collaboratorForm"
-    [educationArray]="educationArray"
-    [languageArray]="languageArray"
     (onChange)="handleChanges($event)">
   </app-collaborator-education-tab>
   <app-collaborator-bank-tab
     *ngIf="collaboratorForm"
     [hidden]="step != 4"
     [form]="collaboratorForm"
-    [bankArray]="bankArray"
+
     (onChange)="handleChanges($event)">
   </app-collaborator-bank-tab>
   <app-collaborator-finance-tab
     *ngIf="collaboratorForm"
-    [financeArray]="financeArray"
     [hidden]="step != 5"
     [form]="collaboratorForm"
     (onChange)="handleChanges($event)">
   </app-collaborator-finance-tab>
   <app-collaborator-skill-tab
     *ngIf="collaboratorForm"
-    [skillArray]="skillArray"
     [hidden]="step != 6"
     [form]="collaboratorForm"
     (onChange)="handleChanges($event)">
   </app-collaborator-skill-tab>
   <app-collaborator-document-tab
-    [documentArray]="documentArray"
     *ngIf="collaboratorForm"
     [hidden]="step != 7"
     [form]="collaboratorForm"
@@ -162,14 +156,14 @@
 
     <button
       mat-flat-button
-      *ngIf="step != 7"
+      *ngIf="step !== 7"
       (click)="navigate('next')"
       color="primary">
       Continuar
     </button>
     <button
       mat-flat-button
-      *ngIf="step == 7"
+      *ngIf="step === 1"
       (click)="saveCollaborator()"
       color="primary">
       Salvar

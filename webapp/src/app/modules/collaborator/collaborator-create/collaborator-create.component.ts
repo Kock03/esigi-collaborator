@@ -166,36 +166,6 @@ export class CollaboratorCreateComponent implements OnInit {
         city: ['', Validators.required],
         district: ['', Validators.required],
       }),
-      BankData: this.fb.array(
-        this.collaborator ? this.collaborator.BankData : []
-      ),
-      Dependents: this.fb.array(
-        this.collaborator ? this.collaborator.Dependents : [],
-        [Validators.required]
-      ),
-      Educations: this.fb.array(
-        this.collaborator ? this.collaborator.Educations : [],
-        [Validators.required]
-      ),
-      Languages: this.fb.array(
-        this.collaborator ? this.collaborator.Languages : [],
-        [Validators.required]
-      ),
-      Financials: this.fb.array(
-        this.collaborator ? this.collaborator.Financials : [],
-        [Validators.required]
-      ),
-      Skills: this.fb.array(this.collaborator ? this.collaborator.Skills : [], [
-        Validators.required,
-      ]),
-      Documents: this.fb.array(
-        this.collaborator ? this.collaborator.Documents : [],
-        [Validators.required]
-      ),
-      Feedbacks: this.fb.array(
-        this.collaborator ? this.collaborator.Feedbacks : [],
-        [Validators.required]
-      ),
     });
   }
 
@@ -209,8 +179,8 @@ export class CollaboratorCreateComponent implements OnInit {
     let data = this.collaboratorForm.getRawValue();
 
     try {
-      const colaborators = await this.collaboratorProvider.store(data);
-
+      const colaborator = await this.collaboratorProvider.store(data);
+      sessionStorage.setItem('colaborator_id', colaborator.id);
       this.snackbarService.successMessage('Colaborador Cadastrado Com Sucesso');
       this.router.navigate(['colaborador/lista']);
       sessionStorage.clear();

@@ -167,7 +167,7 @@ export class CreateCollaboratorsDto {
   Educations: EducationsEntity[];
 
   @ApiPropertyOptional()
-  @IsNotEmpty()
+  @IsOptional()
   @IsArray()
   BankData: BankDataEntity[];
 
