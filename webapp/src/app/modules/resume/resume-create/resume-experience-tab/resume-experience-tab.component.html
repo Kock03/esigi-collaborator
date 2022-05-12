@@ -19,25 +19,30 @@
         *ngFor="let experience of experienceList; let i = index"
         class="list-group-item"
         fxLayoutAlign="start start">
-        <div fxLayout="column">
-          <span class="label-office">
+        <div class="list-item" fxLayout="column">
+          <h2 class="label-office">
             {{ experience.office }}
-          </span>
+          </h2>
           <span>
             {{ experience.companyName }}
           </span>
           <span class="label-gray">
             {{ experience.locality }}
           </span>
-          <span class="label-gray"
-            ><b>{{'generic.start_date'|translate}}</b> {{ experience.startMonth
-            }}<span> / {{ experience.startYear }}</span>
-          </span>
-          <span class="label-gray"
-            ><b>{{'generic.end_date'|translate}}</b> {{ experience.terminusMonth
-            }}<span> / {{ experience.terminusYear }}</span>
-          </span>
-          <p></p>
+          
+          <div class="date-resume-experience" fxLayout="row">
+
+            <b>{{'generic.start_date'|translate}}</b>
+            <span>{{ experience.startMonth}}</span>    
+              <span> / {{ experience.startYear }}</span>    
+          </div>
+
+          <div class="date-resume-experience" fxLayout="row">
+
+            <b>{{'generic.end_date'|translate}}</b>
+            <span>{{ experience.terminusMonth}}</span>    
+              <span> / {{ experience.terminusYear }}</span>    
+          </div>
           <span>
             {{ experience.description }}
           </span>
