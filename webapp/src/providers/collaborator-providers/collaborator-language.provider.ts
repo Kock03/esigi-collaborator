@@ -6,7 +6,7 @@ import { environment } from 'src/environments/environment';
 @Injectable({
     providedIn: 'root',
 })
-export class ResumeApplicationProvider {
+export class CollaboratorLanguageProvider {
     constructor(private apiGateway: ApiGateway) { }
 
     ngOnInit(): void { }
@@ -14,16 +14,7 @@ export class ResumeApplicationProvider {
     findAll(): Promise<any> {
         return new Promise((resolve, reject) => {
             this.apiGateway
-                .get(environment.RESUME_MS + 'resumes')
-                .subscribe((response: HttpResponse<any>) => {
-                    resolve(response.body);
-                }, reject);
-        });
-    }
-
-    findByName(query: any): Promise<any> {
-        return new Promise((resolve, reject) => {
-            this.apiGateway.get(environment.RESUME_MS + `resumes/find/name?${query}`)
+                .get(environment.COLLABORATOR_MS + 'languages')
                 .subscribe((response: HttpResponse<any>) => {
                     resolve(response.body);
                 }, reject);
@@ -33,27 +24,27 @@ export class ResumeApplicationProvider {
     findOne(id: string | null): Promise<any> {
         return new Promise((resolve, reject) => {
             this.apiGateway
-                .get(environment.RESUME_MS + 'resumes/:id', { id: id })
+                .get(environment.COLLABORATOR_MS + 'languages/:id', { id: id })
                 .subscribe((response: HttpResponse<any>) => {
                     resolve(response.body);
                 }, reject);
         });
     }
 
-    update(id: string | null, resume: any): Promise<any> {
+    update(id: string | null, language: any): Promise<any> {
         return new Promise((resolve, reject) => {
             this.apiGateway
-                .put(environment.RESUME_MS + 'resumes/:id', { id: id }, resume)
+                .put(environment.COLLABORATOR_MS + 'languages/:id', { id: id }, language)
                 .subscribe((response: HttpResponse<any>) => {
                     resolve(response.body);
                 }, reject);
         });
     }
 
-    store(resume: any): Promise<any> {
+    store(language: any): Promise<any> {
         return new Promise((resolve, reject) => {
             this.apiGateway
-                .post(environment.RESUME_MS + 'resumes', resume)
+                .post(environment.COLLABORATOR_MS + 'languages', language)
                 .subscribe((response: HttpResponse<any>) => {
                     resolve(response.body);
                 }, reject);
@@ -63,7 +54,7 @@ export class ResumeApplicationProvider {
     destroy(id: string | null): Promise<any> {
         return new Promise((resolve, reject) => {
             this.apiGateway
-                .delete(environment.RESUME_MS + 'resumes/:id', { id: id })
+                .delete(environment.COLLABORATOR_MS + 'languages/:id', { id: id })
                 .subscribe((response: HttpResponse<any>) => {
                     resolve(response.body);
                 }, reject);
