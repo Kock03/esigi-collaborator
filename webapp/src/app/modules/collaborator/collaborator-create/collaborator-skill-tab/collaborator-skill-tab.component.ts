@@ -16,6 +16,10 @@ import {
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
 import { CollaboratorSkillDialog } from './collaborator-skill-dialog.component';
+import { CollaboratorSkillProvider } from 'src/providers/collaborator-providers/collaborator-skill.provider';
+import { ConfirmDialogService } from 'src/services/confirn-dialog.service';
+import { SnackBarService } from 'src/services/snackbar.service';
+import { CollaboratorProvider } from 'src/providers/collaborator-providers/collaborator.provider';
 
 @Component({
   selector: 'app-collaborator-skill-tab',
@@ -24,7 +28,6 @@ import { CollaboratorSkillDialog } from './collaborator-skill-dialog.component';
   encapsulation: ViewEncapsulation.None,
 })
 export class CollaboratorSkillTabComponent implements OnInit {
-  @Input() skillArray!: FormArray;
   @Output() onChange: EventEmitter<any> = new EventEmitter();
   @ViewChild('skillTable') skillTable!: MatTable<any>;
 
@@ -34,34 +37,41 @@ export class CollaboratorSkillTabComponent implements OnInit {
 
   selectedIndex: number = 0;
   skillForm!: FormGroup;
-  index: any = null;
   Skill: any;
   checked = false;
+  method!: string;
+  collaboratorId!: any;
+  skillId!: string;
+  collaboratorMethod!: string;
 
-  constructor(private fb: FormBuilder, public dialog: MatDialog) {}
+  constructor(
+    private fb: FormBuilder, 
+    public dialog: MatDialog,
+    private collaboratorSkillProvider: CollaboratorSkillProvider, 
+    private dialogService: ConfirmDialogService, 
+    private snackbarService: SnackBarService,   
+    private collaboratorProvider: CollaboratorProvider,
+   ) {}
 
   ngOnInit(): void {
-    if (this.skillArray.value.length > 0) {
-      this.data = this.skillArray.value;
+    this.collaboratorMethod = sessionStorage.getItem('collaborator_method')!;
+    if (this.collaboratorMethod === 'edit') {
+      this.getSkillList();
     }
 
-    this.initObservables();
   }
 
-  initObservables() {
-    this.skillArray.valueChanges.subscribe(res => {
-      const isNullIndex = this.skillArray.value.findIndex(
-        (skill: any) => skill == null
-      );
-      if (isNullIndex !== -1) {
-        this.skillArray.removeAt(isNullIndex);
-      }
-      if (res) {
-        this.data = this.skillArray.value;
-      }
-    });
+  async getSkillList() {
+    this.collaboratorId = sessionStorage.getItem('collaborator_id');
+    const data = await this.collaboratorProvider.findOne(this.collaboratorId);
+    this.data = data.Skills;
   }
+
+
+
   openDialog() {
+    this.method = 'add';
+    sessionStorage.setItem('method', this.method);
     const dialogRef = this.dialog.open(CollaboratorSkillDialog, {
       width: '500px',
       height: '470px',
@@ -69,8 +79,7 @@ export class CollaboratorSkillTabComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(skill => {
       if (skill) {
-        this.skillArray.insert(0, this.fb.group(skill));
-        this.skillTable.renderRows();
+        this.getSkillList()
       }
     });
   }
@@ -79,22 +88,45 @@ export class CollaboratorSkillTabComponent implements OnInit {
     this.onChange.next(true);
   }
 
-  getSkill(skillSelected: any, index: number) {
+  getSkill(skillSelected: any, id: string) {
+    this.method = 'edit';
+    sessionStorage.setItem('method', this.method);
+    this.skillId = id;
+    sessionStorage.setItem('skill_id', this.skillId);
     const dialogRef = this.dialog.open(CollaboratorSkillDialog, {
       width: '500px',
       height: '620px',
       data: skillSelected,
     });
-
-    this.index = index;
     dialogRef.afterClosed().subscribe(skill => {
       if (skill) {
-        this.skillArray.controls[this.index].patchValue(skill);
+        this.getSkillList();
       }
     });
   }
 
-  deleteSkill(index: number) {
-    this.skillArray.removeAt(index);
+  deleteSkill(id: string) {
+    const options = {
+      data: {
+        title: 'Atenção',
+        subtitle: 'Você tem certeza que deseja excluir esta Skill?',
+      },
+      panelClass: 'confirm-modal',
+    };
+
+    this.dialogService.open(options);
+
+    this.dialogService.confirmed().subscribe(async (confirmed) => {
+      if (confirmed) {
+        try {
+          let deleteSkill = await this.collaboratorSkillProvider.destroy(id);
+          this.getSkillList();
+          this.snackbarService.successMessage('Registro Excluido Com Sucesso');
+        } catch (error) {
+          console.log('ERROR 132' + error);
+          this.snackbarService.showError('Falha ao Excluir');
+        }
+      }
+    });
   }
 }

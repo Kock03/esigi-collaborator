@@ -1,5 +1,5 @@
 <div id="collaboratorDocumentTab" class="tab">
-  <div class="content-scroll" *ngIf="documentArray">
+  <div class="content-scroll">
     <div fxLayout="row">
       <div class="envolti-table mat-elevation-z8" fxLayout="column">
         <table mat-table [dataSource]="data" #documentTable>
@@ -32,18 +32,18 @@
             <td
               class="button-tab"
               mat-cell
-              *matCellDef="let document; let index = index">
+              *matCellDef="let document">
               <button
                 class="table-button"
                 mat-button
-                (click)="getDocument(document, index)">
+                (click)="getDocument(document, document.id)">
                 <mat-icon>edit</mat-icon>
               </button>
 
               <button
                 class="table-button"
                 mat-button
-                (click)="deleteDocument(index)">
+                (click)="deleteDocument(document.id)">
                 <mat-icon>delete</mat-icon>
               </button>
             </td>

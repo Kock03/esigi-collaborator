@@ -15,6 +15,7 @@ import {
 } from '@angular/material/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DocumentValidator } from 'src/app/validators/document.validator';
+import { CollaboratorDependentsProvider } from 'src/providers/collaborator-providers/collaborator-dependents.provider';
 
 export const PICK_FORMATS = {
   parse: { dateInput: { month: 'numeric', year: 'numeric', day: 'numeric' } },
@@ -49,13 +50,19 @@ export class CollaboratorDependentsDialog {
 
   dependentForm!: FormGroup;
   Date: any;
+  collaboratorId!: string | null;
+  method!: string | null;
+  dependentId!: string | null;
   constructor(
     public dialogRef: MatDialogRef<CollaboratorDependentsDialog>,
     private fb: FormBuilder,
+    private collaboratorDependentsProvider: CollaboratorDependentsProvider,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
   ngOnInit(): void {
+    this.method = sessionStorage.getItem('method')!;
+    this.collaboratorId = sessionStorage.getItem('collaborator_id')!;
     this.initForm();
   }
 
@@ -71,6 +78,7 @@ export class CollaboratorDependentsDialog {
       ddd: [null, Validators.required],
       phoneNumber: [null, Validators.required],
       email: [null, [Validators.required, Validators.email]],
+      collaborator: { id: this.collaboratorId },
     });
     if (this.data) {
       this.dependentForm.patchValue(this.data);
@@ -79,10 +87,31 @@ export class CollaboratorDependentsDialog {
 
   onNoClick(): void {
     this.dialogRef.close();
+    sessionStorage.removeItem('dependent_id');
+    sessionStorage.removeItem('method');
+    console.log(this.dependentForm)
   }
 
-  save() {
+ async save() {
     const data = this.dependentForm.getRawValue();
-    this.dialogRef.close(data);
+    if (this.method === 'add') {
+      try {
+        const dependent = await this.collaboratorDependentsProvider.store(data);
+        sessionStorage.setItem('dependent_id', dependent.id);
+      } catch (error: any) {
+        console.log('ERROR 132' + error);
+      }
+    }
+    if (this.method === 'edit') {
+      try {
+        this.dependentId = sessionStorage.getItem('dependent_id');
+        const updateDependent = await this.collaboratorDependentsProvider.update(
+          this.dependentId,
+          data
+        );
+      } catch (error: any) {
+        console.log('ERROR 132' + error);
+      }
+    }
   }
 }
