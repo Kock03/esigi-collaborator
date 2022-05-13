@@ -6,10 +6,16 @@
     border-width: 3px;
   }
 
-  .buttons-experience{
-    height: 40px;
+  b {
+    margin-right: 9px;
+  }
+
+  .buttons-experience {
+    height: 100%;
+    max-height: 40px;
     margin-top: 140px;
     width: 100%;
+
 
   }
 
@@ -25,11 +31,13 @@
 
   .mat-list-item {
     height: auto !important;
+    width: auto !important;
+    
   }
 
   .list-group {
     margin-top: 16px;
- 
+
   }
 
   .label-office {
@@ -56,14 +64,14 @@
     height: 100% !important;
     max-height: 600px;
   }
-  
-  .mat-icon-list{
+
+  .mat-icon-list {
     margin-top: 100px;
   }
 }
 
 #resumeExperiencDialog {
- 
+
 
   .title {
     text-align: center;

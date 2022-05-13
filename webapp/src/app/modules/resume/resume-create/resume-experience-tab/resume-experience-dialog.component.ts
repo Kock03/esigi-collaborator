@@ -28,7 +28,7 @@ export class ResumeDialogExperience {
       office: [null, Validators.required],
       companyName: [null, Validators.required],
       locality: [null],
-      active: [false],
+      active: [true],
       startMonth: [null, Validators.required],
       startYear: [null, Validators.required],
       terminusMonth: [null, Validators.required],

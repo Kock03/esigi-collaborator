@@ -1,6 +1,8 @@
 <div id="resumeExperiencDialog" class="dialog">
   <div class="content-scroll" *ngIf="experienceForm">
-    <h2 class="title" mat-dialog-title>{{'resumes.resume_experience.experience_registration'|translate}}</h2>
+    <h2 class="title" mat-dialog-title>
+      {{'resumes.resume_experience.experience_registration'|translate}}
+    </h2>
     <mat-dialog-content class="mat-typography">
       <form [formGroup]="experienceForm" fxLayout="column">
         <div fxFlex="100" fxLayoutGap="16px">
@@ -8,30 +10,34 @@
             <mat-label>{{'generic.responsibility'|translate}}</mat-label>
             <input matInput placeholder="Cargo" formControlName="office" />
           </mat-form-field>
-          <mat-form-field fxFlex="50" appearance="outline">
-            <mat-label>{{'resumes.resume_experience.company_name'|translate}} </mat-label>
-            <input
-              matInput
-              placeholder="Nome da empresa"
-              formControlName="companyName" />
-          </mat-form-field>
-        </div>
-        <div fxFlex="100" fxLayoutGap="16px">
-          <mat-form-field fxFlex="50" appearance="outline">
-            <mat-label>{{'resumes.resume_experience.locality'|translate}}</mat-label>
-            <input
-              matInput
-              placeholder="Localidade"
-              formControlName="locality" />
-          </mat-form-field>
           <mat-checkbox
-            fxLayoutAlign="left center"
+            fxLayoutAlign="start center"
             class="checkbox"
             color="primary"
             fxFlex="50"
             formControlName="active"
             >{{'resumes.resume_experience.current_job'|translate}}</mat-checkbox
           >
+        </div>
+        <div fxFlex="100" fxLayoutGap="16px">
+          <mat-form-field fxFlex="50" appearance="outline">
+            <mat-label
+              >{{'resumes.resume_experience.locality'|translate}}</mat-label
+            >
+            <input
+              matInput
+              placeholder="Localidade"
+              formControlName="locality" />
+          </mat-form-field>
+          <mat-form-field fxFlex="50" appearance="outline">
+            <mat-label
+              >{{'resumes.resume_experience.company_name'|translate}}
+            </mat-label>
+            <input
+              matInput
+              placeholder="Nome da empresa"
+              formControlName="companyName" />
+          </mat-form-field>
         </div>
         <div fxFlex="100" fxLayoutGap="16px">
           <mat-form-field fxFlex="50" appearance="outline">
@@ -72,7 +78,9 @@
         </div>
         <div fxFlex="100" fxLayoutGap="16px">
           <mat-form-field fxFlex="100" appearance="outline">
-            <mat-label>{{'resumes.resume_experience.sector'|translate}}</mat-label>
+            <mat-label
+              >{{'resumes.resume_experience.sector'|translate}}</mat-label
+            >
             <input matInput placeholder="Setor" formControlName="sector" />
           </mat-form-field>
         </div>
@@ -81,7 +89,9 @@
             fxFlex="100"
             class="example-full-width"
             appearance="outline">
-            <mat-label>{{'resumes.resume_experience.description'|translate}}</mat-label>
+            <mat-label
+              >{{'resumes.resume_experience.description'|translate}}</mat-label
+            >
             <textarea
               matInput
               placeholder="Ex: contribuir para a melhoria contínua do serviço..."
@@ -106,7 +116,7 @@
           [mat-dialog-close]="true"
           (click)="saveExperience()"
           [disabled]="experienceForm.invalid">
-          {{'generic.delete_button' | translate}}
+          {{'generic.save_button' | translate}}
         </button>
       </div>
     </mat-dialog-actions>
