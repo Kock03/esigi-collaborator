@@ -1,5 +1,5 @@
 <div id="collaboratorSkillTab" class="tab">
-  <div class="content-scroll" *ngIf="skillArray">
+  <div class="content-scroll">
     <div fxLayout="row">
       <div class="envolti-table mat-elevation-z8" fxLayout="column">
         <table mat-table [dataSource]="data" #skillTable>
@@ -53,13 +53,13 @@
               <button
                 class="table-button"
                 mat-button
-                (click)="getSkill(skill, index)">
+                (click)="getSkill(skill, skill.id)">
                 <mat-icon>edit</mat-icon>
               </button>
               <button
                 class="table-button"
                 mat-button
-                (click)="deleteSkill(index)">
+                (click)="deleteSkill(skill.id)">
                 <mat-icon>delete</mat-icon>
               </button>
             </td>

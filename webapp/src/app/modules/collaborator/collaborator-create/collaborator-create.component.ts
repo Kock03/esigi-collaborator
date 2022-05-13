@@ -44,30 +44,7 @@ export class CollaboratorCreateComponent implements OnInit {
     ['Documents'],
   ];
 
-  get educationArray() {
-    return this.collaboratorForm.controls['Educations'] as FormArray;
-  }
-  get languageArray() {
-    return this.collaboratorForm.controls['Languages'] as FormArray;
-  }
 
-  get dependentsArray() {
-    return this.collaboratorForm.controls['Dependents'] as FormArray;
-  }
-  get bankArray() {
-    return this.collaboratorForm.controls['BankData'] as FormArray;
-  }
-
-  get financeArray() {
-    return this.collaboratorForm.controls['Financials'] as FormArray;
-  }
-
-  get skillArray() {
-    return this.collaboratorForm.controls['Skills'] as FormArray;
-  }
-  get documentArray() {
-    return this.collaboratorForm.controls['Documents'] as FormArray;
-  }
 
   constructor(
     private fb: FormBuilder,
