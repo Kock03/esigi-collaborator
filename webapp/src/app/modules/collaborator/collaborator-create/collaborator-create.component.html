@@ -7,7 +7,7 @@
       (click)="listCollaborator()">
       <mat-icon>chevron_left</mat-icon>
     </button>
-    <h2 class="title">{{"sidenav.collaborator" | translate}}</h2>
+    <h2 class="title">{{ 'sidenav.collaborator' | translate }}</h2>
   </div>
 
   <div fxLayout="row" class="tab" fxLayoutGap="16px">
@@ -16,7 +16,7 @@
       fxLayout="column"
       class="tab-group"
       [ngClass]="{ done: step > 0, active: step == 1 }">
-      <p class="tab-item">{{'generic.register' | translate}}</p>
+      <p class="tab-item">{{ 'generic.register' | translate }}</p>
       <span class="tab-border"></span>
     </div>
     <div
@@ -24,7 +24,9 @@
       fxLayout="column"
       class="tab-group"
       [ngClass]="{ done: step > 1, active: step == 2 }">
-      <p class="tab-item">{{'collaborator.colaborator_create.dependents.name' | translate}}</p>
+      <p class="tab-item">
+        {{ 'collaborator.colaborator_create.dependents.name' | translate }}
+      </p>
       <span class="tab-border"></span>
     </div>
     <div
@@ -32,7 +34,9 @@
       fxLayout="column"
       class="tab-group"
       [ngClass]="{ done: step > 2, active: step == 3 }">
-      <p class="tab-item">{{'collaborator.colaborator_create.education.name' | translate}}</p>
+      <p class="tab-item">
+        {{ 'collaborator.colaborator_create.education.name' | translate }}
+      </p>
       <span class="tab-border"></span>
     </div>
     <div
@@ -40,7 +44,9 @@
       fxLayout="column"
       class="tab-group"
       [ngClass]="{ done: step > 3, active: step == 4 }">
-      <p class="tab-item">{{'collaborator.colaborator_create.bank.bank_data' | translate}}</p>
+      <p class="tab-item">
+        {{ 'collaborator.colaborator_create.bank.bank_data' | translate }}
+      </p>
       <span class="tab-border"></span>
     </div>
     <div
@@ -48,7 +54,9 @@
       fxLayout="column"
       class="tab-group"
       [ngClass]="{ done: step > 4, active: step == 5 }">
-      <p class="tab-item">{{'collaborator.colaborator_create.finance.name' | translate}}</p>
+      <p class="tab-item">
+        {{ 'collaborator.colaborator_create.finance.name' | translate }}
+      </p>
       <span class="tab-border"></span>
     </div>
     <div
@@ -56,7 +64,9 @@
       fxLayout="column"
       class="tab-group"
       [ngClass]="{ done: step > 5, active: step == 6 }">
-      <p class="tab-item">{{'collaborator.colaborator_create.skills.name' | translate}}</p>
+      <p class="tab-item">
+        {{ 'collaborator.colaborator_create.skills.name' | translate }}
+      </p>
       <span class="tab-border"></span>
     </div>
     <div
@@ -64,7 +74,9 @@
       fxLayout="column"
       class="tab-group"
       [ngClass]="{ done: step > 6, active: step == 7 }">
-      <p class="tab-item">{{'collaborator.colaborator_create.documents.name' | translate}}</p>
+      <p class="tab-item">
+        {{ 'collaborator.colaborator_create.documents.name' | translate }}
+      </p>
       <span class="tab-border"></span>
     </div>
     <div
@@ -74,7 +86,9 @@
       class="tab-group"
       [ngClass]="{ done: step > 7, active: step == 8 }"
       #feedbackTab>
-      <p class="tab-item">{{'collaborator.colaborator_create.feedbacks.name' | translate}}</p>
+      <p class="tab-item">
+        {{ 'collaborator.colaborator_create.feedbacks.name' | translate }}
+      </p>
       <span class="tab-border"></span>
     </div>
     <div
@@ -83,7 +97,7 @@
       fxLayout="column"
       class="tab-group"
       [ngClass]="{ done: step > 8, active: step == 9 }">
-      <p class="tab-item">{{'generic.accompaniment' | translate}}</p>
+      <p class="tab-item">{{ 'generic.accompaniment' | translate }}</p>
       <span class="tab-border"></span>
     </div>
   </div>
@@ -111,7 +125,6 @@
     *ngIf="collaboratorForm"
     [hidden]="step != 4"
     [form]="collaboratorForm"
-
     (onChange)="handleChanges($event)">
   </app-collaborator-bank-tab>
   <app-collaborator-finance-tab
@@ -156,14 +169,14 @@
 
     <button
       mat-flat-button
-      *ngIf="step != 7"
+      *ngIf="step !== 1 && step !== 7"
       (click)="navigate('next')"
       color="primary">
       Continuar
     </button>
     <button
       mat-flat-button
-      *ngIf="step == 1"
+      *ngIf="step === 1"
       (click)="saveCollaborator()"
       color="primary">
       Salvar
@@ -174,7 +187,23 @@
     fxLayoutAlign="center end"
     fxLayoutGap="16px"
     *ngIf="collaboratorId !== 'novo'">
-    <button mat-flat-button (click)="editCollaborator()" color="primary">
+    <button mat-button *ngIf="step != 1" (click)="navigate('back')">
+      Voltar
+    </button>
+
+    <button
+      mat-flat-button
+      *ngIf="step !== 1 && step !== 7"
+      (click)="navigate('next')"
+      color="primary">
+      Continuar
+    </button>
+
+    <button
+      mat-flat-button
+      (click)="editCollaborator()"
+      color="primary"
+      *ngIf="step === 1">
       Salvar
     </button>
   </div>

@@ -35,13 +35,23 @@ export class CollaboratorCreateComponent implements OnInit {
   urlStep!: number;
 
   validations = [
-    ['cpf', 'admissionDate'],
-    ['Dependents'],
-    ['Educations', 'Languages'],
-    ['BankData'],
-    ['Financials'],
-    ['Skills'],
-    ['Documents'],
+    [
+      'cpf',
+      'admissionDate',
+      'firstNameCorporateName',
+      'lastNameFantasyName',
+      'login',
+      'gender',
+      'maritalStatus',
+      'office',
+      'collaboratorTypes',
+      'active',
+      'birthDate',
+      'email',
+      'Phone',
+      'Address'
+    ],
+
   ];
 
 
@@ -113,15 +123,15 @@ export class CollaboratorCreateComponent implements OnInit {
       maritalStatus: [null, Validators.required],
       office: [null, Validators.required],
       collaboratorTypes: [null, Validators.required],
-      active: [null, Validators.required],
+      active: [true, Validators.required],
       cpf: this.fb.control({ value: null, disabled: false }, [
-        DocumentValidator.isValidCpf(),
+        DocumentValidator.isValidCpf(), Validators.required
       ]),
       birthDate: [null, Validators.required],
       admissionDate: [null, Validators.required],
       email: [null, [Validators.email, Validators.required]],
       cnpj: this.fb.control({ value: null, disabled: true }, [
-        DocumentValidator.isValidCnpj(),
+        DocumentValidator.isValidCnpj(), Validators.required
       ]),
       stateRegistration: [null],
       municipalInscription: [null],
@@ -156,6 +166,7 @@ export class CollaboratorCreateComponent implements OnInit {
     let data = this.collaboratorForm.getRawValue();
 
     try {
+      this.handleStep(2)
       const colaborator = await this.collaboratorProvider.store(data);
       sessionStorage.setItem('colaborator_id', colaborator.id);
       this.snackbarService.successMessage('Colaborador Cadastrado Com Sucesso');
@@ -191,11 +202,11 @@ export class CollaboratorCreateComponent implements OnInit {
 
   checkValid(): boolean {
     let isValid = true;
-    const validations = this.validations[this.step - 1];
+    const validations = this.validations[0];
     for (let index = 0; index < validations.length; index++) {
       if (this.collaboratorForm.controls[validations[index]].invalid) {
         isValid = false;
-  
+
         this.collaboratorForm.markAllAsTouched();
       }
     }

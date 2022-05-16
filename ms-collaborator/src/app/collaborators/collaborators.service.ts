@@ -111,10 +111,6 @@ export class CollaboratorsService {
   }
 
   async update(id: string, data: UpdateCollaboratorsDto) {
-    const activeBanks = data.BankData.filter((bank) => bank.status);
-    if (activeBanks.length > 1) {
-      throw new BadRequestException('Existem mais de um banco ativo');
-    }
     try {
       const collaborator = await this.collaboratorsRepository.findOneOrFail({
         id,

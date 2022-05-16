@@ -22,11 +22,11 @@ export class CollaboratorEducationDialog {
     private collaboratorEducationProvider: CollaboratorEducationProvider,
     private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: any
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.method = sessionStorage.getItem('method')!;
-    this.collaboratorId = sessionStorage.getItem('collaboratorId')!;
+    this.collaboratorId = sessionStorage.getItem('collaborator_id')!;
     this.initForm();
   }
 
@@ -43,7 +43,7 @@ export class CollaboratorEducationDialog {
     }
   }
 
-  ngAfterViewInit(): void {}
+  ngAfterViewInit(): void { }
 
   onNoClick(): void {
     this.dialogRef.close();
@@ -51,24 +51,26 @@ export class CollaboratorEducationDialog {
     sessionStorage.removeItem('method');
   }
 
- async save() {
+  async save() {
     const data = this.educationForm.getRawValue();
-    try {
-      const education = await this.collaboratorEducationProvider.store(data);
-      sessionStorage.setItem('education_id', education.id);
-    } catch (error: any) {
-      console.log('ERROR 132' + error);
+    if (this.method === 'add') {
+      try {
+        const education = await this.collaboratorEducationProvider.store(data);
+        sessionStorage.setItem('education_id', education.id);
+      } catch (error: any) {
+        console.log('ERROR 132' + error);
+      }
     }
-  if (this.method === 'edit') {
-    try {
-      this.educationId = sessionStorage.getItem('education_id');
-      const updateEducation = await this.collaboratorEducationProvider.update(
-        this.educationId,
-        data
-      );
-    } catch (error: any) {
-      console.log('ERROR 132' + error);
+    if (this.method === 'edit') {
+      try {
+        this.educationId = sessionStorage.getItem('education_id');
+        const updateEducation = await this.collaboratorEducationProvider.update(
+          this.educationId,
+          data
+        );
+      } catch (error: any) {
+        console.log('ERROR 132' + error);
+      }
     }
-  }
   }
 }

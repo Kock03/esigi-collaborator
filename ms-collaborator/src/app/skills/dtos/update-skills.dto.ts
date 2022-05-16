@@ -4,12 +4,14 @@ import {
   IsEnum,
   IsNotEmpty,
   IsNumber,
+  IsObject,
   IsOptional,
   IsString,
   MaxLength,
   Min,
   MinLength,
 } from 'class-validator';
+import { CollaboratorsEntity } from 'src/app/collaborators/collaborators.entity';
 import { Seniority } from './seniority.enun';
 
 export class UpdateSkillsDto {
@@ -34,4 +36,9 @@ export class UpdateSkillsDto {
   @IsOptional()
   @IsBoolean()
   currentPosition: boolean;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsObject()
+  Collaborator: CollaboratorsEntity;
 }
