@@ -72,11 +72,11 @@
 
   .list-item {
     position: absolute !important;
-    // flex-wrap: nowrap !important;
-    line-break: auto;
+    line-break: anywhere;
     width: 100% !important;
     max-width: 400px !important;
-
+     overflow: auto;
+    height: 100% !important;
   }
 
 
