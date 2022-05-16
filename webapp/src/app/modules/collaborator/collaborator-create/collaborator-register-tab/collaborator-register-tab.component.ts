@@ -134,9 +134,9 @@ export class CollaboratorRegisterTabComponent implements OnInit {
   }
   collaboratorIsActive() {
     if (this.collaborator.active == true) {
-      this.collaborator.active = 'ativo';
-    } else {
       this.collaborator.active = 'inativo';
+    } else {
+      this.collaborator.active = 'ativo';
     }
   }
 }
