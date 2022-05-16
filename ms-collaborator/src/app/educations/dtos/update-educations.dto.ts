@@ -9,6 +9,7 @@ import {
   MaxLength,
   MinLength,
 } from 'class-validator';
+import { CollaboratorsEntity } from 'src/app/collaborators/collaborators.entity';
 import { Schooling } from './schooling.enum';
 import { Situation } from './situation.enum';
 
@@ -27,7 +28,7 @@ export class UpdateEducationsDto {
 
   @ApiProperty()
   @IsNotEmpty()
-  @IsNumber()
+  @IsString()
   @MinLength(10)
   @MaxLength(100)
   institution: string;
@@ -36,4 +37,9 @@ export class UpdateEducationsDto {
   @IsNotEmpty()
   @IsEnum(Situation)
   situation: Situation;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsObject()
+  Collaborator: CollaboratorsEntity;
 }

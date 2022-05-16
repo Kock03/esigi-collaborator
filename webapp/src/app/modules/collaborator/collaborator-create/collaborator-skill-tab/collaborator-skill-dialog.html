@@ -15,22 +15,34 @@
         <mat-form-field appearance="outline">
           <mat-label>{{'generic.seniority.name'|translate}}}</mat-label>
           <mat-select formControlName="seniority">
-            <mat-option [value]="1">{{'generic.seniority.senior'|translate}}</mat-option>
-            <mat-option [value]="2">{{'generic.seniority.full'|translate}}</mat-option>
-            <mat-option [value]="3">{{'generic.seniority.junior'|translate}}</mat-option>
-            <mat-option [value]="4">{{'generic.seniority.apprentice'|translate}}</mat-option>
-            <mat-option [value]="5">{{'generic.seniority.specialist'|translate}}</mat-option>
-            <mat-option [value]="6">{{'generic.seniority.architect'|translate}}</mat-option>
+            <mat-option [value]="1"
+              >{{'generic.seniority.senior'|translate}}</mat-option
+            >
+            <mat-option [value]="2"
+              >{{'generic.seniority.full'|translate}}</mat-option
+            >
+            <mat-option [value]="3"
+              >{{'generic.seniority.junior'|translate}}</mat-option
+            >
+            <mat-option [value]="4"
+              >{{'generic.seniority.apprentice'|translate}}</mat-option
+            >
+            <mat-option [value]="5"
+              >{{'generic.seniority.specialist'|translate}}</mat-option
+            >
+            <mat-option [value]="6"
+              >{{'generic.seniority.architect'|translate}}</mat-option
+            >
           </mat-select>
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-label>  {{'generic.skills.time_experience'|translate}}</mat-label>
+          <mat-label> {{'generic.skills.time_experience'|translate}}</mat-label>
           <input
             matInput
             disableRipple
             formControlName="yearsExperience"
-            mask="0||00"
+            type="number"
             placeholder="Tempo de Experiência" />
         </mat-form-field>
 

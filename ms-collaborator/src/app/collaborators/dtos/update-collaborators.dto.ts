@@ -142,44 +142,4 @@ export class UpdateCollaboratorsDto {
   @ApiProperty()
   @IsOptional()
   Phone: PhoneEntity;
-
-  @ApiPropertyOptional()
-  @IsOptional()
-  @IsArray()
-  Skills: SkillsEntity[];
-
-  @ApiPropertyOptional()
-  @IsOptional()
-  @IsArray()
-  Documents: DocumentsEntity[];
-
-  @ApiPropertyOptional()
-  @IsOptional()
-  @IsArray()
-  Languages: LanguagesEntity[];
-
-  @ApiPropertyOptional()
-  @IsOptional()
-  @IsArray()
-  Educations: EducationsEntity[];
-
-  @ApiPropertyOptional()
-  @IsOptional()
-  @IsArray()
-  BankData: BankDataEntity[];
-
-  @ApiPropertyOptional()
-  @IsOptional()
-  @IsArray()
-  Financials: FinancialsEntity[];
-
-  @ApiPropertyOptional()
-  @IsOptional()
-  @IsArray()
-  Dependents: DependentsEntity[];
-
-  @ApiPropertyOptional()
-  @IsOptional()
-  @IsArray()
-  Feedbacks: FeedbacksEntity[];
 }

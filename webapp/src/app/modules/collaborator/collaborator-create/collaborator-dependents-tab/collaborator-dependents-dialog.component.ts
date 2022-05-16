@@ -78,7 +78,7 @@ export class CollaboratorDependentsDialog {
       ddd: [null, Validators.required],
       phoneNumber: [null, Validators.required],
       email: [null, [Validators.required, Validators.email]],
-      collaborator: { id: this.collaboratorId },
+      Collaborator: { id: this.collaboratorId },
     });
     if (this.data) {
       this.dependentForm.patchValue(this.data);

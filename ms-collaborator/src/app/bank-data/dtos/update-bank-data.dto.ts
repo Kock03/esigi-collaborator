@@ -4,6 +4,7 @@ import {
   IsEnum,
   IsNotEmpty,
   IsNumber,
+  IsObject,
   IsOptional,
   IsString,
   Length,
@@ -62,4 +63,9 @@ export class UpdateBankDataDto {
   @ApiProperty()
   @IsOptional()
   status: boolean;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsObject()
+  Collaborator: CollaboratorsEntity;
 }

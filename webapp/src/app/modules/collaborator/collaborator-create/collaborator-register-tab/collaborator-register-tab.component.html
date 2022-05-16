@@ -20,6 +20,13 @@
               <mat-option [value]="2">{{'collaborator.colaborator_create.collaborator_type.pj'|translate}}</mat-option>
               <mat-option [value]="3">{{'collaborator.colaborator_create.collaborator_type.cooperated'|translate}}</mat-option>
             </mat-select>
+            <mat-error
+            *ngIf="
+              collaboratorForm && collaboratorForm.controls['collaboratorTypes'].hasError('required')
+            "
+          >
+            Selecione o Tipo de Contrato</mat-error
+          >
           </mat-form-field>
 
           <mat-form-field fxFlex="35" appearance="outline">
@@ -74,6 +81,12 @@
             placeholder="CPF"
             formControlName="cpf"
             mask="000.000.000-00" />
+            <mat-error
+            *ngIf="
+              collaboratorForm && collaboratorForm.controls['cpf'].hasError('required')
+            "
+          >CPF inválido 
+            </mat-error>
         </mat-form-field>
 
         <mat-form-field

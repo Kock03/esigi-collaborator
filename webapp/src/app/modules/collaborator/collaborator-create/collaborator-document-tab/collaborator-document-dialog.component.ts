@@ -28,7 +28,7 @@ export class CollaboratorDocumentDialog {
 
   ngOnInit(): void {
     this.method = sessionStorage.getItem('method')!;
-    this.collaboratorId = sessionStorage.getItem('collaboratorId')!;
+    this.collaboratorId = sessionStorage.getItem('collaborator_id')!;
     this.initForm();
   }
 
