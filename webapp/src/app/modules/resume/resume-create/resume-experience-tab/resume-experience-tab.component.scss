@@ -15,9 +15,15 @@
     max-height: 40px;
     margin-top: 140px;
     width: 100%;
+    margin-left: 390px;
     // float: right;
   }
 
+  .description {
+    width: 100%;
+    max-width: 200px;
+    overflow-wrap: break-word;
+  }
 
 
 
@@ -29,12 +35,6 @@
     overflow: auto;
     height: calc(100vh - 280px);
     margin-right: 10px !important;
-  }
-
-  .mat-list-item {
-    height: auto !important;
-    width: auto !important;
-
   }
 
   .list-group {
@@ -62,11 +62,24 @@
     height: 100%;
   }
 
-  .mat.list.item {
+  mat-list-item {
     padding: 0 !important;
     height: 100% !important;
-    max-height: 600px;
+    max-height: 200px;
+    width: 45%;
+
   }
+
+  .list-item {
+    position: absolute !important;
+    // flex-wrap: nowrap !important;
+    line-break: auto;
+    width: 100% !important;
+    max-width: 400px !important;
+
+  }
+
+
 
   .mat-icon-list {
     margin-top: 100px;
@@ -80,13 +93,31 @@
     text-align: center;
   }
 
+  .input-description {
+    height: 100% !important;
+    height: 250px;
+    overflow: auto !important;
+    width: 100% !important;
+    max-width: 400px;
+    white-space:wrap
+  }
+
+  // .description-button{
+  //   height: 100%;
+  //   max-height: 70px;
+  //   width: 100%;
+  //   max-width: 20px
+  // }
+
   .button-dialog {
     margin-left: 140px;
+    position: fixed;
+
   }
 
   .content-scroll {
     overflow: auto;
-    height: calc(100vh - 220px);
+    height: calc(100vh - 280px);
     margin-left: 15px !important;
     position: absolute;
   }

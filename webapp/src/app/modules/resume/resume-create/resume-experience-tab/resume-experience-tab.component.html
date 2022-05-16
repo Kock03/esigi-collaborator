@@ -43,13 +43,16 @@
             <span>{{ experience.terminusMonth }}</span>
             <span> / {{ experience.terminusYear }}</span>
           </div>
-          <p></p>
-          <span>
-            {{ experience.description }}
-          </span>
+          <div>
+            <p></p>
+          <p> {{ experience.description }}</p>
+          </div>
         </div>
 
-        <div class="buttons-experience" fxLayout="row" fxLayoutAlign="center end"  fxLayoutAlign="end end">
+        <div
+          class="buttons-experience"
+          fxLayout="row"
+          fxLayoutAlign="end end">
           <button
             class="table-button"
             mat-button

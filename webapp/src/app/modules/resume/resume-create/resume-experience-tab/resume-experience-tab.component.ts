@@ -77,7 +77,7 @@ export class ResumeExperienceTabComponent implements OnInit {
   openDialog() {
     const dialogRef = this.dialog.open(ResumeDialogExperience, {
       width: '500px',
-      height: '620px',
+      height: '640px',
     });
 
     dialogRef.afterClosed().subscribe(experience => {
@@ -114,7 +114,7 @@ export class ResumeExperienceTabComponent implements OnInit {
   getExperience(experienceSelected: any, index: number) {
     const dialogRef = this.dialog.open(ResumeDialogExperience, {
       width: '500px',
-      height: '620px',
+      height: '640px',
       data: experienceSelected,
     });
 
