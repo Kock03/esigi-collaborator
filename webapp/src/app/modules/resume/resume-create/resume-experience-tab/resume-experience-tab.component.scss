@@ -15,9 +15,11 @@
     max-height: 40px;
     margin-top: 140px;
     width: 100%;
-
-
+    // float: right;
   }
+
+
+
 
   .example-full-width {
     width: 100%;
@@ -32,7 +34,7 @@
   .mat-list-item {
     height: auto !important;
     width: auto !important;
-    
+
   }
 
   .list-group {
@@ -57,6 +59,7 @@
     width: 45% !important;
     padding: 15px;
     margin-bottom: 16px;
+    height: 100%;
   }
 
   .mat.list.item {
@@ -79,7 +82,13 @@
 
   .button-dialog {
     margin-left: 140px;
+  }
 
+  .content-scroll {
+    overflow: auto;
+    height: calc(100vh - 220px);
+    margin-left: 15px !important;
+    position: absolute;
   }
 
 }
