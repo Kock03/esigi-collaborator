@@ -16,7 +16,10 @@ import {
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
+import { CollaboratorDocumentProvider } from 'src/providers/collaborator-providers/collaborator-document.provider';
+import { CollaboratorProvider } from 'src/providers/collaborator-providers/collaborator.provider';
 import { ConfirmDialogService } from 'src/services/confirn-dialog.service';
+import { SnackBarService } from 'src/services/snackbar.service';
 import { CollaboratorDocumentDialog } from './collaborator-document-dialog.component';
 
 @Component({
@@ -26,7 +29,6 @@ import { CollaboratorDocumentDialog } from './collaborator-document-dialog.compo
   encapsulation: ViewEncapsulation.None,
 })
 export class CollaboratorDocumentTabComponent implements OnInit {
-  @Input() documentArray!: FormArray;
   @Output() onChange: EventEmitter<any> = new EventEmitter();
   @ViewChild('documentTable') documentTable!: MatTable<any>;
 
@@ -34,39 +36,40 @@ export class CollaboratorDocumentTabComponent implements OnInit {
 
   selectedIndex = 0;
   documentForm!: FormGroup;
-  index: any = null;
   Document: any;
   data: [] = [];
+  method!: string;
+  collaboratorId!: any;
+  documentId!: string;
+  collaboratorMethod!: string;
 
   constructor(
     private fb: FormBuilder,
     public dialog: MatDialog,
-    private dialogService: ConfirmDialogService
+    private dialogService: ConfirmDialogService,
+    private collaboratorDocumentProvider: CollaboratorDocumentProvider,
+    private snackbarService: SnackBarService,   
+    private collaboratorProvider: CollaboratorProvider,
   ) {}
 
   ngOnInit(): void {
-    if (this.documentArray.value.length > 0) {
-      this.data = this.documentArray.value;
+    this.collaboratorMethod = sessionStorage.getItem('collaborator_method')!;
+    if (this.collaboratorMethod === 'edit') {
+      this.getDocumentList();
     }
-
-    this.initObservables();
   }
 
-  initObservables() {
-    this.documentArray.valueChanges.subscribe(res => {
-      const isNullIndex = this.documentArray.value.findIndex(
-        (document: any) => document == null
-      );
-      if (isNullIndex !== -1) {
-        this.documentArray.removeAt(isNullIndex);
-      }
-      if (res) {
-        this.data = this.documentArray.value;
-      }
-    });
+  async getDocumentList() {
+    this.collaboratorId = sessionStorage.getItem('collaborator_id');
+    const data = await this.collaboratorProvider.findOne(this.collaboratorId);
+    this.data = data.Documents;
   }
+
+
 
   openDialog() {
+    this.method = 'add';
+    sessionStorage.setItem('method', this.method);
     const dialogRef = this.dialog.open(CollaboratorDocumentDialog, {
       width: '500px',
       height: '300px',
@@ -74,31 +77,34 @@ export class CollaboratorDocumentTabComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(document => {
       if (document) {
-        this.documentArray.insert(0, this.fb.group(document));
-        this.documentTable.renderRows();
+        this.getDocumentList();
       }
     });
   }
 
-  getDocument(documentSelected: any, index: number) {
+  getDocument(documentSelected: any, id: string) {
+    this.method = 'edit';
+    sessionStorage.setItem('method', this.method);
+    this.documentId = id;
+    sessionStorage.setItem('document_id', this.documentId);
     const dialogRef = this.dialog.open(CollaboratorDocumentDialog, {
       width: '500px',
       height: '300px',
       data: documentSelected,
     });
 
-    this.index = index;
+
     dialogRef.afterClosed().subscribe(document => {
       if (document) {
-        this.documentArray.controls[this.index].patchValue(document);
+        this.getDocumentList();
       }
     });
   }
 
-  deleteDocument(index: number) {
+  deleteDocument(id: string) {
     const options = {
       data: {
-        title: 'Anteção',
+        title: 'Atenção',
         subtitle: 'Você tem certeza que deseja excluir essas informações?',
       },
       panelClass: 'confirm-modal',
@@ -108,7 +114,14 @@ export class CollaboratorDocumentTabComponent implements OnInit {
 
     this.dialogService.confirmed().subscribe(async confirmed => {
       if (confirmed) {
-        this.documentArray.removeAt(index);
+        try {
+          let deleteDocument = await this.collaboratorDocumentProvider.destroy(id);
+          this.getDocumentList();
+          this.snackbarService.successMessage('Registro Excluido Com Sucesso');
+        } catch (error) {
+          console.log('ERROR 132' + error);
+          this.snackbarService.showError('Falha ao Excluir');
+        }
       }
     });
   }

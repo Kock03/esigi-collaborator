@@ -15,7 +15,7 @@ import {
 import { ActivatedRoute, Router, RoutesRecognized } from '@angular/router';
 import { filter, pairwise } from 'rxjs/operators';
 import { ICollaborator } from 'src/app/interfaces/icollaborator';
-import { CollaboratorProvider } from 'src/providers/collaborator.provider';
+import { CollaboratorProvider } from 'src/providers/collaborator-providers/collaborator.provider';
 import { FeedbackProvider } from 'src/providers/feedback.provider';
 import { SnackBarService } from 'src/services/snackbar.service';
 

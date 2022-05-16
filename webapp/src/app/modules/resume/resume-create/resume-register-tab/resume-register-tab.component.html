@@ -13,15 +13,23 @@
 
         <div fxFlex="100" fxLayoutGap="16px" fxFlexAlign="end">
           <mat-form-field fxFlex="33" appearance="outline">
-            <mat-label>Nome</mat-label>
+            <mat-label>{{ 'generic.name' | translate }}</mat-label>
             <input matInput placeholder="Nome" formControlName="firstName" />
           </mat-form-field>
           <mat-form-field fxFlex="33" appearance="outline">
+<<<<<<< HEAD
             <mat-label>Sobrenome</mat-label>
             <input matInput placeholder="Sobrenome" formControlName="lastName" />
+=======
+            <mat-label>{{ 'generic.last_name' | translate }}</mat-label>
+            <input
+              matInput
+              placeholder="Sobrenome"
+              formControlName="lastName" />
+>>>>>>> 96a9a14096cf79627ee70e71536432cae664947b
           </mat-form-field>
           <mat-form-field fxFlex="34" appearance="outline">
-            <mat-label>Login</mat-label>
+            <mat-label>{{ 'generic.login' | translate }}</mat-label>
             <input matInput placeholder="Login" formControlName="login" />
           </mat-form-field>
         </div>
@@ -29,52 +37,114 @@
 
       <div fxFlex="100" fxLayoutGap="16px">
         <mat-form-field fxFlex="25" appearance="outline">
+<<<<<<< HEAD
           <mat-label>CPF</mat-label>
           <input matInput placeholder="CPF" formControlName="cpf" mask="000.000.000-00" />
         </mat-form-field>
         <mat-form-field fxFlex="25" appearance="outline">
           <mat-label>Data de aniversário</mat-label>
           <input matInput mask="00/00/0000" formControlName="birthDate" placeholder="Data de aniversário" />
+=======
+          <mat-label>{{ 'generic.cpf' | translate }}</mat-label>
+          <input
+            matInput
+            placeholder="CPF"
+            formControlName="cpf"
+            mask="000.000.000-00" />
+        </mat-form-field>
+        <mat-form-field fxFlex="25" appearance="outline">
+          <mat-label>{{ 'generic.birth_date' | translate }}</mat-label>
+          <input
+            matInput
+            [matDatepicker]="picker"
+            formControlName="birthDate"
+            placeholder="Data de aniversário" />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+>>>>>>> 96a9a14096cf79627ee70e71536432cae664947b
         </mat-form-field>
         <mat-form-field fxFlex="25" appearance="outline">
           <mat-label>Sexo</mat-label>
           <mat-select matInput disableRipple formControlName="gender">
-            <mat-option [value]="1">Masculino</mat-option>
-            <mat-option [value]="2">Feminino</mat-option>
+            <mat-option [value]="1">{{ "generic.gender.masculine" | translate }}</mat-option>
+            <mat-option [value]="2">{{ "generic.gender.feminine" | translate }}</mat-option>
           </mat-select>
         </mat-form-field>
         <mat-form-field fxFlex="25" appearance="outline">
           <mat-label>Estado Civil</mat-label>
           <mat-select matInput disableRipple formControlName="maritalStatus">
-            <mat-option [value]="1">Solteiro</mat-option>
-            <mat-option [value]="2">Casado</mat-option>
-            <mat-option [value]="2">Viúvo</mat-option>
-            <mat-option [value]="2">União estável</mat-option>
+            <mat-option [value]="1">{{
+              'generic.marital_status.single' | translate
+            }}</mat-option>
+            <mat-option [value]="2">{{
+              'generic.marital_status.married' | translate
+            }}</mat-option>
+            <mat-option [value]="3">{{
+              'generic.marital_status.widower' | translate
+            }}</mat-option>
+            <mat-option [value]="4">{{
+              'generic.marital_status.stable_union' | translate
+            }}</mat-option>
           </mat-select>
         </mat-form-field>
       </div>
 
       <div fxFlex="100" fxLayoutGap="16px" formGroupName="Address">
         <mat-form-field fxFlex="25" appearance="outline">
+<<<<<<< HEAD
           <mat-label>CEP </mat-label>
           <input matInput placeholder="CEP" formControlName="cep" type="text" mask="99999-999" />
+=======
+          <mat-label>{{ 'generic.address.cep' | translate }} </mat-label>
+          <input
+            matInput
+            placeholder="CEP"
+            formControlName="cep"
+            type="text"
+            mask="99999-999" />
+>>>>>>> 96a9a14096cf79627ee70e71536432cae664947b
           <mat-icon matSuffix style="cursor: pointer" (click)="getAddress()">
             search
           </mat-icon>
         </mat-form-field>
 
         <mat-form-field fxFlex="40" appearance="outline">
-          <mat-label>Rua</mat-label>
+          <mat-label>{{ 'generic.address.street' | translate }}</mat-label>
           <input matInput placeholder="Rua" formControlName="street" />
         </mat-form-field>
 
         <mat-form-field fxFlex="15" appearance="outline">
+<<<<<<< HEAD
           <mat-label>Número</mat-label>
           <input matInput placeholder="Número" formControlName="number" mask="0||00||000||0000" />
         </mat-form-field>
         <mat-form-field fxFlex="40" appearance="outline">
           <mat-label>Complemento</mat-label>
           <input matInput placeholder="Complemento" formControlName="complement" />
+=======
+          <mat-label>{{ 'generic.address.number' | translate }}</mat-label>
+          <input
+            matInput
+            placeholder="Número"
+            formControlName="number"
+            mask="0||00||000||0000" />
+        </mat-form-field>
+        <mat-form-field fxFlex="45" appearance="outline">
+          <mat-label>{{ 'generic.address.state' | translate }}</mat-label>
+          <input matInput placeholder="Estado" formControlName="state" />
+        </mat-form-field>
+      </div>
+
+      <div fxFlex="100" fxLayoutGap="16px" formGroupName="Address">
+        <mat-form-field fxFlex="40" appearance="outline">
+          <mat-label>{{ 'generic.address.complement' | translate }}</mat-label>
+          <input
+            matInput
+            placeholder="Complemento"
+            formControlName="complement" />
+>>>>>>> 96a9a14096cf79627ee70e71536432cae664947b
         </mat-form-field>
        
       </div>
@@ -82,10 +152,11 @@
       <div formGroupName="Phone" fxFlex="100" fxLayoutGap="16px">      
 
         <mat-form-field fxFlex="20" appearance="outline">
-          <mat-label>Bairro</mat-label>
+          <mat-label>{{ 'generic.address.district' | translate }}</mat-label>
           <input matInput placeholder="Bairro" formControlName="district" />
         </mat-form-field>
 
+<<<<<<< HEAD
         <mat-form-field fxFlex="30" appearance="outline">
           <mat-label>Estado</mat-label>
           <input matInput placeholder="Estado" formControlName="state" />
@@ -120,6 +191,59 @@
         
         <mat-form-field fxFlex="33" appearance="outline">
           <mat-label>Linkedin</mat-label>
+=======
+        <mat-form-field fxFlex="40" appearance="outline">
+          <mat-label>{{ 'generic.address.city' | translate }}</mat-label>
+          <input matInput placeholder="Cidade" formControlName="city" />
+        </mat-form-field>
+      </div>
+
+      <div fxFlex="100" fxLayoutGap="16px">
+        <mat-form-field fxFlex="50" appearance="outline">
+          <mat-label>{{ 'generic.email' | translate }}</mat-label>
+          <input matInput placeholder="Email" formControlName="email" />
+        </mat-form-field>
+
+        <mat-form-field fxFlex="50" appearance="outline">
+          <mat-label>{{ 'generic.site' | translate }}</mat-label>
+          <input matInput placeholder="Site" formControlName="site" />
+        </mat-form-field>
+      </div>
+
+      <div fxFlex="100" fxLayoutGap="16px">
+        <div formGroupName="Phone" fxFlex="100" fxLayoutGap="16px">
+          <mat-form-field fxFlex="30" appearance="outline">
+            <mat-label>{{ 'generic.ddi' | translate }}</mat-label>
+            <input
+              matInput
+              placeholder="DDI"
+              formControlName="ddi"
+              mask="+00" />
+          </mat-form-field>
+
+          <mat-form-field fxFlex="35" appearance="outline">
+            <mat-label>{{ 'generic.ddd' | translate }}</mat-label>
+            <input
+              matInput
+              placeholder="DDD"
+              formControlName="ddd"
+              mask="(00)" />
+          </mat-form-field>
+
+          <mat-form-field fxFlex="35" appearance="outline">
+            <mat-label>{{
+              'generic.phone.phone_number' | translate
+            }}</mat-label>
+            <input
+              matInput
+              placeholder="Telefone"
+              formControlName="phoneNumber"
+              mask="0000-0000||00000-0000" />
+          </mat-form-field>
+        </div>
+        <mat-form-field fxFlex="50" appearance="outline">
+          <mat-label>{{ 'generic.linkedIn' | translate }}</mat-label>
+>>>>>>> 96a9a14096cf79627ee70e71536432cae664947b
           <input matInput placeholder="Linkedin" formControlName="linkedin" />
         </mat-form-field>
 

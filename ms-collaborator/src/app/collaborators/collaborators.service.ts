@@ -38,10 +38,17 @@ export class CollaboratorsService {
     })
   }
 
+  async shortListCollaborators(){
+    return await this.collaboratorsRepository.find({
+      select: ['id', 'firstNameCorporateName', 'lastNameFantasyName'],
+      where: { active: true },
+    });
+  }
+
   async findInactive() {
     return await this.collaboratorsRepository
       .createQueryBuilder('collaborators')
-      .where('collaborators.active =false')
+      .where('collaborators.active =false') 
       .getMany();
   }
 
@@ -54,6 +61,7 @@ export class CollaboratorsService {
 
   findByName(query): Promise<CollaboratorsEntity[]> {
     return this.collaboratorsRepository.find({
+      select:[ 'id','firstNameCorporateName', 'lastNameFantasyName'],
       where: [
         { firstNameCorporateName: Like(`${query.firstNameCorporateName}%`) },]
     });
@@ -64,7 +72,9 @@ export class CollaboratorsService {
 
     options?: FindOneOptions<CollaboratorsEntity>,
   ) {
+    options = { relations: ['Financials', 'Address', 'BankData', 'Dependents', 'Documents', 'Educations','Feedbacks','Languages', 'Phone', 'Skills'] };
     try {
+     
       return await this.collaboratorsRepository.findOneOrFail(
         conditions,
         options,
@@ -101,10 +111,6 @@ export class CollaboratorsService {
   }
 
   async update(id: string, data: UpdateCollaboratorsDto) {
-    const activeBanks = data.BankData.filter((bank) => bank.status);
-    if (activeBanks.length > 1) {
-      throw new BadRequestException('Existem mais de um banco ativo');
-    }
     try {
       const collaborator = await this.collaboratorsRepository.findOneOrFail({
         id,

@@ -94,7 +94,7 @@ export class JobPanelTabComponent implements OnInit {
   async deleteInterview(interviewId: any) {
     const options = {
       data: {
-        title: 'Anteção',
+        title: 'Atenção',
         subtitle: 'Você tem certeza que deseja excluir esta entrevista?',
       },
       panelClass: 'confirm-modal',

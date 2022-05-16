@@ -25,16 +25,16 @@ export class ResumeDialogExperience {
 
   initForm(): void {
     this.experienceForm = this.fb.group({
-      office: [null, Validators.required],
-      companyName: [null, Validators.required],
-      locality: [null],
+      office: ['', Validators.required],
+      companyName: ['', Validators.required],
+      locality: [''],
       active: [false],
-      startMonth: [null, Validators.required],
-      startYear: [null, Validators.required],
-      terminusMonth: [null, Validators.required],
-      terminusYear: [null, Validators.required],
-      sector: [null, Validators.required],
-      description: [null, Validators.required],
+      startMonth: ['', Validators.required],
+      startYear: ['', Validators.required],
+      terminusMonth: [''],
+      terminusYear: [''],
+      sector: ['', Validators.required],
+      description: ['', Validators.required],
     });
 
     if (this.data) {

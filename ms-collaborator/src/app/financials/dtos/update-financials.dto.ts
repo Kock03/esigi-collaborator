@@ -3,10 +3,12 @@ import {
   IsEnum,
   IsNotEmpty,
   IsNumber,
+  IsObject,
   IsOptional,
   MaxLength,
   MinLength,
 } from 'class-validator';
+import { CollaboratorsEntity } from 'src/app/collaborators/collaborators.entity';
 import { Reasons } from './contract-reasons.enum';
 import { ContractTypes } from './contract-types.enum';
 
@@ -37,4 +39,9 @@ export class UpdateFinancialsDto {
   @ApiProperty()
   @IsOptional()
   monthlyValue: number;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsObject()
+  Collaborator: CollaboratorsEntity;
 }

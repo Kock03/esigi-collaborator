@@ -1,21 +1,21 @@
 <div id="CollaboradorDependentsDialog" class="dialog">
   <div class="content-scroll" *ngIf="dependentForm">
-    <h2 class="title-dialog" mat-dialog-title>Cadastro Dependentes</h2>
+    <h2 class="title-dialog" mat-dialog-title>{{'collaborator.colaborator_create.dependents.dependent_registration' | translate}}</h2>
     <mat-dialog-content class="mat-typography">
       <form [formGroup]="dependentForm" fxLayout="column">
         <mat-form-field appearance="outline">
-          <mat-label>Tipo</mat-label>
+          <mat-label>{{'collaborator.colaborator_create.dependents.type.name' | translate}}</mat-label>
           <mat-select formControlName="type">
-            <mat-option [value]="1">Conjuge</mat-option>
-            <mat-option [value]="2">Filho(a)</mat-option>
-            <mat-option [value]="3">Enteado(a)</mat-option>
-            <mat-option [value]="4">Pai</mat-option>
-            <mat-option [value]="5">Mãe</mat-option>
+            <mat-option [value]="1">{{'collaborator.colaborator_create.dependents.type.spouse' | translate}}</mat-option>
+            <mat-option [value]="2">{{'collaborator.colaborator_create.dependents.type.son' | translate}}</mat-option>
+            <mat-option [value]="3">{{'collaborator.colaborator_create.dependents.type.stepson' | translate}}</mat-option>
+            <mat-option [value]="4">{{'collaborator.colaborator_create.dependents.type.dad' | translate}}</mat-option>
+            <mat-option [value]="5">{{'collaborator.colaborator_create.dependents.type.mom' | translate}}</mat-option>
           </mat-select>
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-label>Nome</mat-label>
+          <mat-label>{{'generic.name' | translate}}</mat-label>
           <input
             matInput
             disableRipple
@@ -24,7 +24,7 @@
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-label>Sobrenome</mat-label>
+          <mat-label>{{'generic.last_name' | translate}}</mat-label>
           <input
             matInput
             disableRipple
@@ -33,16 +33,16 @@
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-label>Sexo</mat-label>
+          <mat-label>{{'generic.gender.name' | translate}}</mat-label>
           <mat-select formControlName="gender">
-            <mat-option [value]="1">Feminino</mat-option>
-            <mat-option [value]="2">Masculino</mat-option>
-            <mat-option [value]="3">Não Definido</mat-option>
+            <mat-option [value]="1">{{'generic.gender.feminine' | translate}}</mat-option>
+            <mat-option [value]="2">{{'generic.gender.masculine' | translate}}</mat-option>
+            <mat-option [value]="3">{{'generic.gender.undefined' | translate}}</mat-option>
           </mat-select>
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-label>CPF</mat-label>
+          <mat-label>{{'generic.cpf' | translate}}</mat-label>
           <input
             matInput
             disableRipple
@@ -52,7 +52,7 @@
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-label>Data de Aniversario</mat-label>
+          <mat-label>{{'generic.birth_date' | translate}}</mat-label>
           <input
             matInput
             [matDatepicker]="picker"
@@ -65,7 +65,7 @@
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-label>DDI</mat-label>
+          <mat-label>{{'generic.phone.ddi' | translate}}</mat-label>
           <input
             matInput
             disableRipple
@@ -75,7 +75,7 @@
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-label>DDD</mat-label>
+          <mat-label>{{'generic.phone.ddd' | translate}}</mat-label>
           <input
             matInput
             disableRipple
@@ -85,7 +85,7 @@
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-label>Telefone</mat-label>
+          <mat-label>{{'generic.phone.phone_number' | translate}}</mat-label>
           <input
             matInput
             disableRipple
@@ -95,7 +95,7 @@
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-label>Email</mat-label>
+          <mat-label>{{'generic.email' | translate}}</mat-label>
           <input
             matInput
             disableRipple
@@ -107,7 +107,7 @@
     <mat-dialog-actions>
       <div class="button-dialog">
         <button mat-flat-button mat-dialog-close (click)="onNoClick()">
-          Cancelar
+          {{'generic.cancel_button' | translate}}
         </button>
         <button
           mat-flat-button
@@ -115,7 +115,7 @@
           color="primary"
           [disabled]="dependentForm.invalid"
           (click)="save()">
-          Salvar
+          {{'generic.save_button' | translate}}
         </button>
       </div>
     </mat-dialog-actions>

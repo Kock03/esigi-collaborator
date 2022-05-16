@@ -75,19 +75,19 @@ export class CreateResumesDto {
   Phone: PhoneEntity;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   Educations: EducationsEntity[];
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   Languages: LanguagesEntity[];
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   Experiences: ExperiencesEntity[];
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   Skills: SkillsEntity[];
 
   @ApiProperty()

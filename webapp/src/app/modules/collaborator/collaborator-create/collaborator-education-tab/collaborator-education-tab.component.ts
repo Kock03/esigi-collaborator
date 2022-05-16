@@ -11,7 +11,11 @@ import {
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
+import { CollaboratorEducationProvider } from 'src/providers/collaborator-providers/collaborator-education.provider';
+import { CollaboratorLanguageProvider } from 'src/providers/collaborator-providers/collaborator-language.provider';
+import { CollaboratorProvider } from 'src/providers/collaborator-providers/collaborator.provider';
 import { ConfirmDialogService } from 'src/services/confirn-dialog.service';
+import { SnackBarService } from 'src/services/snackbar.service';
 import { CollaboratorEducationDialog } from './collaborator-education-dialog.component';
 import { CollaboratorLanguageDialog } from './collaborator-language-dialog.component';
 
@@ -22,8 +26,6 @@ import { CollaboratorLanguageDialog } from './collaborator-language-dialog.compo
   encapsulation: ViewEncapsulation.None,
 })
 export class CollaboratorEducationTabComponent implements OnInit {
-  @Input() educationArray!: FormArray;
-  @Input() languageArray!: FormArray;
   @Output() onChange: EventEmitter<any> = new EventEmitter();
   @ViewChild('languageTable') languageTable!: MatTable<any>;
   @ViewChild('educationTable') educationTable!: MatTable<any>;
@@ -49,54 +51,55 @@ export class CollaboratorEducationTabComponent implements OnInit {
 
   index: any = null;
   Language: any;
-  languageList: any = [];
   Education: any;
-  educationList: any = [];
+  collaboratorMethod!: string;
+  collaboratorId!: any;
+  languageId!: string;
+  educationId!: string;
+  method!: string;
+
+
 
   constructor(
     private dialogService: ConfirmDialogService,
     private fb: FormBuilder,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private collaboratorProvider: CollaboratorProvider,
+    private snackbarService: SnackBarService,
+    private collaboratorLanguageProvider: CollaboratorLanguageProvider,
+    private collaboratorEducationProvider: CollaboratorEducationProvider
+
   ) {}
 
   ngOnInit(): void {
-    if (this.educationArray.value.length > 0) {
-      this.dataEducation = this.educationArray.value;
-    }
-    if (this.languageArray.value.length > 0) {
-      this.dataLanguage = this.languageArray.value;
+
+    this.collaboratorMethod = sessionStorage.getItem('collaborator_method')!;
+    if (this.collaboratorMethod === 'edit') {
+      this.getEducationsList();
+      this.getLanguagesList();
     }
 
-    this.initObservables();
   }
 
-  initObservables() {
-    this.educationArray.valueChanges.subscribe(res => {
-      const isNullIndex = this.educationArray.value.findIndex(
-        (knowledge: any) => knowledge == null
-      );
-      if (isNullIndex !== -1) {
-        this.educationArray.removeAt(isNullIndex);
-      }
-      if (res) {
-        this.dataEducation = this.educationArray.value;
-      }
-    });
-
-    this.languageArray.valueChanges.subscribe(res => {
-      const isNullIndex = this.languageArray.value.findIndex(
-        (knowledge: any) => knowledge == null
-      );
-      if (isNullIndex !== -1) {
-        this.languageArray.removeAt(isNullIndex);
-      }
-      if (res) {
-        this.dataLanguage = this.languageArray.value;
-      }
-    });
+  
+  async getEducationsList() {
+    this.collaboratorId = sessionStorage.getItem('collaborator_id');
+    const data = await this.collaboratorProvider.findOne(this.collaboratorId);
+    this.dataEducation = data.Educations;
   }
+
+  
+  async getLanguagesList() {
+    this.collaboratorId = sessionStorage.getItem('collaborator_id');
+    const data = await this.collaboratorProvider.findOne(this.collaboratorId);
+    this.dataLanguage = data.Languages;
+  }
+
+
 
   openDialogLanguage() {
+    this.method = 'add';
+    sessionStorage.setItem('method', this.method);
     const dialogRef = this.dialog.open(CollaboratorLanguageDialog, {
       width: '500px',
       height: '300px',
@@ -104,13 +107,14 @@ export class CollaboratorEducationTabComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(language => {
       if (language) {
-        this.languageArray.insert(0, this.fb.group(language));
-        this.languageTable.renderRows();
+        this.getLanguagesList();
       }
     });
   }
 
   openDialogEducation() {
+    this.method = 'add';
+    sessionStorage.setItem('method', this.method);
     const dialogRef = this.dialog.open(CollaboratorEducationDialog, {
       width: '500px',
       height: '470px',
@@ -118,8 +122,7 @@ export class CollaboratorEducationTabComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(education => {
       if (education) {
-        this.educationArray.insert(0, this.fb.group(education));
-        this.educationTable.renderRows();
+        this.getEducationsList();
       }
     });
   }
@@ -128,25 +131,28 @@ export class CollaboratorEducationTabComponent implements OnInit {
     this.onChange.next(true);
   }
 
-  getLanguage(languageSelected: any, index: number) {
+  getLanguage(languageSelected: any, id: string) {
+    this.method = 'edit';
+    sessionStorage.setItem('method', this.method);
+    this.languageId = id;
+    sessionStorage.setItem('language_id', this.languageId);
     const dialogRef = this.dialog.open(CollaboratorLanguageDialog, {
       width: '500px',
       height: '300px',
       data: languageSelected,
     });
 
-    this.index = index;
     dialogRef.afterClosed().subscribe(language => {
       if (language) {
-        this.languageArray.controls[this.index].patchValue(language);
+        this.getLanguagesList();
       }
     });
   }
 
-  deleteLanguage(index: number) {
+  deleteLanguage(id: string) {
     const options = {
       data: {
-        title: 'Anteção',
+        title: 'Atenção',
         subtitle: 'Você tem certeza que deseja excluir essas informações?',
       },
       panelClass: 'confirm-modal',
@@ -156,30 +162,40 @@ export class CollaboratorEducationTabComponent implements OnInit {
 
     this.dialogService.confirmed().subscribe(async confirmed => {
       if (confirmed) {
-        this.languageArray.removeAt(index);
+        try {
+          let deleteLanguage = await this.collaboratorLanguageProvider.destroy(id);
+          this.getLanguagesList();
+
+          this.snackbarService.successMessage('Registro Excluido Com Sucesso');
+        } catch (error) {
+          console.log('ERROR 132' + error);
+          this.snackbarService.showError('Falha ao Excluir');
+        }
       }
     });
   }
 
-  getEducation(educationSelected: any, index: number) {
+  getEducation(educationSelected: any, id: string) {
+    this.method = 'edit';
+    sessionStorage.setItem('method', this.method);
+    this.educationId = id;
+    sessionStorage.setItem('education_id', this.educationId);
     const dialogRef = this.dialog.open(CollaboratorEducationDialog, {
       width: '500px',
       height: '470px',
       data: educationSelected,
     });
-
-    this.index = index;
     dialogRef.afterClosed().subscribe(education => {
       if (education) {
-        this.educationArray.controls[this.index].patchValue(education);
+        this.getEducationsList();
       }
     });
   }
 
-  deleteEducation(index: number) {
+  deleteEducation(id: string) {
     const options = {
       data: {
-        title: 'Anteção',
+        title: 'Atenção',
         subtitle: 'Você tem certeza que deseja excluir essas informações?',
       },
       panelClass: 'confirm-modal',
@@ -189,7 +205,15 @@ export class CollaboratorEducationTabComponent implements OnInit {
 
     this.dialogService.confirmed().subscribe(async confirmed => {
       if (confirmed) {
-        this.educationArray.removeAt(index);
+        try {
+          let deleteEducation = await this.collaboratorEducationProvider.destroy(id);
+          this.getEducationsList();
+
+          this.snackbarService.successMessage('Registro Excluido Com Sucesso');
+        } catch (error) {
+          console.log('ERROR 132' + error);
+          this.snackbarService.showError('Falha ao Excluir');
+        }
       }
     });
   }

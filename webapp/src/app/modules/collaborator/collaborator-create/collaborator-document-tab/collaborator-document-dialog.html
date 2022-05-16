@@ -1,10 +1,10 @@
 <div id="collaboratorDocumentDialog" class="dialog">
   <div class="content-scroll" *ngIf="documentForm">
-    <h2 mat-dialog-title class="title-dialog">Cadastro de Documento</h2>
+    <h2 mat-dialog-title class="title-dialog">{{'collaborator.colaborator_create.documents.document_registration'|translate}}</h2>
     <mat-dialog-content class="mat-typography">
       <form [formGroup]="documentForm" fxLayout="column">
         <mat-form-field appearance="outline">
-          <mat-label>Nome</mat-label>
+          <mat-label>{{'collaborator.colaborator_create.documents.document_name'|translate}}</mat-label>
           <input
             matInput
             disableRipple
@@ -27,7 +27,7 @@
     <mat-dialog-actions>
       <div class="button-dialog">
         <button mat-flat-button mat-dialog-close (click)="onNoClick()">
-          Cancelar
+          {{'generic.cancel_button' | translate}}
         </button>
         <button
           color="primary"
@@ -35,7 +35,7 @@
           mat-flat-button
           [mat-dialog-close]="true"
           (click)="save()">
-          Salvar
+          {{'generic.save_button' | translate}}
         </button>
       </div>
     </mat-dialog-actions>

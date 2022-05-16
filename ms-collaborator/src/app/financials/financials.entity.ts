@@ -41,7 +41,7 @@ export class FinancialsEntity {
   @ManyToOne(
     () => CollaboratorsEntity,
     (collaborator) => collaborator.Financials,
-    { onDelete: 'CASCADE' },
+    { onDelete: 'CASCADE'},
   )
   Collaborator: CollaboratorsEntity;
 

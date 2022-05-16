@@ -1,10 +1,10 @@
 <div id="resumeLanguageDialog">
   <div class="content-scroll" *ngIf="languageForm">
-    <h2 mat-dialog-title class="title-dialog">Idioma</h2>
+    <h2 mat-dialog-title class="title-dialog">{{'generic.education.languages.name'|translate}}</h2>
     <mat-dialog-content class="mat-typography">
       <form [formGroup]="languageForm" fxLayout="column">
         <mat-form-field appearance="outline">
-          <mat-label>Idioma</mat-label>
+          <mat-label>{{'generic.education.languages.one_language'|translate}}</mat-label>
           <input
             matInput
             disableRipple
@@ -13,28 +13,28 @@
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-label>Grau de Fluência</mat-label>
+          <mat-label>{{'generic.education.languages.fluency.name'|translate}}</mat-label>
           <mat-select formControlName="degreeOfInfluence">
-            <mat-option [value]="1">Leitura, Escrita e Conversação</mat-option>
-            <mat-option [value]="2">Escrita</mat-option>
-            <mat-option [value]="3">Leitura</mat-option>
-            <mat-option [value]="4">Conversação</mat-option>
-            <mat-option [value]="5">Escrita e Leitura</mat-option>
-            <mat-option [value]="6">Escrita e Conversação</mat-option>
+            <mat-option [value]="1">{{'generic.education.languages.fluency.all_options'|translate}}</mat-option>
+            <mat-option [value]="2">{{'generic.education.languages.fluency.writing'|translate}}</mat-option>
+            <mat-option [value]="3">{{'generic.education.languages.fluency.reading'|translate}}</mat-option>
+            <mat-option [value]="4">{{'generic.education.languages.fluency.conversation'|translate}}</mat-option>
+            <mat-option [value]="5">{{'generic.education.languages.fluency.writing_and_reading'|translate}}</mat-option>
+            <mat-option [value]="6">{{'generic.education.languages.fluency.writing_and_conversation'|translate}}</mat-option>
           </mat-select>
         </mat-form-field>
       </form>
     </mat-dialog-content>
     <mat-dialog-actions>
       <div class="button-dialog">
-        <button mat-flat-button mat-dialog-close>Cancelar</button>
+        <button mat-flat-button mat-dialog-close>{{'generic.cancel_button' | translate}}</button>
         <button
           mat-flat-button
           [mat-dialog-close]="true"
           color="primary"
           (click)="save()"
           [disabled]="languageForm.invalid">
-          Salvar
+          {{'generic.save_button' | translate}}
         </button>
       </div>
     </mat-dialog-actions>

@@ -19,7 +19,7 @@ import {
   fromEvent,
   Subject,
 } from 'rxjs';
-import { CollaboratorProvider } from 'src/providers/collaborator.provider';
+import { CollaboratorProvider } from 'src/providers/collaborator-providers/collaborator.provider';
 import { CollaboratorCreateComponent } from '../collaborator-create/collaborator-create.component';
 import { CollaboratorRegisterTabComponent } from '../collaborator-create/collaborator-register-tab/collaborator-register-tab.component';
 import { ConfirmDialogService } from 'src/services/confirn-dialog.service';
@@ -100,7 +100,7 @@ export class CollaboratorListComponent implements OnInit {
   async deleteCollaborator(collaboratorId: any) {
     const options = {
       data: {
-        title: 'Anteção',
+        title: 'Atenção',
         subtitle: 'Você tem certeza que deseja excluir este colaborador?',
       },
       panelClass: 'confirm-modal',
@@ -171,5 +171,8 @@ export class CollaboratorListComponent implements OnInit {
 
   editCollaborator(collaboratorId: any) {
     this.router.navigate([`colaborador/${collaboratorId}`]);
+    const method = 'edit';
+    sessionStorage.setItem('collaborator_method', method)
+    sessionStorage.setItem('collaborator_id', collaboratorId);
   }
 }

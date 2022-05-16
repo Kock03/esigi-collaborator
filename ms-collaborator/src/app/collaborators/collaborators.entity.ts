@@ -84,72 +84,63 @@ export class CollaboratorsEntity {
 
   @OneToOne(() => AddressEntity, {
     cascade: ['insert', 'update', 'remove'],
-    orphanedRowAction: 'delete',
-    eager: true,
+    orphanedRowAction: 'delete'
   })
   @JoinColumn()
   Address: AddressEntity;
 
   @OneToMany(() => SkillsEntity, (skills) => skills.Collaborator, {
     cascade: ['insert', 'update', 'remove'],
-    orphanedRowAction: 'delete',
-    eager: true,
+    orphanedRowAction: 'delete'
   })
   @JoinColumn()
   Skills: SkillsEntity[];
 
   @OneToMany(() => FeedbacksEntity, (feed) => feed.Collaborator, {
     cascade: ['insert', 'update', 'remove'],
-    orphanedRowAction: 'delete',
-    eager: true,
+    orphanedRowAction: 'delete'
   })
   @JoinColumn()
   Feedbacks: FeedbacksEntity[];
 
   @OneToMany(() => DocumentsEntity, (documents) => documents.Collaborator, {
     cascade: ['insert', 'update', 'remove'],
-    orphanedRowAction: 'delete',
-    eager: true,
+    orphanedRowAction: 'delete'
   })
   @JoinColumn()
   Documents: DocumentsEntity[];
 
   @OneToMany(() => LanguagesEntity, (languages) => languages.Collaborator, {
     cascade: ['insert', 'update', 'soft-remove'],
-    orphanedRowAction: 'delete',
-    eager: true,
+    orphanedRowAction: 'delete'
   })
   @JoinColumn()
   Languages: LanguagesEntity[];
 
   @OneToMany(() => EducationsEntity, (educations) => educations.Collaborator, {
     cascade: ['insert', 'update', 'remove'],
-    orphanedRowAction: 'delete',
-    eager: true,
+    orphanedRowAction: 'delete'
   })
   @JoinColumn()
   Educations: EducationsEntity[];
 
   @OneToOne(() => PhoneEntity, {
     cascade: ['insert', 'update', 'remove'],
-    orphanedRowAction: 'delete',
-    eager: true,
+    orphanedRowAction: 'delete'
   })
   @JoinColumn()
   Phone: PhoneEntity;
 
   @OneToMany(() => BankDataEntity, (bank) => bank.collaborator, {
     cascade: ['insert', 'update', 'remove'],
-    orphanedRowAction: 'delete',
-    eager: true,
+    orphanedRowAction: 'delete'
   })
   @JoinColumn()
   BankData: BankDataEntity[];
 
   @OneToMany(() => FinancialsEntity, (Financials) => Financials.Collaborator, {
     cascade: ['insert', 'update', 'remove'],
-    orphanedRowAction: 'delete',
-    eager: true,
+    orphanedRowAction: 'delete'
   })
   @JoinColumn()
   Financials: FinancialsEntity[];
@@ -157,7 +148,6 @@ export class CollaboratorsEntity {
   @OneToMany(() => DependentsEntity, (Dependents) => Dependents.Collaborator, {
     cascade: ['insert', 'update', 'remove'],
     orphanedRowAction: 'delete',
-    eager: true,
     nullable: true,
   })
   @JoinColumn()

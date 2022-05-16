@@ -21,7 +21,10 @@ import {
 import { MatDialog } from '@angular/material/dialog';
 
 import { MatTable } from '@angular/material/table';
+import { CollaboratorFinanceProvider } from 'src/providers/collaborator-providers/collaborator-finance.provider';
+import { CollaboratorProvider } from 'src/providers/collaborator-providers/collaborator.provider';
 import { ConfirmDialogService } from 'src/services/confirn-dialog.service';
+import { SnackBarService } from 'src/services/snackbar.service';
 import { CollaboratorFinanceDialog } from './collaborator-finance-dialog.component';
 
 @Component({
@@ -31,7 +34,6 @@ import { CollaboratorFinanceDialog } from './collaborator-finance-dialog.compone
   encapsulation: ViewEncapsulation.None,
 })
 export class CollaboratorFinanceTabComponent implements OnInit {
-  @Input() financeArray!: FormArray;
   @Output() onChange: EventEmitter<any> = new EventEmitter();
   @ViewChild('financeTable') financeTable!: MatTable<any>;
 
@@ -50,37 +52,39 @@ export class CollaboratorFinanceTabComponent implements OnInit {
 
   financeForm!: FormGroup;
 
-  index: any = null;
   Finance: any;
+  method!: string;
+  collaboratorId!: any;
+  fnanceId!: string;
+  collaboratorMethod!: string;
 
   constructor(
     private fb: FormBuilder,
     public dialog: MatDialog,
-    private dialogService: ConfirmDialogService
-  ) {}
+    private collaboratorFinanceProvider: CollaboratorFinanceProvider,
+    private dialogService: ConfirmDialogService, private snackbarService: SnackBarService,    
+    private collaboratorProvider: CollaboratorProvider,
+  ) { }
 
   ngOnInit(): void {
-    if (this.financeArray.value.length > 0) {
-      this.data = this.financeArray.value;
+    this.collaboratorMethod = sessionStorage.getItem('collaborator_method')!;
+    if (this.collaboratorMethod === 'edit') {
+      this.getFinanceList();
     }
-    this.initObservables();
   }
 
-  initObservables() {
-    this.financeArray.valueChanges.subscribe(res => {
-      const isNullIndex = this.financeArray.value.findIndex(
-        (finance: any) => finance == null
-      );
-      if (isNullIndex !== -1) {
-        this.financeArray.removeAt(isNullIndex);
-      }
-      if (res) {
-        this.data = this.financeArray.value;
-      }
-    });
+
+  async getFinanceList() {
+    this.collaboratorId = sessionStorage.getItem('collaborator_id');
+    const data = await this.collaboratorProvider.findOne(this.collaboratorId);
+    this.data = data.Financials;
   }
+
+
 
   openDialog() {
+    this.method = 'add';
+    sessionStorage.setItem('method', this.method);
     const dialogRef = this.dialog.open(CollaboratorFinanceDialog, {
       width: '500px',
       height: '550px',
@@ -88,8 +92,7 @@ export class CollaboratorFinanceTabComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(finance => {
       if (finance) {
-        this.financeArray.insert(0, this.fb.group(finance));
-        this.financeTable.renderRows();
+        this.getFinanceList();
       }
     });
   }
@@ -98,25 +101,28 @@ export class CollaboratorFinanceTabComponent implements OnInit {
     this.onChange.next(true);
   }
 
-  getFinance(financeSelected: any, index: number) {
+  getFinance(financeSelected: any, id: string) {
+    this.method = 'edit';
+    sessionStorage.setItem('method', this.method);
+    this.fnanceId = id;
+    sessionStorage.setItem('skill_id', this.fnanceId);
     const dialogRef = this.dialog.open(CollaboratorFinanceDialog, {
       width: '500px',
       height: '550px',
       data: financeSelected,
     });
 
-    this.index = index;
     dialogRef.afterClosed().subscribe(finance => {
       if (finance) {
-        this.financeArray.controls[this.index].patchValue(finance);
+        this.getFinanceList();
       }
     });
   }
 
-  deleteFinance(index: number) {
+  deleteFinance(id: string) {
     const options = {
       data: {
-        title: 'Anteção',
+        title: 'Atenção',
         subtitle: 'Você tem certeza que deseja excluir essas informações?',
       },
       panelClass: 'confirm-modal',
@@ -126,7 +132,15 @@ export class CollaboratorFinanceTabComponent implements OnInit {
 
     this.dialogService.confirmed().subscribe(async confirmed => {
       if (confirmed) {
-        this.financeArray.removeAt(index);
+        try {
+          let deleteFinance = await this.collaboratorFinanceProvider.destroy(id);
+          this.getFinanceList();
+
+          this.snackbarService.successMessage('Registro Excluido Com Sucesso');
+        } catch (error) {
+          console.log('ERROR 132' + error);
+          this.snackbarService.showError('Falha ao Excluir');
+        }
       }
     });
   }

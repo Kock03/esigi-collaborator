@@ -3,6 +3,7 @@
     <form [formGroup]="jobForm" fxLayout="column" class="form">
 
       <div fxFlex="100" fxLayoutGap="16px">
+<<<<<<< HEAD
         <mat-form-field fxFlex="80" appearance="outline">
           <mat-label>Nome da Vaga</mat-label>
           <input placeholder="Nome da Vaga" matInput formControlName="jobName" type="text" />
@@ -11,10 +12,44 @@
         <mat-form-field fxFlex="20" appearance="outline">
           <mat-label>Data de Abertura</mat-label>
           <input matInput mask="00/00/0000 " formControlName="openingDate" placeholder="Ex: 00/00/0000" />
+=======
+        <mat-form-field fxFlex="30" appearance="outline">
+          <mat-label>{{'generic.request' | translate}}</mat-label>
+          <input
+            placeholder="Solicitante"
+            matInput
+            formControlName="requester"
+            type="text" />
+        </mat-form-field>
+
+        <mat-form-field fxFlex="35" appearance="outline">
+          <mat-label>{{'generic.opening_date' | translate}}</mat-label>
+          <input
+            matInput
+            [matDatepicker]="picker"
+            formControlName="openingDate"
+            placeholder="Data de Abertura" />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field fxFlex="35" appearance="outline">
+          <mat-label>{{'generic.status' | translate}}</mat-label>
+          <mat-select matInput disableRipple formControlName="status">
+            <mat-option [value]="1">{{'job.job_create.status.processed' | translate}}</mat-option>
+            <mat-option [value]="2">{{'job.job_create.status.in_revision' | translate}}</mat-option>
+            <mat-option [value]="3">{{'job.job_create.status.closed' | translate}}</mat-option>
+            <mat-option [value]="4">{{'job.job_create.status.lost' | translate}}</mat-option>
+            <mat-option [value]="5">{{'job.job_create.status.completed' | translate}}</mat-option>
+          </mat-select>
+>>>>>>> 96a9a14096cf79627ee70e71536432cae664947b
         </mat-form-field>
       </div>
 
       <div fxFlex="100" fxLayoutGap="16px">
+<<<<<<< HEAD
         <mat-form-field fxFlex="50" appearance="outline">
           <mat-label>Solicitante</mat-label>
           <input placeholder="Solicitante" matInput formControlName="requester" type="text" />
@@ -23,20 +58,30 @@
         <mat-form-field fxFlex="50" appearance="outline">
           <mat-label>Cliente</mat-label>
           <input placeholder="Cliente" matInput formControlName="client" type="text" />
+=======
+        <mat-form-field fxFlex="40" appearance="outline">
+          <mat-label>{{'generic.client' | translate}}</mat-label>
+          <input
+            placeholder="Cliente"
+            matInput
+            formControlName="client"
+            type="text" />
+>>>>>>> 96a9a14096cf79627ee70e71536432cae664947b
         </mat-form-field>
       </div>
 
       <div fxFlex="100" fxLayoutGap="16px">
 
         <mat-form-field fxFlex="35" appearance="outline">
-          <mat-label>Tipo de Vaga</mat-label>
+          <mat-label>{{'job.job_create.type_of_job.name' | translate}}</mat-label>
           <mat-select matInput disableRipple formControlName="typeOfJob">
-            <mat-option [value]="1">Aumento de Quadro</mat-option>
-            <mat-option [value]="2">Promoção</mat-option>
-            <mat-option [value]="3">Fidelidade</mat-option>
+            <mat-option [value]="1">{{'job.job_create.type_of_job.staff_increase' | translate}}</mat-option>
+            <mat-option [value]="2">{{'job.job_create.type_of_job.promotion' | translate}}</mat-option>
+            <mat-option [value]="3">{{'job.job_create.type_of_job.faithfulness' | translate}}</mat-option>
           </mat-select>
         </mat-form-field>
 
+<<<<<<< HEAD
         <mat-form-field fxFlex="25" appearance="outline">
           <mat-label>Tipo de Contratação</mat-label>
           <mat-select matInput disableRipple formControlName="typeOfContract">
@@ -51,10 +96,31 @@
         <mat-form-field fxFlex="25" appearance="outline" *ngIf="jobForm.controls['temporary'].value == true">
           <mat-label>Tempo Contrato</mat-label>
           <input placeholder="Tempo de Contrato" matInput formControlName="monthTime" type="text" />
+=======
+        <mat-checkbox
+          class="checkbox"
+          color="primary"
+          fxFlex="25"
+          formControlName="temporary"
+          >{{'job.job_create.temporary' | translate}}</mat-checkbox
+        >
+
+        <mat-form-field
+          fxFlex="25"
+          appearance="outline"
+          *ngIf="jobForm.controls['temporary'].value == true">
+          <mat-label>{{'job.job_create.month_time' | translate}}</mat-label>
+          <input
+            placeholder="Tempo de Contrato"
+            matInput
+            formControlName="monthTime"
+            type="text" />
+>>>>>>> 96a9a14096cf79627ee70e71536432cae664947b
         </mat-form-field>
       </div>
 
       <div fxFlex="100" fxLayoutGap="16px">
+<<<<<<< HEAD
 
         <mat-form-field fxFlex="35" appearance="outline">
           <mat-label>Previsão de Inicio</mat-label>
@@ -68,21 +134,62 @@
       </div>
       <div fxFlex="100" fxLayoutGap="16px">
 
+=======
+        <mat-form-field fxFlex="35" appearance="outline">
+          <mat-label>{{'job.job_create.name' | translate}}</mat-label>
+          <input
+            placeholder="Nome da Vaga"
+            matInput
+            formControlName="jobName"
+            type="text" />
+        </mat-form-field>
+
+        <mat-form-field fxFlex="35" appearance="outline">
+          <mat-label>{{'job.job_create.start_forecast' | translate}}</mat-label>
+          <input
+            matInput
+            [matDatepicker]="init"
+            formControlName="startForecast"
+            placeholder="Previsão de Início" />
+          <mat-datepicker-toggle matSuffix [for]="init"></mat-datepicker-toggle>
+          <mat-datepicker #init></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field fxFlex="30" appearance="outline">
+          <mat-label>{{'job.job_create.job_number' | translate}}</mat-label>
+          <input
+            placeholder="Número de Vagas"
+            matInput
+            formControlName="jobNumber"
+            type="number" />
+        </mat-form-field>
+      </div>
+      <div fxFlex="100" fxLayoutGap="16px">
+        <mat-form-field fxFlex="25" appearance="outline">
+          <mat-label>{{'job.job_create.type_of_contract' | translate}}</mat-label>
+          <mat-select matInput disableRipple formControlName="typeOfContract">
+            <mat-option [value]="1">{{'generic.clt' | translate}}</mat-option>
+            <mat-option [value]="2">{{'generic.pj' | translate}}</mat-option>
+            <mat-option [value]="3">{{'generic.cooperated' | translate}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+>>>>>>> 96a9a14096cf79627ee70e71536432cae664947b
 
         <mat-form-field fxFlex="25" appearance="outline">
-          <mat-label>Local de Trabalho</mat-label>
+          <mat-label>{{'job.job_create.workplace.name' | translate}}</mat-label>
           <mat-select matInput disableRipple formControlName="workplace">
-            <mat-option [value]="1">In Loco</mat-option>
-            <mat-option [value]="2">Home Office</mat-option>
-            <mat-option [value]="3">Hibrido</mat-option>
-            <mat-option [value]="4">Envolti</mat-option>
+            <mat-option [value]="1">{{'job.job_create.workplace.in_loco' | translate}}</mat-option>
+            <mat-option [value]="2">{{'job.job_create.workplace.home_office' | translate}}</mat-option>
+            <mat-option [value]="3">{{'job.job_create.workplace.hybrid' | translate}}</mat-option>
+            <mat-option [value]="4">{{'job.job_create.workplace.envolti' | translate}}</mat-option>
           </mat-select>
         </mat-form-field>
 
         <div class="checkbox-section" fxFlex="50" formGroupName="Seniorities">
           <section fxLayout="column">
-            <span class="text" fxLayoutAlign="start">Senioridade</span>
+            <span class="text" fxLayoutAlign="start">{{'generic.seniority.name' | translate}}</span>
             <div fxLayout="row" fxLayoutAlign="space-around">
+<<<<<<< HEAD
               <mat-checkbox color="primary" formControlName="intern">Estagiário</mat-checkbox>
 
               <mat-checkbox color="primary" formControlName="junior">Junior</mat-checkbox>
@@ -90,12 +197,30 @@
               <mat-checkbox color="primary" formControlName="pleno">Pleno</mat-checkbox>
 
               <mat-checkbox color="primary" formControlName="senior">Senior</mat-checkbox>
+=======
+              <mat-checkbox color="primary" formControlName="intern"
+                >{{'generic.intern' | translate}}</mat-checkbox
+              >
+
+              <mat-checkbox color="primary" formControlName="junior"
+                >{{'generic.seniority.junior' | translate}}</mat-checkbox
+              >
+
+              <mat-checkbox color="primary" formControlName="pleno"
+                >{{'generic.seniority.full' | translate}}</mat-checkbox
+              >
+
+              <mat-checkbox color="primary" formControlName="senior"
+                >{{'generic.seniority.senior' | translate}}</mat-checkbox
+              >
+>>>>>>> 96a9a14096cf79627ee70e71536432cae664947b
             </div>
           </section>
         </div>
       </div>
       <div fxFlex="100" fxLayoutGap="16px">
         <mat-form-field fxFlex="30" appearance="outline">
+<<<<<<< HEAD
           <mat-label>Jornada de Trabaho</mat-label>
           <input placeholder="Jornada de Trabaho" matInput formControlName="workingDay" />
         </mat-form-field>
@@ -122,6 +247,39 @@
         </mat-form-field>
 
         <mat-checkbox class="checkbox" color="primary" fxFlex="20" formControlName="publish">Publicar Vaga
+=======
+          <mat-label>{{'job.job_create.working_day' | translate}}</mat-label>
+          <input
+            placeholder="Jornada de Trabaho"
+            matInput
+            formControlName="workingDay" />
+        </mat-form-field>
+
+        <mat-form-field fxFlex="25" appearance="outline">
+          <mat-label>{{'job.job_create.minimum_value' | translate}}</mat-label>
+          <input
+            type="number"
+            placeholder="Valor Minimo"
+            matInput
+            formControlName="minimumValue" />
+        </mat-form-field>
+
+        <mat-form-field fxFlex="25" appearance="outline">
+          <mat-label>{{'job.job_create.maximum_value' | translate}}</mat-label>
+          <input
+            type="number"
+            placeholder="Valor Maximo"
+            matInput
+            formControlName="maximumValue" />
+        </mat-form-field>
+
+        <mat-checkbox
+          class="checkbox"
+          color="primary"
+          fxFlex="20"
+          formControlName="publish"
+          >{{'job.job_create.post_vacancy' | translate}}
+>>>>>>> 96a9a14096cf79627ee70e71536432cae664947b
         </mat-checkbox>
       </div>
     </form>

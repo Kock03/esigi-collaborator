@@ -1,10 +1,10 @@
 <div id="collaboratorBankDialog">
   <div class="content-scroll" *ngIf="bankForm">
-    <h2 class="title-dialog" mat-dialog-title>Cadastro Bancário</h2>
+    <h2 class="title-dialog" mat-dialog-title>{{'collaborator.colaborator_create.bank.bank_registration' | translate}}</h2>
     <mat-dialog-content class="mat-typography">
       <form [formGroup]="bankForm" fxLayout="column">
         <mat-form-field appearance="outline">
-          <mat-label>Banco</mat-label>
+          <mat-label>{{'collaborator.colaborator_create.bank.name' | translate}}</mat-label>
           <input
             matInput
             disableRipple
@@ -14,11 +14,11 @@
 
         <div fxLayout="row" fxFlex="100" fxLayoutGap="16px">
           <mat-form-field appearance="outline" fxFlex="75">
-            <mat-label>Tipo da Conta</mat-label>
+            <mat-label>{{'collaborator.colaborator_create.bank.type.name' | translate}}</mat-label>
             <mat-select formControlName="accountType">
-              <mat-option [value]="1">Conta Corrente</mat-option>
-              <mat-option [value]="2">Conta Salário</mat-option>
-              <mat-option [value]="3">Conta Poupança</mat-option>
+              <mat-option [value]="1">{{'collaborator.colaborator_create.bank.type.checking_account' | translate}}</mat-option>
+              <mat-option [value]="2">{{'collaborator.colaborator_create.bank.type.salary_account' | translate}}</mat-option>
+              <mat-option [value]="3">{{'collaborator.colaborator_create.bank.type.savings_account' | translate}}</mat-option>
             </mat-select>
           </mat-form-field>
           <br />
@@ -27,12 +27,12 @@
             color="primary"
             fxFlex="25"
             formControlName="status">
-            Ativa
+            {{'generic.active' | translate}}
           </mat-checkbox>
         </div>
         <div fxLayout="row" fxFlex="100" fxLayoutGap="16px">
           <mat-form-field fxFlex="75" appearance="outline">
-            <mat-label>Agência</mat-label>
+            <mat-label>{{'collaborator.colaborator_create.bank.agency' | translate}}</mat-label>
             <input
               matInput
               disableRipple
@@ -42,7 +42,7 @@
           </mat-form-field>
 
           <mat-form-field fxFlex="25" appearance="outline">
-            <mat-label>Digito</mat-label>
+            <mat-label>{{'collaborator.colaborator_create.bank.digit' | translate}}</mat-label>
             <input
               matInput
               disableRipple
@@ -54,7 +54,7 @@
 
         <div fxLayout="row" fxFlex="100" fxLayoutGap="16px">
           <mat-form-field fxFlex="75" appearance="outline">
-            <mat-label>Número Conta</mat-label>
+            <mat-label>{{'collaborator.colaborator_create.bank.account_number' | translate}}</mat-label>
             <input
               matInput
               disableRipple
@@ -64,7 +64,7 @@
           </mat-form-field>
 
           <mat-form-field fxFlex="25" appearance="outline">
-            <mat-label>Digito</mat-label>
+            <mat-label>{{'collaborator.colaborator_create.bank.digit' | translate}}</mat-label>
             <input
               matInput
               disableRipple
@@ -78,7 +78,7 @@
     <mat-dialog-actions>
       <div class="button-dialog">
         <button mat-flat-button mat-dialog-close (click)="onNoClick()">
-          Cancelar
+          {{'generic.cancel_button' | translate}}
         </button>
         <button
           mat-flat-button
@@ -86,7 +86,7 @@
           color="primary"
           [disabled]="bankForm.invalid"
           (click)="save()">
-          Salvar
+          {{'generic.save_button' | translate}}
         </button>
       </div>
     </mat-dialog-actions>

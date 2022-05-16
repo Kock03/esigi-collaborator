@@ -3,54 +3,54 @@
     <button (click)="listFeedback()" color="primary" mat-button>
       <mat-icon> chevron_left </mat-icon>
     </button>
-    <h2>Feedback</h2>
+    <h2>{{'collaborator.colaborator_create.feedbacks.name'|translate}}</h2>
   </div>
 
   <div fxLayout="column" class="content-scroll" *ngIf="feedbackForm">
     <form [formGroup]="feedbackForm" fxLayout="column">
       <div class="formGroup1" fxFlex="100" fxLayoutGap="16px">
         <mat-form-field appearance="outline" fxFlex="25">
-          <mat-label>Tipo de Feedback</mat-label>
+          <mat-label>{{'collaborator.colaborator_create.feedbacks.feedback_type.name'|translate}}</mat-label>
           <mat-select formControlName="feedbackType">
-            <mat-option [value]="1">Profissional Desmotivado</mat-option>
-            <mat-option [value]="2">Mudança de Cargo</mat-option>
-            <mat-option [value]="3">Aumento de Salário</mat-option>
+            <mat-option [value]="1">{{'collaborator.colaborator_create.feedbacks.feedback_type.unmotivated_professional'|translate}}</mat-option>
+            <mat-option [value]="2">{{'collaborator.colaborator_create.feedbacks.feedback_type.change_of_position'|translate}}</mat-option>
+            <mat-option [value]="3">{{'collaborator.colaborator_create.feedbacks.feedback_type.salary_increase'|translate}}</mat-option>
           </mat-select>
         </mat-form-field>
 
         <mat-form-field appearance="outline" fxFlex="25">
-          <mat-label>Motivo</mat-label>
+          <mat-label>{{'generic.reason' | translate}}</mat-label>
           <mat-select formControlName="reason">
-            <mat-option [value]="1">Solicitação Gestão</mat-option>
-            <mat-option [value]="2">Solicitação Cliente</mat-option>
-            <mat-option [value]="3">Solicitação Colaborador</mat-option>
+            <mat-option [value]="1">{{'collaborator.colaborator_create.feedbacks.reason.management_request'|translate}}</mat-option>
+            <mat-option [value]="2">{{'collaborator.colaborator_create.feedbacks.reason.customer_request'|translate}}</mat-option>
+            <mat-option [value]="3">{{'collaborator.colaborator_create.feedbacks.reason.contributor_request'|translate}}</mat-option>
           </mat-select>
         </mat-form-field>
 
         <mat-form-field appearance="outline" fxFlex="25">
-          <mat-label>Projeto</mat-label>
+          <mat-label>{{'generic.project' | translate}}</mat-label>
           <input matInput disableRipple formControlName="project" />
         </mat-form-field>
 
         <mat-form-field appearance="outline" fxFlex="25">
-          <mat-label>Gestor</mat-label>
+          <mat-label>{{'collaborator.colaborator_create.feedbacks.manager'|translate}}</mat-label>
           <input matInput disableRipple formControlName="manager" />
         </mat-form-field>
       </div>
 
       <div class="formGroup1" fxFlex="200" fxLayoutGap="20px">
-        <h2 class="h2G" appearance="outline" fxFlex="1''0">Gestão</h2>
+        <h2 class="h2G" appearance="outline" fxFlex="1''0">{{'collaborator.colaborator_create.feedbacks.management'|translate}}</h2>
         <mat-form-field appearance="outline" fxFlex="20">
-          <mat-label>Status</mat-label>
+          <mat-label>{{'generic.status' | translate}}</mat-label>
           <mat-select formControlName="status">
-            <mat-option [value]="1">Agendada</mat-option>
-            <mat-option [value]="2">Concluída</mat-option>
-            <mat-option [value]="3">Retorno de Feedback</mat-option>
+            <mat-option [value]="1">{{'collaborator.colaborator_create.feedbacks.status.scheduled'|translate}}</mat-option>
+            <mat-option [value]="2">{{'collaborator.colaborator_create.feedbacks.status.completed'|translate}}</mat-option>
+            <mat-option [value]="3">{{'collaborator.colaborator_create.feedbacks.status.feedback_return'|translate}}</mat-option>
           </mat-select>
         </mat-form-field>
 
         <mat-form-field appearance="outline" fxFlex="20">
-          <mat-label>Data Feedback</mat-label>
+          <mat-label>{{'collaborator.colaborator_create.feedbacks.feedback_date'|translate}}</mat-label>
           <input
             matInput
             [matDatepicker]="picker"
@@ -62,7 +62,7 @@
         </mat-form-field>
 
         <mat-form-field appearance="outline" fxFlex="10">
-          <mat-label>Hora</mat-label>
+          <mat-label>{{'collaborator.colaborator_create.feedbacks.hour'|translate}}</mat-label>
           <input
             matInput
             disableRipple
@@ -71,7 +71,7 @@
         </mat-form-field>
 
         <mat-form-field appearance="outline" fxFlex="30">
-          <mat-label>Data Retorno Feedback</mat-label>
+          <mat-label>{{'collaborator.colaborator_create.feedbacks.feedback_date_retorn'|translate}}</mat-label>
           <input
             matInput
             [matDatepicker]="pickerReturn"
@@ -83,7 +83,7 @@
         </mat-form-field>
 
         <mat-form-field appearance="outline" fxFlex="10">
-          <mat-label>Hora</mat-label>
+          <mat-label>{{'collaborator.colaborator_create.feedbacks.hour'|translate}}</mat-label>
           <input
             matInput
             disableRipple
@@ -94,7 +94,7 @@
 
       <div fxFlex="100" fxLayoutGap="20px">
         <mat-form-field appearance="outline" fxFlex="50">
-          <mat-label>Descrição</mat-label>
+          <mat-label>{{'collaborator.colaborator_create.feedbacks.description'|translate}}</mat-label>
           <textarea
             class="text-area"
             matInput
@@ -104,7 +104,7 @@
         </mat-form-field>
 
         <mat-form-field appearance="outline" fxFlex="50">
-          <mat-label>Pontos de Melhoria</mat-label>
+          <mat-label>{{'collaborator.colaborator_create.feedbacks.improvement_points'|translate}}</mat-label>
           <textarea
             class="text-area"
             matInput
@@ -114,10 +114,10 @@
         </mat-form-field>
       </div>
 
-      <h2>Colaborador</h2>
+      <h2>{{"sidenav.collaborator" | translate}}</h2>
       <div fxFlex="100" fxLayoutGap="20px">
         <mat-form-field appearance="outline" fxFlex="50">
-          <mat-label>Descrição</mat-label>
+          <mat-label>{{'collaborator.colaborator_create.feedbacks.description'|translate}}</mat-label>
           <textarea
             class="text-area"
             matInput
@@ -126,7 +126,7 @@
             rows="5"></textarea>
         </mat-form-field>
         <mat-form-field appearance="outline" fxFlex="50">
-          <mat-label>Compromissos</mat-label>
+          <mat-label>{{'collaborator.colaborator_create.feedbacks.commitments'|translate}}</mat-label>
           <textarea
             class="text-area"
             matInput
@@ -148,7 +148,7 @@
       color="primary"
       [disabled]="this.feedbackForm.invalid"
       (click)="saveFeedback()">
-      Salvar
+      {{'generic.save_button' | translate}}
     </button>
   </div>
   <div
@@ -161,7 +161,7 @@
       mat-flat-button
       color="primary"
       (click)="saveEditFeedback()">
-      Salvar
+      {{'generic.save_button' | translate}}
     </button>
   </div>
 </div>
