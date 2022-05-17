@@ -31,7 +31,7 @@
 
           <mat-form-field fxFlex="20" appearance="outline">
             <mat-label>Data Admissão</mat-label>
-            <input matInput mask="00/00/0000" formControlName="admissionDate" placeholder="Data Admissão" />
+            <input matInput mask="00/00/0000" [showMaskTyped]="true" [dropSpecialCharacters]="false" formControlName="admissionDate" placeholder="Data Admissão" />
           </mat-form-field>
 
 
@@ -91,7 +91,7 @@
         <mat-form-field *ngIf="collaboratorForm.controls['collaboratorTypes'].value !== 2" fxFlex="35"
           appearance="outline">
           <mat-label>{{'generic.birth_date'|translate}}</mat-label>
-          <input matInput formControlName="birthDate" mask="00/00/0000" placeholder="Data Aniversário" />
+          <input matInput formControlName="birthDate" mask="00/00/0000"  [showMaskTyped]="true" [dropSpecialCharacters]="false" placeholder="Data Aniversário" />
         </mat-form-field>
         <mat-form-field fxFlex="35" appearance="outline">
           <mat-label>{{'generic.marital_status.name'|translate}}</mat-label>
@@ -140,7 +140,7 @@
         <mat-form-field *ngIf="collaboratorForm.controls['collaboratorTypes'].value == 2" fxFlex="20"
           appearance="outline">
           <mat-label>{{'generic.birth_date'|translate}}</mat-label>
-          <input matInput formControlName="birthDate" mask="00/00/0000" placeholder="Data Aniversário" />
+          <input matInput formControlName="birthDate" mask="00/00/0000"  [showMaskTyped]="true" [dropSpecialCharacters]="false" placeholder="Data Aniversário" />
         </mat-form-field>
       </div>
 
