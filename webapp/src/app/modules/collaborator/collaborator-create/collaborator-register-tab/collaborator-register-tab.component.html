@@ -36,11 +36,15 @@
 
           <mat-form-field fxFlex="20" appearance="outline">
             <mat-label>Data Admissão</mat-label>
+<<<<<<< HEAD
             <input matInput mask="00/00/0000" formControlName="admissionDate"
               placeholder="Data Admissão" />
             <mat-error *ngIf="collaboratorForm &&
               collaboratorForm.controls['admissionDate'].hasError('required')">
               Prenncha a data de admissão</mat-error>
+=======
+            <input matInput mask="00/00/0000" [showMaskTyped]="true" [dropSpecialCharacters]="false" formControlName="admissionDate" placeholder="Data Admissão" />
+>>>>>>> 46eaf03dbf8ecc6f4af4b1546f6a79742df21ea6
           </mat-form-field>
 
 
@@ -118,12 +122,16 @@
           fxFlex="35"
           appearance="outline">
           <mat-label>{{'generic.birth_date'|translate}}</mat-label>
+<<<<<<< HEAD
           <input matInput formControlName="birthDate" mask="00/00/0000"
             placeholder="Data Aniversário" />
           <mat-error *ngIf="collaboratorForm &&
             collaboratorForm.controls['birthDate'].hasError('required')">
             {{'collaborator.validators.birth-date-validator' | translate}}
           </mat-error>
+=======
+          <input matInput formControlName="birthDate" mask="00/00/0000"  [showMaskTyped]="true" [dropSpecialCharacters]="false" placeholder="Data Aniversário" />
+>>>>>>> 46eaf03dbf8ecc6f4af4b1546f6a79742df21ea6
         </mat-form-field>
         <mat-form-field fxFlex="35" appearance="outline">
           <mat-label>{{'generic.marital_status.name'|translate}}</mat-label>
@@ -195,8 +203,12 @@
           fxFlex="20"
           appearance="outline">
           <mat-label>{{'generic.birth_date'|translate}}</mat-label>
+<<<<<<< HEAD
           <input matInput formControlName="birthDate" mask="00/00/0000"
             placeholder="Data Aniversário" />
+=======
+          <input matInput formControlName="birthDate" mask="00/00/0000"  [showMaskTyped]="true" [dropSpecialCharacters]="false" placeholder="Data Aniversário" />
+>>>>>>> 46eaf03dbf8ecc6f4af4b1546f6a79742df21ea6
         </mat-form-field>
       </div>
 
