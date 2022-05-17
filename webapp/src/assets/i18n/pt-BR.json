@@ -103,29 +103,6 @@
                 "commitments": "Compromissos"
             }
         },
-        "validators": {
-            "admission-date-validator": "Preencha o campo data de admissão",
-            "first-name-corporate-name-validator": "Campo obrigatório",
-            "last-name-fantasy-name-validator": "Campo obrigatório",
-            "login-validator": "Campo obrigatório",
-            "gender-validator": "Selecione o gênero",
-            "marital-status-validator": "Selecione o estado civil",
-            "office-validator": "Preencha o campo cargo",
-            "collaborator-types-validator": "Selecione o tipo de contrato",
-            "birth-date-validator": "Preencha a data de aniversário",
-            "email-invalid-validator": "Email inválido",
-            "email-required-validator": "Preencha o campo email",
-            "ddi-validator": "Preencha o campo DDI",
-            "ddd-validator": "Preencha o campo DDD",
-            "phone-number-validator": "Preencha o campo telefone",
-            "cep-validator": "Preencha o campo CEP",
-            "street-validator": "Preencha o campo rua",
-            "number-validator": "Preencha o campo número",
-            "state-validator": "Preencha o campo estado",
-            "complement-validator": "Preencha o campo complemento",
-            "district-validator": "Preencha o campo bairro",
-            "city-validator": "Preencha o campo cidade"
-        },
         "job": {
             "name": "Vaga",
             "job_description": "Descrição da Vaga",
@@ -381,5 +358,9 @@
             "specialist": "Especialista",
             "architect": "Arquiteto"
         }
+    },
+    "validators": {
+        "collaborator-types-validator": "Selecione o tipo de contrato",
+        "validator-required": "Campo obrigatório"
     }
 }

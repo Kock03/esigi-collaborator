@@ -21,8 +21,7 @@
             </mat-select>
             <mat-error *ngIf="collaboratorForm &&
               collaboratorForm.controls['collaboratorTypes'].hasError('required')">
-              {{'collaborator.validators.collaborator-types-validator' |
-              translate}} </mat-error>
+              {{'validators.collaborator-types-validator' |  translate}} </mat-error>
           </mat-form-field>
 
           <mat-form-field fxFlex="35" appearance="outline">
@@ -30,7 +29,7 @@
             <input matInput placeholder="Cargo" formControlName="office" />
             <mat-error *ngIf="collaboratorForm &&
               collaboratorForm.controls['office'].hasError('required')">
-              {{'collaborator.validators.office-validator' | translate}}
+              {{'validators.validator-required' | translate}}
             </mat-error>
           </mat-form-field>
 
@@ -57,8 +56,7 @@
             formControlName="firstNameCorporateName" />
           <mat-error *ngIf="collaboratorForm &&
             collaboratorForm.controls['firstNameCorporateName'].hasError('required')">
-            {{'collaborator.validators.first-name-corporate-name-validator' |
-            translate}} </mat-error>
+            {{'validators.validator-required' | translate}} </mat-error>
         </mat-form-field>
         <mat-form-field fxFlex="40" appearance="outline">
           <mat-label>
@@ -72,8 +70,7 @@
             placeholder="Sobrenome" />
           <mat-error *ngIf="collaboratorForm &&
             collaboratorForm.controls['lastNameFantasyName'].hasError('required')">
-            {{'collaborator.validators.last-name-fantasy-name-validator' |
-            translate}} </mat-error>
+            {{'validators.validator-required' | translate}} </mat-error>
         </mat-form-field>
 
         <mat-form-field fxFlex="25" appearance="outline">
@@ -84,7 +81,7 @@
           </mat-select>
           <mat-error *ngIf="collaboratorForm &&
             collaboratorForm.controls['gender'].hasError('required')">
-            {{'collaborator.validators.gender-validator' | translate}}
+            {{'validators.validator-required' | translate}}
           </mat-error>
         </mat-form-field>
       </div>
@@ -98,7 +95,7 @@
           <input matInput placeholder="CPF" formControlName="cpf"
             mask="000.000.000-00" />
           <mat-error *ngIf="collaboratorForm &&
-            collaboratorForm.controls['cpf'].hasError('required')">CPF inválido
+            collaboratorForm.controls['cpf'].hasError('required')"> {{'validators.validator-required' | translate}}
           </mat-error>
         </mat-form-field>
 
@@ -126,7 +123,7 @@
           </mat-select>
           <mat-error *ngIf="collaboratorForm &&
             collaboratorForm.controls['maritalStatus'].hasError('required')">
-            {{'collaborator.validators.marital-status-validator' | translate}}
+            {{'validators.validator-required' | translate}}
           </mat-error>
         </mat-form-field>
       </div>
@@ -140,7 +137,7 @@
               />
             <mat-error *ngIf="phoneForm &&
               phoneForm.controls['ddi'].hasError('required')">
-              {{'collaborator.validators.ddi-validator' | translate}}
+              {{'validators.validator-required' | translate}}
             </mat-error>
           </mat-form-field>
 
@@ -150,7 +147,7 @@
               />
             <mat-error *ngIf="phoneForm &&
               phoneForm.controls['ddd'].hasError('required')">
-              {{'collaborator.validators.ddd-validator' | translate}}
+              {{'validators.validator-required' | translate}}
             </mat-error>
           </mat-form-field>
 
@@ -160,7 +157,7 @@
               mask="0000-0000||00000-0000" />
             <mat-error *ngIf="phoneForm &&
               phoneForm.controls['phoneNumber'].hasError('required')">
-              {{'collaborator.validators.phone-number-validator' | translate}}
+              {{'validators.validator-required' | translate}}
             </mat-error>
           </mat-form-field>
         </div>
@@ -200,7 +197,7 @@
           </mat-icon>
           <mat-error *ngIf="addressForm &&
             addressForm.controls['cep'].hasError('required')">
-            {{'collaborator.validators.cep-validator' | translate}} </mat-error>
+            {{'validators.validator-required' | translate}} </mat-error>
         </mat-form-field>
 
         <mat-form-field fxFlex="40" appearance="outline">
@@ -208,7 +205,7 @@
           <input matInput placeholder="Rua" formControlName="street" />
           <mat-error *ngIf="addressForm &&
             addressForm.controls['street'].hasError('required')">
-            {{'collaborator.validators.street-validator' | translate}}</mat-error>
+            {{'validators.validator-required' | translate}}</mat-error>
         </mat-form-field>
 
         <mat-form-field fxFlex="15" appearance="outline">
@@ -217,7 +214,7 @@
             formControlName="number" />
           <mat-error *ngIf="addressForm &&
             addressForm.controls['number'].hasError('required')">
-            {{'collaborator.validators.number-validator' | translate}}
+            {{'validators.validator-required' | translate}}
           </mat-error>
         </mat-form-field>
 
@@ -227,7 +224,7 @@
             />
           <mat-error *ngIf="addressForm &&
             addressForm.controls['complement'].hasError('required')">
-            {{'collaborator.validators.complement-validator' | translate}}</mat-error>
+            {{'validators.validator-required' | translate}}</mat-error>
         </mat-form-field>
 
 
@@ -241,7 +238,7 @@
           <input matInput placeholder="Bairro" formControlName="district" />
           <mat-error *ngIf="addressForm &&
             addressForm.controls['district'].hasError('required')">
-            {{'collaborator.validators.district-validator' | translate}}
+            {{'validators.validator-required' | translate}}
           </mat-error>
         </mat-form-field>
 
@@ -250,7 +247,7 @@
           <input matInput placeholder="Cidade" formControlName="city" />
           <mat-error *ngIf="addressForm &&
             addressForm.controls['city'].hasError('required')">
-            {{'collaborator.validators.city-validator' | translate}}
+            {{'validators.validator-required' | translate}}
           </mat-error>
         </mat-form-field>
 
@@ -259,7 +256,7 @@
           <input matInput placeholder="Estado" formControlName="state" />
           <mat-error *ngIf="addressForm &&
             addressForm.controls['state'].hasError('required')">
-            {{'collaborator.validators.state-validator' | translate}}
+            {{'validators.validator-required' | translate}}
           </mat-error>
         </mat-form-field>
 
@@ -275,7 +272,7 @@
           </mat-error>
           <mat-error *ngIf="collaboratorForm &&
             collaboratorForm.controls['email'].hasError('required')">
-            {{'collaborator.validators.email-required-validator' | translate}}
+            {{'validators.validator-required' | translate}}
           </mat-error>
         </mat-form-field>
 
@@ -290,7 +287,7 @@
           <input matInput placeholder="Login" formControlName="login" />
           <mat-error *ngIf="collaboratorForm &&
             collaboratorForm.controls['login'].hasError('required')">
-            {{'collaborator.validators.login-validator' | translate}}
+            {{'validators.validator-required' | translate}}
           </mat-error>
         </mat-form-field>
 
