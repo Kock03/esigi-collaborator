@@ -65,8 +65,9 @@ export class CollaboratorRegisterTabComponent implements OnInit {
   url: any;
   collaboratorId!: string | null;
   collaborator!: any;
-
   typeControl = new FormControl();
+  addressForm!: FormGroup;
+  phoneForm!: FormGroup;
 
   constructor(
     private fb: FormBuilder,
@@ -83,8 +84,14 @@ export class CollaboratorRegisterTabComponent implements OnInit {
         const addressForm = this.collaboratorForm.controls[
           'Address'
         ] as FormGroup;
-
+        this.addressForm = addressForm
         addressForm.controls['cep'].valueChanges.subscribe(res => {});
+
+        const phoneForm = this.collaboratorForm.controls[
+          'Phone'
+        ] as FormGroup;
+        this.phoneForm = phoneForm
+        phoneForm.controls['ddi'].valueChanges.subscribe(res => {});
       });
     }
   }

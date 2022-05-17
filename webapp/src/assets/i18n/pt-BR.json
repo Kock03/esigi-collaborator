@@ -102,63 +102,86 @@
                 "improvement_points": "Pontos de Melhoria",
                 "commitments": "Compromissos"
             }
-        }
-    },
-    "job": {
-        "name": "Vaga",
-        "job_description": "Descrição da Vaga",
-        "job_list": {
-            "search_jobs": "Buscar Vagas",
-            "name": "Nome da Vaga"
         },
-        "job_create": {
-            "register": "Cadastro",
-            "status": {
-                "processed": "Processada",
-                "in_revision": "Em Revisão",
-                "closed": "Fechada",
-                "lost": "Perdida",
-                "completed": "Concluída"
+        "validators": {
+            "admission-date-validator": "Preencha o campo data de admissão",
+            "first-name-corporate-name-validator": "Campo obrigatório",
+            "last-name-fantasy-name-validator": "Campo obrigatório",
+            "login-validator": "Campo obrigatório",
+            "gender-validator": "Selecione o gênero",
+            "marital-status-validator": "Selecione o estado civil",
+            "office-validator": "Preencha o campo cargo",
+            "collaborator-types-validator": "Selecione o tipo de contrato",
+            "birth-date-validator": "Preencha a data de aniversário",
+            "email-invalid-validator": "Email inválido",
+            "email-required-validator": "Preencha o campo email",
+            "ddi-validator": "Preencha o campo DDI",
+            "ddd-validator": "Preencha o campo DDD",
+            "phone-number-validator": "Preencha o campo telefone",
+            "cep-validator": "Preencha o campo CEP",
+            "street-validator": "Preencha o campo rua",
+            "number-validator": "Preencha o campo número",
+            "state-validator": "Preencha o campo estado",
+            "complement-validator": "Preencha o campo complemento",
+            "district-validator": "Preencha o campo bairro",
+            "city-validator": "Preencha o campo cidade"
+        },
+        "job": {
+            "name": "Vaga",
+            "job_description": "Descrição da Vaga",
+            "job_list": {
+                "search_jobs": "Buscar Vagas",
+                "name": "Nome da Vaga"
             },
-            "type_of_job": {
-                "name": "Tipo de Vaga",
-                "staff_increase": "Aumento de Quadro",
-                "promotion": "Promoção",
-                "faithfulness": "Fidelidade"
-            },
-            "temporary": "Temporário",
-            "month_time": "Tempo de Contrato",
-            "name": "Nome da Vaga",
-            "start_forecast": "Previsão de Inicio",
-            "job_number": "Número de Vagas",
-            "type_of_contract": "Tipo de Contratação",
-            "workplace": {
-                "name": "Local de Trabalho",
-                "in_loco": "In Loco",
-                "home_office": "Home Office",
-                "hybrid": "híbrido",
-                "envolti": "Envolti"
-            },
-            "working_day": "Jornada de Trabaho",
-            "minimum_value": "Valor Mínimo",
-            "maximum_value": "Valor Máximo",
-            "post_vacancy": "Publicar Vaga",
-            "opening_date": "Data de Abertura",
-            "skills": {
-                "register": "Conhecimentos",
-                "name": "Habilidades",
-                "schooling": {
-                    "complete_higher_education": "Ensino Superior Completo",
-                    "incomplete_higher_education": "Ensino Superior Incompleto",
-                    "complete_high_school": "Ensino Médio Completo"
+            "job_create": {
+                "register": "Cadastro",
+                "status": {
+                    "processed": "Processada",
+                    "in_revision": "Em Revisão",
+                    "closed": "Fechada",
+                    "lost": "Perdida",
+                    "completed": "Concluída"
                 },
-                "collaborator_activities": "Quais são as principais atividades que ocolaborador irá exercer?",
-                "desired_experience": "Experiência Desejada",
-                "required_behavior": "Comportamento e/ou competências necessárias",
-                "type_of_period": {
-                    "name": "Período",
-                    "year": "ano",
-                    "month": "Mês"
+                "type_of_job": {
+                    "name": "Tipo de Vaga",
+                    "staff_increase": "Aumento de Quadro",
+                    "promotion": "Promoção",
+                    "faithfulness": "Fidelidade"
+                },
+                "temporary": "Temporário",
+                "month_time": "Tempo de Contrato",
+                "name": "Nome da Vaga",
+                "start_forecast": "Previsão de Inicio",
+                "job_number": "Número de Vagas",
+                "type_of_contract": "Tipo de Contratação",
+                "workplace": {
+                    "name": "Local de Trabalho",
+                    "in_loco": "In Loco",
+                    "home_office": "Home Office",
+                    "hybrid": "híbrido",
+                    "envolti": "Envolti"
+                },
+                "working_day": "Jornada de Trabaho",
+                "minimum_value": "Valor Mínimo",
+                "maximum_value": "Valor Máximo",
+                "post_vacancy": "Publicar Vaga",
+                "opening_date": "Data de Abertura",
+                "skills": {
+                    "register": "Conhecimentos",
+                    "name": "Habilidades",
+                    "schooling": {
+                        "complete_higher_education": "Ensino Superior Completo",
+                        "incomplete_higher_education": "Ensino Superior Incompleto",
+                        "complete_high_school": "Ensino Médio Completo"
+                    },
+                    "collaborator_activities": "Quais são as principais atividades que ocolaborador irá exercer?",
+                    "desired_experience": "Experiência Desejada",
+                    "required_behavior": "Comportamento e/ou competências necessárias",
+                    "type_of_period": {
+                        "name": "Período",
+                        "year": "ano",
+                        "month": "Mês"
+                    }
                 }
             }
         },

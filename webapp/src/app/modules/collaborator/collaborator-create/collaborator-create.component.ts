@@ -121,14 +121,14 @@ export class CollaboratorCreateComponent implements OnInit {
       login: [null, Validators.required],
       gender: [null, Validators.required],
       maritalStatus: [null, Validators.required],
-      office: [null, Validators.required],
+      office: ['', Validators.required],
       collaboratorTypes: [null, Validators.required],
       active: [true, Validators.required],
       cpf: this.fb.control({ value: null, disabled: false }, [
         DocumentValidator.isValidCpf(), Validators.required
       ]),
       birthDate: [null, Validators.required],
-      admissionDate: [null, Validators.required],
+      admissionDate: ['', Validators.required],
       email: [null, [Validators.email, Validators.required]],
       cnpj: this.fb.control({ value: null, disabled: true }, [
         DocumentValidator.isValidCnpj(), Validators.required
@@ -146,8 +146,8 @@ export class CollaboratorCreateComponent implements OnInit {
 
       Address: this.fb.group({
         cep: ['', Validators.required],
-        number: [''],
-        complement: [''],
+        number: ['', Validators.required],
+        complement: ['', Validators.required],
         street: ['', Validators.required],
         state: ['', Validators.required],
         city: ['', Validators.required],
