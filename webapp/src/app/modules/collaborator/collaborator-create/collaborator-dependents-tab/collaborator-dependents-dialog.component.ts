@@ -72,12 +72,12 @@ export class CollaboratorDependentsDialog {
       firstName: [null, Validators.required],
       lastName: [null, Validators.required],
       gender: [null, Validators.required],
-      cpf: [null, [DocumentValidator.isValidCpf(), Validators.required]],
+      cpf: [null, [DocumentValidator.isValidCpf()]],
       birthDate: [null, Validators.required],
-      ddi: [null, Validators.required],
-      ddd: [null, Validators.required],
-      phoneNumber: [null, Validators.required],
-      email: [null, [Validators.required, Validators.email]],
+      ddi: [null],
+      ddd: [null],
+      phoneNumber: [null],
+      email: [null, [Validators.email]],
       Collaborator: { id: this.collaboratorId },
     });
     if (this.data) {

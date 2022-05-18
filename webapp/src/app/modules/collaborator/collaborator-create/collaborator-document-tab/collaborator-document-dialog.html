@@ -10,6 +10,9 @@
             disableRipple
             formControlName="name"
             placeholder="Nome do Documento" />
+            <mat-error *ngIf="documentForm &&
+            documentForm.controls['name'].hasError('required')">
+                  {{'validators.validator-required' |  translate}} </mat-error>
         </mat-form-field>
 
         <div class="image-upload">

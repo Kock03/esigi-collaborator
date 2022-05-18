@@ -13,6 +13,9 @@
             matSuffix
             [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
+          <mat-error *ngIf="financeForm &&
+          financeForm.controls['dateInclusion'].hasError('required')">
+                {{'validators.validator-required' |  translate}} </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline">
@@ -23,6 +26,9 @@
             <mat-option [value]="3">{{'generic.cooperated' | translate}}</mat-option>
             <mat-option [value]="4">{{'generic.intern' | translate}}</mat-option>
           </mat-select>
+          <mat-error *ngIf="financeForm &&
+          financeForm.controls['contractType'].hasError('required')">
+                {{'validators.validator-required' |  translate}} </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline">
@@ -33,6 +39,9 @@
             <mat-option [value]="3">{{'collaborator.colaborator_create.finance.reason.home_time' | translate}}</mat-option>
             <mat-option [value]="4">{{'collaborator.colaborator_create.finance.reason.retention' | translate}}</mat-option>
           </mat-select>
+          <mat-error *ngIf="financeForm &&
+          financeForm.controls['reason'].hasError('required')">
+                {{'validators.validator-required' |  translate}} </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline">
@@ -43,6 +52,9 @@
             disableRipple
             formControlName="value"
             placeholder="Valor" />
+            <mat-error *ngIf="financeForm &&
+            financeForm.controls['value'].hasError('required')">
+                  {{'validators.validator-required' |  translate}} </mat-error>
         </mat-form-field>
 
         <mat-form-field fxFlex="50" appearance="outline">
@@ -56,13 +68,16 @@
             matSuffix
             [for]="paypicker"></mat-datepicker-toggle>
           <mat-datepicker #paypicker></mat-datepicker>
+          <mat-error *ngIf="financeForm &&
+            financeForm.controls['payday'].hasError('required')">
+                  {{'validators.validator-required' |  translate}} </mat-error>
         </mat-form-field>
       </form>
     </mat-dialog-content>
     <mat-dialog-actions>
       <div class="button-dialog">
         <button mat-flat-button mat-dialog-close (click)="onNoClick()">
-          {{'generic.continue_button' | translate}}
+          {{'generic.back_button' | translate}}
         </button>
         <button
           color="primary"

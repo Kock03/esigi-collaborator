@@ -12,6 +12,9 @@
             <mat-option [value]="4">{{'collaborator.colaborator_create.dependents.type.dad' | translate}}</mat-option>
             <mat-option [value]="5">{{'collaborator.colaborator_create.dependents.type.mom' | translate}}</mat-option>
           </mat-select>
+          <mat-error *ngIf="dependentForm &&
+          dependentForm.controls['type'].hasError('required')">
+              {{'validators.validator-required' |  translate}} </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline">
@@ -21,6 +24,9 @@
             disableRipple
             formControlName="firstName"
             placeholder="Nome" />
+            <mat-error *ngIf="dependentForm &&
+            dependentForm.controls['firstName'].hasError('required')">
+                {{'validators.validator-required' |  translate}} </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline">
@@ -30,6 +36,10 @@
             disableRipple
             formControlName="lastName"
             placeholder="Sobrenome" />
+            <mat-error *ngIf="dependentForm &&
+            dependentForm.controls['lastName'].hasError('required')">
+              {{'validators.validator-required' | translate}}
+            </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline">
@@ -39,6 +49,10 @@
             <mat-option [value]="2">{{'generic.gender.masculine' | translate}}</mat-option>
             <mat-option [value]="3">{{'generic.gender.undefined' | translate}}</mat-option>
           </mat-select>
+          <mat-error *ngIf="dependentForm &&
+          dependentForm.controls['gender'].hasError('required')">
+          {{'validators.validator-required' | translate}}
+        </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline">

@@ -16,6 +16,9 @@
             <mat-option [value]="2">{{'collaborator.colaborator_create.feedbacks.feedback_type.change_of_position'|translate}}</mat-option>
             <mat-option [value]="3">{{'collaborator.colaborator_create.feedbacks.feedback_type.salary_increase'|translate}}</mat-option>
           </mat-select>
+          <mat-error *ngIf="feedbackForm &&
+          feedbackForm.controls['feedbackType'].hasError('required')">
+                {{'validators.validator-required' |  translate}} </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline" fxFlex="25">
@@ -25,16 +28,25 @@
             <mat-option [value]="2">{{'collaborator.colaborator_create.feedbacks.reason.customer_request'|translate}}</mat-option>
             <mat-option [value]="3">{{'collaborator.colaborator_create.feedbacks.reason.contributor_request'|translate}}</mat-option>
           </mat-select>
+          <mat-error *ngIf="feedbackForm &&
+          feedbackForm.controls['reason'].hasError('required')">
+                {{'validators.validator-required' |  translate}} </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline" fxFlex="25">
           <mat-label>{{'generic.project' | translate}}</mat-label>
           <input matInput disableRipple formControlName="project" />
+          <mat-error *ngIf="feedbackForm &&
+          feedbackForm.controls['project'].hasError('required')">
+                {{'validators.validator-required' |  translate}} </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline" fxFlex="25">
           <mat-label>{{'collaborator.colaborator_create.feedbacks.manager'|translate}}</mat-label>
           <input matInput disableRipple formControlName="manager" />
+          <mat-error *ngIf="feedbackForm &&
+          feedbackForm.controls['manager'].hasError('required')">
+                {{'validators.validator-required' |  translate}} </mat-error>
         </mat-form-field>
       </div>
 
@@ -47,6 +59,9 @@
             <mat-option [value]="2">{{'collaborator.colaborator_create.feedbacks.status.completed'|translate}}</mat-option>
             <mat-option [value]="3">{{'collaborator.colaborator_create.feedbacks.status.feedback_return'|translate}}</mat-option>
           </mat-select>
+          <mat-error *ngIf="feedbackForm &&
+          feedbackForm.controls['status'].hasError('required')">
+                {{'validators.validator-required' |  translate}} </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline" fxFlex="20">
@@ -59,6 +74,9 @@
             matSuffix
             [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
+          <mat-error *ngIf="feedbackForm &&
+          feedbackForm.controls['feedbackDate'].hasError('required')">
+                {{'validators.validator-required' |  translate}} </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline" fxFlex="10">
@@ -68,6 +86,9 @@
             disableRipple
             formControlName="hourDate"
             mask="00:00" />
+            <mat-error *ngIf="feedbackForm &&
+          feedbackForm.controls['hourDate'].hasError('required')">
+                {{'validators.validator-required' |  translate}} </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline" fxFlex="30">
@@ -80,6 +101,9 @@
             matSuffix
             [for]="pickerReturn"></mat-datepicker-toggle>
           <mat-datepicker #pickerReturn></mat-datepicker>
+          <mat-error *ngIf="feedbackForm &&
+          feedbackForm.controls['feedbackDateRetorn'].hasError('required')">
+                {{'validators.validator-required' |  translate}} </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline" fxFlex="10">
@@ -89,11 +113,14 @@
             disableRipple
             formControlName="hourDateRetorn"
             mask="00:00" />
+            <mat-error *ngIf="feedbackForm &&
+            feedbackForm.controls['hourDateRetorn'].hasError('required')">
+                  {{'validators.validator-required' |  translate}} </mat-error>
         </mat-form-field>
       </div>
 
       <div fxFlex="100" fxLayoutGap="20px">
-        <mat-form-field appearance="outline" fxFlex="50">
+        <mat-form-field  class="second-column" appearance="outline" fxFlex="50">
           <mat-label>{{'collaborator.colaborator_create.feedbacks.description'|translate}}</mat-label>
           <textarea
             class="text-area"

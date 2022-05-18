@@ -10,6 +10,9 @@
             disableRipple
             formControlName="bank"
             placeholder="Banco" />
+            <mat-error *ngIf="bankForm &&
+            bankForm.controls['bank'].hasError('required')">
+              {{'validators.validator-required' |  translate}} </mat-error>
         </mat-form-field>
 
         <div fxLayout="row" fxFlex="100" fxLayoutGap="16px">
@@ -20,6 +23,9 @@
               <mat-option [value]="2">{{'collaborator.colaborator_create.bank.type.salary_account' | translate}}</mat-option>
               <mat-option [value]="3">{{'collaborator.colaborator_create.bank.type.savings_account' | translate}}</mat-option>
             </mat-select>
+            <mat-error *ngIf="bankForm &&
+            bankForm.controls['accountType'].hasError('required')">
+              {{'validators.validator-required' |  translate}} </mat-error>
           </mat-form-field>
           <br />
           <mat-checkbox
@@ -39,6 +45,9 @@
               formControlName="agency"
               mask="0000"
               placeholder="Agência" />
+              <mat-error *ngIf="bankForm &&
+            bankForm.controls['agency'].hasError('required')">
+              {{'validators.validator-required' |  translate}} </mat-error>
           </mat-form-field>
 
           <mat-form-field fxFlex="25" appearance="outline">
@@ -49,6 +58,9 @@
               formControlName="digit"
               mask="0"
               placeholder="Digito" />
+              <mat-error *ngIf="bankForm &&
+            bankForm.controls['digit'].hasError('required')">
+              {{'validators.validator-required' |  translate}} </mat-error>
           </mat-form-field>
         </div>
 
@@ -61,6 +73,9 @@
               formControlName="accountNumber"
               mask="00000"
               placeholder="Número Conta" />
+              <mat-error *ngIf="bankForm &&
+              bankForm.controls['accountNumber'].hasError('required')">
+                {{'validators.validator-required' |  translate}} </mat-error>
           </mat-form-field>
 
           <mat-form-field fxFlex="25" appearance="outline">
@@ -71,6 +86,9 @@
               formControlName="bankAccountDigit"
               mask="0"
               placeholder="Digito" />
+              <mat-error *ngIf="bankForm &&
+              bankForm.controls['bankAccountDigit'].hasError('required')">
+                {{'validators.validator-required' |  translate}} </mat-error>
           </mat-form-field>
         </div>
       </form>
