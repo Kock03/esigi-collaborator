@@ -16,6 +16,7 @@ export class CreateLanguagesDto {
   @IsEnum(Fluency)
   degreeOfInfluence: Fluency;
 
+  @ApiProperty()
   @IsNotEmpty()
-  resume: ResumesEntity;
+  Resume: ResumesEntity;
 }

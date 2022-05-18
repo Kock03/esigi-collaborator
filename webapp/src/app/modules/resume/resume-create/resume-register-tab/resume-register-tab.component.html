@@ -15,14 +15,23 @@
           <mat-form-field fxFlex="33" appearance="outline">
             <mat-label>{{ 'generic.name' | translate }}</mat-label>
             <input matInput placeholder="Nome" formControlName="firstName" />
+            <mat-error *ngIf="resumeForm &&
+            resumeForm.controls['firstName'].hasError('required')">
+            {{'validators.validator-required' | translate}} </mat-error>
           </mat-form-field>
           <mat-form-field fxFlex="33" appearance="outline">
             <mat-label>{{ 'generic.last_name' | translate }}</mat-label>
             <input matInput placeholder="Sobrenome" formControlName="lastName" />
+            <mat-error *ngIf="resumeForm &&
+            resumeForm.controls['lastName'].hasError('required')">
+            {{'validators.validator-required' | translate}} </mat-error>
           </mat-form-field>
           <mat-form-field fxFlex="34" appearance="outline">
             <mat-label>{{ 'generic.login' | translate }}</mat-label>
             <input matInput placeholder="Login" formControlName="login" />
+            <mat-error *ngIf="resumeForm &&
+            resumeForm.controls['login'].hasError('required')">
+            {{'validators.validator-required' | translate}} </mat-error>
           </mat-form-field>
         </div>
       </div>
@@ -31,12 +40,16 @@
         <mat-form-field fxFlex="25" appearance="outline">
           <mat-label>{{ 'generic.cpf' | translate }}</mat-label>
           <input matInput placeholder="CPF" formControlName="cpf" mask="000.000.000-00" />
+          <mat-error *ngIf="resumeForm &&
+          resumeForm.controls['cpf'].hasError('required')">
+          {{'validators.validator-required' | translate}} </mat-error>
         </mat-form-field>
         <mat-form-field fxFlex="25" appearance="outline">
           <mat-label>{{ 'generic.birth_date' | translate }}</mat-label>
-          <input matInput [matDatepicker]="picker" formControlName="birthDate" placeholder="Data de aniversário" />
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
+          <input matInput  formControlName="birthDate" placeholder="Data de aniversário" mask="00/00/0000" [showMaskTyped]="true" [dropSpecialCharacters]="false"/>
+          <mat-error *ngIf="resumeForm &&
+          resumeForm.controls['birthDate'].hasError('required')">
+          {{'validators.validator-required' | translate}} </mat-error>
         </mat-form-field>
         <mat-form-field fxFlex="25" appearance="outline">
           <mat-label>Sexo</mat-label>
@@ -44,6 +57,9 @@
             <mat-option [value]="1">{{ "generic.gender.masculine" | translate }}</mat-option>
             <mat-option [value]="2">{{ "generic.gender.feminine" | translate }}</mat-option>
           </mat-select>
+          <mat-error *ngIf="resumeForm &&
+          resumeForm.controls['gender'].hasError('required')">
+          {{'validators.validator-required' | translate}} </mat-error>
         </mat-form-field>
         <mat-form-field fxFlex="25" appearance="outline">
           <mat-label>Estado Civil</mat-label>
@@ -61,6 +77,9 @@
               'generic.marital_status.stable_union' | translate
               }}</mat-option>
           </mat-select>
+          <mat-error *ngIf="resumeForm &&
+          resumeForm.controls['maritalStatus'].hasError('required')">
+          {{'validators.validator-required' | translate}} </mat-error>
         </mat-form-field>
       </div>
 
@@ -114,6 +133,9 @@
         <mat-form-field fxFlex="50" appearance="outline">
           <mat-label>{{ 'generic.email' | translate }}</mat-label>
           <input matInput placeholder="Email" formControlName="email" />
+          <mat-error *ngIf="resumeForm &&
+          resumeForm.controls['email'].hasError('required')">
+          {{'validators.validator-required' | translate}} </mat-error>
         </mat-form-field>
 
         <mat-form-field fxFlex="50" appearance="outline">
@@ -125,12 +147,12 @@
       <div fxFlex="100" fxLayoutGap="16px">
         <div formGroupName="Phone" fxFlex="100" fxLayoutGap="16px">
           <mat-form-field fxFlex="30" appearance="outline">
-            <mat-label>{{ 'generic.ddi' | translate }}</mat-label>
+            <mat-label>{{ 'generic.phone.ddi' | translate }}</mat-label>
             <input matInput placeholder="DDI" formControlName="ddi" mask="+00" />
           </mat-form-field>
 
           <mat-form-field fxFlex="35" appearance="outline">
-            <mat-label>{{ 'generic.ddd' | translate }}</mat-label>
+            <mat-label>{{ 'generic.phone.ddd' | translate }}</mat-label>
             <input matInput placeholder="DDD" formControlName="ddd" mask="(00)" />
           </mat-form-field>
 

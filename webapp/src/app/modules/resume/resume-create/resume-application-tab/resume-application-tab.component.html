@@ -1,7 +1,4 @@
-<div
-  id="applicationTable
-"
-  class="tab">
+<div id="applicationTable" class="tab">
   <div class="content-scroll" *ngIf="resumeForm">
     <div class="envolti-table mat-elevation-z8" fxLayout="column">
       <table mat-table [dataSource]="filteredApplicationList">
@@ -35,15 +32,15 @@
           <th mat-header-cell *matHeaderCellDef>{{'generic.status'|translate}}</th>
           <td mat-cell *matCellDef="let application">
             {{
-              application.status == 1
-                ? 'Processada'
-                : application.status == 2
-                ? 'Em revisão'
-                : application.status == 3
-                ? 'Encerrada'
-                : application.status == 4
-                ? 'Perdida'
-                : 'Concluída'
+            application.status == 1
+            ? 'Processada'
+            : application.status == 2
+            ? 'Em revisão'
+            : application.status == 3
+            ? 'Encerrada'
+            : application.status == 4
+            ? 'Perdida'
+            : 'Concluída'
             }}
           </td>
         </ng-container>
@@ -55,9 +52,7 @@
           </td>
         </ng-container>
 
-        <tr
-          mat-header-row
-          *matHeaderRowDef="displayedApplication; sticky: true"></tr>
+        <tr mat-header-row *matHeaderRowDef="displayedApplication; sticky: true"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedApplication"></tr>
       </table>
     </div>

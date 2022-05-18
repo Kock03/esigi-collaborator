@@ -16,6 +16,7 @@ import { SnackBarService } from 'src/services/snackbar.service';
 import { MatSort } from '@angular/material/sort';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { MatTableDataSource } from '@angular/material/table';
+import { FormGroup } from '@angular/forms';
 
 export interface Resume {
   id: string;
@@ -33,7 +34,6 @@ export interface Resume {
 })
 export class ResumeListComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort = new MatSort();
-
   @ViewChild('filter', { static: true }) filter!: ElementRef;
   private _unsubscribeAll: Subject<any>;
   displayedResume: string[] = ['name', 'birthDate', 'phoneNumber', 'icon'];
@@ -42,6 +42,8 @@ export class ResumeListComponent implements OnInit {
   filteredResumeList = new MatTableDataSource();
   index: any = null;
   Resume: any;
+  step: number = 1;
+  form!: FormGroup;
   resume!: any;
 
   constructor(
@@ -114,6 +116,9 @@ export class ResumeListComponent implements OnInit {
 
   editResume(resumeId: any) {
     this.router.navigate([`curriculo/${resumeId}`]);
+    const method = 'edit';
+    sessionStorage.setItem('resume_method', method)
+    sessionStorage.setItem('resume_id', resumeId);
   }
 
   async deleteResume(resumeId: any) {

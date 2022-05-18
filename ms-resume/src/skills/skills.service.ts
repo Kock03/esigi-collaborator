@@ -29,6 +29,7 @@ export class SkillsService {
     conditions: FindConditions<SkillsEntity>,
     options?: FindOneOptions<SkillsEntity>,
   ) {
+    options = { relations: ['Resume'] };
     try {
       return await this.skillsRepository.findOneOrFail(conditions, options);
     } catch {

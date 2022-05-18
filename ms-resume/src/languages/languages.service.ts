@@ -29,6 +29,7 @@ export class IdiomsService {
     conditions: FindConditions<LanguagesEntity>,
     options?: FindOneOptions<LanguagesEntity>,
   ) {
+    options = { relations: ['Resume'] };
     try {
       return await this.languagesRepository.findOneOrFail(conditions, options);
     } catch {

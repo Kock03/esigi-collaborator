@@ -28,7 +28,7 @@ export class SkillsEntity {
   currentPosition: boolean;
 
   @ManyToOne(() => ResumesEntity, (resumes) => resumes.Skills, {})
-  resume: ResumesEntity;
+  Resume: ResumesEntity;
 
   @CreateDateColumn({ name: 'date_inclusion' })
   createdAt: Date;

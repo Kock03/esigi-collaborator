@@ -64,22 +64,6 @@ export class UpdateResumesDto {
 
   @ApiProperty()
   @IsOptional()
-  Educations: EducationsEntity[];
-
-  @ApiProperty()
-  @IsOptional()
-  Languages: LanguagesEntity[];
-
-  @ApiProperty()
-  @IsOptional()
-  Experiences: ExperiencesEntity[];
-
-  @ApiProperty()
-  @IsOptional()
-  Skills: SkillsEntity[];
-
-  @ApiProperty()
-  @IsOptional()
   @IsEmail()
   @IsString()
   @MinLength(5)

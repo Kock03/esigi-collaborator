@@ -31,5 +31,5 @@ export class CreateSkillsDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsObject()
-  resume: ResumesEntity;
+Resume: ResumesEntity;
 }

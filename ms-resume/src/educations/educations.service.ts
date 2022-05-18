@@ -7,8 +7,8 @@ import {
   FindOneOptions,
   Repository,
 } from 'typeorm';
-import { CreateSchoolingDto } from './dto/create-schooling.dto';
-import { UpdateSchoolingDto } from './dto/update-schooling.dto';
+import { CreateEducationsDto } from './dto/create-educations.dto';
+import { UpdateEducationsingDto } from './dto/update-educations.dto';
 import { EducationsEntity } from './educations.entity';
 
 @Injectable()
@@ -29,6 +29,7 @@ export class EducationsService {
     conditions: FindConditions<EducationsEntity>,
     options?: FindOneOptions<EducationsEntity>,
   ) {
+    options = { relations: ['Resume'] };
     try {
       return await this.educationsRepository.findOneOrFail(conditions, options);
     } catch {
@@ -36,12 +37,12 @@ export class EducationsService {
     }
   }
 
-  async store(createDto: CreateSchoolingDto) {
+  async store(createDto: CreateEducationsDto) {
     const education = this.educationsRepository.create(createDto);
     return await this.educationsRepository.save(education);
   }
 
-  async update(id: string, data: UpdateSchoolingDto) {
+  async update(id: string, data: UpdateEducationsingDto) {
     try {
       const education = await this.educationsRepository.findOneOrFail({ id });
     } catch {

@@ -10,6 +10,9 @@
             disableRipple
             formControlName="languageName"
             placeholder="Idioma" />
+            <mat-error *ngIf="languageForm &&
+            languageForm.controls['languageName'].hasError('required')">
+            {{'validators.validator-required' |  translate}} </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline">
@@ -22,6 +25,9 @@
             <mat-option [value]="5">{{'generic.education.languages.fluency.writing_and_reading'|translate}}</mat-option>
             <mat-option [value]="6">{{'generic.education.languages.fluency.writing_and_conversation'|translate}}</mat-option>
           </mat-select>
+          <mat-error *ngIf="languageForm &&
+          languageForm.controls['degreeOfInfluence'].hasError('required')">
+          {{'validators.validator-required' |  translate}} </mat-error>
         </mat-form-field>
       </form>
     </mat-dialog-content>

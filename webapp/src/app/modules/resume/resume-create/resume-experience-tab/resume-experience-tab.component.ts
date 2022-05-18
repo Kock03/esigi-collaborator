@@ -1,4 +1,4 @@
-import { Expression } from '@angular/compiler';
+ import { Expression } from '@angular/compiler';
 import {
   Component,
   EventEmitter,
@@ -15,7 +15,11 @@ import {
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
+import { IExperience } from 'src/app/interfaces/iexperience';
+import { ResumeExperienceProvider } from 'src/providers/resume-providers/resume-experience.provider';
+import { ResumeProvider } from 'src/providers/resume-providers/resume.provider';
 import { ConfirmDialogService } from 'src/services/confirn-dialog.service';
+import { SnackBarService } from 'src/services/snackbar.service';
 import { ResumeDialogExperience } from './resume-experience-dialog.component';
 
 export interface Experience {
@@ -38,43 +42,46 @@ export interface Experience {
   encapsulation: ViewEncapsulation.None,
 })
 export class ResumeExperienceTabComponent implements OnInit {
-  @Input() experiencesArray!: FormArray;
   @Output() onChange: EventEmitter<any> = new EventEmitter();
 
+  data: IExperience[] = [];
   Experience: any;
   experienceList: any[] = [];
   experienceForm!: FormGroup;
   index: any = null;
+  checked = false;
   resumeId!: any;
+  method!: string;
+  experienceId!: string;
+  resumeMethod!: string;
 
-  constructor(
-    private dialogService: ConfirmDialogService,
+  constructor( 
     private fb: FormBuilder,
     public dialog: MatDialog,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private snackbarService: SnackBarService, 
+    private dialogService: ConfirmDialogService,
+    private resumeExperienceProvider:ResumeExperienceProvider,
+    private resumeProvider: ResumeProvider
   ) {}
 
   ngOnInit(): void {
-    if (this.experiencesArray.value.length > 0) {
-      this.experienceList = this.experiencesArray.value;
+    this.resumeMethod = sessionStorage.getItem('resume_method')!;
+    if (this.resumeMethod === 'edit') {
+      this.getExperienceList();
     }
   }
 
-  initObservables() {
-    this.experiencesArray.valueChanges.subscribe(res => {
-      const isNullIndex = this.experiencesArray.value.findIndex(
-        (experience: any) => experience == null
-      );
-      if (isNullIndex !== -1) {
-        this.experiencesArray.removeAt(isNullIndex);
-      }
-      if (res) {
-        this.experienceList = this.experiencesArray.value;
-      }
-    });
+  async getExperienceList() {
+    this.resumeId = sessionStorage.getItem('resume_id');
+    const data = await this.resumeProvider.findOne(this.resumeId);
+    this.data = data.Experiences;
+
   }
 
   openDialog() {
+    this.method = 'add';
+    sessionStorage.setItem('method', this.method);
     const dialogRef = this.dialog.open(ResumeDialogExperience, {
       width: '500px',
       height: '640px',
@@ -82,17 +89,29 @@ export class ResumeExperienceTabComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(experience => {
       if (experience) {
-        this.experiencesArray.insert(0, this.fb.group(experience));
-        this.experienceList.push(experience);
+        this.getExperienceList()
       }
     });
   }
 
-  next() {
-    this.onChange.next(true);
+  getExperience(experienceSelected: any, id: string) {
+    this.method = 'edit';
+    sessionStorage.setItem('method', this.method);
+    this.experienceId = id;
+    sessionStorage.setItem('experience_id', this.experienceId);
+    const dialogRef = this.dialog.open(ResumeDialogExperience, {
+      width: '500px',
+      height: '640px',
+      data: experienceSelected,
+    });
+    dialogRef.afterClosed().subscribe(experience => {
+      if (experience) {
+        this.getExperienceList();
+      }
+    }); 
   }
 
-  deleteExperience(index: number) {
+  deleteExperience(id: string) {
     const options = {
       data: {
         title: 'Atenção',
@@ -103,26 +122,22 @@ export class ResumeExperienceTabComponent implements OnInit {
 
     this.dialogService.open(options);
 
-    this.dialogService.confirmed().subscribe(async confirmed => {
+    this.dialogService.confirmed().subscribe(async (confirmed) => {
       if (confirmed) {
-        this.experiencesArray.removeAt(index);
-        this.experienceList.splice(index, 1);
+        try {
+          let deleteSkill = await this.resumeExperienceProvider.destroy(id);
+          this.getExperienceList();
+          this.snackbarService.successMessage('Registro Excluido Com Sucesso');
+        } catch (error) {
+          console.log('ERROR 132' + error);
+          this.snackbarService.showError('Falha ao Excluir');
+        }
       }
     });
   }
 
-  getExperience(experienceSelected: any, index: number) {
-    const dialogRef = this.dialog.open(ResumeDialogExperience, {
-      width: '500px',
-      height: '640px',
-      data: experienceSelected,
-    });
 
-    this.index = index;
-    dialogRef.afterClosed().subscribe(experience => {
-      if (experience) {
-        this.experiencesArray.controls[this.index].patchValue(experience);
-      }
-    });
+  next() {
+    this.onChange.next(true);
   }
 }

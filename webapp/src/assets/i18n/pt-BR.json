@@ -214,6 +214,8 @@
         "initial_data": "Data de Inicio"
     },
     "resumes": {
+        "name": "Cadastro do Currículo",
+        "register": "Cadastro",
         "resume_list": {
             "search_resumes": "Buscar Currículos",
             "filter": "Filtro",
@@ -224,6 +226,7 @@
             "stopped": "Parado"
         },
         "resume_experience": {
+            "name": "Experiência",
             "experience_registration": "Cadastro de experiência",
             "company_name": "Nome da empresa",
             "locality": "Localidade",
@@ -232,12 +235,8 @@
             "description": "Descrição"
         },
         "resume_application": {
-            "experience_registration": "Cadastro de experiência",
-            "company_name": "Nome da empresa",
-            "locality": "Localidade",
-            "current_job": "Trabalho atual",
-            "sector": "Setor",
-            "description": "Descrição"
+            "job_name": "Nome da Vaga",
+            "name": "Candidaturas"
         }
     },
     "generic": {

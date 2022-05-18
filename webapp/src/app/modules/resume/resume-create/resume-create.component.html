@@ -3,7 +3,7 @@
     <button (click)="listResume()" color="primary" mat-button>
       <mat-icon> chevron_left </mat-icon>
     </button>
-    <h2>Cadastro de Currículo</h2>
+    <h2>{{'resumes.name' | translate}}</h2>
   </div>
 
   <div fxLayout="row" class="tab" fxLayoutGap="16px">
@@ -12,7 +12,7 @@
       fxLayout="column"
       class="tab-group"
       [ngClass]="{ done: step > 0, active: step == 1 }">
-      <p class="tab-item">Cadastro</p>
+      <p class="tab-item">{{'resumes.register' | translate}}</p>
       <span class="tab-border"></span>
     </div>
     <div
@@ -20,7 +20,7 @@
       fxLayout="column"
       class="tab-group"
       [ngClass]="{ done: step > 1, active: step == 2 }">
-      <p class="tab-item">Educação</p>
+      <p class="tab-item">{{'generic.education.name' | translate}}</p>
       <span class="tab-border"></span>
     </div>
     <div
@@ -28,7 +28,7 @@
       fxLayout="column"
       class="tab-group"
       [ngClass]="{ done: step > 2, active: step == 3 }">
-      <p class="tab-item">Experiência</p>
+      <p class="tab-item">{{'resumes.resume_experience.name' | translate}}</p>
       <span class="tab-border"></span>
     </div>
     <div
@@ -36,7 +36,7 @@
       fxLayout="column"
       class="tab-group"
       [ngClass]="{ done: step > 3, active: step == 4 }">
-      <p class="tab-item">Skills</p>
+      <p class="tab-item">{{'generic.skills.name' | translate}}</p>
       <span class="tab-border"></span>
     </div>
 
@@ -46,7 +46,7 @@
       fxLayout="column"
       class="tab-group"
       [ngClass]="{ done: step > 4, active: step == 5 }">
-      <p class="tab-item">Candidaturas</p>
+      <p class="tab-item">{{'resumes.resume_application.name' | translate}}</p>
       <span class="tab-border"></span>
     </div>
 
@@ -55,7 +55,7 @@
       fxLayout="column"
       class="tab-group disabled"
       [ngClass]="{ done: step > 5, active: step == 6 }">
-      <p class="tab-item">Acompanhamento</p>
+      <p class="tab-item">{{'generic.accompaniment' | translate}}</p>
       <span class="tab-border"></span>
     </div>
   </div>
@@ -66,16 +66,12 @@
     (onChange)="handleChanges($event)"></app-resume-register-tab>
   <app-resume-education-tab
     [hidden]="step != 2"
-    [educationArray]="educationArray"
-    [languageArray]="languageArray"
     (onChange)="handleChanges($event)">
   </app-resume-education-tab>
   <app-resume-experience-tab
-    [experiencesArray]="experiencesArray"
     [hidden]="step != 3"
     (onChange)="handleChanges($event)"></app-resume-experience-tab>
   <app-resume-skills-tab
-    [skillArray]="skillArray"
     [hidden]="step != 4"
     (onChange)="handleChanges($event)">
   </app-resume-skills-tab>
@@ -98,14 +94,14 @@
     </button>
     <button
       mat-flat-button
-      *ngIf="step != 4"
+      *ngIf="step !== 1 && step !== 4"
       (click)="navigate('next')"
       color="primary">
       {{'generic.continue_button' | translate}}
     </button>
     <button
       mat-flat-button
-      *ngIf="step == 4"
+      *ngIf="step === 1"
       (click)="saveResume()"
       color="primary">
       {{'generic.save_button' | translate}}
@@ -116,7 +112,20 @@
     fxLayoutAlign="center end"
     fxLayoutGap="16px"
     *ngIf="resumeId !== 'novo'">
-    <button mat-flat-button (click)="saveEditResume()" color="primary">
+
+    <button mat-button *ngIf="step != 1" (click)="navigate('back')">
+      {{'generic.back_button' | translate}}
+    </button>
+
+    <button
+      mat-flat-button
+      *ngIf="step !== 1 && step !== 5"
+      (click)="navigate('next')"
+      color="primary">
+      {{'generic.continue_button' | translate}}
+    </button>
+
+    <button mat-flat-button  *ngIf="step === 1" (click)="saveEditResume()" color="primary">
       {{'generic.save_button' | translate}}
     </button>
   </div>

@@ -170,7 +170,6 @@ export class CollaboratorCreateComponent implements OnInit {
       const colaborator = await this.collaboratorProvider.store(data);
       sessionStorage.setItem('colaborator_id', colaborator.id);
       this.snackbarService.successMessage('Colaborador Cadastrado Com Sucesso');
-      this.router.navigate(['colaborador/lista']);
       sessionStorage.clear();
     } catch (error: any) {
       console.log('ERROR 132' + error);

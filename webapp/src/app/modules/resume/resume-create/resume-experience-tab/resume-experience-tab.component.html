@@ -1,5 +1,5 @@
 <div id="resumeExperienceTab" class="tab">
-  <div class="content-scroll" *ngIf="experiencesArray" fxLayout="column">
+  <div class="content-scroll" fxLayout="column">
     <h2 mat-dialog-title class="label">
       {{ 'resumes.resume_experience.experience_registration' | translate }}
     </h2>
@@ -15,10 +15,9 @@
     <mat-list
       role="list"
       #experiencesList
-      *ngIf="experiencesArray"
       class="list-group">
       <mat-list-item
-        *ngFor="let experience of experienceList; let i = index"
+        *ngFor="let experience of data; let i = index"
         class="list-group-item"
         fxLayoutAlign="start start">
         <div class="list-item" fxLayout="column">
@@ -56,10 +55,10 @@
           <button
             class="table-button"
             mat-button
-            (click)="getExperience(experience, i)">
+            (click)="getExperience(experience, experience.id)">
             <mat-icon>edit</mat-icon>
           </button>
-          <button (click)="deleteExperience(i)" class="table-button" mat-button>
+          <button (click)="deleteExperience(experience.id)" class="table-button" mat-button>
             <mat-icon>delete</mat-icon>
           </button>
         </div>

@@ -15,7 +15,10 @@ import {
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
+import { ResumeSkillsProvider } from 'src/providers/resume-providers/resume-skills.provider';
+import { ResumeProvider } from 'src/providers/resume-providers/resume.provider';
 import { ConfirmDialogService } from 'src/services/confirn-dialog.service';
+import { SnackBarService } from 'src/services/snackbar.service';
 import { ResumeSkillDialog } from './resume-skill.dialog.component';
 
 @Component({
@@ -25,7 +28,6 @@ import { ResumeSkillDialog } from './resume-skill.dialog.component';
   encapsulation: ViewEncapsulation.None,
 })
 export class ResumeSkillsTabComponent implements OnInit {
-  @Input() skillArray!: FormArray;
   @Output() onChange: EventEmitter<any> = new EventEmitter();
   @ViewChild('skillTable') skillTable!: MatTable<any>;
 
@@ -35,39 +37,38 @@ export class ResumeSkillsTabComponent implements OnInit {
 
   selectedIndex: number = 0;
   skillForm!: FormGroup;
-  index: any = null;
   Skill: any;
   checked = false;
+  method!: string;
+  resumeId!: any;
+  skillId!: string;
+  resumeMethod!: string;
 
   constructor(
     private fb: FormBuilder,
     public dialog: MatDialog,
-    private dialogService: ConfirmDialogService
+    private snackbarService: SnackBarService, 
+    private dialogService: ConfirmDialogService,
+    private resumeSkillsProvider:ResumeSkillsProvider,
+    private resumeProvider: ResumeProvider
   ) {}
 
-  ngOnInit(): void {
-    if (this.skillArray.value.length > 0) {
-      this.data = this.skillArray.value;
+  ngOnInit(): void {                
+    this.resumeMethod = sessionStorage.getItem('resume_method')!;
+    if (this.resumeMethod === 'edit') {
+      this.getSkillList();
     }
-
-    this.initObservables();
   }
 
-  initObservables() {
-    this.skillArray.valueChanges.subscribe(res => {
-      const isNullIndex = this.skillArray.value.findIndex(
-        (skill: any) => skill == null
-      );
-      if (isNullIndex !== -1) {
-        this.skillArray.removeAt(isNullIndex);
-      }
-      if (res) {
-        this.data = this.skillArray.value;
-      }
-    });
+  async getSkillList() {
+    this.resumeId = sessionStorage.getItem('resume_id');
+    const data = await this.resumeProvider.findOne(this.resumeId);
+    this.data = data.Skills;
   }
 
   openDialog() {
+    this.method = 'add';
+    sessionStorage.setItem('method', this.method);
     const dialogRef = this.dialog.open(ResumeSkillDialog, {
       width: '500px',
       height: '470px',
@@ -75,8 +76,7 @@ export class ResumeSkillsTabComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(skill => {
       if (skill) {
-        this.skillArray.insert(0, this.fb.group(skill));
-        this.skillTable.renderRows();
+        this.getSkillList()
       }
     });
   }
@@ -85,22 +85,24 @@ export class ResumeSkillsTabComponent implements OnInit {
     this.onChange.next(true);
   }
 
-  getSkill(skillSelected: any, index: number) {
+  getSkill(skillSelected: any, id: string) {
+    this.method = 'edit';
+    sessionStorage.setItem('method', this.method);
+    this.skillId = id;
+    sessionStorage.setItem('skill_id', this.skillId);
     const dialogRef = this.dialog.open(ResumeSkillDialog, {
       width: '500px',
-      height: '450px',
+      height: '620px',
       data: skillSelected,
     });
-
-    this.index = index;
     dialogRef.afterClosed().subscribe(skill => {
       if (skill) {
-        this.skillArray.controls[this.index].patchValue(skill);
+        this.getSkillList();
       }
     });
   }
 
-  deleteSkill(index: number) {
+  deleteSkill(id: string) {
     const options = {
       data: {
         title: 'Atenção',
@@ -111,9 +113,16 @@ export class ResumeSkillsTabComponent implements OnInit {
 
     this.dialogService.open(options);
 
-    this.dialogService.confirmed().subscribe(async confirmed => {
+    this.dialogService.confirmed().subscribe(async (confirmed) => {
       if (confirmed) {
-        this.skillArray.removeAt(index);
+        try {
+          let deleteSkill = await this.resumeSkillsProvider.destroy(id);
+          this.getSkillList();
+          this.snackbarService.successMessage('Registro Excluido Com Sucesso');
+        } catch (error) {
+          console.log('ERROR 132' + error);
+          this.snackbarService.showError('Falha ao Excluir');
+        }
       }
     });
   }

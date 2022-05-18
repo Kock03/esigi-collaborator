@@ -6,7 +6,7 @@ import { environment } from 'src/environments/environment';
 @Injectable({
     providedIn: 'root',
 })
-export class ResumeSkillsProvider {
+export class ResumeLanguageProvider {
     constructor(private apiGateway: ApiGateway) { }
 
     ngOnInit(): void { }
@@ -14,16 +14,7 @@ export class ResumeSkillsProvider {
     findAll(): Promise<any> {
         return new Promise((resolve, reject) => {
             this.apiGateway
-                .get(environment.RESUME_MS + 'skills')
-                .subscribe((response: HttpResponse<any>) => {
-                    resolve(response.body);
-                }, reject);
-        });
-    }
-
-    findByName(query: any): Promise<any> {
-        return new Promise((resolve, reject) => {
-            this.apiGateway.get(environment.RESUME_MS + `skills/find/name?${query}`)
+                .get(environment.RESUME_MS + 'languages')
                 .subscribe((response: HttpResponse<any>) => {
                     resolve(response.body);
                 }, reject);
@@ -33,27 +24,27 @@ export class ResumeSkillsProvider {
     findOne(id: string | null): Promise<any> {
         return new Promise((resolve, reject) => {
             this.apiGateway
-                .get(environment.RESUME_MS + 'skills/:id', { id: id })
+                .get(environment.RESUME_MS + 'languages/:id', { id: id })
                 .subscribe((response: HttpResponse<any>) => {
                     resolve(response.body);
                 }, reject);
         });
     }
 
-    update(id: string | null, skill: any): Promise<any> {
+    update(id: string | null, language: any): Promise<any> {
         return new Promise((resolve, reject) => {
             this.apiGateway
-                .put(environment.RESUME_MS + 'skills/:id', { id: id }, skill)
+                .put(environment.RESUME_MS + 'languages/:id', { id: id }, language)
                 .subscribe((response: HttpResponse<any>) => {
                     resolve(response.body);
                 }, reject);
         });
     }
 
-    store(skill: any): Promise<any> {
+    store(language: any): Promise<any> {
         return new Promise((resolve, reject) => {
             this.apiGateway
-                .post(environment.RESUME_MS + 'skills', skill)
+                .post(environment.RESUME_MS + 'languages', language)
                 .subscribe((response: HttpResponse<any>) => {
                     resolve(response.body);
                 }, reject);
@@ -63,7 +54,7 @@ export class ResumeSkillsProvider {
     destroy(id: string | null): Promise<any> {
         return new Promise((resolve, reject) => {
             this.apiGateway
-                .delete(environment.RESUME_MS + 'skills/:id', { id: id })
+                .delete(environment.RESUME_MS + 'languages/:id', { id: id })
                 .subscribe((response: HttpResponse<any>) => {
                     resolve(response.body);
                 }, reject);

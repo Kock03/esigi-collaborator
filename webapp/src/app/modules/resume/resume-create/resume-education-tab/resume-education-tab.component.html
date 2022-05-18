@@ -1,5 +1,5 @@
 <div id="resumeEducationTab" class="tab">
-  <div class="content-scroll" *ngIf="educationArray">
+  <div class="content-scroll">
     <mat-tab-group animationDuration="0">
       <mat-tab label="Escolaridade">
         <ng-template mat-tab-label> {{'generic.education.schooling.name'|translate}} </ng-template>
@@ -58,11 +58,11 @@
                   <button
                     class="table-button"
                     mat-button
-                    (click)="getEducation(education, index)">
+                    (click)="getEducation(education, education.id)">
                     <mat-icon>edit</mat-icon>
                   </button>
                   <button
-                    (click)="deleteEducation(index)"
+                    (click)="deleteEducation(education.id)"
                     class="table-button"
                     mat-button>
                     <mat-icon>delete</mat-icon>
@@ -130,11 +130,11 @@
                   <button
                     class="table-button"
                     mat-button
-                    (click)="getLanguage(language, index)">
+                    (click)="getLanguage(language, language.id)">
                     <mat-icon>edit</mat-icon>
                   </button>
                   <button
-                    (click)="deleteLanguage(index)"
+                    (click)="deleteLanguage(language.id)"
                     class="table-button"
                     mat-button>
                     <mat-icon>delete</mat-icon>

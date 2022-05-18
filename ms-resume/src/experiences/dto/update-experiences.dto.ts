@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, Min, Max, IsOptional, IsBoolean, IsString, MaxLength, MinLength } from 'class-validator';
+import { IsNotEmpty, Min, Max, IsOptional, IsBoolean, IsString, MaxLength, MinLength, IsObject } from 'class-validator';
 import { ResumesEntity } from 'src/resumes/resumes.entity';
 
 export class UpdateExperiencesDto {
@@ -30,12 +30,20 @@ export class UpdateExperiencesDto {
   active: boolean;
 
   @ApiProperty()
-  @IsOptional()
-  startDate: Date;
+  @IsNotEmpty()
+  startMonth: number;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  startYear: number;
 
   @ApiProperty()
   @IsOptional()
-  endDate: Date;
+  terminusMonth: number;
+
+  @ApiProperty()
+  @IsOptional()
+  terminusYear: number;
 
   @ApiProperty()
   @IsOptional()
@@ -48,4 +56,9 @@ export class UpdateExperiencesDto {
   @IsOptional()
   @IsString()
   description: string;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsObject()
+Resume: ResumesEntity;
 }

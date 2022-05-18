@@ -34,6 +34,7 @@ export class ResumesService {
     conditions: FindConditions<ResumesEntity>,
     options?: FindOneOptions<ResumesEntity>,
   ) {
+    options = { relations: ['Educations','Skills','Experiences','Languages'] };
     try {
       return await this.resumesRepository.findOneOrFail(conditions, options);
     } catch (error) {

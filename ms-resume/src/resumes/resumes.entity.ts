@@ -61,31 +61,30 @@ export class ResumesEntity {
   @JoinColumn()
   Phone: PhoneEntity;
 
-  @OneToMany(() => EducationsEntity, (educations) => educations.resume, {
+  @OneToMany(() => EducationsEntity, (educations) => educations.Resume, {
     cascade: ['insert', 'update', 'soft-remove'],
-    eager: true,
+    orphanedRowAction: 'delete'
   })
   @JoinColumn()
   Educations: EducationsEntity[];
 
-  @OneToMany(() => ExperiencesEntity, (experiences) => experiences.resume, {
+  @OneToMany(() => ExperiencesEntity, (experiences) => experiences.Resume, {
     cascade: ['insert', 'update', 'soft-remove'],
-    eager: true,
+    orphanedRowAction: 'delete'
   })
   @JoinColumn()
   Experiences: ExperiencesEntity[];
 
-  @OneToMany(() => SkillsEntity, (skills) => skills.resume, {
+  @OneToMany(() => SkillsEntity, (skills) => skills.Resume, {
     cascade: ['insert', 'update', 'soft-remove'],
-    eager: true,
+    orphanedRowAction: 'delete'
   })
   @JoinColumn()
   Skills: SkillsEntity[];
 
-  @OneToMany(() => LanguagesEntity, (languages) => languages.resume, {
+  @OneToMany(() => LanguagesEntity, (languages) => languages.Resume, {
     cascade: ['insert', 'update', 'soft-remove'],
-    orphanedRowAction: 'delete',
-    eager: true,
+    orphanedRowAction: 'delete'
   })
   Languages: LanguagesEntity[];
 

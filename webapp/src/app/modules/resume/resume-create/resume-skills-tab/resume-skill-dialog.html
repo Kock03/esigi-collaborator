@@ -10,6 +10,9 @@
             disableRipple
             formControlName="technology"
             placeholder="Tecnologia" />
+            <mat-error *ngIf="skillForm &&
+            skillForm.controls['technology'].hasError('required')">
+                {{'validators.validator-required' |  translate}} </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline">
@@ -22,6 +25,9 @@
             <mat-option [value]="5">{{'generic.seniority.specialist'|translate}}</mat-option>
             <mat-option [value]="6">{{'generic.seniority.architect'|translate}}</mat-option>
           </mat-select>
+          <mat-error *ngIf="skillForm &&
+          skillForm.controls['seniority'].hasError('required')">
+              {{'validators.validator-required' |  translate}} </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline">
@@ -32,6 +38,9 @@
             formControlName="yearsExperience"
             placeholder="Em anos"
             mask="0||00" />
+            <mat-error *ngIf="skillForm &&
+            skillForm.controls['yearsExperience'].hasError('required')">
+                {{'validators.validator-required' |  translate}} </mat-error>
         </mat-form-field>
 
         <mat-checkbox

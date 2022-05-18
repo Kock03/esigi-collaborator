@@ -25,4 +25,8 @@ export class UpdateSkillsDto {
   @IsOptional()
   @IsBoolean()
   currentPosition: boolean;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  Resume: ResumesEntity;
 }
