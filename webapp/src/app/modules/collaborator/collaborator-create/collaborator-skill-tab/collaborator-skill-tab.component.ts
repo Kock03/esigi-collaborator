@@ -31,7 +31,7 @@ export class CollaboratorSkillTabComponent implements OnInit {
   @Output() onChange: EventEmitter<any> = new EventEmitter();
   @ViewChild('skillTable') skillTable!: MatTable<any>;
 
-  displayedColumns: string[] = ['technology', 'time', 'level', 'icon'];
+  displayedColumns: string[] = ['technology', 'time','typeOfPeriod', 'level', 'icon'];
 
   data: [] = [];
 

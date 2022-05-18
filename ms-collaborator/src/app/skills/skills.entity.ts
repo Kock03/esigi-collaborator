@@ -9,6 +9,7 @@ import {
   ManyToOne,
 } from 'typeorm';
 import { Seniority } from './dtos/seniority.enun';
+import { TypeOfPeriod } from './dtos/type-of-period.enum';
 
 @Entity({ name: 'skills' })
 export class SkillsEntity {
@@ -23,6 +24,10 @@ export class SkillsEntity {
   @Column({ type: 'int' })
   seniority: Seniority;
 
+  
+  @Column({ type: 'int' })
+  typeOfPeriod: TypeOfPeriod;
+  
   @Column()
   yearsExperience: number;
 

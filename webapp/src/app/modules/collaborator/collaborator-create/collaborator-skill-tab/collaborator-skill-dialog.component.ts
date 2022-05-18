@@ -36,6 +36,7 @@ export class CollaboratorSkillDialog {
       seniority: [null, Validators.required],
       yearsExperience: [null, [Validators.required, Validators.maxLength(2)]],
       currentPosition: [false, Validators.required],
+      typeOfPeriod:[null, Validators.required],
       Collaborator: { id: this.collaboratorId },
     });
     if (this.data) {

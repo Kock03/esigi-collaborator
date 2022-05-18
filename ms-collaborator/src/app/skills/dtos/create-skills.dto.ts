@@ -11,6 +11,7 @@ import {
 } from 'class-validator';
 import { CollaboratorsEntity } from 'src/app/collaborators/collaborators.entity';
 import { Seniority } from './seniority.enun';
+import { TypeOfPeriod } from './type-of-period.enum';
 
 export class CreateSkillsDto {
   @ApiProperty()
@@ -29,6 +30,13 @@ export class CreateSkillsDto {
   @IsNotEmpty()
   @IsNumber()
   yearsExperience: number;
+
+  
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsEnum(TypeOfPeriod)
+  typeOfPeriod: TypeOfPeriod;
+
 
   @ApiProperty()
   @IsNotEmpty()

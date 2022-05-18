@@ -43,6 +43,14 @@
                 {{'validators.validator-required' |  translate}} </mat-error>
         </mat-form-field>
 
+        <mat-form-field fxFlex="20" appearance="outline">
+          <mat-label>{{'job.job_create.skills.type_of_period.name' | translate}}</mat-label>
+          <mat-select matInput disableRipple formControlName="typeOfPeriod">
+            <mat-option [value]="1">{{'job.job_create.skills.type_of_period.month' | translate}}</mat-option>
+            <mat-option [value]="2">{{'job.job_create.skills.type_of_period.year' | translate}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
         <mat-checkbox
           class="checkbox"
           color="primary"

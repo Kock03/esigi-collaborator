@@ -31,7 +31,7 @@ export class ResumeSkillsTabComponent implements OnInit {
   @Output() onChange: EventEmitter<any> = new EventEmitter();
   @ViewChild('skillTable') skillTable!: MatTable<any>;
 
-  displayedColumns: string[] = ['name', 'time', 'level', 'icon'];
+  displayedColumns: string[] = ['name', 'time','typeOfPeriod' ,'level', 'icon'];
 
   data: [] = [];
 

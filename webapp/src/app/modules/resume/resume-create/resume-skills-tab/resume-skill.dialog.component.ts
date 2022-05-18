@@ -35,6 +35,7 @@ export class ResumeSkillDialog {
       technology: [null, [Validators.required, Validators.maxLength(50)]],
       seniority: [null, Validators.required],
       yearsExperience: [null, [Validators.required, Validators.maxLength(2)]],
+      typeOfPeriod:[null, Validators.required],
       currentPosition: [false],
       Resume: { id: this.resumeId },
     });
