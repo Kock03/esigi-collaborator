@@ -229,7 +229,7 @@ export class JobCreateComponent implements OnInit {
 
   navigate(direction: string) {
     if (this.step > 1 && direction === 'back') {
-      this.step -= 1;
+      this.step === 1;
     } else if (this.checkValid() && this.step < 2 && direction === 'next') {
       this.step += 1;
     } else {
