@@ -6,9 +6,9 @@
     <h2>{{'collaborator.colaborator_create.feedbacks.name'|translate}}</h2>
   </div>
 
-  <div fxLayout="column" class="content-scroll" *ngIf="feedbackForm">
+  <div fxLayout="column" class="content-scroll" *ngIf="feedbackForm" >
     <form [formGroup]="feedbackForm" fxLayout="column">
-      <div class="formGroup1" fxFlex="100" fxLayoutGap="16px">
+      <div class="form-group-content" fxFlex="100" fxLayoutGap="16px">
         <mat-form-field appearance="outline" fxFlex="25">
           <mat-label>{{'collaborator.colaborator_create.feedbacks.feedback_type.name'|translate}}</mat-label>
           <mat-select formControlName="feedbackType">
@@ -50,8 +50,7 @@
         </mat-form-field>
       </div>
 
-      <div class="formGroup1" fxFlex="200" fxLayoutGap="20px">
-        <h2 class="h2G" appearance="outline" fxFlex="1''0">{{'collaborator.colaborator_create.feedbacks.management'|translate}}</h2>
+      <div class="formGroup1" fxFlex="100" fxLayoutGap="20px">
         <mat-form-field appearance="outline" fxFlex="20">
           <mat-label>{{'generic.status' | translate}}</mat-label>
           <mat-select formControlName="status">
@@ -106,7 +105,7 @@
                 {{'validators.validator-required' |  translate}} </mat-error>
         </mat-form-field>
 
-        <mat-form-field appearance="outline" fxFlex="10">
+        <mat-form-field appearance="outline" fxFlex="20">
           <mat-label>{{'collaborator.colaborator_create.feedbacks.hour'|translate}}</mat-label>
           <input
             matInput
@@ -119,6 +118,7 @@
         </mat-form-field>
       </div>
 
+      <h2 class="text-subtitlle" appearance="outline" >{{'collaborator.colaborator_create.feedbacks.management'|translate}}</h2>
       <div fxFlex="100" fxLayoutGap="20px">
         <mat-form-field  class="second-column" appearance="outline" fxFlex="50">
           <mat-label>{{'collaborator.colaborator_create.feedbacks.description'|translate}}</mat-label>
@@ -141,7 +141,7 @@
         </mat-form-field>
       </div>
 
-      <h2>{{"sidenav.collaborator" | translate}}</h2>
+      <h2 class="text-subtitlle" >{{"sidenav.collaborator" | translate}}</h2>
       <div fxFlex="100" fxLayoutGap="20px">
         <mat-form-field appearance="outline" fxFlex="50">
           <mat-label>{{'collaborator.colaborator_create.feedbacks.description'|translate}}</mat-label>
