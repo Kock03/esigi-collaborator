@@ -26,11 +26,17 @@ export class ExperiencesEntity {
   @Column()
   active: boolean;
 
-  @CreateDateColumn({ name: 'start_date', type: 'datetime' })
-  startDate: Date;
+  @Column()
+  startMonth: number;
 
-  @CreateDateColumn({ name: 'end_date', type: 'datetime' })
-  endDate: Date;
+  @Column()
+  startYear : number;
+
+  @Column({nullable: true})
+  terminusMonth  : number;
+
+  @Column({nullable: true})
+  terminusYear : number;
 
   @Column({ name: 'sector', length: 40 })
   sector: string;
@@ -41,7 +47,7 @@ export class ExperiencesEntity {
   @ManyToOne(() => ResumesEntity, (resumes) => resumes.Experiences, {
 
   })
-  resume: ResumesEntity;
+  Resume: ResumesEntity;
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;

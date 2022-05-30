@@ -1,42 +1,57 @@
 <div id="resumeEducationDialog" class="dialog">
   <div class="content-scroll" *ngIf="educationForm">
-    <h2 mat-dialog-title class="title-dialog">Escolaridade</h2>
+    <h2 mat-dialog-title class="title-dialog">{{'generic.education.schooling.name'|translate}}</h2>
     <mat-dialog-content class="mat-typography">
       <form [formGroup]="educationForm" fxLayout="column">
         <mat-form-field appearance="outline">
-          <mat-label>Escolaridade</mat-label>
+          <mat-label>{{'generic.education.schooling.name'|translate}}</mat-label>
           <mat-select formControlName="schooling">
-            <mat-option [value]="1">Ensino Fundamental</mat-option>
-            <mat-option [value]="2">Ensino Médio</mat-option>
-            <mat-option [value]="3">Ensino Superior</mat-option>
+            <mat-option [value]="1">{{'generic.education.schooling.type.elementary_school'|translate}}</mat-option>
+            <mat-option [value]="2">{{'generic.education.schooling.type.high_school'|translate}}</mat-option>
+            <mat-option [value]="3">{{'generic.education.schooling.type.university_education'|translate}}</mat-option>
           </mat-select>
+          <mat-error *ngIf="educationForm &&
+          educationForm.controls['schooling'].hasError('required')">
+            {{'validators.validator-required' |  translate}} </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-label>Curso</mat-label>
+          <mat-label>{{'generic.education.schooling.course'|translate}}</mat-label>
           <input
             matInput
             disableRipple
             formControlName="course"
             placeholder="Curso" />
+            <mat-error *ngIf="educationForm &&
+            educationForm.controls['course'].hasError('required')">
+              {{'validators.validator-required' | translate}}
+            </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-label>Instituição</mat-label>
+          <mat-label>{{'generic.education.schooling.institution'|translate}}</mat-label>
           <input
             matInput
             disableRipple
             formControlName="institution"
             placeholder="Instituição" />
+            <mat-error *ngIf="educationForm &&
+            educationForm.controls['institution'].hasError('required')">
+              {{'validators.validator-required' | translate}}
+            </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-label>Situação</mat-label>
+          <mat-label>{{'generic.education.schooling.situation.name'|translate}}</mat-label>
           <mat-select formControlName="situation">
-            <mat-option [value]="1">Parado</mat-option>
-            <mat-option [value]="2">Completo</mat-option>
-            <mat-option [value]="3">Em andamento</mat-option>
+            <mat-option [value]="1">{{'generic.education.schooling.situation.stop'|translate}}</mat-option>
+            <mat-option [value]="2">{{'generic.education.schooling.situation.complete'|translate}}</mat-option>
+            <mat-option [value]="3">{{'generic.education.schooling.situation.in_progress'|translate}}</mat-option>
           </mat-select>
+          <mat-error *ngIf="educationForm &&
+          educationForm.controls['situation'].hasError('required')">
+            {{'validators.validator-required' | translate}}
+          </mat-error>
         </mat-form-field>
       </form>
     </mat-dialog-content>
@@ -47,7 +62,7 @@
           mat-flat-button
           mat-dialog-close
           (click)="onNoClick()">
-          Cancelar
+          {{'generic.cancel_button' | translate}}
         </button>
         <button
           [disabled]="educationForm.invalid"
@@ -55,7 +70,7 @@
           color="primary"
           [mat-dialog-close]="true"
           (click)="save()">
-          Salvar
+          {{'generic.save_button' | translate}}
         </button>
       </div>
     </mat-dialog-actions>

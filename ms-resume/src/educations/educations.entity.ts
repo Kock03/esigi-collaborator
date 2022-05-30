@@ -32,7 +32,7 @@ export class EducationsEntity {
   @ManyToOne(() => ResumesEntity, (resumes) => resumes.Educations, {
  
   })
-  resume: ResumesEntity;
+Resume: ResumesEntity;
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;

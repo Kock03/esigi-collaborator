@@ -2,6 +2,7 @@ import { ApiProperty } from '@nestjs/swagger';
 import {
   IsBoolean,
   IsNotEmpty,
+  IsObject,
   IsOptional,
   IsString,
   Max,
@@ -41,11 +42,19 @@ export class CreateExperiencesDto {
 
   @ApiProperty()
   @IsNotEmpty()
-  startDate: Date;
+  startMonth: number;
 
   @ApiProperty()
   @IsNotEmpty()
-  endDate: Date;
+  startYear: number;
+
+  @ApiProperty()
+  @IsOptional()
+  terminusMonth: number;
+
+  @ApiProperty()
+  @IsOptional()
+  terminusYear: number;
 
   @ApiProperty()
   @IsNotEmpty()
@@ -61,5 +70,6 @@ export class CreateExperiencesDto {
 
   @ApiProperty()
   @IsNotEmpty()
-  resume: ResumesEntity;
+  @IsObject()
+  Resume: ResumesEntity;
 }

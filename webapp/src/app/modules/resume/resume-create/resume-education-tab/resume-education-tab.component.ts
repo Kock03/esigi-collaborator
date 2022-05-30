@@ -16,7 +16,11 @@ import {
 } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
 import { MatTabGroup } from '@angular/material/tabs';
+import { ResumeEducationProvider } from 'src/providers/resume-providers/resume-education.provider';
+import { ResumeLanguageProvider } from 'src/providers/resume-providers/resume-language.provider';
+import { ResumeProvider } from 'src/providers/resume-providers/resume.provider';
 import { ConfirmDialogService } from 'src/services/confirn-dialog.service';
+import { SnackBarService } from 'src/services/snackbar.service';
 import { ResumeEducationDialog } from './resume-education-dialog.component';
 import { ResumeLanguageDialog } from './resume-language-dialog.component';
 
@@ -26,9 +30,7 @@ import { ResumeLanguageDialog } from './resume-language-dialog.component';
   styleUrls: ['./resume-education-tab.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class ResumeEducationTabComponent implements OnInit {
-  @Input() educationArray!: FormArray;
-  @Input() languageArray!: FormArray;
+export class ResumeEducationTabComponent implements OnInit { 
   @Output() onChange: EventEmitter<any> = new EventEmitter();
   @ViewChild('languageTable') languageTable!: MatTable<any>;
   @ViewChild('educationTable') educationTable!: MatTable<any>;
@@ -54,100 +56,84 @@ export class ResumeEducationTabComponent implements OnInit {
 
   index: any = null;
   Language: any;
-  languageList: any = [];
   Education: any;
-  educationList: any = [];
+  resumeMethod!: string;
+  resumeId!: any | null;
+  languageId!: string;
+  educationId!: string;
+  method!: string;
 
   constructor(
     private dialogService: ConfirmDialogService,
     private fb: FormBuilder,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private resumeProvider: ResumeProvider,
+    private snackbarService: SnackBarService,
+    private resumeLanguageProvider: ResumeLanguageProvider,
+    private resumeEducationProvider: ResumeEducationProvider
   ) {}
 
   ngOnInit(): void {
-    if (this.educationArray.value.length > 0) {
-      this.dataEducation = this.educationArray.value;
+    this.resumeMethod = sessionStorage.getItem('resume_method')!;
+    if (this.resumeMethod === 'edit') {
+      this.getEducationsList();
+      this.getLanguagesList();
     }
-    if (this.languageArray.value.length > 0) {
-      this.dataLanguage = this.languageArray.value;
-    }
-    this.initObservables();
+
   }
 
-  initObservables() {
-    this.educationArray.valueChanges.subscribe(res => {
-      const isNullIndex = this.educationArray.value.findIndex(
-        (education: any) => education == null
-      );
-      if (isNullIndex !== -1) {
-        this.educationArray.removeAt(isNullIndex);
-      }
-      if (res) {
-        this.dataEducation = this.educationArray.value;
-      }
-    });
+  async getEducationsList() {
+    this.resumeId = sessionStorage.getItem('resume_id');
 
-    this.languageArray.valueChanges.subscribe(res => {
-      const isNullIndex = this.languageArray.value.findIndex(
-        (language: any) => language == null
-      );
-      if (isNullIndex !== -1) {
-        this.languageArray.removeAt(isNullIndex);
-      }
-      if (res) {
-        this.dataLanguage = this.languageArray.value;
-      }
-    });
+    const data = await this.resumeProvider.findOne(this.resumeId);
+    this.dataEducation = data.Educations;
   }
 
-  openDialogLanguage() {
-    const dialogRef = this.dialog.open(ResumeLanguageDialog, {
-      width: '500px',
-      height: '300px',
-    });
-
-    dialogRef.afterClosed().subscribe(language => {
-      if (language) {
-        this.languageArray.insert(0, this.fb.group(language));
-        this.languageTable.renderRows();
-      }
-    });
-  }
-
-  openDialogEducation() {
-    const dialogRef = this.dialog.open(ResumeEducationDialog, {
-      width: '500px',
-      height: '470px',
-    });
-
-    dialogRef.afterClosed().subscribe(education => {
-      if (education) {
-        this.educationArray.insert(0, this.fb.group(education));
-        this.educationTable.renderRows();
-      }
-    });
+  
+  async getLanguagesList() {
+    this.resumeId = sessionStorage.getItem('resume_id');
+    const data = await this.resumeProvider.findOne(this.resumeId);
+    this.dataLanguage = data.Languages;
   }
 
   next() {
     this.onChange.next(true);
   }
 
-  getLanguage(languageSelected: any, index: number) {
+  openDialogLanguage() {
+    this.method = 'add';
+    sessionStorage.setItem('method', this.method);
+    const dialogRef = this.dialog.open(ResumeLanguageDialog, {
+      width: '500px',
+      height: '300px',
+    });
+
+    dialogRef.afterClosed().subscribe(language => {
+      if (language) {
+        this.getLanguagesList();
+      }
+    });
+  }
+  
+  getLanguage(languageSelected: any, id: string) {
+    this.method = 'edit';
+    sessionStorage.setItem('method', this.method);
+    this.languageId = id;
+    sessionStorage.setItem('language_id', this.languageId);
     const dialogRef = this.dialog.open(ResumeLanguageDialog, {
       width: '500px',
       height: '300px',
       data: languageSelected,
     });
 
-    this.index = index;
     dialogRef.afterClosed().subscribe(language => {
       if (language) {
-        this.languageArray.controls[this.index].patchValue(language);
+        this.getLanguagesList();
       }
     });
   }
 
-  deleteLanguage(index: number) {
+  deleteLanguage(id: string) {
     const options = {
       data: {
         title: 'Atenção',
@@ -160,27 +146,52 @@ export class ResumeEducationTabComponent implements OnInit {
 
     this.dialogService.confirmed().subscribe(async confirmed => {
       if (confirmed) {
-        this.languageArray.removeAt(index);
+        try {
+          let deleteLanguage = await this.resumeLanguageProvider.destroy(id);
+          this.getLanguagesList();
+
+          this.snackbarService.successMessage('Registro Excluido Com Sucesso');
+        } catch (error) {
+          console.log('ERROR 132' + error);
+          this.snackbarService.showError('Falha ao Excluir');
+        }
       }
     });
   }
 
-  getEducation(educationSelected: any, index: number) {
+  openDialogEducation() {
+    this.method = 'add';
+    sessionStorage.setItem('method', this.method);
+    const dialogRef = this.dialog.open(ResumeEducationDialog, {
+      width: '500px',
+      height: '470px',
+    });
+
+    dialogRef.afterClosed().subscribe(education => {
+      if (education) {
+        this.getEducationsList();
+      }
+    });
+  }
+
+  getEducation(educationSelected: any, id: string) {
+    this.method = 'edit';
+    sessionStorage.setItem('method', this.method);
+    this.educationId = id;
+    sessionStorage.setItem('education_id', this.educationId);
     const dialogRef = this.dialog.open(ResumeEducationDialog, {
       width: '500px',
       height: '470px',
       data: educationSelected,
     });
-
-    this.index = index;
     dialogRef.afterClosed().subscribe(education => {
       if (education) {
-        this.educationArray.controls[this.index].patchValue(education);
+        this.getEducationsList();
       }
     });
   }
 
-  deleteEducation(index: number) {
+  deleteEducation(id: string) {
     const options = {
       data: {
         title: 'Atenção',
@@ -193,7 +204,15 @@ export class ResumeEducationTabComponent implements OnInit {
 
     this.dialogService.confirmed().subscribe(async confirmed => {
       if (confirmed) {
-        this.educationArray.removeAt(index);
+        try {
+          let deleteEducation = await this.resumeEducationProvider.destroy(id);
+          this.getEducationsList();
+
+          this.snackbarService.successMessage('Registro Excluido Com Sucesso');
+        } catch (error) {
+          console.log('ERROR 132' + error);
+          this.snackbarService.showError('Falha ao Excluir');
+        }
       }
     });
   }

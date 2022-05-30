@@ -48,7 +48,7 @@ export class CollaboratorsService {
   async findInactive() {
     return await this.collaboratorsRepository
       .createQueryBuilder('collaborators')
-      .where('collaborators.active =false')
+      .where('collaborators.active =false') 
       .getMany();
   }
 
@@ -61,6 +61,7 @@ export class CollaboratorsService {
 
   findByName(query): Promise<CollaboratorsEntity[]> {
     return this.collaboratorsRepository.find({
+      select:[ 'id','firstNameCorporateName', 'lastNameFantasyName'],
       where: [
         { firstNameCorporateName: Like(`${query.firstNameCorporateName}%`) },]
     });
@@ -110,10 +111,6 @@ export class CollaboratorsService {
   }
 
   async update(id: string, data: UpdateCollaboratorsDto) {
-    const activeBanks = data.BankData.filter((bank) => bank.status);
-    if (activeBanks.length > 1) {
-      throw new BadRequestException('Existem mais de um banco ativo');
-    }
     try {
       const collaborator = await this.collaboratorsRepository.findOneOrFail({
         id,

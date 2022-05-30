@@ -9,6 +9,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { Seniority } from './dto/seniority.enum';
+import { TypeOfPeriod } from './dto/type-of-period.enum';
 
 @Entity({ name: 'skills' })
 export class SkillsEntity {
@@ -21,6 +22,9 @@ export class SkillsEntity {
   @Column({ name: 'period_experience', length: 15 })
   yearsExperience: string;
 
+  @Column({ type: 'int' })
+  typeOfPeriod: TypeOfPeriod;
+  
   @Column({ name: 'level', type: 'int' })
   seniority: Seniority;
 
@@ -28,7 +32,7 @@ export class SkillsEntity {
   currentPosition: boolean;
 
   @ManyToOne(() => ResumesEntity, (resumes) => resumes.Skills, {})
-  resume: ResumesEntity;
+  Resume: ResumesEntity;
 
   @CreateDateColumn({ name: 'date_inclusion' })
   createdAt: Date;

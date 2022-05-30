@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { ResumeSkillsProvider } from 'src/providers/resume-providers/resume-skills.provider';
 
 @Component({
   selector: 'resume-skill-dialog',
@@ -12,14 +13,20 @@ export class ResumeSkillDialog {
   @Output() onChange: EventEmitter<any> = new EventEmitter();
 
   skillForm!: FormGroup;
+  method!: string;
+  resumeId!: string | null;
+  skillId!: string | null;
 
   constructor(
     public dialogRef: MatDialogRef<ResumeSkillDialog>,
+    private resumeSkillsProvider:ResumeSkillsProvider,
     private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
   ngOnInit(): void {
+    this.method = sessionStorage.getItem('method')!;
+    this.resumeId = sessionStorage.getItem('resume_id')!;
     this.initForm();
   }
 
@@ -28,7 +35,9 @@ export class ResumeSkillDialog {
       technology: [null, [Validators.required, Validators.maxLength(50)]],
       seniority: [null, Validators.required],
       yearsExperience: [null, [Validators.required, Validators.maxLength(2)]],
-      currentPosition: [null, Validators.required],
+      typeOfPeriod:[null, Validators.required],
+      currentPosition: [false],
+      Resume: { id: this.resumeId },
     });
     if (this.data) {
       this.skillForm.patchValue(this.data);
@@ -37,10 +46,30 @@ export class ResumeSkillDialog {
 
   onNoClick(): void {
     this.dialogRef.close();
+    sessionStorage.removeItem('skill_id');
+    sessionStorage.removeItem('method');
   }
 
-  save() {
+  async save() {
     const data = this.skillForm.getRawValue();
-    this.dialogRef.close(data);
+    if (this.method === 'add') {
+      try {
+        const skill = await this.resumeSkillsProvider.store(data);
+        sessionStorage.setItem('skill_id', skill.id);
+      } catch (error: any) {
+        console.log('ERROR 132' + error);
+      }
+    }
+    if (this.method === 'edit') {
+      try {
+        this.skillId = sessionStorage.getItem('skill_id');
+        const updateSkill = await this.resumeSkillsProvider.update(
+          this.skillId,
+          data
+        );
+      } catch (error: any) {
+        console.log('ERROR 132' + error);
+      }
+    }
   }
 }

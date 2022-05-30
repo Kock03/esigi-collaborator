@@ -1,9 +1,6 @@
-import { formatDate } from '@angular/common';
 import {
   Component,
   EventEmitter,
-  Inject,
-  Injectable,
   Input,
   OnInit,
   Output,
@@ -12,18 +9,13 @@ import {
 } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {
-  DateAdapter,
-  MAT_DATE_FORMATS,
-  NativeDateAdapter,
-} from '@angular/material/core';
-import {
   MatDialog,
-  MatDialogRef,
-  MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
-import { DocumentValidator } from 'src/app/validators/document.validator';
+import { CollaboratorDependentsProvider } from 'src/providers/collaborator-providers/collaborator-dependents.provider';
+import { CollaboratorProvider } from 'src/providers/collaborator-providers/collaborator.provider';
 import { ConfirmDialogService } from 'src/services/confirn-dialog.service';
+import { SnackBarService } from 'src/services/snackbar.service';
 import { CollaboratorDependentsDialog } from './collaborator-dependents-dialog.component';
 
 @Component({
@@ -50,39 +42,37 @@ export class CollaboratorDependentsTabComponent implements OnInit {
 
   data: [] = [];
   dependentForm!: FormGroup;
-
-  index: any = null;
+  method!: string;
+  collaboratorId!: any;
+  dependentId!: string;
   Dependent: any;
-
+  collaboratorMethod!: string;
   constructor(
-    private fb: FormBuilder,
     public dialog: MatDialog,
-    private dialogService: ConfirmDialogService
+    private dialogService: ConfirmDialogService, 
+    private collaboratorDependentsProvider: CollaboratorDependentsProvider,
+    private collaboratorProvider: CollaboratorProvider,
+    private snackbarService: SnackBarService
   ) {}
 
   ngOnInit(): void {
-    if (this.dependentsArray.value.length > 0) {
-      this.data = this.dependentsArray.value;
+    this.collaboratorMethod = sessionStorage.getItem('collaborator_method')!;
+    if (this.collaboratorMethod === 'edit') {
+      this.getDependentsList();
     }
-
-    this.initObservables();
   }
 
-  initObservables() {
-    this.dependentsArray.valueChanges.subscribe(res => {
-      const isNullIndex = this.dependentsArray.value.findIndex(
-        (dependent: any) => dependent == null
-      );
-      if (isNullIndex !== -1) {
-        this.dependentsArray.removeAt(isNullIndex);
-      }
-      if (res) {
-        this.data = this.dependentsArray.value;
-      }
-    });
+  async getDependentsList() {
+    this.collaboratorId = sessionStorage.getItem('collaborator_id');
+    const data = await this.collaboratorProvider.findOne(this.collaboratorId);
+    this.data = data.Dependents;
   }
+
+
 
   openDialog() {
+    this.method = 'add';
+    sessionStorage.setItem('method', this.method);
     const dialogRef = this.dialog.open(CollaboratorDependentsDialog, {
       width: '500px',
       height: '650px',
@@ -90,8 +80,7 @@ export class CollaboratorDependentsTabComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(dependent => {
       if (dependent) {
-        this.dependentsArray.insert(0, this.fb.group(dependent));
-        this.dependentTable.renderRows();
+        this.getDependentsList();
       }
     });
   }
@@ -100,21 +89,24 @@ export class CollaboratorDependentsTabComponent implements OnInit {
     this.onChange.next(true);
   }
 
-  getDependents(dependentsSelected: any, index: number) {
+  getDependents(dependentsSelected: any, id: string) {
+    this.method = 'edit';
+    sessionStorage.setItem('method', this.method);
+    this.dependentId = id;
+    sessionStorage.setItem('dependent_id', this.dependentId);
     const dialogRef = this.dialog.open(CollaboratorDependentsDialog, {
       width: '500px',
       height: '650px',
       data: dependentsSelected,
     });
-    this.index = index;
     dialogRef.afterClosed().subscribe(dependent => {
       if (dependent) {
-        this.dependentsArray.controls[this.index].patchValue(dependent);
+        this.getDependentsList();
       }
     });
   }
 
-  deleteDependents(index: number) {
+  deleteDependents(id: string) {
     const options = {
       data: {
         title: 'Atenção',
@@ -127,7 +119,15 @@ export class CollaboratorDependentsTabComponent implements OnInit {
 
     this.dialogService.confirmed().subscribe(async confirmed => {
       if (confirmed) {
-        this.dependentsArray.removeAt(index);
+        try {
+          let deleteDependent = await this.collaboratorDependentsProvider.destroy(id);
+          this.getDependentsList();
+
+          this.snackbarService.successMessage('Registro Excluido Com Sucesso');
+        } catch (error) {
+          console.log('ERROR 132' + error);
+          this.snackbarService.showError('Falha ao Excluir');
+        }
       }
     });
   }

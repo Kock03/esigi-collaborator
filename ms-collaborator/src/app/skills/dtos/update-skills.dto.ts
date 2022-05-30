@@ -4,13 +4,16 @@ import {
   IsEnum,
   IsNotEmpty,
   IsNumber,
+  IsObject,
   IsOptional,
   IsString,
   MaxLength,
   Min,
   MinLength,
 } from 'class-validator';
+import { CollaboratorsEntity } from 'src/app/collaborators/collaborators.entity';
 import { Seniority } from './seniority.enun';
+import { TypeOfPeriod } from './type-of-period.enum';
 
 export class UpdateSkillsDto {
   @ApiProperty()
@@ -31,7 +34,17 @@ export class UpdateSkillsDto {
   yearsExperience: number;
 
   @ApiProperty()
+  @IsNotEmpty()
+  @IsEnum(TypeOfPeriod)
+  typeOfPeriod: TypeOfPeriod;
+
+  @ApiProperty()
   @IsOptional()
   @IsBoolean()
   currentPosition: boolean;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsObject()
+  Collaborator: CollaboratorsEntity;
 }

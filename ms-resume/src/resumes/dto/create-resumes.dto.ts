@@ -76,22 +76,6 @@ export class CreateResumesDto {
 
   @ApiProperty()
   @IsNotEmpty()
-  Educations: EducationsEntity[];
-
-  @ApiProperty()
-  @IsNotEmpty()
-  Languages: LanguagesEntity[];
-
-  @ApiProperty()
-  @IsNotEmpty()
-  Experiences: ExperiencesEntity[];
-
-  @ApiProperty()
-  @IsNotEmpty()
-  Skills: SkillsEntity[];
-
-  @ApiProperty()
-  @IsNotEmpty()
   @IsEmail()
   @IsString()
   @MinLength(5)

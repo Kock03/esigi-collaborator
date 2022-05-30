@@ -11,7 +11,10 @@ import {
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
+import { CollaboratorBankProvider } from 'src/providers/collaborator-providers/collaborator-bank.provider';
+import { CollaboratorProvider } from 'src/providers/collaborator-providers/collaborator.provider';
 import { ConfirmDialogService } from 'src/services/confirn-dialog.service';
+import { SnackBarService } from 'src/services/snackbar.service';
 import { CollaboratorBankDialog } from './collaborator-bank-dialog.component';
 
 @Component({
@@ -21,7 +24,6 @@ import { CollaboratorBankDialog } from './collaborator-bank-dialog.component';
   encapsulation: ViewEncapsulation.None,
 })
 export class CollaboratorBankTabComponent implements OnInit {
-  @Input() bankArray!: FormArray;
   @Output() onChange: EventEmitter<any> = new EventEmitter();
   @ViewChild('bankTable') bankTable!: MatTable<any>;
 
@@ -36,49 +38,46 @@ export class CollaboratorBankTabComponent implements OnInit {
     'icon',
   ];
 
-  index: any = null;
+
   bank: any;
+  method!: string;
+  collaboratorId!: any;
+  bankId!: string;
+  collaboratorMethod!: string;
 
   constructor(
-    private fb: FormBuilder,
     private dialogService: ConfirmDialogService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private snackbarService: SnackBarService,
+    private collaboratorBankProvider: CollaboratorBankProvider,
+    private collaboratorProvider: CollaboratorProvider
   ) {}
 
   ngOnInit(): void {
-    if (this.bankArray.value.length > 0) {
-      this.data = this.bankArray.value;
-    }
-
-    this.initObservables();
-
-    if (this.bankArray.value.status == true) {
+    this.collaboratorMethod = sessionStorage.getItem('collaborator_method')!;
+    if (this.collaboratorMethod === 'edit') {
+      this.getBankList();
     }
   }
 
-  initObservables() {
-    this.bankArray.valueChanges.subscribe(res => {
-      const isNullIndex = this.bankArray.value.findIndex(
-        (bank: any) => bank == null
-      );
-      if (isNullIndex !== -1) {
-        this.bankArray.removeAt(isNullIndex);
-      }
-      if (res) {
-        this.data = this.bankArray.value;
-      }
-    });
+  async getBankList() {
+    this.collaboratorId = sessionStorage.getItem('collaborator_id');
+    const data = await this.collaboratorProvider.findOne(this.collaboratorId);
+    this.data = data.BankData;
   }
+
+
 
   openDialog() {
+    this.method = 'add';
+    sessionStorage.setItem('method', this.method);
     const dialogRef = this.dialog.open(CollaboratorBankDialog, {
       width: '500px',
       height: '470px',
     });
     dialogRef.afterClosed().subscribe(bank => {
       if (bank) {
-        this.bankArray.insert(0, this.fb.group(bank));
-        this.bankTable.renderRows();
+        this.getBankList();
       }
     });
   }
@@ -87,34 +86,37 @@ export class CollaboratorBankTabComponent implements OnInit {
     this.onChange.next(true);
   }
 
-  getBank(bankSelected: any, index: number) {
+  getBank(bankSelected: any, id: string) {
+    this.method = 'edit';
+    sessionStorage.setItem('method', this.method);
+    this.bankId = id;
+    sessionStorage.setItem('dependent_id', this.bankId);
     const dialogRef = this.dialog.open(CollaboratorBankDialog, {
       width: '500px',
       height: '470px',
       data: bankSelected,
     });
-    this.index = index;
     dialogRef.afterClosed().subscribe(bank => {
       if (bank) {
-        this.checkBank(bank);
+        this.getBankList();
       }
     });
   }
 
-  checkBank(bank: any) {
-    if (bank.status) {
-      const activeLength = this.bankArray.value.filter(
-        (item: any) => item.status
-      );
-      if (activeLength.length > 1) {
-        //  TODO - Exibir mensagem que não pode um banco ativo
-      }
-    } else {
-      this.bankArray.controls[this.index].patchValue(bank);
-    }
-  }
+  // checkBank(bank: any) {
+  //   if (bank.status) {
+  //     const activeLength = this.bankArray.value.filter(
+  //       (item: any) => item.status
+  //     );
+  //     if (activeLength.length > 1) {
+  //       //  TODO - Exibir mensagem que não pode um banco ativo
+  //     }
+  //   } else {
+  //     this.bankArray.controls[this.index].patchValue(bank);
+  //   }
+  // }
 
-  deleteBank(index: number) {
+  deleteBank(id: string) {
     const options = {
       data: {
         title: 'Atenção',
@@ -127,7 +129,15 @@ export class CollaboratorBankTabComponent implements OnInit {
 
     this.dialogService.confirmed().subscribe(async confirmed => {
       if (confirmed) {
-        this.bankArray.removeAt(index);
+        try {
+          let deleteBank = await this.collaboratorBankProvider.destroy(id);
+          this.getBankList();
+
+          this.snackbarService.successMessage('Registro Excluido Com Sucesso');
+        } catch (error) {
+          console.log('ERROR 132' + error);
+          this.snackbarService.showError('Falha ao Excluir');
+        }
       }
     });
   }

@@ -8,7 +8,7 @@ import {
   MatDialogRef,
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
-import { ResumeProvider } from 'src/providers/resume.provider';
+import { ResumeProvider } from 'src/providers/resume-providers/resume.provider';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SnackBarService } from 'src/services/snackbar.service';
 import { ThisReceiver } from '@angular/compiler';
@@ -28,26 +28,20 @@ export class ResumeCreateComponent implements OnInit {
   Experience: any;
 
   validations = [
-    ['cpf'],
-    ['Educations', 'Languages'],
-    ['Experiences'],
-    ['Skills'],
+    ['cpf',
+      'firstName',
+      'lastName',
+      'login',
+      'birthDate',
+      'gender', 
+      'maritalStatus',
+      'Address',
+      'Phone',
+      'email',
+      'site',
+      'linkedin']
   ];
 
-
-  get educationArray() {
-    return this.resumeForm.controls['Educations'] as FormArray;
-  }
-  get languageArray() {
-    return this.resumeForm.controls['Languages'] as FormArray;
-  }
-
-  get skillArray() {
-    return this.resumeForm.controls['Skills'] as FormArray;
-  }
-  get experiencesArray() {
-    return this.resumeForm.controls['Experiences'] as FormArray;
-  }
 
   constructor(
     private fb: FormBuilder,
@@ -59,11 +53,10 @@ export class ResumeCreateComponent implements OnInit {
   ) {}
 
   async ngOnInit(): Promise<void> {
-    this.resumeId = this.route.snapshot.paramMap.get('id');
-
     if (sessionStorage.getItem('resume_tab') == undefined) {
       sessionStorage.setItem('resume_tab', '1');
     }
+    this.resumeId = this.route.snapshot.paramMap.get('id');
     this.step = JSON.parse(sessionStorage.getItem('resume_tab')!);
 
     if (this.resumeId !== 'novo') {
@@ -85,43 +78,39 @@ export class ResumeCreateComponent implements OnInit {
 
   initForm() {
     this.resumeForm = this.fb.group({
-      firstName: ['joao', Validators.required],
-      lastName: ['silva', Validators.required],
-      login: ['joao.silva', Validators.required],
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      login: ['', Validators.required],
 
       cpf: this.fb.control(
         { value: null, disabled: false },
        [  DocumentValidator.isValidCpf(), Validators.required]
       ),
 
-      birthDate: ['2022-01-01', Validators.required],
+      birthDate: ['', Validators.required],
       gender: [1, Validators.required],
       maritalStatus: [1, Validators.required],
       photo: [null],
 
       Address: this.fb.group({
-        cep: ['89040400', Validators.required],
-        number: ['43'],
-        complement: ['casa'],
-        street: ['rua', Validators.required],
-        state: ['estado', Validators.required],
-        city: ['cidade', Validators.required],
-        district: ['bairro', Validators.required],
+        cep: ['', Validators.required],
+        number: [''],
+        complement: [''],
+        street: ['', Validators.required],
+        state: ['', Validators.required],
+        city: ['', Validators.required],
+        district: ['', Validators.required],
       }),
       Phone: this.fb.group({
-        phoneNumber: ['42334324', Validators.required],
-        ddd: ['44', Validators.required],
-        ddi: ['44', Validators.required],
+        phoneNumber: ['', Validators.required],
+        ddd: ['', Validators.required],
+        ddi: ['', Validators.required],
       }),
 
-      email: ['joao@silva.com', Validators.email],
+      email: ['', Validators.email],
       site: ['', Validators.required],
       linkedin: ['', Validators.required],
-
-      Educations: this.fb.array(this.resume ? this.resume.Educations : [],    [ Validators.required]),
-      Languages: this.fb.array(this.resume ? this.resume.Languages : [], [ Validators.required]),
-      Experiences: this.fb.array(this.resume ? this.resume.Experiences : [], [ Validators.required]),
-      Skills: this.fb.array(this.resume ? this.resume.Skills : [], [ Validators.required]),
+      
     });
   }
 
@@ -130,14 +119,15 @@ export class ResumeCreateComponent implements OnInit {
   }
 
   async saveResume() {
+    this.checkValid()
     let data = this.resumeForm.getRawValue();
 
     try {
       const resume = await this.resumeProvider.store(data);
-
+      this.handleStep(2);
       this.snackbarService.successMessage('Vaga Cadastrada Com Sucesso');
-      this.router.navigate(['curriculo/lista']);
-      sessionStorage.clear();
+     
+      sessionStorage.setItem('resume_id', resume.id);
     } catch (error: any) {
       console.log('ERROR 132' + error);
       this.snackbarService.showError('Falha ao Cadastrar');
@@ -147,7 +137,7 @@ export class ResumeCreateComponent implements OnInit {
   navigate(direction: string) {
     if (this.step > 1 && direction === 'back') {
       this.step -= 1;
-    } else if (this.checkValid() && this.step < 4 && direction === 'next') {
+    } else if (this.checkValid() && this.step < 5 && direction === 'next') {
       this.step += 1;
     } else {
       this.snackbarService.showAlert('Verifique os campos');
@@ -186,7 +176,7 @@ export class ResumeCreateComponent implements OnInit {
 
     checkValid(): boolean {
       let isValid = true;
-      const validations = this.validations[this.step - 1];
+      const validations = this.validations[0];
       for (let index = 0; index < validations.length; index++) {
         if (this.resumeForm.controls[validations[index]].invalid) {
           isValid = false;

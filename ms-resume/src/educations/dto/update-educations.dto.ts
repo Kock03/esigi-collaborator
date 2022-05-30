@@ -1,30 +1,29 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsEnum, IsNotEmpty, IsSemVer, IsString, Max, MaxLength, Min, MinLength } from 'class-validator';
+import { IsNotEmpty, Min, Max, MaxLength, MinLength, IsEnum, IsString, IsOptional, IsObject } from 'class-validator';
 import { ResumesEntity } from 'src/resumes/resumes.entity';
 import { Schooling } from './schooling.enum';
 import { Situation } from './situation.enum';
 
-export class CreateSchoolingDto {
-
+export class UpdateEducationsingDto {
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsEnum(Schooling)
   schooling: Schooling;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsEnum(Schooling)
   situation: Situation;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @MinLength(3)
   @MaxLength(70)
   @IsString()
   institution: string;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @MinLength(3)
   @MaxLength(70)
   @IsString()
@@ -32,5 +31,6 @@ export class CreateSchoolingDto {
 
   @ApiProperty()
   @IsNotEmpty()
+  @IsObject()
   resume: ResumesEntity;
 }

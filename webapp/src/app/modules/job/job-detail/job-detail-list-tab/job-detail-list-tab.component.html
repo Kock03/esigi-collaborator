@@ -7,19 +7,19 @@
             {{ job.jobName }}
           </span>
           <span class="label-gray">
-            <b>Solicitante:</b>
+            <b>{{'generic.request' | translate}}:</b>
             {{ job.requester }}
           </span>
           <span class="label-gray">
-            <b>Cliente:</b>
+            <b>{{'generic.client' | translate}}:</b>
             {{ job.client }}
           </span>
           <span class="label-gray">
-            <b>Data de Abertura:</b>
+            <b>{{'generic.opening_date' | translate}}:</b>
             {{ job.openingDate | date: 'dd/MM/yyyy' }}
           </span>
           <span class="label-gray">
-            <b>Status da Vaga:</b>
+            <b>{{'generic.status' | translate}}:</b>
             {{
               job.status == 1
                 ? 'Processada'
@@ -33,7 +33,7 @@
             }}
           </span>
           <span class="label-gray">
-            <b>Tipo da Vaga:</b>
+            <b>{{'job.job_create.type_of_job.name' | translate}}:</b>
             {{
               job.typeOfJob == 1
                 ? 'Aumento de Quadro'
@@ -43,23 +43,23 @@
             }}
           </span>
           <span class="label-gray">
-            <b>Temporario:</b>
+            <b>{{'job.job_create.temporary' | translate}}:</b>
             {{ job.temporary == true ? 'Sim' : 'Não' }}
           </span>
           <span *ngIf="job.temporary == true" class="label-gray">
-            <b>Tempo de Contrato:</b>
+            <b>{{'job.job_create.month_time' | translate}}:</b>
             {{ job.monthTime }}
           </span>
           <span class="label-gray">
-            <b>Previsão de Inicio:</b>
+            <b>{{'job.job_create.start_forecast' | translate}}:</b>
             {{ job.startForecast | date: 'dd/MM/yyyy' }}
           </span>
           <span class="label-gray">
-            <b>Número de Vagas:</b>
+            <b>{{'job.job_create.job_number' | translate}}:</b>
             {{ job.jobNumber }}
           </span>
           <span class="label-gray">
-            <b>Tipo de Contratação:</b>
+            <b>{{'job.job_create.type_of_contract' | translate}}:</b>
             {{
               job.typeOfContract == 1
                 ? 'CLT'
@@ -69,7 +69,7 @@
             }}
           </span>
           <span class="label-gray">
-            <b>Local de Trabalho:</b>
+            <b>{{'job.job_create.workplace.name' | translate}}:</b>
             {{
               job.workplace == 1
                 ? 'In Loco'
@@ -81,30 +81,30 @@
             }}
           </span>
           <span class="label-gray">
-            <b>Jornada de Trabalho:</b>
+            <b>{{'job.job_create.working_day' | translate}}:</b>
             {{ job.workingDay }}
           </span>
           <span class="label-gray">
-            <b>Senioridade:</b>
+            <b>{{'generic.seniority.name' | translate}}:</b>
             {{ job.Seniorities.intern == true ? 'Estagiário,' : '' }}
             {{ job.Seniorities.junior == true ? 'Junior,' : '' }}
             {{ job.Seniorities.pleno == true ? 'Pleno,' : '' }}
             {{ job.Seniorities.senior == true ? 'Senior.' : '' }}
           </span>
           <span class="label-gray">
-            <b>Valor Minimo:</b>
+            <b>{{'job.job_create.minimum_value' | translate}}:</b>
             {{ job.minimumValue }}
           </span>
           <span class="label-gray">
-            <b>Valor Maximo:</b>
+            <b>{{'job.job_create.maximum_value' | translate}}:</b>
             {{ job.maximumValue }}
           </span>
           <span class="label-gray">
-            <b>Vaga:</b>
+            <b>{{'job.name' | translate}}:</b>
             {{ job.publish == true ? 'Publicada' : 'Não Publicada' }}
           </span>
           <span class="label-gray">
-            <b>Escolaridade:</b>
+            <b>{{'generic.education.schooling.name' | translate}}:</b>
             {{
               job.schooling == 1
                 ? 'Ensino Superior Completo'
@@ -114,11 +114,11 @@
             }}
           </span>
           <span class="label-gray" *ngFor="let language of job?.Languages">
-            <b>Idioma:</b>
+            <b>{{'generic.education.languages.name' | translate}}:</b>
             {{ language.languageName }}
           </span>
           <span class="label-gray" *ngFor="let language of job?.Languages">
-            <b>Nivel de Fluência:</b>
+            <b>{{'generic.education.languages.fluency.name' | translate}}:</b>
             {{
               language.degreeOfInfluence == 1
                 ? 'Leitura e Conversação'
@@ -128,7 +128,7 @@
             }}
           </span>
           <span class="label-gray" *ngFor="let knowledge of job?.Knowledges">
-            <b>Skill:</b>
+            <b>{{'generic.skills.name' | translate}}:</b>
             {{ knowledge.name }}
           </span>
           <span class="label-gray" *ngFor="let knowledge of job?.Knowledges">
@@ -144,17 +144,17 @@
           fxLayoutAlign="space-around center">
           <div fxLayout="column" class="activities-text">
             <span class="label-text">
-              Quais são as principais atividades que ocolaborador irá exercer?
+              {{'job.job_create.skills.collaborator_activities' | translate}}
             </span>
             <span class="span-text"> {{ job.collaboratorActivities }}</span>
           </div>
           <div fxLayout="column">
-            <span class="label-text"> Experiencia Desejada:</span>
+            <span class="label-text"> {{'job.job_create.skills.desired_experience' | translate}}:</span>
             <span class="span-text">{{ job.skills }}</span>
           </div>
           <div fxLayout="column" class="knowledges-text">
             <span class="label-text">
-              Comportamento e/ou competências necessárias:
+              {{'job.job_create.skills.required_behavior' | translate}}:
             </span>
             <span class="span-text"> {{ job.attitudes }}</span>
           </div>

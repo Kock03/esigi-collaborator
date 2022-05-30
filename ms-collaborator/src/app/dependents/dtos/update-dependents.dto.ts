@@ -4,12 +4,14 @@ import {
   IsEnum,
   IsNotEmpty,
   IsNumber,
+  IsObject,
   IsOptional,
   IsString,
   Length,
   MaxLength,
   MinLength,
 } from 'class-validator';
+import { CollaboratorsEntity } from 'src/app/collaborators/collaborators.entity';
 import { Gender } from 'src/app/collaborators/dtos/gender.enum';
 import { Type } from './type.enum';
 
@@ -75,4 +77,9 @@ export class UpdateDependentsDto {
   @MinLength(10)
   @MaxLength(100)
   email: string;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsObject()
+  Collaborator: CollaboratorsEntity;
 }

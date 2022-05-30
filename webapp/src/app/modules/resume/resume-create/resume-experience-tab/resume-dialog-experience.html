@@ -1,112 +1,95 @@
 <div id="resumeExperiencDialog" class="dialog">
   <div class="content-scroll" *ngIf="experienceForm">
-    <h2 class="title" mat-dialog-title>Cadastro de experiência</h2>
+    <h2 class="title" mat-dialog-title>
+      {{'resumes.resume_experience.experience_registration'|translate}}
+    </h2>
     <mat-dialog-content class="mat-typography">
       <form [formGroup]="experienceForm" fxLayout="column">
         <div fxFlex="100" fxLayoutGap="16px">
           <mat-form-field fxFlex="50" appearance="outline">
-            <mat-label>Cargo</mat-label>
+            <mat-label>{{'generic.responsibility'|translate}}</mat-label>
             <input matInput placeholder="Cargo" formControlName="office" />
+            <mat-error *ngIf="experienceForm &&
+            experienceForm.controls['office'].hasError('required')">
+              {{'validators.validator-required' | translate}} </mat-error>
+          </mat-form-field>
+          <mat-checkbox fxLayoutAlign="start center" class="checkbox" color="primary" fxFlex="50"
+            formControlName="active">{{'resumes.resume_experience.current_job'|translate}}</mat-checkbox>
+        </div>
+        <div fxFlex="100" fxLayoutGap="16px">
+          <mat-form-field fxFlex="50" appearance="outline">
+            <mat-label>{{'resumes.resume_experience.locality'|translate}}</mat-label>
+            <input matInput placeholder="Localidade" formControlName="locality" />
+            <mat-error *ngIf="experienceForm &&
+              experienceForm.controls['locality'].hasError('required')">
+              {{'validators.validator-required' | translate}} </mat-error>
           </mat-form-field>
           <mat-form-field fxFlex="50" appearance="outline">
-            <mat-label>Nome da empresa </mat-label>
-            <input
-              matInput
-              placeholder="Nome da empresa"
-              formControlName="companyName" />
+            <mat-label>{{'resumes.resume_experience.company_name'|translate}}
+            </mat-label>
+            <input matInput placeholder="Nome da empresa" formControlName="companyName" />
+            <mat-error *ngIf="experienceForm &&
+              experienceForm.controls['companyName'].hasError('required')">
+              {{'validators.validator-required' | translate}} </mat-error>
           </mat-form-field>
         </div>
         <div fxFlex="100" fxLayoutGap="16px">
           <mat-form-field fxFlex="50" appearance="outline">
-            <mat-label>Localidade</mat-label>
-            <input
-              matInput
-              placeholder="Localidade"
-              formControlName="locality" />
-          </mat-form-field>
-          <mat-checkbox
-            fxLayoutAlign="left center"
-            class="checkbox"
-            color="primary"
-            fxFlex="50"
-            formControlName="active"
-            >Trabalho atual</mat-checkbox
-          >
-        </div>
-        <div fxFlex="100" fxLayoutGap="16px">
-          <mat-form-field fxFlex="50" appearance="outline">
-            <mat-label>Data de início: mês</mat-label>
-            <input
-              matInput
-              placeholder="Data de início: mês"
-              mask="0||00"
-              formControlName="startMonth" />
+            <mat-label>{{'generic.start_date_month'|translate}}</mat-label>
+            <input matInput placeholder="Data de início: mês" mask="0||00" formControlName="startMonth" />
+            <mat-error *ngIf="experienceForm &&
+              experienceForm.controls['startMonth'].hasError('required')">
+              {{'validators.validator-required' | translate}} </mat-error>
           </mat-form-field>
           <mat-form-field fxFlex="50" appearance="outline">
-            <mat-label>Data de início: ano</mat-label>
-            <input
-              matInput
-              placeholder="Data de início: ano"
-              mask="00||0000"
-              formControlName="startYear" />
+            <mat-label>{{'generic.start_date_year'|translate}}</mat-label>
+            <input matInput placeholder="Data de início: ano" mask="00||0000" formControlName="startYear" />
+            <mat-error *ngIf="experienceForm &&
+              experienceForm.controls['startYear'].hasError('required')">
+              {{'validators.validator-required' | translate}} </mat-error>
           </mat-form-field>
         </div>
 
-        <div fxFlex="100" fxLayoutGap="16px">
+        <div fxFlex="100" fxLayoutGap="16px" *ngIf="experienceForm.controls['active'].value === false">
           <mat-form-field fxFlex="50" appearance="outline">
-            <mat-label>Data de término: mês</mat-label>
-            <input
-              matInput
-              placeholder="Data de término: mês"
-              mask="0||00"
-              formControlName="terminusMonth" />
+            <mat-label>{{'generic.end_date_month'|translate}}</mat-label>
+            <input matInput placeholder="Data de término: mês" mask="0||00" formControlName="terminusMonth" />
           </mat-form-field>
           <mat-form-field fxFlex="50" appearance="outline">
-            <mat-label>Data de término: ano</mat-label>
-            <input
-              matInput
-              placeholder="Data de término: ano"
-              mask="00||0000"
-              formControlName="terminusYear" />
+            <mat-label>{{'generic.end_date_year'|translate}}</mat-label>
+            <input matInput placeholder="Data de término: ano" mask="00||0000" formControlName="terminusYear" />
           </mat-form-field>
         </div>
         <div fxFlex="100" fxLayoutGap="16px">
           <mat-form-field fxFlex="100" appearance="outline">
-            <mat-label>Setor</mat-label>
+            <mat-label>{{'resumes.resume_experience.sector'|translate}}</mat-label>
             <input matInput placeholder="Setor" formControlName="sector" />
+            <mat-error *ngIf="experienceForm &&
+            experienceForm.controls['sector'].hasError('required')">
+              {{'validators.validator-required' | translate}} </mat-error>
           </mat-form-field>
         </div>
         <div fxFlex="100" fxLayoutGap="16px">
-          <mat-form-field
-            fxFlex="100"
-            class="example-full-width"
-            appearance="outline">
-            <mat-label>Descrição</mat-label>
-            <textarea
-              matInput
+          <mat-form-field fxFlex="100" class="example-full-width" appearance="outline">
+            <mat-label>{{'resumes.resume_experience.description'|translate}}</mat-label>
+            <textarea class="input-description" matInput
               placeholder="Ex: contribuir para a melhoria contínua do serviço..."
               formControlName="description"></textarea>
+            <mat-error *ngIf="experienceForm &&
+              experienceForm.controls['description'].hasError('required')">
+              {{'validators.validator-required' | translate}} </mat-error>
           </mat-form-field>
         </div>
       </form>
     </mat-dialog-content>
     <mat-dialog-actions>
       <div class="button-dialog">
-        <button
-          class="cancel-button"
-          mat-flat-button
-          mat-dialog-close
-          (click)="onNoClick()">
-          Cancelar
+        <button class="cancel-button" mat-flat-button mat-dialog-close (click)="onNoClick()">
+          {{'generic.cancel_button' | translate}}
         </button>
-        <button
-          class="save-button"
-          color="primary"
-          mat-flat-button
-          [mat-dialog-close]="true"
-          (click)="saveExperience()"
+        <button class="save-button" color="primary" mat-flat-button [mat-dialog-close]="true" (click)="saveExperience()"
           [disabled]="experienceForm.invalid">
-          Salvar
+          {{'generic.save_button' | translate}}
         </button>
       </div>
     </mat-dialog-actions>

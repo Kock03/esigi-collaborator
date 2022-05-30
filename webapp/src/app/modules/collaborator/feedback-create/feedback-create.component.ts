@@ -15,7 +15,7 @@ import {
 import { ActivatedRoute, Router, RoutesRecognized } from '@angular/router';
 import { filter, pairwise } from 'rxjs/operators';
 import { ICollaborator } from 'src/app/interfaces/icollaborator';
-import { CollaboratorProvider } from 'src/providers/collaborator.provider';
+import { CollaboratorProvider } from 'src/providers/collaborator-providers/collaborator.provider';
 import { FeedbackProvider } from 'src/providers/feedback.provider';
 import { SnackBarService } from 'src/services/snackbar.service';
 
@@ -96,10 +96,10 @@ export class FeedbackCreateComponent implements OnInit {
         reason: ['', Validators.required],
         project: ['', Validators.required],
         status: ['', Validators.required],
-        managerDescription: ['', Validators.required],
-        improvementPoints: ['', Validators.required],
-        collaboratorDescription: ['', Validators.required],
-        commitment: ['', Validators.required],
+        managerDescription: [''],
+        improvementPoints: [''],
+        collaboratorDescription: [''],
+        commitment: [''],
         manager: ['', Validators.required],
         feedbackDate: ['', Validators.required],
         hourDate: ['', Validators.required],
@@ -113,10 +113,10 @@ export class FeedbackCreateComponent implements OnInit {
         reason: ['', Validators.required],
         project: ['', Validators.required],
         status: ['', Validators.required],
-        managerDescription: ['', Validators.required],
-        improvementPoints: ['', Validators.required],
-        collaboratorDescription: ['', Validators.required],
-        commitment: ['', Validators.required],
+        managerDescription: [''],
+        improvementPoints: [''],
+        collaboratorDescription: [''],
+        commitment: [''],
         manager: ['', Validators.required],
         feedbackDate: ['', Validators.required],
         hourDate: ['', Validators.required],

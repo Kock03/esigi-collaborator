@@ -22,7 +22,7 @@ export class LanguagesEntity {
   degreeOfInfluence: Fluency;
 
   @ManyToOne(() => ResumesEntity, (resumes) => resumes.Languages)
-  resume: ResumesEntity;
+  Resume: ResumesEntity;
 
   @CreateDateColumn({ name: 'created_at', type: 'datetime' })
   createdAt: Date;

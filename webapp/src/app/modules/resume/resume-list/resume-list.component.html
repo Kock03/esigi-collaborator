@@ -3,18 +3,18 @@
   <div fxLayout="row" fxLayoutAlign="space-between"  >
     <form class="search" fxLayoutGap="16px">
       <mat-form-field appearance="outline">
-        <mat-label>Buscar curículos</mat-label>
+        <mat-label>{{"resumes.resume_list.search_resumes" | translate }}</mat-label>
         <input matInput placeholder="Currículo" #filter matInput />
         <mat-icon matSuffix style="cursor: pointer">search</mat-icon>
       </mat-form-field>
       <mat-form-field fxFlex="20" appearance="outline">
         <mat-label>Filtro</mat-label>
         <mat-select (selectionChange)="selectList($event)" matInput disableRipple>
-          <mat-option [value]="1">Ver Todos</mat-option>
-          <mat-option [value]="2">Cliente</mat-option>
-          <mat-option [value]="3">Processar</mat-option>
-          <mat-option [value]="4">Vaga</mat-option>
-          <mat-option [value]="5">Parada</mat-option>
+          <mat-option [value]="1">{{"resume.resume_list.all" | translate }}</mat-option>
+          <mat-option [value]="2">{{"resume.resume_list.client" | translate }}</mat-option>
+          <mat-option [value]="3">{{"resume.resume_list.process" | translate }}</mat-option>
+          <mat-option [value]="4">{{"resume.resume_list.job" | translate }}</mat-option>
+          <mat-option [value]="5">{{"resume.resume_list.stopped" | translate }}</mat-option>
         </mat-select>
       </mat-form-field>
     </form>

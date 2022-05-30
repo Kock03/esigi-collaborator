@@ -145,7 +145,7 @@ export class JobCreateComponent implements OnInit {
           Validators.maxLength(100),
         ],
       ],
-      status: [1, Validators.required],
+      status: [''],
       publish: [false],
       client: [
         '',
@@ -155,7 +155,7 @@ export class JobCreateComponent implements OnInit {
           Validators.maxLength(100),
         ],
       ],
-      typeOfJob: [1, Validators.required],
+      typeOfJob: ['', Validators.required],
       temporary: [false],
       monthTime: [''],
       jobName: [
@@ -168,29 +168,28 @@ export class JobCreateComponent implements OnInit {
       ],
       startForecast: [new Date(), Validators.required],
       jobNumber: [
-        1,
-        [Validators.required, Validators.max(10), Validators.min(1)],
+        '',
+        [ Validators.max(10), Validators.min(1)],
       ],
-      typeOfContract: [1, Validators.required],
-      workplace: [1, Validators.required],
+      typeOfContract: [''],
+      workplace: [''],
       workingDay: [
         '',
         [
-          Validators.required,
           Validators.maxLength(50),
           Validators.minLength(5),
         ],
       ],
-      minimumValue: [1, Validators.required],
-      maximumValue: [1, Validators.required],
+      minimumValue: [''],
+      maximumValue: [''],
       openingDate: [new Date(), Validators.required],
-      schooling: [1, Validators.required],
-      collaboratorActivities: ['', Validators.required],
-      skills: ['', Validators.required],
-      attitudes: ['', Validators.required],
+      schooling: [''],
+      collaboratorActivities: [''],
+      skills: [''],
+      attitudes: [''],
       Languages: this.fb.group({
-        languageName: ['', [Validators.required, Validators.maxLength(20)]],
-        degreeOfInfluence: [1, Validators.required],
+        languageName: ['', [Validators.maxLength(20)]],
+        degreeOfInfluence: [''],
       }),
       Seniorities: this.fb.group({
         intern: [false],
@@ -230,7 +229,7 @@ export class JobCreateComponent implements OnInit {
 
   navigate(direction: string) {
     if (this.step > 1 && direction === 'back') {
-      this.step -= 1;
+      this.step === 1;
     } else if (this.checkValid() && this.step < 2 && direction === 'next') {
       this.step += 1;
     } else {

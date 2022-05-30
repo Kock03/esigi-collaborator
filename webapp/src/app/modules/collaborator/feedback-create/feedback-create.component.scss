@@ -2,11 +2,38 @@
     .form-box {
         width: 100%;
     }
-    .formGroup1 {
-    min-width: 400px;
+
+    .form-group-content{
+        min-width: 400px;
+        padding-top: 30px;
     }
 
+    .text-subtitlle {
+        padding-top: 30px;
+    }
+
+
+
+    .content-scroll {
+        overflow: auto;
+        height: calc(100vh - 200px);
+
+    }
+
+    .form-control {
+        margin-top: 20px;
+    }
+
+    .text-area {
+        height: 100% !important;
+        height: 250px;
+        overflow: auto !important;
+        width: 100% !important;
+        max-width: 600px;
+        white-space: wrap
+    }
+
+    .space-between-form{
+        margin-top: 30px;
+    }
 }
- .h2G{
-     padding-top:30px;
- }
