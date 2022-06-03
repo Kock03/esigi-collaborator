@@ -7,6 +7,7 @@ import { filter, pairwise } from 'rxjs';
 
 import { DocumentValidator } from 'src/app/validators/document.validator';
 import { CollaboratorProvider } from 'src/providers/collaborator-providers/collaborator.provider';
+import { UserProvider } from 'src/providers/user.provider';
 import { SnackBarService } from 'src/services/snackbar.service';
 
 @Component({
@@ -17,6 +18,7 @@ import { SnackBarService } from 'src/services/snackbar.service';
 })
 export class CollaboratorCreateComponent implements OnInit {
   collaboratorForm!: FormGroup;
+  userForm!: FormGroup;
   step: any = 1;
   collaboratorId!: string | null;
   collaborator!: any;
@@ -59,6 +61,7 @@ export class CollaboratorCreateComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private collaboratorProvider: CollaboratorProvider,
+    private userProvider: UserProvider,
     private router: Router,
     private snackbarService: SnackBarService,
     private route: ActivatedRoute
@@ -127,7 +130,7 @@ export class CollaboratorCreateComponent implements OnInit {
       cpf: this.fb.control({ value: null, disabled: false }, [
         DocumentValidator.isValidCpf(), Validators.required
       ]),
-      birthDate: [null, Validators.required],
+      birthDate: ['', Validators.required],
       admissionDate: ['', Validators.required],
       email: [null, [Validators.email, Validators.required]],
       cnpj: this.fb.control({ value: null, disabled: true }, [
@@ -165,9 +168,27 @@ export class CollaboratorCreateComponent implements OnInit {
   async saveCollaborator() {
     let data = this.collaboratorForm.getRawValue();
 
+    if (data.collaboratorTypes === 2) {
+      this.userForm = this.fb.group({
+        firstName: data.firstNameCorporateName,
+        lastName: data.lastNameFantasyName,
+        password: data.cnpj
+      })
+    } else {
+      this.userForm = this.fb.group({
+        firstName: data.firstNameCorporateName,
+        lastName: data.lastNameFantasyName,
+        password: data.cpf
+      })
+    }
+
+    let dataUser = this.userForm.getRawValue();
+    console.log(dataUser);
+
     try {
       this.handleStep(2)
       const colaborator = await this.collaboratorProvider.store(data);
+      const user = await this.userProvider.store(dataUser);
       sessionStorage.setItem('colaborator_id', colaborator.id);
       this.snackbarService.successMessage('Colaborador Cadastrado Com Sucesso');
       sessionStorage.clear();
@@ -175,6 +196,8 @@ export class CollaboratorCreateComponent implements OnInit {
       console.log('ERROR 132' + error);
     }
   }
+
+
   handleChanges(value: any): void { }
 
   handleStep(number: number): void {

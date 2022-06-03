@@ -79,7 +79,7 @@ export class UpdateCollaboratorsDto {
 
   @ApiProperty()
   @IsOptional()
-  birthDate: Date;
+  birthDate: string;
 
   @ApiProperty()
   @IsOptional()
