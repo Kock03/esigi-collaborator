@@ -1,12 +1,12 @@
 import { HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ApiGateway } from 'src/api-gateway';
-import { environment } from 'src/environments/environment.prod';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
-export class SettingProvider {
+export class UserProvider {
   constructor(private apiGateway: ApiGateway) {}
 
   ngOnInit(): void {}
@@ -14,7 +14,7 @@ export class SettingProvider {
   findAll(): Promise<any> {
     return new Promise((resolve, reject) => {
       this.apiGateway
-        .get(environment.SETTING_MS + 'settings')
+        .get(environment.AUTH_SERVICE_MS + 'users')
         .subscribe((response: HttpResponse<any>) => {
           resolve(response.body);
         }, reject);
@@ -24,37 +24,37 @@ export class SettingProvider {
   findOne(id: string): Promise<any> {
     return new Promise((resolve, reject) => {
       this.apiGateway
-        .get(environment.SETTING_MS + 'settings', { id: id })
+        .get(environment.AUTH_SERVICE_MS + 'users', { id: id })
         .subscribe((response: HttpResponse<any>) => {
           resolve(response.body);
         }, reject);
     });
   }
 
-  update(setting: any): Promise<any> {
+  update(user: any): Promise<any> {
     return new Promise((resolve, reject) => {
       this.apiGateway
-        .put(environment.SETTING_MS + 'settings', setting)
+        .put(environment.AUTH_SERVICE_MS + 'users', user)
         .subscribe((response: HttpResponse<any>) => {
           resolve(response.body);
         }, reject);
     });
   }
 
-  store(setting: any): Promise<any> {
+  store(user: any): Promise<any> {
     return new Promise((resolve, reject) => {
       this.apiGateway
-        .post(environment.SETTING_MS + 'settings', setting)
+        .post(environment.AUTH_SERVICE_MS + 'users', user)
         .subscribe((response: HttpResponse<any>) => {
           resolve(response.body);
         }, reject);
     });
   }
 
-  destroy(setting: any): Promise<any> {
+  destroy(user: any): Promise<any> {
     return new Promise((resolve, reject) => {
       this.apiGateway
-        .delete(environment.SETTING_MS + 'settings', setting)
+        .delete(environment.AUTH_SERVICE_MS + 'users', user)
         .subscribe((response: HttpResponse<any>) => {
           resolve(response.body);
         }, reject);

@@ -53,7 +53,7 @@ export class CollaboratorsEntity {
   cpf: string;
 
   @Column()
-  birthDate: Date;
+  birthDate: string;
 
   @Column()
   email: string;
