@@ -8,6 +8,8 @@ export const environment = {
   RESUME_MS: 'localhost:3502/api/v1/',
   JOBS_MS: 'localhost:3503/api/v1/',
   SETTING_MS: 'localhost:3504/api/v1/',
+  AUTH_SERVICE_MS: 'localhost:3000/api/v1/',
+
 
   message: 'LOCAL',
   protocol: 'http',

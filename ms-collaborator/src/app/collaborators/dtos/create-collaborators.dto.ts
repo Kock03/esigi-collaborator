@@ -79,8 +79,8 @@ export class CreateCollaboratorsDto {
   maritalStatus: MaritalStatus;
 
   @ApiProperty()
-  @IsNotEmpty()
-  birthDate: Date;
+  @IsOptional()
+  birthDate: string;
 
   @ApiProperty()
   @IsNotEmpty()
