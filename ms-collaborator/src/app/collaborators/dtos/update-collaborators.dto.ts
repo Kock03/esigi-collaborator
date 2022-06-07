@@ -88,7 +88,7 @@ export class UpdateCollaboratorsDto {
 
   @ApiProperty()
   @IsOptional()
-  admissionDate: Date;
+  admissionDate: string;
 
   @ApiProperty()
   @IsOptional()

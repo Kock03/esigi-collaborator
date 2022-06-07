@@ -45,6 +45,14 @@ export class CollaboratorsService {
     });
   }
 
+  async shortListCollaboratorsPermission() {
+    return await this.collaboratorsRepository
+      .createQueryBuilder('collaborators')
+      .leftJoinAndSelect("collaborators.Phone", "Phone")
+      .where('collaborators.inactive =false')
+      .getMany();
+  }
+
   async findInactive() {
     return await this.collaboratorsRepository
       .createQueryBuilder('collaborators')

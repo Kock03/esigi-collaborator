@@ -46,6 +46,12 @@ export class CollaboratorsController {
   async shortListCollaborators() {
     return await this.collaboratorsService.shortListCollaborators();
   }
+
+  @Get('/short/list/permission/collaborators')
+  async shortListCollaboratorsPermission() {
+    return await this.collaboratorsService.shortListCollaborators();
+  }
+  
   
   @Get('list/inactive')
   async findInactive() {

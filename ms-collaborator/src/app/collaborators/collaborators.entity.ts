@@ -62,7 +62,7 @@ export class CollaboratorsEntity {
   active: boolean;
 
   @Column()
-  admissionDate: Date;
+  admissionDate: string;
 
   @Column({ unique: true, length: 14, nullable: true })
   cnpj: string;

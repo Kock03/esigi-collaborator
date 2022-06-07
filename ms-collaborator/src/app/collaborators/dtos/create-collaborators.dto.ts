@@ -88,8 +88,8 @@ export class CreateCollaboratorsDto {
   active: boolean;
 
   @ApiProperty()
-  @IsNotEmpty()
-  admissionDate: Date;
+  @IsOptional()
+  admissionDate: string;
 
   @ApiProperty()
   @IsNotEmpty()

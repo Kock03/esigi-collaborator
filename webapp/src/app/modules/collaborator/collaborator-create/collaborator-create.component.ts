@@ -172,12 +172,14 @@ export class CollaboratorCreateComponent implements OnInit {
       this.userForm = this.fb.group({
         firstName: data.firstNameCorporateName,
         lastName: data.lastNameFantasyName,
+        email: data.email,
         password: data.cnpj
       })
     } else {
       this.userForm = this.fb.group({
         firstName: data.firstNameCorporateName,
         lastName: data.lastNameFantasyName,
+        email: data.email,
         password: data.cpf
       })
     }
