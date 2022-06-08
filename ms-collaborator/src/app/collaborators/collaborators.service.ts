@@ -40,7 +40,7 @@ export class CollaboratorsService {
 
   async shortListCollaborators(){
     return await this.collaboratorsRepository.find({
-      select: ['id', 'firstNameCorporateName', 'lastNameFantasyName'],
+      select: ['id', 'firstNameCorporateName', 'lastNameFantasyName', 'email'],
       where: { active: true },
     });
   }
@@ -69,9 +69,10 @@ export class CollaboratorsService {
 
   findByName(query): Promise<CollaboratorsEntity[]> {
     return this.collaboratorsRepository.find({
-      select:[ 'id','firstNameCorporateName', 'lastNameFantasyName'],
+      select:[ 'id','firstNameCorporateName', 'lastNameFantasyName', 'email'],
+      relations: ['Phone'],
       where: [
-        { firstNameCorporateName: Like(`${query.firstNameCorporateName}%`) },]
+        { firstNameCorporateName: Like(`${query.firstNameCorporateName}%`) },],
     });
   }
 
