@@ -16,6 +16,7 @@ import { CreateCollaboratorsDto } from './dtos/create-collaborators.dto';
 import { UpdateCollaboratorsDto } from './dtos/update-collaborators.dto';
 import { DocumentsBadRequestExcpetion } from '../exceptions/documents-bad-request.exception';
 import { BadRequestException } from '../exceptions/bad-request.exception';
+import { UpdatePermissionDto } from './dtos/update-permission.dto';
 
 @Injectable()
 export class CollaboratorsService {
@@ -120,6 +121,18 @@ export class CollaboratorsService {
   }
 
   async update(id: string, data: UpdateCollaboratorsDto) {
+    try {
+      const collaborator = await this.collaboratorsRepository.findOneOrFail({
+        id,
+      });
+    } catch {
+      throw new NotFoundException();
+    }
+
+    return await this.collaboratorsRepository.save({ id: id, ...data });
+  }
+
+  async updatePermission(id: string, data: UpdatePermissionDto) {
     try {
       const collaborator = await this.collaboratorsRepository.findOneOrFail({
         id,

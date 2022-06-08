@@ -16,6 +16,7 @@ import { Observable } from 'rxjs';
 import { CollaboratorsService } from './collaborators.service';
 import { CreateCollaboratorsDto } from './dtos/create-collaborators.dto';
 import { UpdateCollaboratorsDto } from './dtos/update-collaborators.dto';
+import { UpdatePermissionDto } from './dtos/update-permission.dto';
 import { ICollaborators } from './interfaces/i-collaborators.interfaces';
 
 @Controller('/api/v1/collaborators')
@@ -67,6 +68,14 @@ export class CollaboratorsController {
   @Get('list/active')
   async findActive() {
     return await this.collaboratorsService.findActive();
+  }
+
+  @Put('permission/:id')
+  async updatePermission(
+    @Param('id', new ParseUUIDPipe()) id: string,
+    @Body() body: UpdatePermissionDto,
+  ) {
+    return await this.collaboratorsService.updatePermission(id, body);
   }
 
   @Put(':id')

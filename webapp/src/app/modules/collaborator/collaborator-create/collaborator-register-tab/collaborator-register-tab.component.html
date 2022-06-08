@@ -94,13 +94,10 @@
           <mat-label>{{'generic.cpf'|translate}}</mat-label>
           <input matInput placeholder="CPF" formControlName="cpf"
             mask="000.000.000-00" />
-          <mat-error *ngIf="collaboratorForm &&
-            collaboratorForm.controls['cpf'].hasError('required')"> {{'validators.validator-required' | translate}}
-          </mat-error>
         </mat-form-field>
 
         <mat-form-field fxFlex="35" appearance="outline"
-          *ngIf="collaboratorForm.controls['collaboratorTypes'].value == 2">
+          *ngIf="collaboratorForm.controls['collaboratorTypes'].value === 2">
           <mat-label>{{'collaborator.colaborator_create.cnpj'|translate}}</mat-label>
           <input matInput placeholder="CNPJ" formControlName="cnpj"
             mask="00.000.000/0000-00" />
@@ -168,14 +165,14 @@
           *ngIf="collaboratorForm.controls['collaboratorTypes'].value == 2">
           <mat-label>{{'collaborator.colaborator_create.state_registration'|translate}}</mat-label>
           <input matInput placeholder="Inscrição Estadual"
-            formControlName="stateRegistration" />
+            formControlName="stateRegistration"  mask="000.000.000||000.000.000.000||000.000.000.000-00"/>
         </mat-form-field>
 
         <mat-form-field fxFlex="40" appearance="outline"
           *ngIf="collaboratorForm.controls['collaboratorTypes'].value == 2">
           <mat-label>{{'collaborator.colaborator_create.municipal_inscription'|translate}}</mat-label>
           <input matInput placeholder="Inscrição municipal"
-            formControlName="municipalInscription" />
+            formControlName="municipalInscription"   mask="000.000.000||000.000.000.000||000.000.000.000-00"/>
         </mat-form-field>
 
         <mat-form-field

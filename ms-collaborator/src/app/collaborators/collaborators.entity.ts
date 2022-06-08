@@ -82,6 +82,9 @@ export class CollaboratorsEntity {
   @Column({ nullable: true })
   photo: Buffer;
 
+  @Column({ nullable: true })
+  PermissionId: string;
+
   @OneToOne(() => AddressEntity, {
     cascade: ['insert', 'update', 'remove'],
     orphanedRowAction: 'delete'
