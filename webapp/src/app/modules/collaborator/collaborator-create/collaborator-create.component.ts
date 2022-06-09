@@ -38,7 +38,6 @@ export class CollaboratorCreateComponent implements OnInit {
 
   validations = [
     [
-      'cpf',
       'admissionDate',
       'firstNameCorporateName',
       'lastNameFantasyName',
@@ -133,7 +132,7 @@ export class CollaboratorCreateComponent implements OnInit {
       birthDate: ['', Validators.required],
       admissionDate: ['', Validators.required],
       email: [null, [Validators.email, Validators.required]],
-      cnpj: this.fb.control({ value: null, disabled: true }, [
+      cnpj: this.fb.control({ value: null, disabled: false }, [
         DocumentValidator.isValidCnpj(), Validators.required
       ]),
       stateRegistration: [null],
@@ -168,28 +167,31 @@ export class CollaboratorCreateComponent implements OnInit {
   async saveCollaborator() {
     let data = this.collaboratorForm.getRawValue();
 
-    if (data.collaboratorTypes === 2) {
-      this.userForm = this.fb.group({
-        firstName: data.firstNameCorporateName,
-        lastName: data.lastNameFantasyName,
-        password: data.cnpj
-      })
-    } else {
-      this.userForm = this.fb.group({
-        firstName: data.firstNameCorporateName,
-        lastName: data.lastNameFantasyName,
-        password: data.cpf
-      })
-    }
-
-    let dataUser = this.userForm.getRawValue();
-    console.log(dataUser);
 
     try {
       this.handleStep(2)
       const colaborator = await this.collaboratorProvider.store(data);
-      const user = await this.userProvider.store(dataUser);
       sessionStorage.setItem('colaborator_id', colaborator.id);
+
+      if (colaborator.collaboratorTypes === 2) {
+        this.userForm = this.fb.group({
+          firstName: colaborator.firstNameCorporateName,
+          lastName: colaborator.lastNameFantasyName,
+          email: colaborator.email,
+          password: colaborator.cnpj,
+          collaboratorId: colaborator.id
+        })
+      } else {
+        this.userForm = this.fb.group({
+          firstName: colaborator.firstNameCorporateName,
+          lastName: colaborator.lastNameFantasyName,
+          email: colaborator.email,
+          collaboratorId: colaborator.id,
+          password: colaborator.cpf
+        })
+      }
+      let dataUser = this.userForm.getRawValue();
+      const user = await this.userProvider.store(dataUser);
       this.snackbarService.successMessage('Colaborador Cadastrado Com Sucesso');
       sessionStorage.clear();
     } catch (error: any) {
@@ -226,6 +228,7 @@ export class CollaboratorCreateComponent implements OnInit {
     let isValid = true;
     const validations = this.validations[0];
     for (let index = 0; index < validations.length; index++) {
+
       if (this.collaboratorForm.controls[validations[index]].invalid) {
         isValid = false;
 

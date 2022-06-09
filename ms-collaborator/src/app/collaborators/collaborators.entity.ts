@@ -62,7 +62,7 @@ export class CollaboratorsEntity {
   active: boolean;
 
   @Column()
-  admissionDate: Date;
+  admissionDate: string;
 
   @Column({ unique: true, length: 14, nullable: true })
   cnpj: string;
@@ -81,6 +81,9 @@ export class CollaboratorsEntity {
 
   @Column({ nullable: true })
   photo: Buffer;
+
+  @Column({ nullable: true })
+  PermissionId: string;
 
   @OneToOne(() => AddressEntity, {
     cascade: ['insert', 'update', 'remove'],

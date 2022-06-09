@@ -16,6 +16,7 @@ import { CreateCollaboratorsDto } from './dtos/create-collaborators.dto';
 import { UpdateCollaboratorsDto } from './dtos/update-collaborators.dto';
 import { DocumentsBadRequestExcpetion } from '../exceptions/documents-bad-request.exception';
 import { BadRequestException } from '../exceptions/bad-request.exception';
+import { UpdatePermissionDto } from './dtos/update-permission.dto';
 
 @Injectable()
 export class CollaboratorsService {
@@ -40,9 +41,17 @@ export class CollaboratorsService {
 
   async shortListCollaborators(){
     return await this.collaboratorsRepository.find({
-      select: ['id', 'firstNameCorporateName', 'lastNameFantasyName'],
+      select: ['id', 'firstNameCorporateName', 'lastNameFantasyName', 'email'],
       where: { active: true },
     });
+  }
+
+  async shortListCollaboratorsPermission() {
+    return await this.collaboratorsRepository
+      .createQueryBuilder('collaborators')
+      .leftJoinAndSelect("collaborators.Phone", "Phone")
+      .where('collaborators.inactive =false')
+      .getMany();
   }
 
   async findInactive() {
@@ -61,9 +70,10 @@ export class CollaboratorsService {
 
   findByName(query): Promise<CollaboratorsEntity[]> {
     return this.collaboratorsRepository.find({
-      select:[ 'id','firstNameCorporateName', 'lastNameFantasyName'],
+      select:[ 'id','firstNameCorporateName', 'lastNameFantasyName', 'email'],
+      relations: ['Phone'],
       where: [
-        { firstNameCorporateName: Like(`${query.firstNameCorporateName}%`) },]
+        { firstNameCorporateName: Like(`${query.firstNameCorporateName}%`) },],
     });
   }
 
@@ -111,6 +121,18 @@ export class CollaboratorsService {
   }
 
   async update(id: string, data: UpdateCollaboratorsDto) {
+    try {
+      const collaborator = await this.collaboratorsRepository.findOneOrFail({
+        id,
+      });
+    } catch {
+      throw new NotFoundException();
+    }
+
+    return await this.collaboratorsRepository.save({ id: id, ...data });
+  }
+
+  async updatePermission(id: string, data: UpdatePermissionDto) {
     try {
       const collaborator = await this.collaboratorsRepository.findOneOrFail({
         id,

@@ -39,7 +39,7 @@
                 <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by admissionDate">{{"generic.admission_date" | translate}}
                 </th>
                 <td mat-cell *matCellDef="let collaborator">
-                    {{ collaborator.admissionDate | date: 'dd/MM/yyyy' }}
+                    {{ collaborator.admissionDate }}
                 </td>
             </ng-container>
 

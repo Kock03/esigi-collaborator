@@ -88,7 +88,7 @@ export class UpdateCollaboratorsDto {
 
   @ApiProperty()
   @IsOptional()
-  admissionDate: Date;
+  admissionDate: string;
 
   @ApiProperty()
   @IsOptional()
@@ -105,16 +105,14 @@ export class UpdateCollaboratorsDto {
 
   @ApiProperty()
   @IsOptional()
-  @IsString()
-  @MinLength(12)
-  @MaxLength(12)
+  @MinLength(9)
+  @MaxLength(14)
   stateRegistration: string;
 
   @ApiProperty()
   @IsOptional()
-  @IsString()
-  @MinLength(12)
-  @MaxLength(12)
+  @MinLength(9)
+  @MaxLength(14)
   municipalInscription: string;
 
   @ApiProperty()
