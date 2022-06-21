@@ -1,10 +1,9 @@
 import { ApiProperty } from '@nestjs/swagger';
 import {
   IsEnum,
-  IsNotEmpty,
+  IsOptional,
   IsNumber,
   IsObject,
-  IsOptional,
   IsString,
   MaxLength,
   MinLength,
@@ -15,31 +14,29 @@ import { Situation } from './situation.enum';
 
 export class UpdateEducationsDto {
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
-  @MinLength(3)
-  @MaxLength(70)
+  @MinLength(1)
   course: string;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsEnum(Schooling)
   schooling: Schooling;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
-  @MinLength(10)
-  @MaxLength(100)
+  @MinLength(1)
   institution: string;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsEnum(Situation)
   situation: Situation;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsObject()
   Collaborator: CollaboratorsEntity;
 }

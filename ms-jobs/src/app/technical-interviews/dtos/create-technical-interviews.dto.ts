@@ -18,15 +18,13 @@ export class CreateTechnicalInterviewsDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
-  @MinLength(3)
-  @MaxLength(80)
+  @MinLength(1)
   nameCandidate: string;
 
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
-  @MinLength(3)
-  @MaxLength(80)
+  @MinLength(1)
   evaluator: string;
 
   @ApiProperty()

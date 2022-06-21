@@ -16,21 +16,18 @@ export class UpdateResumesDto {
 
   @ApiProperty()
   @IsOptional()
-  @MinLength(3)
-  @MaxLength(70)
+  @MinLength(1)
   firstName: string;
 
   @ApiProperty()
   @IsOptional()
-  @MinLength(3)
-  @MaxLength(70)
+  @MinLength(1)
   @IsString()
   lastName: string;
 
   @ApiProperty()
   @IsOptional()
-  @MinLength(3)
-  @MaxLength(70)
+  @MinLength(1)
   @IsString()
   login: string;
 
@@ -66,15 +63,13 @@ export class UpdateResumesDto {
   @IsOptional()
   @IsEmail()
   @IsString()
-  @MinLength(5)
-  @MaxLength(80)
+  @MinLength(1)
   @IsString()
   email: string;
 
   @ApiProperty()
   @IsOptional()
-  @MinLength(5)
-  @MaxLength(80)
+  @MinLength(1)
   @IsString()
   site: string;
 

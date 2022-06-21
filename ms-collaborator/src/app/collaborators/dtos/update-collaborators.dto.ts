@@ -31,22 +31,19 @@ export class UpdateCollaboratorsDto {
   @ApiProperty()
   @IsOptional()
   @IsString()
-  @MinLength(4)
-  @MaxLength(100)
+  @MinLength(1)
   firstNameCorporateName: string;
 
   @ApiProperty()
   @IsOptional()
   @IsString()
-  @MinLength(4)
-  @MaxLength(100)
+  @MinLength(1)
   lastNameFantasyName: string;
 
   @ApiProperty()
   @IsOptional()
   @IsString()
-  @MinLength(5)
-  @MaxLength(70)
+  @MinLength(1)
   login: string;
 
   @ApiProperty()
@@ -57,8 +54,7 @@ export class UpdateCollaboratorsDto {
   @ApiProperty()
   @IsOptional()
   @IsString()
-  @MinLength(5)
-  @MaxLength(200)
+  @MinLength(1)
   office: string;
 
   @ApiProperty()
@@ -84,7 +80,7 @@ export class UpdateCollaboratorsDto {
   @ApiProperty()
   @IsOptional()
   @IsBoolean()
-  active: boolean;
+  inactive: boolean;
 
   @ApiProperty()
   @IsOptional()
@@ -93,8 +89,7 @@ export class UpdateCollaboratorsDto {
   @ApiProperty()
   @IsOptional()
   @IsEmail()
-  @MinLength(10)
-  @MaxLength(100)
+  @MinLength(1)
   email: string;
 
   @ApiProperty()
@@ -118,15 +113,13 @@ export class UpdateCollaboratorsDto {
   @ApiProperty()
   @IsOptional()
   @IsString()
-  @MinLength(5)
-  @MaxLength(70)
+  @MinLength(1)
   site: string;
 
   @ApiProperty()
   @IsOptional()
   @IsString()
-  @MinLength(5)
-  @MaxLength(70)
+  @MinLength(1)
   linkedin: string;
 
   @ApiProperty()

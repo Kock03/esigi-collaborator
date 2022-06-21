@@ -3,6 +3,7 @@ import {
   IsEnum,
   IsNotEmpty,
   IsNumber,
+  IsOptional,
   IsString,
   MaxLength,
   MinLength,
@@ -12,19 +13,18 @@ import { TypeOfPeriod } from './type-of-period.enum';
 
 export class UpdateKnowledgesDto {
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
-  @MinLength(3)
-  @MaxLength(80)
+  @MinLength(1)
   name: string;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsNumber()
   yearsExperience: number;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsEnum(TypeOfPeriod)
   typeOfPeriod: TypeOfPeriod;
 }

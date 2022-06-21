@@ -23,6 +23,10 @@
 
     <mat-divider></mat-divider>
 
+    <button mat-button class="menu-button"  (click)="openApp(3406)">
+      <mat-icon>home</mat-icon>
+      <span>Início</span>
+    </button>
     <div *ngFor="let menu of menuList">
       <button
         [ngClass]="{
@@ -36,7 +40,7 @@
       </button>
     </div>
 
-    <button mat-button class="menu-button logout">
+    <button mat-button class="menu-button logout" (click)=logout()>
       <mat-icon>exit_to_app</mat-icon>
       <span>Logout</span>
     </button>

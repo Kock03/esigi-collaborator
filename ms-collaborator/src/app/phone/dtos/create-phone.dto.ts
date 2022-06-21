@@ -13,7 +13,7 @@ export class CreatePhoneDto {
   @IsNotEmpty()
   @IsString()
   @MinLength(9)
-  @MaxLength(9)
+  @MaxLength(11)
   phoneNumber: string;
 
   @ApiProperty()

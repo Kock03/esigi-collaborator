@@ -15,8 +15,7 @@ export class CreateLanguagesDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
-  @MinLength(3)
-  @MaxLength(50)
+  @MinLength(1)
   languageName: string;
 
   @ApiProperty()

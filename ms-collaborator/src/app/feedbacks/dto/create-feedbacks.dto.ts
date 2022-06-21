@@ -28,8 +28,7 @@ export class CreateFeedbacksDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
-  @MinLength(5)
-  @MaxLength(100)
+  @MinLength(1)
   project: string;
 
   @ApiProperty()
@@ -58,32 +57,31 @@ export class CreateFeedbacksDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
-  @MinLength(5)
-  @MaxLength(70)
+  @MinLength(1)
   manager: string;
 
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
-  @MaxLength(200)
+  @MinLength(1)
   managerDescription: string;
 
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
-  @MaxLength(200)
+  @MinLength(1)
   improvementPoints: string;
 
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
-  @MaxLength(200)
+  @MinLength(1)
   collaboratorDescription: string;
 
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
-  @MaxLength(100)
+  @MinLength(1)
   commitment: string;
 
   @ApiPropertyOptional()

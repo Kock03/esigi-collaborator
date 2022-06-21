@@ -4,6 +4,7 @@ import { BreakpointObserver, LayoutModule } from '@angular/cdk/layout';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
+import { UserService } from 'src/services/user.service';
 
 @Component({
   selector: 'app-root',
@@ -17,12 +18,12 @@ export class AppComponent {
   sidenav!: MatSidenav;
 
   menuList = [
-    {
-      name: 'sidenav.home',
-      icon: 'home',
-      selected: false,
-      action: 'home',
-    },
+    // {
+    //   name: 'sidenav.home',
+    //   icon: 'home',
+    //   selected: false,
+    //   action:'http://localhost:3406',
+    // },
     {
       name: 'sidenav.collaborator',
       icon: 'person',
@@ -50,7 +51,8 @@ export class AppComponent {
     private observer: BreakpointObserver,
     private router: Router,
     private route: ActivatedRoute,
-    public translateService: TranslateService
+    public translateService: TranslateService,
+    private userService: UserService
   ) {
     translateService.addLangs(['en-US', 'pt-BR']);
   }
@@ -82,4 +84,13 @@ export class AppComponent {
   navigate(route: string) {
     this.router.navigate([route]);
   }
+
+  openApp(port: number): void {
+    location.replace(`http://localhost:${port}`);
+  }
+
+  logout(): void {
+    this.userService.logout();
+  }
+
 }

@@ -24,15 +24,13 @@ export class CreatedependentsDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
-  @MinLength(3)
-  @MaxLength(70)
+  @MinLength(1)
   firstName: string;
 
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
-  @MinLength(3)
-  @MaxLength(70)
+  @MinLength(1)
   lastName: string;
 
   @ApiProperty()
@@ -74,8 +72,7 @@ export class CreatedependentsDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsEmail()
-  @MinLength(10)
-  @MaxLength(100)
+  @MinLength(1)
   email: string;
 
   @ApiProperty()

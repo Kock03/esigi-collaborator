@@ -6,10 +6,8 @@ import {
   IsOptional,
   IsString,
   Length,
-  Max,
-  MaxLength,
-  Min,
   MinLength,
+  MaxLength,
 } from 'class-validator';
 import { AddressEntity } from 'src/address/address.entity';
 import { PhoneEntity } from 'src/phone/phone.entity';
@@ -28,21 +26,18 @@ export class CreateResumesDto {
 
   @ApiProperty()
   @IsNotEmpty()
-  @MinLength(3)
-  @MaxLength(70)
+  @MinLength(1)
   firstName: string;
 
   @ApiProperty()
   @IsNotEmpty()
-  @MinLength(3)
-  @MaxLength(70)
+  @MinLength(1)
   @IsString()
   lastName: string;
 
   @ApiProperty()
   @IsNotEmpty()
-  @MinLength(3)
-  @MaxLength(70)
+  @MinLength(1)
   @IsString()
   login: string;
 
@@ -78,15 +73,13 @@ export class CreateResumesDto {
   @IsNotEmpty()
   @IsEmail()
   @IsString()
-  @MinLength(5)
-  @MaxLength(80)
+  @MinLength(1)
   @IsString()
   email: string;
 
   @ApiProperty()
   @IsOptional()
-  @MinLength(5)
-  @MaxLength(80)
+  @MinLength(1)
   @IsString()
   site: string;
 

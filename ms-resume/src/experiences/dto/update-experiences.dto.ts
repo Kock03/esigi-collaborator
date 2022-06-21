@@ -1,26 +1,23 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, Min, Max, IsOptional, IsBoolean, IsString, MaxLength, MinLength, IsObject } from 'class-validator';
+import { IsNotEmpty, IsOptional, IsBoolean, IsString, MinLength, IsObject } from 'class-validator';
 import { ResumesEntity } from 'src/resumes/resumes.entity';
 
 export class UpdateExperiencesDto {
   @ApiProperty()
   @IsOptional()
-  @MinLength(2)
-  @MaxLength(40)
+  @MinLength(1)
   @IsString()
   office: string;
 
   @ApiProperty()
   @IsOptional()
-  @MinLength(3)
-  @MaxLength(70)
+  @MinLength(1)
   @IsString()
   companyName: string;
 
   @ApiProperty()
   @IsOptional()
-  @MinLength(2)
-  @MaxLength(40)
+  @MinLength(1)
   @IsString()
   locality: string;
 
@@ -47,8 +44,7 @@ export class UpdateExperiencesDto {
 
   @ApiProperty()
   @IsOptional()
-  @MinLength(2)
-  @MaxLength(40)
+  @MinLength(1)
   @IsString()
   sector: string;
 
@@ -57,8 +53,4 @@ export class UpdateExperiencesDto {
   @IsString()
   description: string;
 
-  @ApiProperty()
-  @IsNotEmpty()
-  @IsObject()
-Resume: ResumesEntity;
 }

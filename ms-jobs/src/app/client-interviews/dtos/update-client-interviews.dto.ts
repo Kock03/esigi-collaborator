@@ -4,6 +4,7 @@ import {
   IsDate,
   IsEnum,
   IsNotEmpty,
+  IsOptional,
   IsString,
   MaxLength,
   MinLength,
@@ -14,50 +15,48 @@ import { JobsEntity } from 'src/app/jobs/jobs.entity';
 
 export class UpdateClientInterviewsDto {
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
-  @MinLength(3)
-  @MaxLength(80)
+  @MinLength(1)
   nameCandidate: string;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
-  @MinLength(3)
-  @MaxLength(80)
+  @MinLength(1)
   evaluator: string;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   clientInterviewDate: Date;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
   hourInterview: string;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsEnum(Punctuality)
   punctuality: Punctuality;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsBoolean()
   jobProfile: boolean;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
   technicalEvaluation: string;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
   comments: string;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsEnum(Situation)
   situational: Situation;
 }

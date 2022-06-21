@@ -3,6 +3,7 @@ import {
   IsEnum,
   IsNotEmpty,
   IsNumber,
+  IsOptional,
   IsString,
   MaxLength,
   MinLength,
@@ -10,14 +11,13 @@ import {
 
 export class UpdateLanguagesDto {
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
-  @MinLength(3)
-  @MaxLength(50)
+  @MinLength(1)
   languageName: string;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsNumber()
   degreeOfInfluence: degreeOfInfluence;
 }

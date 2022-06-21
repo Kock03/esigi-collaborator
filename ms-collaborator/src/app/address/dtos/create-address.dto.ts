@@ -31,35 +31,30 @@ export class CreateAddressDto {
   @IsNotEmpty()
   @IsString()
   @MinLength(3)
-  @MaxLength(60)
   street: string;
 
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
   @MinLength(3)
-  @MaxLength(60)
   district: string;
 
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
   @MinLength(3)
-  @MaxLength(60)
   state: string;
 
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
   @MinLength(3)
-  @MaxLength(60)
   city: string;
 
   @ApiProperty()
   @IsOptional()
   @IsString()
   @MinLength(3)
-  @MaxLength(60)
   complement: string;
 
   @ApiProperty()

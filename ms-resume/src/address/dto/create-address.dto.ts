@@ -15,16 +15,14 @@ export class CreateAddressDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
-  @MinLength(8)
-  @MaxLength(8)
+  @MinLength(1)
   @IsString()
   cep: string;
 
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
-  @MinLength(3)
-  @MaxLength(60)
+  @MinLength(1)
   @IsString()
   street: string;
 
@@ -32,7 +30,6 @@ export class CreateAddressDto {
   @IsNotEmpty()
   @IsString()
   @MinLength(1)
-  @MaxLength(10)
   @IsNumber()
   number: string;
 
@@ -40,30 +37,26 @@ export class CreateAddressDto {
   @IsNotEmpty()
   @IsString()
   @IsString()
-  @MinLength(3)
-  @MaxLength(60)
+  @MinLength(1)
   @IsString()
   district: string;
 
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
-  @MinLength(3)
-  @MaxLength(60)
+  @MinLength(1)
   @IsString()
   city: string;
 
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
-  @MinLength(3)
-  @MaxLength(60)
+  @MinLength(1)
   @IsString()
   state: string;
 
   @ApiProperty()
-  @MinLength(3)
-  @MaxLength(60)
+  @MinLength(1)
   @IsOptional()
   @IsString()
   complement: string;

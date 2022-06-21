@@ -13,7 +13,7 @@ export class UpdatePhoneDto {
   @IsOptional()
   @IsString()
   @MinLength(9)
-  @MaxLength(9)
+  @MaxLength(11)
   phoneNumber: string;
 
   @ApiProperty()

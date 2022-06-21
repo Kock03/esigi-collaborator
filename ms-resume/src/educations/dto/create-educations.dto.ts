@@ -18,15 +18,13 @@ export class CreateEducationsDto {
 
   @ApiProperty()
   @IsNotEmpty()
-  @MinLength(3)
-  @MaxLength(70)
+  @MinLength(1)
   @IsString()
   institution: string;
 
   @ApiProperty()
   @IsNotEmpty()
-  @MinLength(3)
-  @MaxLength(70)
+  @MinLength(1)
   @IsString()
   course: string;
 

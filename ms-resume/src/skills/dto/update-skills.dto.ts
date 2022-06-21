@@ -8,8 +8,7 @@ export class UpdateSkillsDto {
   @ApiProperty()
   @IsOptional()
   @IsString()
-  @MinLength(3)
-  @MaxLength(80)
+  @MinLength(1)
   technology: string;
 
   @ApiProperty()
@@ -18,7 +17,7 @@ export class UpdateSkillsDto {
   yearsExperience: string;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsEnum(TypeOfPeriod)
   typeOfPeriod: TypeOfPeriod;
 
@@ -32,7 +31,5 @@ export class UpdateSkillsDto {
   @IsBoolean()
   currentPosition: boolean;
 
-  @ApiProperty()
-  @IsNotEmpty()
-  Resume: ResumesEntity;
+
 }

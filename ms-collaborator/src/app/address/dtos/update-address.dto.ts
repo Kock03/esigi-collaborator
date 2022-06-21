@@ -26,21 +26,18 @@ export class UpdateAddressDto {
   @IsOptional()
   @IsString()
   @MinLength(3)
-  @MaxLength(60)
   street: string;
 
   @ApiProperty()
   @IsOptional()
   @IsString()
   @MinLength(3)
-  @MaxLength(60)
   district: string;
 
   @ApiProperty()
   @IsOptional()
   @IsString()
   @MinLength(3)
-  @MaxLength(60)
   state: string;
 
   @ApiProperty()
@@ -54,6 +51,5 @@ export class UpdateAddressDto {
   @IsOptional()
   @IsString()
   @MinLength(3)
-  @MaxLength(60)
   complement: string;
 }

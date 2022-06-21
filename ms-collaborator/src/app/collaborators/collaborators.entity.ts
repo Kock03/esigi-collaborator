@@ -59,7 +59,7 @@ export class CollaboratorsEntity {
   email: string;
 
   @Column()
-  active: boolean;
+  inactive: boolean;
 
   @Column()
   admissionDate: string;
@@ -73,10 +73,10 @@ export class CollaboratorsEntity {
   @Column({ nullable: true })
   municipalInscription: string;
 
-  @Column()
+  @Column({ nullable: true })
   site: string;
 
-  @Column()
+  @Column({ nullable: true} )
   linkedin: string;
 
   @Column({ nullable: true })

@@ -16,8 +16,7 @@ export class UpdateLanguagesDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
-  @MinLength(4)
-  @MaxLength(25)
+  @MinLength(1)
   languageName: string;
 
   @ApiProperty()
@@ -25,8 +24,4 @@ export class UpdateLanguagesDto {
   @IsEnum(degreeOfInfluence)
   degreeOfInfluence: degreeOfInfluence;
 
-  @ApiProperty()
-  @IsNotEmpty()
-  @IsObject()
-  Collaborator: CollaboratorsEntity;
 }

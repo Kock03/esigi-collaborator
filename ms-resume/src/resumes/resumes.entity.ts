@@ -91,10 +91,10 @@ export class ResumesEntity {
   @Column({ name: 'email', length: 100, unique: true })
   email: string;
 
-  @Column({ name: 'site', length: 100 })
+  @Column({ name: 'site', length: 100,  nullable: true  })
   site: string;
 
-  @Column({ name: 'linkedin', length: 100 })
+  @Column({ name: 'linkedin', length: 100,  nullable: true  })
   linkedin: string;
 
   @CreateDateColumn({ name: 'created_at' })

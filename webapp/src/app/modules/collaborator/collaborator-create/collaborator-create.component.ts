@@ -125,7 +125,7 @@ export class CollaboratorCreateComponent implements OnInit {
       maritalStatus: [null, Validators.required],
       office: ['', Validators.required],
       collaboratorTypes: [null, Validators.required],
-      active: [true, Validators.required],
+      inactive: [false, Validators.required],
       cpf: this.fb.control({ value: null, disabled: false }, [
         DocumentValidator.isValidCpf(), Validators.required
       ]),

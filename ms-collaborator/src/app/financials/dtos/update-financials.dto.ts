@@ -40,8 +40,4 @@ export class UpdateFinancialsDto {
   @IsOptional()
   monthlyValue: number;
 
-  @ApiProperty()
-  @IsNotEmpty()
-  @IsObject()
-  Collaborator: CollaboratorsEntity;
 }

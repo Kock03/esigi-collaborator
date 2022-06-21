@@ -17,24 +17,23 @@ import { TypeOfPeriod } from './type-of-period.enum';
 
 export class UpdateSkillsDto {
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
-  @MinLength(4)
-  @MaxLength(40)
+  @MinLength(1)
   technology: string;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsEnum(Seniority)
   seniority: Seniority;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsNumber()
   yearsExperience: number;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsEnum(TypeOfPeriod)
   typeOfPeriod: TypeOfPeriod;
 
@@ -42,9 +41,4 @@ export class UpdateSkillsDto {
   @IsOptional()
   @IsBoolean()
   currentPosition: boolean;
-
-  @ApiProperty()
-  @IsNotEmpty()
-  @IsObject()
-  Collaborator: CollaboratorsEntity;
 }

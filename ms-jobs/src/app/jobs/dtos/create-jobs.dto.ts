@@ -33,8 +33,7 @@ export class CreateJobsDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
-  @MinLength(3)
-  @MaxLength(80)
+  @MinLength(1)
   requester: string;
 
   @ApiProperty()
@@ -50,8 +49,7 @@ export class CreateJobsDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
-  @MinLength(3)
-  @MaxLength(80)
+  @MinLength(1)
   client: string;
 
   @ApiProperty()
@@ -72,8 +70,7 @@ export class CreateJobsDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
-  @MinLength(3)
-  @MaxLength(80)
+  @MinLength(1)
   jobName: string;
 
   @ApiProperty()

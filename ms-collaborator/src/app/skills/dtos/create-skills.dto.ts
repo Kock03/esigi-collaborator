@@ -17,8 +17,7 @@ export class CreateSkillsDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
-  @MinLength(4)
-  @MaxLength(40)
+  @MinLength(1)
   technology: string;
 
   @ApiProperty()

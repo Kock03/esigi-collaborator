@@ -4,6 +4,7 @@ import {
   IsDate,
   IsEnum,
   IsNotEmpty,
+  IsOptional,
   IsString,
   MaxLength,
   MinLength,
@@ -15,57 +16,56 @@ import { TypeContract } from '../enums/type-contract.enum';
 
 export class UpdateReturnsDto {
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
-  @MinLength(3)
-  @MaxLength(80)
+  @MinLength(1)
   nameCandidate: string;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   dateOfReturn: Date;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsEnum(Situation)
   behavioralEvaluation: Situation;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsEnum(Situation)
   technicalEvaluation: Situation;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
   behavioralEvaluationComent: string;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   technicalEvaluationComent: string;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsBoolean()
   returnOfCandidate: boolean;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsEnum(Reason)
   reason: Reason;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsEnum(TypeContract)
   typeOdContract: TypeContract;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
   combinedValue: string;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   initialData: Date;
 
 }

@@ -17,15 +17,13 @@ export class UpdateEducationsingDto {
 
   @ApiProperty()
   @IsOptional()
-  @MinLength(3)
-  @MaxLength(70)
+  @MinLength(1)
   @IsString()
   institution: string;
 
   @ApiProperty()
   @IsOptional()
-  @MinLength(3)
-  @MaxLength(70)
+  @MinLength(1)
   @IsString()
   course: string;
 

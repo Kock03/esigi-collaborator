@@ -2,7 +2,6 @@ import { ApiProperty } from '@nestjs/swagger';
 import {
   IsEmail,
   IsEnum,
-  IsNotEmpty,
   IsNumber,
   IsObject,
   IsOptional,
@@ -17,69 +16,62 @@ import { Type } from './type.enum';
 
 export class UpdateDependentsDto {
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsEnum(Type)
   type: Type;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
-  @MinLength(3)
-  @MaxLength(70)
+  @MinLength(1)
   firstName: string;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
-  @MinLength(3)
-  @MaxLength(70)
+  @MinLength(1)
   lastName: string;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsEnum(Gender)
   gender: Gender;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @MinLength(11)
   @MaxLength(11)
   cpf: string;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   birthDate: Date;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
   @MinLength(9)
   @MaxLength(9)
   phoneNumber: string;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
   @MinLength(2)
   @MaxLength(2)
   ddd: string;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
   @MinLength(2)
   @MaxLength(2)
   ddi: string;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsEmail()
-  @MinLength(10)
-  @MaxLength(100)
+  @MinLength(1)
   email: string;
 
-  @ApiProperty()
-  @IsNotEmpty()
-  @IsObject()
-  Collaborator: CollaboratorsEntity;
 }

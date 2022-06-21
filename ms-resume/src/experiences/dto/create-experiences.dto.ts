@@ -16,22 +16,19 @@ export class CreateExperiencesDto {
   
   @ApiProperty()
   @IsNotEmpty()
-  @MinLength(2)
-  @MaxLength(40)
+  @MinLength(1)
   @IsString()
   office: string;
 
   @ApiProperty()
   @IsNotEmpty()
-  @MinLength(3)
-  @MaxLength(70)
+  @MinLength(1)
   @IsString()
   companyName: string;
 
   @ApiProperty()
   @IsNotEmpty()
-  @MinLength(2)
-  @MaxLength(40)
+  @MinLength(1)
   @IsString()
   locality: string;
 
@@ -58,8 +55,7 @@ export class CreateExperiencesDto {
 
   @ApiProperty()
   @IsNotEmpty()
-  @MinLength(2)
-  @MaxLength(40)
+  @MinLength(1)
   @IsString()
   sector: string;
 

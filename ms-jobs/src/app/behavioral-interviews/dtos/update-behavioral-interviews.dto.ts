@@ -16,17 +16,16 @@ import { Punctuality } from '../enums/punctuality.enum';
 import { Situation } from '../enums/situational.enum';
 
 export class UpdateBehaviorInterviewsDto {
-  @MinLength(3)
-  @MaxLength(80)
+
   @IsString()
   @IsOptional()
+  @MinLength(1)
   @ApiProperty()
   nameCandidate: string;
 
   @IsOptional()
   @ApiProperty()
-  @MinLength(3)
-  @MaxLength(80)
+  @MinLength(1)
   @IsString()
   techRecruter: string;
 
@@ -53,16 +52,6 @@ export class UpdateBehaviorInterviewsDto {
   @ApiProperty()
   @IsString()
   salaryExpectation: string;
-
-  // @IsOptional()
-  // @ApiProperty()
-  // @IsString()
-  // hiringPreferences: string;
-
-  // @IsOptional()
-  // @ApiProperty()
-  // @IsString()
-  // hiringPreference: string;
 
   @IsOptional()
   @ApiProperty()
