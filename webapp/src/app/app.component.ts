@@ -18,12 +18,6 @@ export class AppComponent {
   sidenav!: MatSidenav;
 
   menuList = [
-    // {
-    //   name: 'sidenav.home',
-    //   icon: 'home',
-    //   selected: false,
-    //   action:'http://localhost:3406',
-    // },
     {
       name: 'sidenav.collaborator',
       icon: 'person',
@@ -85,8 +79,8 @@ export class AppComponent {
     this.router.navigate([route]);
   }
 
-  openApp(port: number): void {
-    location.replace(`http://localhost:${port}`);
+  openApp(): void {
+    location.replace(`http://localhost:3406/portal`);
   }
 
   logout(): void {
