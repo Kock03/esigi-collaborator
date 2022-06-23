@@ -46,7 +46,7 @@ export class CollaboratorCreateComponent implements OnInit {
       'maritalStatus',
       'office',
       'collaboratorTypes',
-      'active',
+      'inactive',
       'birthDate',
       'email',
       'Phone',
