@@ -130,7 +130,7 @@ export class CollaboratorCreateComponent implements OnInit {
         DocumentValidator.isValidCpf(), Validators.required
       ]),
       birthDate: ['', Validators.required],
-      admissionDate: ['', Validators.required],
+      admissionDate: [new Date().toLocaleDateString(), Validators.required],
       email: [null, [Validators.email, Validators.required]],
       cnpj: this.fb.control({ value: null, disabled: false }, [
         DocumentValidator.isValidCnpj(), Validators.required
