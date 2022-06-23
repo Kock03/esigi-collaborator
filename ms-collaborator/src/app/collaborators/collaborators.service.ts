@@ -54,17 +54,17 @@ export class CollaboratorsService {
       .getMany();
   }
 
-  async findInactive() {
-    return await this.collaboratorsRepository
-      .createQueryBuilder('collaborators')
-      .where('collaborators.active =false') 
-      .getMany();
-  }
-
   async findActive() {
     return await this.collaboratorsRepository
       .createQueryBuilder('collaborators')
-      .where('collaborators.active =true')
+      .where('collaborators.inactive =false') 
+      .getMany();
+  }
+
+  async findInactive() {
+    return await this.collaboratorsRepository
+      .createQueryBuilder('collaborators')
+      .where('collaborators.inactive =true')
       .getMany();
   }
 
