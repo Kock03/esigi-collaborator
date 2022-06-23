@@ -167,10 +167,7 @@ export class JobCreateComponent implements OnInit {
         ],
       ],
       startForecast: [new Date(), Validators.required],
-      jobNumber: [
-        '',
-        [ Validators.max(10), Validators.min(1)],
-      ],
+      jobNumber: ['', Validators.required],
       typeOfContract: [''],
       workplace: [''],
       workingDay: [

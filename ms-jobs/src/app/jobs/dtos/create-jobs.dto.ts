@@ -75,7 +75,7 @@ export class CreateJobsDto {
 
   @ApiProperty()
   @IsNotEmpty()
-  startForecast: Date;
+  startForecast: string;
 
   @ApiProperty()
   @IsNotEmpty()
@@ -138,7 +138,7 @@ export class CreateJobsDto {
 
   @ApiProperty()
   @IsNotEmpty()
-  openingDate: Date;
+  openingDate: string;
 
   @ApiProperty()
   @IsNotEmpty()

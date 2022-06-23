@@ -57,7 +57,7 @@ export class JobsEntity {
   jobName: string;
 
   @Column()
-  startForecast: Date;
+  startForecast: string;
 
   @Column({ type: 'int' })
   jobNumber: number;
@@ -90,7 +90,7 @@ export class JobsEntity {
   attitudes: string;
 
   @Column()
-  openingDate: Date;
+  openingDate: string;
 
   @OneToMany(() => LanguagesEntity, (languages) => languages.Job, {
     cascade: ['insert', 'update', 'soft-remove'],

@@ -70,7 +70,7 @@ export class UpdateJobsDto {
 
   @ApiProperty()
   @IsOptional()
-  startForecast: Date;
+  startForecast: string;
 
   @ApiProperty()
   @IsOptional()
@@ -126,7 +126,7 @@ export class UpdateJobsDto {
 
   @ApiProperty()
   @IsOptional()
-  openingDate: Date;
+  openingDate: string;
 
   @ApiProperty()
   @IsOptional()
