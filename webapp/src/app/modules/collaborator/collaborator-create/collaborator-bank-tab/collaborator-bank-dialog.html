@@ -58,9 +58,6 @@
               formControlName="digit"
               mask="0"
               placeholder="Digito" />
-              <mat-error *ngIf="bankForm &&
-            bankForm.controls['digit'].hasError('required')">
-              {{'validators.validator-required' |  translate}} </mat-error>
           </mat-form-field>
         </div>
 
@@ -86,9 +83,6 @@
               formControlName="bankAccountDigit"
               mask="0"
               placeholder="Digito" />
-              <mat-error *ngIf="bankForm &&
-              bankForm.controls['bankAccountDigit'].hasError('required')">
-                {{'validators.validator-required' |  translate}} </mat-error>
           </mat-form-field>
         </div>
       </form>

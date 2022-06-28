@@ -45,7 +45,7 @@ export class CollaboratorBankDialog {
       agency: [null, [Validators.required, Validators.maxLength(4)]],
       accountType: [null, Validators.required],
       accountNumber: [null, [Validators.required, Validators.maxLength(5)]],
-      digit: [null, Validators.required],
+      digit: [null],
       bankAccountDigit: [null, [Validators.required, Validators.maxLength(1)]],
       status: [null, Validators.required],
       collaborator: { id: this.collaboratorId },
@@ -64,7 +64,7 @@ export class CollaboratorBankDialog {
 
   async save() {
     const data = this.bankForm.getRawValue();
-    if (!data.status) {
+      if (!data.status) {
       data.status = false;
     }
     try {

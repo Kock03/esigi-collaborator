@@ -1,3 +1,4 @@
+import { IsOptional } from 'class-validator';
 import { CollaboratorsEntity } from 'src/app/collaborators/collaborators.entity';
 import {
   Column,
@@ -32,10 +33,10 @@ export class BankDataEntity {
   @Column()
   accountNumber: string;
 
-  @Column()
+  @Column({nullable: true})
   digit: string;
 
-  @Column()
+  @Column({nullable: true})
   bankAccountDigit: string;
 
   @Column()
