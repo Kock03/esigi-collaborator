@@ -24,6 +24,7 @@ export class ResumeCreateComponent implements OnInit {
   step: number = 1;
   resume!: any;
   resumeId!: string | null;
+  resumeMethod!: string;
 
   Experience: any;
 
@@ -37,9 +38,7 @@ export class ResumeCreateComponent implements OnInit {
       'maritalStatus',
       'Address',
       'Phone',
-      'email',
-      'site',
-      'linkedin']
+      'email']
   ];
 
 
@@ -108,8 +107,8 @@ export class ResumeCreateComponent implements OnInit {
       }),
 
       email: ['', Validators.email],
-      site: ['', Validators.required],
-      linkedin: ['', Validators.required],
+      site: [''],
+      linkedin: [''],
       
     });
   }
@@ -124,10 +123,12 @@ export class ResumeCreateComponent implements OnInit {
 
     try {
       const resume = await this.resumeProvider.store(data);
+      this.router.navigate([`curriculo/${resume.id}`]);
+      this.resumeMethod = 'edit'
+      sessionStorage.setItem('resume_method',this.resumeMethod );
+      sessionStorage.setItem('resume_id', resume.id);
       this.handleStep(2);
       this.snackbarService.successMessage('Vaga Cadastrada Com Sucesso');
-     
-      sessionStorage.setItem('resume_id', resume.id);
     } catch (error: any) {
       console.log('ERROR 132' + error);
       this.snackbarService.showError('Falha ao Cadastrar');

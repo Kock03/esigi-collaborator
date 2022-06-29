@@ -29,6 +29,7 @@ export class BankDataService {
     conditions: FindConditions<BankDataEntity>,
     options?: FindOneOptions<BankDataEntity>,
   ) {
+    options = { relations: ['Collaborator'] };
     try {
       return await this.bankDataRepository.findOneOrFail(conditions, options);
     } catch {
@@ -37,18 +38,8 @@ export class BankDataService {
     }
   }
 
-  // async method(id: string) {
-  //   const bankdata = await this.bankDataRepository.query(
-  //     'select created_at from esigi_collaborator.bank_data where collaborator_id = ":id"',
-  //     [id],
-  //   );
-
-  //   if (bankdata.created_at.length > 1) {
-  //     for (let index = 0; index < bankdata.created_at.length; index++) {
-  //       if ([index] < bankdata.created_at.length) bankdata.isActive = false;
-  //       bankdata.isActive = true;
-  //     }
-  //   }
+  // async findBankData(id: string){
+  //   return await this.bankDataRepository.query('select bank_data.id, bank_data.bank, bank_data.agency, bank_data.account_type, bank_data.digit, bank_data.bank_account_digit, bank_data.status from bank_data where bank_')
   // }
 
   async store(data: CreateBankDataDto) {

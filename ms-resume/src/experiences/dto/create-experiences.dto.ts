@@ -47,11 +47,11 @@ export class CreateExperiencesDto {
 
   @ApiProperty()
   @IsOptional()
-  terminusMonth: number;
+  terminusMonth: string;
 
   @ApiProperty()
   @IsOptional()
-  terminusYear: number;
+  terminusYear: string;
 
   @ApiProperty()
   @IsNotEmpty()

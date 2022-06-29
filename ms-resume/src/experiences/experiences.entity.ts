@@ -33,10 +33,10 @@ export class ExperiencesEntity {
   startYear : number;
 
   @Column({nullable: true})
-  terminusMonth  : number;
+  terminusMonth  : string;
 
   @Column({nullable: true})
-  terminusYear : number;
+  terminusYear : string;
 
   @Column({ name: 'sector', length: 40 })
   sector: string;

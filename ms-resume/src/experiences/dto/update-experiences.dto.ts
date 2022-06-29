@@ -36,11 +36,11 @@ export class UpdateExperiencesDto {
 
   @ApiProperty()
   @IsOptional()
-  terminusMonth: number;
+  terminusMonth: string;
 
   @ApiProperty()
   @IsOptional()
-  terminusYear: number;
+  terminusYear: string;
 
   @ApiProperty()
   @IsOptional()

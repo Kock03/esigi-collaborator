@@ -38,8 +38,8 @@ export class ResumesEntity {
   @Column({ name: 'cpf', unique: true, length: 11, nullable: true })
   cpf: string;
 
-  @CreateDateColumn({ name: 'birth_date', type: 'datetime' })
-  birthDate: Date;
+  @Column()
+  birthDate: string;
 
   @Column({ name: 'sex', type: 'int' })
   gender: GenderTypes;

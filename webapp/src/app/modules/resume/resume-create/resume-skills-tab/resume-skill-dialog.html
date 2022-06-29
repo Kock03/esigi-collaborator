@@ -30,19 +30,6 @@
               {{'validators.validator-required' |  translate}} </mat-error>
         </mat-form-field>
 
-        <mat-form-field appearance="outline">
-          <mat-label>{{'generic.skills.time_experience'|translate}}</mat-label>
-          <input
-            matInput
-            disableRipple
-            formControlName="yearsExperience"
-            placeholder="Em anos"
-            mask="0||00" />
-            <mat-error *ngIf="skillForm &&
-            skillForm.controls['yearsExperience'].hasError('required')">
-                {{'validators.validator-required' |  translate}} </mat-error>
-        </mat-form-field>
-
         <mat-form-field fxFlex="20" appearance="outline">
           <mat-label>{{'job.job_create.skills.type_of_period.name' | translate}}</mat-label>
           <mat-select matInput disableRipple formControlName="typeOfPeriod">
@@ -50,6 +37,21 @@
             <mat-option [value]="2">{{'job.job_create.skills.type_of_period.year' | translate}}</mat-option>
           </mat-select>
         </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>{{'generic.skills.time_experience'|translate}}</mat-label>
+          <input
+            matInput
+            disableRipple
+            formControlName="yearsExperience"
+            placeholder="Tempo de Experiência"
+            mask="0||00" />
+            <mat-error *ngIf="skillForm &&
+            skillForm.controls['yearsExperience'].hasError('required')">
+                {{'validators.validator-required' |  translate}} </mat-error>
+        </mat-form-field>
+
+        
 
         <mat-checkbox
           class="checkbox"

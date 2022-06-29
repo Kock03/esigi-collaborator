@@ -39,7 +39,7 @@ export class UpdateResumesDto {
 
   @ApiProperty()
   @IsOptional()
-  birthDate: Date;
+  birthDate: string;
 
   @ApiProperty()
   @IsOptional()
@@ -69,7 +69,6 @@ export class UpdateResumesDto {
 
   @ApiProperty()
   @IsOptional()
-  @MinLength(1)
   @IsString()
   site: string;
 

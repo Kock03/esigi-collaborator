@@ -49,7 +49,7 @@ export class CreateResumesDto {
 
   @ApiProperty()
   @IsNotEmpty()
-  birthDate: Date;
+  birthDate: string;
 
   @ApiProperty()
   @IsNotEmpty()
@@ -79,7 +79,6 @@ export class CreateResumesDto {
 
   @ApiProperty()
   @IsOptional()
-  @MinLength(1)
   @IsString()
   site: string;
 

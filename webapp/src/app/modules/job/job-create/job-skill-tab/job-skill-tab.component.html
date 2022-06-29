@@ -1,52 +1,42 @@
- <div id="jobSkillTab" class="tab">
+<div id="jobSkillTab" class="tab">
   <div class="content-scroll" *ngIf="jobForm">
     <div fxLayout="column">
       <form [formGroup]="jobForm" fxLayout="column" class="form">
         <div fxFlex="60" fxLayoutGap="16px">
-          <mat-form-field fxFlex="20" appearance="outline">
+          <mat-form-field fxFlex="52" appearance="outline">
             <mat-label>{{'generic.education.schooling.name' | translate}}</mat-label>
             <mat-select matInput disableRipple formControlName="schooling">
-              <mat-option [value]="1">{{'job.job_create.skills.schooling.complete_higher_education' | translate}}</mat-option>
-              <mat-option [value]="2">{{'job.job_create.skills.schooling.incomplete_higher_education' | translate}}</mat-option>
-              <mat-option [value]="3">{{'job.job_create.skills.schooling.complete_high_school' | translate}}</mat-option>
+              <mat-option [value]="1">{{'job.job_create.skills.schooling.complete_higher_education' | translate}}
+              </mat-option>
+              <mat-option [value]="2">{{'job.job_create.skills.schooling.incomplete_higher_education' | translate}}
+              </mat-option>
+              <mat-option [value]="3">{{'job.job_create.skills.schooling.complete_high_school' | translate}}
+              </mat-option>
             </mat-select>
           </mat-form-field>
-
-          <mat-form-field
-            fxFlex="20"
-            appearance="outline"
-            formGroupName="Languages">
+        </div>
+        <div fxFlex="60" fxLayoutGap="16px">
+          <mat-form-field fxFlex="25" appearance="outline" formGroupName="Languages">
             <mat-label>{{'generic.education.languages.name' | translate}}</mat-label>
-            <input
-              placeholder="Idioma"
-              matInput
-              formControlName="languageName" />
+            <input placeholder="Idioma" matInput formControlName="languageName" />
           </mat-form-field>
 
-          <mat-form-field
-            fxFlex="20"
-            appearance="outline"
-            formGroupName="Languages">
+          <mat-form-field fxFlex="26" appearance="outline" formGroupName="Languages">
             <mat-label>{{'generic.education.languages.fluency.name' | translate}}</mat-label>
-            <mat-select
-              matInput
-              disableRipple
-              formControlName="degreeOfInfluence">
-              <mat-option [value]="1">{{'generic.education.languages.fluency.reading_and_conversation' | translate}}</mat-option>
-              <mat-option [value]="2">{{'generic.education.languages.fluency.writing_and_conversation' | translate}}</mat-option>
-              <mat-option [value]="3">{{'generic.education.languages.fluency.writing_and_reading' | translate}}</mat-option>
+            <mat-select matInput disableRipple formControlName="degreeOfInfluence">
+              <mat-option [value]="1">{{'generic.education.languages.fluency.reading_and_conversation' | translate}}
+              </mat-option>
+              <mat-option [value]="2">{{'generic.education.languages.fluency.writing_and_conversation' | translate}}
+              </mat-option>
+              <mat-option [value]="3">{{'generic.education.languages.fluency.writing_and_reading' | translate}}
+              </mat-option>
             </mat-select>
           </mat-form-field>
         </div>
         <div fxFlex="63" fxLayoutGap="16px">
           <mat-form-field fxFlex="63" appearance="outline">
-            <mat-label
-              >{{'job.job_create.skills.collaborator_activities' | translate}}</mat-label
-            >
-            <textarea
-              class="text-area"
-              matInput
-              placeholder="Atividades"
+            <mat-label>{{'job.job_create.skills.collaborator_activities' | translate}}</mat-label>
+            <textarea class="text-area" matInput placeholder="Atividades"
               formControlName="collaboratorActivities"></textarea>
           </mat-form-field>
         </div>
@@ -54,22 +44,14 @@
         <div fxFlex="63" fxLayoutGap="16px">
           <mat-form-field fxFlex="63" appearance="outline">
             <mat-label>{{'job.job_create.skills.desired_experience' | translate}}</mat-label>
-            <textarea
-              class="text-area"
-              matInput
-              placeholder="Habilidades"
-              formControlName="skills"></textarea>
+            <textarea class="text-area" matInput placeholder="Habilidades" formControlName="skills"></textarea>
           </mat-form-field>
         </div>
 
         <div fxFlex="63" fxLayoutGap="16px">
           <mat-form-field fxFlex="63" appearance="outline">
             <mat-label>{{'job.job_create.skills.required_behavior' | translate}}</mat-label>
-            <textarea
-              class="text-area"
-              matInput
-              placeholder="Atitudes"
-              formControlName="attitudes"></textarea>
+            <textarea class="text-area" matInput placeholder="Atitudes" formControlName="attitudes"></textarea>
           </mat-form-field>
         </div>
       </form>
@@ -100,37 +82,22 @@
 
             <ng-container matColumnDef="icon">
               <th mat-header-cell *matHeaderCellDef>
-                <button
-                  class="edit-button"
-                  mat-flat-button
-                  color="primary"
-                  (click)="openDialog()">
+                <button class="edit-button" mat-flat-button color="primary" (click)="openDialog()">
                   <mat-icon>add</mat-icon>
                 </button>
               </th>
               <th mat-header-cell *matHeaderCellDef></th>
-              <td
-                class="button-tab"
-                mat-cell
-                *matCellDef="let Knowledge; let index = index">
-                <button
-                  class="table-button"
-                  mat-button
-                  (click)="getKnowledge(Knowledge, index)">
+              <td class="button-tab" mat-cell *matCellDef="let Knowledge; let index = index">
+                <button class="table-button" mat-button (click)="getKnowledge(Knowledge, index)">
                   <mat-icon>edit</mat-icon>
                 </button>
-                <button
-                  class="table-button"
-                  mat-button
-                  (click)="deleteKnowledge(index)">
+                <button class="table-button" mat-button (click)="deleteKnowledge(index)">
                   <mat-icon>delete</mat-icon>
                 </button>
               </td>
             </ng-container>
 
-            <tr
-              mat-header-row
-              *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
           </table>
         </div>

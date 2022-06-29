@@ -32,7 +32,7 @@ export class BankDataEntity {
   @Column()
   accountNumber: string;
 
-  @Column()
+  @Column({nullable: true})
   digit: string;
 
   @Column()
@@ -44,12 +44,9 @@ export class BankDataEntity {
   @ManyToOne(
     () => CollaboratorsEntity,
     (collaborator) => collaborator.BankData,
-    {
-      cascade: ['update'],
-    },
   )
   @JoinColumn()
-  collaborator: CollaboratorsEntity;
+  Collaborator: CollaboratorsEntity;
 
   @CreateDateColumn({ type: 'datetime' })
   createdAt: Date;

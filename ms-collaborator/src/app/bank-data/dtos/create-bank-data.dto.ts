@@ -31,10 +31,8 @@ export class CreateBankDataDto {
   agency: string;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
-  @MinLength(1)
-  @MaxLength(1)
   digit: string;
 
   @ApiProperty()
@@ -45,15 +43,11 @@ export class CreateBankDataDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
-  @MinLength(9)
-  @MaxLength(9)
   accountNumber: string;
 
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
-  @MinLength(4)
-  @MaxLength(4)
   bankAccountDigit: string;
 
   @ApiProperty()
@@ -63,6 +57,5 @@ export class CreateBankDataDto {
 
   @ApiProperty()
   @IsNotEmpty()
-  @IsObject()
   Collaborator: CollaboratorsEntity;
 }

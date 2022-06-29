@@ -24,6 +24,7 @@ export class CollaboratorCreateComponent implements OnInit {
   collaborator!: any;
   active: boolean = true;
 
+  method: any;
   Educations: any;
   Languages: any;
   BankData: any;
@@ -169,9 +170,8 @@ export class CollaboratorCreateComponent implements OnInit {
 
 
     try {
-      this.handleStep(2)
+
       const colaborator = await this.collaboratorProvider.store(data);
-      sessionStorage.setItem('colaborator_id', colaborator.id);
 
       if (colaborator.collaboratorTypes === 2) {
         this.userForm = this.fb.group({
@@ -192,8 +192,13 @@ export class CollaboratorCreateComponent implements OnInit {
       }
       let dataUser = this.userForm.getRawValue();
       const user = await this.userProvider.store(dataUser);
+      sessionStorage.setItem('collaborator_id', colaborator.id);
+      this.router.navigate([`colaborador/${colaborator.id}`]);
+      this.method = 'edit'
+      this.handleStep(2)
+
       this.snackbarService.successMessage('Colaborador Cadastrado Com Sucesso');
-      sessionStorage.clear();
+      
     } catch (error: any) {
       console.log('ERROR 132' + error);
     }

@@ -29,11 +29,10 @@ export class UpdateBankDataDto {
   @MaxLength(4)
   agency: string;
 
+
   @ApiProperty()
   @IsOptional()
-  @IsNumber()
-  @MinLength(1)
-  @MaxLength(1)
+  @IsString()
   digit: string;
 
   @ApiProperty()
