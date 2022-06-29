@@ -12,8 +12,7 @@
         <div fxFlex="100" fxLayoutGap="16px" fxFlexAlign="end">
           <mat-form-field fxFlex="30" appearance="outline">
             <mat-label>{{'collaborator.colaborator_create.collaborator_type.name'|translate}}</mat-label>
-            <mat-select matInput disableRipple
-              formControlName="collaboratorTypes">
+            <mat-select matInput disableRipple formControlName="collaboratorTypes">
               <mat-option [value]="1">{{'collaborator.colaborator_create.collaborator_type.clt'|translate}}</mat-option>
               <mat-option [value]="2">{{'collaborator.colaborator_create.collaborator_type.pj'|translate}}</mat-option>
               <mat-option [value]="3">{{'collaborator.colaborator_create.collaborator_type.cooperated'|translate}}
@@ -21,7 +20,7 @@
             </mat-select>
             <mat-error *ngIf="collaboratorForm &&
               collaboratorForm.controls['collaboratorTypes'].hasError('required')">
-              {{'validators.validator-required' |  translate}} </mat-error>
+              {{'validators.validator-required' | translate}} </mat-error>
           </mat-form-field>
 
           <mat-form-field fxFlex="35" appearance="outline">
@@ -35,12 +34,12 @@
 
           <mat-form-field fxFlex="20" appearance="outline">
             <mat-label>Data Admissão</mat-label>
-            <input matInput mask="00/00/0000" [showMaskTyped]="true" [dropSpecialCharacters]="false" formControlName="admissionDate" placeholder="Data Admissão" />
+            <input matInput mask="00/00/0000" [showMaskTyped]="true" [dropSpecialCharacters]="false"
+              formControlName="admissionDate" placeholder="Data Admissão" />
           </mat-form-field>
 
 
-          <mat-checkbox class="checkbox" color="primary" fxFlex="10"
-            formControlName="active"
+          <mat-checkbox class="checkbox" color="primary" fxFlex="10" formControlName="active"
             fxLayoutAlign="center center">Inativo</mat-checkbox>
         </div>
       </div>
@@ -52,8 +51,7 @@
             ? 'Nome'
             : 'Razão Social'
             }}</mat-label>
-          <input matInput placeholder="Nome"
-            formControlName="firstNameCorporateName" />
+          <input matInput placeholder="Nome" formControlName="firstNameCorporateName" />
           <mat-error *ngIf="collaboratorForm &&
             collaboratorForm.controls['firstNameCorporateName'].hasError('required')">
             {{'validators.validator-required' | translate}} </mat-error>
@@ -66,8 +64,7 @@
             : 'Nome Fantasia'
             }}
           </mat-label>
-          <input matInput formControlName="lastNameFantasyName"
-            placeholder="Sobrenome" />
+          <input matInput formControlName="lastNameFantasyName" placeholder="Sobrenome" />
           <mat-error *ngIf="collaboratorForm &&
             collaboratorForm.controls['lastNameFantasyName'].hasError('required')">
             {{'validators.validator-required' | translate}} </mat-error>
@@ -92,23 +89,20 @@
         <mat-form-field fxFlex="35" appearance="outline"
           *ngIf="collaboratorForm.controls['collaboratorTypes'].value !== 2">
           <mat-label>{{'generic.cpf'|translate}}</mat-label>
-          <input matInput placeholder="CPF" formControlName="cpf"
-            mask="000.000.000-00" />
+          <input matInput placeholder="CPF" formControlName="cpf" mask="000.000.000-00" />
         </mat-form-field>
 
         <mat-form-field fxFlex="35" appearance="outline"
           *ngIf="collaboratorForm.controls['collaboratorTypes'].value === 2">
           <mat-label>{{'collaborator.colaborator_create.cnpj'|translate}}</mat-label>
-          <input matInput placeholder="CNPJ" formControlName="cnpj"
-            mask="00.000.000/0000-00" />
+          <input matInput placeholder="CNPJ" formControlName="cnpj" mask="00.000.000/0000-00" />
         </mat-form-field>
 
-        <mat-form-field
-          *ngIf="collaboratorForm.controls['collaboratorTypes'].value !== 2"
-          fxFlex="35"
+        <mat-form-field *ngIf="collaboratorForm.controls['collaboratorTypes'].value !== 2" fxFlex="35"
           appearance="outline">
           <mat-label>{{'generic.birth_date'|translate}}</mat-label>
-          <input matInput formControlName="birthDate" mask="00/00/0000"  [showMaskTyped]="true" [dropSpecialCharacters]="false" placeholder="Data Aniversário" />
+          <input matInput formControlName="birthDate" mask="00/00/0000" [showMaskTyped]="true"
+            [dropSpecialCharacters]="false" placeholder="Data Aniversário" />
         </mat-form-field>
         <mat-form-field fxFlex="35" appearance="outline">
           <mat-label>{{'generic.marital_status.name'|translate}}</mat-label>
@@ -130,8 +124,7 @@
         <div formGroupName="Phone" fxFlex="100" fxLayoutGap="16px">
           <mat-form-field fxFlex="15" appearance="outline">
             <mat-label>{{'generic.phone.ddi'|translate}}</mat-label>
-            <input matInput placeholder="DDI" formControlName="ddi" mask="+00"
-              />
+            <input matInput placeholder="DDI" formControlName="ddi" mask="+00" />
             <mat-error *ngIf="phoneForm &&
               phoneForm.controls['ddi'].hasError('required')">
               {{'validators.validator-required' | translate}}
@@ -140,8 +133,7 @@
 
           <mat-form-field fxFlex="15" appearance="outline">
             <mat-label>{{'generic.phone.ddd'|translate}}</mat-label>
-            <input matInput placeholder="DDD" formControlName="ddd" mask="(00)"
-              />
+            <input matInput placeholder="DDD" formControlName="ddd" mask="(00)" />
             <mat-error *ngIf="phoneForm &&
               phoneForm.controls['ddd'].hasError('required')">
               {{'validators.validator-required' | translate}}
@@ -150,8 +142,7 @@
 
           <mat-form-field fxFlex="70" appearance="outline">
             <mat-label>{{'generic.phone.phone_number'|translate}}</mat-label>
-            <input matInput placeholder="Telefone" formControlName="phoneNumber"
-              mask="0000-0000||00000-0000" />
+            <input matInput placeholder="Telefone" formControlName="phoneNumber" mask="0000-0000||00000-0000" />
             <mat-error *ngIf="phoneForm &&
               phoneForm.controls['phoneNumber'].hasError('required')">
               {{'validators.validator-required' | translate}}
@@ -164,31 +155,29 @@
         <mat-form-field fxFlex="40" appearance="outline"
           *ngIf="collaboratorForm.controls['collaboratorTypes'].value == 2">
           <mat-label>{{'collaborator.colaborator_create.state_registration'|translate}}</mat-label>
-          <input matInput placeholder="Inscrição Estadual"
-            formControlName="stateRegistration"  mask="000.000.000||000.000.000.000||000.000.000.000-00"/>
+          <input matInput placeholder="Inscrição Estadual" formControlName="stateRegistration"
+            mask="000.000.000||000.000.000.000||000.000.000.000-00" />
         </mat-form-field>
 
         <mat-form-field fxFlex="40" appearance="outline"
           *ngIf="collaboratorForm.controls['collaboratorTypes'].value == 2">
           <mat-label>{{'collaborator.colaborator_create.municipal_inscription'|translate}}</mat-label>
-          <input matInput placeholder="Inscrição municipal"
-            formControlName="municipalInscription"   mask="000.000.000||000.000.000.000||000.000.000.000-00"/>
+          <input matInput placeholder="Inscrição municipal" formControlName="municipalInscription"
+            mask="000.000.000||000.000.000.000||000.000.000.000-00" />
         </mat-form-field>
 
-        <mat-form-field
-          *ngIf="collaboratorForm.controls['collaboratorTypes'].value == 2"
-          fxFlex="20"
+        <mat-form-field *ngIf="collaboratorForm.controls['collaboratorTypes'].value == 2" fxFlex="20"
           appearance="outline">
           <mat-label>{{'generic.birth_date'|translate}}</mat-label>
-          <input matInput formControlName="birthDate" mask="00/00/0000"  [showMaskTyped]="true" [dropSpecialCharacters]="false" placeholder="Data Aniversário" />
+          <input matInput formControlName="birthDate" mask="00/00/0000" [showMaskTyped]="true"
+            [dropSpecialCharacters]="false" placeholder="Data Aniversário" />
         </mat-form-field>
       </div>
 
       <div fxFlex="100" fxLayoutGap="16px" formGroupName="Address">
         <mat-form-field fxFlex="25" appearance="outline">
           <mat-label>{{'generic.address.cep'|translate}} </mat-label>
-          <input matInput placeholder="CEP" formControlName="cep" type="text"
-            mask="99999-999" />
+          <input matInput placeholder="CEP" formControlName="cep" type="text" mask="99999-999" />
           <mat-icon matSuffix style="cursor: pointer" (click)="getAddress()">
             search
           </mat-icon>
@@ -207,8 +196,7 @@
 
         <mat-form-field fxFlex="15" appearance="outline">
           <mat-label>{{'generic.address.number'|translate}}</mat-label>
-          <input type="number" matInput placeholder="Número"
-            formControlName="number" />
+          <input type="number" matInput placeholder="Número" formControlName="number" />
           <mat-error *ngIf="addressForm &&
             addressForm.controls['number'].hasError('required')">
             {{'validators.validator-required' | translate}}
@@ -217,8 +205,7 @@
 
         <mat-form-field fxFlex="45" appearance="outline">
           <mat-label>{{'generic.address.complement'|translate}}</mat-label>
-          <input matInput placeholder="Complemento" formControlName="complement"
-            />
+          <input matInput placeholder="Complemento" formControlName="complement" />
           <mat-error *ngIf="addressForm &&
             addressForm.controls['complement'].hasError('required')">
             {{'validators.validator-required' | translate}}</mat-error>
@@ -250,11 +237,40 @@
 
         <mat-form-field fxFlex="40" appearance="outline">
           <mat-label>{{'generic.address.state'|translate}}</mat-label>
-          <input matInput placeholder="Estado" formControlName="state" />
-          <mat-error *ngIf="addressForm &&
+          <mat-select matInput disableRipple formControlName="collaboratorTypes">
+            <mat-option [value]="1">{{'generic.address.state_list.AC'|translate}}</mat-option>
+            <mat-option [value]="2">{{'generic.address.state_list.AL'|translate}}</mat-option>
+            <mat-option [value]="3">{{'generic.address.state_list.AP'|translate}}</mat-option>
+            <mat-option [value]="4">{{'generic.address.state_list.AM'|translate}}</mat-option>
+            <mat-option [value]="5">{{'generic.address.state_list.BA'|translate}}</mat-option>
+            <mat-option [value]="6">{{'generic.address.state_list.CE'|translate}}</mat-option>
+            <mat-option [value]="7">{{'generic.address.state_list.DF'|translate}}</mat-option>
+            <mat-option [value]="8">{{'generic.address.state_list.ES'|translate}}</mat-option>
+            <mat-option [value]="9">{{'generic.address.state_list.GO'|translate}}</mat-option>
+            <mat-option [value]="10">{{'generic.address.state_list.MA'|translate}}</mat-option>
+            <mat-option [value]="11">{{'generic.address.state_list.MT'|translate}}</mat-option>
+            <mat-option [value]="12">{{'generic.address.state_list.MS'|translate}}</mat-option>
+            <mat-option [value]="13">{{'generic.address.state_list.MG'|translate}}</mat-option>
+            <mat-option [value]="14">{{'generic.address.state_list.PA'|translate}}</mat-option>
+            <mat-option [value]="15">{{'generic.address.state_list.PB'|translate}}</mat-option>
+            <mat-option [value]="16">{{'generic.address.state_list.PR'|translate}}</mat-option>
+            <mat-option [value]="17">{{'generic.address.state_list.PE'|translate}}</mat-option>
+            <mat-option [value]="18">{{'generic.address.state_list.PI'|translate}}</mat-option>
+            <mat-option [value]="19">{{'generic.address.state_list.RJ'|translate}}</mat-option>
+            <mat-option [value]="20">{{'generic.address.state_list.RN'|translate}}</mat-option>
+            <mat-option [value]="21">{{'generic.address.state_list.RS'|translate}}</mat-option>
+            <mat-option [value]="22">{{'generic.address.state_list.RO'|translate}}</mat-option>
+            <mat-option [value]="23">{{'generic.address.state_list.RR'|translate}}</mat-option>
+            <mat-option [value]="24">{{'generic.address.state_list.SC'|translate}}</mat-option>
+            <mat-option [value]="25">{{'generic.address.state_list.SP'|translate}}</mat-option>
+            <mat-option [value]="26">{{'generic.address.state_list.SE'|translate}}</mat-option>
+            <mat-option [value]="27">{{'generic.address.state_list.TO'|translate}}</mat-option>
+            <mat-option [value]="28">{{'generic.address.state_list.other'|translate}}</mat-option>
+          </mat-select>
+        <mat-error *ngIf="addressForm &&
             addressForm.controls['state'].hasError('required')">
-            {{'validators.validator-required' | translate}}
-          </mat-error>
+          {{'validators.validator-required' | translate}}
+        </mat-error>
         </mat-form-field>
 
       </div>
