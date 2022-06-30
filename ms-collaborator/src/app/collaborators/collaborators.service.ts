@@ -23,7 +23,7 @@ export class CollaboratorsService {
   constructor(
     @InjectRepository(CollaboratorsEntity)
     private readonly collaboratorsRepository: Repository<CollaboratorsEntity>,
-  ) {}
+  ) { }
 
   async findAll() {
     const options: FindManyOptions = {
@@ -39,7 +39,7 @@ export class CollaboratorsService {
     })
   }
 
-  async shortListCollaborators(){
+  async shortListCollaborators() {
     return await this.collaboratorsRepository.find({
       select: ['id', 'firstNameCorporateName', 'lastNameFantasyName', 'email'],
       where: { active: true },
@@ -57,7 +57,7 @@ export class CollaboratorsService {
   async findActive() {
     return await this.collaboratorsRepository
       .createQueryBuilder('collaborators')
-      .where('collaborators.inactive =false') 
+      .where('collaborators.inactive =false')
       .getMany();
   }
 
@@ -70,11 +70,20 @@ export class CollaboratorsService {
 
   findByName(query): Promise<CollaboratorsEntity[]> {
     return this.collaboratorsRepository.find({
-      select:[ 'id','firstNameCorporateName', 'lastNameFantasyName', 'email'],
+      select: ['id', 'firstNameCorporateName', 'lastNameFantasyName', 'email'],
       relations: ['Phone'],
       where: [
         { firstNameCorporateName: Like(`${query.firstNameCorporateName}%`) },],
     });
+  }
+
+  async findByNameGerente(query) {
+    return await this.collaboratorsRepository.query(
+      'select collaborators.id, collaborators.office,collaborators.first_name_corporate_name, collaborators.last_name_fantasy_name from collaborators where collaborators.first_name_corporate_name like ' +
+      '"%' +
+      query.firstNameCorporateName +
+      '" ' +
+      'and collaborators.office = "Gerente" and collaborators.deleted_at is null')
   }
 
   async findOneOrFail(
@@ -82,9 +91,9 @@ export class CollaboratorsService {
 
     options?: FindOneOptions<CollaboratorsEntity>,
   ) {
-    options = { relations: ['Financials', 'Address', 'BankData', 'Dependents', 'Documents', 'Educations','Feedbacks','Languages', 'Phone', 'Skills'] };
+    options = { relations: ['Financials', 'Address', 'BankData', 'Dependents', 'Documents', 'Educations', 'Feedbacks', 'Languages', 'Phone', 'Skills'] };
     try {
-     
+
       return await this.collaboratorsRepository.findOneOrFail(
         conditions,
         options,

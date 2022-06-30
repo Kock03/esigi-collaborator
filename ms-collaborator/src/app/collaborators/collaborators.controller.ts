@@ -65,6 +65,11 @@ export class CollaboratorsController {
     return this.collaboratorsService.findByName(query);
   }
 
+  @Get('find/name/gerente')
+  async findByNameGerente(@Query() query: any) {
+    return this.collaboratorsService.findByNameGerente(query);
+  }
+
   @Get('list/active')
   async findActive() {
     return await this.collaboratorsService.findActive();

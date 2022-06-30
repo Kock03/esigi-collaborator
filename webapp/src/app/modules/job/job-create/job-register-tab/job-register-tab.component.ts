@@ -1,19 +1,24 @@
 import { formatDate } from '@angular/common';
 import {
   Component,
+  ElementRef,
   EventEmitter,
   Injectable,
   Input,
   OnInit,
   Output,
+  ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import {
   NativeDateAdapter,
   DateAdapter,
   MAT_DATE_FORMATS,
 } from '@angular/material/core';
+import { ICollaborator } from 'src/app/interfaces/icollaborator';
+import { CollaboratorProvider } from 'src/providers/collaborator-providers/collaborator.provider';
+import { debounceTime, distinctUntilChanged } from 'rxjs';
 
 export const PICK_FORMATS = {
   parse: { dateInput: { month: 'numeric', year: 'numeric', day: 'numeric' } },
@@ -48,11 +53,59 @@ export class PickDateAdapter extends NativeDateAdapter {
 })
 export class JobRegisterTabComponent implements OnInit {
   @Input('form') jobForm!: FormGroup;
+  @Input('collaborator') collaboratorControl!: FormControl;
   @Output() onChange: EventEmitter<any> = new EventEmitter();
 
+
+
   date: any;
+  method: any;
 
-  constructor() {}
+  collaborators!:  any[];
+  filteredCollaborators?: any[];
+  filteredCollaboratorList: any;
+  collaborator!: any;
+  collaboratorValid: boolean = false;
 
-  ngOnInit(): void {}
+  constructor(private collaboratorProvider: CollaboratorProvider,) {}
+
+  ngOnInit(){
+    this.method =  sessionStorage.getItem('method');
+  }
+
+  async getCollaboratorList() {
+    this.filteredCollaboratorList = this.collaborators =
+      await this.collaboratorProvider.shortListCollaborators();
+  }
+
+  private initFilter() {
+    this.collaboratorControl.valueChanges
+      .pipe(debounceTime(350), distinctUntilChanged())
+      .subscribe((res) => {
+        this._filter(res);
+        if (res && res.id) {
+          this.collaboratorValid = true;
+        } else {
+          this.collaboratorValid = false;
+        }
+      });
+  }
+
+  displayFn(user: any): string {
+    if (typeof user === 'string' && this.collaborators) {
+      return this.collaborators.find(
+        (collaborator) => collaborator.id === user
+      );
+    }
+    return user && user.firstNameCorporateName && user.lastNameFantasyName
+      ? user.firstNameCorporateName + ' ' + user.lastNameFantasyName
+      : '';
+  }
+
+  private async _filter(name: string): Promise<void> {
+    const params = `firstNameCorporateName=${name}`;
+    this.filteredCollaborators = await this.collaboratorProvider.findByNameGerente(
+      params
+    );
+  }
 }

@@ -15,6 +15,7 @@ import {
 import { ActivatedRoute, Router, RoutesRecognized } from '@angular/router';
 import { filter, pairwise } from 'rxjs/operators';
 import { ICollaborator } from 'src/app/interfaces/icollaborator';
+import { DocumentValidator } from 'src/app/validators/document.validator';
 import { CollaboratorProvider } from 'src/providers/collaborator-providers/collaborator.provider';
 import { FeedbackProvider } from 'src/providers/feedback.provider';
 import { SnackBarService } from 'src/services/snackbar.service';
@@ -101,9 +102,9 @@ export class FeedbackCreateComponent implements OnInit {
         collaboratorDescription: [''],
         commitment: [''],
         manager: ['', Validators.required],
-        feedbackDate: ['', Validators.required],
+        feedbackDate:  this.fb.control({ value: ' ', disabled: false },[ DocumentValidator.isValidData(), Validators.required]),
         hourDate: ['', Validators.required],
-        feedbackDateRetorn: ['', Validators.required],
+        feedbackDateRetorn: this.fb.control({ value: ' ', disabled: false },[ DocumentValidator.isValidData(), Validators.required]),
         hourDateRetorn: ['', Validators.required],
       });
     }
@@ -118,11 +119,11 @@ export class FeedbackCreateComponent implements OnInit {
         collaboratorDescription: [''],
         commitment: [''],
         manager: ['', Validators.required],
-        feedbackDate: ['', Validators.required],
+        feedbackDate: this.fb.control({ value: ' ', disabled: false },[ DocumentValidator.isValidData(), Validators.required]),
         hourDate: ['', Validators.required],
-        feedbackDateRetorn: ['', Validators.required],
+        feedbackDateRetorn:  this.fb.control({ value: ' ', disabled: false },[ DocumentValidator.isValidData(), Validators.required]),
         hourDateRetorn: ['', Validators.required],
-        Collaborator: { id: this.get.id },
+        Collaborator: sessionStorage.getItem('collaborator_id'),
       });
     }
   }

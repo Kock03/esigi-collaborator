@@ -35,16 +35,8 @@
 
             <mat-form-field fxFlex="30" appearance="outline">
               <mat-label>{{'job.job_interview_create.interview_date' | translate}}</mat-label>
-              <input
-                matInput
-                [matDatepicker]="behavioralDate"
-                formControlName="behavioralInterviewDate"
-              />
-              <mat-datepicker-toggle
-                matSuffix
-                [for]="behavioralDate"
-              ></mat-datepicker-toggle>
-              <mat-datepicker #behavioralDate></mat-datepicker>
+              <input matInput mask="00/00/0000" [showMaskTyped]="true" [dropSpecialCharacters]="false"
+              formControlName="behavioralInterviewDate" placeholder="Data da Entrevista" />
             </mat-form-field>
           </div>
           <div fxFlex="100" fxLayoutGap="16px">
@@ -184,16 +176,8 @@
 
             <mat-form-field fxFlex="30" appearance="outline">
               <mat-label>{{'job.job_interview_create.interview_date' | translate}}</mat-label>
-              <input
-                matInput
-                [matDatepicker]="technicalDate"
-                formControlName="technicalInterviewDate"
-              />
-              <mat-datepicker-toggle
-                matSuffix
-                [for]="technicalDate"
-              ></mat-datepicker-toggle>
-              <mat-datepicker #technicalDate></mat-datepicker>
+              <input matInput mask="00/00/0000" [showMaskTyped]="true" [dropSpecialCharacters]="false"
+              formControlName="technicalInterviewDate" placeholder="Data da Entrevista" />
             </mat-form-field>
           </div>
           <div fxFlex="100" fxLayoutGap="16px">
@@ -285,16 +269,8 @@
 
             <mat-form-field fxFlex="30" appearance="outline">
               <mat-label>{{'job.job_interview_create.interview_date' | translate}}</mat-label>
-              <input
-                matInput
-                [matDatepicker]="clientDate"
-                formControlName="clientInterviewDate"
-              />
-              <mat-datepicker-toggle
-                matSuffix
-                [for]="clientDate"
-              ></mat-datepicker-toggle>
-              <mat-datepicker #clientDate></mat-datepicker>
+              <input matInput mask="00/00/0000" [showMaskTyped]="true" [dropSpecialCharacters]="false"
+              formControlName="clientInterviewDate" placeholder="Data da Entrevista" />
             </mat-form-field>
           </div>
           <div fxFlex="100" fxLayoutGap="16px">
@@ -380,16 +356,8 @@
             </mat-form-field>
             <mat-form-field fxFlex="50" appearance="outline">
               <mat-label>{{'job.job_interview_create.date_of_return' | translate}}</mat-label>
-              <input
-                matInput
-                [matDatepicker]="dateOfReturn"
-                formControlName="dateOfReturn"
-              />
-              <mat-datepicker-toggle
-                matSuffix
-                [for]="dateOfReturn"
-              ></mat-datepicker-toggle>
-              <mat-datepicker #dateOfReturn></mat-datepicker>
+              <input matInput mask="00/00/0000" [showMaskTyped]="true" [dropSpecialCharacters]="false"
+              formControlName="dateOfReturn" placeholder="Data de Retorno" />
             </mat-form-field>
           </div>
           <div fxFlex="100" fxLayoutGap="16px">
@@ -478,16 +446,8 @@
             </mat-form-field>
             <mat-form-field fxFlex="40" appearance="outline">
               <mat-label>{{'job.job_interview_create.initial_data' | translate}}</mat-label>
-              <input
-                matInput
-                [matDatepicker]="initialData"
-                formControlName="initialData"
-              />
-              <mat-datepicker-toggle
-                matSuffix
-                [for]="initialData"
-              ></mat-datepicker-toggle>
-              <mat-datepicker #initialData></mat-datepicker>
+              <input matInput mask="00/00/0000" [showMaskTyped]="true" [dropSpecialCharacters]="false"
+              formControlName="initialData" placeholder="Data de Início" />
             </mat-form-field>
 
             <div fxLayoutAlign="center" fxFlex="20">

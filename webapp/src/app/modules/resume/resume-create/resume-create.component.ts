@@ -86,7 +86,7 @@ export class ResumeCreateComponent implements OnInit {
        [  DocumentValidator.isValidCpf(), Validators.required]
       ),
 
-      birthDate: ['', Validators.required],
+      birthDate:  this.fb.control({ value: ' ', disabled: false },[ DocumentValidator.isValidData(), Validators.required]),
       gender: [1, Validators.required],
       maritalStatus: [1, Validators.required],
       photo: [null],

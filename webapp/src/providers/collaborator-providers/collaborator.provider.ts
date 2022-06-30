@@ -50,10 +50,29 @@ export class CollaboratorProvider {
     });
   }
 
+  findByNameGerente(query: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.apiGateway.get(environment.COLLABORATOR_MS + `collaborators/find/name/gerente?${query}`)
+        .subscribe((response: HttpResponse<any>) => {
+          resolve(response.body);
+        }, reject);
+    });
+  }
+
   findOne(id: string | null): Promise<any> {
     return new Promise((resolve, reject) => {
       this.apiGateway
         .get(environment.COLLABORATOR_MS + 'collaborators/:id', { id: id })
+        .subscribe((response: HttpResponse<any>) => {
+          resolve(response.body);
+        }, reject);
+    });
+  }
+
+  shortListCollaborators(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.apiGateway
+        .get(environment.COLLABORATOR_MS + 'collaborators/short/list/collaborators')
         .subscribe((response: HttpResponse<any>) => {
           resolve(response.body);
         }, reject);

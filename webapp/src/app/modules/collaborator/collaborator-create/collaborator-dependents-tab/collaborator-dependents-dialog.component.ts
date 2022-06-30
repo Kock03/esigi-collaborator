@@ -73,7 +73,7 @@ export class CollaboratorDependentsDialog {
       lastName: [null, Validators.required],
       gender: [null, Validators.required],
       cpf: [null, [DocumentValidator.isValidCpf()]],
-      birthDate: [null, Validators.required],
+      birthDate:  this.fb.control({ value: ' ', disabled: false },[ DocumentValidator.isValidData(), Validators.required]),
       ddi: [null],
       ddd: [null],
       phoneNumber: [null],

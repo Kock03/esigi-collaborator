@@ -65,14 +65,8 @@
 
         <mat-form-field appearance="outline" fxFlex="20">
           <mat-label>{{'collaborator.colaborator_create.feedbacks.feedback_date'|translate}}</mat-label>
-          <input
-            matInput
-            [matDatepicker]="picker"
-            formControlName="feedbackDate" />
-          <mat-datepicker-toggle
-            matSuffix
-            [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
+          <input matInput mask="00/00/0000" [showMaskTyped]="true" [dropSpecialCharacters]="false"
+          formControlName="feedbackDate" placeholder="Data Feedback" />
           <mat-error *ngIf="feedbackForm &&
           feedbackForm.controls['feedbackDate'].hasError('required')">
                 {{'validators.validator-required' |  translate}} </mat-error>
@@ -92,14 +86,8 @@
 
         <mat-form-field appearance="outline" fxFlex="30">
           <mat-label>{{'collaborator.colaborator_create.feedbacks.feedback_date_retorn'|translate}}</mat-label>
-          <input
-            matInput
-            [matDatepicker]="pickerReturn"
-            formControlName="feedbackDateRetorn" />
-          <mat-datepicker-toggle
-            matSuffix
-            [for]="pickerReturn"></mat-datepicker-toggle>
-          <mat-datepicker #pickerReturn></mat-datepicker>
+          <input matInput mask="00/00/0000" [showMaskTyped]="true" [dropSpecialCharacters]="false"
+          formControlName="feedbackDateRetorn" placeholder="Data Retorno Feedback" />
           <mat-error *ngIf="feedbackForm &&
           feedbackForm.controls['feedbackDateRetorn'].hasError('required')">
                 {{'validators.validator-required' |  translate}} </mat-error>

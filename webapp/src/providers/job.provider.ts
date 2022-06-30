@@ -40,6 +40,9 @@ export class JobProvider {
     });
   }
 
+
+
+
   findOne(id: string | null): Promise<any> {
     return new Promise((resolve, reject) => {
       this.apiGateway

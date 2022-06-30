@@ -3,6 +3,7 @@ import { DatePipe, formatDate } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import {
   Component,
+  ElementRef,
   EventEmitter,
   Injectable,
   Input,
@@ -28,8 +29,12 @@ import {
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ICollaborator } from 'src/app/interfaces/icollaborator';
+import { DocumentValidator } from 'src/app/validators/document.validator';
+import { CollaboratorProvider } from 'src/providers/collaborator-providers/collaborator.provider';
 import { JobProvider } from 'src/providers/job.provider';
 import { SnackBarService } from 'src/services/snackbar.service';
+import { debounceTime, distinctUntilChanged } from 'rxjs';
 
 export const PICK_FORMATS = {
   parse: { dateInput: { month: 'numeric', year: 'numeric', day: 'numeric' } },
@@ -64,6 +69,7 @@ export class PickDateAdapter extends NativeDateAdapter {
 })
 export class JobCreateComponent implements OnInit {
   @ViewChild('knowledgeTable') knowledgeTable!: MatTable<any>;
+  @ViewChild('filter', { static: true }) filter!: ElementRef;
 
   displayedColumns: string[] = [
     'name',
@@ -72,6 +78,10 @@ export class JobCreateComponent implements OnInit {
     'icon',
   ];
 
+
+  collaboratorControl = new FormControl();
+
+  
   Date: any;
   jobForm!: FormGroup;
   step: number = 1;
@@ -103,6 +113,7 @@ export class JobCreateComponent implements OnInit {
     private fb: FormBuilder,
     public dialog: MatDialog,
     private jobProvider: JobProvider,
+    private collaboratorProvider: CollaboratorProvider,
     private http: HttpClient,
     private snackbarService: SnackBarService,
     private router: Router,
@@ -117,6 +128,7 @@ export class JobCreateComponent implements OnInit {
     this.step = JSON.parse(sessionStorage.getItem('job_tab')!);
 
     if (this.jobId !== 'novo') {
+      sessionStorage.setItem('method', 'edit');
       await this.getJob();
       this.initForm();
       this.setFormValue();
@@ -166,10 +178,10 @@ export class JobCreateComponent implements OnInit {
           Validators.maxLength(50),
         ],
       ],
-      startForecast: [new Date(), Validators.required],
+      startForecast: this.fb.control({ value: ' ', disabled: false },[ DocumentValidator.isValidData(), Validators.required]),
       jobNumber: ['', Validators.required],
       typeOfContract: [''],
-      workplace: [''],
+      workplace: [''], 
       workingDay: [
         '',
         [
@@ -179,7 +191,7 @@ export class JobCreateComponent implements OnInit {
       ],
       minimumValue: [''],
       maximumValue: [''],
-      openingDate: [new Date(), Validators.required],
+      openingDate: this.fb.control({ value: new Date().toLocaleDateString(), disabled: false },[ DocumentValidator.isValidData(), Validators.required]),
       schooling: [''],
       collaboratorActivities: [''],
       skills: [''],
@@ -195,6 +207,14 @@ export class JobCreateComponent implements OnInit {
         senior: [false],
       }),
       Knowledges: this.fb.array(this.job ? this.job.Knowledges : []),
+    });
+
+    this.collaboratorControl.valueChanges.subscribe((res) => {
+      if (res && res.id) {
+        this.jobForm.controls['requester'].setValue(res.id, {
+          emitEvent: true,
+        });
+      }
     });
   }
 

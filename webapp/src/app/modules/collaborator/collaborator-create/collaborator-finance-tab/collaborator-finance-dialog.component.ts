@@ -14,6 +14,7 @@ import {
   MAT_DATE_FORMATS,
 } from '@angular/material/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { DocumentValidator } from 'src/app/validators/document.validator';
 import { CollaboratorFinanceProvider } from 'src/providers/collaborator-providers/collaborator-finance.provider';
 
 export const PICK_FORMATS = {
@@ -68,11 +69,11 @@ export class CollaboratorFinanceDialog {
 
   initForm(): void {
     this.financeForm = this.fb.group({
-      dateInclusion: [null, Validators.required],
+      dateInclusion: this.fb.control({ value: ' ', disabled: false },[ DocumentValidator.isValidData(), Validators.required]),
       contractType: [null, Validators.required],
       reason: [null, Validators.required],
       value: [null, Validators.required],
-      payday: [null, Validators.required],
+      payday: this.fb.control({ value: ' ', disabled: false },[ DocumentValidator.isValidData(), Validators.required]),
       collaborator: { id: this.collaboratorId },
     });
     if (this.data) {

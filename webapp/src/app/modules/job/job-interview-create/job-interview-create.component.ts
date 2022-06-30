@@ -22,6 +22,7 @@ import { Location } from '@angular/common';
 import { InterviewsProvider } from 'src/providers/interview.provider';
 import { IInterview } from 'src/app/interfaces/iinterview';
 import { JobPanelModel } from 'src/models/job-panel-model';
+import { DocumentValidator } from 'src/app/validators/document.validator';
 
 @Component({
   selector: 'app-job-interview-create',
@@ -88,7 +89,7 @@ export class JobInterviewCreateComponent implements OnInit {
       id: null,
       nameCandidate: ['', Validators.required],
       techRecruter: ['', Validators.required],
-      behavioralInterviewDate: ['', Validators.required],
+      behavioralInterviewDate:  this.fb.control({ value: ' ', disabled: false },[ DocumentValidator.isValidData(), Validators.required]),
       hourInterview: ['', Validators.required],
       punctuality: [1, Validators.required],
       presentation: [1, Validators.required],
@@ -107,7 +108,7 @@ export class JobInterviewCreateComponent implements OnInit {
     this.technicalInterviewForm = this.fb.group({
       nameCandidate: ['', Validators.required],
       evaluator: ['', Validators.required],
-      technicalInterviewDate: ['', Validators.required],
+      technicalInterviewDate:  this.fb.control({ value: ' ', disabled: false },[ DocumentValidator.isValidData(), Validators.required]),
       hourInterview: ['', Validators.required],
       punctuality: [1, Validators.required],
       jobProfile: [true, Validators.required],
@@ -120,7 +121,7 @@ export class JobInterviewCreateComponent implements OnInit {
     this.clientInterviewForm = this.fb.group({
       nameCandidate: ['', Validators.required],
       evaluator: ['', Validators.required],
-      clientInterviewDate: ['', Validators.required],
+      clientInterviewDate:  this.fb.control({ value: ' ', disabled: false },[ DocumentValidator.isValidData(), Validators.required]),
       hourInterview: ['', Validators.required],
       punctuality: [1, Validators.required],
       jobProfile: [true, Validators.required],
@@ -131,7 +132,7 @@ export class JobInterviewCreateComponent implements OnInit {
 
     this.returnForm = this.fb.group({
       nameCandidate: ['', Validators.required],
-      dateOfReturn: ['', Validators.required],
+      dateOfReturn:  this.fb.control({ value: ' ', disabled: false },[ DocumentValidator.isValidData(), Validators.required]),
       technicalEvaluation: [1, Validators.required],
       behavioralEvaluation: [1, Validators.required],
       technicalEvaluationComent: ['', Validators.required],
@@ -140,7 +141,7 @@ export class JobInterviewCreateComponent implements OnInit {
       reason: [1, Validators.required],
       typeOdContract: [1, Validators.required],
       combinedValue: ['', Validators.required],
-      initialData: ['', Validators.required],
+      initialData: this.fb.control({ value: new Date().toLocaleDateString(), disabled: false },[ DocumentValidator.isValidData(), Validators.required]),
     });
 
 

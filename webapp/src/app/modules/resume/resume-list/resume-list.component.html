@@ -40,8 +40,8 @@
       <ng-container matColumnDef="phoneNumber">
         <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by phoneNumber">Telefone</th>
         <td mat-cell *matCellDef="let resume">
-          {{ resume.Phone.ddi }}
-          {{ resume.Phone.ddd }}
+          +{{ resume.Phone.ddi }}
+          ({{ resume.Phone.ddd }})
           {{ resume.Phone.phoneNumber }}
         </td>
       </ng-container>

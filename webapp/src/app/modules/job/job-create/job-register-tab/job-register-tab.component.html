@@ -1,19 +1,47 @@
 <div id="jobRegisterTab" class="tab">
   <div class="content-scroll" *ngIf="jobForm">
     <form [formGroup]="jobForm" fxLayout="column" class="form">
-      <div fxFlex="100" fxLayoutGap="16px">
-        <mat-form-field fxFlex="30" appearance="outline">
-          <mat-label>{{'generic.request' | translate}}</mat-label>
-          <input placeholder="Solicitante" matInput formControlName="requester" type="text" />
-          <mat-error *ngIf="jobForm &&
-          jobForm.controls['requester'].hasError('required')">
-                {{'validators.validator-required' |  translate}} </mat-error>
-        </mat-form-field>
-
-
+        <div fxFlex="100" fxLayoutGap="16px">
+      <mat-form-field fxFlex="30" appearance="outline">
+        <mat-label>{{'generic.request' | translate}}</mat-label>
+        <input placeholder="Solicitante" matInput formControlName="requester" type="text" />
+        <mat-error *ngIf="jobForm &&
+        jobForm.controls['requester'].hasError('required')">
+              {{'validators.validator-required' |  translate}} </mat-error>
+      </mat-form-field>
+    <!-- <div fxFlex="100" fxLayoutGap="16px">
+        <mat-form-field
+        fxFlex="30"
+        class="example-full-width"
+        appearance="outline"
+      >
+      <mat-label>{{'generic.request' | translate}}</mat-label>
+        <input
+          type="text"
+          placeholder="Solicitante"
+          aria-label="text"
+          #filter
+          matInput
+          [matAutocomplete]="auto"
+          [formControl]="collaboratorControl"
+        />
+        <mat-autocomplete
+          autoActiveFirstOption
+          #auto="matAutocomplete"
+          [displayWith]="displayFn"
+        >
+          <mat-option
+            *ngFor="let collaborator of filteredCollaborators"
+            [value]="collaborator"
+          >
+            {{collaborator.firstNameCorporateName }}
+            {{collaborator.lastNameFantasyName}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field> -->
         <mat-form-field fxFlex="20" appearance="outline">
           <mat-label>{{'generic.opening_date' | translate}}</mat-label>
-          <input matInput mask="00/00/0000 " formControlName="openingDate" placeholder="Ex: 00/00/0000" />
+          <input matInput mask="00/00/0000" [showMaskTyped]="true" [dropSpecialCharacters]="false" formControlName="openingDate" placeholder="Data de Abertura" />
         </mat-form-field>
 
         <mat-form-field fxFlex="35" appearance="outline">
@@ -68,7 +96,7 @@
 
         <mat-form-field fxFlex="35" appearance="outline">
           <mat-label>{{'job.job_create.start_forecast' | translate}}</mat-label>
-          <input formControlName="startForecast" matInput mask="00/00/0000 "/>
+          <input matInput mask="00/00/0000" [showMaskTyped]="true" [dropSpecialCharacters]="false" formControlName="startForecast" placeholder="Previsão de Início" />
           <mat-error *ngIf="jobForm &&
           jobForm.controls['startForecast'].hasError('required')">
                 {{'validators.validator-required' |  translate}} </mat-error>

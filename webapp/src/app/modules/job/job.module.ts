@@ -33,6 +33,7 @@ import { JobDialogSkill } from './job-create/job-skill-tab/job-skill-dialog.comp
 import { JobInterviewCreateComponent } from './job-interview-create/job-interview-create.component';
 import { MatSortModule } from '@angular/material/sort';
 import { TranslateModule } from '@ngx-translate/core';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 const routes: Routes = [
   {
@@ -84,6 +85,7 @@ const routes: Routes = [
     MatTreeModule,
     HttpClientModule,
     NgxMaskModule,
+    MatAutocompleteModule,
     MatSortModule,
   ],
   providers: [MatDatepickerModule, ConfirmDialogService],
