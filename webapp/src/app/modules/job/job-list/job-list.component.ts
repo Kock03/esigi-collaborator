@@ -50,6 +50,7 @@ export class JobListComponent implements OnInit {
   ];
   jobs!: Job[];
   filteredJobList = new MatTableDataSource();
+  method: any;
 
   constructor(
     private liveAnnouncer: LiveAnnouncer,
@@ -104,6 +105,7 @@ export class JobListComponent implements OnInit {
   }
 
   editJob(jobId: any) {
+    this.method =  sessionStorage.setItem('method', 'edit');
     this.router.navigate([`vaga/${jobId}`]);
   }
 

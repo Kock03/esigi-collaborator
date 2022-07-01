@@ -26,6 +26,7 @@ import { ClientInterviewsEntity } from '../client-interviews/client-interviews.e
 import { TechnicalInterviewsEntity } from '../technical-interviews/technical-interviews.entity';
 import { ReturnsEntity } from '../returns/returns.entity';
 import { InterviewsEnitiy } from '../interviews/interviews.entity';
+import { ICollaborator } from './_model/collaborator.model';
 
 @Entity({ name: 'jobs' })
 export class JobsEntity {
@@ -136,4 +137,6 @@ export class JobsEntity {
 
   @DeleteDateColumn({ name: 'deleted_at' })
   deletedAt: Date;
+
+  collaborator: ICollaborator;
 }

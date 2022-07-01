@@ -87,7 +87,7 @@ export class JobCreateComponent implements OnInit {
   step: number = 1;
 
   checked = false;
-
+  collaborator!: any;
   index: any = null;
   Knowledge: any;
 
@@ -140,6 +140,7 @@ export class JobCreateComponent implements OnInit {
   async getJob() {
     try {
       this.job = await this.jobProvider.findOne(this.jobId);
+      this.collaboratorControl.patchValue(this.collaborator);
     } catch (error) {
       console.error(error);
     }

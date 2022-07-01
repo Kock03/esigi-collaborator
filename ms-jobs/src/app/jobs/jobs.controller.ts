@@ -44,6 +44,9 @@ export class JobsController {
     return await this.jobsService.store(body);
   }
 
+
+  
+
   @Put(':id')
   async update(
     @Param('id', new ParseUUIDPipe()) id: string,

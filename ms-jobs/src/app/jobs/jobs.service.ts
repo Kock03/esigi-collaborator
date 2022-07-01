@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpService, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { FindManyOptions, Like } from 'typeorm';
 import { FindConditions } from 'typeorm/find-options/FindConditions';
@@ -14,13 +14,43 @@ export class JobsService {
   constructor(
     @InjectRepository(JobsEntity)
     private readonly jobsRepository: Repository<JobsEntity>,
-  ) {}
+    private httpService: HttpService,
+  ) { }
 
   async findAll() {
     const options: FindManyOptions = {
       order: { createdAt: 'DESC' },
     };
-    return await this.jobsRepository.find(options);
+    try {
+      const jobs = await this.jobsRepository.find(options);
+
+      const collaboratorIdList = jobs.map((job) => {
+        return job.requester;
+      });
+      
+      // TODO - Substituir futuramente e remover o toPromise()
+      const collaborators = await this.httpService
+        .post('http://localhost:3501/api/v1/collaborators/list', {
+          idList: collaboratorIdList,
+        })
+        .toPromise();
+        console.log(collaborators.data)
+        if (collaborators.data) {
+          jobs.map((job) => {
+            const collaborator = collaborators.data.find(
+              (collaborator) => collaborator.id === job.requester);
+            console.log(collaborator)
+            job.collaborator = {
+              firstNameCorporateName: collaborator.firstNameCorporateName,
+              lastNameFantasyName: collaborator.lastNameFantasyName,
+            };
+            return job;
+          })
+        }
+        return jobs;
+      } catch (error) {
+        throw new NotFoundException();
+      }
   }
 
   findByName(query): Promise<JobsEntity[]> {
@@ -37,13 +67,17 @@ export class JobsService {
     options = {
       relations: ['Returns'],
     };
-
     try {
-      return await this.jobsRepository.findOneOrFail(conditions, options);
+      const job = await this.jobsRepository.findOneOrFail(
+        conditions,
+        options,
+      );
     } catch (error) {
       throw new NotFoundException();
     }
   }
+
+
 
   // async findInterviewsList(
   //   conditions: FindConditions<JobsEntity>,

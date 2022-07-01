@@ -19,6 +19,7 @@ import {
 import { ICollaborator } from 'src/app/interfaces/icollaborator';
 import { CollaboratorProvider } from 'src/providers/collaborator-providers/collaborator.provider';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
+import { CollaboratorPanelModel } from 'src/models/collaborator-panel-model';
 
 export const PICK_FORMATS = {
   parse: { dateInput: { month: 'numeric', year: 'numeric', day: 'numeric' } },
@@ -55,6 +56,7 @@ export class JobRegisterTabComponent implements OnInit {
   @Input('form') jobForm!: FormGroup;
   @Input('collaborator') collaboratorControl!: FormControl;
   @Output() onChange: EventEmitter<any> = new EventEmitter();
+  @ViewChild('filter', { static: true }) filter!: ElementRef;
 
 
 
@@ -62,7 +64,7 @@ export class JobRegisterTabComponent implements OnInit {
   method: any;
 
   collaborators!:  any[];
-  filteredCollaborators?: any[];
+  filteredCollaborators!: any[];
   filteredCollaboratorList: any;
   collaborator!: any;
   collaboratorValid: boolean = false;
@@ -71,11 +73,14 @@ export class JobRegisterTabComponent implements OnInit {
 
   ngOnInit(){
     this.method =  sessionStorage.getItem('method');
+    this.initFilter();
+    this.getCollaboratorList();
   }
 
   async getCollaboratorList() {
-    this.filteredCollaboratorList = this.collaborators =
-      await this.collaboratorProvider.shortListCollaborators();
+    this.filteredCollaboratorList=this.collaborators =
+      await this.collaboratorProvider.findGerente();
+
   }
 
   private initFilter() {
@@ -88,7 +93,9 @@ export class JobRegisterTabComponent implements OnInit {
         } else {
           this.collaboratorValid = false;
         }
+        
       });
+
   }
 
   displayFn(user: any): string {
@@ -107,5 +114,6 @@ export class JobRegisterTabComponent implements OnInit {
     this.filteredCollaborators = await this.collaboratorProvider.findByNameGerente(
       params
     );
+
   }
 }

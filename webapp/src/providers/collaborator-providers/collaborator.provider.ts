@@ -30,7 +30,15 @@ export class CollaboratorProvider {
         }, reject);
     });
   }
-
+  findGerente(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.apiGateway
+        .get(environment.COLLABORATOR_MS + 'collaborators/list/gerente')
+        .subscribe((response: HttpResponse<any>) => {
+          resolve(response.body);
+        }, reject);
+    });
+  }
   findActive(): Promise<any> {
     return new Promise((resolve, reject) => {
       this.apiGateway

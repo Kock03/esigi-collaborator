@@ -28,6 +28,11 @@ export class CollaboratorsController {
     return await this.collaboratorsService.findAll();
   }
 
+  @Get('list/gerente')
+  async findGerente() {
+    return await this.collaboratorsService.findGerente();
+  }
+
   @Post('/list')
   async findCollaboratorsListById(@Body() body: ICollaborators) {
     return await this.collaboratorsService.findCollaboratorsListById(body.idList);

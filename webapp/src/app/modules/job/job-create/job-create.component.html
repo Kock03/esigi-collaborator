@@ -28,6 +28,7 @@
   <app-job-register-tab
     [hidden]="step != 1"
     [form]="jobForm"
+    [collaborator]="collaboratorControl"
     (onChange)="handleChanges($event)">
   </app-job-register-tab>
   <app-job-skill-tab

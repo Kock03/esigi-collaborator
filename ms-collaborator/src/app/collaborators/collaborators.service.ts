@@ -73,17 +73,31 @@ export class CollaboratorsService {
       select: ['id', 'firstNameCorporateName', 'lastNameFantasyName', 'email'],
       relations: ['Phone'],
       where: [
-        { firstNameCorporateName: Like(`${query.firstNameCorporateName}%`) },],
-    });
+        { firstNameCorporateName: Like(`${query.firstNameCorporateName}%`) }]});
   }
 
   async findByNameGerente(query) {
-    return await this.collaboratorsRepository.query(
-      'select collaborators.id, collaborators.office,collaborators.first_name_corporate_name, collaborators.last_name_fantasy_name from collaborators where collaborators.first_name_corporate_name like ' +
-      '"%' +
-      query.firstNameCorporateName +
-      '" ' +
-      'and collaborators.office = "Gerente" and collaborators.deleted_at is null')
+    if(query.firstNameCorporateName == '') {
+      return await this.collaboratorsRepository
+      .createQueryBuilder('collaborators')
+      .where('collaborators.office = "Gerente"')
+      .getMany();
+    }else{
+      return this.collaboratorsRepository.find({
+        select: ['id', 'firstNameCorporateName', 'lastNameFantasyName', 'office'],
+        where: [
+          { firstNameCorporateName: Like(`${query.firstNameCorporateName}%`) },
+          { office: 'Gerente' }],
+      });
+    }
+
+  }
+
+  async findGerente() {
+    return await this.collaboratorsRepository
+      .createQueryBuilder('collaborators')
+      .where('collaborators.office = "Gerente"')
+      .getMany();
   }
 
   async findOneOrFail(
