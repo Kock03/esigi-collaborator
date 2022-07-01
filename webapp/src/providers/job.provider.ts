@@ -21,6 +21,17 @@ export class JobProvider {
     });
   }
 
+  shortListCollaborators(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.apiGateway
+        .get(environment.JOBS_MS + 'collaborators/short/list/collaborators')
+        .subscribe((response: HttpResponse<any>) => {
+          resolve(response.body);
+        }, reject);
+    });
+  }
+
+
   findAllInterviews(): Promise<any> {
     return new Promise((resolve, reject) => {
       this.apiGateway

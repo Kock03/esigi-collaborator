@@ -4,7 +4,14 @@
       <div fxFlex="100" fxLayoutGap="16px">
         <mat-form-field fxFlex="30" appearance="outline">
           <mat-label>{{'generic.request' | translate}}</mat-label>
-          <input placeholder="Solicitante" matInput formControlName="requester" type="text" />
+          <input placeholder="Solicitante" matInput formControlName="requester" type="text"
+          #filter matInput [matAutocomplete]="auto" [formControl]="collaboratorControl" />
+          <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="displayFn">
+            <mat-option *ngFor="let collaborator of filteredCollaborators" [value]="collaborator">
+                {{ collaborator.firstNameCorporateName }}
+                {{ collaborator.lastNameFantasyName }}
+            </mat-option>
+        </mat-autocomplete>
           <mat-error *ngIf="jobForm &&
           jobForm.controls['requester'].hasError('required')">
                 {{'validators.validator-required' |  translate}} </mat-error>

@@ -8,12 +8,21 @@ import {
   Output,
   ViewEncapsulation,
 } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import {
   NativeDateAdapter,
   DateAdapter,
   MAT_DATE_FORMATS,
 } from '@angular/material/core';
+import { CollaboratorProvider } from 'src/providers/collaborator-providers/collaborator.provider';
+
+export interface ICollaborator {
+
+  id: string;
+  firstNameCorporateName: string;
+  lastNameCorporateName: string
+
+}
 
 export const PICK_FORMATS = {
   parse: { dateInput: { month: 'numeric', year: 'numeric', day: 'numeric' } },
@@ -52,7 +61,34 @@ export class JobRegisterTabComponent implements OnInit {
 
   date: any;
 
-  constructor() {}
+  collaboratorControl = new FormControl();
+  collaborator!: ICollaborator;
+  collaborators!: ICollaborator[] | any[];
+  collaboratorValid: boolean = false;
+  filteredCollaboratorList: any;
+  collaboratorId!: string | null;
+  filteredCollaborators?: any[];
+
+  constructor(
+
+    private collaboratorProvider: CollaboratorProvider,
+  ) {}
 
   ngOnInit(): void {}
+
+  async getCollaboratorList() {
+    this.filteredCollaboratorList = this.collaborators =
+      await this.collaboratorProvider.shortListCollaborators();
+  }
+
+  displayFn(user: any): string {
+    if (typeof user === 'string' && this.collaborators) {
+      return this.collaborators.find(
+        (collaborator) => collaborator.id === user
+      );
+    }
+    return user && user.firstNameCorporateName && user.lastNameFantasyName
+      ? user.firstNameCorporateName + ' ' + user.lastNameFantasyName
+      : '';
+  }
 }
