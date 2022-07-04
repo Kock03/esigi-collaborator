@@ -34,7 +34,7 @@ export class CreateJobsDto {
   @IsNotEmpty()
   @IsString()
   @MinLength(1)
-  requester: string;
+  collaboratorRequesterId: string;
 
   @ApiProperty()
   @IsNotEmpty()
@@ -50,7 +50,7 @@ export class CreateJobsDto {
   @IsNotEmpty()
   @IsString()
   @MinLength(1)
-  client: string;
+  customerId: string;
 
   @ApiProperty()
   @IsNotEmpty()

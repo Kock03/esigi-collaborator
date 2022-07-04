@@ -73,7 +73,7 @@ export class CollaboratorsService {
       select: ['id', 'firstNameCorporateName', 'lastNameFantasyName', 'email'],
       relations: ['Phone'],
       where: [
-        { firstNameCorporateName: Like(`${query.firstNameCorporateName}%`) }]});
+        { firstNameCorporateName: Like(`%${query.firstNameCorporateName}%`) }]});
   }
 
   async findByNameGerente(query) {
@@ -86,8 +86,7 @@ export class CollaboratorsService {
       return this.collaboratorsRepository.find({
         select: ['id', 'firstNameCorporateName', 'lastNameFantasyName', 'office'],
         where: [
-          { firstNameCorporateName: Like(`${query.firstNameCorporateName}%`) },
-          { office: 'Gerente' }],
+          { firstNameCorporateName: Like(`%${query.firstNameCorporateName}%`), office: "Gerente" } ],
       });
     }
 

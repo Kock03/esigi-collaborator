@@ -29,7 +29,7 @@ export class UpdateJobsDto {
   @IsOptional()
   @IsString()
   @MinLength(1)
-  requester: string;
+  collaboratorRequesterId: string;
 
   @ApiProperty()
   @IsOptional()
@@ -45,7 +45,7 @@ export class UpdateJobsDto {
   @IsOptional()
   @IsString()
   @MinLength(1)
-  client: string;
+  customerId: string;
 
   @ApiProperty()
   @IsOptional()

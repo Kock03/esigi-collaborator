@@ -36,36 +36,12 @@ import { JobProvider } from 'src/providers/job.provider';
 import { SnackBarService } from 'src/services/snackbar.service';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 
-export const PICK_FORMATS = {
-  parse: { dateInput: { month: 'numeric', year: 'numeric', day: 'numeric' } },
-  display: {
-    dateInput: 'input',
-    monthYearLabel: { year: 'numeric', month: 'numeric' },
-    dateA11yLabel: { year: 'numeric', month: 'numeric', day: 'numeric' },
-    monthYearA11yLabel: { year: 'numeric', month: 'numeric' },
-  },
-};
-
-@Injectable()
-export class PickDateAdapter extends NativeDateAdapter {
-  override format(date: Date, displayFormat: Object): string {
-    if (displayFormat === 'input') {
-      return formatDate(date, 'dd-MM-yyyy', this.locale);
-    } else {
-      return date.toDateString();
-    }
-  }
-}
 
 @Component({
   selector: 'app-job-create',
   templateUrl: './job-create.component.html',
   styleUrls: ['./job-create.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  providers: [
-    { provide: DateAdapter, useClass: PickDateAdapter },
-    { provide: MAT_DATE_FORMATS, useValue: PICK_FORMATS },
-  ],
 })
 export class JobCreateComponent implements OnInit {
   @ViewChild('knowledgeTable') knowledgeTable!: MatTable<any>;
@@ -80,7 +56,7 @@ export class JobCreateComponent implements OnInit {
 
 
   collaboratorControl = new FormControl();
-
+  customerControl = new FormControl();
   
   Date: any;
   jobForm!: FormGroup;
@@ -131,7 +107,7 @@ export class JobCreateComponent implements OnInit {
       sessionStorage.setItem('method', 'edit');
       await this.getJob();
       this.initForm();
-      this.setFormValue();
+      this.setFormValue( sessionStorage.getItem('customer_name'));
     } else {
       this.initForm();
     }
@@ -150,7 +126,7 @@ export class JobCreateComponent implements OnInit {
 
   initForm() {
     this.jobForm = this.fb.group({
-      requester: [
+      collaboratorRequesterId: [
         '',
         [
           Validators.required,
@@ -160,7 +136,7 @@ export class JobCreateComponent implements OnInit {
       ],
       status: [''],
       publish: [false],
-      client: [
+      customerId: [
         '',
         [
           Validators.required,
@@ -212,16 +188,25 @@ export class JobCreateComponent implements OnInit {
 
     this.collaboratorControl.valueChanges.subscribe((res) => {
       if (res && res.id) {
-        this.jobForm.controls['requester'].setValue(res.id, {
+        this.jobForm.controls['collaboratorRequesterId'].setValue(res.id, {
+          emitEvent: true,
+        });
+      }
+    });
+
+    this.customerControl.valueChanges.subscribe((res) => {
+      if (res && res.id) {
+        this.jobForm.controls['customerId'].setValue(res.id, {
           emitEvent: true,
         });
       }
     });
   }
 
-  setFormValue() {
+  setFormValue(customerName: any) {
     if (this.job) {
       this.jobForm.patchValue(this.job);
+      this.customerControl.patchValue(customerName);
       if (this.job.Languages[0]) {
         const languages = this.jobForm.controls['Languages'] as FormGroup;
         languages.patchValue(this.job.Languages[0]);

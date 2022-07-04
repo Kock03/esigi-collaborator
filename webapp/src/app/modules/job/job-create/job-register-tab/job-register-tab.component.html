@@ -1,14 +1,6 @@
 <div id="jobRegisterTab" class="tab">
   <div class="content-scroll" *ngIf="jobForm">
     <form [formGroup]="jobForm" fxLayout="column" class="form">
-        <!-- <div fxFlex="100" fxLayoutGap="16px"> -->
-      <!-- <mat-form-field fxFlex="30" appearance="outline">
-        <mat-label>{{'generic.request' | translate}}</mat-label>
-        <input placeholder="Solicitante" matInput formControlName="requester" type="text" />
-        <mat-error *ngIf="jobForm &&
-        jobForm.controls['requester'].hasError('required')">
-              {{'validators.validator-required' |  translate}} </mat-error>
-      </mat-form-field> -->
     <div fxFlex="100" fxLayoutGap="16px">
         <mat-form-field
         fxFlex="30"
@@ -22,13 +14,13 @@
           aria-label="text"
           #filter
           matInput
-          [matAutocomplete]="auto"
+          [matAutocomplete]="autoRequester"
           [formControl]="collaboratorControl"
         />
         <mat-autocomplete
           autoActiveFirstOption
-          #auto="matAutocomplete"
-          [displayWith]="displayFn"
+          #autoRequester="matAutocomplete"
+          [displayWith]="displayFnRequester"
         >
           <mat-option
             *ngFor="let collaborator of filteredCollaborators"
@@ -57,13 +49,35 @@
       </div>
 
       <div fxFlex="100" fxLayoutGap="16px">
-        <mat-form-field fxFlex="40" appearance="outline">
-          <mat-label>{{'generic.client' | translate}}</mat-label>
-          <input placeholder="Cliente" matInput formControlName="client" type="text" />
-          <mat-error *ngIf="jobForm &&
-          jobForm.controls['client'].hasError('required')">
-                {{'validators.validator-required' |  translate}} </mat-error>
-        </mat-form-field>
+
+        <mat-form-field
+        fxFlex="30"
+        class="example-full-width"
+        appearance="outline"
+      >
+      <mat-label>{{'generic.client' | translate}}</mat-label>
+        <input
+          type="text"
+          placeholder="Cliente"
+          aria-label="text"
+          #fiilter
+          matInput
+          [matAutocomplete]="autoCustomer"
+          [formControl]="customerControl"
+        />
+        <mat-autocomplete
+          autoActiveFirstOption
+          #autoCustomer="matAutocomplete"
+          [displayWith]="displayFnCustomer"
+        >
+          <mat-option
+            *ngFor="let customer of filteredCustomers"
+            [value]="customer"
+          >
+            {{customer.corporateName }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
 
         <mat-form-field fxFlex="35" appearance="outline">
           <mat-label>{{'job.job_create.type_of_job.name' | translate}}</mat-label>

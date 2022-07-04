@@ -27,6 +27,7 @@ import { TechnicalInterviewsEntity } from '../technical-interviews/technical-int
 import { ReturnsEntity } from '../returns/returns.entity';
 import { InterviewsEnitiy } from '../interviews/interviews.entity';
 import { ICollaborator } from './_model/collaborator.model';
+import { ICustomer } from './_model/customer.model';
 
 @Entity({ name: 'jobs' })
 export class JobsEntity {
@@ -34,7 +35,7 @@ export class JobsEntity {
   id: string;
 
   @Column()
-  requester: string;
+  collaboratorRequesterId: string;
 
   @Column()
   status: Status;
@@ -43,7 +44,7 @@ export class JobsEntity {
   publish: boolean;
 
   @Column()
-  client: string;
+  customerId: string;
 
   @Column({ type: 'int' })
   typeOfJob: Type;
@@ -139,4 +140,6 @@ export class JobsEntity {
   deletedAt: Date;
 
   collaborator: ICollaborator;
+
+  customer: ICustomer;
 }

@@ -25,7 +25,7 @@ export class JobsService {
       const jobs = await this.jobsRepository.find(options);
 
       const collaboratorIdList = jobs.map((job) => {
-        return job.requester;
+        return job.collaboratorRequesterId;
       });
       
       // TODO - Substituir futuramente e remover o toPromise()
@@ -38,11 +38,31 @@ export class JobsService {
         if (collaborators.data) {
           jobs.map((job) => {
             const collaborator = collaborators.data.find(
-              (collaborator) => collaborator.id === job.requester);
+              (collaborator) => collaborator.id === job.collaboratorRequesterId);
             console.log(collaborator)
             job.collaborator = {
               firstNameCorporateName: collaborator.firstNameCorporateName,
               lastNameFantasyName: collaborator.lastNameFantasyName,
+            };
+            return job;
+          })
+        }
+        const customerIdList = jobs.map((job) => {
+          return job.customerId;
+        });
+
+        const customers = await this.httpService
+        .post('http://localhost:3506/api/v1/customers/list', {
+          idList: customerIdList,
+        })
+        .toPromise();
+        if (customers.data) {
+          jobs.map((job) => {
+            const customer = customers.data.find(
+              (customer) => customer.id === job.customerId);
+
+            job.customer = {
+              corporateName: customer.corporateName,
             };
             return job;
           })

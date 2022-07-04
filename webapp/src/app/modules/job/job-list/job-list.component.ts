@@ -104,9 +104,12 @@ export class JobListComponent implements OnInit {
     this.router.navigate([`vaga/detalhe/${jobId}`]);
   }
 
-  editJob(jobId: any) {
+  editJob(jobId: any, customerId: any) {
+    console.log(customerId)
+    sessionStorage.setItem('customer_name', customerId);
     this.method =  sessionStorage.setItem('method', 'edit');
     this.router.navigate([`vaga/${jobId}`]);
+
   }
 
   initFilter() {

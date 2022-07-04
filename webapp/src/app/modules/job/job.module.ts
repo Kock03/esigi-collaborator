@@ -25,7 +25,6 @@ import { JobPanelTabComponent } from './job-detail/job-panel-tab/job-panel-tab.c
 import { NgxMaskModule } from 'ngx-mask';
 import {
   JobRegisterTabComponent,
-  PickDateAdapter,
 } from './job-create/job-register-tab/job-register-tab.component';
 import { JobSkillTabComponent } from './job-create/job-skill-tab/job-skill-tab.component';
 import { ConfirmDialogService } from 'src/services/confirn-dialog.service';

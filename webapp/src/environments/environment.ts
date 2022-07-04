@@ -9,6 +9,7 @@ export const environment = {
   JOBS_MS: 'localhost:3503/api/v1/',
   SETTING_MS: 'localhost:3504/api/v1/',
   AUTH_SERVICE_MS: 'localhost:3500/api/v1/',
+  CUSTOMER_MS: 'localhost:3506/api/v1/',
 
 
   message: 'LOCAL',

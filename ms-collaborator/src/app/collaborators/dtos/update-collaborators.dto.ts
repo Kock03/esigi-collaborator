@@ -113,13 +113,11 @@ export class UpdateCollaboratorsDto {
   @ApiProperty()
   @IsOptional()
   @IsString()
-  @MinLength(1)
   site: string;
 
   @ApiProperty()
   @IsOptional()
   @IsString()
-  @MinLength(1)
   linkedin: string;
 
   @ApiProperty()
