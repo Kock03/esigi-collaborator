@@ -68,6 +68,8 @@ export class JobCreateComponent implements OnInit {
   Knowledge: any;
 
   jobId!: string | null;
+  customerId!: string | null;
+  collaboratorRequesterId!: string | null;
   job!: any;
 
   validations = [
@@ -102,12 +104,14 @@ export class JobCreateComponent implements OnInit {
       sessionStorage.setItem('job_tab', '1');
     }
     this.step = JSON.parse(sessionStorage.getItem('job_tab')!);
+    this.jobId = this.route.snapshot.paramMap.get('id');
+    this.customerId = sessionStorage.getItem('customer_id');
+    this.collaboratorRequesterId =  sessionStorage.getItem('collaboratorRequester_id');
 
     if (this.jobId !== 'novo') {
-      sessionStorage.setItem('method', 'edit');
       await this.getJob();
       this.initForm();
-      this.setFormValue( sessionStorage.getItem('customer_name'));
+      this.setFormValue();
     } else {
       this.initForm();
     }
@@ -116,7 +120,8 @@ export class JobCreateComponent implements OnInit {
   async getJob() {
     try {
       this.job = await this.jobProvider.findOne(this.jobId);
-      this.collaboratorControl.patchValue(this.collaborator);
+      console.log(this.jobId)
+
     } catch (error) {
       console.error(error);
     }
@@ -203,10 +208,11 @@ export class JobCreateComponent implements OnInit {
     });
   }
 
-  setFormValue(customerName: any) {
+  setFormValue() {
     if (this.job) {
       this.jobForm.patchValue(this.job);
-      this.customerControl.patchValue(customerName);
+      this.customerControl.patchValue(this.customerId);
+      this.collaboratorControl.patchValue(this.collaboratorRequesterId);
       if (this.job.Languages[0]) {
         const languages = this.jobForm.controls['Languages'] as FormGroup;
         languages.patchValue(this.job.Languages[0]);

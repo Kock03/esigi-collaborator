@@ -29,7 +29,7 @@ import { InterviewsEnitiy } from '../interviews/interviews.entity';
 import { ICollaborator } from './_model/collaborator.model';
 import { ICustomer } from './_model/customer.model';
 
-@Entity({ name: 'jobs' })
+@Entity()
 export class JobsEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
@@ -97,7 +97,6 @@ export class JobsEntity {
   @OneToMany(() => LanguagesEntity, (languages) => languages.Job, {
     cascade: ['insert', 'update', 'soft-remove'],
     orphanedRowAction: 'delete',
-    eager: true,
   })
   @JoinColumn()
   Languages: LanguagesEntity[];
@@ -105,7 +104,6 @@ export class JobsEntity {
   @OneToMany(() => KnowledgesEntity, (Knowledges) => Knowledges.Job, {
     cascade: ['insert', 'update', 'soft-remove'],
     orphanedRowAction: 'delete',
-    eager: true,
   })
   @JoinColumn()
   Knowledges: KnowledgesEntity[];
@@ -113,7 +111,6 @@ export class JobsEntity {
   @OneToOne(() => SenioritiesEntity, {
     cascade: ['insert', 'update', 'remove'],
     orphanedRowAction: 'delete',
-    eager: true,
   })
   @JoinColumn()
   Seniorities: SenioritiesEntity;

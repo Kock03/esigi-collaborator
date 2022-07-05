@@ -80,6 +80,7 @@ export class JobListComponent implements OnInit {
 
   createJob() {
     this.router.navigate(['vaga/novo']);
+    this.method =  sessionStorage.setItem('job_method', 'novo');
   }
 
   async getJobList() {
@@ -104,10 +105,11 @@ export class JobListComponent implements OnInit {
     this.router.navigate([`vaga/detalhe/${jobId}`]);
   }
 
-  editJob(jobId: any, customerId: any) {
+  editJob(jobId: any, customerId: any, collaboratorRequesterId: any) {
     console.log(customerId)
-    sessionStorage.setItem('customer_name', customerId);
-    this.method =  sessionStorage.setItem('method', 'edit');
+    sessionStorage.setItem('customer_id', customerId);
+    sessionStorage.setItem('collaboratorRequester_id', collaboratorRequesterId);
+    this.method =  sessionStorage.setItem('job_method', 'edit');
     this.router.navigate([`vaga/${jobId}`]);
 
   }

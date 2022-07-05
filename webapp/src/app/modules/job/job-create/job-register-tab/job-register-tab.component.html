@@ -6,6 +6,7 @@
         fxFlex="30"
         class="example-full-width"
         appearance="outline"
+        *ngIf="this.method === 'novo'"
       >
       <mat-label>{{'generic.request' | translate}}</mat-label>
         <input
@@ -31,6 +32,21 @@
           </mat-option>
         </mat-autocomplete>
       </mat-form-field>
+      <mat-form-field
+      appearance="outline"
+      *ngIf="this.method === 'edit'"
+      fxFlex="25"
+      class="example-full-width"
+    >
+    <mat-label>{{'generic.request' | translate}}</mat-label>
+      <input
+        disabled
+        matInput
+        disableRipple
+        [value]="this.collaboratorControl.value"
+      />
+    </mat-form-field>
+
         <mat-form-field fxFlex="20" appearance="outline">
           <mat-label>{{'generic.opening_date' | translate}}</mat-label>
           <input matInput mask="00/00/0000" [showMaskTyped]="true" [dropSpecialCharacters]="false" formControlName="openingDate" placeholder="Data de Abertura" />
@@ -54,6 +70,7 @@
         fxFlex="30"
         class="example-full-width"
         appearance="outline"
+        *ngIf="this.method === 'novo'"
       >
       <mat-label>{{'generic.client' | translate}}</mat-label>
         <input
@@ -78,7 +95,22 @@
           </mat-option>
         </mat-autocomplete>
       </mat-form-field>
-
+      <mat-form-field
+      appearance="outline"
+      *ngIf="this.method === 'edit'"
+      fxFlex="25"
+      class="example-full-width"
+    >
+      <mat-label
+        >{{'generic.client' | translate}}</mat-label
+      >
+      <input
+        disabled
+        matInput
+        disableRipple
+        [value]="this.customerControl.value"
+      />
+    </mat-form-field>
         <mat-form-field fxFlex="35" appearance="outline">
           <mat-label>{{'job.job_create.type_of_job.name' | translate}}</mat-label>
           <mat-select matInput disableRipple formControlName="typeOfJob">

@@ -50,10 +50,7 @@ export class JobRegisterTabComponent implements OnInit {
 
   ngOnInit(){
     const customeer = sessionStorage.getItem('customer_name')
-    this.method =  sessionStorage.getItem('method');
-    if(this.method == 'edit'){
-     this.displayFnCustomer(customeer);
-    }
+    this.method =  sessionStorage.getItem('job_method');
     this.getCollaboratorList();
     this.getCustomerList();
     this.initFilterRequester();

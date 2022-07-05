@@ -67,7 +67,7 @@
           </button>
         </th>
         <td class="button-tab" mat-cell *matCellDef="let job" style="text-align: end">
-          <button class="table-button" mat-button (click)="editJob(job.id, job.customer.corporateName)">
+          <button class="table-button" mat-button (click)="editJob(job.id, job.customer.corporateName, job.collaborator.firstNameCorporateName)">
             <mat-icon>edit</mat-icon>
           </button>
           <button class="table-button" mat-button (click)="deleteJob(job.id)">
