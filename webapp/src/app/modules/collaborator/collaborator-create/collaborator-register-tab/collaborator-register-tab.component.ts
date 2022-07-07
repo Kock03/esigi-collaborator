@@ -79,6 +79,18 @@ export class CollaboratorRegisterTabComponent implements OnInit {
     this.onChange.next(true);
   }
 
+  setValueLogin() {
+    if (this.collaboratorForm.controls['collaboratorTypes'].value === 2) {
+      this.collaboratorForm.controls['login'].setValue(`${this.collaboratorForm.controls['firstNameCorporateName'].value}@Envolti.com.br`);
+    } else {
+      if (this.collaboratorForm.controls['firstNameCorporateName'].value != null && this.collaboratorForm.controls['lastNameFantasyName'].value != null) {
+
+        this.collaboratorForm.controls['login'].setValue(`${this.collaboratorForm.controls['firstNameCorporateName'].value}.${this.collaboratorForm.controls['lastNameFantasyName'].value}@Envolti.com.br`);
+
+      }
+    }
+
+  }
   compareSelect(o1: any, o2: any): boolean {
     if (!o1 || !o2) {
       return false;

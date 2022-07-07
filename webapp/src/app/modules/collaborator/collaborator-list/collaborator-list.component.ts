@@ -56,6 +56,7 @@ export class CollaboratorListComponent implements OnInit {
   Collaborator: any;
   step: number = 1;
   form!: FormGroup;
+  params!: string;
   firstNameCorporateName = '';
 
   constructor(
@@ -76,9 +77,9 @@ export class CollaboratorListComponent implements OnInit {
   }
 
   
-  async searchCollaborators(query?: string) {
+  async searchCollaborators(firstNameCorporateName?: string, inactive?: string) {
     try {
-      this.collaborators = await this.collaboratorProvider.findByName(query);
+      this.collaborators = await this.collaboratorProvider.findByName(firstNameCorporateName, inactive);
       console.log(this.collaborators);
     } catch (error) {
       console.error(error);
@@ -129,18 +130,38 @@ export class CollaboratorListComponent implements OnInit {
   }
 
   async selectList(ev: any) {
+    var params = `inactive=${ev.value}`
     if (ev.value == 1) {
       return (this.filteredCollaboratorList = this.collaborators =
         await this.collaboratorProvider.findAll());
-    }
-    if (ev.value == 2) {
+    }else if(ev.value === undefined){
       return (this.filteredCollaboratorList = this.collaborators =
-        await this.collaboratorProvider.findActive());
+        await this.collaboratorProvider.findByName(this.params));
+    }else if(this.params === undefined){
+      if (ev.value == 2) {
+        params = `inactive=0`
+        return (this.filteredCollaboratorList = this.collaborators =
+          await this.collaboratorProvider.findByName(params));
+      }
+      if (ev.value == 3) {
+        params = `inactive=1`
+        return (this.filteredCollaboratorList = this.collaborators =
+          await this.collaboratorProvider.findByName(params));
+      }
     }
-    if (ev.value == 3) {
-      return (this.filteredCollaboratorList = this.collaborators =
-        await this.collaboratorProvider.findInactive());
+    else{
+      if (ev.value == 2) {
+        params = `inactive=0`
+        return (this.filteredCollaboratorList = this.collaborators =
+          await this.collaboratorProvider.findByName(this.params, params));
+      }
+      if (ev.value == 3) {
+        params = `inactive=1`
+        return (this.filteredCollaboratorList = this.collaborators =
+          await this.collaboratorProvider.findByName(this.params, params));
+      }
     }
+   
   }
 
   async getCollaboratorList() {
@@ -163,8 +184,11 @@ export class CollaboratorListComponent implements OnInit {
               .includes(this.filter.nativeElement.value.toLocaleLowerCase())
               
         )
-        const params = `firstNameCorporateName=${this.filter.nativeElement.value}`;
-        this.searchCollaborators(params);
+        this.params = `firstNameCorporateName=${this.filter.nativeElement.value}`;
+        this.searchCollaborators(this.params);
+        if (this.filter.nativeElement.value === '') {
+          this.getCollaboratorList();
+        }
       });
    
   }

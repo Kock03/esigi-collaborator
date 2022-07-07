@@ -103,6 +103,7 @@ export class JobListComponent implements OnInit {
 
   viewDetail(jobId: any) {
     this.router.navigate([`vaga/detalhe/${jobId}`]);
+
   }
 
   editJob(jobId: any, customerId: any, collaboratorRequesterId: any) {

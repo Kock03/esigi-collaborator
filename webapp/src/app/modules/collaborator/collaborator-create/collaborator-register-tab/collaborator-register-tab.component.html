@@ -53,7 +53,7 @@
             : 'Razão Social'
             }}</mat-label>
           <input matInput placeholder="Nome"
-            formControlName="firstNameCorporateName" />
+            formControlName="firstNameCorporateName"  (change)="setValueLogin()"/>
           <mat-error *ngIf="collaboratorForm &&
             collaboratorForm.controls['firstNameCorporateName'].hasError('required')">
             {{'validators.validator-required' | translate}} </mat-error>
@@ -67,17 +67,19 @@
             }}
           </mat-label>
           <input matInput formControlName="lastNameFantasyName"
-            placeholder="Sobrenome" />
+            placeholder="Sobrenome"   (change)="setValueLogin()"/>
           <mat-error *ngIf="collaboratorForm &&
             collaboratorForm.controls['lastNameFantasyName'].hasError('required')">
             {{'validators.validator-required' | translate}} </mat-error>
         </mat-form-field>
 
         <mat-form-field fxFlex="35" appearance="outline"
-        *ngIf="collaboratorForm.controls['collaboratorTypes'].value !== 2">
+        *ngIf="collaboratorForm.controls['collaboratorTypes'].value !== 2"
+          
+     >
         <mat-label>{{'generic.cpf'|translate}}</mat-label>
         <input matInput placeholder="CPF" formControlName="cpf"
-          mask="000.000.000-00" />
+          mask="000.000.000-00"/>
       </mat-form-field>
 
         <mat-form-field fxFlex="25" appearance="outline">
@@ -99,7 +101,7 @@
 
       <div fxFlex="100" fxLayoutGap="16px">
         <mat-form-field fxFlex="35" appearance="outline"
-          *ngIf="collaboratorForm.controls['collaboratorTypes'].value === 2">
+          *ngIf="collaboratorForm.controls['collaboratorTypes'].value === 2" >
           <mat-label>{{'collaborator.colaborator_create.cnpj'|translate}}</mat-label>
           <input matInput placeholder="CNPJ" formControlName="cnpj"
             mask="00.000.000/0000-00" />
@@ -303,7 +305,7 @@
       <div fxFlex="100" fxLayoutGap="16px">
         <mat-form-field fxFlex="50" appearance="outline">
           <mat-label>{{'generic.login'|translate}}</mat-label>
-          <input matInput placeholder="Login" formControlName="login" />
+          <input matInput placeholder="Login" formControlName="login"  readonly/>
           <mat-error *ngIf="collaboratorForm &&
             collaboratorForm.controls['login'].hasError('required')">
             {{'validators.validator-required' | translate}}

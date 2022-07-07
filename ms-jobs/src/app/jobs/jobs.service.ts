@@ -27,55 +27,55 @@ export class JobsService {
       const collaboratorIdList = jobs.map((job) => {
         return job.collaboratorRequesterId;
       });
-      
+
       // TODO - Substituir futuramente e remover o toPromise()
       const collaborators = await this.httpService
         .post('http://localhost:3501/api/v1/collaborators/list', {
           idList: collaboratorIdList,
         })
         .toPromise();
-        if (collaborators.data) {
-          jobs.map((job) => {
-            const collaborator = collaborators.data.find(
-              (collaborator) => collaborator.id === job.collaboratorRequesterId);
-            console.log(collaborator)
-            job.collaborator = {
-              firstNameCorporateName: collaborator.firstNameCorporateName,
-              lastNameFantasyName: collaborator.lastNameFantasyName,
-            };
-            return job;
-          })
-        }
-        const customerIdList = jobs.map((job) => {
-          return job.customerId;
-        });
+      if (collaborators.data) {
+        jobs.map((job) => {
+          const collaborator = collaborators.data.find(
+            (collaborator) => collaborator.id === job.collaboratorRequesterId);
+          console.log(collaborator)
+          job.collaborator = {
+            firstNameCorporateName: collaborator.firstNameCorporateName,
+            lastNameFantasyName: collaborator.lastNameFantasyName,
+          };
+          return job;
+        })
+      }
+      const customerIdList = jobs.map((job) => {
+        return job.customerId;
+      });
 
-        const customers = await this.httpService
+      const customers = await this.httpService
         .post('http://localhost:3506/api/v1/customers/list', {
           idList: customerIdList,
         })
         .toPromise();
-        if (customers.data) {
-          jobs.map((job) => {
-            const customer = customers.data.find(
-              (customer) => customer.id === job.customerId);
+      if (customers.data) {
+        jobs.map((job) => {
+          const customer = customers.data.find(
+            (customer) => customer.id === job.customerId);
 
-            job.customer = {
-              corporateName: customer.corporateName,
-            };
-            return job;
-          })
-        }
-        return jobs;
-      } catch (error) {
-        throw new NotFoundException();
+          job.customer = {
+            corporateName: customer.corporateName,
+          };
+          return job;
+        })
       }
+      return jobs;
+    } catch (error) {
+      throw new NotFoundException();
+    }
   }
 
   findByName(query): Promise<JobsEntity[]> {
     return this.jobsRepository.find({
       where: [
-        { jobName: Like(`${query.jobName}%`) },]
+        { jobName: Like(`%${query.jobName}%`) },]
     });
   }
 
@@ -84,18 +84,31 @@ export class JobsService {
     options?: FindOneOptions<JobsEntity>,
   ) {
     options = {
-      relations: ['Seniorities', 'Knowledges','Languages','Returns'],
+      relations: ['Seniorities', 'Knowledges', 'Languages', 'Returns'],
     };
+    var job;
     try {
-      return await  this.jobsRepository.findOneOrFail(
+        job = await this.jobsRepository.findOneOrFail(
         conditions,
         options,
       );
+   
     } catch (error) {
       console.log(error)
       throw new NotFoundException();
+    }
+    try {
+      const collaboratorId = job.collaboratorRequesterId;
+
+      const collaborator = await this.httpService
+        .get('http://localhost:3501/api/v1/collaborators/'+ collaboratorId)
+
+
+      console.log(collaborator)
+    } catch (err) {
 
     }
+  
   }
 
 

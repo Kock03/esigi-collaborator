@@ -68,25 +68,56 @@ export class CollaboratorsService {
       .getMany();
   }
 
-  findByName(query): Promise<CollaboratorsEntity[]> {
-    return this.collaboratorsRepository.find({
-      select: ['id', 'firstNameCorporateName', 'lastNameFantasyName', 'email'],
-      relations: ['Phone'],
-      where: [
-        { firstNameCorporateName: Like(`%${query.firstNameCorporateName}%`) }]});
+
+  async findByName(firstNameCorporateName?: string, inactive?: string) {
+
+    if (!firstNameCorporateName) {
+      return this.collaboratorsRepository.find({
+        select: ['id', 'firstNameCorporateName', 'lastNameFantasyName', 'email', 'inactive', 'admissionDate', 'office',],
+        relations: ['Phone'],
+        where: [
+          { inactive: inactive }]
+      });
+
+    } else if (!inactive) {
+      return this.collaboratorsRepository.find({
+        select: ['id', 'firstNameCorporateName', 'lastNameFantasyName', 'email', 'inactive', 'admissionDate', 'office',],
+        relations: ['Phone'],
+        where: [
+          { firstNameCorporateName: Like(`%${firstNameCorporateName}%`) }]
+      });
+    } else {
+      if(inactive === '1'){
+        return this.collaboratorsRepository.find({
+          select: ['id', 'firstNameCorporateName', 'lastNameFantasyName', 'email', 'inactive', 'admissionDate', 'office',],
+          relations: ['Phone'],
+          where: [
+            { firstNameCorporateName: Like(`%${firstNameCorporateName}%`), inactive: true  }]
+        });
+      }else{
+        return this.collaboratorsRepository.find({
+          select: ['id', 'firstNameCorporateName', 'lastNameFantasyName', 'email', 'inactive', 'admissionDate', 'office',],
+          relations: ['Phone'],
+          where: [
+            { firstNameCorporateName: Like(`%${firstNameCorporateName}%`), inactive: false  }]
+        });
+      }
+      
+    }
   }
 
+
   async findByNameGerente(query) {
-    if(query.firstNameCorporateName == '') {
+    if (query.firstNameCorporateName == '') {
       return await this.collaboratorsRepository
-      .createQueryBuilder('collaborators')
-      .where('collaborators.office = "Gerente"')
-      .getMany();
-    }else{
+        .createQueryBuilder('collaborators')
+        .where('collaborators.office = "Gerente"')
+        .getMany();
+    } else {
       return this.collaboratorsRepository.find({
         select: ['id', 'firstNameCorporateName', 'lastNameFantasyName', 'office'],
         where: [
-          { firstNameCorporateName: Like(`%${query.firstNameCorporateName}%`), office: "Gerente" } ],
+          { firstNameCorporateName: Like(`%${query.firstNameCorporateName}%`), office: "Gerente" }],
       });
     }
 

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatTable } from '@angular/material/table';
 import { ActivatedRoute, Router, RoutesRecognized } from '@angular/router';
 import { filter, pairwise } from 'rxjs';
@@ -24,6 +24,7 @@ export class CollaboratorCreateComponent implements OnInit {
   collaborator!: any;
   active: boolean = true;
 
+  loginControl = new FormControl();
   method: any;
   Educations: any;
   Languages: any;
@@ -36,7 +37,7 @@ export class CollaboratorCreateComponent implements OnInit {
   controllers: any;
   url!: string;
   urlStep!: number;
-
+  valid!: boolean;
   validations = [
     [
       'admissionDate',
@@ -130,8 +131,8 @@ export class CollaboratorCreateComponent implements OnInit {
       cpf: this.fb.control({ value: null, disabled: false }, [
         DocumentValidator.isValidCpf(), Validators.required
       ]),
-      birthDate: this.fb.control({ value: ' ', disabled: false },[ DocumentValidator.isValidData(), Validators.required]),
-      admissionDate: this.fb.control({ value: new Date().toLocaleDateString(), disabled: false },[ DocumentValidator.isValidData(), Validators.required]),
+      birthDate: this.fb.control({ value: ' ', disabled: false }, [DocumentValidator.isValidData(), Validators.required]),
+      admissionDate: this.fb.control({ value: new Date().toLocaleDateString(), disabled: false }, [DocumentValidator.isValidData(), Validators.required]),
       email: [null, [Validators.email, Validators.required]],
       cnpj: this.fb.control({ value: null, disabled: false }, [
         DocumentValidator.isValidCnpj(), Validators.required
@@ -157,6 +158,14 @@ export class CollaboratorCreateComponent implements OnInit {
         district: ['', Validators.required],
       }),
     });
+    if (this.collaboratorForm.controls['collaboratorTypes'].value === 2) {
+      this.collaboratorForm.controls['cpf'].removeValidators(Validators.required)
+    } else {
+      this.collaboratorForm.controls['cnpj'].removeValidators(Validators.required)
+    }
+
+
+
   }
 
   setFormValue() {
@@ -165,9 +174,9 @@ export class CollaboratorCreateComponent implements OnInit {
     }
   }
 
+
   async saveCollaborator() {
     let data = this.collaboratorForm.getRawValue();
-
 
     try {
 
@@ -178,6 +187,7 @@ export class CollaboratorCreateComponent implements OnInit {
           firstName: colaborator.firstNameCorporateName,
           lastName: colaborator.lastNameFantasyName,
           email: colaborator.email,
+          login: colaborator.login,
           password: colaborator.cnpj,
           collaboratorId: colaborator.id
         })
@@ -186,6 +196,7 @@ export class CollaboratorCreateComponent implements OnInit {
           firstName: colaborator.firstNameCorporateName,
           lastName: colaborator.lastNameFantasyName,
           email: colaborator.email,
+          login: colaborator.login,
           collaboratorId: colaborator.id,
           password: colaborator.cpf
         })
@@ -198,14 +209,16 @@ export class CollaboratorCreateComponent implements OnInit {
       this.handleStep(2)
 
       this.snackbarService.successMessage('Colaborador Cadastrado Com Sucesso');
-      
+
     } catch (error: any) {
       console.log('ERROR 132' + error);
     }
   }
 
 
-  handleChanges(value: any): void { }
+  handleChanges(value: any): void {
+  }
+
 
   handleStep(number: number): void {
     if (!this.checkValid() && this.step < number) {

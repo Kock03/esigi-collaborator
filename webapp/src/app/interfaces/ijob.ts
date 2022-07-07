@@ -3,8 +3,8 @@ import { Languanges } from './ilanguages';
 
 export interface IJob {
   jobName: string;
-  client: string;
-  requester: string;
+  customerId: string;
+  collaboratorRequesterId: string;
   openingDate: string;
   status: number;
   typeOfJob: number;
