@@ -9,7 +9,7 @@ import {
 } from 'typeorm';
 import { BehavioralInterviewsEntity } from '../behavioral-interviews/behavioral-interviews.entity';
 
-@Entity({ name: 'hiring_preferences' })
+@Entity()
 export class HiringPreferencesEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;

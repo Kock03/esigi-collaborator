@@ -1,5 +1,6 @@
 import { HttpService, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { errorMonitor } from 'mysql2/typings/mysql/lib/Connection';
 import { FindManyOptions, Like } from 'typeorm';
 import { FindConditions } from 'typeorm/find-options/FindConditions';
 import { FindOneOptions } from 'typeorm/find-options/FindOneOptions';
@@ -84,31 +85,39 @@ export class JobsService {
     options?: FindOneOptions<JobsEntity>,
   ) {
     options = {
-      relations: ['Seniorities', 'Knowledges', 'Languages', 'Returns'],
-    };
-    var job;
+      relations: ['Seniorities', 'Knowledges', 'Languages', 'Returns', 'Interviews'],
+    }
+    let job;
+    let collaborator;
     try {
-        job = await this.jobsRepository.findOneOrFail(
+
+       job = await this.jobsRepository.findOneOrFail(
         conditions,
         options,
       );
-   
     } catch (error) {
-      console.log(error)
+      console.log(error);
       throw new NotFoundException();
     }
-    try {
-      const collaboratorId = job.collaboratorRequesterId;
+    
+    try{
+      const collaboratorId = job.collaboratorRequesterId
+       collaborator =  this.httpService.post('http://localhost:3501/api/v1/collaborators/list/collaborator', {
+        id: collaboratorId,
+      })
 
-      const collaborator = await this.httpService
-        .get('http://localhost:3501/api/v1/collaborators/'+ collaboratorId)
+      job.collaborator = {
+        firstNameCorporateName: collaborator.firstNameCorporateName,
+        lastNameFantasyName: collaborator.lastNameFantasyName,
+      };
+      console.log(job)
+      return job;
 
-
-      console.log(collaborator)
-    } catch (err) {
-
+    }catch (error) {
+      console.log(error)
     }
-  
+   
+    return job;
   }
 
 

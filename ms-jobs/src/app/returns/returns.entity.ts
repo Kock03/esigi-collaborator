@@ -14,7 +14,7 @@ import { JobsEntity } from '../jobs/jobs.entity';
 import { Reason } from './enums/reason.enum';
 import { TypeContract } from './enums/type-contract.enum';
 
-@Entity({ name: 'returns' })
+@Entity()
 export class ReturnsEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;

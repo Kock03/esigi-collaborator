@@ -16,7 +16,7 @@ import {
 import { Situation } from '../behavioral-interviews/enums/situational.enum';
 import { InterviewsEnitiy } from '../interviews/interviews.entity';
 
-@Entity({ name: 'client_interviews' })
+@Entity()
 export class ClientInterviewsEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;

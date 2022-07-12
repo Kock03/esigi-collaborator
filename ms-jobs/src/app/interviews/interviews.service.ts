@@ -1,3 +1,4 @@
+import { HttpService } from '@nestjs/common';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { join } from 'path/posix';
@@ -16,9 +17,11 @@ import { InterviewsEnitiy } from './interviews.entity';
 
 @Injectable()
 export class InterviewsService {
+
   constructor(
     @InjectRepository(InterviewsEnitiy)
     private readonly interviewsRepository: Repository<InterviewsEnitiy>,
+    private httpService: HttpService,
   ) {}
 
   async findAll() {
@@ -37,58 +40,40 @@ export class InterviewsService {
     try {
       return await this.interviewsRepository.findOneOrFail(conditions, options);
     } catch (error) {
-      console.log(error);
       throw new NotFoundException();
     }
   }
 
-  // async findInterviewsDetails(
-  //   conditions: FindConditions<InterviewsEnitiy>,
-  //   options?: FindOneOptions<InterviewsEnitiy>,
-  // ) {
-  //   options = {
-  //     relations: ['behavioralInterviews', 'technicalInterviews', 'jobs'],
-  //   };
-
-  //   try {
-  //     const interviewFound = await this.interviewsRepository.findOneOrFail(
-  //       conditions,
-  //       options,
-  //     );
-  //     const interviewData = {
-  //       name: {
-  //         candiadte: interviewFound.behavioralInterviews.nameCandidate,
-  //       },
-  //       behavioral: {
-  //         behavioralInterviewDate:
-  //           interviewFound.behavioralInterviews.behavioralInterviewDate,
-  //       },
-  //       technical: {
-  //         technicalInterviewDate:
-  //           interviewFound.technicalInterviews.technicalInterviewDate,
-  //       },
-  //       job: {
-  //         requester: interviewFound.jobs.requester,
-  //         status: interviewFound.jobs.status,
-  //       },
-  //     };
-
-  //     return interviewData;
-  //     return interviewFound;
-  //   } catch (error) {
-  //     console.log(error);
-  //     throw new NotFoundException();
-  //   }
-  // }
 
   async getFollowUpInterviews(id: string) {
-    return await this.interviewsRepository.query(
-      'select interviews.id, b.name_candidate, b.behavioral_interview_date, t.name_candidate as name_candidate_tec , t.technical_interview_date, j.requester, j.status from interviews left join behavioral_interviews b on interviews.behavioral_interviews_id = b.id left join technical_interviews t on interviews.technical_interviews_id = t.id left join jobs j on interviews.job_id = j.id where interviews.job_id = ' +
+    const interviews = await this.interviewsRepository.query(
+      'select interviews_enitiy.id, b.name_candidate, b.behavioral_interview_date, t.name_candidate as name_candidate_tec , t.technical_interview_date, j.collaborator_requester_id, j.status from interviews_enitiy left join behavioral_interviews_entity b on interviews_enitiy.behavioral_interviews_id = b.id left join technical_interviews_entity t on interviews_enitiy.technical_interviews_id = t.id left join jobs_entity j on interviews_enitiy.job_id = j.id where interviews_enitiy.job_id = ' +
         '"' +
         id +
         '"' +
-        'and interviews.deleted_at is null ',
+        'and interviews_enitiy.deleted_at is null ',
     );
+    const collaboratorIdList = interviews.map((interview) => {
+      return interview.collaborator_requester_id;
+    });
+
+    const collaborators = await this.httpService.post('http://localhost:3501/api/v1/collaborators/list', {
+      idList: collaboratorIdList,
+    }).toPromise();
+
+    if (collaborators.data) {
+      interviews.map((interview) => {
+        const collaborator = collaborators.data.find(
+          (collaborator) => collaborator.id === interview.collaborator_requester_id);
+        console.log(collaborator)
+        interview.collaborator = {
+          firstNameCorporateName: collaborator.firstNameCorporateName,
+          lastNameFantasyName: collaborator.lastNameFantasyName,
+        };
+        return interview;
+      })
+      return interviews;
+    }
   }
 
   async store(data: CreateInterviewsDto) {

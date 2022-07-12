@@ -12,8 +12,9 @@ import { BehavioralInterviewsEntity } from '../behavioral-interviews/behavioral-
 import { ClientInterviewsEntity } from '../client-interviews/client-interviews.entity';
 import { JobsEntity } from '../jobs/jobs.entity';
 import { TechnicalInterviewsEntity } from '../technical-interviews/technical-interviews.entity';
+import { ICollaborator } from './_model/collaborator.model';
 
-@Entity({ name: 'interviews' })
+@Entity()
 export class InterviewsEnitiy {
   @PrimaryGeneratedColumn('uuid')
   id: string;
@@ -39,7 +40,7 @@ export class InterviewsEnitiy {
   @JoinColumn()
   ClientInterviews: ClientInterviewsEntity;
 
-  @ManyToOne(() => JobsEntity, (jobs) => jobs.interviews, {
+  @ManyToOne(() => JobsEntity, (jobs) => jobs.Interviews, {
     cascade: ['insert', 'update', 'soft-remove'],
   })
   Job: JobsEntity;
@@ -52,4 +53,6 @@ export class InterviewsEnitiy {
 
   @DeleteDateColumn()
   deletedAt: Date;
+
+  collaborator: ICollaborator;
 }

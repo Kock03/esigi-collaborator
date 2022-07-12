@@ -39,6 +39,13 @@ export class CollaboratorsService {
     })
   }
 
+  async findCollaboratorById(id: string) {
+    return await this.collaboratorsRepository.find({
+      select: ['id', 'firstNameCorporateName', 'lastNameFantasyName'],
+      where: { id: id }
+    })
+  }
+
   async shortListCollaborators() {
     return await this.collaboratorsRepository.find({
       select: ['id', 'firstNameCorporateName', 'lastNameFantasyName', 'email'],
@@ -136,15 +143,7 @@ export class CollaboratorsService {
     options?: FindOneOptions<CollaboratorsEntity>,
   ) {
     options = { relations: ['Financials', 'Address', 'BankData', 'Dependents', 'Documents', 'Educations', 'Feedbacks', 'Languages', 'Phone', 'Skills'] };
-    try {
-
-      return await this.collaboratorsRepository.findOneOrFail(
-        conditions,
-        options,
-      );
-    } catch (error) {
-      throw new NotFoundException();
-    }
+                                                         
   }
 
   async store(data: CreateCollaboratorsDto) {

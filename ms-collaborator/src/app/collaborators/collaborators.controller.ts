@@ -17,7 +17,7 @@ import { CollaboratorsService } from './collaborators.service';
 import { CreateCollaboratorsDto } from './dtos/create-collaborators.dto';
 import { UpdateCollaboratorsDto } from './dtos/update-collaborators.dto';
 import { UpdatePermissionDto } from './dtos/update-permission.dto';
-import { ICollaborators } from './interfaces/i-collaborators.interfaces';
+import { ICollaborator, ICollaborators } from './interfaces/i-collaborators.interfaces';
 
 @Controller('/api/v1/collaborators')
 export class CollaboratorsController {
@@ -36,6 +36,11 @@ export class CollaboratorsController {
   @Post('/list')
   async findCollaboratorsListById(@Body() body: ICollaborators) {
     return await this.collaboratorsService.findCollaboratorsListById(body.idList);
+  }
+
+  @Post('/list/collaborator')
+  async findCollaboratorById(@Body() body: any) {
+    return await this.collaboratorsService.findCollaboratorsListById(body.id);
   }
 
   @Post()

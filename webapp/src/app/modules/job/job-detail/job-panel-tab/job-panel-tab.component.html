@@ -40,7 +40,8 @@
         <ng-container matColumnDef="responsible">
           <th mat-header-cell *matHeaderCellDef>{{'generic.requester' | translate}}</th>
           <td mat-cell *matCellDef="let interviews">
-            {{ interviews.requester }}
+            {{ interviews.collaborator.firstNameCorporateName }}
+            {{interviews.collaborator.lastNameFantasyName}}
           </td>
         </ng-container>
 

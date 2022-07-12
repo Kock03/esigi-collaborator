@@ -10,7 +10,7 @@ import {
 import { JobsEntity } from '../jobs/jobs.entity';
 import { TypeOfPeriod } from './dtos/type-of-period.enum';
 
-@Entity({ name: 'knowledges' })
+@Entity()
 export class KnowledgesEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;

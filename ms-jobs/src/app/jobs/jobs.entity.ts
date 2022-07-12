@@ -118,8 +118,8 @@ export class JobsEntity {
   @OneToMany(() => InterviewsEnitiy, (interviews) => interviews.Job, {
     cascade: ['insert', 'update', 'soft-remove'],
   })
-  @JoinTable({ name: 'jobs_interviews' })
-  interviews: InterviewsEnitiy[];
+  @JoinTable()
+  Interviews: InterviewsEnitiy[];
 
   @OneToMany(() => ReturnsEntity, (returns) => returns.Job, {
     cascade: ['insert', 'update', 'soft-remove'],

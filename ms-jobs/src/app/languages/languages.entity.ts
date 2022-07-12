@@ -12,7 +12,7 @@ import {
 import { SoftDeleteQueryBuilder } from 'typeorm/query-builder/SoftDeleteQueryBuilder';
 import { JobsEntity } from '../jobs/jobs.entity';
 
-@Entity({ name: 'languages' })
+@Entity()
 export class LanguagesEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
