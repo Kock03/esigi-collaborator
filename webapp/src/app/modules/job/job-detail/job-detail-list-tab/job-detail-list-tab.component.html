@@ -6,14 +6,14 @@
           <span class="label-office">
             {{ job.jobName }}
           </span>
-          <span class="label-gray">
+          <span class="label-gray"  *ngIf="collaborator">
             <b>{{'generic.request' | translate}}:</b>
-            {{ job.firstNameCorporateName }}
-            {{job.lastNameFantasyName}}
+            {{ collaborator.firstNameCorporateName }}
+            {{collaborator.lastNameFantasyName}}
           </span>
-          <span class="label-gray">
+          <span class="label-gray"  *ngIf="customer">
             <b>{{'generic.client' | translate}}:</b>
-            {{ job.customerId }}
+            {{ customer.corporateName }}
           </span>
           <span class="label-gray">
             <b>{{'generic.opening_date' | translate}}:</b>

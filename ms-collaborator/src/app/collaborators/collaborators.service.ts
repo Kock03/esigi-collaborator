@@ -139,11 +139,14 @@ export class CollaboratorsService {
 
   async findOneOrFail(
     conditions: FindConditions<CollaboratorsEntity>,
-
     options?: FindOneOptions<CollaboratorsEntity>,
   ) {
     options = { relations: ['Financials', 'Address', 'BankData', 'Dependents', 'Documents', 'Educations', 'Feedbacks', 'Languages', 'Phone', 'Skills'] };
-                                                         
+    try {
+      return await this.collaboratorsRepository.findOneOrFail(conditions, options);
+    } catch {
+      throw new NotFoundException();
+    }                                      
   }
 
   async store(data: CreateCollaboratorsDto) {

@@ -39,7 +39,6 @@ export class JobsService {
         jobs.map((job) => {
           const collaborator = collaborators.data.find(
             (collaborator) => collaborator.id === job.collaboratorRequesterId);
-          console.log(collaborator)
           job.collaborator = {
             firstNameCorporateName: collaborator.firstNameCorporateName,
             lastNameFantasyName: collaborator.lastNameFantasyName,
@@ -87,11 +86,10 @@ export class JobsService {
     options = {
       relations: ['Seniorities', 'Knowledges', 'Languages', 'Returns', 'Interviews'],
     }
-    let job;
-    let collaborator;
+
     try {
 
-       job = await this.jobsRepository.findOneOrFail(
+       return await this.jobsRepository.findOneOrFail(
         conditions,
         options,
       );
@@ -100,24 +98,6 @@ export class JobsService {
       throw new NotFoundException();
     }
     
-    try{
-      const collaboratorId = job.collaboratorRequesterId
-       collaborator =  this.httpService.post('http://localhost:3501/api/v1/collaborators/list/collaborator', {
-        id: collaboratorId,
-      })
-
-      job.collaborator = {
-        firstNameCorporateName: collaborator.firstNameCorporateName,
-        lastNameFantasyName: collaborator.lastNameFantasyName,
-      };
-      console.log(job)
-      return job;
-
-    }catch (error) {
-      console.log(error)
-    }
-   
-    return job;
   }
 
 
