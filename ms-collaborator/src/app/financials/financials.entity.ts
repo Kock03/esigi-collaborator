@@ -30,10 +30,10 @@ export class FinancialsEntity {
   reason: Reasons;
 
   @Column()
-  payday: Date;
+  payday: string;
 
   @Column()
-  dateInclusion: Date;
+  dateInclusion: string;
 
   @Column({ type: 'double', nullable: true })
   monthlyValue: number;

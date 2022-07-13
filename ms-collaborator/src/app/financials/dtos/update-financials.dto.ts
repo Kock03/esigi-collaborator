@@ -20,7 +20,6 @@ export class UpdateFinancialsDto {
 
   @ApiProperty()
   @IsOptional()
-  @IsNumber()
   value: number;
 
   @ApiProperty()
@@ -30,11 +29,11 @@ export class UpdateFinancialsDto {
 
   @ApiProperty()
   @IsOptional()
-  dateInclusion: Date;
+  dateInclusion: string;
 
   @ApiProperty()
   @IsOptional()
-  payday: Date;
+  payday: string;
 
   @ApiProperty()
   @IsOptional()

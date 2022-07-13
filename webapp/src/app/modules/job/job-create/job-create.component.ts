@@ -156,21 +156,13 @@ export class JobCreateComponent implements OnInit {
         '',
         [
           Validators.required,
-          Validators.minLength(8),
-          Validators.maxLength(50),
-        ],
+          Validators.minLength(2),  ],
       ],
       startForecast: this.fb.control({ value: ' ', disabled: false },[ DocumentValidator.isValidData(), Validators.required]),
       jobNumber: ['', Validators.required],
       typeOfContract: [''],
       workplace: [''], 
-      workingDay: [
-        '',
-        [
-          Validators.maxLength(50),
-          Validators.minLength(5),
-        ],
-      ],
+      workingDay: ['', Validators.required],
       minimumValue: [''],
       maximumValue: [''],
       openingDate: this.fb.control({ value: new Date().toLocaleDateString(), disabled: false },[ DocumentValidator.isValidData(), Validators.required]),

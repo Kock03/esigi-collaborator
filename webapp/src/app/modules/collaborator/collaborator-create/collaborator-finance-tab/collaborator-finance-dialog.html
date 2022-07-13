@@ -45,7 +45,7 @@
 
         <mat-form-field appearance="outline">
           <mat-label>{{'collaborator.colaborator_create.finance.value' | translate}}</mat-label>
-          <input mask="00||00,00||000,00||0.000,00||00.000,00" matInput disableRipple formControlName="value"
+          <input matInput prefix="R$" type="text" mask="separator.2" thousandSeparator="." separatorLimit="100000000" disableRipple formControlName="value"
             placeholder="Valor" />
           <mat-error *ngIf="financeForm &&
             financeForm.controls['value'].hasError('required')">

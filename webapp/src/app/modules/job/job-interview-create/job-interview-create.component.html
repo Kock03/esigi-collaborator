@@ -67,7 +67,7 @@
           <div fxFlex="100" fxLayoutGap="16px">
             <mat-form-field fxFlex="30" appearance="outline">
               <mat-label>{{'job.job_interview_create.salary_expectation' | translate}}</mat-label>
-              <input matInput formControlName="salaryExpectation" />
+              <input matInput  prefix="R$" type="text" mask="separator.2" thousandSeparator="." separatorLimit="100000000" formControlName="salaryExpectation" />
             </mat-form-field>
 
             <div class="checkbox-section" fxFlex="70">

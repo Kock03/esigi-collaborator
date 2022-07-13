@@ -72,9 +72,9 @@ export class CollaboratorFinanceDialog {
       dateInclusion: this.fb.control({ value: ' ', disabled: false },[ DocumentValidator.isValidData(), Validators.required]),
       contractType: [null, Validators.required],
       reason: [null, Validators.required],
-      value: [null, Validators.required],
+      value: ['', Validators.required],
       payday: this.fb.control({ value: ' ', disabled: false },[ DocumentValidator.isValidData(), Validators.required]),
-      collaborator: { id: this.collaboratorId },
+      Collaborator: { id: this.collaboratorId },
     });
     if (this.data) {
       this.financeForm.patchValue(this.data);

@@ -20,7 +20,6 @@ export class CreateFinancialsDto {
 
   @ApiProperty()
   @IsNotEmpty()
-  @IsNumber()
   value: number;
 
   @ApiProperty()
@@ -30,11 +29,11 @@ export class CreateFinancialsDto {
 
   @ApiProperty()
   @IsNotEmpty()
-  dateInclusion: Date;
+  dateInclusion: string;
 
   @ApiProperty()
   @IsNotEmpty()
-  payday: Date;
+  payday: string;
 
   @ApiProperty()
   @IsNotEmpty()

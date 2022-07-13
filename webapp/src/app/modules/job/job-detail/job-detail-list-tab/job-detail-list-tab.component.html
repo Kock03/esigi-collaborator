@@ -94,11 +94,11 @@
           </span>
           <span class="label-gray">
             <b>{{'job.job_create.minimum_value' | translate}}:</b>
-            {{ job.minimumValue }}
+            {{ job.minimumValue | currency: 'BRL'}}
           </span>
           <span class="label-gray">
             <b>{{'job.job_create.maximum_value' | translate}}:</b>
-            {{ job.maximumValue }}
+            {{ job.maximumValue | currency: 'BRL'}}
           </span>
           <span class="label-gray">
             <b>{{'job.name' | translate}}:</b>
