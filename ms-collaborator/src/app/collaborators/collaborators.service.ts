@@ -49,7 +49,7 @@ export class CollaboratorsService {
   async shortListCollaborators() {
     return await this.collaboratorsRepository.find({
       select: ['id', 'firstNameCorporateName', 'lastNameFantasyName', 'email'],
-      where: { active: true },
+      where: { inactive: false },
     });
   }
 

@@ -35,6 +35,7 @@ export class JobsService {
           idList: collaboratorIdList,
         })
         .toPromise();
+        
       if (collaborators.data) {
         jobs.map((job) => {
           const collaborator = collaborators.data.find(
