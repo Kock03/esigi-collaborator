@@ -34,8 +34,8 @@ export class CollaboratorsService {
 
   async findCollaboratorsListById(idList: string[]) {
     return await this.collaboratorsRepository.find({
-      select: ['id', 'firstNameCorporateName', 'lastNameFantasyName'],
-      where: { id: In(idList) }
+      select: ['id', 'firstNameCorporateName', 'lastNameFantasyName', 'office', 'login', 'inactive'],
+      where: { id: In(idList) } 
     })
   }
 
