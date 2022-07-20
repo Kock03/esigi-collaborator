@@ -16,7 +16,7 @@ export class BankDataService {
   constructor(
     @InjectRepository(BankDataEntity)
     private readonly bankDataRepository: Repository<BankDataEntity>,
-  ) {}
+  ) { }
 
   async findAll() {
     const options: FindManyOptions = {
@@ -38,23 +38,51 @@ export class BankDataService {
     }
   }
 
-  // async findBankData(id: string){
-  //   return await this.bankDataRepository.query('select bank_data.id, bank_data.bank, bank_data.agency, bank_data.account_type, bank_data.digit, bank_data.bank_account_digit, bank_data.status from bank_data where bank_')
-  // }
-
   async store(data: CreateBankDataDto) {
-    const bank = this.bankDataRepository.create(data);
 
-    return await this.bankDataRepository.save(bank);
+    try {
+      if (data.status === true) {
+        const list = await this.findAll();
+        Object.keys(list).forEach(key => {
+          list[key].status = 0
+          this.update(list[key].id, list[key]);
+        })
+      }
+      const bank = this.bankDataRepository.create(data);
+
+      return await this.bankDataRepository.save(bank);
+
+    } catch (e) {
+      console.error(e);
+    }
+
   }
 
   async update(id: string, data: UpdateBankDataDto) {
-    const bank = await this.bankDataRepository.findOneOrFail({ id });
-    if (!bank) {
-      throw new NotFoundException();
+    try{
+      const bank = await this.bankDataRepository.findOneOrFail({ id });
+      if (!bank) {
+        throw new NotFoundException();
+      }
+      if(data.status === true){
+        const list = await this.findAll();
+        Object.keys(list).forEach(key => {
+          if(list[key].id === id){
+            list[key].status = 1
+            return this.bankDataRepository.save({ id: id, ...data });
+          }else{
+            list[key].status = 0
+            this.update(list[key].id, list[key]);
+          }
+        })
+      } else{
+        return await this.bankDataRepository.save({ id: id, ...data });
+      }
+      console.log(data)
+    }catch (e){
+      console.log(e);
     }
 
-    return await this.bankDataRepository.save({ id: id, ...data });
   }
 
   async destroy(id: string) {

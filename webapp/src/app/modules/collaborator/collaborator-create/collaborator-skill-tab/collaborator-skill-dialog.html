@@ -48,7 +48,7 @@
             matInput
             disableRipple
             formControlName="yearsExperience"
-            type="number"
+            mask="0||00"
             placeholder="Tempo de Experiência" />
             <mat-error *ngIf="skillForm &&
           skillForm.controls['yearsExperience'].hasError('required')">

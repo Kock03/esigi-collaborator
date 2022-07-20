@@ -26,8 +26,7 @@ export class CreateBankDataDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
-  @MinLength(4)
-  @MaxLength(4)
+  @Length(4)
   agency: string;
 
   @ApiProperty()

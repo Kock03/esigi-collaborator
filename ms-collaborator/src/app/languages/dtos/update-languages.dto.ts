@@ -14,14 +14,18 @@ import { degreeOfInfluence } from './degree-of-influence.enum';
 
 export class UpdateLanguagesDto {
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
-  @MinLength(1)
   languageName: string;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsEnum(degreeOfInfluence)
   degreeOfInfluence: degreeOfInfluence;
+
+  @ApiProperty()
+  @IsOptional()
+  Collaborator: CollaboratorsEntity;
+
 
 }

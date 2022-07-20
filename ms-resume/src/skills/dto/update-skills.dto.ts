@@ -23,7 +23,6 @@ export class UpdateSkillsDto {
 
   @ApiProperty()
   @IsOptional()
-  @IsEnum(Seniority)
   seniority: Seniority;
 
   @ApiProperty()
@@ -31,5 +30,7 @@ export class UpdateSkillsDto {
   @IsBoolean()
   currentPosition: boolean;
 
-
+  @ApiProperty()
+  @IsNotEmpty()
+Resume: ResumesEntity;
 }

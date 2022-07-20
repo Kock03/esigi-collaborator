@@ -53,4 +53,9 @@ export class UpdateExperiencesDto {
   @IsString()
   description: string;
 
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsObject()
+  Resume: ResumesEntity;
+
 }

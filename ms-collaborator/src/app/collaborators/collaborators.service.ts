@@ -187,18 +187,6 @@ export class CollaboratorsService {
     return await this.collaboratorsRepository.save({ id: id, ...data });
   }
 
-  async updatePermission(id: string, data: UpdatePermissionDto) {
-    try {
-      const collaborator = await this.collaboratorsRepository.findOneOrFail({
-        id,
-      });
-    } catch {
-      throw new NotFoundException();
-    }
-
-    return await this.collaboratorsRepository.save({ id: id, ...data });
-  }
-
   async destroy(id: string) {
     try {
       await this.collaboratorsRepository.findOneOrFail({ id });

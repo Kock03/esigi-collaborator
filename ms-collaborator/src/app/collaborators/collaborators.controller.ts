@@ -85,14 +85,6 @@ export class CollaboratorsController {
     return await this.collaboratorsService.findActive();
   }
 
-  @Put('permission/:id')
-  async updatePermission(
-    @Param('id', new ParseUUIDPipe()) id: string,
-    @Body() body: UpdatePermissionDto,
-  ) {
-    return await this.collaboratorsService.updatePermission(id, body);
-  }
-
   @Put(':id')
   async update(
     @Param('id', new ParseUUIDPipe()) id: string,

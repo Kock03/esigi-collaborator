@@ -58,7 +58,7 @@ export class CollaboratorEducationDialog {
         const education = await this.collaboratorEducationProvider.store(data);
         sessionStorage.setItem('education_id', education.id);
       } catch (error: any) {
-        console.log('ERROR 132' + error);
+        console.log(error);
       }
     }
     if (this.method === 'edit') {
@@ -69,7 +69,7 @@ export class CollaboratorEducationDialog {
           data
         );
       } catch (error: any) {
-        console.log('ERROR 132' + error);
+        console.log(error);
       }
     }
   }

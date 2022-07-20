@@ -143,7 +143,7 @@ export class FeedbackCreateComponent implements OnInit {
     sessionStorage.removeItem('collaborator_id');
       this.snackBarService.showAlert('Feedbcack cadastrado com sucesso!');
     } catch (error) {
-      console.log('ERROR 132' + error);
+      console.log( error);
       this.snackBarService.showAlert('Falha ao cadastrar!');
     }
   }

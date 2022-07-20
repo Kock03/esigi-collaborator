@@ -35,17 +35,6 @@ export class ResumeApplicationTabComponent implements OnInit {
 
   private _unsubscribeAll: Subject<any>;
 
-  // dataSource: Application[] = [
-  //   {
-  //     jobName: 'C#',
-  //     client: 'Ambev',
-  //     applicationDate: '03/01/2020',
-  //     returnDate: '22/02/2020',
-  //     status: 'Reprovado',
-  //     responsible: 'Wellington Almeida',
-  //   },
-  // ];
-
   displayedApplication: string[] = [
     'jobName',
     'client',

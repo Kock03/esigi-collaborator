@@ -15,4 +15,8 @@ export class UpdateLanguagesDto {
   @IsEnum(Fluency)
   degreeOfInfluence: Fluency;
 
+  @ApiProperty()
+  @IsNotEmpty()
+  Resume: ResumesEntity;
+
 }

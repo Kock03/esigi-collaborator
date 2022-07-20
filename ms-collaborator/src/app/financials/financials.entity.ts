@@ -54,10 +54,4 @@ export class FinancialsEntity {
   @DeleteDateColumn()
   deletedAt: Date;
 
-  @BeforeInsert()
-  @BeforeUpdate()
-  monthlyValueCalculation() {
-    this.monthlyValue = this.value * 170
-  }
-
 }

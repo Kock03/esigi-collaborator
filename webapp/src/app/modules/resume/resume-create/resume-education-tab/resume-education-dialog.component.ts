@@ -58,7 +58,7 @@ export class ResumeEducationDialog {
         const education = await this.resumeEducationProvider.store(data);
         sessionStorage.setItem('education_id', education.id);
       } catch (error: any) {
-        console.log('ERROR 132' + error);
+        console.log(error);
       }
     }
     if (this.method === 'edit') {
@@ -69,7 +69,7 @@ export class ResumeEducationDialog {
           data
         );
       } catch (error: any) {
-        console.log('ERROR 132' + error);
+        console.log( error);
       }
     }
   }

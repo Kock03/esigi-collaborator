@@ -1,0 +1,32 @@
+#jobCreate {
+  max-width: 1200px;
+
+  .tab-group {
+    width: 100%;
+    cursor: pointer;
+  }
+
+  .tab-item {
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  .content-scroll {
+    overflow: auto;
+    height: calc(100vh - 280px);
+
+  }
+
+  .navigation-buttons {
+    margin-top: 8px;
+  }
+}
+
+#jobSkillDialog {
+  height: 150px;
+
+}
+
+.page {
+  height: 100% !important;
+}

@@ -38,6 +38,7 @@ export class FinancialsService {
   }
 
   async store(data: CreateFinancialsDto) {
+    data.monthlyValue = data.value * 170;
     const financial = this.financialsRepository.create(data);
     return await this.financialsRepository.save(financial);
   }
@@ -47,6 +48,7 @@ export class FinancialsService {
     if (!financial) {
       throw new NotFoundException();
     }
+    data.monthlyValue = financial.value * 170;
     return await this.financialsRepository.save({ id: id, ...data });
   }
 

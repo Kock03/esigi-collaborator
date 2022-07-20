@@ -47,7 +47,7 @@ export class CollaboratorBankDialog {
       accountNumber: [null, [Validators.required, Validators.maxLength(5)]],
       digit: [null],
       bankAccountDigit: [null, [Validators.required, Validators.maxLength(1)]],
-      status: [null, Validators.required],
+      status: [true, Validators.required],
       Collaborator: { id: this.collaboratorId },
     });
 
@@ -68,22 +68,24 @@ export class CollaboratorBankDialog {
       data.status = false;
     }
     try {
-      const bank = await this.collaboratorBankProvider.store(data);
-      sessionStorage.setItem('bank_id', bank.id);
+      if (this.method === 'edit') {
+        try {
+          this.bankId = sessionStorage.getItem('bank_id');
+          const updateBank = await this.collaboratorBankProvider.update(
+            this.bankId,
+            data
+          );
+          console.log(updateBank)
+        } catch (error: any) {
+          console.log(error);
+        }
+      }else{
+        const bank = await this.collaboratorBankProvider.store(data);
+        sessionStorage.setItem('bank_id', bank.id);
+      }
     } catch (error: any) {
       console.log('ERROR 132' + error);
     }
-
-    if (this.method === 'edit') {
-      try {
-        this.bankId = sessionStorage.getItem('bank_id');
-        const updateBank = await this.collaboratorBankProvider.update(
-          this.bankId,
-          data
-        );
-      } catch (error: any) {
-        console.log('ERROR 132' + error);
-      }
-    }
+   
   }
 }

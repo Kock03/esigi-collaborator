@@ -16,7 +16,6 @@ export class UpdateEducationsDto {
   @ApiProperty()
   @IsOptional()
   @IsString()
-  @MinLength(1)
   course: string;
 
   @ApiProperty()
@@ -27,7 +26,6 @@ export class UpdateEducationsDto {
   @ApiProperty()
   @IsOptional()
   @IsString()
-  @MinLength(1)
   institution: string;
 
   @ApiProperty()

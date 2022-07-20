@@ -30,5 +30,5 @@ export class UpdateEducationsingDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsObject()
-  resume: ResumesEntity;
+  Resume: ResumesEntity;
 }

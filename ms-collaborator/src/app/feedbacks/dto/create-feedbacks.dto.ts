@@ -86,6 +86,5 @@ export class CreateFeedbacksDto {
 
   @ApiPropertyOptional()
   @IsOptional()
-  @IsObject()
   Collaborator: CollaboratorsEntity;
 }

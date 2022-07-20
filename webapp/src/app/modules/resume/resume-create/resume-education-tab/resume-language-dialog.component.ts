@@ -65,7 +65,7 @@ export class ResumeLanguageDialog {
           data
         );
       } catch (error: any) {
-        console.log('ERROR 132' + error);
+        console.log( error);
       }
     }
   }

@@ -1,4 +1,4 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import {
   IsEnum,
   IsOptional,
@@ -81,4 +81,9 @@ export class UpdateFeedbacksDto {
   @IsString()
   @MinLength(1)
   commitment: string;
+
+  
+  @ApiPropertyOptional()
+  @IsOptional()
+  Collaborator: CollaboratorsEntity;
 }

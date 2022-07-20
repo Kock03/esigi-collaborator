@@ -39,4 +39,8 @@ export class UpdateFinancialsDto {
   @IsOptional()
   monthlyValue: number;
 
+  @IsOptional()
+  Collaborator: CollaboratorsEntity;
+
+
 }

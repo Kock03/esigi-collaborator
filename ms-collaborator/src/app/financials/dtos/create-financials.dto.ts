@@ -36,8 +36,13 @@ export class CreateFinancialsDto {
   payday: string;
 
   @ApiProperty()
+  @IsOptional()
+  monthlyValue: number;
+
+  @ApiProperty()
   @IsNotEmpty()
   @IsObject()
   Collaborator: CollaboratorsEntity;
 
 }
+

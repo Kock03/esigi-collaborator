@@ -25,8 +25,7 @@ export class UpdateBankDataDto {
   @ApiProperty()
   @IsOptional()
   @IsString()
-  @MinLength(4)
-  @MaxLength(4)
+  @Length(4)
   agency: string;
 
 
@@ -42,22 +41,13 @@ export class UpdateBankDataDto {
 
   @ApiProperty()
   @IsOptional()
-  @IsNumber()
-  @MinLength(9)
-  @MaxLength(9)
+  @IsString()
   accountNumber: string;
 
   @ApiProperty()
   @IsOptional()
-  @IsNumber()
-  @MinLength(4)
-  @MaxLength(4)
+  @IsString()
   bankAccountDigit: string;
-
-  @ApiProperty()
-  @IsNotEmpty()
-  @IsBoolean()
-  isActive: boolean;
 
   @ApiProperty()
   @IsOptional()

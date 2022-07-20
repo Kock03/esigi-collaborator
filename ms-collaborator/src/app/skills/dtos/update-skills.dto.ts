@@ -29,7 +29,6 @@ export class UpdateSkillsDto {
 
   @ApiProperty()
   @IsOptional()
-  @IsNumber()
   yearsExperience: number;
 
   @ApiProperty()
@@ -41,4 +40,8 @@ export class UpdateSkillsDto {
   @IsOptional()
   @IsBoolean()
   currentPosition: boolean;
+
+  @IsOptional()
+  Collaborator: CollaboratorsEntity;
+
 }

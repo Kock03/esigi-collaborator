@@ -27,8 +27,7 @@ export class CreateSkillsDto {
 
   @ApiProperty()
   @IsNotEmpty()
-  @IsNumber()
-  yearsExperience: number;
+    yearsExperience: number;
 
   
   @ApiProperty()

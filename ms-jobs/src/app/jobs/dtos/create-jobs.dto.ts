@@ -99,12 +99,10 @@ export class CreateJobsDto {
 
   @ApiProperty()
   @IsNotEmpty()
-  @IsNumber()
   minimumValue: number;
 
   @ApiProperty()
   @IsNotEmpty()
-  @IsNumber()
   maximumValue: number;
 
   @ApiProperty()

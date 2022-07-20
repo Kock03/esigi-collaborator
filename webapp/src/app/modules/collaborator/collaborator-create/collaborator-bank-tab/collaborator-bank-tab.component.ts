@@ -65,7 +65,6 @@ export class CollaboratorBankTabComponent implements OnInit {
     console.log(this.collaboratorId)
     const data = await this.collaboratorProvider.findOne(this.collaboratorId);
     this.data = data.BankData;
-    console.log(this.data);
   }
 
 
@@ -92,7 +91,7 @@ export class CollaboratorBankTabComponent implements OnInit {
     this.method = 'edit';
     sessionStorage.setItem('method', this.method);
     this.bankId = id;
-    sessionStorage.setItem('dependent_id', this.bankId);
+    sessionStorage.setItem('bank_id', this.bankId);
     const dialogRef = this.dialog.open(CollaboratorBankDialog, {
       width: '500px',
       height: '470px',
@@ -104,19 +103,6 @@ export class CollaboratorBankTabComponent implements OnInit {
       }
     });
   }
-
-  // checkBank(bank: any) {
-  //   if (bank.status) {
-  //     const activeLength = this.bankArray.value.filter(
-  //       (item: any) => item.status
-  //     );
-  //     if (activeLength.length > 1) {
-  //       //  TODO - Exibir mensagem que não pode um banco ativo
-  //     }
-  //   } else {
-  //     this.bankArray.controls[this.index].patchValue(bank);
-  //   }
-  // }
 
   deleteBank(id: string) {
     const options = {
