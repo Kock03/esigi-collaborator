@@ -73,11 +73,11 @@ export class JobsEntity {
   @Column()
   workingDay: string;
 
-  @Column({ type: 'numeric' })
-  minimumValue: number;
+  @Column()
+  minimumValue: string;
 
-  @Column({ type: 'numeric' })
-  maximumValue: number;
+  @Column()
+  maximumValue: string;
 
   @Column({ type: 'int' })
   schooling: Schooling;

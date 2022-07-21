@@ -94,11 +94,11 @@ export class UpdateJobsDto {
 
   @ApiProperty()
   @IsOptional()
-  minimumValue: number;
+  minimumValue: string;
 
   @ApiProperty()
   @IsOptional()
-  maximumValue: number;
+  maximumValue: string;
 
   @ApiProperty()
   @IsOptional()

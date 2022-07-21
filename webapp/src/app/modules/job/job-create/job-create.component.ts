@@ -35,6 +35,7 @@ import { CollaboratorProvider } from 'src/providers/collaborator-providers/colla
 import { JobProvider } from 'src/providers/job.provider';
 import { SnackBarService } from 'src/services/snackbar.service';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
+import { MustMatch } from 'src/app/validators/min-max-value.validator';
 
 
 @Component({
@@ -181,6 +182,9 @@ export class JobCreateComponent implements OnInit {
         senior: [false],
       }),
       Knowledges: this.fb.array(this.job ? this.job.Knowledges : []),
+    },
+    {
+      validator: [MustMatch('minimumValue', 'maximumValue')],
     });
 
     this.collaboratorControl.valueChanges.subscribe((res) => {
