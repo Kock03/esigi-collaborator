@@ -23,7 +23,7 @@ export class UpdateReturnsDto {
 
   @ApiProperty()
   @IsOptional()
-  dateOfReturn: Date;
+  dateOfReturn: string;
 
   @ApiProperty()
   @IsOptional()

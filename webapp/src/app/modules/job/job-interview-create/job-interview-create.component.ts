@@ -89,7 +89,7 @@ export class JobInterviewCreateComponent implements OnInit {
       id: null,
       nameCandidate: ['', Validators.required],
       techRecruter: ['', Validators.required],
-      behavioralInterviewDate:  this.fb.control({ value: ' ', disabled: false },[ DocumentValidator.isValidData(), Validators.required]),
+      behavioralInterviewDate: this.fb.control({ value: ' ', disabled: false }, [DocumentValidator.isValidData(), Validators.required]),
       hourInterview: ['', Validators.required],
       punctuality: [1, Validators.required],
       presentation: [1, Validators.required],
@@ -100,7 +100,7 @@ export class JobInterviewCreateComponent implements OnInit {
         legalPerson: [false, Validators.required],
         cooperative: [false, Validators.required],
       }),
-      behavioralAssessment: ['', Validators.required],
+      behavioralAssessment: [''],
       comments: [''],
       situational: [1, Validators.required],
       availabilityOfInitialize: ['', Validators.required],
@@ -108,7 +108,7 @@ export class JobInterviewCreateComponent implements OnInit {
     this.technicalInterviewForm = this.fb.group({
       nameCandidate: ['', Validators.required],
       evaluator: ['', Validators.required],
-      technicalInterviewDate:  this.fb.control({ value: ' ', disabled: false },[ DocumentValidator.isValidData(), Validators.required]),
+      technicalInterviewDate: this.fb.control({ value: ' ', disabled: false }, [DocumentValidator.isValidData(), Validators.required]),
       hourInterview: ['', Validators.required],
       punctuality: [1, Validators.required],
       jobProfile: [true, Validators.required],
@@ -121,27 +121,27 @@ export class JobInterviewCreateComponent implements OnInit {
     this.clientInterviewForm = this.fb.group({
       nameCandidate: ['', Validators.required],
       evaluator: ['', Validators.required],
-      clientInterviewDate:  this.fb.control({ value: ' ', disabled: false },[ DocumentValidator.isValidData(), Validators.required]),
+      clientInterviewDate: this.fb.control({ value: ' ', disabled: false }, [DocumentValidator.isValidData(), Validators.required]),
       hourInterview: ['', Validators.required],
       punctuality: [1, Validators.required],
       jobProfile: [true, Validators.required],
-      technicalEvaluation: ['', Validators.required],
-      comments: ['', Validators.required],
+      technicalEvaluation: [''],
+      comments: [''],
       situational: [1, Validators.required],
     });
 
     this.returnForm = this.fb.group({
       nameCandidate: ['', Validators.required],
-      dateOfReturn:  this.fb.control({ value: ' ', disabled: false },[ DocumentValidator.isValidData(), Validators.required]),
+      dateOfReturn: this.fb.control({ value: ' ', disabled: false }, [DocumentValidator.isValidData(), Validators.required]),
       technicalEvaluation: [1, Validators.required],
       behavioralEvaluation: [1, Validators.required],
-      technicalEvaluationComent: ['', Validators.required],
-      behavioralEvaluationComent: ['', Validators.required],
+      technicalEvaluationComent: [''],
+      behavioralEvaluationComent: [''],
       returnOfCandidate: [true, Validators.required],
       reason: [1, Validators.required],
       typeOdContract: [1, Validators.required],
       combinedValue: ['', Validators.required],
-      initialData: this.fb.control({ value: new Date().toLocaleDateString(), disabled: false },[ DocumentValidator.isValidData(), Validators.required]),
+      initialData: this.fb.control({ value: new Date().toLocaleDateString(), disabled: false }, [DocumentValidator.isValidData(), Validators.required]),
     });
 
 
@@ -216,8 +216,8 @@ export class JobInterviewCreateComponent implements OnInit {
           'Entrevista Técnica Cadastrada Com Sucesso!'
         );
         const jobId = sessionStorage.getItem('job_id');
-    this.router.navigate([`vaga/detalhe/${jobId}`]);
-    sessionStorage.removeItem('job_id');
+        this.router.navigate([`vaga/detalhe/${jobId}`]);
+        sessionStorage.removeItem('job_id');
         this.selectedIndex = this.selectedIndex + 1;
       } catch (error) {
         console.log('ERROR 132' + error);

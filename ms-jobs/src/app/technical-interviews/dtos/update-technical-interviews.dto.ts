@@ -29,7 +29,7 @@ export class UpdateTechnicalInterviewsDto {
 
   @ApiProperty()
   @IsOptional()
-  technicalInterviewDate: Date;
+  technicalInterviewDate: string;
 
   @ApiProperty()
   @IsOptional()

@@ -44,10 +44,10 @@ export class BehavioralInterviewsEntity {
   @Column()
   salaryExpectation: string;
 
-  @Column()
+  @Column({ nullable: true })
   behavioralAssessment: string;
 
-  @Column()
+  @Column({ nullable: true })
   comments: string;
 
   @Column()

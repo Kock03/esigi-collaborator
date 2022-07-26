@@ -28,7 +28,7 @@ export class CreateClientInterviewsDto {
 
   @ApiProperty()
   @IsNotEmpty()
-  clientInterviewDate: Date;
+  clientInterviewDate: string;
 
   @ApiProperty()
   @IsNotEmpty()
@@ -46,12 +46,12 @@ export class CreateClientInterviewsDto {
   jobProfile: boolean;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
   technicalEvaluation: string;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
   comments: string;
 

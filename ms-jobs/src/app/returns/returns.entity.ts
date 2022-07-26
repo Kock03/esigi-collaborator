@@ -23,7 +23,7 @@ export class ReturnsEntity {
   nameCandidate: string;
 
   @Column()
-  dateOfReturn: Date;
+  dateOfReturn: string;
 
   @Column()
   behavioralEvaluation: Situation;
@@ -31,10 +31,10 @@ export class ReturnsEntity {
   @Column()
   technicalEvaluation: Situation;
 
-  @Column()
+  @Column({ nullable: true })
   behavioralEvaluationComent: string;
 
-  @Column()
+  @Column({ nullable: true })
   technicalEvaluationComent: string;
 
   @Column()

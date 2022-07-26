@@ -28,7 +28,7 @@ export class ClientInterviewsEntity {
   evaluator: string;
 
   @Column()
-  clientInterviewDate: Date;
+  clientInterviewDate: string;
 
   @Column()
   hourInterview: string;
@@ -39,10 +39,10 @@ export class ClientInterviewsEntity {
   @Column()
   jobProfile: boolean;
 
-  @Column()
+  @Column({ nullable: true })
   technicalEvaluation: string;
 
-  @Column()
+  @Column({ nullable: true })
   comments: string;
 
   @Column()

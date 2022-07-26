@@ -28,7 +28,7 @@ export class UpdateClientInterviewsDto {
 
   @ApiProperty()
   @IsOptional()
-  clientInterviewDate: Date;
+  clientInterviewDate: string;
 
   @ApiProperty()
   @IsOptional()

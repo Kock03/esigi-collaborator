@@ -4,6 +4,7 @@ import {
   IsDate,
   IsEnum,
   IsNotEmpty,
+  IsOptional,
   IsString,
   MaxLength,
   MinLength,
@@ -23,7 +24,7 @@ export class CreateReturnsDto {
 
   @ApiProperty()
   @IsNotEmpty()
-  dateOfReturn: Date;
+  dateOfReturn: string;
 
   @ApiProperty()
   @IsNotEmpty()
@@ -36,12 +37,12 @@ export class CreateReturnsDto {
   technicalEvaluation: Situation;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
   behavioralEvaluationComent: string;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   technicalEvaluationComent: string;
 
   @ApiProperty()

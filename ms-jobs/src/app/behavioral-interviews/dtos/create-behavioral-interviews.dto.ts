@@ -55,12 +55,12 @@ export class CreateBehaviorInterviewsDto {
   @IsString()
   salaryExpectation: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   @ApiProperty()
   @IsString()
   behavioralAssessment: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   @ApiProperty()
   @IsString()
   comments: string;

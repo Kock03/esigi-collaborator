@@ -29,7 +29,7 @@ export class TechnicalInterviewsEntity {
   evaluator: string;
 
   @Column()
-  technicalInterviewDate: Date;
+  technicalInterviewDate: string;
 
   @Column()
   hourInterview: string;
@@ -40,10 +40,10 @@ export class TechnicalInterviewsEntity {
   @Column()
   jobProfile: boolean;
 
-  @Column()
+  @Column({ nullable: true })
   technicalEvaluation: string;
 
-  @Column() 
+  @Column({ nullable: true })
   comments: string;
 
   @Column()
