@@ -31,7 +31,7 @@ export class UpdateBehaviorInterviewsDto {
 
   @IsOptional()
   @ApiProperty()
-  behavioralInterviewDate: Date;
+  behavioralInterviewDate: string;
 
   @IsOptional()
   @ApiProperty()

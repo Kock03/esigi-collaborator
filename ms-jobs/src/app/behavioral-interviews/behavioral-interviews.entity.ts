@@ -30,7 +30,7 @@ export class BehavioralInterviewsEntity {
   techRecruter: string;
 
   @Column()
-  behavioralInterviewDate: Date;
+  behavioralInterviewDate: string;
 
   @Column()
   hourInterview: string;

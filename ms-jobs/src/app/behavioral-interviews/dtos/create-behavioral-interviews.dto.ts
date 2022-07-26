@@ -33,7 +33,7 @@ export class CreateBehaviorInterviewsDto {
 
   @IsNotEmpty()
   @ApiProperty()
-  behavioralInterviewDate: Date;
+  behavioralInterviewDate: string;
 
   @IsNotEmpty()
   @ApiProperty()
