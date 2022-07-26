@@ -36,7 +36,7 @@ export class UpdateFeedbacksDto {
 
   @ApiProperty()
   @IsOptional()
-  feedbackDate: Date;
+  feedbackDate: string;
 
   @ApiProperty()
   @IsOptional()
@@ -45,7 +45,7 @@ export class UpdateFeedbacksDto {
 
   @ApiProperty()
   @IsOptional()
-  feedbackDateRetorn: Date;
+  feedbackDateRetorn: string;
 
   @ApiProperty()
   @IsOptional()
@@ -55,31 +55,26 @@ export class UpdateFeedbacksDto {
   @ApiProperty()
   @IsOptional()
   @IsString()
-  @MinLength(1)
   manager: string;
 
   @ApiProperty()
   @IsOptional()
   @IsString()
-  @MinLength(1)
   managerDescription: string;
 
   @ApiProperty()
   @IsOptional()
   @IsString()
-  @MinLength(1)
   improvementPoints: string;
 
   @ApiProperty()
   @IsOptional()
   @IsString()
-  @MinLength(1)
   collaboratorDescription: string;
 
   @ApiProperty()
   @IsOptional()
   @IsString()
-  @MinLength(1)
   commitment: string;
 
   

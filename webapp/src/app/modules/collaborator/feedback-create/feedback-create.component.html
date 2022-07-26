@@ -53,7 +53,7 @@
       <div class="formGroup1" fxFlex="100" fxLayoutGap="20px">
         <mat-form-field appearance="outline" fxFlex="20">
           <mat-label>{{'generic.status' | translate}}</mat-label>
-          <mat-select formControlName="status">
+          <mat-select formControlName="status" (ngModelChange)="onChange($event)">
             <mat-option [value]="1">{{'collaborator.colaborator_create.feedbacks.status.scheduled'|translate}}</mat-option>
             <mat-option [value]="2">{{'collaborator.colaborator_create.feedbacks.status.completed'|translate}}</mat-option>
             <mat-option [value]="3">{{'collaborator.colaborator_create.feedbacks.status.feedback_return'|translate}}</mat-option>
@@ -88,9 +88,6 @@
           <mat-label>{{'collaborator.colaborator_create.feedbacks.feedback_date_retorn'|translate}}</mat-label>
           <input matInput mask="00/00/0000" [showMaskTyped]="true" [dropSpecialCharacters]="false"
           formControlName="feedbackDateRetorn" placeholder="Data Retorno Feedback" />
-          <mat-error *ngIf="feedbackForm &&
-          feedbackForm.controls['feedbackDateRetorn'].hasError('required')">
-                {{'validators.validator-required' |  translate}} </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline" fxFlex="20">
@@ -100,9 +97,6 @@
             disableRipple
             formControlName="hourDateRetorn"
             mask="00:00" />
-            <mat-error *ngIf="feedbackForm &&
-            feedbackForm.controls['hourDateRetorn'].hasError('required')">
-                  {{'validators.validator-required' |  translate}} </mat-error>
         </mat-form-field>
       </div>
 
@@ -161,7 +155,7 @@
     <button
       mat-flat-button
       color="primary"
-      [disabled]="this.feedbackForm.invalid"
+      [disabled]="this.feedbackForm?.invalid"
       (click)="saveFeedback()">
       {{'generic.save_button' | translate}}
     </button>
@@ -175,6 +169,7 @@
     <button
       mat-flat-button
       color="primary"
+      [disabled]="this.feedbackForm?.invalid"
       (click)="saveEditFeedback()">
       {{'generic.save_button' | translate}}
     </button>

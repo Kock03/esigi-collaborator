@@ -82,13 +82,13 @@ export class JobsEntity {
   @Column({ type: 'int' })
   schooling: Schooling;
 
-  @Column()
+  @Column({ length: '4000'})
   collaboratorActivities: string;
 
-  @Column()
+  @Column({ length: '4000'})
   skills: string;
 
-  @Column()
+  @Column({ length: '4000' })
   attitudes: string;
 
   @Column()
@@ -104,6 +104,7 @@ export class JobsEntity {
   @OneToMany(() => KnowledgesEntity, (Knowledges) => Knowledges.Job, {
     cascade: ['insert', 'update', 'soft-remove'],
     orphanedRowAction: 'delete',
+    nullable: true
   })
   @JoinColumn()
   Knowledges: KnowledgesEntity[];

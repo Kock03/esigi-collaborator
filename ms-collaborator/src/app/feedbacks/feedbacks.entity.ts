@@ -31,13 +31,13 @@ export class FeedbacksEntity {
   status: Status;
 
   @Column()
-  feedbackDate: Date;
+  feedbackDate: string;
 
   @Column()
   hourDate: string;
 
   @Column({ nullable: true })
-  feedbackDateRetorn: Date;
+  feedbackDateRetorn: string;
 
   @Column({ nullable: true })
   hourDateRetorn: string;
@@ -45,16 +45,16 @@ export class FeedbacksEntity {
   @Column()
   manager: string;
 
-  @Column()
+  @Column({nullable: true})
   managerDescription: string;
 
-  @Column()
+  @Column({nullable: true})
   improvementPoints: string;
 
-  @Column()
+  @Column({nullable: true})
   collaboratorDescription: string;
 
-  @Column()
+  @Column({nullable: true})
   commitment: string;
 
   @CreateDateColumn()

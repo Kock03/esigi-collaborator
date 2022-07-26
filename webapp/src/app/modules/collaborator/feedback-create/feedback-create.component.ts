@@ -58,7 +58,7 @@ export class FeedbackCreateComponent implements OnInit {
   collaborators!: ICollaborator[];
   get!: any;
   feedbackTab: any;
-  collaboratorId!: string | null;
+  collaboratorId!: any;
 
   feedbackId!: string | null;
   feedback!: any;
@@ -79,84 +79,81 @@ export class FeedbackCreateComponent implements OnInit {
     this.feedbackId = this.route.snapshot.paramMap.get('id');
 
     if (this.get !== undefined) {
-      sessionStorage.setItem('collaborator_id', this.get.id);
+      this.collaboratorId = sessionStorage.getItem('collaborator_id');
+      this.initForm();
+
     }
 
-    this.initForm();
     if (this.feedbackId !== 'novo') {
       await this.getFeedback();
+      this.initForm();
+
     }
 
     this.setFormValue();
   }
 
   initForm(): void {
-    if (this.feedbackId !== 'novo') {
-      this.feedbackForm = this.fb.group({
-        feedbackType: [null, Validators.required],
-        reason: ['', Validators.required],
-        project: ['', Validators.required],
-        status: ['', Validators.required],
-        managerDescription: [''],
-        improvementPoints: [''],
-        collaboratorDescription: [''],
-        commitment: [''],
-        manager: ['', Validators.required],
-        feedbackDate:  this.fb.control({ value: ' ', disabled: false },[ DocumentValidator.isValidData(), Validators.required]),
-        hourDate: ['', Validators.required],
-        feedbackDateRetorn: this.fb.control({ value: ' ', disabled: false },[ DocumentValidator.isValidData(), Validators.required]),
-        hourDateRetorn: ['', Validators.required],
-      });
-    }
-    if (this.feedbackId == 'novo') {
-      this.feedbackForm = this.fb.group({
-        feedbackType: [null, Validators.required],
-        reason: ['', Validators.required],
-        project: ['', Validators.required],
-        status: ['', Validators.required],
-        managerDescription: [''],
-        improvementPoints: [''],
-        collaboratorDescription: [''],
-        commitment: [''],
-        manager: ['', Validators.required],
-        feedbackDate: this.fb.control({ value: ' ', disabled: false },[ DocumentValidator.isValidData(), Validators.required]),
-        hourDate: ['', Validators.required],
-        feedbackDateRetorn:  this.fb.control({ value: ' ', disabled: false },[ DocumentValidator.isValidData(), Validators.required]),
-        hourDateRetorn: ['', Validators.required],
-        Collaborator: sessionStorage.getItem('collaborator_id'),
-      });
+    this.feedbackForm = this.fb.group({
+      feedbackType: [null, Validators.required],
+      reason: ['', Validators.required],
+      project: ['', Validators.required],
+      status: [null, Validators.required],
+      managerDescription: [' ', Validators.required],
+      improvementPoints: [' ', Validators.required],
+      collaboratorDescription: [' ', Validators.required],
+      commitment: [' ', Validators.required],
+      manager: ['', Validators.required],
+      feedbackDate: this.fb.control({ value: ' ', disabled: false }, [DocumentValidator.isValidData(), Validators.required]),
+      hourDate: ['', Validators.required],
+      feedbackDateRetorn: this.fb.control({ value: ' ', disabled: false }, [DocumentValidator.isValidData(), Validators.required]),
+      hourDateRetorn: [''],
+      Collaborator: sessionStorage.getItem('collaborator_id'),
+    });
+  }
+
+  onChange(value: number) {
+    if (this.feedbackForm.controls['status'].value === 1) {
+      this.removeValidators()
+      console.log(this.feedbackForm)
     }
   }
 
+  removeValidators() {
+     this.feedbackForm.controls['feedbackDateRetorn'].clearValidators()
+      this.feedbackForm.controls['feedbackDateRetorn'].updateValueAndValidity()
+      this.feedbackForm.controls['managerDescription'].removeValidators(Validators.required)
+      this.feedbackForm.controls['improvementPoints'].removeValidators(Validators.required)
+      this.feedbackForm.controls['collaboratorDescription'].removeValidators(Validators.required)
+      this.feedbackForm.controls['commitment'].removeValidators(Validators.required)
+  }
   listFeedback() {
-    const jobId = sessionStorage.getItem('collaborator_id');
-    this.router.navigate([`colaborador/${jobId}`]);
-    sessionStorage.removeItem('collaborator_id');
+    this.router.navigate([`colaborador/${this.collaboratorId}`]);
   }
 
   async saveFeedback() {
     let data = this.feedbackForm.getRawValue();
     try {
       const feedback = await this.feedbackProvider.store(data);
-      const jobId = sessionStorage.getItem('collaborator_id');
-    this.router.navigate([`colaborador/${jobId}`]);
-    sessionStorage.removeItem('collaborator_id');
-      this.snackBarService.showAlert('Feedbcack cadastrado com sucesso!');
+      this.router.navigate([`colaborador/${data.Collaborator}`]);
+      this.snackBarService.successMessage('Feedbcack cadastrado com sucesso!');
     } catch (error) {
-      console.log( error);
-      this.snackBarService.showAlert('Falha ao cadastrar!');
+      console.log(error);
+      this.snackBarService.showError('Falha ao cadastrar!');
     }
   }
 
   setFormValue() {
     if (this.feedback) {
       this.feedbackForm.patchValue(this.feedback);
+      this.onChange(this.feedback.status)
     }
   }
 
   async getFeedback() {
     try {
       this.feedback = await this.feedbackProvider.findOne(this.feedbackId);
+      this.removeValidators()
     } catch (error) {
       console.error(error);
     }
@@ -165,11 +162,9 @@ export class FeedbackCreateComponent implements OnInit {
   async saveEditFeedback() {
     let data = this.feedbackForm.getRawValue();
     try {
-      const job = await this.feedbackProvider.update(this.feedbackId, data);
+      const job = await this.feedbackProvider.update(this.feedback.id, data);
       this.snackBarService.successMessage('Feedbakc atualizado com sucesso');
-      const jobId = sessionStorage.getItem('collaborator_id');
-      this.router.navigate([`colaborador/${jobId}`]);
-      sessionStorage.removeItem('collaborator_id');
+      this.router.navigate([`colaborador/${this.collaboratorId}`]);
     } catch (error) {
       console.error(error);
     }

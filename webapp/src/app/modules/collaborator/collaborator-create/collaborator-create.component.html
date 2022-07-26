@@ -204,8 +204,8 @@
       mat-flat-button
       (click)="editCollaborator()"
       color="primary"
-      [disabled]="collaboratorForm.invalid"
-      *ngIf="step === 1">
+      [disabled]="collaboratorForm?.invalid"
+      *ngIf="step === 1 ">
       Salvar
     </button>
   </div>

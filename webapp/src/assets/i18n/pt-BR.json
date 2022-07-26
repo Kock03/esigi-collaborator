@@ -82,7 +82,8 @@
                     "name": "Tipo de Feedback",
                     "unmotivated_professional": "Profissional Desmotivado",
                     "change_of_position": "Mudança de Cargo",
-                    "salary_increase": "Aumento de Salário"
+                    "salary_increase": "Aumento de Salário",
+                    "scheduled": "Agendado"
                 },
                 "reason": {
                     "management_request": "Solicitação Gestão",
@@ -157,8 +158,8 @@
                 "required_behavior": "Comportamento e/ou competências necessárias",
                 "type_of_period": {
                     "name": "Período",
-                    "year": "ano",
-                    "month": "Mês"
+                    "year": "ano(s)",
+                    "month": "Mês(s)"
                 }
             }
         },
@@ -304,7 +305,7 @@
                 "situation": {
                     "name": "Situação",
                     "stop": "Parado",
-                    "complete": "Completo",
+                    "complete": "Concluído",
                     "in_progress": "Em Andamento"
                 },
                 "course": "Curso",

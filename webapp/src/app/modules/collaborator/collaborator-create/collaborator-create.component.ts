@@ -164,13 +164,12 @@ export class CollaboratorCreateComponent implements OnInit {
       this.collaboratorForm.controls['cnpj'].removeValidators(Validators.required)
     }
 
-
-
   }
 
-  setFormValue() {
+   setFormValue() {
     if (this.collaborator) {
-      this.collaboratorForm.patchValue(this.collaborator);
+       this.collaborator.Address.state =  Number(this.collaborator.Address.state)
+       this.collaboratorForm.patchValue(this.collaborator);
     }
   }
 

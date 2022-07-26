@@ -38,7 +38,7 @@ export class CreateFeedbacksDto {
 
   @ApiProperty()
   @IsNotEmpty()
-  feedbackDate: Date;
+  feedbackDate: string;
 
   @ApiProperty()
   @IsNotEmpty()
@@ -47,7 +47,7 @@ export class CreateFeedbacksDto {
 
   @ApiProperty()
   @IsOptional()
-  feedbackDateRetorn: Date;
+  feedbackDateRetorn: string;
 
   @ApiProperty()
   @IsOptional()
@@ -61,27 +61,23 @@ export class CreateFeedbacksDto {
   manager: string;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
-  @MinLength(1)
   managerDescription: string;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
-  @MinLength(1)
   improvementPoints: string;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
-  @MinLength(1)
   collaboratorDescription: string;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
-  @MinLength(1)
   commitment: string;
 
   @ApiPropertyOptional()
