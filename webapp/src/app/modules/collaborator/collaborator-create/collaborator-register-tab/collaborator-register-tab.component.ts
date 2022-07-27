@@ -45,6 +45,7 @@ export class CollaboratorRegisterTabComponent implements OnInit {
   typeControl = new FormControl();
   addressForm!: FormGroup;
   phoneForm!: FormGroup;
+  view!: boolean;
 
   constructor(
     private fb: FormBuilder,
@@ -57,6 +58,8 @@ export class CollaboratorRegisterTabComponent implements OnInit {
     this.url =
       'https://st.depositphotos.com/1734074/4228/v/450/depositphotos_42286141-stock-illustration-vector-man-with-mustache-in.jpg';
     if (this.collaboratorId == 'novo') {
+      this.view = true;
+
       this.collaboratorForm.valueChanges.subscribe(res => {
         const addressForm = this.collaboratorForm.controls[
           'Address'
@@ -107,7 +110,9 @@ export class CollaboratorRegisterTabComponent implements OnInit {
     if (district.erro) {
       window.alert('Cep inválido');
       this.collaboratorForm.controls['Address'].reset();
+      this.view = true;
     } else {
+      this.view = false;
       this.collaboratorForm.controls['Address'].patchValue({
         cep: district.cep,
         city: district.localidade,

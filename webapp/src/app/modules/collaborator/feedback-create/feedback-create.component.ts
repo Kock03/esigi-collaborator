@@ -153,7 +153,6 @@ export class FeedbackCreateComponent implements OnInit {
   async getFeedback() {
     try {
       this.feedback = await this.feedbackProvider.findOne(this.feedbackId);
-      this.removeValidators()
     } catch (error) {
       console.error(error);
     }

@@ -243,7 +243,7 @@
           </mat-error>
         </mat-form-field>
 
-        <mat-form-field fxFlex="40" appearance="outline">
+        <mat-form-field fxFlex="40" appearance="outline" *ngIf="this.view">
           <mat-label>{{'generic.address.state'|translate}}</mat-label>
           <mat-select matInput disableRipple placeholder="Estado" formControlName="state">
             <mat-option [value]="1">{{'generic.address.state_list.AC'|translate}}</mat-option>
@@ -279,6 +279,10 @@
             addressForm.controls['state'].hasError('required')">
             {{'validators.validator-required' | translate}}
           </mat-error>
+        </mat-form-field>
+        <mat-form-field fxFlex="45" appearance="outline" *ngIf="this.view === false">
+          <mat-label>Estado</mat-label>
+          <input matInput placeholder="Nome" formControlName="state" />
         </mat-form-field>
 
       </div>

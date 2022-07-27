@@ -119,7 +119,8 @@
                 "in_revision": "Em Revisão",
                 "closed": "Fechada",
                 "lost": "Perdida",
-                "completed": "Concluída"
+                "completed": "Concluída",
+                "new": "Novo"
             },
             "type_of_job": {
                 "name": "Tipo de Vaga",
