@@ -12,6 +12,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class JobDetailComponent implements OnInit {
   step: number = 1;
+  
 
   constructor(private router: Router, private fb: FormBuilder) {}
 
