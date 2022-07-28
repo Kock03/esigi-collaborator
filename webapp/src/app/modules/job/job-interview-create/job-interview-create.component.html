@@ -529,7 +529,7 @@
         </form>
       </mat-tab>
 
-      <mat-tab  label="Currículo" class="tab">
+      <mat-tab  label="Currículo" class="tab" *ngIf="interviewId! !== 'novo'">
         <div class="content-scroll" >
           <mat-list role="list" #experiencesList class="list-group">
             <mat-list-item class="list-group-item" fxLayout="row" fxFlex="100">
