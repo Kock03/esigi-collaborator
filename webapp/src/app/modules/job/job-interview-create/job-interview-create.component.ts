@@ -4,6 +4,7 @@ import {
   Input,
   OnInit,
   Output,
+  OnChanges,
   ViewEncapsulation,
 } from '@angular/core';
 import {
@@ -89,10 +90,10 @@ export class JobInterviewCreateComponent implements OnInit {
       id: null,
       nameCandidate: ['', Validators.required],
       techRecruter: ['', Validators.required],
-      behavioralInterviewDate:  this.fb.control({ value: ' ', disabled: false },[ DocumentValidator.isValidData(), Validators.required]),
+      behavioralInterviewDate: this.fb.control({ value: ' ', disabled: false }, [DocumentValidator.isValidData(), Validators.required]),
       hourInterview: ['', Validators.required],
-      punctuality: [1, Validators.required],
-      presentation: [1, Validators.required],
+      punctuality: [null, Validators.required],
+      presentation: [null,Validators.required],
       salaryExpectation: ['', Validators.required],
       hiringPreference: this.fb.group({
         intern: [false, Validators.required],
@@ -102,13 +103,13 @@ export class JobInterviewCreateComponent implements OnInit {
       }),
       behavioralAssessment: ['', Validators.required],
       comments: [''],
-      situational: [1, Validators.required],
-      availabilityOfInitialize: ['', Validators.required],
+      situational: [null, Validators.required],
+      availabilityOfInitialize: ['',Validators.required],
     });
     this.technicalInterviewForm = this.fb.group({
       nameCandidate: ['', Validators.required],
       evaluator: ['', Validators.required],
-      technicalInterviewDate:  this.fb.control({ value: ' ', disabled: false },[ DocumentValidator.isValidData(), Validators.required]),
+      technicalInterviewDate: this.fb.control({ value: ' ', disabled: false }, [DocumentValidator.isValidData(), Validators.required]),
       hourInterview: ['', Validators.required],
       punctuality: [1, Validators.required],
       jobProfile: [true, Validators.required],
@@ -121,7 +122,7 @@ export class JobInterviewCreateComponent implements OnInit {
     this.clientInterviewForm = this.fb.group({
       nameCandidate: ['', Validators.required],
       evaluator: ['', Validators.required],
-      clientInterviewDate:  this.fb.control({ value: ' ', disabled: false },[ DocumentValidator.isValidData(), Validators.required]),
+      clientInterviewDate: this.fb.control({ value: ' ', disabled: false }, [DocumentValidator.isValidData(), Validators.required]),
       hourInterview: ['', Validators.required],
       punctuality: [1, Validators.required],
       jobProfile: [true, Validators.required],
@@ -132,7 +133,7 @@ export class JobInterviewCreateComponent implements OnInit {
 
     this.returnForm = this.fb.group({
       nameCandidate: ['', Validators.required],
-      dateOfReturn:  this.fb.control({ value: ' ', disabled: false },[ DocumentValidator.isValidData(), Validators.required]),
+      dateOfReturn: this.fb.control({ value: ' ', disabled: false }, [DocumentValidator.isValidData(), Validators.required]),
       technicalEvaluation: [1, Validators.required],
       behavioralEvaluation: [1, Validators.required],
       technicalEvaluationComent: ['', Validators.required],
@@ -141,11 +142,15 @@ export class JobInterviewCreateComponent implements OnInit {
       reason: [1, Validators.required],
       typeOdContract: [1, Validators.required],
       combinedValue: ['', Validators.required],
-      initialData: this.fb.control({ value: new Date().toLocaleDateString(), disabled: false },[ DocumentValidator.isValidData(), Validators.required]),
+      initialData: this.fb.control({ value: new Date().toLocaleDateString(), disabled: false }, [DocumentValidator.isValidData(), Validators.required]),
     });
+  }
 
-
-
+  onChange(value: number) {
+    if (this.behavioralInterviewForm.controls['situational'].value == 5) {
+      this.removeValidatorsBehavioral()
+      console.log(this.behavioralInterviewForm)
+    }
   }
 
   async handleInterviews(type: string) {
@@ -216,8 +221,8 @@ export class JobInterviewCreateComponent implements OnInit {
           'Entrevista Técnica Cadastrada Com Sucesso!'
         );
         const jobId = sessionStorage.getItem('job_id');
-    this.router.navigate([`vaga/detalhe/${jobId}`]);
-    sessionStorage.removeItem('job_id');
+        this.router.navigate([`vaga/detalhe/${jobId}`]);
+        sessionStorage.removeItem('job_id');
         this.selectedIndex = this.selectedIndex + 1;
       } catch (error) {
         console.log('ERROR 132' + error);
@@ -310,5 +315,21 @@ export class JobInterviewCreateComponent implements OnInit {
     const jobId = sessionStorage.getItem('job_id');
     this.router.navigate([`vaga/detalhe/${jobId}`]);
     sessionStorage.removeItem('job_id');
+  }
+
+
+  removeValidatorsBehavioral() {
+    this.behavioralInterviewForm.controls['punctuality'].clearValidators();
+    this.behavioralInterviewForm.controls['punctuality'].updateValueAndValidity();
+
+    this.behavioralInterviewForm.controls['presentation'].clearValidators();
+    this.behavioralInterviewForm.controls['presentation'].updateValueAndValidity();
+
+    this.behavioralInterviewForm.controls['salaryExpectation'].clearValidators();
+    this.behavioralInterviewForm.controls['salaryExpectation'].updateValueAndValidity();
+
+
+    this.behavioralInterviewForm.controls['availabilityOfInitialize'].clearValidators();
+    this.behavioralInterviewForm.controls['availabilityOfInitialize'].updateValueAndValidity();
   }
 }

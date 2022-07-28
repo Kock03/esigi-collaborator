@@ -133,7 +133,7 @@
               <mat-label>{{
                 'job.job_interview_create.situational.name' | translate
                 }}</mat-label>
-              <mat-select matInput disableRipple formControlName="situational">
+              <mat-select matInput disableRipple formControlName="situational" (ngModelChange)="onChange($event)"  >
                 <mat-option [value]="1">{{
                   'job.job_interview_create.situational.okay' | translate
                   }}</mat-option>
@@ -149,6 +149,9 @@
                   'job.job_interview_create.situational.failed_with_reservations'
                   | translate
                   }}</mat-option>
+                  <mat-option [value]="5">{{
+                    'collaborator.colaborator_create.feedbacks.status.scheduled'|translate
+                    }}</mat-option>
               </mat-select>
             </mat-form-field>
 
@@ -246,7 +249,7 @@
               <mat-label>{{
                 'job.job_interview_create.situational.name' | translate
                 }}</mat-label>
-              <mat-select matInput disableRipple formControlName="situational">
+              <mat-select matInput disableRipple formControlName="situational" (ngModelChange)="onChange($event)">
                 <mat-option [value]="1">{{
                   'job.job_interview_create.situational.okay' | translate
                   }}</mat-option>
@@ -261,6 +264,9 @@
                   'job.job_interview_create.situational.failed_with_reservations'
                   | translate
                   }}</mat-option>
+                  <mat-option [value]="5">{{
+                    'collaborator.colaborator_create.feedbacks.status.scheduled'|translate
+                    }}</mat-option>
               </mat-select>
             </mat-form-field>
 
@@ -372,6 +378,9 @@
                   'job.job_interview_create.situational.failed_with_reservations'
                   | translate
                   }}</mat-option>
+                  <mat-option [value]="5">{{
+                    'collaborator.colaborator_create.feedbacks.status.scheduled'|translate
+                    }}</mat-option>
               </mat-select>
             </mat-form-field>
 
