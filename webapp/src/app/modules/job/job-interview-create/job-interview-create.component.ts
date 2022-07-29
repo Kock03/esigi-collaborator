@@ -99,7 +99,7 @@ export class JobInterviewCreateComponent implements OnInit {
       behavioralInterviewDate: this.fb.control({ value: ' ', disabled: false }, [DocumentValidator.isValidData(), Validators.required]),
       hourInterview: ['', Validators.required],
       punctuality: [null, Validators.required],
-      presentation: [null,Validators.required],
+      presentation: [null, Validators.required],
       salaryExpectation: ['', Validators.required],
       hiringPreference: this.fb.group({
         intern: [false, Validators.required],
@@ -110,7 +110,7 @@ export class JobInterviewCreateComponent implements OnInit {
       behavioralAssessment: ['', Validators.required],
       comments: [''],
       situational: [null, Validators.required],
-      availabilityOfInitialize: ['',Validators.required],
+      availabilityOfInitialize: ['', Validators.required],
     });
     this.technicalInterviewForm = this.fb.group({
       nameCandidate: ['', Validators.required],
@@ -363,5 +363,5 @@ export class JobInterviewCreateComponent implements OnInit {
 
 
 
-  
+
 }

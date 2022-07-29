@@ -1,1 +1,138 @@
-<p>job-return-interview-tab works!</p>
+<div id="returnInterviewTab" class="tab">
+    <div class="content-scroll" *ngIf="returnForm">
+        <form [formGroup]="returnForm" fxLayout="column">
+            <div fxFlex="100" fxLayoutGap="16px">
+                <mat-form-field fxFlex="50" appearance="outline">
+                    <mat-label>{{
+                        'job.job_interview_create.name_candidate' | translate
+                        }}</mat-label>
+                    <input placeholder="Nome do Candidato" matInput formControlName="nameCandidate" type="text" />
+                </mat-form-field>
+                <mat-form-field fxFlex="50" appearance="outline">
+                    <mat-label>{{
+                        'job.job_interview_create.date_of_return' | translate
+                        }}</mat-label>
+                    <input matInput mask="00/00/0000" [showMaskTyped]="true" [dropSpecialCharacters]="false"
+                        formControlName="dateOfReturn" placeholder="Data de Retorno" />
+                </mat-form-field>
+            </div>
+            <div fxFlex="100" fxLayoutGap="16px">
+                <mat-form-field fxFlex="50" appearance="outline">
+                    <mat-label>{{
+                        'job.job_interview_create.behavioral_evaluation' | translate
+                        }}</mat-label>
+                    <mat-select matInput disableRipple formControlName="behavioralEvaluation">
+                        <mat-option [value]="1">{{
+                            'job.job_interview_create.situational.okay' | translate
+                            }}</mat-option>
+                        <mat-option [value]="2">{{
+                            'job.job_interview_create.situational.approved_with_reservations'
+                            | translate
+                            }}</mat-option>
+                        <mat-option [value]="3">{{
+                            'job.job_interview_create.situational.disapproved' | translate
+                            }}</mat-option>
+                        <mat-option [value]="4">{{
+                            'job.job_interview_create.situational.failed_with_reservations'
+                            | translate
+                            }}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field fxFlex="50" appearance="outline">
+                    <mat-label>{{
+                        'job.job_interview_create.technical_evaluation' | translate
+                        }}</mat-label>
+                    <mat-select matInput disableRipple formControlName="technicalEvaluation">
+                        <mat-option [value]="1">{{
+                            'job.job_interview_create.situational.okay' | translate
+                            }}</mat-option>
+                        <mat-option [value]="2">{{
+                            'job.job_interview_create.situational.approved_with_reservations'
+                            | translate
+                            }}</mat-option>
+                        <mat-option [value]="3">{{
+                            'job.job_interview_create.situational.disapproved' | translate
+                            }}</mat-option>
+                        <mat-option [value]="4">{{
+                            'job.job_interview_create.situational.failed_with_reservations'
+                            | translate
+                            }}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div fxFlex="100" fxLayoutGap="16px">
+                <mat-form-field fxFlex="50" appearance="outline">
+                    <mat-label>{{
+                        'job.job_interview_create.behavioral_evaluation' | translate
+                        }}</mat-label>
+                    <textarea class="text-area" matInput placeholder="Avaliação Comportamental"
+                        formControlName="behavioralEvaluationComent"></textarea>
+                </mat-form-field>
+                <mat-form-field fxFlex="50" appearance="outline">
+                    <mat-label>{{
+                        'job.job_interview_create.technical_evaluation' | translate
+                        }}</mat-label>
+                    <textarea class="text-area" matInput placeholder="Avaliação Técnica"
+                        formControlName="technicalEvaluationComent"></textarea>
+                </mat-form-field>
+            </div>
+            <div fxFlex="100" fxLayoutGap="16px">
+                <div class="job-checkbox" fxFlex="20" appearance="outline">
+                    <mat-checkbox color="primary" formControlName="returnOfCandidate">{{
+                        'job.job_interview_create.return_of_candidate' | translate
+                        }}</mat-checkbox>
+                </div>
+
+                <mat-form-field fxFlex="20" appearance="outline">
+                    <mat-label>{{ 'generic.reason' | translate }}</mat-label>
+                    <mat-select matInput disableRipple formControlName="reason">
+                        <mat-option [value]="1">{{
+                            'job.job_interview_create.reason.wage' | translate
+                            }}</mat-option>
+                        <mat-option [value]="2">{{
+                            'job.job_interview_create.reason.hiring_model' | translate
+                            }}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field fxFlex="30" appearance="outline">
+                    <mat-label>{{
+                        'job.job_interview_create.type_od_contract' | translate
+                        }}</mat-label>
+                    <mat-select matInput disableRipple formControlName="typeOdContract">
+                        <mat-option [value]="1">{{
+                            'generic.clt' | translate
+                            }}</mat-option>
+                        <mat-option [value]="2">{{
+                            'generic.pj' | translate
+                            }}</mat-option>
+                        <mat-option [value]="3">{{
+                            'generic.cooperated' | translate
+                            }}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field fxFlex="40" appearance="outline">
+                    <mat-label>{{
+                        'job.job_interview_create.combined_value' | translate
+                        }}</mat-label>
+                    <input placeholder="Valor" matInput formControlName="combinedValue" type="text" />
+                </mat-form-field>
+                <mat-form-field fxFlex="40" appearance="outline">
+                    <mat-label>{{
+                        'job.job_interview_create.initial_data' | translate
+                        }}</mat-label>
+                    <input matInput mask="00/00/0000" [showMaskTyped]="true" [dropSpecialCharacters]="false"
+                        formControlName="initialData" placeholder="Data de Início" />
+                </mat-form-field>
+
+                <div fxLayoutAlign="center" fxFlex="20">
+                    <button mat-flat-button color="primary" class="save-button" (click)="saveReturns()"
+                        [disabled]="returnForm.invalid">
+                        {{ 'generic.save_button' | translate }}
+                    </button>
+                </div>
+            </div>
+            <div></div>
+        </form>
+    </div>
+</div>

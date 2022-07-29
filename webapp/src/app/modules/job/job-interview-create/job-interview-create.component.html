@@ -20,7 +20,7 @@
       <span class="tab-border"></span>
     </div>
     <div
-    (click)="navigate('next')"
+    (click)="handleStep(2)"
       fxLayout="column"
       class="tab-group"
       [ngClass]="{ done: step > 1, active: step == 2 }">
@@ -30,7 +30,7 @@
       <span class="tab-border"></span>
     </div>
     <div
-    (click)="navigate('next')"
+    (click)="handleStep(3)"
       fxLayout="column"
       class="tab-group"
       [ngClass]="{ done: step > 2, active: step == 3 }">
@@ -40,7 +40,7 @@
       <span class="tab-border"></span>
     </div>
     <div
-    (click)="navigate('next')"
+    (click)="handleStep(4)"
       fxLayout="column"
       class="tab-group"
       [ngClass]="{ done: step > 3, active: step == 4 }">
@@ -50,6 +50,7 @@
       <span class="tab-border"></span>
     </div>
     <div
+    
     *ngIf="interviewId! !== 'novo'"
       fxLayout="column"
       class="tab-group"
