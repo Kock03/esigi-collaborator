@@ -83,6 +83,12 @@ export class JobInterviewCreateComponent implements OnInit {
     } else {
       this.initForm();
     }
+
+    if (sessionStorage.getItem('job_tab') == undefined) {
+      sessionStorage.setItem('job_tab', '1');
+    }
+    this.interviewId = this.route.snapshot.paramMap.get('id');
+    this.step = JSON.parse(sessionStorage.getItem('job_tab')!);
   }
 
   initForm() {
@@ -317,6 +323,16 @@ export class JobInterviewCreateComponent implements OnInit {
     sessionStorage.removeItem('job_id');
   }
 
+  navigate(direction: string) {
+    if (this.step > 1 && direction === 'back') {
+      this.step -= 1;
+    } else if (this.step < 5 && direction === 'next') {
+      this.step += 1;
+    } else {
+      this.snackbarService.showAlert('Verifique os campos');
+    }
+  }
+
 
   removeValidatorsBehavioral() {
     this.behavioralInterviewForm.controls['punctuality'].clearValidators();
@@ -332,4 +348,20 @@ export class JobInterviewCreateComponent implements OnInit {
     this.behavioralInterviewForm.controls['availabilityOfInitialize'].clearValidators();
     this.behavioralInterviewForm.controls['availabilityOfInitialize'].updateValueAndValidity();
   }
+
+  handleStep(number: number): void {
+    if (this.step < number) {
+      this.snackbarService.showAlert('Verifique os campos');
+    } else if (this.step - number < 1) {
+      this.step = number;
+      sessionStorage.setItem('job_tab', this.step.toString());
+    } else {
+      this.step = number;
+      sessionStorage.setItem('job_tab', this.step.toString());
+    }
+  }
+
+
+
+  
 }
