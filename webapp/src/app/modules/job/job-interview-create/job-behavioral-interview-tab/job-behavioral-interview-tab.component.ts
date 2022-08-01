@@ -24,7 +24,6 @@ export class JobBehavioralInterviewTabComponent implements OnInit {
     private interviewsProvider: InterviewsProvider,
     private route: ActivatedRoute,
     private snackbarService: SnackBarService,
-
     private router: Router,
   ) {
     const state = this.router.getCurrentNavigation()?.extras.state;

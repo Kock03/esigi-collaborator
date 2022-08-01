@@ -81,6 +81,7 @@ export class JobPanelTabComponent implements OnInit {
       console.error(error);
     }
   }
+  
 
   editInterview(interviewId: any) {
     const navigationExtras = {

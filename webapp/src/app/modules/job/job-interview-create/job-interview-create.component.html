@@ -1,59 +1,35 @@
 <div id="interviewCreate" class="page">
   <div fxLayout="row" fxLayoutAlign="start center">
-    <button
-      mat-button
-      class="btn-arrow-back"
-      color="primary"
-      (click)="backToList()">
+    <button mat-button class="btn-arrow-back" color="primary" (click)="backToList()">
       <mat-icon>chevron_left</mat-icon>
     </button>
     <h2 class="title">{{ 'job.job_interview_create.name' | translate }}</h2>
   </div>
 
   <div fxLayout="row" class="tab" fxLayoutGap="16px">
-    <div
-    (click)="handleStep(1)"
-      fxLayout="column"
-      class="tab-group"
-      [ngClass]="{ done: step > 0, active: step == 1 }">
+    <div (click)="handleStep(1)" fxLayout="column" class="tab-group" [ngClass]="{ done: step > 0, active: step == 1 }">
       <p class="tab-item">{{ 'Entevista Comportamental' }}</p>
       <span class="tab-border"></span>
     </div>
-    <div
-    (click)="handleStep(2)"
-      fxLayout="column"
-      class="tab-group"
-      [ngClass]="{ done: step > 1, active: step == 2 }">
+    <div (click)="handleStep(2)" fxLayout="column" class="tab-group" [ngClass]="{ done: step > 1, active: step == 2 }">
       <p class="tab-item">
         {{ 'Entrevista Técnica' }}
       </p>
       <span class="tab-border"></span>
     </div>
-    <div
-    (click)="handleStep(3)"
-      fxLayout="column"
-      class="tab-group"
-      [ngClass]="{ done: step > 2, active: step == 3 }">
+    <div (click)="handleStep(3)" fxLayout="column" class="tab-group" [ngClass]="{ done: step > 2, active: step == 3 }">
       <p class="tab-item">
         {{ 'Entrevista Cliente'}}
       </p>
       <span class="tab-border"></span>
     </div>
-    <div
-    (click)="handleStep(4)"
-      fxLayout="column"
-      class="tab-group"
-      [ngClass]="{ done: step > 3, active: step == 4 }">
+    <div (click)="handleStep(4)" fxLayout="column" class="tab-group" [ngClass]="{ done: step > 3, active: step == 4 }">
       <p class="tab-item">
         {{ 'Devolutiva'}}
       </p>
       <span class="tab-border"></span>
     </div>
-    <div
-    
-    *ngIf="interviewId! !== 'novo'"
-      fxLayout="column"
-      class="tab-group"
+    <div *ngIf="interviewId! !== 'novo'" fxLayout="column" class="tab-group"
       [ngClass]="{ done: step > 4, active: step == 5 }">
       <p class="tab-item">
         {{ 'Currículo'}}
@@ -62,29 +38,18 @@
     </div>
   </div>
 
-  <app-job-behavioral-interview-tab
-    [hidden]="step != 1"
-    >
+  <app-job-behavioral-interview-tab [hidden]="step != 1">
   </app-job-behavioral-interview-tab>
 
-  <app-job-technical-interview-tab
-    [hidden]="step != 2"
-   >
+  <app-job-technical-interview-tab [hidden]="step != 2">
   </app-job-technical-interview-tab>
 
-  <app-job-client-interview-tab
-    [hidden]="step != 3"
-   >
+  <app-job-client-interview-tab [hidden]="step != 3">
   </app-job-client-interview-tab>
 
-  <app-job-return-interview-tab
-    [hidden]="step != 4"
-    >
+  <app-job-return-interview-tab [hidden]="step != 4">
   </app-job-return-interview-tab>
 
-  <app-job-resume-interview-tab
-    [hidden]="step != 5"
-    *ngIf="interviewId! !== 'novo'"
-    >
+  <app-job-resume-interview-tab [hidden]="step != 5" *ngIf="interviewId! !== 'novo'">
   </app-job-resume-interview-tab>
 </div>
