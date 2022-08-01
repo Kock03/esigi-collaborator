@@ -84,6 +84,7 @@ export class JobPanelTabComponent implements OnInit {
   
 
   editInterview(interviewId: any) {
+    sessionStorage.setItem('method', 'edit');
     const navigationExtras = {
       state: {
         id: this.jobId,

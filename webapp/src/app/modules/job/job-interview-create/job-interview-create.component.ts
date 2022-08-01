@@ -66,20 +66,24 @@ export class JobInterviewCreateComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.interviewId = this.route.snapshot.paramMap.get('id');
+    this.step = JSON.parse(sessionStorage.getItem('job_tab')!);
     if (this.jobId !== undefined) {
       sessionStorage.setItem('job_id', this.jobId.id);
     }
 
     if (this.interviewId !== 'novo') {
+      await this.getInterview();
+      this.initForm();
+      this.setFormValue();
       this.initForm();
       this.interview = await this.interviewsProvider.findOne(this.interviewId);
       this.behavioralInterviewForm.patchValue(
         this.interview.BehavioralInterviews
       );
-      this.technicalInterviewForm.patchValue(
-        this.interview.TechnicalInterviews
-      );
-      this.clientInterviewForm.patchValue(this.interview.ClientInterviews);
+      // this.technicalInterviewForm.patchValue(
+      //   this.interview.TechnicalInterviews
+      // );
+      // this.clientInterviewForm.patchValue(this.interview.ClientInterviews);
     } else {
       this.initForm();
     }
@@ -89,7 +93,30 @@ export class JobInterviewCreateComponent implements OnInit {
     }
     this.interviewId = this.route.snapshot.paramMap.get('id');
     this.step = JSON.parse(sessionStorage.getItem('job_tab')!);
+
+    if (sessionStorage.getItem('method') == 'edit'){
+      this. setFormValue();
+    }
   }
+
+  async getInterview() {
+    try {
+      this.interview = await this.interviewsProvider.findOne(
+        this.interviewId
+      );
+      console.log("🚀 ~ file: job-interview-create.component.ts ~ line 103 ~ JobInterviewCreateComponent ~ getCollaborator ~ interview", this.interview)
+      
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  setFormValue() {
+    if (this.interview) {
+      this.behavioralInterviewForm.patchValue(this.interview.BehavioralInterviews);
+    }
+  }
+
 
   initForm() {
     this.behavioralInterviewForm = this.fb.group({

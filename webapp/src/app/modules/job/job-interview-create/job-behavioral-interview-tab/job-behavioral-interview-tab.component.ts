@@ -17,6 +17,7 @@ export class JobBehavioralInterviewTabComponent implements OnInit {
   interviewId!: string | null;
   interview: any;
   selectedIndex: number = 0;
+  step: number = 1;
 
   constructor(
     private fb: FormBuilder,
@@ -33,18 +34,49 @@ export class JobBehavioralInterviewTabComponent implements OnInit {
 
   ngOnInit(): void {
     this.interviewId = this.route.snapshot.paramMap.get('id');
+    this.step = JSON.parse(sessionStorage.getItem('job_tab')!);
     if (this.jobId !== undefined) {
       sessionStorage.setItem('job_id', this.jobId.id);
     }
 
     if (this.interviewId !== 'novo') {
+      this.getBehavioralInterview();
       this.initForm();
+      this.setFormValue();
       this.interview = this.interviewsProvider.findOne(this.interviewId);
       this.behavioralInterviewForm.patchValue(
         this.interview.BehavioralInterviews
       );
     } else {
       this.initForm();
+    }
+
+    if (sessionStorage.getItem('job_tab') == undefined) {
+      sessionStorage.setItem('job_tab', '1');
+    }
+    this.interviewId = this.route.snapshot.paramMap.get('id');
+    this.step = JSON.parse(sessionStorage.getItem('job_tab')!);
+
+    if (sessionStorage.getItem('method') == 'edit'){
+      this. setFormValue();
+    }
+  }
+
+  getBehavioralInterview(){
+    try {
+      this.interview = this.interviewsProvider.findOne(
+        this.interviewId
+      );
+      console.log("🚀 ~ file: job-interview-create.component.ts ~ line 103 ~ JobInterviewCreateComponent ~ getCollaborator ~ interview", this.interview)
+      
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  setFormValue() {
+    if (this.interview) {
+      this.behavioralInterviewForm.patchValue(this.interview.BehavioralInterviews);
     }
   }
 
