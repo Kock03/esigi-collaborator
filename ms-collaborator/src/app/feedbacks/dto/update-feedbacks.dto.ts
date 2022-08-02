@@ -26,8 +26,7 @@ export class UpdateFeedbacksDto {
   @ApiProperty()
   @IsOptional()
   @IsString()
-  @MinLength(1)
-  project: string;
+  projectId: string;
 
   @ApiProperty()
   @IsOptional()
@@ -55,7 +54,7 @@ export class UpdateFeedbacksDto {
   @ApiProperty()
   @IsOptional()
   @IsString()
-  manager: string;
+  collaboratorManagerId: string;
 
   @ApiProperty()
   @IsOptional()

@@ -29,7 +29,7 @@ export class CreateFeedbacksDto {
   @IsNotEmpty()
   @IsString()
   @MinLength(1)
-  project: string;
+  projectId: string;
 
   @ApiProperty()
   @IsNotEmpty()
@@ -58,7 +58,7 @@ export class CreateFeedbacksDto {
   @IsNotEmpty()
   @IsString()
   @MinLength(1)
-  manager: string;
+  collaboratorManagerId: string;
 
   @ApiProperty()
   @IsOptional()

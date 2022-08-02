@@ -27,10 +27,10 @@ export class FeedbacksController {
     return await this.feedbacksService.findOneOrFail({ id });
   }
 
-  // @Get(':id')
-  // async feedbacks(@Param('collaboratorId', new ParseUUIDPipe()) collaboratorId: string): Promise<FeedbacksEntity[]> {
-  //   return await this.feedbacksService.viewFeedbacks({ collaboratorId });
-  // }
+  @Get('collaborator/:id')
+  async findByCollaborator(@Param('id', new ParseUUIDPipe()) id: string){
+    return await this.feedbacksService.findByCollaborator(id)
+  }
 
   @Post()
   async store(@Body() body: CreateFeedbacksDto) {

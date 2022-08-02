@@ -12,6 +12,8 @@ import { CollaboratorsEntity } from '../collaborators/collaborators.entity';
 import { FeedbackTypes } from './enums/feedback-types.enum';
 import { Reason } from './enums/reason.enum';
 import { Status } from './enums/status.enum';
+import { ICollaborator } from './_model/collaborator.model';
+import { IProject } from './_model/project.model';
 
 @Entity({ name: 'feedbacks' })
 export class FeedbacksEntity {
@@ -25,7 +27,7 @@ export class FeedbacksEntity {
   reason: Reason;
 
   @Column()
-  project: string;
+  projectId: string;
 
   @Column({ type: 'int' })
   status: Status;
@@ -43,7 +45,7 @@ export class FeedbacksEntity {
   hourDateRetorn: string;
 
   @Column()
-  manager: string;
+  collaboratorManagerId: string;
 
   @Column({nullable: true})
   managerDescription: string;
@@ -57,6 +59,10 @@ export class FeedbacksEntity {
   @Column({nullable: true})
   commitment: string;
 
+  project: IProject;
+
+  collaborator: ICollaborator;
+
   @CreateDateColumn()
   createdAt: Date;
 
@@ -66,10 +72,6 @@ export class FeedbacksEntity {
   @DeleteDateColumn()
   deletedAt: Date;
 
-  @ManyToOne(
-    () => CollaboratorsEntity,
-    (collaborators) => collaborators.Feedbacks, {
-  }
-  )
+  @ManyToOne(() => CollaboratorsEntity, (collaborators) => collaborators.Feedbacks)
   Collaborator: CollaboratorsEntity;
 }

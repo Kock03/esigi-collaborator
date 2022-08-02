@@ -39,8 +39,10 @@ export class CollaboratorFeedbackTabComponent implements OnInit {
 
   collaboratorId!: string | null;
   collaborator!: any;
-  feedback!: IFeedback[];
+  feedback!: any[];
   data!: Array<any>;
+  method: any;
+
 
   get feedbackArray() {
     return this.collaboratorForm.controls['Feedbacks'] as FormArray;
@@ -63,10 +65,10 @@ export class CollaboratorFeedbackTabComponent implements OnInit {
 
   async getFeedback() {
     try {
-      this.collaborator = await this.collaboratorProvider.findOne(
-        this.collaboratorId
-      );
-      this.feedback = this.collaborator.Feedbacks;
+
+      this.feedback = await this.feedbackProvider.findByCollaborator(this.collaboratorId)
+      console.log(this.feedback)
+    
     } catch (error) {
       console.error(error);
     }
@@ -79,6 +81,7 @@ export class CollaboratorFeedbackTabComponent implements OnInit {
       },
     };
     this.router.navigate(['colaborador/feedback/novo'], navigationExtras);
+    sessionStorage.setItem('feedback_method', 'add')
   }
 
   async deleteFeedback(feedbackId: any) {
@@ -107,7 +110,7 @@ export class CollaboratorFeedbackTabComponent implements OnInit {
     });
   }
 
-  editFeedback(feedbackId: any) {
+  editFeedback(feedbackId: any, managerId: any, projectId: any) {
     const navigationExtras = {
       state: {
         id: this.collaboratorId,
@@ -117,5 +120,8 @@ export class CollaboratorFeedbackTabComponent implements OnInit {
       [`colaborador/feedback/${feedbackId}`],
       navigationExtras
     );
+    sessionStorage.setItem('manager_id', managerId);
+    sessionStorage.setItem('project_id', projectId);
+    this.method =  sessionStorage.setItem('feedback_method', 'edit');
   }
 }

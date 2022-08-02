@@ -5,7 +5,7 @@
         <ng-container matColumnDef="feedbackDate">
           <th mat-header-cell *matHeaderCellDef>{{'collaborator.colaborator_create.feedbacks.feedback_date'|translate}}</th>
           <td mat-cell *matCellDef="let feedback">
-            {{ feedback.feedbackDate }}
+            {{ feedback.feedback_date }}
           </td>
         </ng-container>
 
@@ -25,7 +25,8 @@
         <ng-container matColumnDef="manager">
           <th mat-header-cell *matHeaderCellDef>{{'collaborator.colaborator_create.feedbacks.manager'|translate}}</th>
           <td mat-cell *matCellDef="let feedback">
-            {{ feedback.manager }}
+            {{ feedback.collaborator.firstNameCorporateName }}
+            {{ feedback.collaborator.lastNameFantasyName}} 
           </td>
         </ng-container>
 
@@ -55,7 +56,7 @@
             <button
               class="table-button"
               mat-button
-              (click)="editFeedback(feedback.id)">
+              (click)="editFeedback(feedback.id, feedback.collaborator.firstNameCorporateName, feedback.project.name )">
               <mat-icon>edit</mat-icon>
             </button>
             <button

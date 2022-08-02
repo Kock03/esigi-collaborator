@@ -62,7 +62,6 @@ export class CollaboratorBankTabComponent implements OnInit {
 
   async getBankList() {
     this.collaboratorId = sessionStorage.getItem('collaborator_id');
-    console.log(this.collaboratorId)
     const data = await this.collaboratorProvider.findOne(this.collaboratorId);
     this.data = data.BankData;
   }

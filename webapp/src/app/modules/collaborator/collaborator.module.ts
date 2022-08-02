@@ -39,6 +39,7 @@ import { CollaboratorDocumentDialog } from './collaborator-create/collaborator-d
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSortModule } from '@angular/material/sort';
 import { TranslateModule } from '@ngx-translate/core';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 const routes: Routes = [
   {
@@ -98,6 +99,8 @@ const routes: Routes = [
     NgxMaskModule,
     MatDialogModule,
     MatSortModule,
+    MatAutocompleteModule,
+
   ],
   entryComponents: [
     CollaboratorRegisterTabComponent,

@@ -33,21 +33,67 @@
                 {{'validators.validator-required' |  translate}} </mat-error>
         </mat-form-field>
 
-        <mat-form-field appearance="outline" fxFlex="25">
-          <mat-label>{{'generic.project' | translate}}</mat-label>
-          <input matInput disableRipple formControlName="project" />
-          <mat-error *ngIf="feedbackForm &&
-          feedbackForm.controls['project'].hasError('required')">
-                {{'validators.validator-required' |  translate}} </mat-error>
-        </mat-form-field>
+        <mat-form-field
+        fxFlex="30"
+        class="example-full-width"
+        appearance="outline"
+        *ngIf="this.method === 'add'"
+      >
+      <mat-label>{{'generic.project'|translate}}</mat-label>
+      <input
+          type="text"
+          placeholder="Projeto"
+          aria-label="text"
+          #fiilter
+          matInput
+          [matAutocomplete]="autoProject"
+          [formControl]="projectControl"
+        />
+        <mat-autocomplete
+          autoActiveFirstOption
+          #autoProject="matAutocomplete"
+          [displayWith]="displayFnProject"
+        >
+          <mat-option
+            *ngFor="let project of filteredProjects"
+            [value]="project"
+          >
+            {{project.name }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
 
-        <mat-form-field appearance="outline" fxFlex="25">
-          <mat-label>{{'collaborator.colaborator_create.feedbacks.manager'|translate}}</mat-label>
-          <input matInput disableRipple formControlName="manager" />
-          <mat-error *ngIf="feedbackForm &&
-          feedbackForm.controls['manager'].hasError('required')">
-                {{'validators.validator-required' |  translate}} </mat-error>
-        </mat-form-field>
+
+        <mat-form-field
+        fxFlex="30"
+        class="example-full-width"
+        appearance="outline"
+        *ngIf="this.method === 'add'"
+      >
+      <mat-label>{{'collaborator.colaborator_create.feedbacks.manager'|translate}}</mat-label>
+      <input
+          type="text"
+          placeholder="Gerente"
+          aria-label="text"
+          #filter
+          matInput
+          [matAutocomplete]="autoManager"
+          [formControl]="managerControl"
+        />
+        <mat-autocomplete
+          autoActiveFirstOption
+          #autoManager="matAutocomplete"
+          [displayWith]="displayFnManager"
+        >
+          <mat-option
+            *ngFor="let collaborator of filteredCollaborators"
+            [value]="collaborator"
+          >
+            {{collaborator.firstNameCorporateName }}
+            {{collaborator.lastNameFantasyName}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
       </div>
 
       <div class="formGroup1" fxFlex="100" fxLayoutGap="20px">

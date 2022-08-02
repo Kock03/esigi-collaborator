@@ -54,7 +54,7 @@
                 <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by currentClient">{{"generic.current_client" | translate}}
                 </th>
                 <td mat-cell *matCellDef="let collaborator">
-                    {{ collaborator.currentClient }}
+                    {{ collaborator.resource.projectName }}
                 </td>
             </ng-container>
 

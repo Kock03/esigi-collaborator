@@ -22,6 +22,7 @@ import { MaritalStatus } from './dtos/Marital-status.enum';
 import { DependentsEntity } from '../dependents/dependents.entity';
 import { FeedbacksEntity } from '../feedbacks/feedbacks.entity';
 import { Gender } from './dtos/gender.enum';
+import { IResource } from './_model/resource.model';
 
 @Entity({ name: 'collaborators' })
 export class CollaboratorsEntity {
@@ -164,4 +165,6 @@ export class CollaboratorsEntity {
 
   @DeleteDateColumn()
   deletedAt: Date;
+
+  resource: IResource;
 }

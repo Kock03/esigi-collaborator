@@ -7,9 +7,9 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class FeedbackProvider {
-  constructor(private apiGateway: ApiGateway) {}
+  constructor(private apiGateway: ApiGateway) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   findAll(): Promise<any> {
     return new Promise((resolve, reject) => {
@@ -25,6 +25,16 @@ export class FeedbackProvider {
     return new Promise((resolve, reject) => {
       this.apiGateway
         .get(environment.COLLABORATOR_MS + 'feedbacks/:id', { id: id })
+        .subscribe((response: HttpResponse<any>) => {
+          resolve(response.body);
+        }, reject);
+    });
+  }
+
+  findByCollaborator(id: string | null): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.apiGateway
+        .get(environment.COLLABORATOR_MS + 'feedbacks/collaborator/:id', { id })
         .subscribe((response: HttpResponse<any>) => {
           resolve(response.body);
         }, reject);

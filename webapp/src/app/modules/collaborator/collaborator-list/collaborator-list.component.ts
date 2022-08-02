@@ -167,6 +167,7 @@ export class CollaboratorListComponent implements OnInit {
   async getCollaboratorList() {
     this.filteredCollaboratorList.data = this.collaborators =
       await this.collaboratorProvider.findAll();
+      console.log(  this.collaborators )
     this.filteredCollaboratorList.sort = this.sort;
   }
 

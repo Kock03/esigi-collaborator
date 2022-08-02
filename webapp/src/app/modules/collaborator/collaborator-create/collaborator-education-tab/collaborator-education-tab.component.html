@@ -91,7 +91,7 @@
 
               <ng-container matColumnDef="fluency">
                 <th mat-header-cell *matHeaderCellDef>{{'generic.education.languages.fluency.name' | translate}}</th>
-                <td mat-cell *matCellDef="let language">
+                <td mat-cell *matCellDef="let language" style="padding-left: 20px;">
                   {{
                     language.degreeOfInfluence == 1
                       ? 'Leitura, Escrita e Conversação'

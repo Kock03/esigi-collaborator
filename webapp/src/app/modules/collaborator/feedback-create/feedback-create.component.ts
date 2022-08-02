@@ -1,17 +1,20 @@
 import { formatDate } from '@angular/common';
 import {
   Component,
+  ElementRef,
   Injectable,
   Input,
   OnInit,
+  ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import {
   DateAdapter,
   MAT_DATE_FORMATS,
   NativeDateAdapter,
 } from '@angular/material/core';
+import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { ActivatedRoute, Router, RoutesRecognized } from '@angular/router';
 import { filter, pairwise } from 'rxjs/operators';
 import { ICollaborator } from 'src/app/interfaces/icollaborator';
@@ -19,6 +22,7 @@ import { DocumentValidator } from 'src/app/validators/document.validator';
 import { CollaboratorProvider } from 'src/providers/collaborator-providers/collaborator.provider';
 import { FeedbackProvider } from 'src/providers/feedback.provider';
 import { SnackBarService } from 'src/services/snackbar.service';
+import { ProjectProvider } from 'src/providers/project.provider';
 
 export const PICK_FORMATS = {
   parse: { dateInput: { month: 'numeric', year: 'numeric', day: 'numeric' } },
@@ -52,13 +56,31 @@ export class PickDateAdapter extends NativeDateAdapter {
   encapsulation: ViewEncapsulation.None,
 })
 export class FeedbackCreateComponent implements OnInit {
+  @ViewChild('filter', { static: true }) filter!: ElementRef;
+  @ViewChild('fiilter', { static: true }) fiilter!: ElementRef;
+
   feedbackForm!: FormGroup;
   Date: any;
   step: number = 1;
-  collaborators!: ICollaborator[];
+  collaborators!: any[];
   get!: any;
   feedbackTab: any;
   collaboratorId!: any;
+  managerControl = new FormControl();
+  projectControl = new FormControl();
+  method: any;
+
+  filteredCollaborators!: any[];
+  filteredCollaboratorList: any;
+  collaborator!: any;
+  collaboratorValid: boolean = false;
+
+
+  filteredProjects!: any[];
+  projects!: any[];
+  filteredProjectList: any;
+  project!: any;
+  projectValid: boolean = false;
 
   feedbackId!: string | null;
   feedback!: any;
@@ -66,6 +88,7 @@ export class FeedbackCreateComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private collaboratorProvider: CollaboratorProvider,
+    private projectProvider: ProjectProvider,
     private router: Router,
     private feedbackProvider: FeedbackProvider,
     private snackBarService: SnackBarService,
@@ -77,6 +100,11 @@ export class FeedbackCreateComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.feedbackId = this.route.snapshot.paramMap.get('id');
+    this.method =  sessionStorage.getItem('feedback_method');
+    this.getCollaboratorList();
+    this.getProjectList();
+    this.initFilterManager();
+    this.initFilterProject();
 
     if (this.get !== undefined) {
       this.collaboratorId = sessionStorage.getItem('collaborator_id');
@@ -93,24 +121,116 @@ export class FeedbackCreateComponent implements OnInit {
     this.setFormValue();
   }
 
+  async getCollaboratorList() {
+    this.filteredCollaboratorList=this.collaborators =
+      await this.collaboratorProvider.findGerente();
+  }
+
+  async getProjectList() {
+    this.filteredProjectList=this.projects =
+      await this.projectProvider.findAll();
+  }
+  
+  private initFilterManager() {
+    this.managerControl.valueChanges
+      .pipe(debounceTime(350), distinctUntilChanged())
+      .subscribe((res) => {
+        this._filterManager(res);
+        if (res && res.id) {
+          this.collaboratorValid = true;
+        } else {
+          this.collaboratorValid = false;
+        }
+        
+      });
+  }
+
+  private initFilterProject() {
+    this.projectControl.valueChanges
+      .pipe(debounceTime(350), distinctUntilChanged())
+      .subscribe((res) => {
+        this._filterProject(res);
+        if (res && res.id) {
+          this.projectValid = true;
+        } else {
+          this.projectValid = false;
+        }
+        
+      });
+  }
+
+  displayFnManager(user: any): string {
+    if (typeof user === 'string' && this.collaborators) {
+      return this.collaborators.find(
+        (collaborator) => collaborator.id === user
+      );
+    }
+    return user && user.firstNameCorporateName && user.lastNameFantasyName
+      ? user.firstNameCorporateName + ' ' + user.lastNameFantasyName
+      : '';
+  }
+
+  displayFnProject(user: any): string {
+    if (typeof user === 'string' && this.projects) {
+      return this.projects.find(
+        (project) => project.id === user
+      );
+    }
+    return user && user.name 
+      ? user.name : '';
+  }
+  
+  private async _filterManager(name: string): Promise<void> {
+    const params = `firstNameCorporateName=${name}`;
+    this.filteredCollaborators = await this.collaboratorProvider.findByNameGerente(
+      params
+    );
+  }
+
+  private async _filterProject(name: string): Promise<void> {
+    console.log(name)
+    const params = `name=${name}`;
+    this.filteredProjects = await this.projectProvider.find(
+      params
+    );
+  }
+
   initForm(): void {
     this.feedbackForm = this.fb.group({
       feedbackType: [null, Validators.required],
       reason: ['', Validators.required],
-      project: ['', Validators.required],
+      projectId: ['', Validators.required],
       status: [null, Validators.required],
       managerDescription: [' ', Validators.required],
       improvementPoints: [' ', Validators.required],
       collaboratorDescription: [' ', Validators.required],
       commitment: [' ', Validators.required],
-      manager: ['', Validators.required],
+      collaboratorManagerId: ['', Validators.required],
       feedbackDate: this.fb.control({ value: ' ', disabled: false }, [DocumentValidator.isValidData(), Validators.required]),
       hourDate: ['', Validators.required],
       feedbackDateRetorn: this.fb.control({ value: ' ', disabled: false }, [DocumentValidator.isValidData(), Validators.required]),
       hourDateRetorn: [''],
       Collaborator: sessionStorage.getItem('collaborator_id'),
     });
+
+    this.managerControl.valueChanges.subscribe((res) => {
+      if (res && res.id) {
+        this.feedbackForm.controls['collaboratorManagerId'].setValue(res.id, {
+          emitEvent: true,
+        });
+      }
+    });
+
+    this.projectControl.valueChanges.subscribe((res) => {
+      if (res && res.id) {
+        this.feedbackForm.controls['projectId'].setValue(res.id, {
+          emitEvent: true,
+        });
+      }
+    });
   }
+
+
 
   onChange(value: number) {
     if (this.feedbackForm.controls['status'].value === 1) {

@@ -1,4 +1,5 @@
 import { HttpException, Injectable, UploadedFile } from '@nestjs/common';
+import { HttpService } from '@nestjs/axios';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DocumentValidator } from 'src/app/validators/document.validator';
 import {
@@ -23,19 +24,57 @@ export class CollaboratorsService {
   constructor(
     @InjectRepository(CollaboratorsEntity)
     private readonly collaboratorsRepository: Repository<CollaboratorsEntity>,
+    private httpService: HttpService,
   ) { }
 
   async findAll() {
     const options: FindManyOptions = {
       order: { createdAt: 'DESC' },
     };
-    return await this.collaboratorsRepository.find(options);
+    try {
+      const collaborators = await this.collaboratorsRepository.find(options);
+
+      const collaboratorIdList = collaborators.map((collaborator) => {
+        return collaborator.id;
+      });
+
+      const resources = await this.httpService
+        .post('http://localhost:3505/api/v1/resources/list', {
+          idList: collaboratorIdList,
+        })
+        .toPromise();
+        console.log(resources.data)
+
+      if (resources.data) {
+        collaborators.map((collaborator) => {
+          const resource = resources.data.find(
+            (resource) => resource.collaborator_id === collaborator.id);
+          if (resource) {
+            collaborator.resource = {
+              projectName: resource.name,
+            };
+          } else {
+            collaborator.resource = {
+              projectName: 'Indefinido',
+            };
+            return collaborator;
+          }
+        })
+        return collaborators;
+      } else {
+        return collaborators;
+      }
+
+    } catch (err) {
+      throw new NotFoundException();
+    }
+
   }
 
   async findCollaboratorsListById(idList: string[]) {
     return await this.collaboratorsRepository.find({
       select: ['id', 'firstNameCorporateName', 'lastNameFantasyName', 'office', 'login', 'inactive'],
-      where: { id: In(idList) } 
+      where: { id: In(idList) }
     })
   }
 
@@ -94,22 +133,22 @@ export class CollaboratorsService {
           { firstNameCorporateName: Like(`%${firstNameCorporateName}%`) }]
       });
     } else {
-      if(inactive === '1'){
+      if (inactive === '1') {
         return this.collaboratorsRepository.find({
           select: ['id', 'firstNameCorporateName', 'lastNameFantasyName', 'email', 'inactive', 'admissionDate', 'office',],
           relations: ['Phone'],
           where: [
-            { firstNameCorporateName: Like(`%${firstNameCorporateName}%`), inactive: true  }]
+            { firstNameCorporateName: Like(`%${firstNameCorporateName}%`), inactive: true }]
         });
-      }else{
+      } else {
         return this.collaboratorsRepository.find({
           select: ['id', 'firstNameCorporateName', 'lastNameFantasyName', 'email', 'inactive', 'admissionDate', 'office',],
           relations: ['Phone'],
           where: [
-            { firstNameCorporateName: Like(`%${firstNameCorporateName}%`), inactive: false  }]
+            { firstNameCorporateName: Like(`%${firstNameCorporateName}%`), inactive: false }]
         });
       }
-      
+
     }
   }
 
@@ -146,7 +185,7 @@ export class CollaboratorsService {
       return await this.collaboratorsRepository.findOneOrFail(conditions, options);
     } catch {
       throw new NotFoundException();
-    }                                      
+    }
   }
 
   async store(data: CreateCollaboratorsDto) {
