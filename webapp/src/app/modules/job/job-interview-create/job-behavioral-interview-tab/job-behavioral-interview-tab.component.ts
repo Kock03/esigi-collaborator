@@ -47,6 +47,7 @@ export class JobBehavioralInterviewTabComponent implements OnInit {
       this.behavioralInterviewForm.patchValue(
         this.interview.BehavioralInterviews
       );
+      
     } else {
       this.initForm();
     }
