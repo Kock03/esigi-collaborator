@@ -115,7 +115,6 @@ export class ResumeCreateComponent implements OnInit {
 
   setFormValue() {
     if(this.resume){
-      this.resume.Address.state =  Number(this.resume.Address.state)
       this.resumeForm.patchValue(this.resume);
     }
 

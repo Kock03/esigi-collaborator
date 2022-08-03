@@ -57,6 +57,7 @@ export class ResumeRegisterTabComponent implements OnInit {
   Date: any;
   MaritalStatus: any = ['Solteiro(a)', 'Casado', 'Viúvo', 'União Estável'];
   resumeId!: string | null;
+  view!: boolean;
 
   constructor(
     private fb: FormBuilder,
@@ -67,12 +68,25 @@ export class ResumeRegisterTabComponent implements OnInit {
   ngOnInit(): void {
     this.resumeId = this.route.snapshot.paramMap.get('id');
     if (this.resumeId == 'novo') {
+      this.view = true;
       this.resumeForm.valueChanges.subscribe(res => {
         const addressForm = this.resumeForm.controls['Address'] as FormGroup;
         addressForm.controls['cep'].valueChanges.subscribe(res => {});
       });
+    }else{
+      this.view = false;
     }
   }
+
+  
+  setValueLogin() {
+
+      if (this.resumeForm.controls['firstName'].value != null && this.resumeForm.controls['lastName'].value != null) {
+
+        this.resumeForm.controls['login'].setValue(`${this.resumeForm.controls['firstName'].value}.${this.resumeForm.controls['lastName'].value}@Envolti.com.br`);
+
+      }
+    }
 
   next() {
     this.onChange.next(true);
@@ -93,9 +107,13 @@ export class ResumeRegisterTabComponent implements OnInit {
 
     if (district.erro) {
       window.alert('Cep inválido');
+      this.view = true;
+
 
       this.resumeForm.controls['Address'].reset();
     } else {
+      this.view = false;
+
       this.resumeForm.controls['Address'].patchValue({
         cep: district.cep,
 
