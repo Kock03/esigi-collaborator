@@ -81,7 +81,7 @@ export class JobPanelTabComponent implements OnInit {
       console.error(error);
     }
   }
-  
+
 
   editInterview(interviewId: any) {
     sessionStorage.setItem('method', 'edit');
@@ -134,6 +134,7 @@ export class JobPanelTabComponent implements OnInit {
       },
     };
     this.router.navigate(['vaga/interview/novo'], navigationExtras);
+    sessionStorage.setItem('job_tab', '1');
   }
 
   createJob() {
@@ -155,7 +156,7 @@ export class JobPanelTabComponent implements OnInit {
             .toLocaleLowerCase()
             .includes(this.filter.nativeElement.value.toLocaleLowerCase())
         );
-        
+
       });
   }
 }

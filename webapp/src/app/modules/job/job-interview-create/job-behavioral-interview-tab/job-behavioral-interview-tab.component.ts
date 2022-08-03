@@ -32,7 +32,7 @@ export class JobBehavioralInterviewTabComponent implements OnInit {
     this.jobId = state;
   }
 
- async  ngOnInit() {
+  async ngOnInit() {
     this.interviewId = this.route.snapshot.paramMap.get('id');
     this.step = JSON.parse(sessionStorage.getItem('job_tab')!);
     if (this.jobId !== undefined) {
@@ -46,9 +46,9 @@ export class JobBehavioralInterviewTabComponent implements OnInit {
       this.interview = await this.interviewsProvider.findOne(this.interviewId);
       this.behavioralInterviewForm.patchValue(
         this.interview.BehavioralInterviews
-        );
-        console.log("🚀 ~ file: job-behavioral-interview-tab.component.ts ~ line 49 ~ JobBehavioralInterviewTabComponent ~ ngOnInit ~    this.interview.BehavioralInterviews",    this.interview.BehavioralInterviews)
-      
+      );
+      console.log("🚀 ~ file: job-behavioral-interview-tab.component.ts ~ line 49 ~ JobBehavioralInterviewTabComponent ~ ngOnInit ~    this.interview.BehavioralInterviews", this.interview.BehavioralInterviews)
+
     } else {
       this.initForm();
     }
@@ -59,18 +59,18 @@ export class JobBehavioralInterviewTabComponent implements OnInit {
     this.interviewId = this.route.snapshot.paramMap.get('id');
     this.step = JSON.parse(sessionStorage.getItem('job_tab')!);
 
-    if (sessionStorage.getItem('method') == 'edit'){
-      this. setFormValue();
+    if (sessionStorage.getItem('method') == 'edit') {
+      this.setFormValue();
     }
   }
 
-  getBehavioralInterview(){
+  getBehavioralInterview() {
     try {
       this.interview = this.interviewsProvider.findOne(
         this.interviewId
       );
       console.log("🚀 ~ file: job-interview-create.component.ts ~ line 103 ~ JobInterviewCreateComponent ~ getCollaborator ~ interview", this.interview)
-      
+
     } catch (error) {
       console.error(error);
     }
@@ -117,7 +117,7 @@ export class JobBehavioralInterviewTabComponent implements OnInit {
   removeValidatorsBehavioral() {
     this.behavioralInterviewForm.controls['punctuality'].clearValidators();
     this.behavioralInterviewForm.controls['punctuality'].updateValueAndValidity();
-    this.behavioralInterviewForm.controls['punctuality'].setErrors(null); 
+    this.behavioralInterviewForm.controls['punctuality'].setErrors(null);
 
 
     this.behavioralInterviewForm.controls['presentation'].clearValidators();

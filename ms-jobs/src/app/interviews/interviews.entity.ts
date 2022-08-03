@@ -11,6 +11,7 @@ import {
 import { BehavioralInterviewsEntity } from '../behavioral-interviews/behavioral-interviews.entity';
 import { ClientInterviewsEntity } from '../client-interviews/client-interviews.entity';
 import { JobsEntity } from '../jobs/jobs.entity';
+import { ReturnsEntity } from '../returns/returns.entity';
 import { TechnicalInterviewsEntity } from '../technical-interviews/technical-interviews.entity';
 import { ICollaborator } from './_model/collaborator.model';
 
@@ -40,10 +41,19 @@ export class InterviewsEnitiy {
   @JoinColumn()
   ClientInterviews: ClientInterviewsEntity;
 
+  @OneToOne(() => ReturnsEntity, {
+    cascade: ['insert', 'update', 'soft-remove'],
+    eager: true,
+  })
+  @JoinColumn()
+  Returns: ReturnsEntity;
+
   @ManyToOne(() => JobsEntity, (jobs) => jobs.Interviews, {
     cascade: ['insert', 'update', 'soft-remove'],
   })
   Job: JobsEntity;
+
+  
 
   @CreateDateColumn()
   createdAt: Date;

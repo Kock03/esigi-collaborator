@@ -45,9 +45,9 @@ export class JobReturnInterviewTabComponent implements OnInit {
       this.setFormValue();
       this.interview = await this.interviewsProvider.findOne(this.interviewId);
       this.returnForm.patchValue(
-        this.interview.ReturnInterviews
+        this.interview.Returns
         );
-        console.log("🚀 ~ file: job-return-interview-tab.component.ts ~ line 49 ~ JobReturnInterviewTabComponent ~ ngOnInit ~ this.interview.ReturnInterviews", this.interview.ReturnInterviews)
+        console.log("🚀 ~ file: job-return-interview-tab.component.ts ~ line 49 ~ JobReturnInterviewTabComponent ~ ngOnInit ~  this.interview.Returns",  this.interview.Returns)
       
     } else {
       this.initForm();
@@ -68,8 +68,8 @@ export class JobReturnInterviewTabComponent implements OnInit {
     try {
       this.interview = this.interviewsProvider.findOne(
         this.interviewId
-      );
-      console.log("🚀 ~ file: job-interview-create.component.ts ~ line 103 ~ JobInterviewCreateComponent ~ getCollaborator ~ interview", this.interview)
+        );
+        console.log("🚀 ~ file: job-return-interview-tab.component.ts ~ line 71 ~ JobReturnInterviewTabComponent ~ getInterview ~ this.interviewId", this.interviewId)
       
     } catch (error) {
       console.error(error);
@@ -78,7 +78,7 @@ export class JobReturnInterviewTabComponent implements OnInit {
 
   setFormValue() {
     if (this.interview) {
-      this.returnForm.patchValue(this.interview.ReturnInterviews);
+      this.returnForm.patchValue(this.interview.Returns);
     }
   }
 
@@ -95,7 +95,7 @@ export class JobReturnInterviewTabComponent implements OnInit {
       typeOdContract: [1, Validators.required],
       combinedValue: ['', Validators.required],
       initialData: this.fb.control({ value: new Date().toLocaleDateString(), disabled: false }, [DocumentValidator.isValidData(), Validators.required]),
-    });
+  });
   }
 
   onChange(value: number) {
@@ -134,13 +134,13 @@ export class JobReturnInterviewTabComponent implements OnInit {
   }
 
   async saveInterview() {
-    await this.saveReturnInterviews();
+    await this.saveCReturnInterviews();
   }
 
-  async saveReturnInterviews() {
+  async saveCReturnInterviews() {
     if (this.interviewId == 'novo') {
       let data = this.returnForm.getRawValue();
-      const interview = { ReturnInterviews: data, Job: this.jobId };
+      const interview = { Returns: data, Job: this.jobId };
       try {
         delete data.id;
         await this.interviewsProvider.store(interview);
@@ -159,7 +159,7 @@ export class JobReturnInterviewTabComponent implements OnInit {
       let returnForm = this.returnForm.getRawValue();
       const interview = {
         ...this.interview,
-        ReturnInterviews: { ...returnForm },
+        Returns: { ...returnForm },
       };
       try {
         await this.interviewsProvider.update(interview);

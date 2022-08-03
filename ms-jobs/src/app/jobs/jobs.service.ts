@@ -31,7 +31,7 @@ export class JobsService {
 
       // TODO - Substituir futuramente e remover o toPromise()
       const collaborators = await this.httpService
-        .post('http://localhost:3508/api/v1/collaborators/list', {
+        .post('http://localhost:3501/api/v1/collaborators/list', {
           idList: collaboratorIdList,
         })
         .toPromise();
