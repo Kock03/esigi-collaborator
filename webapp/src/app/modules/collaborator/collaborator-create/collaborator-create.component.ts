@@ -163,7 +163,6 @@ export class CollaboratorCreateComponent implements OnInit {
 
    setFormValue() {
     if (this.collaborator) {
-       this.collaborator.Address.state =  Number(this.collaborator.Address.state)
        this.collaboratorForm.patchValue(this.collaborator);
     }
   }
