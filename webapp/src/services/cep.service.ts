@@ -13,7 +13,7 @@ export class CepService {
   findDistrict(cepCode: string): Promise<any> {
     return new Promise((resolve, reject) => {
       this.apiGateway
-        .get(`//127.0.0.1:8000/street/${cepCode}`, false, 'ms-cep')
+        .get(`street/${cepCode}`, false, 'ms-cep')
         .subscribe((response: HttpResponse<any>) => {
           resolve(response.body);
         }, reject);
