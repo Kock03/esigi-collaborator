@@ -29,7 +29,7 @@
       </p>
       <span class="tab-border"></span>
     </div>
-    <div *ngIf="interviewId! !== 'novo'" fxLayout="column" class="tab-group"
+    <div (click)="handleStep(5)" *ngIf="interviewId! !== 'novo'" fxLayout="column" class="tab-group"
       [ngClass]="{ done: step > 4, active: step == 5 }">
       <p class="tab-item">
         {{ 'Currículo'}}

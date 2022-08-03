@@ -17,34 +17,68 @@ export class JobTechnicalInterviewTabComponent implements OnInit {
   interviewId!: string | null;
   interview: any;
   selectedIndex: number = 0;
+  step: number = 1;
 
   constructor(
     private fb: FormBuilder,
     private technicalInterviewProvider: TechnicalInterviewProvider,
-    private router: Router,
     private interviewsProvider: InterviewsProvider,
     private route: ActivatedRoute,
     private snackbarService: SnackBarService,
+    private router: Router,
   ) {
     const state = this.router.getCurrentNavigation()?.extras.state;
 
     this.jobId = state;
   }
 
-  ngOnInit(): void {
+ async  ngOnInit() {
     this.interviewId = this.route.snapshot.paramMap.get('id');
+    this.step = JSON.parse(sessionStorage.getItem('job_tab')!);
     if (this.jobId !== undefined) {
       sessionStorage.setItem('job_id', this.jobId.id);
     }
 
     if (this.interviewId !== 'novo') {
+      this.getInterview();
       this.initForm();
-      this.interview = this.interviewsProvider.findOne(this.interviewId);
+      this.setFormValue();
+      this.interview = await this.interviewsProvider.findOne(this.interviewId);
       this.technicalInterviewForm.patchValue(
-        this.interview.BehavioralInterviews
-      );
+        this.interview.TechnicalInterviews
+        );
+        console.log("🚀 ~ file: job-tecnical-interview-tab.component.ts ~ line 48 ~ JobTechnicalInterviewTabComponent ~ ngOnInit ~    this.interview.TechnicalInterviews",    this.interview.TechnicalInterviews)
+      
     } else {
       this.initForm();
+    }
+
+    if (sessionStorage.getItem('job_tab') == undefined) {
+      sessionStorage.setItem('job_tab', '1');
+    }
+    this.interviewId = this.route.snapshot.paramMap.get('id');
+    this.step = JSON.parse(sessionStorage.getItem('job_tab')!);
+
+    if (sessionStorage.getItem('method') == 'edit'){
+      this. setFormValue();
+    }
+  }
+
+  getInterview(){
+    try {
+      this.interview = this.interviewsProvider.findOne(
+        this.interviewId
+      );
+      console.log("🚀 ~ file: job-interview-create.component.ts ~ line 103 ~ JobInterviewCreateComponent ~ getCollaborator ~ interview", this.interview)
+      
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  setFormValue() {
+    if (this.interview) {
+      this.technicalInterviewForm.patchValue(this.interview.TechnicalInterviews);
     }
   }
 
@@ -65,17 +99,17 @@ export class JobTechnicalInterviewTabComponent implements OnInit {
 
   onChange(value: number) {
     if (this.technicalInterviewForm.controls['situational'].value == 5) {
-      this.removeValidatorsBehavioral()
+      this.removeValidators()
       console.log(this.technicalInterviewForm)
     }
   }
 
 
 
-  removeValidatorsBehavioral() {
+  removeValidators() {
     this.technicalInterviewForm.controls['punctuality'].clearValidators();
     this.technicalInterviewForm.controls['punctuality'].updateValueAndValidity();
-    this.technicalInterviewForm.controls['punctuality'].setErrors(null);
+    this.technicalInterviewForm.controls['punctuality'].setErrors(null); 
 
 
     this.technicalInterviewForm.controls['presentation'].clearValidators();
@@ -108,7 +142,7 @@ export class JobTechnicalInterviewTabComponent implements OnInit {
       const interview = { TechnicalInterviews: data, Job: this.jobId };
       try {
         delete data.id;
-        this.interviewsProvider.store(interview);
+        await this.interviewsProvider.store(interview);
         this.snackbarService.successMessage(
           'Entrevista Técnica Cadastrada Com Sucesso!'
         );
@@ -127,7 +161,7 @@ export class JobTechnicalInterviewTabComponent implements OnInit {
         TechnicalInterviews: { ...technicalInterviewForm },
       };
       try {
-        this.interviewsProvider.update(interview);
+        await this.interviewsProvider.update(interview);
         this.snackbarService.successMessage(
           'Entrevista Atualizada Com Sucesso!'
         );
@@ -138,4 +172,5 @@ export class JobTechnicalInterviewTabComponent implements OnInit {
       }
     }
   }
+
 }

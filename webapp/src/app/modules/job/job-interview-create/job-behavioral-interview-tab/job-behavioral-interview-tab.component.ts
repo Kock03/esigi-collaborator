@@ -32,7 +32,7 @@ export class JobBehavioralInterviewTabComponent implements OnInit {
     this.jobId = state;
   }
 
-  ngOnInit(): void {
+ async  ngOnInit() {
     this.interviewId = this.route.snapshot.paramMap.get('id');
     this.step = JSON.parse(sessionStorage.getItem('job_tab')!);
     if (this.jobId !== undefined) {
@@ -43,10 +43,11 @@ export class JobBehavioralInterviewTabComponent implements OnInit {
       this.getBehavioralInterview();
       this.initForm();
       this.setFormValue();
-      this.interview = this.interviewsProvider.findOne(this.interviewId);
+      this.interview = await this.interviewsProvider.findOne(this.interviewId);
       this.behavioralInterviewForm.patchValue(
         this.interview.BehavioralInterviews
-      );
+        );
+        console.log("🚀 ~ file: job-behavioral-interview-tab.component.ts ~ line 49 ~ JobBehavioralInterviewTabComponent ~ ngOnInit ~    this.interview.BehavioralInterviews",    this.interview.BehavioralInterviews)
       
     } else {
       this.initForm();

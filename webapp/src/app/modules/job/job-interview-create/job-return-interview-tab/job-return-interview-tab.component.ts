@@ -17,8 +17,10 @@ export class JobReturnInterviewTabComponent implements OnInit {
   interviewId!: string | null;
   interview: any;
   selectedIndex: number = 0;
+  step: number = 1;
 
-  constructor(private fb: FormBuilder,
+  constructor(
+    private fb: FormBuilder,
     private ReturnProvider: ReturnProvider,
     private interviewsProvider: InterviewsProvider,
     private route: ActivatedRoute,
@@ -30,17 +32,53 @@ export class JobReturnInterviewTabComponent implements OnInit {
     this.jobId = state;
   }
 
-  ngOnInit(): void {
+ async  ngOnInit() {
     this.interviewId = this.route.snapshot.paramMap.get('id');
+    this.step = JSON.parse(sessionStorage.getItem('job_tab')!);
     if (this.jobId !== undefined) {
       sessionStorage.setItem('job_id', this.jobId.id);
     }
 
     if (this.interviewId !== 'novo') {
+      this.getInterview();
       this.initForm();
-      this.interview = this.interviewsProvider.findOne(this.interviewId);
+      this.setFormValue();
+      this.interview = await this.interviewsProvider.findOne(this.interviewId);
+      this.returnForm.patchValue(
+        this.interview.ReturnInterviews
+        );
+        console.log("🚀 ~ file: job-return-interview-tab.component.ts ~ line 49 ~ JobReturnInterviewTabComponent ~ ngOnInit ~ this.interview.ReturnInterviews", this.interview.ReturnInterviews)
+      
     } else {
       this.initForm();
+    }
+
+    if (sessionStorage.getItem('job_tab') == undefined) {
+      sessionStorage.setItem('job_tab', '1');
+    }
+    this.interviewId = this.route.snapshot.paramMap.get('id');
+    this.step = JSON.parse(sessionStorage.getItem('job_tab')!);
+
+    if (sessionStorage.getItem('method') == 'edit'){
+      this. setFormValue();
+    }
+  }
+
+  getInterview(){
+    try {
+      this.interview = this.interviewsProvider.findOne(
+        this.interviewId
+      );
+      console.log("🚀 ~ file: job-interview-create.component.ts ~ line 103 ~ JobInterviewCreateComponent ~ getCollaborator ~ interview", this.interview)
+      
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  setFormValue() {
+    if (this.interview) {
+      this.returnForm.patchValue(this.interview.ReturnInterviews);
     }
   }
 
@@ -57,22 +95,82 @@ export class JobReturnInterviewTabComponent implements OnInit {
       typeOdContract: [1, Validators.required],
       combinedValue: ['', Validators.required],
       initialData: this.fb.control({ value: new Date().toLocaleDateString(), disabled: false }, [DocumentValidator.isValidData(), Validators.required]),
-  });
+    });
   }
 
-  async saveReturns() {
-    let data = this.returnForm.getRawValue();
+  onChange(value: number) {
+    if (this.returnForm.controls['situational'].value == 5) {
+      this.removeValidators()
+      console.log(this.returnForm)
+    }
+  }
 
-    try {
-        await this.ReturnProvider.store(data);
 
-        this.snackbarService.successMessage('Retorno Cadastrada Com Sucesso');
+
+  removeValidators() {
+    this.returnForm.controls['punctuality'].clearValidators();
+    this.returnForm.controls['punctuality'].updateValueAndValidity();
+    this.returnForm.controls['punctuality'].setErrors(null); 
+
+
+    this.returnForm.controls['presentation'].clearValidators();
+    this.returnForm.controls['presentation'].updateValueAndValidity();
+    this.returnForm.controls['presentation'].setErrors(null);
+
+    this.returnForm.controls['salaryExpectation'].clearValidators();
+    this.returnForm.controls['salaryExpectation'].updateValueAndValidity();
+    this.returnForm.controls['salaryExpectation'].setErrors(null);
+
+
+    this.returnForm.controls['availabilityOfInitialize'].clearValidators();
+    this.returnForm.controls['availabilityOfInitialize'].updateValueAndValidity();
+    this.returnForm.controls['availabilityOfInitialize'].setErrors(null);
+  }
+
+  backToList() {
+    const jobId = sessionStorage.getItem('job_id');
+    this.router.navigate([`vaga/detalhe/${jobId}`]);
+    sessionStorage.removeItem('job_id');
+  }
+
+  async saveInterview() {
+    await this.saveReturnInterviews();
+  }
+
+  async saveReturnInterviews() {
+    if (this.interviewId == 'novo') {
+      let data = this.returnForm.getRawValue();
+      const interview = { ReturnInterviews: data, Job: this.jobId };
+      try {
+        delete data.id;
+        await this.interviewsProvider.store(interview);
+        this.snackbarService.successMessage(
+          'Entrevista Técnica Cadastrada Com Sucesso!'
+        );
         const jobId = sessionStorage.getItem('job_id');
         this.router.navigate([`vaga/detalhe/${jobId}`]);
         sessionStorage.removeItem('job_id');
-    } catch (error) {
+        this.selectedIndex = this.selectedIndex + 1;
+      } catch (error) {
         console.log('ERROR 132' + error);
         this.snackbarService.showError('Falha ao Cadastrar');
+      }
+    } else {
+      let returnForm = this.returnForm.getRawValue();
+      const interview = {
+        ...this.interview,
+        ReturnInterviews: { ...returnForm },
+      };
+      try {
+        await this.interviewsProvider.update(interview);
+        this.snackbarService.successMessage(
+          'Entrevista Atualizada Com Sucesso!'
+        );
+        this.selectedIndex = this.selectedIndex + 1;
+      } catch (error) {
+        console.log('ERROR 132' + error);
+        this.snackbarService.showError('Falha ao Cadastrar');
+      }
     }
-}
+  }
 }
