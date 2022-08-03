@@ -53,7 +53,7 @@
     <div
       *ngIf="resumeId !== 'novo'"
       fxLayout="column"
-      class="tab-group disabled"
+      class="tab-group"
       [ngClass]="{ done: step > 5, active: step == 6 }">
       <p class="tab-item">{{'generic.accompaniment' | translate}}</p>
       <span class="tab-border"></span>
@@ -119,7 +119,7 @@
 
     <button
       mat-flat-button
-      *ngIf="step !== 1 && step !== 5"
+      *ngIf="step !== 1 && step !== 6"
       (click)="navigate('next')"
       color="primary">
       {{'generic.continue_button' | translate}}

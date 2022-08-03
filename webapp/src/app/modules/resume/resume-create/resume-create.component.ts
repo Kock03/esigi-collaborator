@@ -142,7 +142,7 @@ export class ResumeCreateComponent implements OnInit {
   navigate(direction: string) {
     if (this.step > 1 && direction === 'back') {
       this.step -= 1;
-    } else if (this.checkValid() && this.step < 5 && direction === 'next') {
+    } else if (this.checkValid() && this.step < 6 && direction === 'next') {
       this.step += 1;
     } else {
       this.snackbarService.showAlert('Verifique os campos');
