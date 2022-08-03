@@ -59,7 +59,6 @@ export class CollaboratorRegisterTabComponent implements OnInit {
       'https://st.depositphotos.com/1734074/4228/v/450/depositphotos_42286141-stock-illustration-vector-man-with-mustache-in.jpg';
     if (this.collaboratorId == 'novo') {
       this.view = true;
-
       this.collaboratorForm.valueChanges.subscribe(res => {
         const addressForm = this.collaboratorForm.controls[
           'Address'
@@ -73,6 +72,9 @@ export class CollaboratorRegisterTabComponent implements OnInit {
         this.phoneForm = phoneForm
         phoneForm.controls['ddi'].valueChanges.subscribe(res => {});
       });
+    }else{
+      this.view = false;
+
     }
   }
 

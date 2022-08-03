@@ -74,7 +74,7 @@ export class CollaboratorSkillTabComponent implements OnInit {
     sessionStorage.setItem('method', this.method);
     const dialogRef = this.dialog.open(CollaboratorSkillDialog, {
       width: '500px',
-      height: '470px',
+      height: '540px',
     });
 
     dialogRef.afterClosed().subscribe(skill => {
@@ -95,7 +95,7 @@ export class CollaboratorSkillTabComponent implements OnInit {
     sessionStorage.setItem('skill_id', this.skillId);
     const dialogRef = this.dialog.open(CollaboratorSkillDialog, {
       width: '500px',
-      height: '620px',
+      height: '540px',
       data: skillSelected,
     });
     dialogRef.afterClosed().subscribe(skill => {
