@@ -13,7 +13,7 @@
           <mat-form-field fxFlex="30" appearance="outline">
             <mat-label>{{'collaborator.colaborator_create.collaborator_type.name'|translate}}</mat-label>
             <mat-select matInput disableRipple
-              formControlName="collaboratorTypes">
+              formControlName="collaboratorTypes"  (ngModelChange)="changesType($event)">
               <mat-option [value]="1">{{'collaborator.colaborator_create.collaborator_type.clt'|translate}}</mat-option>
               <mat-option [value]="2">{{'collaborator.colaborator_create.collaborator_type.pj'|translate}}</mat-option>
               <mat-option [value]="3">{{'collaborator.colaborator_create.collaborator_type.cooperated'|translate}}

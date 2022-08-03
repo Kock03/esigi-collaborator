@@ -84,6 +84,8 @@ export class FeedbackCreateComponent implements OnInit {
 
   feedbackId!: string | null;
   feedback!: any;
+  projectId: any;
+  managerId: any;
 
   constructor(
     private fb: FormBuilder,
@@ -105,6 +107,10 @@ export class FeedbackCreateComponent implements OnInit {
     this.getProjectList();
     this.initFilterManager();
     this.initFilterProject();
+
+    this.projectId = sessionStorage.getItem('project_id')
+    this.managerId = sessionStorage.getItem('manager_id')
+
 
     if (this.get !== undefined) {
       this.collaboratorId = sessionStorage.getItem('collaborator_id');
@@ -267,6 +273,9 @@ export class FeedbackCreateComponent implements OnInit {
     if (this.feedback) {
       this.feedbackForm.patchValue(this.feedback);
       this.onChange(this.feedback.status)
+      this.managerControl.patchValue(this.managerId)
+      this.projectControl.patchValue(this.projectId)
+
     }
   }
 

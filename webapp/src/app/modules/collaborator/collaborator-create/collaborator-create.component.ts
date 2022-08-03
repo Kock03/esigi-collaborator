@@ -158,11 +158,6 @@ export class CollaboratorCreateComponent implements OnInit {
         district: ['', Validators.required],
       }),
     });
-    if (this.collaboratorForm.controls['collaboratorTypes'].value === 2) {
-      this.collaboratorForm.controls['cpf'].removeValidators(Validators.required)
-    } else {
-      this.collaboratorForm.controls['cnpj'].removeValidators(Validators.required)
-    }
 
   }
 

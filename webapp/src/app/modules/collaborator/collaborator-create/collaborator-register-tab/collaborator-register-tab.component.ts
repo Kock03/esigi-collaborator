@@ -82,6 +82,19 @@ export class CollaboratorRegisterTabComponent implements OnInit {
     this.onChange.next(true);
   }
 
+  changesType(value: number) {
+    if (this.collaboratorForm.controls['collaboratorTypes'].value === 2) {
+      this.collaboratorForm.controls['cpf'].removeValidators(Validators.required)
+      this.collaboratorForm.controls['cpf'].updateValueAndValidity()
+    } else {
+      this.collaboratorForm.controls['cnpj'].removeValidators(Validators.required)
+      this.collaboratorForm.controls['cnpj'].updateValueAndValidity()
+      this.collaboratorForm.controls['cpf'].addValidators(Validators.required)
+
+    }
+
+  }
+
   setValueLogin() {
     if (this.collaboratorForm.controls['collaboratorTypes'].value === 2) {
       this.collaboratorForm.controls['login'].setValue(`${this.collaboratorForm.controls['firstNameCorporateName'].value}@Envolti.com.br`);

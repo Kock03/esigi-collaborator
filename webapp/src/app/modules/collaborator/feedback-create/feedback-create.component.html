@@ -63,6 +63,11 @@
         </mat-autocomplete>
       </mat-form-field>
 
+      <mat-form-field appearance="outline" *ngIf="this.method === 'edit'" fxFlex="25" class="example-full-width">
+        <mat-label>{{'generic.project'|translate}}</mat-label>
+        <input disabled matInput disableRipple [value]="this.projectControl.value" />
+      </mat-form-field>
+
 
         <mat-form-field
         fxFlex="30"
@@ -93,6 +98,11 @@
             {{collaborator.lastNameFantasyName}}
           </mat-option>
         </mat-autocomplete>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" *ngIf="this.method === 'edit'" fxFlex="25" class="example-full-width">
+        <mat-label>{{'collaborator.colaborator_create.feedbacks.manager'|translate}}</mat-label>
+        <input disabled matInput disableRipple [value]="this.managerControl.value" />
       </mat-form-field>
       </div>
 

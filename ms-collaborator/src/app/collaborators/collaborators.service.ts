@@ -43,7 +43,6 @@ export class CollaboratorsService {
           idList: collaboratorIdList,
         })
         .toPromise();
-        console.log(resources.data)
 
       if (resources.data) {
         collaborators.map((collaborator) => {
