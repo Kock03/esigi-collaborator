@@ -105,9 +105,9 @@ export class CollaboratorEducationTabComponent implements OnInit {
       height: '300px',
     });
 
-    dialogRef.afterClosed().subscribe(language => {
+    dialogRef.afterClosed().subscribe(async language => {
       if (language) {
-        this.getLanguagesList();
+        await this.getLanguagesList();
       }
     });
   }
@@ -120,9 +120,9 @@ export class CollaboratorEducationTabComponent implements OnInit {
       height: '470px',
     });
 
-    dialogRef.afterClosed().subscribe(education => {
+    dialogRef.afterClosed().subscribe(async education => {
       if (education) {
-        this.getEducationsList();
+        await this.getEducationsList();
       }
     });
   }
@@ -142,9 +142,9 @@ export class CollaboratorEducationTabComponent implements OnInit {
       data: languageSelected,
     });
 
-    dialogRef.afterClosed().subscribe(language => {
+    dialogRef.afterClosed().subscribe(async language => {
       if (language) {
-        this.getLanguagesList();
+        await this.getLanguagesList();
       }
     });
   }
@@ -185,9 +185,9 @@ export class CollaboratorEducationTabComponent implements OnInit {
       height: '470px',
       data: educationSelected,
     });
-    dialogRef.afterClosed().subscribe(education => {
+    dialogRef.afterClosed().subscribe(async education => {
       if (education) {
-        this.getEducationsList();
+        await this.getEducationsList();
       }
     });
   }

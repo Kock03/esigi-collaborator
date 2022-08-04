@@ -75,9 +75,9 @@ export class CollaboratorDocumentTabComponent implements OnInit {
       height: '300px',
     });
 
-    dialogRef.afterClosed().subscribe(document => {
+    dialogRef.afterClosed().subscribe(async document => {
       if (document) {
-        this.getDocumentList();
+        await this.getDocumentList();
       }
     });
   }
@@ -94,9 +94,9 @@ export class CollaboratorDocumentTabComponent implements OnInit {
     });
 
 
-    dialogRef.afterClosed().subscribe(document => {
+    dialogRef.afterClosed().subscribe(async document => {
       if (document) {
-        this.getDocumentList();
+        await this.getDocumentList();
       }
     });
   }

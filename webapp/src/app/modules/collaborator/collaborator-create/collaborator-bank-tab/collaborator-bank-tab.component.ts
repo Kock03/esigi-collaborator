@@ -75,9 +75,9 @@ export class CollaboratorBankTabComponent implements OnInit {
       width: '500px',
       height: '470px',
     });
-    dialogRef.afterClosed().subscribe(bank => {
+    dialogRef.afterClosed().subscribe(async bank => {
       if (bank) {
-        this.getBankList();
+        await this.getBankList();
       }
     });
   }
@@ -96,9 +96,9 @@ export class CollaboratorBankTabComponent implements OnInit {
       height: '470px',
       data: bankSelected,
     });
-    dialogRef.afterClosed().subscribe(bank => {
+    dialogRef.afterClosed().subscribe(async bank => {
       if (bank) {
-        this.getBankList();
+        await this.getBankList();
       }
     });
   }

@@ -77,9 +77,9 @@ export class CollaboratorSkillTabComponent implements OnInit {
       height: '540px',
     });
 
-    dialogRef.afterClosed().subscribe(skill => {
+    dialogRef.afterClosed().subscribe(async skill => {
       if (skill) {
-        this.getSkillList()
+        await this.getSkillList()
       }
     });
   }
@@ -98,9 +98,9 @@ export class CollaboratorSkillTabComponent implements OnInit {
       height: '540px',
       data: skillSelected,
     });
-    dialogRef.afterClosed().subscribe(skill => {
+    dialogRef.afterClosed().subscribe(async skill => {
       if (skill) {
-        this.getSkillList();
+        await this.getSkillList();
       }
     });
   }

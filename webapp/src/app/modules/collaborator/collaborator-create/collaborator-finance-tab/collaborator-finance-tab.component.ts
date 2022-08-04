@@ -90,9 +90,9 @@ export class CollaboratorFinanceTabComponent implements OnInit {
       height: '550px',
     });
 
-    dialogRef.afterClosed().subscribe(finance => {
+    dialogRef.afterClosed().subscribe(async finance => {
       if (finance) {
-        this.getFinanceList();
+        await this.getFinanceList();
       }
     });
   }
@@ -112,9 +112,9 @@ export class CollaboratorFinanceTabComponent implements OnInit {
       data: financeSelected,
     });
 
-    dialogRef.afterClosed().subscribe(finance => {
+    dialogRef.afterClosed().subscribe(async finance => {
       if (finance) {
-        this.getFinanceList();
+        await this.getFinanceList();
       }
     });
   }
