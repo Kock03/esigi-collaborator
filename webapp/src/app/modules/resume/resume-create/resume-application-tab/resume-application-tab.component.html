@@ -16,16 +16,44 @@
           </td>
         </ng-container>
 
-        <ng-container matColumnDef="applicationDate">
-          <th mat-header-cell *matHeaderCellDef>{{'generic.application_date'|translate}}</th>
+        <ng-container matColumnDef="request">
+          <th mat-header-cell *matHeaderCellDef>Solicitante</th>
           <td mat-cell *matCellDef="let application">
-            {{ application.openingDate }}
+            {{ application.collaborator.firstNameCorporateName }}
+            {{ application.collaborator.lastNameFantasyName }}
           </td>
         </ng-container>
 
-        <ng-container matColumnDef="returnDate">
-          <th mat-header-cell *matHeaderCellDef>{{'generic.return_date'|translate}}</th>
-          <td mat-cell *matCellDef="let application"></td>
+        <ng-container matColumnDef="workplace">
+          <th mat-header-cell *matHeaderCellDef>Localidade</th>
+          <td mat-cell *matCellDef="let application">
+            {{  application.workplace == 1
+              ? 'In Loco'
+              : application.workplace == 2
+              ? 'Home Office'
+              : application.workplace == 3
+              ? 'Hibrido'
+              : 'Envolti' }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="temporary">
+          <th mat-header-cell *matHeaderCellDef>Temporária</th>
+          <td mat-cell *matCellDef="let application">
+            {{  application.temporary == true ? 'Sim' : 'Não' }}
+          </td>
+        </ng-container>
+
+
+
+        <ng-container matColumnDef="seniority">
+          <th mat-header-cell *matHeaderCellDef>Senioridades</th>
+          <td mat-cell *matCellDef="let application">
+            {{ application.Seniorities.intern == true ? 'Estagiário' : '' }}
+            {{ application.Seniorities.junior == true ? '-Junior' : '' }}
+            {{ application.Seniorities.pleno == true ? '-Pleno,' : '' }}
+            {{ application.Seniorities.senior == true ? '-Senior.' : '' }}
+          </td>
         </ng-container>
 
         <ng-container matColumnDef="status">
@@ -44,15 +72,6 @@
             }}
           </td>
         </ng-container>
-
-        <ng-container matColumnDef="responsible">
-          <th mat-header-cell *matHeaderCellDef>{{'generic.requester'|translate}}</th>
-          <td mat-cell *matCellDef="let application">
-            {{ application.collaborator.firstNameCorporateName }}
-            {{application.collaborator.lastNameFantasyName}}
-          </td>
-        </ng-container>
-
         <tr mat-header-row *matHeaderRowDef="displayedApplication; sticky: true"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedApplication"></tr>
       </table>

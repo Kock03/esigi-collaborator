@@ -165,7 +165,7 @@
             }
         },
         "job_interview_list": {
-            "search_jobs": "Buscar Entrvistas",
+            "search_jobs": "Buscar Entrevistas",
             "technical_interview_date": "Data da Entrevista Técnica",
             "behavioral_interview_date": "Data Entrevista Comportamental"
         },
@@ -372,6 +372,7 @@
         "last_name": "Sobrenome",
         "project": "Projeto",
         "register": "Cadastro",
+        "interviews": "Entrevistas",
         "accompaniment": "Acompanhamento",
         "client": "Cliente",
         "clt": "CLT",

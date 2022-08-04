@@ -154,10 +154,8 @@ export class ResumeCreateComponent implements OnInit {
     sessionStorage.clear();
   }
 
-  handleStep(number: number): void {
-    if (!this.checkValid() && this.step < number) {
-      this.snackbarService.showAlert('Verifique os campos');
-    } else if (this.step - number < 1) {
+  handleStep(number: number): void { 
+    if (this.step - number < 1) {
       this.step = number;
       sessionStorage.setItem('resume_tab', this.step.toString());
     } else {

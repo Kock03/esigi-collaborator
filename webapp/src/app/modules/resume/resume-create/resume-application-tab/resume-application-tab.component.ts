@@ -37,11 +37,11 @@ export class ResumeApplicationTabComponent implements OnInit {
 
   displayedApplication: string[] = [
     'jobName',
-    'client',
-    'applicationDate',
-    'returnDate',
+    'request',
+    'workplace',
+    'temporary',
     'status',
-    'responsible',
+    'seniority',
   ];
 
   applications!: Application[];

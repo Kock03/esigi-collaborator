@@ -33,6 +33,12 @@ import { JobInterviewCreateComponent } from './job-interview-create/job-intervie
 import { MatSortModule } from '@angular/material/sort';
 import { TranslateModule } from '@ngx-translate/core';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { JobBehavioralInterviewTabComponent } from './job-interview-create/job-behavioral-interview-tab/job-behavioral-interview-tab.component';
+import { JobTechnicalInterviewTabComponent } from './job-interview-create/job-technical-interview-tab/job-technical-interview-tab.component';
+import { JobClientInterviewTabComponent } from './job-interview-create/job-client-interview-tab/job-client-interview-tab.component';
+import { JobReturnInterviewTabComponent } from './job-interview-create/job-return-interview-tab/job-return-interview-tab.component';
+import { JobResumeInterviewTabComponent } from './job-interview-create/job-resume-interview-tab/job-resume-interview-tab.component';
+import {MatCardModule} from '@angular/material/card';
 
 const routes: Routes = [
   {
@@ -62,6 +68,11 @@ const routes: Routes = [
     JobRegisterTabComponent,
     JobSkillTabComponent,
     JobInterviewCreateComponent,
+    JobBehavioralInterviewTabComponent,
+    JobTechnicalInterviewTabComponent,
+    JobClientInterviewTabComponent,
+    JobReturnInterviewTabComponent,
+    JobResumeInterviewTabComponent,
   ],
   imports: [
     RouterModule.forChild(routes),
@@ -86,6 +97,7 @@ const routes: Routes = [
     NgxMaskModule,
     MatAutocompleteModule,
     MatSortModule,
+    MatCardModule,
   ],
   providers: [MatDatepickerModule, ConfirmDialogService],
   entryComponents: [

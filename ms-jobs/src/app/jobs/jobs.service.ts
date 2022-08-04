@@ -21,6 +21,7 @@ export class JobsService {
   async findAll() {
     const options: FindManyOptions = {
       order: { createdAt: 'DESC' },
+      relations:['Seniorities']
     };
     try {
       const jobs = await this.jobsRepository.find(options);

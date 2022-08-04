@@ -1,11 +1,13 @@
-#jobList {
+#resumeInterviewTab {
+  max-width: 1240px;
+
   .mat-list-item {
     height: auto !important;
+    width: 100%;
   }
 
   .list-group {
     margin-top: 16px;
-
   }
 
   .label-office {
@@ -18,34 +20,22 @@
     font-size: 15px;
   }
 
+  .label-subtitle {
+    margin-top: 15px !important;
+    color: rgb(65, 64, 64);
+    font-size: 15px;
+  }
+
+  .label-format {
+    margin-top: 30px !important;
+    color: rgb(65, 64, 64);
+    font-size: 15px;
+  }
+
   .label-text {
     color: black;
     font-size: 17px;
   }
-
-  .span-text {
-    color: rgb(125, 123, 123);
-    font-size: 15px;
-  }
-
-  .text-div{
-    height: 100%;
-    
-  }
-  
-  .job-text{
-    height: 100%;
-    width: 100%;
-  }
-  
-  .activities-text{
-    margin-left: 200px;
-  }
-
-  .knowledges-text{
-    margin-left: 190px;
-  }
-
 
   .list-group-item {
     border-style: groove;
@@ -64,9 +54,5 @@
 
   .mat-icon-list {
     margin-top: 100px;
-  }
-
-  .example-card {
-    max-width: 400px;
   }
 }

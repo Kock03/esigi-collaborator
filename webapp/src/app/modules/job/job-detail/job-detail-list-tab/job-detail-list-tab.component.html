@@ -145,7 +145,12 @@
           fxLayoutAlign="space-around center">
           <div fxLayout="column" class="activities-text">
             <span class="label-text">
-              {{'job.job_create.skills.collaborator_activities' | translate}}
+              <mat-card class="example-card">
+                <b>{{'job.job_create.skills.collaborator_activities' | translate}}</b>
+                <mat-card-content>
+                  <p>{{'longText'}}</p>
+                </mat-card-content>
+              </mat-card>
             </span>
             <span class="span-text"> {{ job.collaboratorActivities }}</span>
           </div>

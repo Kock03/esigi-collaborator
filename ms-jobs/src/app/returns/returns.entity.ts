@@ -10,6 +10,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { Situation } from '../behavioral-interviews/enums/situational.enum';
+import { InterviewsEnitiy } from '../interviews/interviews.entity';
 import { JobsEntity } from '../jobs/jobs.entity';
 import { Reason } from './enums/reason.enum';
 import { TypeContract } from './enums/type-contract.enum';
@@ -55,6 +56,9 @@ export class ReturnsEntity {
   @ManyToOne(() => JobsEntity, job => job.Returns, { onDelete: "CASCADE", eager: true })
   @JoinColumn()
   Job: JobsEntity;
+
+  @OneToOne(() => InterviewsEnitiy, (interviews) => interviews.Returns)
+  interviews: InterviewsEnitiy;
 
   @CreateDateColumn()
   createdAt: Date;
