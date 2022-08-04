@@ -74,9 +74,9 @@ export class ResumeSkillsTabComponent implements OnInit {
       height: '540px',
     });
 
-    dialogRef.afterClosed().subscribe(skill => {
+    dialogRef.afterClosed().subscribe(async skill => {
       if (skill) {
-        this.getSkillList()
+        await this.getSkillList()
       }
     });
   }
@@ -95,9 +95,9 @@ export class ResumeSkillsTabComponent implements OnInit {
       height: '540px',
       data: skillSelected,
     });
-    dialogRef.afterClosed().subscribe(skill => {
+    dialogRef.afterClosed().subscribe(async skill => {
       if (skill) {
-        this.getSkillList();
+        await this.getSkillList();
       }
     });
   }

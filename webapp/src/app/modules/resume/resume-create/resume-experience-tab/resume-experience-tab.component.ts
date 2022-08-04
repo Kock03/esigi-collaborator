@@ -87,9 +87,9 @@ export class ResumeExperienceTabComponent implements OnInit {
       height: '640px',
     });
 
-    dialogRef.afterClosed().subscribe(experience => {
+    dialogRef.afterClosed().subscribe(async experience => {
       if (experience) {
-        this.getExperienceList()
+        await this.getExperienceList()
       }
     });
   }
@@ -104,9 +104,9 @@ export class ResumeExperienceTabComponent implements OnInit {
       height: '640px',
       data: experienceSelected,
     });
-    dialogRef.afterClosed().subscribe(experience => {
+    dialogRef.afterClosed().subscribe(async experience => {
       if (experience) {
-        this.getExperienceList();
+        await this.getExperienceList();
       }
     }); 
   }
