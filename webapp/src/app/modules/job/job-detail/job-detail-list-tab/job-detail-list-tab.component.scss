@@ -36,6 +36,7 @@
   .job-text{
     height: 100%;
     width: 100%;
+    margin-left: 5%;
   }
   
   .activities-text{
@@ -67,6 +68,22 @@
   }
 
   .example-card {
-    max-width: 400px;
+    max-width: 590px;
+    width: 100%;
+    margin-left: 190px;
+    
   }
+
+  .label-content{
+    word-wrap:break-word;
+    color: rgb(125, 123, 123);
+    font-size: 15px;
+  }
+
+  .content-gray {
+    color: rgb(125, 123, 123);
+    font-size: 15px;
+  }
+
+  
 }
