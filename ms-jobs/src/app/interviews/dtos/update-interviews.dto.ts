@@ -12,6 +12,10 @@ export class UpdateInterviewsDto {
 
   @ApiProperty()
   @IsOptional()
+  resumeId: string
+
+  @ApiProperty()
+  @IsOptional()
   BehavioralInterviews: BehavioralInterviewsEntity;
 
   @ApiProperty()

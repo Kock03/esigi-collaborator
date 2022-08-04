@@ -16,11 +16,6 @@ import { Reason } from '../enums/reason.enum';
 import { TypeContract } from '../enums/type-contract.enum';
 
 export class CreateReturnsDto {
-  @ApiProperty()
-  @IsNotEmpty()
-  @IsString()
-  @MinLength(1)
-  nameCandidate: string;
 
   @ApiProperty()
   @IsNotEmpty()

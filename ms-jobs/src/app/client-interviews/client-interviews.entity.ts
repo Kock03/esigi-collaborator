@@ -22,9 +22,6 @@ export class ClientInterviewsEntity {
   id: string;
 
   @Column()
-  nameCandidate: string;
-
-  @Column()
   evaluator: string;
 
   @Column()

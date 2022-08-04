@@ -8,6 +8,12 @@ import { TechnicalInterviewsEntity } from 'src/app/technical-interviews/technica
 import { IsNull } from 'typeorm';
 
 export class CreateInterviewsDto {
+
+  
+  @ApiProperty()
+  @IsOptional()
+  resumeId: string
+
   @ApiProperty()
   @IsOptional()
   BehavioralInterviews: BehavioralInterviewsEntity;

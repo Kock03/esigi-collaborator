@@ -15,11 +15,6 @@ import { Reason } from '../enums/reason.enum';
 import { TypeContract } from '../enums/type-contract.enum';
 
 export class UpdateReturnsDto {
-  @ApiProperty()
-  @IsOptional()
-  @IsString()
-  @MinLength(1)
-  nameCandidate: string;
 
   @ApiProperty()
   @IsOptional()

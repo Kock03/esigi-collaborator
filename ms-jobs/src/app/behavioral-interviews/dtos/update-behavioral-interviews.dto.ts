@@ -17,12 +17,6 @@ import { Situation } from '../enums/situational.enum';
 
 export class UpdateBehaviorInterviewsDto {
 
-  @IsString()
-  @IsOptional()
-  @MinLength(1)
-  @ApiProperty()
-  nameCandidate: string;
-
   @IsOptional()
   @ApiProperty()
   @MinLength(1)

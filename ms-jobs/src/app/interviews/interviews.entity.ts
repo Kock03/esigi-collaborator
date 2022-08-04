@@ -1,4 +1,5 @@
 import {
+  Column,
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
@@ -19,6 +20,9 @@ import { ICollaborator } from './_model/collaborator.model';
 export class InterviewsEnitiy {
   @PrimaryGeneratedColumn('uuid')
   id: string;
+
+  @Column()
+  resumeId: string
 
   @OneToOne(() => BehavioralInterviewsEntity, {
     cascade: ['insert', 'update', 'soft-remove'],

@@ -19,10 +19,7 @@ import { TypeContract } from './enums/type-contract.enum';
 export class ReturnsEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
-
-  @Column()
-  nameCandidate: string;
-
+  
   @Column()
   dateOfReturn: string;
 

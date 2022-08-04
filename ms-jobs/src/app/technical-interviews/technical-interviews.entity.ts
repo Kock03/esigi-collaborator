@@ -23,9 +23,6 @@ export class TechnicalInterviewsEntity {
   id: string;
 
   @Column()
-  nameCandidate: string;
-
-  @Column()
   evaluator: string;
 
   @Column()
