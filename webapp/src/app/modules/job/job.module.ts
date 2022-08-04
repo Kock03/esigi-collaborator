@@ -38,6 +38,7 @@ import { JobTechnicalInterviewTabComponent } from './job-interview-create/job-te
 import { JobClientInterviewTabComponent } from './job-interview-create/job-client-interview-tab/job-client-interview-tab.component';
 import { JobReturnInterviewTabComponent } from './job-interview-create/job-return-interview-tab/job-return-interview-tab.component';
 import { JobResumeInterviewTabComponent } from './job-interview-create/job-resume-interview-tab/job-resume-interview-tab.component';
+import {MatCardModule} from '@angular/material/card';
 
 const routes: Routes = [
   {
@@ -96,6 +97,7 @@ const routes: Routes = [
     NgxMaskModule,
     MatAutocompleteModule,
     MatSortModule,
+    MatCardModule,
   ],
   providers: [MatDatepickerModule, ConfirmDialogService],
   entryComponents: [

@@ -144,7 +144,7 @@ export class JobClientInterviewTabComponent implements OnInit {
         delete data.id;
         await this.interviewsProvider.store(interview);
         this.snackbarService.successMessage(
-          'Entrevista Técnica Cadastrada Com Sucesso!'
+          'Entrevista Cliente Cadastrada Com Sucesso!'
         );
         const jobId = sessionStorage.getItem('job_id');
         this.router.navigate([`vaga/detalhe/${jobId}`]);
