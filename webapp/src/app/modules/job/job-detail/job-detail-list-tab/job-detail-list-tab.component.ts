@@ -20,6 +20,9 @@ corporateName: string;
   styleUrls: ['./job-detail-list-tab.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
+
+
+
 export class JobDetailListTabComponent implements OnInit {
   jobId!: string | null;
   job!: any;
@@ -50,4 +53,5 @@ export class JobDetailListTabComponent implements OnInit {
       console.error(error);
     }
   }
+  
 }
