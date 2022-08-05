@@ -85,14 +85,14 @@ export class CollaboratorEducationTabComponent implements OnInit {
   async getEducationsList() {
     this.collaboratorId = sessionStorage.getItem('collaborator_id');
     const data = await this.collaboratorProvider.findOne(this.collaboratorId);
-    this.dataEducation = data.Educations;
+    this.dataEducation = await data.Educations;
   }
 
   
   async getLanguagesList() {
     this.collaboratorId = sessionStorage.getItem('collaborator_id');
     const data = await this.collaboratorProvider.findOne(this.collaboratorId);
-    this.dataLanguage = data.Languages;
+    this.dataLanguage = await data.Languages;
   }
 
 
@@ -105,9 +105,9 @@ export class CollaboratorEducationTabComponent implements OnInit {
       height: '300px',
     });
 
-    dialogRef.afterClosed().subscribe(async language => {
+    dialogRef.afterClosed().subscribe( language => {
       if (language) {
-        await this.getLanguagesList();
+         this.getLanguagesList();
       }
     });
   }
@@ -120,9 +120,9 @@ export class CollaboratorEducationTabComponent implements OnInit {
       height: '470px',
     });
 
-    dialogRef.afterClosed().subscribe(async education => {
+    dialogRef.afterClosed().subscribe( education => {
       if (education) {
-        await this.getEducationsList();
+         this.getEducationsList();
       }
     });
   }
@@ -142,9 +142,9 @@ export class CollaboratorEducationTabComponent implements OnInit {
       data: languageSelected,
     });
 
-    dialogRef.afterClosed().subscribe(async language => {
+    dialogRef.afterClosed().subscribe( language => {
       if (language) {
-        await this.getLanguagesList();
+         this.getLanguagesList();
       }
     });
   }

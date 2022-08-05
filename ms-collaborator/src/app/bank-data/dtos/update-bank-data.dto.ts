@@ -51,7 +51,7 @@ export class UpdateBankDataDto {
 
   @ApiProperty()
   @IsOptional()
-  status: boolean;
+  inactive: boolean;
 
   @ApiProperty()
   @IsNotEmpty()

@@ -32,8 +32,8 @@
             class="checkbox"
             color="primary"
             fxFlex="25"
-            formControlName="status">
-            {{'generic.active' | translate}}
+            formControlName="inactive">
+            Inativo
           </mat-checkbox>
         </div>
         <div fxLayout="row" fxFlex="100" fxLayoutGap="16px">
@@ -56,7 +56,7 @@
               matInput
               disableRipple
               formControlName="digit"
-              mask="0"
+              mask="000"
               placeholder="Digito" />
           </mat-form-field>
         </div>
@@ -81,7 +81,7 @@
               matInput
               disableRipple
               formControlName="bankAccountDigit"
-              mask="0"
+              mask="00"
               placeholder="Digito" />
               <mat-error *ngIf="bankForm &&
               bankForm.controls['bankAccountDigit'].hasError('required')">

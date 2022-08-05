@@ -64,7 +64,7 @@ export class CollaboratorSkillTabComponent implements OnInit {
   async getSkillList() {
     this.collaboratorId = sessionStorage.getItem('collaborator_id');
     const data = await this.collaboratorProvider.findOne(this.collaboratorId);
-    this.data = data.Skills;
+    this.data = await data.Skills;
   }
 
 
@@ -77,9 +77,9 @@ export class CollaboratorSkillTabComponent implements OnInit {
       height: '540px',
     });
 
-    dialogRef.afterClosed().subscribe(async skill => {
+    dialogRef.afterClosed().subscribe( skill => {
       if (skill) {
-        await this.getSkillList()
+         this.getSkillList()
       }
     });
   }

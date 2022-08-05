@@ -46,8 +46,8 @@ export class CollaboratorBankDialog {
       accountType: [null, Validators.required],
       accountNumber: [null, [Validators.required, Validators.maxLength(5)]],
       digit: [null],
-      bankAccountDigit: [null, [Validators.required, Validators.maxLength(1)]],
-      status: [true, Validators.required],
+      bankAccountDigit: [null, Validators.required ],
+      inactive: [false],
       Collaborator: { id: this.collaboratorId },
     });
 
@@ -64,9 +64,7 @@ export class CollaboratorBankDialog {
 
   async save() {
     const data = this.bankForm.getRawValue();
-    if (!data.status) {
-      data.status = false;
-    }
+
     try {
       if (this.method === 'edit') {
         try {
@@ -84,6 +82,8 @@ export class CollaboratorBankDialog {
         sessionStorage.setItem('bank_id', bank.id);
       }
     } catch (error: any) {
+      console.log(error);
+
       console.log('ERROR 132' + error);
     }
    

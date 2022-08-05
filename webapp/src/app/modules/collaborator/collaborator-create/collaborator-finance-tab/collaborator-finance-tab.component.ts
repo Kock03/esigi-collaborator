@@ -77,7 +77,7 @@ export class CollaboratorFinanceTabComponent implements OnInit {
   async getFinanceList() {
     this.collaboratorId = sessionStorage.getItem('collaborator_id');
     const data = await this.collaboratorProvider.findOne(this.collaboratorId);
-    this.data = data.Financials;
+    this.data = await data.Financials;
   }
 
 
@@ -90,9 +90,9 @@ export class CollaboratorFinanceTabComponent implements OnInit {
       height: '550px',
     });
 
-    dialogRef.afterClosed().subscribe(async finance => {
+    dialogRef.afterClosed().subscribe( finance => {
       if (finance) {
-        await this.getFinanceList();
+         this.getFinanceList();
       }
     });
   }
@@ -112,9 +112,9 @@ export class CollaboratorFinanceTabComponent implements OnInit {
       data: financeSelected,
     });
 
-    dialogRef.afterClosed().subscribe(async finance => {
+    dialogRef.afterClosed().subscribe( finance => {
       if (finance) {
-        await this.getFinanceList();
+         this.getFinanceList();
       }
     });
   }

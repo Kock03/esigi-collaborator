@@ -239,11 +239,12 @@ export class FeedbackCreateComponent implements OnInit {
 
 
   onChange(value: number) {
-    if (this.feedbackForm.controls['status'].value === 1) {
+    if (this.feedbackForm.controls['status'].value === 1 && value === 1) {
       this.removeValidators()
       console.log(this.feedbackForm)
     }
   }
+
 
   removeValidators() {
      this.feedbackForm.controls['feedbackDateRetorn'].clearValidators()

@@ -39,7 +39,7 @@ export class BankDataEntity {
   bankAccountDigit: string;
 
   @Column()
-  status: boolean;
+  inactive: boolean;
 
   @ManyToOne(
     () => CollaboratorsEntity,

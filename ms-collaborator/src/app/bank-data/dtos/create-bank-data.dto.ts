@@ -50,9 +50,8 @@ export class CreateBankDataDto {
   bankAccountDigit: string;
 
   @ApiProperty()
-  @IsNotEmpty()
-  @IsBoolean()
-  status: boolean;
+  @IsOptional()
+  inactive: boolean;
 
   @ApiProperty()
   @IsNotEmpty()

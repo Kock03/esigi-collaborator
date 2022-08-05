@@ -65,7 +65,7 @@ export class CollaboratorDependentsTabComponent implements OnInit {
   async getDependentsList() {
     this.collaboratorId = sessionStorage.getItem('collaborator_id');
     const data = await this.collaboratorProvider.findOne(this.collaboratorId);
-    this.data =  data.Dependents;
+    this.data =  await data.Dependents;
   }
 
 
@@ -78,9 +78,9 @@ export class CollaboratorDependentsTabComponent implements OnInit {
       height: '650px',
     });
 
-    dialogRef.afterClosed().subscribe(async dependent => {
+    dialogRef.afterClosed().subscribe( dependent => {
       if (dependent) {
-        await this.getDependentsList();
+         this.getDependentsList();
       }
     });
   }
@@ -99,9 +99,9 @@ export class CollaboratorDependentsTabComponent implements OnInit {
       height: '650px',
       data: dependentsSelected,
     });
-    dialogRef.afterClosed().subscribe(async dependent => {
+    dialogRef.afterClosed().subscribe( dependent => {
       if (dependent) {
-        await this.getDependentsList();
+         this.getDependentsList();
       }
     });
   }

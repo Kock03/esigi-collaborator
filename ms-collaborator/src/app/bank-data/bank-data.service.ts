@@ -41,10 +41,10 @@ export class BankDataService {
   async store(data: CreateBankDataDto) {
 
     try {
-      if (data.status === true) {
+      if (data.inactive === false) {
         const list = await this.findAll();
         Object.keys(list).forEach(key => {
-          list[key].status = 0
+          list[key].inactive = 0
           this.update(list[key].id, list[key]);
         })
       }
@@ -64,14 +64,14 @@ export class BankDataService {
       if (!bank) {
         throw new NotFoundException();
       }
-      if(data.status === true){
+      if(data.inactive === false){
         const list = await this.findAll();
         Object.keys(list).forEach(key => {
           if(list[key].id === id){
-            list[key].status = 1
+            list[key].inactive = 1
             return this.bankDataRepository.save({ id: id, ...data });
           }else{
-            list[key].status = 0
+            list[key].inactive = 0
             this.update(list[key].id, list[key]);
           }
         })

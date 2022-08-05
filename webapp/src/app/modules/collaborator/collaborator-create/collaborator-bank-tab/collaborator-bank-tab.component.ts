@@ -63,7 +63,7 @@ export class CollaboratorBankTabComponent implements OnInit {
   async getBankList() {
     this.collaboratorId = sessionStorage.getItem('collaborator_id');
     const data = await this.collaboratorProvider.findOne(this.collaboratorId);
-    this.data = data.BankData;
+    this.data = await data.BankData;
   }
 
 
@@ -75,9 +75,9 @@ export class CollaboratorBankTabComponent implements OnInit {
       width: '500px',
       height: '470px',
     });
-    dialogRef.afterClosed().subscribe(async bank => {
+    dialogRef.afterClosed().subscribe(bank => {
       if (bank) {
-        await this.getBankList();
+         this.getBankList();
       }
     });
   }
@@ -96,9 +96,9 @@ export class CollaboratorBankTabComponent implements OnInit {
       height: '470px',
       data: bankSelected,
     });
-    dialogRef.afterClosed().subscribe(async bank => {
+    dialogRef.afterClosed().subscribe( bank => {
       if (bank) {
-        await this.getBankList();
+         this.getBankList();
       }
     });
   }
