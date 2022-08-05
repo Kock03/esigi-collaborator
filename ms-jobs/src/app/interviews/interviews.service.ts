@@ -47,7 +47,7 @@ export class InterviewsService {
 
   async getFollowUpInterviews(id: string) {
     const interviews = await this.interviewsRepository.query(
-      'select interviews_enitiy.id, b.name_candidate, b.behavioral_interview_date, t.name_candidate as name_candidate_tec , t.technical_interview_date, j.collaborator_requester_id, j.status from interviews_enitiy left join behavioral_interviews_entity b on interviews_enitiy.behavioral_interviews_id = b.id left join technical_interviews_entity t on interviews_enitiy.technical_interviews_id = t.id left join jobs_entity j on interviews_enitiy.job_id = j.id where interviews_enitiy.job_id = ' +
+      'select interviews_enitiy.id, b.behavioral_interview_date, t.name_candidate as name_candidate_tec , t.technical_interview_date, j.collaborator_requester_id, j.status from interviews_enitiy left join behavioral_interviews_entity b on interviews_enitiy.behavioral_interviews_id = b.id left join technical_interviews_entity t on interviews_enitiy.technical_interviews_id = t.id left join jobs_entity j on interviews_enitiy.job_id = j.id where interviews_enitiy.job_id = ' +
         '"' +
         id +
         '"' +

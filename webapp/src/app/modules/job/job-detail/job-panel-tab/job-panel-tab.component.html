@@ -13,11 +13,7 @@
         <ng-container matColumnDef="nameCandidate">
           <th mat-header-cell *matHeaderCellDef>{{'job.job_interview_create.name_candidate' | translate}}</th>
           <td mat-cell *matCellDef="let interviews">
-            {{
-              interviews.nameCandidate == null
-                ? interviews.nameCandidateTec
-                : interviews.nameCandidate
-            }}
+
           </td>
         </ng-container>
 
