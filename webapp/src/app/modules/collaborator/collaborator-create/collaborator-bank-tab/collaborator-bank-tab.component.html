@@ -13,7 +13,7 @@
           <ng-container matColumnDef="agency">
             <th mat-header-cell *matHeaderCellDef>{{'collaborator.colaborator_create.bank.agency' | translate}}</th>
             <td mat-cell *matCellDef="let bank">
-              {{ bank.agency }}
+              {{ bank.agency }} - {{ bank.digit }}
             </td>
           </ng-container>
 
@@ -33,7 +33,7 @@
           <ng-container matColumnDef="account">
             <th mat-header-cell *matHeaderCellDef>{{'collaborator.colaborator_create.bank.account_number' | translate}}</th>
             <td mat-cell *matCellDef="let bank">
-              {{ bank.accountNumber }}
+              {{ bank.account_number }} - {{bank.bank_account_digit}}
             </td>
           </ng-container>
 

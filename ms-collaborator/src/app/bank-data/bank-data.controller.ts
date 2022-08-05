@@ -28,6 +28,11 @@ export class BankDataController {
     return await this.bankDataService.findOneOrFail({ id });
   }
 
+  @Get('collaborator/:id')
+  async findByCollaborator(@Param('id', new ParseUUIDPipe()) id: string){
+    return await this.bankDataService.findByCollaborator(id)
+  }
+
   @Post()
   async store(@Body() body: CreateBankDataDto) {
     return await this.bankDataService.store(body);

@@ -50,7 +50,7 @@ export class CollaboratorBankTabComponent implements OnInit {
     public dialog: MatDialog,
     private snackbarService: SnackBarService,
     private collaboratorBankProvider: CollaboratorBankProvider,
-    private collaboratorProvider: CollaboratorProvider
+    private collaboratorProvider: CollaboratorProvider,
   ) {}
 
   ngOnInit(): void {
@@ -62,8 +62,7 @@ export class CollaboratorBankTabComponent implements OnInit {
 
   async getBankList() {
     this.collaboratorId = sessionStorage.getItem('collaborator_id');
-    const data = await this.collaboratorProvider.findOne(this.collaboratorId);
-    this.data = await data.BankData;
+    this.data = await this.collaboratorBankProvider.findByCollaborator(this.collaboratorId);
   }
 
 

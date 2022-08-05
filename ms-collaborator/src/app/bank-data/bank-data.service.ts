@@ -25,6 +25,10 @@ export class BankDataService {
     return await this.bankDataRepository.find(options);
   }
 
+  async findByCollaborator(id: string) {
+    return await this.bankDataRepository.query(`select * from bank_data where collaborator_id="${id}"`)
+  }
+
   async findOneOrFail(
     conditions: FindConditions<BankDataEntity>,
     options?: FindOneOptions<BankDataEntity>,
