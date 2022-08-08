@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, Input, Output, EventEmitter, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -17,11 +18,13 @@ export class CollaboratorDocumentDialog {
   method!: string;
   collaboratorId!: string | null;
   documentId!: string | null;
+  file!: any;
 
 
   constructor(
     public dialogRef: MatDialogRef<CollaboratorDocumentDialog>,
     private collaboratorDocumentProvider: CollaboratorDocumentProvider,
+    private httpClient: HttpClient,
     private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
@@ -35,7 +38,7 @@ export class CollaboratorDocumentDialog {
   initForm(): void {
     this.documentForm = this.fb.group({
       name: [null, Validators.required],
-      file: [null],
+      fileName: [null],
       Collaborator: { id: this.collaboratorId },
     });
     if (this.data) {
@@ -43,15 +46,28 @@ export class CollaboratorDocumentDialog {
     }
   }
 
-  fileChanged(file: any) {
-    const reader = new FileReader();
-    reader.readAsDataURL(file.target.files[0]);
-    reader.onload = _file => {
-      this.url = reader.result;
-      this.documentForm.patchValue({
-        file: reader.result,
-      });
-    };
+  inputFileChanged(event: any) {
+    if (event.target.files && event.target.files[0]) {
+      const file = event.target.files[0]
+
+
+      const formData = new FormData();
+      formData.append('file', file);
+
+      try {
+     this.httpClient.post('http://localhost:3000', formData)
+      .subscribe(resposta => {
+        if (resposta){
+          this.file = resposta
+          console.log("🚀 ~ file: collaborator-document-dialog.component.ts ~ line 62 ~ CollaboratorDocumentDialog ~ inputFileChanged ~ this.file", this.file)
+          console.log("🚀 ~ file: collaborator-document-dialog.component.ts ~ line 62 ~ CollaboratorDocumentDialog ~ inputFileChanged ~ resposta", resposta)
+        }
+      })
+      
+      } catch (e) {
+        console.log(e)
+      }
+    }
   }
 
   onNoClick(): void {
@@ -61,9 +77,11 @@ export class CollaboratorDocumentDialog {
   }
 
   async save() {
+    this.documentForm.controls['fileName'].setValue(this.file.filename);
     const data = this.documentForm.getRawValue();
     if (this.method === 'add') {
       try {
+
         const document = await this.collaboratorDocumentProvider.store(data);
         sessionStorage.setItem('document_id', document.id);
       } catch (error: any) {

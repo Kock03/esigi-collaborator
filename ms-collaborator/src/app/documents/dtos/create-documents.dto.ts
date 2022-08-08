@@ -21,7 +21,7 @@ export class CreateDocumentsDto {
   @IsOptional()
   @IsString()
   @MaxLength(255)
-  file: string;
+  fileName: string;
 
   @ApiProperty()
   @IsNotEmpty()

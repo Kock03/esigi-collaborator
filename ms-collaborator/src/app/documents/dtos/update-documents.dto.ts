@@ -21,7 +21,7 @@ export class UpdateDocumentsDto {
   @IsOptional()
   @IsString()
   @MaxLength(255)
-  file: string;
+  fileName: string;
 
   @ApiProperty()
   @IsNotEmpty()

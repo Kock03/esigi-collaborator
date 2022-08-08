@@ -17,8 +17,8 @@ export class DocumentsEntity {
   @Column()
   name: string;
 
-  @Column({ type: 'blob' })
-  file: string;
+  @Column()
+  fileName: string;
 
   @ManyToOne(
     () => CollaboratorsEntity,

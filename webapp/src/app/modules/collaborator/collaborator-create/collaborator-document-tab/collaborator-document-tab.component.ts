@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import {
   Component,
   ElementRef,
@@ -21,6 +22,7 @@ import { CollaboratorProvider } from 'src/providers/collaborator-providers/colla
 import { ConfirmDialogService } from 'src/services/confirn-dialog.service';
 import { SnackBarService } from 'src/services/snackbar.service';
 import { CollaboratorDocumentDialog } from './collaborator-document-dialog.component';
+import { CollaboratorImageDialog } from './collaborator-image-dialog.component';
 
 @Component({
   selector: 'app-collaborator-document-tab',
@@ -46,6 +48,7 @@ export class CollaboratorDocumentTabComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     public dialog: MatDialog,
+    private httpClient: HttpClient,
     private dialogService: ConfirmDialogService,
     private collaboratorDocumentProvider: CollaboratorDocumentProvider,
     private snackbarService: SnackBarService,   
@@ -64,6 +67,16 @@ export class CollaboratorDocumentTabComponent implements OnInit {
     const data = await this.collaboratorProvider.findOne(this.collaboratorId);
     this.data = data.Documents;
   }
+
+  
+  getImage(fileName: string) {
+    const dialogRef = this.dialog.open(CollaboratorImageDialog, {
+      width: '1000px',
+      height: '500px',
+      data: fileName
+    });
+  }
+
 
 
 

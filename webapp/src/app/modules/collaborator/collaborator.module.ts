@@ -40,6 +40,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatSortModule } from '@angular/material/sort';
 import { TranslateModule } from '@ngx-translate/core';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { CollaboratorImageDialog } from './collaborator-create/collaborator-document-tab/collaborator-image-dialog.component';
 
 const routes: Routes = [
   {
@@ -68,6 +69,7 @@ const routes: Routes = [
     CollaboratorDocumentTabComponent,
     CollaboratorLanguageDialog,
     CollaboratorEducationDialog,
+    CollaboratorImageDialog,
     CollaboratorBankDialog,
     CollaboratorFinanceDialog,
     CollaboratorSkillDialog,
@@ -114,6 +116,7 @@ const routes: Routes = [
     CollaboratorEducationDialog,
     CollaboratorBankDialog,
     CollaboratorFinanceDialog,
+    CollaboratorImageDialog,
     CollaboratorSkillDialog,
     CollaboratorDocumentDialog,
     CollaboratorFeedbackTabComponent,
