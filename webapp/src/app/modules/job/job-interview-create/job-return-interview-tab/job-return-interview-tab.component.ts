@@ -86,13 +86,13 @@ export class JobReturnInterviewTabComponent implements OnInit {
     this.returnForm = this.fb.group({
       nameCandidate: ['', Validators.required],
       dateOfReturn: this.fb.control({ value: ' ', disabled: false }, [DocumentValidator.isValidData(), Validators.required]),
-      technicalEvaluation: [1, Validators.required],
-      behavioralEvaluation: [1, Validators.required],
+      technicalEvaluation: [null, Validators.required],
+      behavioralEvaluation: [null, Validators.required],
       technicalEvaluationComent: ['', Validators.required],
       behavioralEvaluationComent: ['', Validators.required],
       returnOfCandidate: [true, Validators.required],
-      reason: [1, Validators.required],
-      typeOdContract: [1, Validators.required],
+      reason: [null, Validators.required],
+      typeOdContract: [null, Validators.required],
       combinedValue: ['', Validators.required],
       initialData: this.fb.control({ value: new Date().toLocaleDateString(), disabled: false }, [DocumentValidator.isValidData(), Validators.required]),
   });
@@ -166,6 +166,8 @@ export class JobReturnInterviewTabComponent implements OnInit {
         this.snackbarService.successMessage(
           'Entrevista Atualizada Com Sucesso!'
         );
+        const jobId = sessionStorage.getItem('job_id');
+        this.router.navigate([`vaga/detalhe/${jobId}`]);
         this.selectedIndex = this.selectedIndex + 1;
       } catch (error) {
         console.log('ERROR 132' + error);

@@ -165,6 +165,8 @@ export class JobTechnicalInterviewTabComponent implements OnInit {
         this.snackbarService.successMessage(
           'Entrevista Atualizada Com Sucesso!'
         );
+        const jobId = sessionStorage.getItem('job_id');
+        this.router.navigate([`vaga/detalhe/${jobId}`]);
         this.selectedIndex = this.selectedIndex + 1;
       } catch (error) {
         console.log('ERROR 132' + error);
