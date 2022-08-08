@@ -58,7 +58,7 @@ export class JobCreateComponent implements OnInit {
 
   collaboratorControl = new FormControl();
   customerControl = new FormControl();
-  
+
   Date: any;
   jobForm!: FormGroup;
   step: number = 1;
@@ -80,7 +80,7 @@ export class JobCreateComponent implements OnInit {
     ['requester'],
     ['client'],
     ['startForecast'],
-    
+
 
   ]
 
@@ -97,7 +97,7 @@ export class JobCreateComponent implements OnInit {
     private snackbarService: SnackBarService,
     private router: Router,
     private route: ActivatedRoute
-  ) {}
+  ) { }
 
   async ngOnInit() {
     this.jobId = this.route.snapshot.paramMap.get('id');
@@ -107,7 +107,7 @@ export class JobCreateComponent implements OnInit {
     this.step = JSON.parse(sessionStorage.getItem('job_tab')!);
     this.jobId = this.route.snapshot.paramMap.get('id');
     this.customerId = sessionStorage.getItem('customer_id');
-    this.collaboratorRequesterId =  sessionStorage.getItem('collaboratorRequester_id');
+    this.collaboratorRequesterId = sessionStorage.getItem('collaboratorRequester_id');
 
     if (this.jobId !== 'novo') {
       await this.getJob();
@@ -157,22 +157,22 @@ export class JobCreateComponent implements OnInit {
         '',
         [
           Validators.required,
-          Validators.minLength(2),  ],
+          Validators.minLength(2),],
       ],
-      startForecast: this.fb.control({ value: ' ', disabled: false },[ DocumentValidator.isValidData(), Validators.required]),
+      startForecast: this.fb.control({ value: ' ', disabled: false }, [DocumentValidator.isValidData(), Validators.required]),
       jobNumber: ['', Validators.required],
       typeOfContract: [''],
-      workplace: [''], 
+      workplace: [''],
       workingDay: ['', Validators.required],
       minimumValue: [null],
       maximumValue: [null],
-      openingDate: this.fb.control({ value: new Date().toLocaleDateString(), disabled: false },[ DocumentValidator.isValidData(), Validators.required]),
-      schooling: ['',Validators.required],
-      collaboratorActivities: ['',Validators.required],
-      skills: ['',Validators.required],
-      attitudes: ['',Validators.required],
+      openingDate: this.fb.control({ value: new Date().toLocaleDateString(), disabled: false }, [DocumentValidator.isValidData(), Validators.required]),
+      schooling: ['', Validators.required],
+      collaboratorActivities: ['', Validators.required],
+      skills: ['', Validators.required],
+      attitudes: ['', Validators.required],
       Languages: this.fb.group({
-        languageName: ['', [Validators.maxLength(20),Validators.required]],
+        languageName: ['', [Validators.maxLength(20), Validators.required]],
         degreeOfInfluence: ['', Validators.required],
       }),
       Seniorities: this.fb.group({
@@ -183,9 +183,9 @@ export class JobCreateComponent implements OnInit {
       }),
       Knowledges: this.fb.array(this.job ? this.job.Knowledges : []),
     },
-    {
-      validator: [MustMatch('minimumValue', 'maximumValue')],
-    });
+      {
+        validator: [MustMatch('minimumValue', 'maximumValue')],
+      });
 
     this.collaboratorControl.valueChanges.subscribe((res) => {
       if (res && res.id) {
@@ -260,32 +260,34 @@ export class JobCreateComponent implements OnInit {
     }
   }
 
-  handleChanges(value: any): void {}
+  handleChanges(value: any): void { }
 
-  
-  async saveEditJob() {
+
+  async saveEditJob(jobId: any) {
     let data = this.jobForm.getRawValue();
     try {
       data.Languages = new Array(data.Languages);
       const job = await this.jobProvider.update(this.jobId, data);
       this.snackbarService.successMessage('Vaga atualizada com sucesso');
-      this.router.navigate(['vaga/lista']);
-    } catch (error) {
+      this.router.navigate([`vaga/detalhe/${jobId}`]);
+
+    }  
+    catch (error) {
       console.error(error);
     }
   }
 
 
-checkValid(): boolean {
-  let isValid = true;
-  const validations = this.validations[this.step - 1];
-  for (let index = 0; index < validations.length; index++) {
-    if (this.jobForm.controls[validations[index]].invalid) {
-      isValid = false;
+  checkValid(): boolean {
+    let isValid = true;
+    const validations = this.validations[this.step - 1];
+    for (let index = 0; index < validations.length; index++) {
+      if (this.jobForm.controls[validations[index]].invalid) {
+        isValid = false;
 
-      this.jobForm.markAllAsTouched();
+        this.jobForm.markAllAsTouched();
+      }
     }
+    return isValid;
   }
-  return isValid;
-}
 }

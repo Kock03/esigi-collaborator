@@ -69,7 +69,7 @@
     fxLayoutAlign="center end"
     fxLayoutGap="16px"
     *ngIf="jobId !== 'novo'">
-    <button mat-flat-button color="primary" (click)="saveEditJob()">
+    <button mat-flat-button color="primary" (click)="saveEditJob(job.id)">
       {{'generic.save_button' | translate}}
     </button>
   </div>
