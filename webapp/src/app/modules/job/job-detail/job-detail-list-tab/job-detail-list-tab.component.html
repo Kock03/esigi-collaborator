@@ -162,7 +162,7 @@
           <button
             class="table-button"
             mat-button
-            (click)="editJob(job.id, job.customer.corporateName, job.collaborator.firstNameCorporateName)"
+            (click)="editJob(job.id, this.customer.corporateName, this.collaborator.firstNameCorporateName)"
             >
             <mat-icon>edit</mat-icon>
           </button>
