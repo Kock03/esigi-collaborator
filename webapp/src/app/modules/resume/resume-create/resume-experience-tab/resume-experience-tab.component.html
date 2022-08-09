@@ -4,63 +4,51 @@
       {{ 'resumes.resume_experience.experience_registration' | translate }}
     </h2>
     <div>
-      <button
-        class="edit-button"
-        mat-flat-button
-        color="primary"
-        (click)="openDialog()">
+      <button class="edit-button" mat-flat-button color="primary" (click)="openDialog()">
         <mat-icon>add</mat-icon>
       </button>
     </div>
-    <mat-list
-      role="list"
-      #experiencesList
-      class="list-group">
-      <mat-list-item
-        *ngFor="let experience of data; let i = index"
-        class="list-group-item"
-        fxLayoutAlign="start start">
+    <mat-list role="list" #experiencesList class="list-group">
+      <mat-list-item *ngFor="let experience of data; let i = index" class="list-group-item" fxLayoutAlign="start start">
         <div class="list-item" fxLayout="column">
-          <h2 class="label-office">
-            {{ experience.office }}
-          </h2>
-          <span>
+          <div fxLayout="row" >
+            <h2 class="label-office">
+              {{ experience.office }}
+            </h2>
+            <div  class="resume-button">
+            <button class="table-button" mat-button (click)="getExperience(experience, experience.id)">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button  (click)="deleteExperience(experience.id)" class="table-button" mat-button>
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+          </div>
+          <b class="label-gray">
             {{ experience.companyName }}
-          </span>
-          <span class="label-gray">
+          </b>
+          <b class="label-gray">
             {{ experience.locality }}
-          </span>
+          </b>
 
-          <div class="date-resume-experience" fxLayout="row">
+          <div class="label-gray" fxLayout="row">
             <b>{{ 'generic.start_date' | translate }}</b>
             <span>{{ experience.startMonth }}</span>
             <span> / {{ experience.startYear }}</span>
           </div>
 
-          <div class="date-resume-experience" fxLayout="row">
+          <div class="label-gray" fxLayout="row">
             <b>{{ 'generic.end_date' | translate }}</b>
             <span>{{ experience.terminusMonth }}</span>
             <span> / {{ experience.terminusYear }}</span>
           </div>
-          <div>
+          <div class="scroll-experience">
             <p></p>
-          <p> {{ experience.description }}</p>
+            <p> {{ experience.description }}</p>
           </div>
         </div>
 
-        <div
-          class="buttons-experience"
-          fxLayout="row"
-          fxLayoutAlign="end end">
-          <button
-            class="table-button"
-            mat-button
-            (click)="getExperience(experience, experience.id)">
-            <mat-icon>edit</mat-icon>
-          </button>
-          <button (click)="deleteExperience(experience.id)" class="table-button" mat-button>
-            <mat-icon>delete</mat-icon>
-          </button>
+        <div class="buttons-experience">
         </div>
       </mat-list-item>
     </mat-list>

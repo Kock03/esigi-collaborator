@@ -6,12 +6,10 @@
   .content-scroll {
     overflow: auto;
     height: calc(100vh - 280px);
-
   }
 
   .list-group {
     margin-top: 16px;
-
   }
 
   .label-office {
@@ -39,26 +37,25 @@
     margin-bottom: 10px;
   }
 
-  .text-div{
+  .text-div {
     height: 100%;
     margin-top: 50px;
   }
-  
-  .job-text{
+
+  .job-text {
     height: 100%;
     width: 100%;
   }
-  
-  .activities-text{
+
+  .activities-text {
     margin-left: 0px;
     margin-bottom: 10px;
   }
 
-  .knowledges-text{
+  .knowledges-text {
     margin-left: 0px;
     margin-bottom: 10px;
   }
-
 
   .list-group-item {
     border-style: groove;
@@ -79,10 +76,8 @@
     margin-top: 100px;
   }
 
-  .job-icon{
+  .job-icon {
     margin-right: 2px !important;
-
-
   }
 
   .buttons-experience {
@@ -94,5 +89,3 @@
     // float: right;
   }
 }
-
-
