@@ -22,8 +22,13 @@ export class CreateReturnsDto {
   @MinLength(1)
   nameCandidate: string;
 
+
   @ApiProperty()
   @IsNotEmpty()
+  dateReturn: string;
+
+  @ApiProperty()
+  @IsOptional()
   dateOfReturn: string;
 
   @ApiProperty()

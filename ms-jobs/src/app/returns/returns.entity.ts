@@ -24,6 +24,9 @@ export class ReturnsEntity {
   nameCandidate: string;
 
   @Column()
+  dateReturn: string;
+
+  @Column({ nullable: true })
   dateOfReturn: string;
 
   @Column()

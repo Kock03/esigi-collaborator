@@ -32,7 +32,7 @@ export class JobReturnInterviewTabComponent implements OnInit {
     this.jobId = state;
   }
 
- async  ngOnInit() {
+  async ngOnInit() {
     this.interviewId = this.route.snapshot.paramMap.get('id');
     this.step = JSON.parse(sessionStorage.getItem('job_tab')!);
     if (this.jobId !== undefined) {
@@ -46,9 +46,9 @@ export class JobReturnInterviewTabComponent implements OnInit {
       this.interview = await this.interviewsProvider.findOne(this.interviewId);
       this.returnForm.patchValue(
         this.interview.Returns
-        );
-        console.log("🚀 ~ file: job-return-interview-tab.component.ts ~ line 49 ~ JobReturnInterviewTabComponent ~ ngOnInit ~  this.interview.Returns",  this.interview.Returns)
-      
+      );
+      console.log("🚀 ~ file: job-return-interview-tab.component.ts ~ line 49 ~ JobReturnInterviewTabComponent ~ ngOnInit ~  this.interview.Returns", this.interview.Returns)
+
     } else {
       this.initForm();
     }
@@ -59,18 +59,18 @@ export class JobReturnInterviewTabComponent implements OnInit {
     this.interviewId = this.route.snapshot.paramMap.get('id');
     this.step = JSON.parse(sessionStorage.getItem('job_tab')!);
 
-    if (sessionStorage.getItem('method') == 'edit'){
-      this. setFormValue();
+    if (sessionStorage.getItem('method') == 'edit') {
+      this.setFormValue();
     }
   }
 
-  getInterview(){
+  getInterview() {
     try {
       this.interview = this.interviewsProvider.findOne(
         this.interviewId
-        );
-        console.log("🚀 ~ file: job-return-interview-tab.component.ts ~ line 71 ~ JobReturnInterviewTabComponent ~ getInterview ~ this.interviewId", this.interviewId)
-      
+      );
+      console.log("🚀 ~ file: job-return-interview-tab.component.ts ~ line 71 ~ JobReturnInterviewTabComponent ~ getInterview ~ this.interviewId", this.interviewId)
+
     } catch (error) {
       console.error(error);
     }
@@ -86,6 +86,7 @@ export class JobReturnInterviewTabComponent implements OnInit {
     this.returnForm = this.fb.group({
       nameCandidate: ['', Validators.required],
       dateOfReturn: this.fb.control({ value: ' ', disabled: false }, [DocumentValidator.isValidData(), Validators.required]),
+      dateReturn: this.fb.control({ value: ' ', disabled: false }, [DocumentValidator.isValidData(), Validators.required]),
       technicalEvaluation: [null, Validators.required],
       behavioralEvaluation: [null, Validators.required],
       technicalEvaluationComent: ['', Validators.required],
@@ -95,7 +96,7 @@ export class JobReturnInterviewTabComponent implements OnInit {
       typeOdContract: [null, Validators.required],
       combinedValue: ['', Validators.required],
       initialData: this.fb.control({ value: new Date().toLocaleDateString(), disabled: false }, [DocumentValidator.isValidData(), Validators.required]),
-  });
+    });
   }
 
   onChange(value: number) {
@@ -110,7 +111,7 @@ export class JobReturnInterviewTabComponent implements OnInit {
   removeValidators() {
     this.returnForm.controls['punctuality'].clearValidators();
     this.returnForm.controls['punctuality'].updateValueAndValidity();
-    this.returnForm.controls['punctuality'].setErrors(null); 
+    this.returnForm.controls['punctuality'].setErrors(null);
 
 
     this.returnForm.controls['presentation'].clearValidators();

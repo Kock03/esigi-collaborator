@@ -14,9 +14,9 @@
           <th mat-header-cell *matHeaderCellDef>{{'job.job_interview_create.name_candidate' | translate}}</th>
           <td mat-cell *matCellDef="let interviews">
             {{
-              interviews.nameCandidate == null
-                ? interviews.nameCandidateTec
-                : interviews.nameCandidate
+            interviews.nameCandidate == null
+            ? interviews.nameCandidateTec
+            : interviews.nameCandidate
             }}
           </td>
         </ng-container>
@@ -26,14 +26,16 @@
             {{'job.job_interview_list.behavioral_interview_date' | translate}}
           </th>
           <td mat-cell *matCellDef="let interviews">
-            {{ interviews.behavioralInterviewDate | date: "dd/MM/yyyy" }}
+            {{ interviews.behavioralInterviewDate == null ? "Entrevista não agendada" :
+            interviews.behavioralInterviewDate}}
           </td>
         </ng-container>
 
         <ng-container matColumnDef="technicalInterviewDate">
           <th mat-header-cell *matHeaderCellDef>{{'job.job_interview_list.technical_interview_date' | translate}}</th>
           <td mat-cell *matCellDef="let interviews">
-            {{ interviews.technicalInterviewDate | date: "dd/MM/yyyy" }}
+            {{ interviews.technicalInterviewDate == null ? "Entrevista não agendada" : interviews.technicalInterviewDate
+            }}
           </td>
         </ng-container>
 
@@ -49,49 +51,30 @@
           <th mat-header-cell *matHeaderCellDef>{{'generic.status'| translate}}</th>
           <td mat-cell *matCellDef="let interviews">
             {{
-              interviews.status == 1
-                ? "Processada"
-                : interviews.status == 2
-                ? "Em Revisão"
-                : interviews.status == 3
-                ? "Fechada"
-                : interviews.status == 4
-                ? "Perdida"
-                : "Concluida"
+            interviews.status == 1
+            ? "Processada"
+            : interviews.status == 2
+            ? "Em Revisão"
+            : interviews.status == 3
+            ? "Fechada"
+            : interviews.status == 4
+            ? "Perdida"
+            : "Concluida"
             }}
           </td>
         </ng-container>
 
         <ng-container matColumnDef="icon">
           <th mat-header-cell *matHeaderCellDef style="text-align: end">
-            <button
-              class="edit-button"
-              mat-flat-button
-              color="primary"
-              (click)="navigateJobs()"
-              >
+            <button class="edit-button" mat-flat-button color="primary" (click)="navigateJobs()">
               <mat-icon>add</mat-icon>
             </button>
           </th>
-          <td
-            class="button-tab"
-            mat-cell
-            *matCellDef="let interviews"
-          
-            style="text-align: end"
-          >
-            <button
-              class="table-button"
-              mat-button
-              (click)="editInterview(interviews.id)"
-            >
+          <td class="button-tab" mat-cell *matCellDef="let interviews" style="text-align: end">
+            <button class="table-button" mat-button (click)="editInterview(interviews.id)">
               <mat-icon>edit</mat-icon>
             </button>
-            <button
-              class="table-button"
-              mat-button
-              (click)="deleteInterview(interviews.id)"
-            >
+            <button class="table-button" mat-button (click)="deleteInterview(interviews.id)">
 
               <mat-icon>delete</mat-icon>
             </button>
