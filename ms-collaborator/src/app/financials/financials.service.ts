@@ -16,7 +16,7 @@ export class FinancialsService {
   constructor(
     @InjectRepository(FinancialsEntity)
     private readonly financialsRepository: Repository<FinancialsEntity>,
-  ) {}
+  ) { }
 
   async findAll() {
     const options: FindManyOptions = {
@@ -35,6 +35,10 @@ export class FinancialsService {
     } catch {
       throw new NotFoundException();
     }
+  }
+
+  async findByCollaborator(id: string) {
+    return await this.financialsRepository.query(`select * from financials_entity where collaborator_id="${id}"`)
   }
 
   async store(data: CreateFinancialsDto) {

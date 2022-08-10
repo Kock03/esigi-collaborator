@@ -5,7 +5,7 @@ import { UpdateDocumentsDto } from "./dtos/update-documents.dto";
 
 @Controller('/api/v1/documents')
 export class DocumentsController {
-  constructor(private readonly documentsService: DocumentsService) {}
+  constructor(private readonly documentsService: DocumentsService) { }
 
   @Get()
   async index() {
@@ -15,6 +15,11 @@ export class DocumentsController {
   @Get(':id')
   async show(@Param('id', new ParseUUIDPipe()) id: string) {
     return await this.documentsService.findOneOrfail({ id });
+  }
+
+  @Get('collaborator/:id')
+  async findByCollaborator(@Param('id', new ParseUUIDPipe()) id: string) {
+    return await this.documentsService.findByCollaborator(id)
   }
 
   @Post()

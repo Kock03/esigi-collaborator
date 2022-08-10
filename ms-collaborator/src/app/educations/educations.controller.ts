@@ -5,7 +5,7 @@ import { EducationsService } from "./educations.service";
 
 @Controller('/api/v1/educations')
 export class EducationsController {
-  constructor(private readonly educationService: EducationsService) {}
+  constructor(private readonly educationService: EducationsService) { }
 
   @Get()
   async index() {
@@ -15,6 +15,11 @@ export class EducationsController {
   @Get(':id')
   async show(@Param('id', new ParseUUIDPipe()) id: string) {
     return await this.educationService.findOneOrFail({ id });
+  }
+
+  @Get('collaborator/:id')
+  async findByCollaborator(@Param('id', new ParseUUIDPipe()) id: string) {
+    return await this.educationService.findByCollaborator(id)
   }
 
   @Post()

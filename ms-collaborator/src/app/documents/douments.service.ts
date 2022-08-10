@@ -16,13 +16,17 @@ export class DocumentsService {
   constructor(
     @InjectRepository(DocumentsEntity)
     private readonly documentsRepository: Repository<DocumentsEntity>,
-  ) {}
+  ) { }
 
   async findAll() {
     const options: FindManyOptions = {
       order: { createdAt: 'DESC' },
     };
     return await this.documentsRepository.find(options);
+  }
+
+  async findByCollaborator(id: string) {
+    return await this.documentsRepository.query(`select * from documents where collaborator_id="${id}"`)
   }
 
   async findOneOrfail(

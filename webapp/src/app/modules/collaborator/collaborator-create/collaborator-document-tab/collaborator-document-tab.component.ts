@@ -51,9 +51,9 @@ export class CollaboratorDocumentTabComponent implements OnInit {
     private httpClient: HttpClient,
     private dialogService: ConfirmDialogService,
     private collaboratorDocumentProvider: CollaboratorDocumentProvider,
-    private snackbarService: SnackBarService,   
+    private snackbarService: SnackBarService,
     private collaboratorProvider: CollaboratorProvider,
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.collaboratorMethod = sessionStorage.getItem('collaborator_method')!;
@@ -64,11 +64,10 @@ export class CollaboratorDocumentTabComponent implements OnInit {
 
   async getDocumentList() {
     this.collaboratorId = sessionStorage.getItem('collaborator_id');
-    const data = await this.collaboratorProvider.findOne(this.collaboratorId);
-    this.data = data.Documents;
+    this.data = await this.collaboratorDocumentProvider.findByCollaborator(this.collaboratorId);
   }
 
-  
+
   getImage(fileName: string) {
     const dialogRef = this.dialog.open(CollaboratorImageDialog, {
       width: '1000px',

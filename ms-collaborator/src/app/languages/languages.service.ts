@@ -12,13 +12,18 @@ export class LanguagesService {
   constructor(
     @InjectRepository(LanguagesEntity)
     private readonly languagesRepository: Repository<LanguagesEntity>,
-  ) {}
+  ) { }
 
   async findAll() {
     const options: FindManyOptions = {
       order: { createdAt: 'DESC' },
     };
     return await this.languagesRepository.find(options);
+  }
+
+
+  async findByCollaborator(id: string) {
+    return await this.languagesRepository.query(`select * from languages where collaborator_id="${id}"`)
   }
 
   async findOneOrfail(

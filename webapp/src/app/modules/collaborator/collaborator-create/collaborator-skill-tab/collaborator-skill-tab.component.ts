@@ -31,7 +31,7 @@ export class CollaboratorSkillTabComponent implements OnInit {
   @Output() onChange: EventEmitter<any> = new EventEmitter();
   @ViewChild('skillTable') skillTable!: MatTable<any>;
 
-  displayedColumns: string[] = ['technology', 'time','typeOfPeriod', 'level', 'icon'];
+  displayedColumns: string[] = ['technology', 'time', 'typeOfPeriod', 'level', 'icon'];
 
   data: [] = [];
 
@@ -45,13 +45,13 @@ export class CollaboratorSkillTabComponent implements OnInit {
   collaboratorMethod!: string;
 
   constructor(
-    private fb: FormBuilder, 
+    private fb: FormBuilder,
     public dialog: MatDialog,
-    private collaboratorSkillProvider: CollaboratorSkillProvider, 
-    private dialogService: ConfirmDialogService, 
-    private snackbarService: SnackBarService,   
+    private collaboratorSkillProvider: CollaboratorSkillProvider,
+    private dialogService: ConfirmDialogService,
+    private snackbarService: SnackBarService,
     private collaboratorProvider: CollaboratorProvider,
-   ) {}
+  ) { }
 
   ngOnInit(): void {
     this.collaboratorMethod = sessionStorage.getItem('collaborator_method')!;
@@ -63,8 +63,7 @@ export class CollaboratorSkillTabComponent implements OnInit {
 
   async getSkillList() {
     this.collaboratorId = sessionStorage.getItem('collaborator_id');
-    const data = await this.collaboratorProvider.findOne(this.collaboratorId);
-    this.data = await data.Skills;
+    this.data = await this.collaboratorSkillProvider.findByCollaborator(this.collaboratorId);
   }
 
 
@@ -77,9 +76,9 @@ export class CollaboratorSkillTabComponent implements OnInit {
       height: '540px',
     });
 
-    dialogRef.afterClosed().subscribe( skill => {
+    dialogRef.afterClosed().subscribe(skill => {
       if (skill) {
-         this.getSkillList()
+        this.getSkillList()
       }
     });
   }

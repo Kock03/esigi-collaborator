@@ -4,18 +4,19 @@
       <div class="envolti-table mat-elevation-z8" fxLayout="column">
         <table mat-table [dataSource]="data" #dependentTable>
           <ng-container matColumnDef="type">
-            <th mat-header-cell *matHeaderCellDef>{{'collaborator.colaborator_create.dependents.type.name' | translate}}</th>
+            <th mat-header-cell *matHeaderCellDef>{{'collaborator.colaborator_create.dependents.type.name' | translate}}
+            </th>
             <td mat-cell *matCellDef="let Dependent">
               {{
-                Dependent.type == 1
-                  ? 'Conjuge'
-                  : Dependent.type == 2
-                  ? 'Filho(a)'
-                  : Dependent.type == 3
-                  ? 'Enteado(a)'
-                  : Dependent.type == 4
-                  ? 'Pai'
-                  : 'Mãe'
+              Dependent.type == 1
+              ? 'Conjuge'
+              : Dependent.type == 2
+              ? 'Filho(a)'
+              : Dependent.type == 3
+              ? 'Enteado(a)'
+              : Dependent.type == 4
+              ? 'Pai'
+              : 'Mãe'
               }}
             </td>
           </ng-container>
@@ -23,7 +24,7 @@
           <ng-container matColumnDef="firstName">
             <th mat-header-cell *matHeaderCellDef>{{'generic.name' | translate}}</th>
             <td mat-cell *matCellDef="let Dependent">
-              {{ Dependent.firstName + ' ' + Dependent.lastName }}
+              {{ Dependent.first_name + ' ' + Dependent.last_name }}
             </td>
           </ng-container>
 
@@ -31,11 +32,11 @@
             <th mat-header-cell *matHeaderCellDef>{{'generic.gender.name' | translate}}</th>
             <td mat-cell *matCellDef="let Dependent">
               {{
-                Dependent.gender == 1
-                  ? 'Feminino'
-                  : Dependent.gender == 2
-                  ? 'Masculino'
-                  : 'Não Definido'
+              Dependent.gender == 1
+              ? 'Feminino'
+              : Dependent.gender == 2
+              ? 'Masculino'
+              : 'Não Definido'
               }}
             </td>
           </ng-container>
@@ -50,7 +51,7 @@
           <ng-container matColumnDef="birthDate">
             <th mat-header-cell *matHeaderCellDef>{{'generic.birth_date' | translate}}</th>
             <td mat-cell *matCellDef="let Dependent">
-              {{ Dependent.birthDate | date: 'dd/MM/yyyy' }}
+              {{ Dependent.birth_date }}
             </td>
           </ng-container>
 
@@ -58,7 +59,7 @@
             <th mat-header-cell *matHeaderCellDef>{{'generic.phone.phone_number' | translate}}</th>
             <td mat-cell *matCellDef="let Dependent">
               +{{ Dependent.ddi }} ({{ Dependent.ddd }})
-              {{ Dependent.phoneNumber }}
+              {{ Dependent.phone_number }}
             </td>
           </ng-container>
 
@@ -71,36 +72,21 @@
 
           <ng-container matColumnDef="icon">
             <th mat-header-cell *matHeaderCellDef style="text-align: end">
-              <button
-                class="edit-button"
-                mat-flat-button
-                color="primary"
-                (click)="openDialog()">
+              <button class="edit-button" mat-flat-button color="primary" (click)="openDialog()">
                 <mat-icon>add</mat-icon>
               </button>
             </th>
-            <td
-              class="button-tab"
-              mat-cell
-              *matCellDef="let Dependent">
-              <button
-                class="table-button"
-                mat-button
-                (click)="getDependents(Dependent, Dependent.id)">
+            <td class="button-tab" mat-cell *matCellDef="let Dependent">
+              <button class="table-button" mat-button (click)="getDependents(Dependent, Dependent.id)">
                 <mat-icon>edit</mat-icon>
               </button>
 
-              <button
-                class="table-button"
-                mat-button
-                (click)="deleteDependents(Dependent.id)">
+              <button class="table-button" mat-button (click)="deleteDependents(Dependent.id)">
                 <mat-icon>delete</mat-icon>
               </button>
             </td>
           </ng-container>
-          <tr
-            mat-header-row
-            *matHeaderRowDef="displayedDependents; sticky: true"></tr>
+          <tr mat-header-row *matHeaderRowDef="displayedDependents; sticky: true"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedDependents"></tr>
         </table>
       </div>

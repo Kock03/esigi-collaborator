@@ -5,10 +5,7 @@
         <ng-template mat-tab-label> {{'generic.education.schooling.name'|translate}} </ng-template>
         <div fxLayout="row">
           <div class="envolti-table mat-elevation-z8" fxLayout="column">
-            <table
-              mat-table
-              [dataSource]="dataEducation"
-              #educationTable>
+            <table mat-table [dataSource]="dataEducation" #educationTable>
               <ng-container matColumnDef="schooling">
                 <th mat-header-cell *matHeaderCellDef>{{'generic.education.schooling.name'|translate}}</th>
                 <td mat-cell *matCellDef="let education">
@@ -39,39 +36,22 @@
 
               <ng-container matColumnDef="icon">
                 <th mat-header-cell *matHeaderCellDef style="text-align: end">
-                  <button
-                    class="edit-button"
-                    mat-flat-button
-                    color="primary"
-                    (click)="openDialogEducation()">
+                  <button class="edit-button" mat-flat-button color="primary" (click)="openDialogEducation()">
                     <mat-icon>add</mat-icon>
                   </button>
                 </th>
-                <td
-                  class="button-tab"
-                  mat-cell
-                  *matCellDef="let education">
-                  <button
-                    class="table-button"
-                    mat-button
-                    (click)="getEducation(education, education.id)">
+                <td class="button-tab" mat-cell *matCellDef="let education">
+                  <button class="table-button" mat-button (click)="getEducation(education, education.id)">
                     <mat-icon>edit</mat-icon>
                   </button>
-                  <button
-                    (click)="deleteEducation(education.id)"
-                    class="table-button"
-                    mat-button>
+                  <button (click)="deleteEducation(education.id)" class="table-button" mat-button>
                     <mat-icon>delete</mat-icon>
                   </button>
                 </td>
               </ng-container>
 
-              <tr
-                mat-header-row
-                *matHeaderRowDef="displayedEducation; sticky: true"></tr>
-              <tr
-                mat-row
-                *matRowDef="let row; columns: displayedEducation"></tr>
+              <tr mat-header-row *matHeaderRowDef="displayedEducation; sticky: true"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedEducation"></tr>
             </table>
           </div>
         </div>
@@ -85,7 +65,7 @@
               <ng-container matColumnDef="language">
                 <th mat-header-cell *matHeaderCellDef>Idioma</th>
                 <td mat-cell *matCellDef="let language">
-                  {{ language.languageName }}
+                  {{ language.language_name }}
                 </td>
               </ng-container>
 
@@ -93,53 +73,38 @@
                 <th mat-header-cell *matHeaderCellDef>{{'generic.education.languages.fluency.name' | translate}}</th>
                 <td mat-cell *matCellDef="let language" style="padding-left: 20px;">
                   {{
-                    language.degreeOfInfluence == 1
-                      ? 'Leitura, Escrita e Conversação'
-                      : language.degreeOfInfluence == 2
-                      ? 'Escrita'
-                      : language.degreeOfInfluence == 3
-                      ? 'Leitura'
-                      : language.degreeOfInfluence == 4
-                      ? 'Conversação'
-                      : language.degreeOfInfluence == 5
-                      ? 'Escrita e Leitura'
-                      : 'Escrita e Conversação'
+                  language.degreeOfInfluence == 1
+                  ? 'Leitura, Escrita e Conversação'
+                  : language.degreeOfInfluence == 2
+                  ? 'Escrita'
+                  : language.degreeOfInfluence == 3
+                  ? 'Leitura'
+                  : language.degreeOfInfluence == 4
+                  ? 'Conversação'
+                  : language.degreeOfInfluence == 5
+                  ? 'Escrita e Leitura'
+                  : 'Escrita e Conversação'
                   }}
                 </td>
               </ng-container>
 
               <ng-container matColumnDef="icon" style="text-align: end">
                 <th mat-header-cell *matHeaderCellDef>
-                  <button
-                    class="edit-button"
-                    mat-flat-button
-                    color="primary"
-                    (click)="openDialogLanguage()">
+                  <button class="edit-button" mat-flat-button color="primary" (click)="openDialogLanguage()">
                     <mat-icon>add</mat-icon>
                   </button>
                 </th>
-                <td
-                  class="button-tab"
-                  mat-cell
-                  *matCellDef="let language">
-                  <button
-                    class="table-button"
-                    mat-button
-                    (click)="getLanguage(language, language.id)">
+                <td class="button-tab" mat-cell *matCellDef="let language">
+                  <button class="table-button" mat-button (click)="getLanguage(language, language.id)">
                     <mat-icon>edit</mat-icon>
                   </button>
-                  <button
-                    (click)="deleteLanguage(language.id)"
-                    class="table-button"
-                    mat-button>
+                  <button (click)="deleteLanguage(language.id)" class="table-button" mat-button>
                     <mat-icon>delete</mat-icon>
                   </button>
                 </td>
               </ng-container>
 
-              <tr
-                mat-header-row
-                *matHeaderRowDef="displayedLanguage; sticky: true"></tr>
+              <tr mat-header-row *matHeaderRowDef="displayedLanguage; sticky: true"></tr>
               <tr mat-row *matRowDef="let row; columns: displayedLanguage"></tr>
             </table>
           </div>

@@ -49,11 +49,11 @@ export class CollaboratorDependentsTabComponent implements OnInit {
   collaboratorMethod!: string;
   constructor(
     public dialog: MatDialog,
-    private dialogService: ConfirmDialogService, 
+    private dialogService: ConfirmDialogService,
     private collaboratorDependentsProvider: CollaboratorDependentsProvider,
     private collaboratorProvider: CollaboratorProvider,
     private snackbarService: SnackBarService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.collaboratorMethod = sessionStorage.getItem('collaborator_method')!;
@@ -64,8 +64,7 @@ export class CollaboratorDependentsTabComponent implements OnInit {
 
   async getDependentsList() {
     this.collaboratorId = sessionStorage.getItem('collaborator_id');
-    const data = await this.collaboratorProvider.findOne(this.collaboratorId);
-    this.data =  await data.Dependents;
+    this.data = await this.collaboratorDependentsProvider.findByCollaborator(this.collaboratorId);
   }
 
 
@@ -78,9 +77,9 @@ export class CollaboratorDependentsTabComponent implements OnInit {
       height: '650px',
     });
 
-    dialogRef.afterClosed().subscribe( dependent => {
+    dialogRef.afterClosed().subscribe(dependent => {
       if (dependent) {
-         this.getDependentsList();
+        this.getDependentsList();
       }
     });
   }
@@ -99,9 +98,9 @@ export class CollaboratorDependentsTabComponent implements OnInit {
       height: '650px',
       data: dependentsSelected,
     });
-    dialogRef.afterClosed().subscribe( dependent => {
+    dialogRef.afterClosed().subscribe(dependent => {
       if (dependent) {
-         this.getDependentsList();
+        this.getDependentsList();
       }
     });
   }

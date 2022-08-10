@@ -16,7 +16,7 @@ import { SkillsService } from './skills.service';
 
 @Controller('/api/v1/skills')
 export class SkillsController {
-  constructor(private readonly skillsService: SkillsService) {}
+  constructor(private readonly skillsService: SkillsService) { }
 
   @Get()
   async index() {
@@ -27,6 +27,12 @@ export class SkillsController {
   async show(@Param('id', new ParseUUIDPipe()) id: string) {
     return await this.skillsService.findOneOrFail({ id });
   }
+
+  @Get('collaborator/:id')
+  async findByCollaborator(@Param('id', new ParseUUIDPipe()) id: string) {
+    return await this.skillsService.findByCollaborator(id)
+  }
+
 
   @Post()
   async store(@Body() body: CreateSkillsDto) {

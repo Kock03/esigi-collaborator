@@ -28,6 +28,11 @@ export class FinancialsController {
     return await this.financialsService.findOneOrFail({ id });
   }
 
+  @Get('collaborator/:id')
+  async findByCollaborator(@Param('id', new ParseUUIDPipe()) id: string) {
+    return await this.financialsService.findByCollaborator(id)
+  }
+
   @Post()
   async store(@Body() body: CreateFinancialsDto) {
     return await this.financialsService.store(body);

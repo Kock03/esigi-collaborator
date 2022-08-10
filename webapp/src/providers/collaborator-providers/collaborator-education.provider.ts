@@ -22,6 +22,16 @@ export class CollaboratorEducationProvider {
     }
 
 
+    findByCollaborator(id: string | null): Promise<any> {
+        return new Promise((resolve, reject) => {
+            this.apiGateway
+                .get(environment.COLLABORATOR_MS + 'educations/collaborator/:id', { id })
+                .subscribe((response: HttpResponse<any>) => {
+                    resolve(response.body);
+                }, reject);
+        });
+    }
+
     findOne(id: string | null): Promise<any> {
         return new Promise((resolve, reject) => {
             this.apiGateway

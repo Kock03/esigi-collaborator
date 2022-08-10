@@ -5,7 +5,7 @@ import { LanguagesService } from "./languages.service";
 
 @Controller('/api/v1/languages')
 export class LanguagesController {
-  constructor(private readonly languagesService: LanguagesService) {}
+  constructor(private readonly languagesService: LanguagesService) { }
 
   @Get()
   async index() {
@@ -15,6 +15,11 @@ export class LanguagesController {
   @Get(':id')
   async show(@Param('id', new ParseUUIDPipe()) id: string) {
     return await this.languagesService.findOneOrfail({ id });
+  }
+
+  @Get('collaborator/:id')
+  async findByCollaborator(@Param('id', new ParseUUIDPipe()) id: string) {
+    return await this.languagesService.findByCollaborator(id)
   }
 
   @Post()

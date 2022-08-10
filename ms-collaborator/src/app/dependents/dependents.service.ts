@@ -20,7 +20,7 @@ export class DependentsService {
   constructor(
     @InjectRepository(DependentsEntity)
     private readonly dependentsRepository: Repository<DependentsEntity>,
-  ) {}
+  ) { }
 
   async findAll() {
     const options: FindManyOptions = {
@@ -39,6 +39,9 @@ export class DependentsService {
     } catch {
       throw new NotFoundException();
     }
+  }
+  async findByCollaborator(id: string) {
+    return await this.dependentsRepository.query(`select * from dependents where collaborator_id="${id}"`)
   }
 
   async store(data: CreatedependentsDto) {

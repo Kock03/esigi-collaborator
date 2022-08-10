@@ -62,7 +62,7 @@ export class CollaboratorFinanceTabComponent implements OnInit {
     private fb: FormBuilder,
     public dialog: MatDialog,
     private collaboratorFinanceProvider: CollaboratorFinanceProvider,
-    private dialogService: ConfirmDialogService, private snackbarService: SnackBarService,    
+    private dialogService: ConfirmDialogService, private snackbarService: SnackBarService,
     private collaboratorProvider: CollaboratorProvider,
   ) { }
 
@@ -76,8 +76,7 @@ export class CollaboratorFinanceTabComponent implements OnInit {
 
   async getFinanceList() {
     this.collaboratorId = sessionStorage.getItem('collaborator_id');
-    const data = await this.collaboratorProvider.findOne(this.collaboratorId);
-    this.data = await data.Financials;
+    this.data = await this.collaboratorFinanceProvider.findByCollaborator(this.collaboratorId);
   }
 
 
@@ -90,9 +89,9 @@ export class CollaboratorFinanceTabComponent implements OnInit {
       height: '550px',
     });
 
-    dialogRef.afterClosed().subscribe( finance => {
+    dialogRef.afterClosed().subscribe(finance => {
       if (finance) {
-         this.getFinanceList();
+        this.getFinanceList();
       }
     });
   }
@@ -112,9 +111,9 @@ export class CollaboratorFinanceTabComponent implements OnInit {
       data: financeSelected,
     });
 
-    dialogRef.afterClosed().subscribe( finance => {
+    dialogRef.afterClosed().subscribe(finance => {
       if (finance) {
-         this.getFinanceList();
+        this.getFinanceList();
       }
     });
   }

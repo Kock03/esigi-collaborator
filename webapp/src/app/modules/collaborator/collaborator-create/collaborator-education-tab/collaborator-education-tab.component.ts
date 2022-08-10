@@ -69,7 +69,7 @@ export class CollaboratorEducationTabComponent implements OnInit {
     private collaboratorLanguageProvider: CollaboratorLanguageProvider,
     private collaboratorEducationProvider: CollaboratorEducationProvider
 
-  ) {}
+  ) { }
 
   ngOnInit(): void {
 
@@ -81,18 +81,16 @@ export class CollaboratorEducationTabComponent implements OnInit {
 
   }
 
-  
+
   async getEducationsList() {
     this.collaboratorId = sessionStorage.getItem('collaborator_id');
-    const data = await this.collaboratorProvider.findOne(this.collaboratorId);
-    this.dataEducation = await data.Educations;
+    this.dataEducation = await this.collaboratorEducationProvider.findByCollaborator(this.collaboratorId);
   }
 
-  
+
   async getLanguagesList() {
     this.collaboratorId = sessionStorage.getItem('collaborator_id');
-    const data = await this.collaboratorProvider.findOne(this.collaboratorId);
-    this.dataLanguage = await data.Languages;
+    this.dataLanguage = await this.collaboratorLanguageProvider.findByCollaborator(this.collaboratorId);
   }
 
 
@@ -105,9 +103,9 @@ export class CollaboratorEducationTabComponent implements OnInit {
       height: '300px',
     });
 
-    dialogRef.afterClosed().subscribe( language => {
+    dialogRef.afterClosed().subscribe(language => {
       if (language) {
-         this.getLanguagesList();
+        this.getLanguagesList();
       }
     });
   }
@@ -120,9 +118,9 @@ export class CollaboratorEducationTabComponent implements OnInit {
       height: '470px',
     });
 
-    dialogRef.afterClosed().subscribe( education => {
+    dialogRef.afterClosed().subscribe(education => {
       if (education) {
-         this.getEducationsList();
+        this.getEducationsList();
       }
     });
   }
@@ -142,9 +140,9 @@ export class CollaboratorEducationTabComponent implements OnInit {
       data: languageSelected,
     });
 
-    dialogRef.afterClosed().subscribe( language => {
+    dialogRef.afterClosed().subscribe(language => {
       if (language) {
-         this.getLanguagesList();
+        this.getLanguagesList();
       }
     });
   }
@@ -227,14 +225,14 @@ export class CollaboratorEducationTabComponent implements OnInit {
         return element.schooling == 1
           ? 'Ensino Fundamental'
           : element.schooling == 2
-          ? 'Ensino Médio'
-          : 'Ensino Superior';
+            ? 'Ensino Médio'
+            : 'Ensino Superior';
       case 'situation': {
         return element.situation == 1
           ? 'Parado'
           : element.situation == 2
-          ? 'Completo'
-          : 'Em andamento';
+            ? 'Completo'
+            : 'Em andamento';
       }
       default:
         return;
