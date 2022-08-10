@@ -34,7 +34,7 @@
       {{'generic.save_button' | translate}}
     </button>
   </div>
-  <<<<<<< HEAD <div class="navigation-buttons" fxLayoutAlign="center end" fxLayoutGap="16px" *ngIf="jobId !== 'novo'">
+  <div class="navigation-buttons" fxLayoutAlign="center end" fxLayoutGap="16px" *ngIf="jobId !== 'novo'">
     <button mat-button *ngIf="step != 1" (click)="navigate('back')">
       Voltar
     </button>
@@ -46,6 +46,6 @@
     <button mat-flat-button (click)="editJob()" color="primary" [disabled]="jobForm?.invalid">
       Salvar
     </button>
-</div>
+  </div>
 
 </div>
