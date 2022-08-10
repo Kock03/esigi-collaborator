@@ -28,6 +28,7 @@ export class JobDetailListTabComponent implements OnInit {
   job!: any;
   collaborator!: ICollaborator;
   customer!: ICustomer;
+  method: any;
 
   constructor(
     private router: Router,
@@ -52,6 +53,15 @@ export class JobDetailListTabComponent implements OnInit {
     } catch (error) {
       console.error(error);
     }
+  }
+
+  editJob(jobId: any, customerId: any, collaboratorRequesterId: any) {
+    console.log(customerId)
+    sessionStorage.setItem('customer_id', customerId);
+    sessionStorage.setItem('collaboratorRequester_id', collaboratorRequesterId);
+    this.method = sessionStorage.setItem('job_method', 'edit');
+    this.router.navigate([`vaga/${jobId}`]);
+
   }
 
 }

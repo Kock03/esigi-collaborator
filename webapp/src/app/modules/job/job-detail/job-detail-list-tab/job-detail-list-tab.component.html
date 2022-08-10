@@ -155,7 +155,21 @@
             <span class="label-content">{{ 'Isso porque o developer front-end fica responsável pela experiência do usuário com o sistema, ou seja, ele programa as páginas com as quais os usuários interagem. Além disso, ele deve monitorar o desempenho dos desenvolvimentos, assim como observar os possíveis problemas de usabilidade dos programas. Portanto, precisa  colaborar com os desenvolvedores back-end e web designers para otimizar essa usabilidade. Aaah! Esse profissional também fica responsável por escrever documentos e guias de requisitos funcionais, conforme os projetos que participa.' }}</span>
             <!-- <span class="label-content">{{ job.attitudes }}</span> -->
           </div>
+          <div
+          class="buttons-experience"
+          fxLayout="row"
+          fxLayoutAlign="end end">
+          <button
+            class="table-button"
+            mat-button
+            (click)="editJob(job.id, this.customer.corporateName, this.collaborator.firstNameCorporateName)"
+            >
+            <mat-icon>edit</mat-icon>
+          </button>
         </div>
+
+        
+        </div>   
       </mat-list-item>
     </mat-list>
   </div>

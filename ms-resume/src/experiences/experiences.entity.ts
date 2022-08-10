@@ -41,7 +41,7 @@ export class ExperiencesEntity {
   @Column({ name: 'sector', length: 40 })
   sector: string;
 
-  @Column()
+  @Column({ length: '4000'})
   description: string;
 
   @ManyToOne(() => ResumesEntity, (resumes) => resumes.Experiences, {

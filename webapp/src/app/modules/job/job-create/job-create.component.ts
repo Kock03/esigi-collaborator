@@ -264,7 +264,6 @@ export class JobCreateComponent implements OnInit {
   handleChanges(value: any): void { }
 
 
-
   checkValid(): boolean {
     let isValid = true;
     const validations = this.validations[0];
@@ -277,4 +276,5 @@ export class JobCreateComponent implements OnInit {
     }
     return isValid;
   }
+
 }
