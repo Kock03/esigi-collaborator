@@ -161,9 +161,9 @@ export class CollaboratorCreateComponent implements OnInit {
 
   }
 
-   setFormValue() {
+  setFormValue() {
     if (this.collaborator) {
-       this.collaboratorForm.patchValue(this.collaborator);
+      this.collaboratorForm.patchValue(this.collaborator);
     }
   }
 

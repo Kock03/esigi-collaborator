@@ -106,12 +106,11 @@ export class CreateJobsDto {
   maximumValue: string;
 
   @ApiProperty()
-  @IsNotEmpty()
-  @IsEnum(Workplace)
+  @IsOptional()
   schooling: Schooling;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
   collaboratorActivities: string;
 
@@ -125,12 +124,17 @@ export class CreateJobsDto {
   Returns: ReturnsEntity[];
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
   skills: string;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
+  @IsString()
+  acquirements: string;
+
+  @ApiProperty()
+  @IsOptional()
   @IsString()
   attitudes: string;
 

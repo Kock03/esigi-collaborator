@@ -3,6 +3,12 @@
     height: auto !important;
   }
 
+  .content-scroll {
+    overflow: auto;
+    height: calc(100vh - 280px);
+
+  }
+
   .list-group {
     margin-top: 16px;
 
@@ -10,27 +16,32 @@
 
   .label-office {
     font-style: bold;
-    font-size: 20px;
+    font-size: 25px;
   }
 
   .label-gray {
     color: rgb(125, 123, 123);
-    font-size: 15px;
+    font-size: 17px;
+    padding-top: 10px;
   }
 
   .label-text {
     color: black;
     font-size: 17px;
+    margin-left: 0;
+    margin-bottom: 10px;
+    margin-top: 30px;
   }
 
   .span-text {
     color: rgb(125, 123, 123);
     font-size: 15px;
+    margin-bottom: 10px;
   }
 
   .text-div{
     height: 100%;
-    
+    margin-top: 50px;
   }
   
   .job-text{
@@ -39,11 +50,13 @@
   }
   
   .activities-text{
-    margin-left: 200px;
+    margin-left: 0px;
+    margin-bottom: 10px;
   }
 
   .knowledges-text{
-    margin-left: 190px;
+    margin-left: 0px;
+    margin-bottom: 10px;
   }
 
 
@@ -66,3 +79,5 @@
     margin-top: 100px;
   }
 }
+
+

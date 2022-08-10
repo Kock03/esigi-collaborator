@@ -16,7 +16,7 @@ import {
   distinctUntilChanged,
   Subject,
 } from 'rxjs';
-import { JobProvider } from 'src/providers/job.provider';
+import { JobProvider } from 'src/providers/job-providers/job.provider';
 import { ConfirmDialogService } from 'src/services/confirn-dialog.service';
 import { SnackBarService } from 'src/services/snackbar.service';
 
@@ -80,7 +80,7 @@ export class JobListComponent implements OnInit {
 
   createJob() {
     this.router.navigate(['vaga/novo']);
-    this.method =  sessionStorage.setItem('job_method', 'novo');
+    this.method = sessionStorage.setItem('job_method', 'novo');
   }
 
   async getJobList() {
@@ -110,7 +110,8 @@ export class JobListComponent implements OnInit {
     console.log(customerId)
     sessionStorage.setItem('customer_id', customerId);
     sessionStorage.setItem('collaboratorRequester_id', collaboratorRequesterId);
-    this.method =  sessionStorage.setItem('job_method', 'edit');
+    this.method = sessionStorage.setItem('job_method', 'edit');
+    sessionStorage.setItem('job_id', jobId);
     this.router.navigate([`vaga/${jobId}`]);
 
   }

@@ -1,18 +1,18 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { JobProvider } from 'src/providers/job.provider';
+import { JobProvider } from 'src/providers/job-providers/job.provider';
 import { Location } from '@angular/common';
 import { IJob } from 'src/app/interfaces/ijob';
 import { CollaboratorProvider } from 'src/providers/collaborator-providers/collaborator.provider';
 import { ResumeProvider } from 'src/providers/resume-providers/resume.provider';
 import { CustomerProvider } from 'src/providers/customer.provider';
 
-export interface ICollaborator{
+export interface ICollaborator {
   firstNameCorporateName: string;
   lastNameFantasyName: string;
 }
-export interface ICustomer{
-corporateName: string;
+export interface ICustomer {
+  corporateName: string;
 }
 @Component({
   selector: 'app-job-detail-list-tab',
@@ -20,6 +20,9 @@ corporateName: string;
   styleUrls: ['./job-detail-list-tab.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
+
+
+
 export class JobDetailListTabComponent implements OnInit {
   jobId!: string | null;
   job!: any;
@@ -33,7 +36,7 @@ export class JobDetailListTabComponent implements OnInit {
     private jobProvider: JobProvider,
     private customerProvider: CustomerProvider,
     private collaboratorProvider: CollaboratorProvider,
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     const state: any = this._location.getState();
@@ -45,9 +48,10 @@ export class JobDetailListTabComponent implements OnInit {
     try {
       this.job = await this.jobProvider.findOne(this.jobId);
       this.collaborator = await this.collaboratorProvider.findOne(this.job.collaboratorRequesterId);
-      this.customer = await  this.customerProvider.findOne(this.job.customerId);
+      this.customer = await this.customerProvider.findOne(this.job.customerId);
     } catch (error) {
       console.error(error);
     }
   }
+
 }

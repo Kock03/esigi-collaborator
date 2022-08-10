@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { JobProvider } from 'src/providers/job.provider';
+import { JobProvider } from 'src/providers/job-providers/job.provider';
 import { Location } from '@angular/common';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -13,7 +13,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class JobDetailComponent implements OnInit {
   step: number = 1;
 
-  constructor(private router: Router, private fb: FormBuilder) {}
+
+  constructor(private router: Router, private fb: FormBuilder) { }
 
   ngOnInit(): void {
     if (sessionStorage.getItem('job_detail_tab') == undefined) {
@@ -22,7 +23,7 @@ export class JobDetailComponent implements OnInit {
     this.step = JSON.parse(sessionStorage.getItem('job_detail_tab')!);
   }
 
-  handleChanges(value: any): void {}
+  handleChanges(value: any): void { }
 
   handleStep(number: number): void {
     this.step = number;

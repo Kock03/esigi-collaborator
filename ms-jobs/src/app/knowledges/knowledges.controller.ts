@@ -5,33 +5,38 @@ import { KnowledgesService } from './knowledges.service';
 
 @Controller('/api/v1/knowledges')
 export class KnowledgesController {
-    constructor(private readonly KnowledgesService: KnowledgesService){ }
+    constructor(private readonly KnowledgesService: KnowledgesService) { }
 
     @Get()
-    async index(){
+    async index() {
         return await this.KnowledgesService.findAll();
     }
 
     @Get(':id')
-    async show(@Param('id', new ParseUUIDPipe()) id: string){
-        return await this.KnowledgesService.findOneOrfail({id});
+    async show(@Param('id', new ParseUUIDPipe()) id: string) {
+        return await this.KnowledgesService.findOneOrfail({ id });
+    }
+
+    @Get('job/:id')
+    async findByJob(@Param('id', new ParseUUIDPipe()) id: string) {
+        return await this.KnowledgesService.findByJob(id)
     }
 
     @Post()
-    async store(@Body() body: CreateKnowledgesDto){
+    async store(@Body() body: CreateKnowledgesDto) {
         return await this.KnowledgesService.store(body);
     }
 
     @Put(':id')
     async update(
         @Param('id', new ParseUUIDPipe()) id: string,
-        @Body() body: UpdateKnowledgesDto){
+        @Body() body: UpdateKnowledgesDto) {
         return await this.KnowledgesService.update(id, body);
     }
 
     @Delete(':id')
     @HttpCode(HttpStatus.NO_CONTENT)
-    async destroy(@Param('id', new ParseUUIDPipe()) id: string){
+    async destroy(@Param('id', new ParseUUIDPipe()) id: string) {
         return await this.KnowledgesService.destroy(id);
     }
 }

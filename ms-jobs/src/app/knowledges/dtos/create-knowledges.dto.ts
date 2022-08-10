@@ -20,7 +20,6 @@ export class CreateKnowledgesDto {
 
   @ApiProperty()
   @IsNotEmpty()
-  @IsNumber()
   yearsExperience: number;
 
   @ApiProperty()

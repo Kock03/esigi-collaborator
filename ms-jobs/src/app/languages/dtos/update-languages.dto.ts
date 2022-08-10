@@ -8,6 +8,7 @@ import {
   MaxLength,
   MinLength,
 } from 'class-validator';
+import { JobsEntity } from 'src/app/jobs/jobs.entity';
 
 export class UpdateLanguagesDto {
   @ApiProperty()
@@ -20,4 +21,7 @@ export class UpdateLanguagesDto {
   @IsOptional()
   @IsNumber()
   degreeOfInfluence: degreeOfInfluence;
+
+  @ApiProperty()
+  Job: JobsEntity;
 }

@@ -79,16 +79,19 @@ export class JobsEntity {
   @Column()
   maximumValue: string;
 
-  @Column({ type: 'int' })
+  @Column({ type: 'int', nullable: true })
   schooling: Schooling;
 
-  @Column({ length: '4000'})
+  @Column({ length: '3000', nullable: true })
   collaboratorActivities: string;
 
-  @Column({ length: '4000'})
+  @Column({ length: '3000', nullable: true })
   skills: string;
 
-  @Column({ length: '4000' })
+  @Column({ length: '3000', nullable: true })
+  acquirements: string;
+
+  @Column({ length: '3000', nullable: true })
   attitudes: string;
 
   @Column()

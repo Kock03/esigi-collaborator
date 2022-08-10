@@ -110,6 +110,12 @@ export class UpdateJobsDto {
   @IsString()
   collaboratorActivities: string;
 
+
+  @ApiProperty()
+  @IsOptional()
+  @IsString()
+  acquirements: string;
+
   @ApiProperty()
   @IsOptional()
   Knowledges: KnowledgesEntity[];

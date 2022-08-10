@@ -154,7 +154,7 @@
                     "incomplete_higher_education": "Ensino Superior Incompleto",
                     "complete_high_school": "Ensino Médio Completo"
                 },
-                "collaborator_activities": "Quais são as principais atividades que ocolaborador irá exercer?",
+                "collaborator_activities": "Principais atividades que ocolaborador irá exercer",
                 "desired_experience": "Experiência Desejada",
                 "required_behavior": "Comportamento e/ou competências necessárias",
                 "type_of_period": {
@@ -165,7 +165,7 @@
             }
         },
         "job_interview_list": {
-            "search_jobs": "Buscar Entrvistas",
+            "search_jobs": "Buscar Entrevistas",
             "technical_interview_date": "Data da Entrevista Técnica",
             "behavioral_interview_date": "Data Entrevista Comportamental"
         },
@@ -372,6 +372,7 @@
         "last_name": "Sobrenome",
         "project": "Projeto",
         "register": "Cadastro",
+        "interviews": "Entrevistas",
         "accompaniment": "Acompanhamento",
         "client": "Cliente",
         "clt": "CLT",

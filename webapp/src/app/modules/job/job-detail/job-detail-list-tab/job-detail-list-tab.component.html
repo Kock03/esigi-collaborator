@@ -130,12 +130,7 @@
           </span>
           <span class="label-gray" *ngFor="let knowledge of job?.Knowledges">
             <b>{{'generic.skills.name' | translate}}:</b>
-            {{ knowledge.name }}
-          </span>
-          <span class="label-gray" *ngFor="let knowledge of job?.Knowledges">
-            <b>Tempo de Experiência:</b>
-            {{ knowledge.yearsExperience }}
-            {{ knowledge.typeOfPeriod == 1 ? 'Mês' : 'Anos' }}
+            {{ knowledge.name }}- {{ knowledge.yearsExperience }} {{ knowledge.typeOfPeriod == 1 ? 'Mês' : 'Anos' }}
           </span>
         </div>
         <div
@@ -143,21 +138,22 @@
           fxLayout="column"
           fxFlex="60"
           fxLayoutAlign="space-around center">
-          <div fxLayout="column" class="activities-text">
-            <span class="label-text">
-              {{'job.job_create.skills.collaborator_activities' | translate}}
-            </span>
-            <span class="span-text"> {{ job.collaboratorActivities }}</span>
+          <div fxLayout="column"  class="example-card">
+            <b class="label-gray"> {{'job.job_create.skills.collaborator_activities' | translate}}:</b>
+            <span class="label-content" >{{ 'O Desenvolvedor Front-end Angular é capaz de programar, fazer a manutenção e as eventuais correções necessárias nos programas web e aplicações mobile. Para isso, ele precisa mostrar conhecimento nas últimas versões do Angular, HTML, CSS e JavaScript. Esse desenvolvedor elabora a identidade visual de sites e aplicativos. Nesse sentido, precisa de conhecimento e experiência com as linguagens de programação já citadas, além de noções, no mínimo, básicas de design, arquitetura da informação e UX (User Experience)' }}</span>
+            <!-- <span class="label-content"> {{ job.collaboratorActivities }}</span> -->
           </div>
-          <div fxLayout="column">
-            <span class="label-text"> {{'job.job_create.skills.desired_experience' | translate}}:</span>
-            <span class="span-text">{{ job.skills }}</span>
+          
+          <div fxLayout="column" class="example-card">
+            <b class="label-gray"> {{'job.job_create.skills.desired_experience' | translate}}:</b>
+            <span class="label-content" >{{ 'As empresas que buscam por esse profissional, geralmente, colocam como pré-requisito o Ensino Superior completo ou cursando “Análise e Desenvolvimento de Sistemas” ou cursos afins. O developer também precisa mostrar conhecimento avançado na tecnologia Angular e linguagens de programação, como HTML, CSS e JavaScript. Além do mais, é importante que conheça as linguagens .NET, C# e o banco de dados MySQL. Um ponto que pode ser um diferencial dessa profissão é a experiência com versionamento (git). E a fluência no inglês, certamente, é outra questão que potencializa a carreira do Desenvolvedor Front-end Angular, afinal é com esse idioma que ele lidará diariamente. ' }}</span>
+            <!-- <span class="label-content" >{{ job.skills }}</span> -->
           </div>
-          <div fxLayout="column" class="knowledges-text">
-            <span class="label-text">
-              {{'job.job_create.skills.required_behavior' | translate}}:
-            </span>
-            <span class="span-text"> {{ job.attitudes }}</span>
+
+          <div fxLayout="column" class="example-card">
+            <b class="label-gray">  {{'job.job_create.skills.required_behavior' | translate}}:</b>
+            <span class="label-content">{{ 'Isso porque o developer front-end fica responsável pela experiência do usuário com o sistema, ou seja, ele programa as páginas com as quais os usuários interagem. Além disso, ele deve monitorar o desempenho dos desenvolvimentos, assim como observar os possíveis problemas de usabilidade dos programas. Portanto, precisa  colaborar com os desenvolvedores back-end e web designers para otimizar essa usabilidade. Aaah! Esse profissional também fica responsável por escrever documentos e guias de requisitos funcionais, conforme os projetos que participa.' }}</span>
+            <!-- <span class="label-content">{{ job.attitudes }}</span> -->
           </div>
         </div>
       </mat-list-item>

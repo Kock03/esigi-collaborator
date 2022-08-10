@@ -8,11 +8,7 @@
 
       <mat-form-field appearance="outline" fxFlex="20">
         <mat-label>{{'generic.skills.time_experience' | translate}}</mat-label>
-        <input
-          matInput
-          placeholder="Tempo de Experiencia"
-          mask="0||00"
-          formControlName="yearsExperience" />
+        <input matInput placeholder="Tempo de Experiencia" mask="0||00" formControlName="yearsExperience" />
       </mat-form-field>
 
       <mat-form-field fxFlex="20" appearance="outline">
@@ -26,10 +22,7 @@
 
     <div mat-dialog-actions fxLayout="row" fxFlexAlign="center">
       <button mat-flat-button (click)="onNoClick()">Cancelar</button>
-      <button
-        mat-flat-button
-        color="primary"
-        [disabled]="knowledgeForm.invalid"
+      <button mat-flat-button color="primary" [mat-dialog-close]="true" [disabled]="knowledgeForm.invalid"
         (click)="saveKnowledge()">
         Salvar
       </button>

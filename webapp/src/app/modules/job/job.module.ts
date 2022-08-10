@@ -32,7 +32,14 @@ import { JobDialogSkill } from './job-create/job-skill-tab/job-skill-dialog.comp
 import { JobInterviewCreateComponent } from './job-interview-create/job-interview-create.component';
 import { MatSortModule } from '@angular/material/sort';
 import { TranslateModule } from '@ngx-translate/core';
-import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { JobBehavioralInterviewTabComponent } from './job-interview-create/job-behavioral-interview-tab/job-behavioral-interview-tab.component';
+import { JobTechnicalInterviewTabComponent } from './job-interview-create/job-technical-interview-tab/job-technical-interview-tab.component';
+import { JobClientInterviewTabComponent } from './job-interview-create/job-client-interview-tab/job-client-interview-tab.component';
+import { JobReturnInterviewTabComponent } from './job-interview-create/job-return-interview-tab/job-return-interview-tab.component';
+import { JobResumeInterviewTabComponent } from './job-interview-create/job-resume-interview-tab/job-resume-interview-tab.component';
+import { MatCardModule } from '@angular/material/card';
+import { JobDialogLanguage } from './job-create/job-skill-tab/job-language-dialog.component';
 
 const routes: Routes = [
   {
@@ -55,6 +62,7 @@ const routes: Routes = [
   declarations: [
     JobCreateComponent,
     JobDialogSkill,
+    JobDialogLanguage,
     JobListComponent,
     JobDetailComponent,
     JobDetailListTabComponent,
@@ -62,6 +70,11 @@ const routes: Routes = [
     JobRegisterTabComponent,
     JobSkillTabComponent,
     JobInterviewCreateComponent,
+    JobBehavioralInterviewTabComponent,
+    JobTechnicalInterviewTabComponent,
+    JobClientInterviewTabComponent,
+    JobReturnInterviewTabComponent,
+    JobResumeInterviewTabComponent,
   ],
   imports: [
     RouterModule.forChild(routes),
@@ -74,25 +87,27 @@ const routes: Routes = [
     FlexLayoutModule,
     MatButtonModule,
     MatSelectModule,
-    MatTableModule,
     MatCheckboxModule,
     MatListModule,
     MatDialogModule,
     MatDatepickerModule,
     MatNativeDateModule,
     MatIconModule,
+    MatTableModule,
     MatTreeModule,
     HttpClientModule,
     NgxMaskModule,
     MatAutocompleteModule,
     MatSortModule,
+    MatCardModule,
   ],
   providers: [MatDatepickerModule, ConfirmDialogService],
   entryComponents: [
     JobDialogSkill,
+    JobDialogLanguage,
     JobRegisterTabComponent,
     JobSkillTabComponent,
     JobInterviewCreateComponent,
   ],
 })
-export class JobModule {}
+export class JobModule { }

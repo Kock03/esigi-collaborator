@@ -11,13 +11,14 @@ import { Subject, fromEvent, debounceTime, distinctUntilChanged } from 'rxjs';
 import { IInterview } from 'src/app/interfaces/iinterview';
 import { IJob } from 'src/app/interfaces/ijob';
 import { SnackBarService } from 'src/services/snackbar.service';
-import { JobProvider } from 'src/providers/job.provider';
 import { ConfirmDialogService } from 'src/services/confirn-dialog.service';
 import { Job } from '../../job-list/job-list.component';
 import { JobPanelModel } from 'src/models/job-panel-model';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { InterviewsProvider } from 'src/providers/interview.provider';
 import { FormGroup } from '@angular/forms';
+import { JobProvider } from 'src/providers/job-providers/job.provider';
+
 
 // import { IInterview } from 'src/app/interfaces/iinterview';
 
@@ -82,7 +83,9 @@ export class JobPanelTabComponent implements OnInit {
     }
   }
 
+
   editInterview(interviewId: any) {
+    sessionStorage.setItem('method', 'edit');
     const navigationExtras = {
       state: {
         id: this.jobId,
@@ -132,6 +135,7 @@ export class JobPanelTabComponent implements OnInit {
       },
     };
     this.router.navigate(['vaga/interview/novo'], navigationExtras);
+    sessionStorage.setItem('job_tab', '1');
   }
 
   createJob() {
@@ -153,7 +157,7 @@ export class JobPanelTabComponent implements OnInit {
             .toLocaleLowerCase()
             .includes(this.filter.nativeElement.value.toLocaleLowerCase())
         );
-        
+
       });
   }
 }

@@ -17,6 +17,12 @@ export class LanguagesController {
     return await this.languagesService.findOneOrfail({ id });
   }
 
+  @Get('job/:id')
+  async findByJob(@Param('id', new ParseUUIDPipe()) id: string) {
+    return await this.languagesService.findByJob(id)
+  }
+
+
   @Post()
   async store(@Body() body: CreateLanguagesDto) {
     return await this.languagesService.store(body);

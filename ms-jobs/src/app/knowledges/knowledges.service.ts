@@ -16,13 +16,17 @@ export class KnowledgesService {
   constructor(
     @InjectRepository(KnowledgesEntity)
     private readonly knowledgesRepository: Repository<KnowledgesEntity>,
-  ) {}
+  ) { }
 
   async findAll() {
     const options: FindManyOptions = {
       order: { createdAt: 'DESC' },
     };
     return await this.knowledgesRepository.find(options);
+  }
+
+  async findByJob(id: string) {
+    return await this.knowledgesRepository.query(`select * from knowledges_entity where job_id="${id}"`)
   }
 
   async findOneOrfail(

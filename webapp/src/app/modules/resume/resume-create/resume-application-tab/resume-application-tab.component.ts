@@ -11,7 +11,7 @@ import {
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { debounceTime, distinctUntilChanged, fromEvent, Subject } from 'rxjs';
-import { JobProvider } from 'src/providers/job.provider';
+import { JobProvider } from 'src/providers/job-providers/job.provider';
 
 export interface Application {
   jobName: string;

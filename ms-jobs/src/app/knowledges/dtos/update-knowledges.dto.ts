@@ -20,11 +20,14 @@ export class UpdateKnowledgesDto {
 
   @ApiProperty()
   @IsOptional()
-  @IsNumber()
   yearsExperience: number;
 
   @ApiProperty()
   @IsOptional()
   @IsEnum(TypeOfPeriod)
   typeOfPeriod: TypeOfPeriod;
+
+
+  @ApiProperty()
+  Job: JobsEntity;
 }
