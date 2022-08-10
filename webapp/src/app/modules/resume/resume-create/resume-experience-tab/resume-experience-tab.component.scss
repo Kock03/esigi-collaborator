@@ -10,17 +10,15 @@
     margin-right: 9px;
   }
 
-  .buttons-experience {
-    height: 100%;
-    max-height: 40px;
-    margin-top: 190px;
+  .experience {
+    // margin-top: 190px;
     width: 100%;
     margin-left: 390px;
     // float: right;
   }
-  
-  .resume-button{
-    margin-left: 200px;
+
+  .resume-button {
+    margin-left: 220px;
   }
 
   .description {
@@ -32,7 +30,7 @@
   .label-gray {
     color: rgb(125, 123, 123);
     font-size: 16px;
-    width: 520px;;
+    width: 520px;
   }
 
   .example-full-width {
@@ -61,8 +59,16 @@
   //   font-size: 15px;
   // }
 
-  .mat-list-base .mat-list-item .mat-list-item-content, .mat-list-base .mat-list-option .mat-list-item-conten{
-    width: 97%;
+  .mat-list-base .mat-list-item .mat-list-item-content,
+  .mat-list-base .mat-list-option .mat-list-item-conten {
+    width: 100%;
+    height: 100% !important;
+    max-height: 500px;
+  }
+
+  .mat-list-item-content{
+    // max-height: 100px !important;
+    height: inherit !important;
   }
 
   .list-group-item {
@@ -71,8 +77,9 @@
     border-color: #ff6a39;
     width: 45% !important;
     padding: 30px;
-    margin-bottom: 90px;
-    height: 100% !important;
+    margin-bottom: 90px !important;
+    position: static;
+    
   }
 
   // mat-list{
@@ -92,15 +99,14 @@
     max-width: 550px !important;
     overflow: hidden !important;
     height: 100% !important;
-    padding: 1px 1px 15px 1px;
+    padding: 1px 25px 15px 1px;
   }
 
   .scroll-experience {
     overflow: auto;
-    word-wrap:break-word;
+    word-wrap: break-word;
     width: 100%;
   }
-  
 
   .mat-icon-list {
     margin-top: 100px;
@@ -114,7 +120,7 @@
 
   .input-description {
     height: 100% !important;
-    height: 400px;
+    height: 300px;
     overflow: auto !important;
     width: 100% !important;
     max-width: 400px;
@@ -132,7 +138,7 @@
     margin-left: 15px !important;
     position: absolute;
   }
-  
+
   .style-list {
     padding: 20px;
   }
