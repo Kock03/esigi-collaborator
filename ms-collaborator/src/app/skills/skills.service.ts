@@ -26,7 +26,9 @@ export class SkillsService {
   }
 
   async findByCollaborator(id: string) {
-    return await this.skillsRepository.query(`select * from skills where collaborator_id="${id}"`)
+    return await this.skillsRepository.createQueryBuilder('skills')
+      .where(`collaborator_id="${id}"`)
+      .getMany();
   }
 
   async findOneOrFail(

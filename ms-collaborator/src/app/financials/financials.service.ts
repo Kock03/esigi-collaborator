@@ -38,7 +38,9 @@ export class FinancialsService {
   }
 
   async findByCollaborator(id: string) {
-    return await this.financialsRepository.query(`select * from financials_entity where collaborator_id="${id}"`)
+    return await this.financialsRepository.createQueryBuilder('financials')
+      .where(`collaborator_id="${id}"`)
+      .getMany();
   }
 
   async store(data: CreateFinancialsDto) {

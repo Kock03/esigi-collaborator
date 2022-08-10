@@ -31,7 +31,7 @@ export class ResumeSkillsTabComponent implements OnInit {
   @Output() onChange: EventEmitter<any> = new EventEmitter();
   @ViewChild('skillTable') skillTable!: MatTable<any>;
 
-  displayedColumns: string[] = ['name', 'time','typeOfPeriod' ,'level', 'icon'];
+  displayedColumns: string[] = ['name', 'time', 'typeOfPeriod', 'level', 'icon'];
 
   data: [] = [];
 
@@ -47,13 +47,13 @@ export class ResumeSkillsTabComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     public dialog: MatDialog,
-    private snackbarService: SnackBarService, 
+    private snackbarService: SnackBarService,
     private dialogService: ConfirmDialogService,
-    private resumeSkillsProvider:ResumeSkillsProvider,
+    private resumeSkillsProvider: ResumeSkillsProvider,
     private resumeProvider: ResumeProvider
-  ) {}
+  ) { }
 
-  ngOnInit(): void {                
+  ngOnInit(): void {
     this.resumeMethod = sessionStorage.getItem('resume_method')!;
     if (this.resumeMethod === 'edit') {
       this.getSkillList();
@@ -62,8 +62,7 @@ export class ResumeSkillsTabComponent implements OnInit {
 
   async getSkillList() {
     this.resumeId = sessionStorage.getItem('resume_id');
-    const data = await this.resumeProvider.findOne(this.resumeId);
-    this.data = data.Skills;
+    this.data = await this.resumeSkillsProvider.findByResume(this.resumeId);
   }
 
   openDialog() {

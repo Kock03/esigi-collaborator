@@ -41,7 +41,9 @@ export class DependentsService {
     }
   }
   async findByCollaborator(id: string) {
-    return await this.dependentsRepository.query(`select * from dependents where collaborator_id="${id}"`)
+    return await this.dependentsRepository.createQueryBuilder('dependents')
+      .where(`collaborator_id="${id}"`)
+      .getMany();
   }
 
   async store(data: CreatedependentsDto) {

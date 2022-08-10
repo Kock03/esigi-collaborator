@@ -38,7 +38,9 @@ export class EducationsService {
   }
 
   async findByCollaborator(id: string) {
-    return await this.educationsRepository.query(`select * from educations where collaborator_id="${id}"`)
+    return await this.educationsRepository.createQueryBuilder('educations')
+      .where(`collaborator_id="${id}"`)
+      .getMany();
   }
 
 

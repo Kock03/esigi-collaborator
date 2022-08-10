@@ -26,6 +26,11 @@ export class SkillsController {
     return await this.skillsService.findOneOrFail({ id });
   }
 
+  @Get('resume/:id')
+  async findByResume(@Param('id', new ParseUUIDPipe()) id: string) {
+    return await this.skillsService.findByResume(id)
+  }
+
   @Post()
   async store(@Body() body: CreateSkillsDto) {
     return await this.skillsService.store(body);

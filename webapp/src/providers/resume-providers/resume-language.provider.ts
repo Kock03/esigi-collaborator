@@ -31,6 +31,16 @@ export class ResumeLanguageProvider {
         });
     }
 
+    findByResume(id: string | null): Promise<any> {
+        return new Promise((resolve, reject) => {
+            this.apiGateway
+                .get(environment.RESUME_MS + 'languages/resume/:id', { id })
+                .subscribe((response: HttpResponse<any>) => {
+                    resolve(response.body);
+                }, reject);
+        });
+    }
+
     update(id: string | null, language: any): Promise<any> {
         return new Promise((resolve, reject) => {
             this.apiGateway

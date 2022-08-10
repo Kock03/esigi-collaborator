@@ -17,13 +17,19 @@ export class ExperiencesService {
   constructor(
     @InjectRepository(ExperiencesEntity)
     private readonly experiencesRepository: Repository<ExperiencesEntity>,
-  ) {}
+  ) { }
 
   async findAll() {
     const options: FindManyOptions = {
       order: { createdAt: 'DESC' },
     };
     return await this.experiencesRepository.find();
+  }
+
+  async findByResume(id: string) {
+    return await this.experiencesRepository.createQueryBuilder('experiences')
+      .where(`resume_id="${id}"`)
+      .getMany();
   }
 
   async findOneOrFail(

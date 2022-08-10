@@ -12,11 +12,11 @@ import { UpdateLanguagesDto } from './dto/update-languages.dto';
 import { LanguagesEntity } from './languages.entity';
 
 @Injectable()
-export class IdiomsService {
+export class LanguagesService {
   constructor(
     @InjectRepository(LanguagesEntity)
     private readonly languagesRepository: Repository<LanguagesEntity>,
-  ) {}
+  ) { }
 
   async findAll() {
     const options: FindManyOptions = {
@@ -35,6 +35,13 @@ export class IdiomsService {
     } catch {
       throw new NotFoundException();
     }
+  }
+
+
+  async findByResume(id: string) {
+    return await this.languagesRepository.createQueryBuilder('languages')
+      .where(`resume_id="${id}"`)
+      .getMany();
   }
 
   async store(createDto: CreateLanguagesDto) {

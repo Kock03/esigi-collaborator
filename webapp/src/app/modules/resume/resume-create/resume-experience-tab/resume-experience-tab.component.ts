@@ -1,4 +1,4 @@
- import { Expression } from '@angular/compiler';
+import { Expression } from '@angular/compiler';
 import {
   Component,
   EventEmitter,
@@ -44,7 +44,7 @@ export interface Experience {
 export class ResumeExperienceTabComponent implements OnInit {
   @Output() onChange: EventEmitter<any> = new EventEmitter();
 
-  data: IExperience[] = [];
+  data: any[] = [];
   Experience: any;
   experienceList: any[] = [];
   experienceForm!: FormGroup;
@@ -55,15 +55,15 @@ export class ResumeExperienceTabComponent implements OnInit {
   experienceId!: string;
   resumeMethod!: string;
 
-  constructor( 
+  constructor(
     private fb: FormBuilder,
     public dialog: MatDialog,
     private route: ActivatedRoute,
-    private snackbarService: SnackBarService, 
+    private snackbarService: SnackBarService,
     private dialogService: ConfirmDialogService,
-    private resumeExperienceProvider:ResumeExperienceProvider,
+    private resumeExperienceProvider: ResumeExperienceProvider,
     private resumeProvider: ResumeProvider
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.resumeMethod = sessionStorage.getItem('resume_method')!;
@@ -74,8 +74,7 @@ export class ResumeExperienceTabComponent implements OnInit {
 
   async getExperienceList() {
     this.resumeId = sessionStorage.getItem('resume_id');
-    const data = await this.resumeProvider.findOne(this.resumeId);
-    this.data = data.Experiences;
+    this.data = await this.resumeExperienceProvider.findByResume(this.resumeId);
 
   }
 
@@ -108,7 +107,7 @@ export class ResumeExperienceTabComponent implements OnInit {
       if (experience) {
         await this.getExperienceList();
       }
-    }); 
+    });
   }
 
   deleteExperience(id: string) {

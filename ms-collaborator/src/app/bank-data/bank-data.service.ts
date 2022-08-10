@@ -26,7 +26,9 @@ export class BankDataService {
   }
 
   async findByCollaborator(id: string) {
-    return await this.bankDataRepository.query(`select * from bank_data where collaborator_id="${id}"`)
+    return await this.bankDataRepository.createQueryBuilder('bankData')
+      .where(`collaborator_id="${id}"`)
+      .getMany();
   }
 
   async findOneOrFail(
@@ -63,27 +65,27 @@ export class BankDataService {
   }
 
   async update(id: string, data: UpdateBankDataDto) {
-    try{
+    try {
       const bank = await this.bankDataRepository.findOneOrFail({ id });
       if (!bank) {
         throw new NotFoundException();
       }
-      if(data.inactive === false){
+      if (data.inactive === false) {
         const list = await this.findAll();
         Object.keys(list).forEach(key => {
-          if(list[key].id === id){
+          if (list[key].id === id) {
             list[key].inactive = 1
             return this.bankDataRepository.save({ id: id, ...data });
-          }else{
+          } else {
             list[key].inactive = 0
             this.update(list[key].id, list[key]);
           }
         })
-      } else{
+      } else {
         return await this.bankDataRepository.save({ id: id, ...data });
       }
       console.log(data)
-    }catch (e){
+    } catch (e) {
       console.log(e);
     }
 

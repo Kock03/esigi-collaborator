@@ -30,6 +30,16 @@ export class ResumeExperienceProvider {
         });
     }
 
+    findByResume(id: string | null): Promise<any> {
+        return new Promise((resolve, reject) => {
+            this.apiGateway
+                .get(environment.RESUME_MS + 'experiences/resume/:id', { id })
+                .subscribe((response: HttpResponse<any>) => {
+                    resolve(response.body);
+                }, reject);
+        });
+    }
+
     findOne(id: string | null): Promise<any> {
         return new Promise((resolve, reject) => {
             this.apiGateway

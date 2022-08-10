@@ -16,13 +16,19 @@ export class EducationsService {
   constructor(
     @InjectRepository(EducationsEntity)
     private readonly educationsRepository: Repository<EducationsEntity>,
-  ) {}
+  ) { }
 
   async findAll() {
     const options: FindManyOptions = {
       order: { createdAt: 'DESC' },
     };
     return await this.educationsRepository.find(options);
+  }
+
+  async findByResume(id: string) {
+    return await this.educationsRepository.createQueryBuilder('educations')
+      .where(`resume_id="${id}"`)
+      .getMany();
   }
 
   async findOneOrFail(

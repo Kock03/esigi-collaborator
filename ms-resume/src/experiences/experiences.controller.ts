@@ -26,6 +26,11 @@ export class ExperiencesController {
     return await this.experiencesService.findOneOrFail({ id });
   }
 
+  @Get('resume/:id')
+  async findByResume(@Param('id', new ParseUUIDPipe()) id: string) {
+    return await this.experiencesService.findByResume(id)
+  }
+
   @Post()
   async store(@Body() body: CreateExperiencesDto) {
     return await this.experiencesService.store(body);

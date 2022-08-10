@@ -30,7 +30,7 @@ import { ResumeLanguageDialog } from './resume-language-dialog.component';
   styleUrls: ['./resume-education-tab.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class ResumeEducationTabComponent implements OnInit { 
+export class ResumeEducationTabComponent implements OnInit {
   @Output() onChange: EventEmitter<any> = new EventEmitter();
   @ViewChild('languageTable') languageTable!: MatTable<any>;
   @ViewChild('educationTable') educationTable!: MatTable<any>;
@@ -71,7 +71,7 @@ export class ResumeEducationTabComponent implements OnInit {
     private snackbarService: SnackBarService,
     private resumeLanguageProvider: ResumeLanguageProvider,
     private resumeEducationProvider: ResumeEducationProvider
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.resumeMethod = sessionStorage.getItem('resume_method')!;
@@ -84,16 +84,13 @@ export class ResumeEducationTabComponent implements OnInit {
 
   async getEducationsList() {
     this.resumeId = sessionStorage.getItem('resume_id');
-
-    const data = await this.resumeProvider.findOne(this.resumeId);
-    this.dataEducation = data.Educations;
+    this.dataEducation = await this.resumeEducationProvider.findByResume(this.resumeId);
   }
 
-  
+
   async getLanguagesList() {
     this.resumeId = sessionStorage.getItem('resume_id');
-    const data = await this.resumeProvider.findOne(this.resumeId);
-    this.dataLanguage = data.Languages;
+    this.dataLanguage = await this.resumeLanguageProvider.findByResume(this.resumeId);
   }
 
   next() {
@@ -114,7 +111,7 @@ export class ResumeEducationTabComponent implements OnInit {
       }
     });
   }
-  
+
   getLanguage(languageSelected: any, id: string) {
     this.method = 'edit';
     sessionStorage.setItem('method', this.method);
@@ -169,7 +166,7 @@ export class ResumeEducationTabComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(async education => {
       if (education) {
-       await this.getEducationsList();
+        await this.getEducationsList();
       }
     });
   }
@@ -226,14 +223,14 @@ export class ResumeEducationTabComponent implements OnInit {
         return element.schooling == 1
           ? 'Ensino Fundamental'
           : element.schooling == 2
-          ? 'Ensino Médio'
-          : 'Ensino Superior';
+            ? 'Ensino Médio'
+            : 'Ensino Superior';
       case 'situation': {
         return element.situation == 1
           ? 'Parado'
           : element.situation == 2
-          ? 'Completo'
-          : 'Em andamento';
+            ? 'Completo'
+            : 'Em andamento';
       }
       default:
         return;

@@ -12,7 +12,7 @@
             <th mat-header-cell *matHeaderCellDef>
               {{'generic.skills.time_experience'|translate}}
             </th>
-            <td mat-cell *matCellDef="let skill"  style="padding-left: 45px;">
+            <td mat-cell *matCellDef="let skill" style="padding-left: 45px;">
               {{ skill.yearsExperience }}
             </td>
           </ng-container>
@@ -28,54 +28,39 @@
             <th mat-header-cell *matHeaderCellDef>{{'generic.seniority.name'|translate}}</th>
             <td mat-cell *matCellDef="let skill">
               {{
-                skill.seniority == 1
-                  ? 'Senior'
-                  : skill.seniority == 2
-                  ? 'Pleno'
-                  : skill.seniority == 3
-                  ? 'Junior'
-                  : skill.seniority == 4
-                  ? 'Aprendiz'
-                  : skill.seniority == 5
-                  ? 'Especialista'
-                  : 'Arquiteto'
+              skill.seniority == 1
+              ? 'Senior'
+              : skill.seniority == 2
+              ? 'Pleno'
+              : skill.seniority == 3
+              ? 'Junior'
+              : skill.seniority == 4
+              ? 'Aprendiz'
+              : skill.seniority == 5
+              ? 'Especialista'
+              : 'Arquiteto'
               }}
             </td>
           </ng-container>
 
           <ng-container matColumnDef="icon">
             <th mat-header-cell *matHeaderCellDef style="text-align: end">
-              <button
-                class="edit-button"
-                mat-flat-button
-                color="primary"
-                (click)="openDialog()">
+              <button class="edit-button" mat-flat-button color="primary" (click)="openDialog()">
                 <mat-icon>add</mat-icon>
               </button>
             </th>
             <th mat-header-cell *matHeaderCellDef></th>
-            <td
-              class="button-tab"
-              mat-cell
-              *matCellDef="let skill; let index = index">
-              <button
-                class="table-button"
-                mat-button
-                (click)="getSkill(skill, skill.id)">
+            <td class="button-tab" mat-cell *matCellDef="let skill; let index = index">
+              <button class="table-button" mat-button (click)="getSkill(skill, skill.id)">
                 <mat-icon>edit</mat-icon>
               </button>
-              <button
-                class="table-button"
-                mat-button
-                (click)="deleteSkill(skill.id)">
+              <button class="table-button" mat-button (click)="deleteSkill(skill.id)">
                 <mat-icon>delete</mat-icon>
               </button>
             </td>
           </ng-container>
 
-          <tr
-            mat-header-row
-            *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
         </table>
       </div>

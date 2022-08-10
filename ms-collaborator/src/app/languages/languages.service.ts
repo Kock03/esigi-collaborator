@@ -23,7 +23,9 @@ export class LanguagesService {
 
 
   async findByCollaborator(id: string) {
-    return await this.languagesRepository.query(`select * from languages where collaborator_id="${id}"`)
+    return await this.languagesRepository.createQueryBuilder('languages')
+      .where(`collaborator_id="${id}"`)
+      .getMany();
   }
 
   async findOneOrfail(

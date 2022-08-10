@@ -16,13 +16,19 @@ export class SkillsService {
   constructor(
     @InjectRepository(SkillsEntity)
     private readonly skillsRepository: Repository<SkillsEntity>,
-  ) {}
+  ) { }
 
   async findAll() {
     const options: FindManyOptions = {
       order: { createdAt: 'DESC' },
     };
     return await this.skillsRepository.find(options);
+  }
+
+  async findByResume(id: string) {
+    return await this.skillsRepository.createQueryBuilder('skills')
+      .where(`resume_id="${id}"`)
+      .getMany();
   }
 
   async findOneOrFail(

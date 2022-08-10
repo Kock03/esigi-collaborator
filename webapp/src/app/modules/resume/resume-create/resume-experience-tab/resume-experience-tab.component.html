@@ -11,18 +11,18 @@
     <mat-list role="list" #experiencesList class="list-group">
       <mat-list-item *ngFor="let experience of data; let i = index" class="list-group-item" fxLayoutAlign="start start">
         <div class="list-item" fxLayout="column">
-          <div fxLayout="row" >
+          <div fxLayout="row">
             <h2 class="label-office">
               {{ experience.office }}
             </h2>
-            <div  class="resume-button">
-            <button class="table-button" mat-button (click)="getExperience(experience, experience.id)">
-              <mat-icon>edit</mat-icon>
-            </button>
-            <button  (click)="deleteExperience(experience.id)" class="table-button" mat-button>
-              <mat-icon>delete</mat-icon>
-            </button>
-          </div>
+            <div class="resume-button">
+              <button class="table-button" mat-button (click)="getExperience(experience, experience.id)">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button (click)="deleteExperience(experience.id)" class="table-button" mat-button>
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
           </div>
           <b class="label-gray">
             {{ experience.companyName }}

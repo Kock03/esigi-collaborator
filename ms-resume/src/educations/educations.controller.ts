@@ -26,6 +26,12 @@ export class EducationsController {
     return await this.educationsService.findOneOrFail({ id });
   }
 
+
+  @Get('resume/:id')
+  async findByResume(@Param('id', new ParseUUIDPipe()) id: string) {
+    return await this.educationsService.findByResume(id)
+  }
+
   @Post()
   async store(@Body() body: CreateEducationsDto) {
     return await this.educationsService.store(body);

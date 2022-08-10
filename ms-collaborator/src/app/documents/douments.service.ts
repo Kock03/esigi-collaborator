@@ -26,7 +26,9 @@ export class DocumentsService {
   }
 
   async findByCollaborator(id: string) {
-    return await this.documentsRepository.query(`select * from documents where collaborator_id="${id}"`)
+    return await this.documentsRepository.createQueryBuilder('documents')
+      .where(`collaborator_id="${id}"`)
+      .getMany();
   }
 
   async findOneOrfail(
