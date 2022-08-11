@@ -6,16 +6,30 @@
                     <mat-label>{{
                         'job.job_interview_create.name_candidate' | translate
                         }}</mat-label>
-                    <input placeholder="Nome do Candidato" matInput formControlName="nameCandidate"
-                        type="text" />
+                    <input placeholder="Nome do Candidato" matInput formControlName="nameCandidate" type="text" />
                 </mat-form-field>
+
+                <!-- <mat-form-field fxFlex="35" appearance="outline">
+                    <mat-label>{{
+                        'job.job_interview_create.evaluator' | translate
+                        }}</mat-label>
+                    <input matInput formControlName="evaluator" />
+                </mat-form-field> -->
 
                 <mat-form-field fxFlex="35" appearance="outline">
                     <mat-label>{{
                         'job.job_interview_create.evaluator' | translate
                         }}</mat-label>
-                    <input matInput formControlName="evaluator" />
+                    <input type="text" placeholder="Cliente" aria-label="text" #fiilter matInput
+                        [matAutocomplete]="autoCustomer" [formControl]="customerControl" />
+                    <mat-autocomplete autoActiveFirstOption #autoCustomer="matAutocomplete"
+                        [displayWith]="displayFnCustomer">
+                        <mat-option *ngFor="let customer of filteredCustomers" [value]="customer">
+                            {{customer.corporateName }}
+                        </mat-option>
+                    </mat-autocomplete>
                 </mat-form-field>
+
 
                 <mat-form-field fxFlex="30" appearance="outline">
                     <mat-label>{{
@@ -106,8 +120,8 @@
                 </div>
 
                 <div fxLayoutAlign="center" fxFlex="20">
-                    <button mat-flat-button color="primary" class="save-button"
-                        (click)="saveInterview()" [disabled]="clientInterviewForm.invalid">
+                    <button mat-flat-button color="primary" class="save-button" (click)="saveInterview()"
+                        [disabled]="clientInterviewForm.invalid">
                         {{ 'generic.save_button' | translate }}
                     </button>
                 </div>

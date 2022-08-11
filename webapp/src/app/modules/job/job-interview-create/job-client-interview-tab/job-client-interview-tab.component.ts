@@ -1,17 +1,21 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { InterviewsProvider } from 'src/providers/interview.provider';
 import { SnackBarService } from 'src/services/snackbar.service';
 import { DocumentValidator } from 'src/app/validators/document.validator';
 import { ClientInterviewProvider } from 'src/providers/clientInterview.provider';
+import { CustomerProvider } from 'src/providers/customer.provider';
+import { debounceTime, distinctUntilChanged } from 'rxjs';
 
 @Component({
   selector: 'app-job-client-interview-tab',
   templateUrl: './job-client-interview-tab.component.html',
-  styleUrls: ['./job-client-interview-tab.component.scss']
+  styleUrls: ['./job-client-interview-tab.component.scss'],
+
 })
 export class JobClientInterviewTabComponent implements OnInit {
+  @ViewChild('filter', { static: true }) filter!: ElementRef;
   clientInterviewForm!: FormGroup;
   jobId!: any;
   interviewId!: string | null;
@@ -19,9 +23,17 @@ export class JobClientInterviewTabComponent implements OnInit {
   selectedIndex: number = 0;
   step: number = 1;
 
+  customerControl = new FormControl();
+  customers!: any[];
+  filteredCustomers!: any[];
+  filteredCustomerList: any;
+  customer!: any;
+  customerValid: boolean = false;
+
   constructor(
     private fb: FormBuilder,
     private clientInterviewProvider: ClientInterviewProvider,
+    private customerProvider: CustomerProvider,
     private interviewsProvider: InterviewsProvider,
     private route: ActivatedRoute,
     private snackbarService: SnackBarService,
@@ -32,7 +44,9 @@ export class JobClientInterviewTabComponent implements OnInit {
     this.jobId = state;
   }
 
- async  ngOnInit() {
+  async ngOnInit() {
+    this.getCustomerList();
+    this.initFilterCustomer();
     this.interviewId = this.route.snapshot.paramMap.get('id');
     this.step = JSON.parse(sessionStorage.getItem('job_tab')!);
     if (this.jobId !== undefined) {
@@ -46,9 +60,9 @@ export class JobClientInterviewTabComponent implements OnInit {
       this.interview = await this.interviewsProvider.findOne(this.interviewId);
       this.clientInterviewForm.patchValue(
         this.interview.ClientInterviews
-        );
-        console.log("🚀 ~ file: job-client-interview-tab.component.ts ~ line 49 ~ JobClientInterviewTabComponent ~ ngOnInit ~ this.interview.ClientInterviews", this.interview.ClientInterviews)
-      
+      );
+      console.log("🚀 ~ file: job-client-interview-tab.component.ts ~ line 49 ~ JobClientInterviewTabComponent ~ ngOnInit ~ this.interview.ClientInterviews", this.interview.ClientInterviews)
+
     } else {
       this.initForm();
     }
@@ -59,18 +73,57 @@ export class JobClientInterviewTabComponent implements OnInit {
     this.interviewId = this.route.snapshot.paramMap.get('id');
     this.step = JSON.parse(sessionStorage.getItem('job_tab')!);
 
-    if (sessionStorage.getItem('method') == 'edit'){
-      this. setFormValue();
+    if (sessionStorage.getItem('method') == 'edit') {
+      this.setFormValue();
     }
   }
 
-  getInterview(){
+  async getCustomerList() {
+    this.filteredCustomerList = this.customers =
+      await this.customerProvider.shortListCustomers();
+  }
+
+  private initFilterCustomer() {
+    this.customerControl.valueChanges
+      .pipe(debounceTime(350), distinctUntilChanged())
+      .subscribe((res) => {
+        this._filterCustomer(res);
+        if (res && res.id) {
+          this.customerValid = true;
+        } else {
+          this.customerValid = false;
+        }
+
+      });
+
+  }
+
+  displayFnCustomer(user: any): string {
+    if (typeof user === 'string' && this.customers) {
+      return this.customers.find(
+        (customer) => customer.id === user
+      );
+    }
+    return user && user.corporateName
+      ? user.corporateName
+      : '';
+  }
+
+  private async _filterCustomer(name: string): Promise<void> {
+    const params = `corporateName=${name}`;
+    this.filteredCustomers = await this.customerProvider.findByName(
+      params
+    );
+
+  }
+
+  getInterview() {
     try {
       this.interview = this.interviewsProvider.findOne(
         this.interviewId
       );
       console.log("🚀 ~ file: job-interview-create.component.ts ~ line 103 ~ JobInterviewCreateComponent ~ getCollaborator ~ interview", this.interview)
-      
+
     } catch (error) {
       console.error(error);
     }
@@ -95,6 +148,14 @@ export class JobClientInterviewTabComponent implements OnInit {
       situational: [null, Validators.required],
       //Job: { id: this.jobId },
     });
+
+    this.customerControl.valueChanges.subscribe((res) => {
+      if (res && res.id) {
+        this.clientInterviewForm.controls['evaluator'].setValue(res.id, {
+          emitEvent: true,
+        });
+      }
+    });
   }
 
   onChange(value: number) {
@@ -109,7 +170,7 @@ export class JobClientInterviewTabComponent implements OnInit {
   removeValidators() {
     this.clientInterviewForm.controls['punctuality'].clearValidators();
     this.clientInterviewForm.controls['punctuality'].updateValueAndValidity();
-    this.clientInterviewForm.controls['punctuality'].setErrors(null); 
+    this.clientInterviewForm.controls['punctuality'].setErrors(null);
 
 
     this.clientInterviewForm.controls['presentation'].clearValidators();

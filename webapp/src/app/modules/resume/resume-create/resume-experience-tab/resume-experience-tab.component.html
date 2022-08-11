@@ -8,8 +8,9 @@
         <mat-icon>add</mat-icon>
       </button>
     </div>
-    <mat-list role="list" #experiencesList class="list-group">
-      <mat-list-item *ngFor="let experience of data; let i = index" class="list-group-item" fxLayoutAlign="start start">
+  
+    <mat-list role="list" #experiencesList class="list-group"  >
+      <mat-list-item  *ngFor="let experience of data; let i = index" class="list-group-item" fxLayoutAlign="start start">
         <div class="list-item" fxLayout="column">
           <div fxLayout="row">
             <h2 class="label-office">
@@ -37,7 +38,7 @@
             <span> / {{ experience.startYear }}</span>
           </div>
 
-          <div class="label-gray" fxLayout="row">
+          <div class="label-gray" fxLayout="row" *ngIf="experience.active == false"  >
             <b>{{ 'generic.end_date' | translate }}</b>
             <span>{{ experience.terminusMonth }}</span>
             <span> / {{ experience.terminusYear }}</span>
@@ -48,8 +49,8 @@
           </div>
         </div>
 
-        <div class="buttons-experience">
-        </div>
+        <!-- <p class="experience">
+        </p> -->
       </mat-list-item>
     </mat-list>
   </div>
