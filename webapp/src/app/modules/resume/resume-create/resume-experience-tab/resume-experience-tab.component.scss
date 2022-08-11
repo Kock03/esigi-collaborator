@@ -18,13 +18,20 @@
   }
 
   .resume-button {
-    margin-left: 220px;
+    margin-left: 150px !important;
+    margin-right: 1px !important;
   }
 
   .description {
     width: 100%;
     max-width: 200px;
     overflow-wrap: break-word;
+  }
+
+  .list-content-item{
+    width: 100%;
+    max-width: 515px;
+    
   }
 
   .label-gray {
@@ -37,11 +44,11 @@
     width: 100%;
   }
 
-  .content-scroll {
-    overflow: auto;
-    height: calc(100vh - 280px);
-    margin-right: 10px !important;
-  }
+  // .content-scroll {
+  //   overflow: auto;
+  //   height: calc(100vh - 280px);
+  //   margin-right: 10px !important;
+  // }
 
   .list-group {
     margin-top: 10px;
@@ -68,7 +75,7 @@
 
   .mat-list-item-content{
     // max-height: 100px !important;
-    height: inherit !important;
+    // height: inherit !important;
   }
 
   .list-group-item {
@@ -77,9 +84,17 @@
     border-color: #ff6a39;
     width: 45% !important;
     padding: 30px;
-    margin-bottom: 90px !important;
+    margin-bottom: 60px !important;
+    height: 100% !important;
+    max-height: 250px;
+    min-height: 250px;
     position: static;
     
+  }
+
+  .content-list{
+    width: 100%;
+    max-width: 1200px;
   }
 
   // mat-list{
