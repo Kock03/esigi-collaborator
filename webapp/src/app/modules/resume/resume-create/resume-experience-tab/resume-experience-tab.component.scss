@@ -18,8 +18,11 @@
   }
 
   .resume-button {
-    margin-left: 150px !important;
+    margin-left: 390px !important;
+    margin-top: 2px;
     margin-right: 1px !important;
+    position: absolute;
+
   }
 
   .description {
@@ -28,11 +31,11 @@
     overflow-wrap: break-word;
   }
 
-  .list-content-item{
-    width: 100%;
-    max-width: 515px;
+  // .list-content-item{
+  //   width: 100%;
+  //   max-width: 515px;
     
-  }
+  // }
 
   .label-gray {
     color: rgb(125, 123, 123);
