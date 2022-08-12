@@ -89,14 +89,15 @@ export class JobPanelTabComponent implements OnInit {
   }
 
 
-  async editInterview(interviewId: any, customerId?: any) {
-    if(customerId ){
-      const interviewData = await this.InterviewsProvider.findOne(interviewId);
-    console.log("🚀 ~ file: job-panel-tab.component.ts ~ line 92 ~ JobPanelTabComponent ~ editInterview ~ interviewData", interviewData)
-       
-    const clientData = await this.customerProvider.findOne(interviewData.ClientInterviews.evaluator);
-    console.log(customerId);
-    sessionStorage.setItem('customer_id', clientData.corporateName);
+  async editInterview(interviewId: any) {
+    const interviewData = await this.InterviewsProvider.findOne(interviewId);
+
+    if (interviewData.ClientInterviews) {
+
+      const clientData = await this.customerProvider.findOne(interviewData.ClientInterviews.evaluator);
+
+      sessionStorage.setItem('customer_id', clientData.corporateName);
+
     }
     sessionStorage.setItem('method', 'edit');
 

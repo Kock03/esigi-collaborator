@@ -1,10 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { InterviewsProvider } from 'src/providers/interview.provider';
 import { TechnicalInterviewProvider } from 'src/providers/technicalInterview.provider';
 import { SnackBarService } from 'src/services/snackbar.service';
 import { DocumentValidator } from 'src/app/validators/document.validator';
+import { debounceTime, distinctUntilChanged } from 'rxjs';
+import { CollaboratorProvider } from 'src/providers/collaborator-providers/collaborator.provider';
+
 
 @Component({
   selector: 'app-job-technical-interview-tab',
@@ -12,12 +15,24 @@ import { DocumentValidator } from 'src/app/validators/document.validator';
   styleUrls: ['./job-technical-interview-tab.component.scss']
 })
 export class JobTechnicalInterviewTabComponent implements OnInit {
+  @ViewChild('filter', { static: true }) filter!: ElementRef;
   technicalInterviewForm!: FormGroup;
   jobId!: any;
   interviewId!: string | null;
   interview: any;
   selectedIndex: number = 0;
   step: number = 1;
+
+  collaboratorControl = new FormControl();
+  collaborators!: any[];
+  filteredCollaborators!: any[];
+  filteredCollaboratorList: any;
+  collaborator!: any;
+  collaboratorValid: boolean = false;
+  method: any;
+  collaboratorRequesterId!: string | null;
+  visible: boolean = false;
+
 
   constructor(
     private fb: FormBuilder,
@@ -26,13 +41,17 @@ export class JobTechnicalInterviewTabComponent implements OnInit {
     private route: ActivatedRoute,
     private snackbarService: SnackBarService,
     private router: Router,
+    private collaboratorProvider: CollaboratorProvider,
   ) {
     const state = this.router.getCurrentNavigation()?.extras.state;
 
     this.jobId = state;
   }
 
- async  ngOnInit() {
+  async ngOnInit() {
+    this.visible = false
+    this.getCollaboratorList();
+    this.initFilterRequester();
     this.interviewId = this.route.snapshot.paramMap.get('id');
     this.step = JSON.parse(sessionStorage.getItem('job_tab')!);
     if (this.jobId !== undefined) {
@@ -46,9 +65,9 @@ export class JobTechnicalInterviewTabComponent implements OnInit {
       this.interview = await this.interviewsProvider.findOne(this.interviewId);
       this.technicalInterviewForm.patchValue(
         this.interview.TechnicalInterviews
-        );
-        console.log("🚀 ~ file: job-tecnical-interview-tab.component.ts ~ line 48 ~ JobTechnicalInterviewTabComponent ~ ngOnInit ~    this.interview.TechnicalInterviews",    this.interview.TechnicalInterviews)
-      
+      );
+      console.log("🚀 ~ file: job-tecnical-interview-tab.component.ts ~ line 48 ~ JobTechnicalInterviewTabComponent ~ ngOnInit ~    this.interview.TechnicalInterviews", this.interview.TechnicalInterviews)
+
     } else {
       this.initForm();
     }
@@ -59,18 +78,59 @@ export class JobTechnicalInterviewTabComponent implements OnInit {
     this.interviewId = this.route.snapshot.paramMap.get('id');
     this.step = JSON.parse(sessionStorage.getItem('job_tab')!);
 
-    if (sessionStorage.getItem('method') == 'edit'){
-      this. setFormValue();
+    if (sessionStorage.getItem('method') == 'edit') {
+      this.setFormValue();
     }
   }
 
-  getInterview(){
+  async getCollaboratorList() {
+    this.filteredCollaboratorList = this.collaborators =
+      await this.collaboratorProvider.findGerente();
+  }
+
+  private initFilterRequester() {
+    this.collaboratorControl.valueChanges
+      .pipe(debounceTime(350), distinctUntilChanged())
+      .subscribe((res) => {
+        this._filterRequester(res);
+        if (res && res.id) {
+          this.collaboratorValid = true;
+        } else {
+          this.collaboratorValid = false;
+        }
+
+      });
+
+  }
+
+  displayFnRequester(user: any): string {
+    if (typeof user === 'string' && this.collaborators) {
+      return this.collaborators.find(
+        (collaborator) => collaborator.id === user
+      );
+    }
+    return user && user.firstNameCorporateName && user.lastNameFantasyName
+      ? user.firstNameCorporateName + ' ' + user.lastNameFantasyName
+      : '';
+  }
+
+  private async _filterRequester(name: string): Promise<void> {
+    const params = `firstNameCorporateName=${name}`;
+    this.filteredCollaborators = await this.collaboratorProvider.findByNameGerente(
+      params
+    );
+
+  }
+
+
+
+  getInterview() {
     try {
       this.interview = this.interviewsProvider.findOne(
         this.interviewId
       );
       console.log("🚀 ~ file: job-interview-create.component.ts ~ line 103 ~ JobInterviewCreateComponent ~ getCollaborator ~ interview", this.interview)
-      
+
     } catch (error) {
       console.error(error);
     }
@@ -79,6 +139,8 @@ export class JobTechnicalInterviewTabComponent implements OnInit {
   setFormValue() {
     if (this.interview) {
       this.technicalInterviewForm.patchValue(this.interview.TechnicalInterviews);
+      this.visible = true;
+      this.collaboratorControl.patchValue(this.collaboratorRequesterId);
     }
   }
 
@@ -95,7 +157,17 @@ export class JobTechnicalInterviewTabComponent implements OnInit {
       situational: [null, Validators.required],
       //Job: { id: this.jobId },
     });
+
+    this.collaboratorControl.valueChanges.subscribe((res) => {
+      if (res && res.id) {
+        this.technicalInterviewForm.controls['evaluator'].setValue(res.id, {
+          emitEvent: true,
+        });
+      }
+    });
   }
+
+
 
   onChange(value: number) {
     if (this.technicalInterviewForm.controls['situational'].value == 5) {
@@ -109,7 +181,7 @@ export class JobTechnicalInterviewTabComponent implements OnInit {
   removeValidators() {
     this.technicalInterviewForm.controls['punctuality'].clearValidators();
     this.technicalInterviewForm.controls['punctuality'].updateValueAndValidity();
-    this.technicalInterviewForm.controls['punctuality'].setErrors(null); 
+    this.technicalInterviewForm.controls['punctuality'].setErrors(null);
 
 
     this.technicalInterviewForm.controls['presentation'].clearValidators();

@@ -6,16 +6,38 @@
                     <mat-label>{{
                         'job.job_interview_create.name_candidate' | translate
                         }}</mat-label>
-                    <input placeholder="Nome do Candidato" matInput formControlName="nameCandidate"
-                        type="text" />
+                    <input placeholder="Nome do Candidato" matInput formControlName="nameCandidate" type="text" />
                 </mat-form-field>
 
-                <mat-form-field fxFlex="35" appearance="outline">
+
+                <mat-form-field fxFlex="30" class="example-full-width" appearance="outline" *ngIf="this.visible === false" 
+                    >
+                    <mat-label>{{'generic.request' | translate}}</mat-label>
+                    <input type="text" placeholder="Solicitante" aria-label="text" #filter matInput
+                        [matAutocomplete]="autoRequester" [formControl]="collaboratorControl" />
+                    <mat-autocomplete autoActiveFirstOption #autoRequester="matAutocomplete"
+                        [displayWith]="displayFnRequester">
+                        <mat-option *ngFor="let collaborator of filteredCollaborators" [value]="collaborator">
+                            {{collaborator.firstNameCorporateName }}
+                            {{collaborator.lastNameFantasyName}}
+                        </mat-option>
+                    </mat-autocomplete>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" *ngIf="this.visible === true" fxFlex="35"
+                    class="example-full-width">
+                    <mat-label>{{
+                        'job.job_interview_create.evaluator' | translate
+                        }}</mat-label>
+                    <input disabled matInput disableRipple [value]="this.collaboratorControl.value" />
+                </mat-form-field>
+
+                <!-- <mat-form-field fxFlex="35" appearance="outline">
                     <mat-label>{{
                         'job.job_interview_create.evaluator' | translate
                         }}</mat-label>
                     <input matInput formControlName="evaluator" />
-                </mat-form-field>
+                </mat-form-field> -->
 
                 <mat-form-field fxFlex="30" appearance="outline">
                     <mat-label>{{
@@ -77,8 +99,7 @@
                     <mat-label>{{
                         'job.job_interview_create.situational.name' | translate
                         }}</mat-label>
-                    <mat-select matInput disableRipple formControlName="situational"
-                        (ngModelChange)="onChange($event)">
+                    <mat-select matInput disableRipple formControlName="situational" (ngModelChange)="onChange($event)">
                         <mat-option [value]="1">{{
                             'job.job_interview_create.situational.okay' | translate
                             }}</mat-option>
@@ -106,8 +127,8 @@
                 </div>
 
                 <div fxLayoutAlign="center" fxFlex="20">
-                    <button mat-flat-button color="primary" class="save-button"
-                        (click)="saveInterview()" [disabled]="technicalInterviewForm.invalid">
+                    <button mat-flat-button color="primary" class="save-button" (click)="saveInterview()"
+                        [disabled]="technicalInterviewForm.invalid">
                         {{ 'generic.save_button' | translate }}
                     </button>
                 </div>

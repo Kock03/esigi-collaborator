@@ -138,6 +138,8 @@ export class JobClientInterviewTabComponent implements OnInit {
       this.clientInterviewForm.patchValue(this.interview.ClientInterviews );
       this.visible = true;
       this.customerControl.patchValue(this.customerId);
+      console.log("🚀 ~ file: job-client-interview-tab.component.ts ~ line 141 ~ JobClientInterviewTabComponent ~ setFormValue ~ customerId", this.customerId)
+      
     }
   }
 
