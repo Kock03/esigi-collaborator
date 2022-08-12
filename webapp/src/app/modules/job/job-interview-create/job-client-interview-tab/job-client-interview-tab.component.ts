@@ -29,6 +29,8 @@ export class JobClientInterviewTabComponent implements OnInit {
   filteredCustomerList: any;
   customer!: any;
   customerValid: boolean = false;
+  customerId!: string | null;
+  visible: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -45,10 +47,12 @@ export class JobClientInterviewTabComponent implements OnInit {
   }
 
   async ngOnInit() {
+    this.visible = false
     this.getCustomerList();
     this.initFilterCustomer();
     this.interviewId = this.route.snapshot.paramMap.get('id');
     this.step = JSON.parse(sessionStorage.getItem('job_tab')!);
+    this.customerId = sessionStorage.getItem('customer_id');
     if (this.jobId !== undefined) {
       sessionStorage.setItem('job_id', this.jobId.id);
     }
@@ -130,8 +134,10 @@ export class JobClientInterviewTabComponent implements OnInit {
   }
 
   setFormValue() {
-    if (this.interview) {
-      this.clientInterviewForm.patchValue(this.interview.ClientInterviews);
+    if (this.interview.ClientInterviews) {
+      this.clientInterviewForm.patchValue(this.interview.ClientInterviews );
+      this.visible = true;
+      this.customerControl.patchValue(this.customerId);
     }
   }
 

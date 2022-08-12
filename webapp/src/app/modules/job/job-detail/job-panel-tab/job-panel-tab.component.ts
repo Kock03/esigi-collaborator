@@ -18,6 +18,9 @@ import { JobPanelModel } from 'src/models/job-panel-model';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { InterviewsProvider } from 'src/providers/interview.provider';
 import { FormGroup } from '@angular/forms';
+import { TechnicalInterviewProvider } from 'src/providers/technicalInterview.provider';
+import { ClientInterviewProvider } from 'src/providers/clientInterview.provider';
+import { CustomerProvider } from 'src/providers/customer.provider';
 
 // import { IInterview } from 'src/app/interfaces/iinterview';
 
@@ -48,6 +51,7 @@ export class JobPanelTabComponent implements OnInit {
   job: any;
   jobId!: string | null;
   data: any;
+  Id!: string | null;
 
   constructor(
     private snackbarService: SnackBarService,
@@ -55,7 +59,9 @@ export class JobPanelTabComponent implements OnInit {
     private route: ActivatedRoute,
     private JobProvider: JobProvider,
     private dialogService: ConfirmDialogService,
-    private InterviewsProvider: InterviewsProvider
+    private InterviewsProvider: InterviewsProvider,
+    private clientInterviewProvider: ClientInterviewProvider,
+    private customerProvider: CustomerProvider,
   ) {
     this._unsubscribeAll = new Subject();
   }
@@ -83,13 +89,25 @@ export class JobPanelTabComponent implements OnInit {
   }
 
 
-  editInterview(interviewId: any) {
+  async editInterview(interviewId: any, customerId?: any) {
+    if(customerId ){
+      const interviewData = await this.InterviewsProvider.findOne(interviewId);
+    console.log("🚀 ~ file: job-panel-tab.component.ts ~ line 92 ~ JobPanelTabComponent ~ editInterview ~ interviewData", interviewData)
+       
+    const clientData = await this.customerProvider.findOne(interviewData.ClientInterviews.evaluator);
+    console.log(customerId);
+    sessionStorage.setItem('customer_id', clientData.corporateName);
+    }
     sessionStorage.setItem('method', 'edit');
+
     const navigationExtras = {
       state: {
         id: this.jobId,
       },
     };
+
+
+
     this.router.navigate([`vaga/interview/${interviewId}`], navigationExtras);
   }
 
