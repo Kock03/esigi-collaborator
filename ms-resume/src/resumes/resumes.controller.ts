@@ -9,6 +9,7 @@ import {
   Put,
   Query,
 } from '@nestjs/common';
+import { IResumes } from 'src/interfaces/iresume.interface';
 import { CreateResumesDto } from './dto/create-resumes.dto';
 import { UpdateResumesDto } from './dto/update-resumes.dto';
 import { ResumesService } from './resumes.service';
@@ -22,16 +23,21 @@ export class ResumesController {
     return this.resumesService.findAll();
   }
 
+  @Post('/list')
+  async findResumesListById(@Body() body: IResumes) {
+    return await this.resumesService.findResumesListById(body.idList);
+  }
+
   @Get(':id')
   async show(@Param('id', new ParseUUIDPipe()) id: string) {
     return await this.resumesService.findOneOrFail({ id });
   }
 
   @Get('find/name')
-  async findByName(@Query() query: any) {
-    return this.resumesService.findByName(query);
+  async findByName(@Query('name') name: any) {
+    return this.resumesService.findByName(name);
   }
-  
+
   @Post()
   async store(@Body() body: CreateResumesDto) {
     return await this.resumesService.store(body);

@@ -13,14 +13,11 @@ import { Situation } from 'src/app/behavioral-interviews/enums/situational.enum'
 import { JobsController } from 'src/app/jobs/jobs.controller';
 import { JobsEntity } from 'src/app/jobs/jobs.entity';
 import { Reason } from '../enums/reason.enum';
+import { ReturnOfCandidate } from '../enums/return-of-candidate';
 import { TypeContract } from '../enums/type-contract.enum';
 
 export class CreateReturnsDto {
-  @ApiProperty()
-  @IsNotEmpty()
-  @IsString()
-  @MinLength(1)
-  nameCandidate: string;
+
 
 
   @ApiProperty()
@@ -51,9 +48,8 @@ export class CreateReturnsDto {
   technicalEvaluationComent: string;
 
   @ApiProperty()
-  @IsNotEmpty()
-  @IsBoolean()
-  returnOfCandidate: boolean;
+  @IsEnum(ReturnOfCandidate)
+  returnOfCandidate: ReturnOfCandidate;
 
   @ApiProperty()
   @IsNotEmpty()
@@ -66,13 +62,13 @@ export class CreateReturnsDto {
   typeOdContract: TypeContract;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
   combinedValue: string;
 
   @ApiProperty()
-  @IsNotEmpty()
-  initialData: Date;
+  @IsOptional()
+  initialData: string;
 
   @ApiProperty()
   @IsNotEmpty()

@@ -10,6 +10,7 @@ import {
   FindConditions,
   FindOneOptions,
   FindManyOptions,
+  In,
   Like,
 } from 'typeorm';
 import { CreateResumesDto } from './dto/create-resumes.dto';
@@ -21,7 +22,7 @@ export class ResumesService {
   constructor(
     @InjectRepository(ResumesEntity)
     private readonly resumesRepository: Repository<ResumesEntity>,
-  ) {}
+  ) { }
 
   async findAll() {
     const options: FindManyOptions = {
@@ -30,11 +31,18 @@ export class ResumesService {
     return await this.resumesRepository.find(options);
   }
 
+  async findResumesListById(idList: string[]) {
+    return await this.resumesRepository.find({
+      select: ['id', 'firstName', 'lastName'],
+      where: { id: In(idList) }
+    })
+  }
+
   async findOneOrFail(
     conditions: FindConditions<ResumesEntity>,
     options?: FindOneOptions<ResumesEntity>,
   ) {
-    options = { relations: ['Educations','Skills','Experiences','Languages'] };
+    options = { relations: ['Educations', 'Skills', 'Experiences', 'Languages'] };
     try {
       return await this.resumesRepository.findOneOrFail(conditions, options);
     } catch (error) {
@@ -42,11 +50,12 @@ export class ResumesService {
     }
   }
 
-  
-  findByName(query): Promise<ResumesEntity[]> {
+
+  findByName(name: string) {
     return this.resumesRepository.find({
+      select: ['id', 'firstName', 'lastName'],
       where: [
-        { firstName: Like(`${query.firstName}%`) },]
+        { firstName: Like(`%${name}%`) }]
     });
   }
 

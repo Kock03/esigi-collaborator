@@ -22,8 +22,6 @@ export class TechnicalInterviewsEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column()
-  nameCandidate: string;
 
   @Column()
   evaluator: string;

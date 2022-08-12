@@ -24,9 +24,6 @@ export class BehavioralInterviewsEntity {
   id: string;
 
   @Column()
-  nameCandidate: string;
-
-  @Column()
   techRecruter: string;
 
   @Column()

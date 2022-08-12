@@ -18,9 +18,9 @@ import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { InterviewsProvider } from 'src/providers/interview.provider';
 import { FormGroup } from '@angular/forms';
 import { JobProvider } from 'src/providers/job-providers/job.provider';
+import { ResumeProvider } from 'src/providers/resume-providers/resume.provider';
 
 
-// import { IInterview } from 'src/app/interfaces/iinterview';
 
 @Component({
   selector: 'app-job-panel-tab',
@@ -56,7 +56,7 @@ export class JobPanelTabComponent implements OnInit {
     private route: ActivatedRoute,
     private JobProvider: JobProvider,
     private dialogService: ConfirmDialogService,
-    private InterviewsProvider: InterviewsProvider
+    private InterviewsProvider: InterviewsProvider,
   ) {
     this._unsubscribeAll = new Subject();
   }
@@ -77,6 +77,7 @@ export class JobPanelTabComponent implements OnInit {
       });
 
       this.interviewsTable.renderRows();
+      console.log(this.interviews)
 
     } catch (error) {
       console.error(error);

@@ -14,9 +14,10 @@
           <th mat-header-cell *matHeaderCellDef>{{'job.job_interview_create.name_candidate' | translate}}</th>
           <td mat-cell *matCellDef="let interviews">
             {{
-            interviews.nameCandidate == null
-            ? interviews.nameCandidateTec
-            : interviews.nameCandidate
+            interviews.resume.firstName
+            }}
+            {{
+            interviews.resume.lastName
             }}
           </td>
         </ng-container>

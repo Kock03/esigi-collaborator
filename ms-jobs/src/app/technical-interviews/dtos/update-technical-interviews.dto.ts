@@ -15,11 +15,7 @@ import { InterviewsEnitiy } from 'src/app/interviews/interviews.entity';
 import { JobsEntity } from 'src/app/jobs/jobs.entity';
 
 export class UpdateTechnicalInterviewsDto {
-  @ApiProperty()
-  @IsOptional()
-  @IsString()
-  @MinLength(1)
-  nameCandidate: string;
+
 
   @ApiProperty()
   @IsOptional()

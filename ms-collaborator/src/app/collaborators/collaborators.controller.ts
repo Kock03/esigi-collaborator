@@ -62,17 +62,17 @@ export class CollaboratorsController {
   async shortListCollaboratorsPermission() {
     return await this.collaboratorsService.shortListCollaborators();
   }
-  
-  
+
+
   @Get('list/inactive')
   async findInactive() {
     return await this.collaboratorsService.findInactive();
   }
 
-  
+
   @Get('find/name')
   async findByName(@Query('firstNameCorporateName') firstNameCorporateName?: any, @Query('inactive') inactive?: any) {
-    return this.collaboratorsService.findByName(firstNameCorporateName,inactive);
+    return this.collaboratorsService.findByName(firstNameCorporateName, inactive);
   }
 
   @Get('find/name/gerente')

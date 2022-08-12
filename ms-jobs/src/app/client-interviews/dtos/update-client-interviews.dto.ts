@@ -14,11 +14,7 @@ import { Situation } from 'src/app/behavioral-interviews/enums/situational.enum'
 import { JobsEntity } from 'src/app/jobs/jobs.entity';
 
 export class UpdateClientInterviewsDto {
-  @ApiProperty()
-  @IsOptional()
-  @IsString()
-  @MinLength(1)
-  nameCandidate: string;
+
 
   @ApiProperty()
   @IsOptional()

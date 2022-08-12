@@ -18,13 +18,6 @@ import { Situation } from '../enums/situational.enum';
 
 export class CreateBehaviorInterviewsDto {
 
-
-  @IsString()
-  @IsNotEmpty()
-  @ApiProperty()
-  @MinLength(1)
-  nameCandidate: string;
-
   @IsNotEmpty()
   @ApiProperty()
   @MinLength(1)

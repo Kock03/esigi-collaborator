@@ -8,7 +8,23 @@
                         }}</mat-label>
                     <input placeholder="Nome do Candidato" matInput formControlName="nameCandidate" type="text" />
                 </mat-form-field>
-                <mat-form-field fxFlex="50" appearance="outline">
+                <mat-form-field fxFlex="20" appearance="outline">
+                    <mat-label>{{
+                        'job.job_interview_create.type_od_contract' | translate
+                        }}</mat-label>
+                    <mat-select matInput disableRipple formControlName="typeOdContract">
+                        <mat-option [value]="1">{{
+                            'generic.clt' | translate
+                            }}</mat-option>
+                        <mat-option [value]="2">{{
+                            'generic.pj' | translate
+                            }}</mat-option>
+                        <mat-option [value]="3">{{
+                            'generic.cooperated' | translate
+                            }}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field fxFlex="20" appearance="outline">
                     <mat-label>{{
                         'job.job_interview_create.date_of_return' | translate
                         }}</mat-label>
@@ -76,14 +92,17 @@
                         formControlName="technicalEvaluationComent"></textarea>
                 </mat-form-field>
             </div>
-            <div fxFlex="100" fxLayoutGap="16px">
-                <div class="job-checkbox" fxFlex="20" appearance="outline">
-                    <mat-checkbox color="primary" formControlName="returnOfCandidate">{{
-                        'job.job_interview_create.return_of_candidate' | translate
-                        }}</mat-checkbox>
-                </div>
-
-                <mat-form-field fxFlex="20" appearance="outline">
+            <div fxFlex="100" fxLayoutGap="16px"
+                *ngIf="returnForm.controls['technicalEvaluation'].value === 1 || returnForm.controls['behavioralEvaluation'].value === 1 && returnForm.controls['technicalEvaluation'].value === 2 || returnForm.controls['behavioralEvaluation'].value === 2">
+                <mat-form-field fxFlex="30" appearance="outline">
+                    <mat-label>Retorno Candidato</mat-label>
+                    <mat-select matInput disableRipple formControlName="returnOfCandidate">
+                        <mat-option [value]="1">Proposta Aceita</mat-option>
+                        <mat-option [value]="2">Declinou</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field fxFlex="25" appearance="outline"
+                    *ngIf="returnForm.controls['returnOfCandidate'].value === 2">
                     <mat-label>{{ 'generic.reason' | translate }}</mat-label>
                     <mat-select matInput disableRipple formControlName="reason">
                         <mat-option [value]="1">{{
@@ -94,43 +113,35 @@
                             }}</mat-option>
                     </mat-select>
                 </mat-form-field>
-
-                <mat-form-field fxFlex="30" appearance="outline">
-                    <mat-label>{{
-                        'job.job_interview_create.type_od_contract' | translate
-                        }}</mat-label>
-                    <mat-select matInput disableRipple formControlName="typeOdContract">
-                        <mat-option [value]="1">{{
-                            'generic.clt' | translate
-                            }}</mat-option>
-                        <mat-option [value]="2">{{
-                            'generic.pj' | translate
-                            }}</mat-option>
-                        <mat-option [value]="3">{{
-                            'generic.cooperated' | translate
-                            }}</mat-option>
-                    </mat-select>
-                </mat-form-field>
-                <mat-form-field fxFlex="40" appearance="outline">
+                <mat-form-field fxFlex="40" appearance="outline"
+                    *ngIf="returnForm.controls['returnOfCandidate'].value === 1">
                     <mat-label>{{
                         'job.job_interview_create.combined_value' | translate
                         }}</mat-label>
                     <input placeholder="Valor" matInput formControlName="combinedValue" type="text" />
                 </mat-form-field>
-                <mat-form-field fxFlex="40" appearance="outline">
+                <mat-form-field fxFlex="20" appearance="outline"
+                    *ngIf="returnForm.controls['returnOfCandidate'].value === 1">
+                    <mat-label>{{
+                        'job.job_interview_create.date_of_return' | translate
+                        }}</mat-label>
+                    <input matInput mask="00/00/0000" [showMaskTyped]="true" [dropSpecialCharacters]="false"
+                        formControlName="dateOfReturn" placeholder="Data de Retorno do Candidato" />
+                </mat-form-field>
+                <mat-form-field fxFlex="40" appearance="outline"
+                    *ngIf="returnForm.controls['returnOfCandidate'].value === 1">
                     <mat-label>{{
                         'job.job_interview_create.initial_data' | translate
                         }}</mat-label>
                     <input matInput mask="00/00/0000" [showMaskTyped]="true" [dropSpecialCharacters]="false"
                         formControlName="initialData" placeholder="Data de Início" />
                 </mat-form-field>
-
-                <div fxLayoutAlign="center" fxFlex="20">
-                    <button mat-flat-button color="primary" class="save-button" (click)="saveInterview()"
-                        [disabled]="returnForm.invalid">
-                        {{ 'generic.save_button' | translate }}
-                    </button>
-                </div>
+            </div>
+            <div fxLayoutAlign="center" fxFlex="20">
+                <button mat-flat-button color="primary" class="save-button" (click)="saveInterview()"
+                    [disabled]="returnForm.invalid">
+                    {{ 'generic.save_button' | translate }}
+                </button>
             </div>
             <div></div>
         </form>

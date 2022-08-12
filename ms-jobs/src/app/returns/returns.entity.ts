@@ -13,6 +13,7 @@ import { Situation } from '../behavioral-interviews/enums/situational.enum';
 import { InterviewsEnitiy } from '../interviews/interviews.entity';
 import { JobsEntity } from '../jobs/jobs.entity';
 import { Reason } from './enums/reason.enum';
+import { ReturnOfCandidate } from './enums/return-of-candidate';
 import { TypeContract } from './enums/type-contract.enum';
 
 @Entity()
@@ -20,8 +21,6 @@ export class ReturnsEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column()
-  nameCandidate: string;
 
   @Column()
   dateReturn: string;
@@ -41,8 +40,8 @@ export class ReturnsEntity {
   @Column({ nullable: true })
   technicalEvaluationComent: string;
 
-  @Column()
-  returnOfCandidate: boolean;
+  @Column({ nullable: true })
+  returnOfCandidate: ReturnOfCandidate;
 
   @Column()
   reason: Reason;
@@ -50,11 +49,11 @@ export class ReturnsEntity {
   @Column()
   typeOdContract: TypeContract;
 
-  @Column()
+  @Column({ nullable: true })
   combinedValue: string;
 
-  @Column()
-  initialData: Date;
+  @Column({ nullable: true })
+  initialData: string;
 
   @ManyToOne(() => JobsEntity, job => job.Returns, { onDelete: "CASCADE", eager: true })
   @JoinColumn()

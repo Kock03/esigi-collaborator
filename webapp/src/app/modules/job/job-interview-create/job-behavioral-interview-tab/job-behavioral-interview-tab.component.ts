@@ -1,10 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DocumentValidator } from 'src/app/validators/document.validator';
 import { BehaviroalInterviewProvider } from 'src/providers/behaviroalInterview.provider';
 import { InterviewsProvider } from 'src/providers/interview.provider';
+import { ResumeProvider } from 'src/providers/resume-providers/resume.provider';
 import { SnackBarService } from 'src/services/snackbar.service';
+import { debounceTime, distinctUntilChanged } from 'rxjs';
+
 
 @Component({
   selector: 'app-job-behavioral-interview-tab',
@@ -12,12 +15,21 @@ import { SnackBarService } from 'src/services/snackbar.service';
   styleUrls: ['./job-behavioral-interview-tab.component.scss']
 })
 export class JobBehavioralInterviewTabComponent implements OnInit {
+  @ViewChild('filter', { static: true }) fiilter!: ElementRef;
   behavioralInterviewForm!: FormGroup;
   jobId!: any;
   interviewId!: string | null;
   interview: any;
   selectedIndex: number = 0;
   step: number = 1;
+  ResumeControl = new FormControl();
+  nameCandidate!: any;
+
+  resumes!: any[];
+  filteredResumes!: any[];
+  filteredResumeList: any;
+  resume!: any;
+  resumeValid: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -26,6 +38,7 @@ export class JobBehavioralInterviewTabComponent implements OnInit {
     private route: ActivatedRoute,
     private snackbarService: SnackBarService,
     private router: Router,
+    private resumeProvider: ResumeProvider
   ) {
     const state = this.router.getCurrentNavigation()?.extras.state;
 
@@ -62,7 +75,52 @@ export class JobBehavioralInterviewTabComponent implements OnInit {
     if (sessionStorage.getItem('method') == 'edit') {
       this.setFormValue();
     }
+
+    this.initFilterResume()
+    this.getResumeList()
   }
+
+  async getResumeList() {
+    this.filteredResumeList = this.resumes =
+      await this.resumeProvider.findAll();
+  }
+
+
+  private initFilterResume() {
+    this.ResumeControl.valueChanges
+      .pipe(debounceTime(350), distinctUntilChanged())
+      .subscribe((res) => {
+        this._filterResume(res);
+        if (res && res.id) {
+          this.resumeValid = true;
+        } else {
+          this.resumeValid = false;
+        }
+
+      });
+
+  }
+
+  displayFnResume(user: any): string {
+    if (typeof user === 'string' && this.resumes) {
+      return this.resumes.find(
+        (resume) => resume.id === user
+      );
+    }
+
+    return user && user.firstName && user.lastName
+      ? user.firstName + ' ' + user.lastName
+      : '';
+  }
+
+  private async _filterResume(name: string): Promise<void> {
+    const params = `name=${name}`;
+    this.filteredResumes = await this.resumeProvider.findByName(
+      params
+    );
+
+  }
+
 
   getBehavioralInterview() {
     try {
@@ -85,7 +143,6 @@ export class JobBehavioralInterviewTabComponent implements OnInit {
   initForm() {
     this.behavioralInterviewForm = this.fb.group({
       id: null,
-      nameCandidate: ['', Validators.required],
       techRecruter: ['', Validators.required],
       behavioralInterviewDate: this.fb.control({ value: ' ', disabled: false }, [DocumentValidator.isValidData(), Validators.required]),
       hourInterview: ['', Validators.required],
@@ -102,7 +159,15 @@ export class JobBehavioralInterviewTabComponent implements OnInit {
       comments: [''],
       situational: [null, Validators.required],
       availabilityOfInitialize: ['', Validators.required],
+
     });
+    // this.ResumeControl.valueChanges.subscribe((res) => {
+    //   if (res && res.id) {
+    //     this.nameCandidate.set(res.id);
+    //   }
+    // });
+
+
   };
 
   onChange(value: number) {
@@ -147,7 +212,8 @@ export class JobBehavioralInterviewTabComponent implements OnInit {
   async saveBehaviroalInterviews() {
     if (this.interviewId == 'novo') {
       let data = this.behavioralInterviewForm.getRawValue();
-      const interview = { BehavioralInterviews: data, Job: this.jobId };
+      console.log(this.ResumeControl.value.id)
+      const interview = { BehavioralInterviews: data, Job: this.jobId, nameCandidate: this.ResumeControl.value.id };
 
       try {
         delete data.id;
@@ -161,7 +227,7 @@ export class JobBehavioralInterviewTabComponent implements OnInit {
         this.router.navigate([`vaga/detalhe/${jobId}`]);
         sessionStorage.removeItem('job_id');
       } catch (error) {
-        console.log('ERROR 132' + error);
+        console.log(error);
         this.snackbarService.showError('Falha ao Cadastrar');
       }
     } else {

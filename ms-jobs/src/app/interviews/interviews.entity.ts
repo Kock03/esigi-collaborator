@@ -1,4 +1,5 @@
 import {
+  Column,
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
@@ -14,11 +15,15 @@ import { JobsEntity } from '../jobs/jobs.entity';
 import { ReturnsEntity } from '../returns/returns.entity';
 import { TechnicalInterviewsEntity } from '../technical-interviews/technical-interviews.entity';
 import { ICollaborator } from './_model/collaborator.model';
+import { IResume } from './_model/resume.model';
 
 @Entity()
 export class InterviewsEnitiy {
   @PrimaryGeneratedColumn('uuid')
   id: string;
+
+  @Column()
+  nameCandidate: string;
 
   @OneToOne(() => BehavioralInterviewsEntity, {
     cascade: ['insert', 'update', 'soft-remove'],
@@ -53,7 +58,7 @@ export class InterviewsEnitiy {
   })
   Job: JobsEntity;
 
-  
+
 
   @CreateDateColumn()
   createdAt: Date;
@@ -65,4 +70,6 @@ export class InterviewsEnitiy {
   deletedAt: Date;
 
   collaborator: ICollaborator;
+
+  resume: IResume;
 }

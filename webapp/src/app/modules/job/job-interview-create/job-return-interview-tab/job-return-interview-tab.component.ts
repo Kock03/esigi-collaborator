@@ -85,17 +85,17 @@ export class JobReturnInterviewTabComponent implements OnInit {
   initForm() {
     this.returnForm = this.fb.group({
       nameCandidate: ['', Validators.required],
-      dateOfReturn: this.fb.control({ value: ' ', disabled: false }, [DocumentValidator.isValidData(), Validators.required]),
+      dateOfReturn: this.fb.control({ value: new Date().toLocaleDateString(), disabled: false }, [DocumentValidator.isValidData(), Validators.required]),
       dateReturn: this.fb.control({ value: ' ', disabled: false }, [DocumentValidator.isValidData(), Validators.required]),
       technicalEvaluation: [null, Validators.required],
       behavioralEvaluation: [null, Validators.required],
       technicalEvaluationComent: ['', Validators.required],
       behavioralEvaluationComent: ['', Validators.required],
-      returnOfCandidate: [true, Validators.required],
+      returnOfCandidate: [null],
       reason: [null, Validators.required],
       typeOdContract: [null, Validators.required],
-      combinedValue: ['', Validators.required],
-      initialData: this.fb.control({ value: new Date().toLocaleDateString(), disabled: false }, [DocumentValidator.isValidData(), Validators.required]),
+      combinedValue: [''],
+      initialData: this.fb.control({ value: ' ', disabled: false }, [DocumentValidator.isValidData()]),
     });
   }
 

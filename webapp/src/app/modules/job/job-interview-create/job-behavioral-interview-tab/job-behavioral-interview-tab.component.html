@@ -1,13 +1,18 @@
 <div id="behavioralInterviewTab" class="tab">
     <div class="content-scroll" *ngIf="behavioralInterviewForm">
-        <form  [formGroup]="behavioralInterviewForm" fxLayout="column">
+        <form [formGroup]="behavioralInterviewForm" fxLayout="column">
             <div fxFlex="100" fxLayoutGap="16px">
-                <mat-form-field fxFlex="35" appearance="outline">
-                    <mat-label>{{
-                        'job.job_interview_create.name_candidate' | translate
-                        }}</mat-label>
-                    <input placeholder="Nome do Candidato" matInput formControlName="nameCandidate"
-                        type="text" />
+                <mat-form-field fxFlex="30" class="example-full-width" appearance="outline">
+                    <mat-label>{{'generic.request' | translate}}</mat-label>
+                    <input type="text" placeholder="Candidato" aria-label="text" #filter matInput
+                        [matAutocomplete]="autoResume" [formControl]="ResumeControl" />
+                    <mat-autocomplete autoActiveFirstOption #autoResume="matAutocomplete"
+                        [displayWith]="displayFnResume">
+                        <mat-option *ngFor="let resume of filteredResumes" [value]="resume">
+                            {{resume.firstName}}
+                            {{resume.lastName}}
+                        </mat-option>
+                    </mat-autocomplete>
                 </mat-form-field>
 
                 <mat-form-field fxFlex="35" appearance="outline">
@@ -129,8 +134,7 @@
                     <mat-label>{{
                         'job.job_interview_create.situational.name' | translate
                         }}</mat-label>
-                    <mat-select matInput disableRipple formControlName="situational"
-                        (ngModelChange)="onChange($event)">
+                    <mat-select matInput disableRipple formControlName="situational" (ngModelChange)="onChange($event)">
                         <mat-option [value]="1">{{
                             'job.job_interview_create.situational.okay' | translate
                             }}</mat-option>
@@ -160,8 +164,8 @@
                     <input matInput formControlName="availabilityOfInitialize" />
                 </mat-form-field>
                 <div fxLayoutAlign="center" fxFlex="20">
-                    <button mat-flat-button color="primary" class="save-button"
-                        (click)="saveInterview()" [disabled]="behavioralInterviewForm.invalid">
+                    <button mat-flat-button color="primary" class="save-button" (click)="saveInterview()"
+                        [disabled]="behavioralInterviewForm.invalid">
                         {{ 'generic.save_button' | translate }}
                     </button>
                 </div>
