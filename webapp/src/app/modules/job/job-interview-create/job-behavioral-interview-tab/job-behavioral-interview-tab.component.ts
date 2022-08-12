@@ -24,12 +24,13 @@ export class JobBehavioralInterviewTabComponent implements OnInit {
   step: number = 1;
   ResumeControl = new FormControl();
   nameCandidate!: any;
-
+  visible: boolean = false;
   resumes!: any[];
   filteredResumes!: any[];
   filteredResumeList: any;
   resume!: any;
   resumeValid: boolean = false;
+  resumeId: any;
 
   constructor(
     private fb: FormBuilder,
@@ -48,6 +49,7 @@ export class JobBehavioralInterviewTabComponent implements OnInit {
   async ngOnInit() {
     this.interviewId = this.route.snapshot.paramMap.get('id');
     this.step = JSON.parse(sessionStorage.getItem('job_tab')!);
+    this.resumeId = sessionStorage.getItem('resume_name');
     if (this.jobId !== undefined) {
       sessionStorage.setItem('job_id', this.jobId.id);
     }
@@ -135,8 +137,10 @@ export class JobBehavioralInterviewTabComponent implements OnInit {
   }
 
   setFormValue() {
-    if (this.interview) {
+    if (this.interview.BehavioralInterviews) {
       this.behavioralInterviewForm.patchValue(this.interview.BehavioralInterviews);
+      this.visible = true;
+      this.ResumeControl.patchValue(this.resumeId);
     }
   }
 
@@ -161,11 +165,7 @@ export class JobBehavioralInterviewTabComponent implements OnInit {
       availabilityOfInitialize: ['', Validators.required],
 
     });
-    // this.ResumeControl.valueChanges.subscribe((res) => {
-    //   if (res && res.id) {
-    //     this.nameCandidate.set(res.id);
-    //   }
-    // });
+
 
 
   };

@@ -1,146 +1,152 @@
 <div id="resumeInterviewTab" class="tab">
-    <div class="content-scroll" >
+    <div class="content-scroll" *ngIf="resume">
         <mat-list role="list" #experiencesList class="list-group">
             <mat-list-item class="list-group-item" fxLayout="row" fxFlex="100">
                 <div class="text-div" fxLayout="column" fxFlex="50">
                     <span class="label-office">
-                        {{ 'Wellington Almeida' }}
+                        {{ resume.firstName }} {{ resume.lastName }}
                     </span>
                     <span class="label-subtitle">
                         <b>{{ 'Dados Gerais' }}</b>
                     </span>
                     <span class="label-gray">
                         <b>{{ 'generic.cpf' | translate }}:</b>
-                        {{'601.855.300-79'}}
+                        {{resume.cpf}}
                     </span>
                     <span class="label-gray">
                         <b>{{ 'generic.birth_date' | translate }}:</b>
-                        {{'01/09/1976'}}
+                        {{resume.birthDate}}
                     </span>
                     <span class="label-gray">
                         <b>{{'Sexo'}}:</b>
-                        {{'Masculino'}}
+                        {{resume.gender == '1' ? 'Masculino' : 'Feminino'}}
                     </span>
                     <span class="label-gray">
                         <b>{{'Estado Civil'}}:</b>
-                        {{'Casado'}}
+                        {{resume.maritalStatus == 1
+                        ? 'Solteiro(a)'
+                        : resume.maritalStatus == 2
+                        ? 'Casado(a)'
+                        : resume.maritalStatus == 3
+                        ? 'Viúvo(a)'
+                        : 'União Estável'
+                        }}
                     </span>
                     <span class="label-gray">
                         <b>{{ 'generic.address.city' | translate }}:</b>
-                        {{'Blumenau'}}
+                        {{resume.Address.city}}
                     </span>
                     <span class="label-gray">
                         <b>{{ 'generic.address.district' | translate }}:</b>
-                        {{'Vila Nova'}}
+                        {{resume.Address.district}}
                     </span>
                     <span class="label-subtitle">
                         <b>{{ 'Contato' }}</b>
                     </span>
                     <span class="label-gray">
                         <b>{{ 'generic.email' | translate }}:</b>
-                        {{'wellington@hotmail.com'}}
+                        {{resume.email}}
                     </span>
                     <span class="label-gray">
                         <b>{{'Telefone'}}:</b>
-                        {{'(47) 99283-2513'}}
+                        +{{resume.Phone.ddd}} ({{resume.Phone.ddi}}) {{resume.Phone.phoneNumber}}
                     </span>
                     <span class="label-gray">
                         <b>{{ 'generic.linkedIn' | translate }}:</b>
-                        {{'wellington.almeida'}}
+                        {{resume.linkedin == "" ? "Não registrado" : resume.linkedin}}
                     </span>
                     <span class="label-subtitle">
                         <b>{{'generic.education.schooling.name'|translate}}</b>
                     </span>
-                    <span class="label-gray">
+                    <span class="label-gray" *ngFor="let education of resume?.Educations">
+                        <b>{{'Curso'}}:</b>
+                        {{education.course}}
+                        <br>
                         <b>{{'Nível'}}:</b>
-                        {{'Ensino superior'}}
+                        {{education.schooling == 1
+                        ? 'Ensino Fundamental'
+                        : education.schooling == 2
+                        ? 'Ensino Médio'
+                        : 'Ensino Superior'}}
                     </span>
-                    <span class="label-gray">
-                        <b>{{'generic.education.schooling.course'|translate}}:</b>
-                        {{'Engenharia de Software'}}
-                    </span>
+
                     <span class="label-subtitle">
                         <b>{{'Idiomas'}}</b>
                     </span>
-                    <span class="label-gray">
+                    <span class="label-gray" *ngFor="let language of resume?.Languages">
                         <b>{{'Língua'}}:</b>
-                        {{'Inglês'}}
-                    </span>
-                    <span class="label-gray">
+                        {{language.languageName}}
+                        <br>
                         <b>{{ 'Grau de fluência' }}:</b>
-                        {{'Fluente'}}
+                        {{language.degreeOfInfluence == 1
+                        ? 'Leiture, Escrita e Conversação'
+                        : language.degreeOfInfluence == 2
+                        ? 'Escrita'
+                        : language.degreeOfInfluence == 3
+                        ? 'Leitura'
+                        : language.degreeOfInfluence == 4
+                        ? 'Conversação'
+                        : language.degreeOfInfluence == 5
+                        ? 'Escrita e Leitura'
+                        : 'Escrita e Conversação'}}
                     </span>
                     <span class="label-subtitle">
                         <b>{{'Skills'}}</b>
                     </span>
-                    <span class="label-gray">
+                    <span class="label-gray" *ngFor="let skill of resume?.Skills">
                         <b>{{'generic.skills.technology'|translate}}:</b>
-                        {{'PHP'}}
-                    </span>
-                    <span class="label-gray">
+                        {{skill.technology}}
+                        <br>
                         <b>{{'generic.seniority.name' | translate}}:</b>
-                        {{'teste'}}
+                        {{skill.seniority == 1
+                        ? 'Senior'
+                        : skill.seniority == 2
+                        ? 'Pleno'
+                        : skill.seniority == 3
+                        ? 'Junior'
+                        : skill.seniority == 4
+                        ? 'Aprendiz'
+                        : skill.seniority == 5
+                        ? 'Especialista'
+                        : 'Arquiteto(a)' }}
+                        <br>
+                        <b>{{'generic.skills.time_experience'|translate}}:</b>
+                        {{skill.yearsExperience }} {{skill.typeOfPeriod == 1 ? 'Mês(s)' : 'Ano(s)'}}
                     </span>
                     <span class="label-gray">
-                        <b>{{'generic.skills.time_experience'|translate}}:</b>
-                        {{'5 anos'}}
+
                     </span>
                 </div>
                 <div class="job-text" fxLayout="column" fxFlex="50" fxLayoutAlign="start start">
-
-                    <span class="label-area ">
-                        <b>{{'Experiência'}}</b>
-                    </span>
-                    <span class="label-gray">
-                        <b>{{'generic.responsibility'|translate}}:</b>
-                        {{'Gerente de Operações'}}
-                    </span>
-                    <span class="label-gray">
-                        <b>{{'Data de início'}}:</b>
-                        {{'27/05/2020'}}
-                    </span>
-                    <span class="label-gray">
-                        <b>{{'Data de término'}}:</b>
-                        {{'27/05/2029'}}
-                    </span>
-                    <span class="label-gray">
-                        <b>{{'Setor'}}:</b>
-                        {{'Tecnologia'}}
-                    </span>
-                    <span class="label-gray">
-                        <b>{{'Descrição'}}:</b>
-                        {{'A função de gerente de operações é principalmente implementar as práticas e os
-                        processos corretos em toda a organização.
-                        Os deveres específicos de um gerente de operações incluem formular estratégias,
-                        melhorar o desempenho, adquirir materiais e recursos e
-                        garantir a conformidade. Você deve estar pronto para orientar os membros da equipe,
-                        encontrar maneiras de aumentar a qualidade do serviço
-                        ao cliente e implementar as melhores práticas em todos os níveis. Por fim,
-                        confiaremos em você para nos ajudar a permanecer em conformidade,
-                        eficiente e rentável durante o curso dos negócios. Garantir que todas as operações
-                        sejam realizadas de maneira apropriada e econômica
-                        Melhorar sistemas, processos e práticas recomendadas de gerenciamento operacional.
-                        Comprar materiais, planejar inventário e supervisionar a eficiência do armazém
-                        Ajudar os processos da organização a permanecerem em conformidade com a lei.
-                        Formular objetivos estratégicos e operacionais. Examinar dados financeiros e usá-los
-                        para melhorar a lucratividade
-                        Gerenciar orçamentos e previsões. Executar controles de qualidade e monitorar KPIs
-                        de produção. Recrutar, treinar e supervisionar funcionários
-                        Encontrar maneiras de aumentar a qualidade do serviço ao cliente'}}
-                    </span>
-
-                    <span class="label-gray">
+                    <span class="label-gray" *ngFor="let experience of resume?.Experiences">
+                        <span class="label-area">
+                            <b>{{'Experiência'}}</b>
+                        </span>
+                        <br>
                         <b>{{'resumes.resume_experience.company_name'|translate}}:</b>
-                        {{'Envolti'}}
-                    </span>
-                    <span class="label-gray">
+                        {{experience.companyName}}
+                        <br>
                         <b>{{'generic.responsibility'|translate}}:</b>
-                        {{'Gerente de Operações'}}
+                        {{experience.companyName}}
+                        <br>
+                        <b>{{'Data de início'}}:</b>
+                        {{experience.startMonth}}/ {{experience.startYear}}
+                        <br>
+                        <b>{{'Data de término'}}:</b>
+                        {{experience.terminusMonth && experience.terminusYear == "" ? "Não Definido" :
+                        experience.terminusMonth}}/{{experience.terminusYear}}
+                        <br>
+                        <b>{{'Setor'}}:</b>
+                        {{experience.sector}}
+                        <br>
+                        <b>{{'generic.responsibility'|translate}}:</b>
+                        {{experience.office}}
+                        <br>
+                        <b>{{'Descrição'}}:</b>
+                        {{experience.description}}
                     </span>
-
                 </div>
             </mat-list-item>
-        </mat-list> 
+        </mat-list>
     </div>
 </div>
-       

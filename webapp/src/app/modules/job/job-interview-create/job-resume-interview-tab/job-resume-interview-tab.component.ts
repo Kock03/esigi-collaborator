@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ResumeProvider } from 'src/providers/resume-providers/resume.provider';
 
 @Component({
   selector: 'app-job-resume-interview-tab',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class JobResumeInterviewTabComponent implements OnInit {
 
-  constructor() { }
+  resume: any;
+  resumeId: any;
+  constructor(private resumeProvider: ResumeProvider) { }
 
   ngOnInit(): void {
+    this.resumeId = sessionStorage.getItem('resume_id');
+    this.getResume()
+  }
+
+  async getResume() {
+    this.resume = await this.resumeProvider.findOne(this.resumeId)
+    console.log(this.resume)
   }
 
 }

@@ -9,14 +9,7 @@
                     <input placeholder="Nome do Candidato" matInput formControlName="nameCandidate" type="text" />
                 </mat-form-field>
 
-                <!-- <mat-form-field fxFlex="35" appearance="outline">
-                    <mat-label>{{
-                        'job.job_interview_create.evaluator' | translate
-                        }}</mat-label>
-                    <input matInput formControlName="evaluator" />
-                </mat-form-field> -->
-
-                <mat-form-field fxFlex="35" appearance="outline"  *ngIf="this.visible === false" >
+                <mat-form-field fxFlex="35" appearance="outline" *ngIf="this.visible === false">
                     <mat-label>{{
                         'job.job_interview_create.evaluator' | translate
                         }}</mat-label>

@@ -72,7 +72,8 @@
             </button>
           </th>
           <td class="button-tab" mat-cell *matCellDef="let interviews" style="text-align: end">
-            <button class="table-button" mat-button (click)="editInterview(interviews.id)">
+            <button class="table-button" mat-button
+              (click)="editInterview(interviews.id,  interviews.resume, interviews.nameCandidate)">
               <mat-icon>edit</mat-icon>
             </button>
             <button class="table-button" mat-button (click)="deleteInterview(interviews.id)">
