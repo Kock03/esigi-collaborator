@@ -16,7 +16,7 @@
                     <input matInput formControlName="evaluator" />
                 </mat-form-field> -->
 
-                <mat-form-field fxFlex="35" appearance="outline">
+                <mat-form-field fxFlex="35" appearance="outline"  *ngIf="this.visible === false" >
                     <mat-label>{{
                         'job.job_interview_create.evaluator' | translate
                         }}</mat-label>
@@ -28,6 +28,14 @@
                             {{customer.corporateName }}
                         </mat-option>
                     </mat-autocomplete>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" *ngIf="this.visible === true" fxFlex="35"
+                    class="example-full-width">
+                    <mat-label>{{
+                        'job.job_interview_create.evaluator' | translate
+                        }}</mat-label>
+                    <input disabled matInput disableRipple [value]="this.customerControl.value" />
                 </mat-form-field>
 
 
