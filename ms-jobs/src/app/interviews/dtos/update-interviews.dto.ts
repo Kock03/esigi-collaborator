@@ -12,6 +12,10 @@ export class UpdateInterviewsDto {
 
   @ApiProperty()
   @IsOptional()
+  nameCandidate: string;
+
+  @ApiProperty()
+  @IsOptional()
   BehavioralInterviews: BehavioralInterviewsEntity;
 
   @ApiProperty()
@@ -28,12 +32,12 @@ export class UpdateInterviewsDto {
 
   @ApiProperty()
   @IsOptional()
-  createdAt : string;
-  
+  createdAt: string;
+
   @ApiProperty()
   @IsOptional()
-  deletedAt : string;
-  
+  deletedAt: string;
+
 
   @ApiProperty()
   @IsOptional()

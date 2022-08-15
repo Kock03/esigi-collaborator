@@ -1,10 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { InterviewsProvider } from 'src/providers/interview.provider';
 import { SnackBarService } from 'src/services/snackbar.service';
 import { DocumentValidator } from 'src/app/validators/document.validator';
 import { ReturnProvider } from 'src/providers/return.provider';
+import { ResumeProvider } from 'src/providers/resume-providers/resume.provider';
+import { debounceTime, distinctUntilChanged } from 'rxjs';
+
 
 @Component({
   selector: 'app-job-return-interview-tab',
@@ -12,12 +15,22 @@ import { ReturnProvider } from 'src/providers/return.provider';
   styleUrls: ['./job-return-interview-tab.component.scss']
 })
 export class JobReturnInterviewTabComponent implements OnInit {
+  @ViewChild('filterResume', { static: true }) filterResume!: ElementRef;
+
   returnForm!: FormGroup;
   jobId!: any;
   interviewId!: string | null;
   interview: any;
   selectedIndex: number = 0;
   step: number = 1;
+  visibleResume: boolean = false;
+  resumes!: any[];
+  filteredResumes!: any[];
+  filteredResumeList: any;
+  resume!: any;
+  ResumeControl = new FormControl();
+  resumeValid: boolean = false;
+  resumeId: any;
 
   constructor(
     private fb: FormBuilder,
@@ -26,6 +39,7 @@ export class JobReturnInterviewTabComponent implements OnInit {
     private route: ActivatedRoute,
     private snackbarService: SnackBarService,
     private router: Router,
+    private resumeProvider: ResumeProvider
   ) {
     const state = this.router.getCurrentNavigation()?.extras.state;
 
@@ -35,6 +49,8 @@ export class JobReturnInterviewTabComponent implements OnInit {
   async ngOnInit() {
     this.interviewId = this.route.snapshot.paramMap.get('id');
     this.step = JSON.parse(sessionStorage.getItem('job_tab')!);
+    this.resumeId = sessionStorage.getItem('resume_name');
+
     if (this.jobId !== undefined) {
       sessionStorage.setItem('job_id', this.jobId.id);
     }
@@ -62,7 +78,51 @@ export class JobReturnInterviewTabComponent implements OnInit {
     if (sessionStorage.getItem('method') == 'edit') {
       this.setFormValue();
     }
+    this.initFilterResume()
+    this.getResumeList()
   }
+
+  async getResumeList() {
+    this.filteredResumeList = this.resumes =
+      await this.resumeProvider.findAll();
+  }
+
+
+  private initFilterResume() {
+    this.ResumeControl.valueChanges
+      .pipe(debounceTime(350), distinctUntilChanged())
+      .subscribe((res) => {
+        this._filterResume(res);
+        if (res && res.id) {
+          this.resumeValid = true;
+        } else {
+          this.resumeValid = false;
+        }
+
+      });
+
+  }
+
+  displayFnResume(user: any): string {
+    if (typeof user === 'string' && this.resumes) {
+      return this.resumes.find(
+        (resume) => resume.id === user
+      );
+    }
+
+    return user && user.firstName && user.lastName
+      ? user.firstName + ' ' + user.lastName
+      : '';
+  }
+
+  private async _filterResume(name: string): Promise<void> {
+    const params = `name=${name}`;
+    this.filteredResumes = await this.resumeProvider.findByName(
+      params
+    );
+
+  }
+
 
   getInterview() {
     try {
@@ -78,13 +138,16 @@ export class JobReturnInterviewTabComponent implements OnInit {
 
   setFormValue() {
     if (this.interview) {
-      this.returnForm.patchValue(this.interview.Returns);
+      this.ResumeControl.patchValue(this.resumeId);
+      this.visibleResume = true;
+      if (this.interview.Returns) {
+        this.returnForm.patchValue(this.interview.Returns);
+      }
     }
   }
 
   initForm() {
     this.returnForm = this.fb.group({
-      nameCandidate: ['', Validators.required],
       dateOfReturn: this.fb.control({ value: new Date().toLocaleDateString(), disabled: false }, [DocumentValidator.isValidData(), Validators.required]),
       dateReturn: this.fb.control({ value: ' ', disabled: false }, [DocumentValidator.isValidData(), Validators.required]),
       technicalEvaluation: [null, Validators.required],
@@ -141,7 +204,7 @@ export class JobReturnInterviewTabComponent implements OnInit {
   async saveCReturnInterviews() {
     if (this.interviewId == 'novo') {
       let data = this.returnForm.getRawValue();
-      const interview = { Returns: data, Job: this.jobId };
+      const interview = { Returns: data, Job: this.jobId, nameCandidate: this.ResumeControl.value.id };
       try {
         delete data.id;
         await this.interviewsProvider.store(interview);

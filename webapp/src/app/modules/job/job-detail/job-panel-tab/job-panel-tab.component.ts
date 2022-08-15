@@ -163,6 +163,7 @@ export class JobPanelTabComponent implements OnInit {
         id: this.jobId,
       },
     };
+    sessionStorage.setItem('method', 'add');
     this.router.navigate(['vaga/novo']);
   }
 

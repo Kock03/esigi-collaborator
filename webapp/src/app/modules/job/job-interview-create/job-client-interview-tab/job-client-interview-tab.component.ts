@@ -7,6 +7,7 @@ import { DocumentValidator } from 'src/app/validators/document.validator';
 import { ClientInterviewProvider } from 'src/providers/clientInterview.provider';
 import { CustomerProvider } from 'src/providers/customer.provider';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
+import { ResumeProvider } from 'src/providers/resume-providers/resume.provider';
 
 @Component({
   selector: 'app-job-client-interview-tab',
@@ -16,13 +17,23 @@ import { debounceTime, distinctUntilChanged } from 'rxjs';
 })
 export class JobClientInterviewTabComponent implements OnInit {
   @ViewChild('filter', { static: true }) filter!: ElementRef;
+  @ViewChild('filterResume', { static: true }) filterResume!: ElementRef;
+
   clientInterviewForm!: FormGroup;
   jobId!: any;
   interviewId!: string | null;
   interview: any;
   selectedIndex: number = 0;
   step: number = 1;
-
+  visible: boolean = false;
+  visibleResume: boolean = false;
+  resumes!: any[];
+  filteredResumes!: any[];
+  filteredResumeList: any;
+  resume!: any;
+  ResumeControl = new FormControl();
+  resumeValid: boolean = false;
+  resumeId: any;
   customerControl = new FormControl();
   customers!: any[];
   filteredCustomers!: any[];
@@ -30,7 +41,6 @@ export class JobClientInterviewTabComponent implements OnInit {
   customer!: any;
   customerValid: boolean = false;
   customerId!: string | null;
-  visible: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -40,6 +50,8 @@ export class JobClientInterviewTabComponent implements OnInit {
     private route: ActivatedRoute,
     private snackbarService: SnackBarService,
     private router: Router,
+    private resumeProvider: ResumeProvider
+
   ) {
     const state = this.router.getCurrentNavigation()?.extras.state;
 
@@ -52,6 +64,7 @@ export class JobClientInterviewTabComponent implements OnInit {
     this.initFilterCustomer();
     this.interviewId = this.route.snapshot.paramMap.get('id');
     this.step = JSON.parse(sessionStorage.getItem('job_tab')!);
+    this.resumeId = sessionStorage.getItem('resume_name');
     this.customerId = sessionStorage.getItem('customer_id');
     if (this.jobId !== undefined) {
       sessionStorage.setItem('job_id', this.jobId.id);
@@ -80,7 +93,53 @@ export class JobClientInterviewTabComponent implements OnInit {
     if (sessionStorage.getItem('method') == 'edit') {
       this.setFormValue();
     }
+
+    this.initFilterResume()
+    this.getResumeList()
   }
+
+  async getResumeList() {
+    this.filteredResumeList = this.resumes =
+      await this.resumeProvider.findAll();
+  }
+
+
+  private initFilterResume() {
+    this.ResumeControl.valueChanges
+      .pipe(debounceTime(350), distinctUntilChanged())
+      .subscribe((res) => {
+        this._filterResume(res);
+        if (res && res.id) {
+          this.resumeValid = true;
+        } else {
+          this.resumeValid = false;
+        }
+
+      });
+
+  }
+
+  displayFnResume(user: any): string {
+    if (typeof user === 'string' && this.resumes) {
+      return this.resumes.find(
+        (resume) => resume.id === user
+      );
+    }
+
+    return user && user.firstName && user.lastName
+      ? user.firstName + ' ' + user.lastName
+      : '';
+  }
+
+  private async _filterResume(name: string): Promise<void> {
+    const params = `name=${name}`;
+    this.filteredResumes = await this.resumeProvider.findByName(
+      params
+    );
+
+  }
+
+
 
   async getCustomerList() {
     this.filteredCustomerList = this.customers =
@@ -134,16 +193,21 @@ export class JobClientInterviewTabComponent implements OnInit {
   }
 
   setFormValue() {
-    if (this.interview.ClientInterviews) {
-      this.clientInterviewForm.patchValue(this.interview.ClientInterviews );
-      this.visible = true;
-      this.customerControl.patchValue(this.customerId);
+    if (this.interview) {
+      this.ResumeControl.patchValue(this.resumeId);
+      this.visibleResume = true;
+
+      if (this.interview.ClientInterviews) {
+        this.clientInterviewForm.patchValue(this.interview.ClientInterviews);
+        this.visible = true;
+        this.customerControl.patchValue(this.customerId);
+      }
     }
+
   }
 
   initForm() {
     this.clientInterviewForm = this.fb.group({
-      nameCandidate: ['', Validators.required],
       evaluator: ['', Validators.required],
       clientInterviewDate: this.fb.control({ value: ' ', disabled: false }, [DocumentValidator.isValidData(), Validators.required]),
       hourInterview: ['', Validators.required],
@@ -206,7 +270,7 @@ export class JobClientInterviewTabComponent implements OnInit {
   async saveClientInterviews() {
     if (this.interviewId == 'novo') {
       let data = this.clientInterviewForm.getRawValue();
-      const interview = { ClientInterviews: data, Job: this.jobId };
+      const interview = { ClientInterviews: data, Job: this.jobId, nameCandidate: this.ResumeControl.value.id };
       try {
         delete data.id;
         await this.interviewsProvider.store(interview);
@@ -236,7 +300,7 @@ export class JobClientInterviewTabComponent implements OnInit {
         this.router.navigate([`vaga/detalhe/${jobId}`]);
         this.selectedIndex = this.selectedIndex + 1;
       } catch (error) {
-        console.log('ERROR 132' + error);
+        console.log(error);
         this.snackbarService.showError('Falha ao Cadastrar');
       }
     }

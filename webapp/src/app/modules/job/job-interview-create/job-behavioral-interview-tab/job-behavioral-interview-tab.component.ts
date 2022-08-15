@@ -137,11 +137,15 @@ export class JobBehavioralInterviewTabComponent implements OnInit {
   }
 
   setFormValue() {
-    if (this.interview.BehavioralInterviews) {
-      this.behavioralInterviewForm.patchValue(this.interview.BehavioralInterviews);
+    if (this.interview) {
       this.visible = true;
       this.ResumeControl.patchValue(this.resumeId);
+      if (this.interview.BehavioralInterviews) {
+        this.behavioralInterviewForm.patchValue(this.interview.BehavioralInterviews);
+
+      }
     }
+
   }
 
   initForm() {
