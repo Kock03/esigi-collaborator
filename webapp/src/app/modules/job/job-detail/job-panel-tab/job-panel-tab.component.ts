@@ -21,6 +21,7 @@ import { FormGroup } from '@angular/forms';
 import { TechnicalInterviewProvider } from 'src/providers/technicalInterview.provider';
 import { ClientInterviewProvider } from 'src/providers/clientInterview.provider';
 import { CustomerProvider } from 'src/providers/customer.provider';
+import { CollaboratorProvider } from 'src/providers/collaborator-providers/collaborator.provider';
 
 // import { IInterview } from 'src/app/interfaces/iinterview';
 
@@ -62,6 +63,7 @@ export class JobPanelTabComponent implements OnInit {
     private InterviewsProvider: InterviewsProvider,
     private clientInterviewProvider: ClientInterviewProvider,
     private customerProvider: CustomerProvider,
+    private collaboratorProvider:  CollaboratorProvider,
   ) {
     this._unsubscribeAll = new Subject();
   }
@@ -93,10 +95,21 @@ export class JobPanelTabComponent implements OnInit {
     const interviewData = await this.InterviewsProvider.findOne(interviewId);
 
     if (interviewData.ClientInterviews) {
+    console.log("🚀 ~ file: job-panel-tab.component.ts ~ line 96 ~ JobPanelTabComponent ~ editInterview ~ interviewData", interviewData)
+      
 
       const clientData = await this.customerProvider.findOne(interviewData.ClientInterviews.evaluator);
 
       sessionStorage.setItem('customer_id', clientData.corporateName);
+
+    }
+    if (interviewData.TechnicalInterviews) {
+
+      const collaboratorData = await this.collaboratorProvider.findOne(interviewData.TechnicalInterviews.collaboratorRequesterId);
+      console.log("🚀 ~ file: job-panel-tab.component.ts ~ line 109 ~ JobPanelTabComponent ~ editInterview ~ collaboratorData", collaboratorData)
+      
+
+      sessionStorage.setItem('collaborator_id', collaboratorData.firstNameCorporateName);
 
     }
     sessionStorage.setItem('method', 'edit');

@@ -26,10 +26,10 @@ export class TechnicalInterviewsEntity {
   nameCandidate: string;
 
   @Column()
-  evaluator: string;
+  collaboratorRequesterId: string;
 
   @Column()
-  technicalInterviewDate: Date;
+  technicalInterviewDate: string;
 
   @Column()
   hourInterview: string;

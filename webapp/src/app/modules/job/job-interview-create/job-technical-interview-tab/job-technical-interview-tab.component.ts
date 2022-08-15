@@ -49,11 +49,12 @@ export class JobTechnicalInterviewTabComponent implements OnInit {
   }
 
   async ngOnInit() {
-    this.visible = false
+    this.visible = false;
     this.getCollaboratorList();
     this.initFilterRequester();
     this.interviewId = this.route.snapshot.paramMap.get('id');
     this.step = JSON.parse(sessionStorage.getItem('job_tab')!);
+    this.collaboratorRequesterId = sessionStorage.getItem('collaborator_id');
     if (this.jobId !== undefined) {
       sessionStorage.setItem('job_id', this.jobId.id);
     }
@@ -63,13 +64,8 @@ export class JobTechnicalInterviewTabComponent implements OnInit {
       this.initForm();
       this.setFormValue();
       this.interview = await this.interviewsProvider.findOne(this.interviewId);
-      this.technicalInterviewForm.patchValue(
-        this.interview.TechnicalInterviews
-      );
-      console.log("🚀 ~ file: job-tecnical-interview-tab.component.ts ~ line 48 ~ JobTechnicalInterviewTabComponent ~ ngOnInit ~    this.interview.TechnicalInterviews", this.interview.TechnicalInterviews)
+      
 
-    } else {
-      this.initForm();
     }
 
     if (sessionStorage.getItem('job_tab') == undefined) {
@@ -147,7 +143,7 @@ export class JobTechnicalInterviewTabComponent implements OnInit {
   initForm() {
     this.technicalInterviewForm = this.fb.group({
       nameCandidate: ['', Validators.required],
-      evaluator: ['', Validators.required],
+      collaboratorRequesterId: ['', Validators.required],
       technicalInterviewDate: this.fb.control({ value: ' ', disabled: false }, [DocumentValidator.isValidData(), Validators.required]),
       hourInterview: ['', Validators.required],
       punctuality: [null, Validators.required],
@@ -160,7 +156,7 @@ export class JobTechnicalInterviewTabComponent implements OnInit {
 
     this.collaboratorControl.valueChanges.subscribe((res) => {
       if (res && res.id) {
-        this.technicalInterviewForm.controls['evaluator'].setValue(res.id, {
+        this.technicalInterviewForm.controls['collaboratorRequesterId'].setValue(res.id, {
           emitEvent: true,
         });
       }
