@@ -95,7 +95,6 @@ export class JobListComponent implements OnInit {
   async searchJobs(query?: string) {
     try {
       this.jobs = await this.jobProvider.findByName(query);
-      console.log(this.jobs);
     } catch (error) {
       console.error(error);
     }

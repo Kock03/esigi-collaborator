@@ -73,14 +73,13 @@ export class CollaboratorListComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     await this.getCollaboratorList();
     this.initFilter();
-  
+
   }
 
-  
+
   async searchCollaborators(firstNameCorporateName?: string, inactive?: string) {
     try {
       this.collaborators = await this.collaboratorProvider.findByName(firstNameCorporateName, inactive);
-      console.log(this.collaborators);
     } catch (error) {
       console.error(error);
     }
@@ -134,10 +133,10 @@ export class CollaboratorListComponent implements OnInit {
     if (ev.value == 1) {
       return (this.filteredCollaboratorList = this.collaborators =
         await this.collaboratorProvider.findAll());
-    }else if(ev.value === undefined){
+    } else if (ev.value === undefined) {
       return (this.filteredCollaboratorList = this.collaborators =
         await this.collaboratorProvider.findByName(this.params));
-    }else if(this.params === undefined){
+    } else if (this.params === undefined) {
       if (ev.value == 2) {
         params = `inactive=0`
         return (this.filteredCollaboratorList = this.collaborators =
@@ -149,7 +148,7 @@ export class CollaboratorListComponent implements OnInit {
           await this.collaboratorProvider.findByName(params));
       }
     }
-    else{
+    else {
       if (ev.value == 2) {
         params = `inactive=0`
         return (this.filteredCollaboratorList = this.collaborators =
@@ -161,13 +160,12 @@ export class CollaboratorListComponent implements OnInit {
           await this.collaboratorProvider.findByName(this.params, params));
       }
     }
-   
+
   }
 
   async getCollaboratorList() {
     this.filteredCollaboratorList.data = this.collaborators =
       await this.collaboratorProvider.findAll();
-      console.log(  this.collaborators )
     this.filteredCollaboratorList.sort = this.sort;
   }
 
@@ -178,11 +176,11 @@ export class CollaboratorListComponent implements OnInit {
 
       .subscribe((res) => {
         this.filteredCollaboratorList.data = this.collaborators.filter(
-          (collaborator) =>         
-          collaborator.firstNameCorporateName
+          (collaborator) =>
+            collaborator.firstNameCorporateName
               .toLocaleLowerCase()
               .includes(this.filter.nativeElement.value.toLocaleLowerCase())
-              
+
         )
         this.params = `firstNameCorporateName=${this.filter.nativeElement.value}`;
         this.searchCollaborators(this.params);
@@ -190,7 +188,7 @@ export class CollaboratorListComponent implements OnInit {
           this.getCollaboratorList();
         }
       });
-   
+
   }
 
   editCollaborator(collaboratorId: any) {

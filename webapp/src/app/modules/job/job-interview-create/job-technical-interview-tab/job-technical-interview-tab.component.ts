@@ -7,6 +7,7 @@ import { SnackBarService } from 'src/services/snackbar.service';
 import { DocumentValidator } from 'src/app/validators/document.validator';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { CollaboratorProvider } from 'src/providers/collaborator-providers/collaborator.provider';
+import { ResumeProvider } from 'src/providers/resume-providers/resume.provider';
 
 
 @Component({
@@ -16,13 +17,22 @@ import { CollaboratorProvider } from 'src/providers/collaborator-providers/colla
 })
 export class JobTechnicalInterviewTabComponent implements OnInit {
   @ViewChild('filter', { static: true }) filter!: ElementRef;
+  @ViewChild('filterResume', { static: true }) filterResume!: ElementRef;
+
   technicalInterviewForm!: FormGroup;
   jobId!: any;
   interviewId!: string | null;
   interview: any;
   selectedIndex: number = 0;
   step: number = 1;
-
+  visibleResume: boolean = false;
+  resumes!: any[];
+  filteredResumes!: any[];
+  filteredResumeList: any;
+  resume!: any;
+  ResumeControl = new FormControl();
+  resumeValid: boolean = false;
+  resumeId: any;
   collaboratorControl = new FormControl();
   collaborators!: any[];
   filteredCollaborators!: any[];
@@ -42,6 +52,8 @@ export class JobTechnicalInterviewTabComponent implements OnInit {
     private snackbarService: SnackBarService,
     private router: Router,
     private collaboratorProvider: CollaboratorProvider,
+    private resumeProvider: ResumeProvider
+
   ) {
     const state = this.router.getCurrentNavigation()?.extras.state;
 
@@ -54,6 +66,7 @@ export class JobTechnicalInterviewTabComponent implements OnInit {
     this.initFilterRequester();
     this.interviewId = this.route.snapshot.paramMap.get('id');
     this.step = JSON.parse(sessionStorage.getItem('job_tab')!);
+    this.resumeId = sessionStorage.getItem('resume_name');
     this.collaboratorRequesterId = sessionStorage.getItem('collaborator_id');
     if (this.jobId !== undefined) {
       sessionStorage.setItem('job_id', this.jobId.id);
@@ -77,6 +90,50 @@ export class JobTechnicalInterviewTabComponent implements OnInit {
     if (sessionStorage.getItem('method') == 'edit') {
       this.setFormValue();
     }
+
+    this.initFilterResume()
+    this.getResumeList()
+  }
+
+  async getResumeList() {
+    this.filteredResumeList = this.resumes =
+      await this.resumeProvider.findAll();
+  }
+
+
+  private initFilterResume() {
+    this.ResumeControl.valueChanges
+      .pipe(debounceTime(350), distinctUntilChanged())
+      .subscribe((res) => {
+        this._filterResume(res);
+        if (res && res.id) {
+          this.resumeValid = true;
+        } else {
+          this.resumeValid = false;
+        }
+
+      });
+
+  }
+
+  displayFnResume(user: any): string {
+    if (typeof user === 'string' && this.resumes) {
+      return this.resumes.find(
+        (resume) => resume.id === user
+      );
+    }
+
+    return user && user.firstName && user.lastName
+      ? user.firstName + ' ' + user.lastName
+      : '';
+  }
+
+  private async _filterResume(name: string): Promise<void> {
+    const params = `name=${name}`;
+    this.filteredResumes = await this.resumeProvider.findByName(
+      params
+    );
+
   }
 
   async getCollaboratorList() {
@@ -125,7 +182,6 @@ export class JobTechnicalInterviewTabComponent implements OnInit {
       this.interview = this.interviewsProvider.findOne(
         this.interviewId
       );
-      console.log("🚀 ~ file: job-interview-create.component.ts ~ line 103 ~ JobInterviewCreateComponent ~ getCollaborator ~ interview", this.interview)
 
     } catch (error) {
       console.error(error);
@@ -133,16 +189,19 @@ export class JobTechnicalInterviewTabComponent implements OnInit {
   }
 
   setFormValue() {
-    if (this.interview.technicalInterviewForm) {
-      this.technicalInterviewForm.patchValue(this.interview.TechnicalInterviews);
-      this.visible = true;
-      this.collaboratorControl.patchValue(this.collaboratorRequesterId);
+    if (this.interview) {
+      this.ResumeControl.patchValue(this.resumeId);
+      this.visibleResume = true;
+      if (this.interview.TechnicalInterviews) {
+        this.technicalInterviewForm.patchValue(this.interview.TechnicalInterviews);
+        this.visible = true;
+        this.collaboratorControl.patchValue(this.collaboratorRequesterId);
+      }
     }
   }
 
   initForm() {
     this.technicalInterviewForm = this.fb.group({
-      nameCandidate: ['', Validators.required],
       collaboratorRequesterId: ['', Validators.required],
       technicalInterviewDate: this.fb.control({ value: ' ', disabled: false }, [DocumentValidator.isValidData(), Validators.required]),
       hourInterview: ['', Validators.required],
@@ -168,7 +227,6 @@ export class JobTechnicalInterviewTabComponent implements OnInit {
   onChange(value: number) {
     if (this.technicalInterviewForm.controls['situational'].value == 5) {
       this.removeValidators()
-      console.log(this.technicalInterviewForm)
     }
   }
 
@@ -207,7 +265,7 @@ export class JobTechnicalInterviewTabComponent implements OnInit {
   async saveTechnicalInterviews() {
     if (this.interviewId == 'novo') {
       let data = this.technicalInterviewForm.getRawValue();
-      const interview = { TechnicalInterviews: data, Job: this.jobId };
+      const interview = { TechnicalInterviews: data, Job: this.jobId, nameCandidate: this.ResumeControl.value.id };
       try {
         delete data.id;
         await this.interviewsProvider.store(interview);

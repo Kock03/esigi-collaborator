@@ -54,7 +54,6 @@ export class InterviewsService {
         '"' +
         'and interviews_enitiy.deleted_at is null ',
       );
-      console.log(interviews)
       const collaboratorIdList = interviews.map((interview) => {
         return interview.collaborator_requester_id;
       });
@@ -87,7 +86,6 @@ export class InterviewsService {
         interviews.map((interview) => {
           const resume = resumes.data.find(
             (resume) => resume.id === interview.name_candidate);
-          console.log(resume)
           interview.resume = {
             firstName: resume.firstName,
             lastName: resume.lastName,

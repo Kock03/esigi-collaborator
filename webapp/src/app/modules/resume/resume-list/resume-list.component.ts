@@ -64,7 +64,6 @@ export class ResumeListComponent implements OnInit {
   async searchResumes(query?: string) {
     try {
       this.resumes = await this.resumeProvider.findByName(query);
-      console.log(this.resumes);
     } catch (error) {
       console.error(error);
     }

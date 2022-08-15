@@ -19,7 +19,6 @@ export class JobResumeInterviewTabComponent implements OnInit {
 
   async getResume() {
     this.resume = await this.resumeProvider.findOne(this.resumeId)
-    console.log(this.resume)
   }
 
 }

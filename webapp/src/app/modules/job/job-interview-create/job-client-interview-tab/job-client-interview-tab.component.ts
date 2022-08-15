@@ -78,7 +78,6 @@ export class JobClientInterviewTabComponent implements OnInit {
       this.clientInterviewForm.patchValue(
         this.interview.ClientInterviews
       );
-      console.log("🚀 ~ file: job-client-interview-tab.component.ts ~ line 49 ~ JobClientInterviewTabComponent ~ ngOnInit ~ this.interview.ClientInterviews", this.interview.ClientInterviews)
 
     } else {
       this.initForm();
@@ -185,7 +184,6 @@ export class JobClientInterviewTabComponent implements OnInit {
       this.interview = this.interviewsProvider.findOne(
         this.interviewId
       );
-      console.log("🚀 ~ file: job-interview-create.component.ts ~ line 103 ~ JobInterviewCreateComponent ~ getCollaborator ~ interview", this.interview)
 
     } catch (error) {
       console.error(error);
@@ -231,7 +229,6 @@ export class JobClientInterviewTabComponent implements OnInit {
   onChange(value: number) {
     if (this.clientInterviewForm.controls['situational'].value == 5) {
       this.removeValidators()
-      console.log(this.clientInterviewForm)
     }
   }
 

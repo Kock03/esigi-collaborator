@@ -62,7 +62,6 @@ export class JobBehavioralInterviewTabComponent implements OnInit {
       this.behavioralInterviewForm.patchValue(
         this.interview.BehavioralInterviews
       );
-      console.log("🚀 ~ file: job-behavioral-interview-tab.component.ts ~ line 49 ~ JobBehavioralInterviewTabComponent ~ ngOnInit ~    this.interview.BehavioralInterviews", this.interview.BehavioralInterviews)
 
     } else {
       this.initForm();
@@ -129,7 +128,6 @@ export class JobBehavioralInterviewTabComponent implements OnInit {
       this.interview = this.interviewsProvider.findOne(
         this.interviewId
       );
-      console.log("🚀 ~ file: job-interview-create.component.ts ~ line 103 ~ JobInterviewCreateComponent ~ getCollaborator ~ interview", this.interview)
 
     } catch (error) {
       console.error(error);
@@ -177,7 +175,6 @@ export class JobBehavioralInterviewTabComponent implements OnInit {
   onChange(value: number) {
     if (this.behavioralInterviewForm.controls['situational'].value == 5) {
       this.removeValidatorsBehavioral()
-      console.log(this.behavioralInterviewForm)
     }
   }
 
@@ -216,7 +213,6 @@ export class JobBehavioralInterviewTabComponent implements OnInit {
   async saveBehaviroalInterviews() {
     if (this.interviewId == 'novo') {
       let data = this.behavioralInterviewForm.getRawValue();
-      console.log(this.ResumeControl.value.id)
       const interview = { BehavioralInterviews: data, Job: this.jobId, nameCandidate: this.ResumeControl.value.id };
 
       try {

@@ -85,7 +85,6 @@ export class JobPanelTabComponent implements OnInit {
       });
 
       this.interviewsTable.renderRows();
-      console.log(this.interviews)
 
     } catch (error) {
       console.error(error);

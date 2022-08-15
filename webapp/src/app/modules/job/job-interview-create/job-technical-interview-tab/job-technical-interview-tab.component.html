@@ -2,16 +2,28 @@
     <div class="content-scroll" *ngIf="technicalInterviewForm">
         <form [formGroup]="technicalInterviewForm" fxLayout="column">
             <div fxFlex="100" fxLayoutGap="16px">
-                <mat-form-field fxFlex="35" appearance="outline">
-                    <mat-label>{{
-                        'job.job_interview_create.name_candidate' | translate
-                        }}</mat-label>
-                    <input placeholder="Nome do Candidato" matInput formControlName="nameCandidate" type="text" />
+                <mat-form-field fxFlex="30" class="example-full-width" appearance="outline"
+                    *ngIf="this.visibleResume === false">
+                    <mat-label>Nome do Candidato</mat-label>
+                    <input type="text" placeholder="Candidato" aria-label="text" #filterResume matInput
+                        [matAutocomplete]="autoResume" [formControl]="ResumeControl" />
+                    <mat-autocomplete autoActiveFirstOption #autoResume="matAutocomplete"
+                        [displayWith]="displayFnResume">
+                        <mat-option *ngFor="let resume of filteredResumes" [value]="resume">
+                            {{resume.firstName}}
+                            {{resume.lastName}}
+                        </mat-option>
+                    </mat-autocomplete>
+                </mat-form-field>
+                <mat-form-field appearance="outline" *ngIf="this.visibleResume === true" fxFlex="35"
+                    class="example-full-width">
+                    <mat-label>Nome do Candidato</mat-label>
+                    <input disabled matInput disableRipple [value]="this.ResumeControl.value" />
                 </mat-form-field>
 
 
-                <mat-form-field fxFlex="30" class="example-full-width" appearance="outline" *ngIf="this.visible === false" 
-                    >
+                <mat-form-field fxFlex="30" class="example-full-width" appearance="outline"
+                    *ngIf="this.visible === false">
                     <mat-label>{{'generic.request' | translate}}</mat-label>
                     <input type="text" placeholder="Solicitante" aria-label="text" #filter matInput
                         [matAutocomplete]="autoRequester" [formControl]="collaboratorControl" />
