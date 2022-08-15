@@ -21,7 +21,7 @@ export class CreateTechnicalInterviewsDto {
   @IsNotEmpty()
   @IsString()
   @MinLength(1)
-  evaluator: string;
+  collaboratorRequesterId: string;
 
   @ApiProperty()
   @IsNotEmpty()

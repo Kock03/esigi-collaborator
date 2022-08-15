@@ -24,7 +24,7 @@ export class TechnicalInterviewsEntity {
 
 
   @Column()
-  evaluator: string;
+  collaboratorRequesterId: string;
 
   @Column()
   technicalInterviewDate: string;

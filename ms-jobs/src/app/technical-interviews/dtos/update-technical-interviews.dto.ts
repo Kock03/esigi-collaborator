@@ -21,7 +21,7 @@ export class UpdateTechnicalInterviewsDto {
   @IsOptional()
   @IsString()
   @MinLength(1)
-  evaluator: string;
+  collaboratorRequesterId: string;
 
   @ApiProperty()
   @IsOptional()

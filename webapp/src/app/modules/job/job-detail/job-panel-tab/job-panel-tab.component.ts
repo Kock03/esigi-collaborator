@@ -23,6 +23,7 @@ import { ResumeProvider } from 'src/providers/resume-providers/resume.provider';
 import { TechnicalInterviewProvider } from 'src/providers/technicalInterview.provider';
 import { ClientInterviewProvider } from 'src/providers/clientInterview.provider';
 import { CustomerProvider } from 'src/providers/customer.provider';
+import { CollaboratorProvider } from 'src/providers/collaborator-providers/collaborator.provider';
 
 
 @Component({
@@ -63,6 +64,7 @@ export class JobPanelTabComponent implements OnInit {
     private InterviewsProvider: InterviewsProvider,
     private clientInterviewProvider: ClientInterviewProvider,
     private customerProvider: CustomerProvider,
+    private collaboratorProvider: CollaboratorProvider,
   ) {
     this._unsubscribeAll = new Subject();
   }
@@ -91,11 +93,21 @@ export class JobPanelTabComponent implements OnInit {
   }
 
 
+
   async editInterview(interviewId: any, nameCandidate?: any, resumeId?: any) {
     const interviewData = await this.InterviewsProvider.findOne(interviewId);
     if (interviewData.ClientInterviews) {
       const clientData = await this.customerProvider.findOne(interviewData.ClientInterviews.evaluator);
       sessionStorage.setItem('customer_id', clientData.corporateName);
+    }
+    if (interviewData.ClientInterviews) {
+      const clientData = await this.customerProvider.findOne(interviewData.ClientInterviews.evaluator);
+      sessionStorage.setItem('customer_id', clientData.corporateName);
+    }
+    if (interviewData.TechnicalInterviews) {
+      const collaboratorData = await this.collaboratorProvider.findOne(interviewData.TechnicalInterviews.collaboratorRequesterId);
+      sessionStorage.setItem('collaborator_id', `${collaboratorData.firstNameCorporateName} ${collaboratorData.lastNameFantasyName}`);
+
     }
     sessionStorage.setItem('resume_name', `${nameCandidate.firstName} ${nameCandidate.lastName}`);
     sessionStorage.setItem('resume_id', resumeId);
