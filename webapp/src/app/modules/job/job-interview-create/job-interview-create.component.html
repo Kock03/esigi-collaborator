@@ -1,9 +1,10 @@
 <div id="interviewCreate" class="page">
-  <div fxLayout="row" fxLayoutAlign="start center">
-    <button mat-button class="btn-arrow-back" color="primary" (click)="backToList()">
-      <mat-icon>chevron_left</mat-icon>
+
+  <div fxLayout="row" fxLayoutAlign="start start">
+    <button (click)="backToList()" color="primary" mat-button>
+      <mat-icon> chevron_left </mat-icon>
     </button>
-    <h2 class="title">{{ 'job.job_interview_create.name' | translate }}</h2>
+    <h2 class="title">{{'job.job_interview_create.name' | translate}}</h2>
   </div>
 
   <div fxLayout="row" class="tab" fxLayoutGap="16px">

@@ -7,9 +7,16 @@
     height: calc(100vh - 100px);
     width: 100%;
   }
-  .title {
+
+  .title{
     margin-top: 1px;
   }
+
+  .btn-arrow-back{
+    padding-top: 0 !important;
+  }
+
+ 
 
   .mat-list-item {
     height: auto !important;
