@@ -91,28 +91,6 @@
         </mat-form-field>
       </div>
       <div fxFlex="100" fxLayoutGap="16px">
-        <!-- <mat-form-field fxFlex="35" appearance="outline">
-          <mat-label>{{'job.job_create.name' | translate}}</mat-label>
-          <input placeholder="Nome da Vaga" matInput formControlName="jobName" type="text" />
-          <mat-error *ngIf="jobForm &&
-          jobForm.controls['jobName'].hasError('required')">
-            {{'validators.validator-required' | translate}} </mat-error>
-        </mat-form-field> -->
-
-        <!-- <mat-form-field fxFlex="35" appearance="outline">
-          <mat-label>{{'job.job_create.start_forecast' | translate}}</mat-label>
-          <input matInput mask="00/00/0000" [showMaskTyped]="true" [dropSpecialCharacters]="false"
-            formControlName="startForecast" placeholder="Previsão de Início" />
-          <mat-error *ngIf="jobForm &&
-          jobForm.controls['startForecast'].hasError('required')">
-            {{'validators.validator-required' | translate}} </mat-error>
-        </mat-form-field> -->
-        
-
-        <!-- <mat-form-field fxFlex="15" appearance="outline">
-          <mat-label>{{'job.job_create.job_number' | translate}}</mat-label>
-          <input placeholder="Número de Vagas" matInput formControlName="jobNumber" type="number" />
-        </mat-form-field> -->
 
         <mat-form-field fxFlex="20" appearance="outline">
           <mat-label>{{'job.job_create.type_of_contract' | translate}}</mat-label>
@@ -151,45 +129,6 @@
           </section>
         </div>
       </div>
-      <div fxFlex="100" fxLayoutGap="16px">
-        <!-- <mat-form-field fxFlex="25" appearance="outline">
-          <mat-label>{{'job.job_create.type_of_contract' | translate}}</mat-label>
-          <mat-select matInput disableRipple formControlName="typeOfContract">
-            <mat-option [value]="1">{{'generic.clt' | translate}}</mat-option>
-            <mat-option [value]="2">{{'generic.pj' | translate}}</mat-option>
-            <mat-option [value]="3">{{'generic.cooperated' | translate}}</mat-option>
-          </mat-select>
-        </mat-form-field> -->
-
-        <!-- <mat-form-field fxFlex="25" appearance="outline">
-          <mat-label>{{'job.job_create.workplace.name' | translate}}</mat-label>
-          <mat-select matInput disableRipple formControlName="workplace">
-            <mat-option [value]="1">{{'job.job_create.workplace.in_loco' | translate}}</mat-option>
-            <mat-option [value]="2">{{'job.job_create.workplace.home_office' | translate}}</mat-option>
-            <mat-option [value]="3">{{'job.job_create.workplace.hybrid' | translate}}</mat-option>
-            <mat-option [value]="4">{{'job.job_create.workplace.envolti' | translate}}</mat-option>
-          </mat-select>
-        </mat-form-field> -->
-
-        <!-- <div class="checkbox-section" fxFlex="50" formGroupName="Seniorities">
-          <section fxLayout="column">
-            <span class="text" fxLayoutAlign="start">{{'generic.seniority.name' | translate}}</span>
-            <div fxLayout="row" fxLayoutAlign="space-around">
-              <mat-checkbox color="primary" formControlName="intern">{{'generic.intern' | translate}}</mat-checkbox>
-
-              <mat-checkbox color="primary" formControlName="junior">{{'generic.seniority.junior' | translate}}
-              </mat-checkbox>
-
-              <mat-checkbox color="primary" formControlName="pleno">{{'generic.seniority.full' | translate}}
-              </mat-checkbox>
-
-              <mat-checkbox color="primary" formControlName="senior">{{'generic.seniority.senior' | translate}}
-              </mat-checkbox>
-            </div>
-          </section>
-        </div> -->
-      </div>
-      
 
 
       <div fxFlex="100" fxLayoutGap="16px">
