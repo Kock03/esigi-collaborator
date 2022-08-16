@@ -130,7 +130,7 @@ export class JobCreateComponent implements OnInit {
           Validators.required,
         ],
       ],
-      status: [''],
+      status: [1],
       publish: [false],
       customerId: [
         '',

@@ -32,10 +32,12 @@
     font-size: 15px;
   }
 
-  .job-text {
-    margin-left: 400px;
-    // margin-top: 50px;
-  }
+  // .job-text {
+  //   margin-left: 400px;
+  //   // margin-top: 50px;
+  //   position: relative;
+  //   margin-top: 1px;
+  // }
 
   .label-format {
     margin-top: 30px !important;
@@ -60,16 +62,17 @@
     width: 100% !important;
     padding: 15px;
     margin-bottom: 16px;
-    
   }
 
   .mat.list.item {
     padding: 0 !important;
     height: 100% !important;
     max-height: 600px;
-    position: absolute;
   }
-  
+
+  //   position: fixed;
+  //   overflow:hidden;
+  //  white-space:nowrap;
 
   .mat-icon-list {
     margin-top: 100px;
@@ -80,15 +83,16 @@
     max-width: 600px;
   }
 
-  // .label-text-box ng-star-inserted{
-  //   // margin-top: 0 !important;
-  //   padding: 10px 20px; 
-  // }
+  .text-div-right {
+    width: 100%;
+    max-width: 700px !important;
+    margin-left: 400px;
+  }
 
   .label-text-box {
     color: rgb(125, 123, 123);
     font-size: 15px;
-    padding-top: 2px;
+    margin-top: 15px;
   }
   .label-padding {
     margin-top: 8px;
