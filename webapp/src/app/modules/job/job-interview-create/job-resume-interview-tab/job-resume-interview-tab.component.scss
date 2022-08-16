@@ -1,9 +1,15 @@
 #resumeInterviewTab {
   max-width: 1240px;
+  max-height: 800px;
 
   .mat-list-item {
     height: auto !important;
     width: 100%;
+  }
+
+  .content-scroll {
+    overflow: auto;
+    height: calc(100vh - 10px);
   }
 
   .list-group {
@@ -24,6 +30,11 @@
     margin-top: 15px !important;
     color: rgb(65, 64, 64);
     font-size: 15px;
+  }
+
+  .job-text {
+    margin-left: 400px;
+    // margin-top: 50px;
   }
 
   .label-format {
@@ -59,5 +70,20 @@
 
   .mat-icon-list {
     margin-top: 100px;
+  }
+
+  .text-div {
+    width: 100%;
+    max-width: 600px;
+  }
+
+  .label-text-box {
+    color: rgb(125, 123, 123);
+    font-size: 15px;
+  }
+  .label-padding {
+    margin-top: 8px;
+    color: rgb(125, 123, 123);
+    font-size: 15px;
   }
 }
