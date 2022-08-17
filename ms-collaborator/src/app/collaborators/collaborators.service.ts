@@ -33,36 +33,7 @@ export class CollaboratorsService {
     };
     try {
       const collaborators = await this.collaboratorsRepository.find(options);
-
-      const collaboratorIdList = collaborators.map((collaborator) => {
-        return collaborator.id;
-      });
-
-      const resources = await this.httpService
-        .post('http://localhost:3505/api/v1/resources/list', {
-          idList: collaboratorIdList,
-        })
-        .toPromise();
-
-      if (resources.data) {
-        collaborators.map((collaborator) => {
-          const resource = resources.data.find(
-            (resource) => resource.collaborator_id === collaborator.id);
-          if (resource) {
-            collaborator.resource = {
-              projectName: resource.name,
-            };
-          } else {
-            collaborator.resource = {
-              projectName: 'Indefinido',
-            };
-            return collaborator;
-          }
-        })
-        return collaborators;
-      } else {
-        return collaborators;
-      }
+      return await this.requestResource(collaborators)
 
     } catch (err) {
       throw new NotFoundException();
@@ -117,35 +88,38 @@ export class CollaboratorsService {
   async findByName(firstNameCorporateName?: string, inactive?: string) {
 
     if (!firstNameCorporateName) {
-      return this.collaboratorsRepository.find({
+      const collaborators = await this.collaboratorsRepository.find({
         select: ['id', 'firstNameCorporateName', 'lastNameFantasyName', 'email', 'inactive', 'admissionDate', 'office',],
         relations: ['Phone'],
         where: [
           { inactive: inactive }]
       });
-
+      return await this.requestResource(collaborators)
     } else if (!inactive) {
-      return this.collaboratorsRepository.find({
+      const collaborators = await this.collaboratorsRepository.find({
         select: ['id', 'firstNameCorporateName', 'lastNameFantasyName', 'email', 'inactive', 'admissionDate', 'office',],
         relations: ['Phone'],
         where: [
           { firstNameCorporateName: Like(`%${firstNameCorporateName}%`) }]
       });
+      return await this.requestResource(collaborators)
     } else {
       if (inactive === '1') {
-        return this.collaboratorsRepository.find({
+        const collaborators = await this.collaboratorsRepository.find({
           select: ['id', 'firstNameCorporateName', 'lastNameFantasyName', 'email', 'inactive', 'admissionDate', 'office',],
           relations: ['Phone'],
           where: [
             { firstNameCorporateName: Like(`%${firstNameCorporateName}%`), inactive: true }]
         });
+        return await this.requestResource(collaborators)
       } else {
-        return this.collaboratorsRepository.find({
+        const collaborators = await this.collaboratorsRepository.find({
           select: ['id', 'firstNameCorporateName', 'lastNameFantasyName', 'email', 'inactive', 'admissionDate', 'office',],
           relations: ['Phone'],
           where: [
             { firstNameCorporateName: Like(`%${firstNameCorporateName}%`), inactive: false }]
         });
+        return await this.requestResource(collaborators)
       }
 
     }
@@ -275,5 +249,42 @@ export class CollaboratorsService {
       throw new NotFoundException();
     }
     return await this.collaboratorsRepository.softDelete({ id });
+  }
+
+  async requestResource(collaborators: any[]) {
+    try {
+      const collaboratorIdList = collaborators.map((collaborator) => {
+        return collaborator.id;
+      });
+
+      const resources = await this.httpService
+        .post('http://localhost:3505/api/v1/resources/list', {
+          idList: collaboratorIdList,
+        })
+        .toPromise();
+
+      if (resources.data) {
+        collaborators.map((collaborator) => {
+          const resource = resources.data.find(
+            (resource) => resource.collaborator_id === collaborator.id);
+          if (resource) {
+            collaborator.resource = {
+              projectName: resource.name,
+            };
+          } else {
+            collaborator.resource = {
+              projectName: 'Indefinido',
+            };
+            return collaborator;
+          }
+        })
+        return collaborators;
+      } else {
+        return collaborators;
+      }
+
+    } catch (err) {
+      throw new NotFoundException();
+    }
   }
 }

@@ -51,7 +51,7 @@ export class CollaboratorRegisterTabComponent implements OnInit {
     private fb: FormBuilder,
     private cepService: CepService,
     private route: ActivatedRoute
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.collaboratorId = this.route.snapshot.paramMap.get('id');
@@ -64,21 +64,21 @@ export class CollaboratorRegisterTabComponent implements OnInit {
           'Address'
         ] as FormGroup;
         this.addressForm = addressForm
-        addressForm.controls['cep'].valueChanges.subscribe(res => {});
+        addressForm.controls['cep'].valueChanges.subscribe(res => { });
 
         const phoneForm = this.collaboratorForm.controls[
           'Phone'
         ] as FormGroup;
         this.phoneForm = phoneForm
-        phoneForm.controls['ddi'].valueChanges.subscribe(res => {});
+        phoneForm.controls['ddi'].valueChanges.subscribe(res => { });
       });
-    }else{
+    } else {
       this.view = false;
-
+      this.changesType(this.collaboratorForm.controls['collaboratorTypes'].value)
     }
   }
 
-  ngAfterViewInit(): void {}
+  ngAfterViewInit(): void { }
 
   next() {
     this.onChange.next(true);
