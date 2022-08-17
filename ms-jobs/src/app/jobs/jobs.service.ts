@@ -39,11 +39,18 @@ export class JobsService {
         jobs.map((job) => {
           const collaborator = collaborators.data.find(
             (collaborator) => collaborator.id === job.collaboratorRequesterId);
-          job.collaborator = {
-            firstNameCorporateName: collaborator.firstNameCorporateName,
-            lastNameFantasyName: collaborator.lastNameFantasyName,
-          };
-          return job;
+            if(collaborator){
+              job.collaborator = {
+                firstNameCorporateName: collaborator.firstNameCorporateName,
+                lastNameFantasyName: collaborator.lastNameFantasyName,
+              };
+              return job;
+            }
+            job.collaborator = {
+              firstNameCorporateName: 'Não',
+              lastNameFantasyName: 'definido',
+            };
+            return job;
         })
       }
       const customerIdList = jobs.map((job) => {
@@ -68,6 +75,8 @@ export class JobsService {
       }
       return jobs;
     } catch (error) {
+    console.log("🚀 ~ file: jobs.service.ts ~ line 72 ~ JobsService ~ findAll ~ error", error)
+      
       throw new NotFoundException();
     }
   }

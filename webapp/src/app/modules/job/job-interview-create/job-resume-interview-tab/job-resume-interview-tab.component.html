@@ -92,31 +92,33 @@
                     <span class="label-subtitle">
                         <b>{{'Skills'}}</b>
                     </span>
-                    <span class="label-gray" *ngFor="let skill of resume?.Skills">
+                    <span class="label-gray" *ngFor="let skill of resume?.Skills" class="label-padding">
                         <b>{{'generic.skills.technology'|translate}}:</b>
                         {{skill.technology}}
-                        <br>
-                        <b>{{'generic.seniority.name' | translate}}:</b>
-                        {{skill.seniority == 1
-                        ? 'Senior'
-                        : skill.seniority == 2
-                        ? 'Pleno'
-                        : skill.seniority == 3
-                        ? 'Junior'
-                        : skill.seniority == 4
-                        ? 'Aprendiz'
-                        : skill.seniority == 5
-                        ? 'Especialista'
-                        : 'Arquiteto(a)' }}
-                        <br>
-                        <b>{{'generic.skills.time_experience'|translate}}:</b>
-                        {{skill.yearsExperience }} {{skill.typeOfPeriod == 1 ? 'Mês(s)' : 'Ano(s)'}}
+                        
+                        <div fxLayout="row">
+                            <b>{{'generic.seniority.name' | translate}}: </b>
+                            {{skill.seniority == 1
+                            ? 'Senior '
+                            : skill.seniority == 2
+                            ? 'Pleno '
+                            : skill.seniority == 3
+                            ? 'Junior '
+                            : skill.seniority == 4
+                            ? 'Aprendiz '
+                            : skill.seniority == 5
+                            ? 'Especialista '
+                            : 'Arquiteto(a) ' }}
+                           <span> - {{skill.yearsExperience }} {{skill.typeOfPeriod == 1 ? 'Mês(s)' :
+                                'Ano(s)'}}</span>
+                            <!-- <b>{{'generic.skills.time_experience'|translate}}:</b> -->
+                        </div>
                     </span>
-                    <span class="label-gray">
-                    </span>
+
                 </div>
-                <div class="job-text" fxLayout="column" fxFlex="50" fxLayoutAlign="start start">
-                    <span class="label-gray" *ngFor="let experience of resume?.Experiences">
+                <div class="text-div-right" fxLayout="column" fxFlex="50" >
+                
+                    <span class="label-text-box" *ngFor="let experience of resume?.Experiences">
                         <span class="label-area">
                             <b>{{'Experiência'}}</b>
                         </span>

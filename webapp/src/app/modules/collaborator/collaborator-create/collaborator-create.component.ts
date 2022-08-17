@@ -204,7 +204,7 @@ export class CollaboratorCreateComponent implements OnInit {
       this.snackbarService.successMessage('Colaborador Cadastrado Com Sucesso');
 
     } catch (error: any) {
-      console.log('ERROR 132' + error);
+      console.log( error);
     }
   }
 
