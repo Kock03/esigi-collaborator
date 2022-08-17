@@ -15,6 +15,7 @@ import {
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
+import { ActivatedRoute } from '@angular/router';
 import { JobKnowledgeProvider } from 'src/providers/job-providers/job-knowledges.provider';
 import { JobLanguageProvider } from 'src/providers/job-providers/job-languages.provider';
 import { ConfirmDialogService } from 'src/services/confirn-dialog.service';
@@ -46,6 +47,7 @@ export class JobSkillTabComponent implements OnInit {
   methodLanguage: any;
   data: [] = [];
   dataLanguage: [] = [];
+  jobURL: any;
 
   displayedColumns: string[] = [
     'name',
@@ -63,24 +65,31 @@ export class JobSkillTabComponent implements OnInit {
     public dialog: MatDialog,
     private fb: FormBuilder,
     private snackbarService: SnackBarService,
+    private route: ActivatedRoute,
     private dialogService: ConfirmDialogService,
     private jobLangagueProvider: JobLanguageProvider,
     private jobKnowledgeProvider: JobKnowledgeProvider
   ) { }
 
   ngOnInit(): void {
-    this.method = sessionStorage.getItem('job_method')
-    this.jobId = sessionStorage.getItem('job_id')
-    this.getLanguagesList()
-    this.getKnowledgeList()
+    this.method = sessionStorage.getItem('job_method');
+    this.jobURL = this.route.snapshot.paramMap.get('id');
+
+    if (this.jobURL !== 'novo') {
+      this.getLanguagesList()
+      this.getKnowledgeList()
+    }
+
 
   }
 
   async getLanguagesList() {
+    this.jobId = sessionStorage.getItem('job_id');
     this.dataLanguage = await this.jobLangagueProvider.findByJob(this.jobId)
   }
 
   async getKnowledgeList() {
+    this.jobId = sessionStorage.getItem('job_id');
     this.data = await this.jobKnowledgeProvider.findByJob(this.jobId)
   }
 

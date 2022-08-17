@@ -39,6 +39,27 @@ export class CollaboratorProvider {
         }, reject);
     });
   }
+
+  findEvaluator(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.apiGateway
+        .get(environment.COLLABORATOR_MS + 'collaborators/list/evaluator')
+        .subscribe((response: HttpResponse<any>) => {
+          resolve(response.body);
+        }, reject);
+    });
+  }
+
+  findTechRecruter(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.apiGateway
+        .get(environment.COLLABORATOR_MS + 'collaborators/list/tech-recruter')
+        .subscribe((response: HttpResponse<any>) => {
+          resolve(response.body);
+        }, reject);
+    });
+  }
+
   findActive(): Promise<any> {
     return new Promise((resolve, reject) => {
       this.apiGateway
@@ -61,6 +82,24 @@ export class CollaboratorProvider {
   findByNameGerente(query: any): Promise<any> {
     return new Promise((resolve, reject) => {
       this.apiGateway.get(environment.COLLABORATOR_MS + `collaborators/find/name/gerente?${query}`)
+        .subscribe((response: HttpResponse<any>) => {
+          resolve(response.body);
+        }, reject);
+    });
+  }
+
+  findByTechRecruter(query: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.apiGateway.get(environment.COLLABORATOR_MS + `collaborators/find/name/tech-recruter?${query}`)
+        .subscribe((response: HttpResponse<any>) => {
+          resolve(response.body);
+        }, reject);
+    });
+  }
+
+  findByNameEvaluator(query: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.apiGateway.get(environment.COLLABORATOR_MS + `collaborators/find/name/gerente/desenvolvedor?${query}`)
         .subscribe((response: HttpResponse<any>) => {
           resolve(response.body);
         }, reject);

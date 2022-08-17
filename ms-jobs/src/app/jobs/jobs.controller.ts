@@ -17,7 +17,7 @@ import { JobsService } from './jobs.service';
 
 @Controller('/api/v1/jobs/')
 export class JobsController {
-  constructor(private readonly jobsService: JobsService) {}
+  constructor(private readonly jobsService: JobsService) { }
 
   @Get()
   async index() {
@@ -29,15 +29,16 @@ export class JobsController {
     return await this.jobsService.findOneOrFail({ id });
   }
 
+
+  @Get('find/resume/:id')
+  async findByResume(@Param('id', new ParseUUIDPipe()) id: string) {
+    return await this.jobsService.findByResume(id);
+  }
+
   @Get('find/name')
   async findByName(@Query() query: any) {
     return this.jobsService.findByName(query);
   }
-
-  // @Get('interviews/:id')
-  // async findInterviews(@Param('id', new ParseUUIDPipe()) id: string) {
-  //   return await this.jobsService.findInterviewsList({ id });
-  // }
 
   @Post()
   async store(@Body() body: CreateJobsDto) {
@@ -45,7 +46,7 @@ export class JobsController {
   }
 
 
-  
+
 
   @Put(':id')
   async update(

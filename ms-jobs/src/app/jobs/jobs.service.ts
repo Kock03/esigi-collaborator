@@ -29,13 +29,12 @@ export class JobsService {
         return job.collaboratorRequesterId;
       });
 
-      // TODO - Substituir futuramente e remover o toPromise()
       const collaborators = await this.httpService
         .post('http://localhost:3501/api/v1/collaborators/list', {
           idList: collaboratorIdList,
         })
         .toPromise();
-        
+
       if (collaborators.data) {
         jobs.map((job) => {
           const collaborator = collaborators.data.find(
@@ -73,6 +72,69 @@ export class JobsService {
     }
   }
 
+  async findByResume(id: string) {
+    try {
+      const jobs = await this.jobsRepository.query(`select jobs_entity.collaborator_requester_id, jobs_entity.job_name, jobs_entity.customer_id, jobs_entity.type_of_contract, jobs_entity.publish, jobs_entity.status, b.behavioral_interview_date,  r.date_of_return from jobs_entity
+      left join interviews_enitiy i on i.job_id = jobs_entity.id
+      left join behavioral_interviews_entity b on i.behavioral_interviews_id = b.id
+      left join returns_entity r on i.returns_id = r.id where i.name_candidate = "${id}"`)
+
+      const collaboratorIdList = jobs.map((job) => {
+        return job.collaborator_requester_id;
+      });
+
+      const collaborators = await this.httpService
+        .post('http://localhost:3501/api/v1/collaborators/list', {
+          idList: collaboratorIdList,
+        })
+        .toPromise();
+
+      if (collaborators.data) {
+        jobs.map((job) => {
+          if(!job.behavioral_interview_date){
+            job.behavioral_interview_date = 'Não definido'
+          }
+          if(!job.date_of_return){
+            job.date_of_return = 'Não definido'
+          }
+          const collaborator = collaborators.data.find(
+            (collaborator) => collaborator.id === job.collaborator_requester_id);
+          job.collaborator = {
+            firstNameCorporateName: collaborator.firstNameCorporateName,
+            lastNameFantasyName: collaborator.lastNameFantasyName,
+          };
+          return job;
+        })
+      }
+
+      const customerIdList = jobs.map((job) => {
+        return job.customer_id;
+      });
+
+      const customers = await this.httpService
+        .post('http://localhost:3506/api/v1/customers/list', {
+          idList: customerIdList,
+        })
+        .toPromise();
+      if (customers.data) {
+        jobs.map((job) => {
+          const customer = customers.data.find(
+            (customer) => customer.id === job.customer_id);
+
+          job.customer = {
+            corporateName: customer.corporateName,
+          };
+          return job;
+        })
+      }
+      return jobs;
+
+    } catch (error) {
+
+    }
+  }
+
+
   findByName(query): Promise<JobsEntity[]> {
     return this.jobsRepository.find({
       where: [
@@ -90,7 +152,7 @@ export class JobsService {
 
     try {
 
-       return await this.jobsRepository.findOneOrFail(
+      return await this.jobsRepository.findOneOrFail(
         conditions,
         options,
       );
@@ -98,7 +160,7 @@ export class JobsService {
       console.log(error);
       throw new NotFoundException();
     }
-    
+
   }
 
 

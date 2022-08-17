@@ -152,6 +152,35 @@ export class CollaboratorsService {
   }
 
 
+  async findByNameEvaluator(query) {
+    if (query.firstNameCorporateName == '') {
+      return await this.collaboratorsRepository
+        .createQueryBuilder('collaborators')
+        .where('collaborators.office = "Gerente" or collaborators.office = "Desenvolvedor"')
+        .getMany();
+    } else {
+      return this.collaboratorsRepository.find({
+        select: ['id', 'firstNameCorporateName', 'lastNameFantasyName', 'office'],
+        where: [{ firstNameCorporateName: Like(`%${query.firstNameCorporateName}%`), office: "Gerente" }, { firstNameCorporateName: Like(`%${query.firstNameCorporateName}%`), office: "Desenvolvedor" }],
+      });
+    }
+  }
+
+  async findByNameTechRecruter(query) {
+    if (query.firstNameCorporateName == '') {
+      return await this.collaboratorsRepository
+        .createQueryBuilder('collaborators')
+        .where('collaborators.office = "Tech Recruter" and collaborators.office = "RH"')
+        .getMany();
+    } else {
+      return this.collaboratorsRepository.find({
+        select: ['id', 'firstNameCorporateName', 'lastNameFantasyName', 'office'],
+        where: [{ firstNameCorporateName: Like(`%${query.firstNameCorporateName}%`), office: "Tech Recruter" }, { firstNameCorporateName: Like(`%${query.firstNameCorporateName}%`), office: "RH" }],
+      });
+    }
+  }
+
+
   async findByNameGerente(query) {
     if (query.firstNameCorporateName == '') {
       return await this.collaboratorsRepository
@@ -165,13 +194,27 @@ export class CollaboratorsService {
           { firstNameCorporateName: Like(`%${query.firstNameCorporateName}%`), office: "Gerente" }],
       });
     }
-
   }
 
   async findGerente() {
     return await this.collaboratorsRepository
       .createQueryBuilder('collaborators')
       .where('collaborators.office = "Gerente"')
+      .getMany();
+  }
+
+
+  async findEvaluator() {
+    return await this.collaboratorsRepository
+      .createQueryBuilder('collaborators')
+      .where('collaborators.office = "Gerente" and collaborators.office = "Desenvolvedor"')
+      .getMany();
+  }
+
+  async findTechRecruter() {
+    return await this.collaboratorsRepository
+      .createQueryBuilder('collaborators')
+      .where('collaborators.office = "Tech Recruter" and collaborators.office = "RH"')
       .getMany();
   }
 

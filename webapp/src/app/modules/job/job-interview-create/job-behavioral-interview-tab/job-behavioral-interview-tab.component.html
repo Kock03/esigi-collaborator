@@ -3,7 +3,7 @@
         <form [formGroup]="behavioralInterviewForm" fxLayout="column">
             <div fxFlex="100" fxLayoutGap="16px">
                 <mat-form-field fxFlex="30" class="example-full-width" appearance="outline"
-                    *ngIf="this.visible === false">
+                    *ngIf="this.visibleResume === false">
                     <mat-label>Nome do Candidato</mat-label>
                     <input type="text" placeholder="Candidato" aria-label="text" #filter matInput
                         [matAutocomplete]="autoResume" [formControl]="ResumeControl" />
@@ -15,16 +15,34 @@
                         </mat-option>
                     </mat-autocomplete>
                 </mat-form-field>
-                <mat-form-field appearance="outline" *ngIf="this.visible === true" fxFlex="35"
+                <mat-form-field appearance="outline" *ngIf="this.visibleResume === true" fxFlex="35"
                     class="example-full-width">
                     <mat-label>Nome do Candidato</mat-label>
                     <input disabled matInput disableRipple [value]="this.ResumeControl.value" />
                 </mat-form-field>
-                <mat-form-field fxFlex="35" appearance="outline">
+
+                <mat-form-field fxFlex="30" class="example-full-width" appearance="outline"
+                    *ngIf="this.visibleTechRecruter === false">
                     <mat-label>{{
                         'job.job_interview_create.tech_recruter' | translate
                         }}</mat-label>
-                    <input matInput formControlName="techRecruter" />
+                    <input type="text" placeholder="Tech Recruter" aria-label="text" #fiilterTech matInput
+                        [matAutocomplete]="autoTechRecruter" [formControl]="collaboratorControl" />
+                    <mat-autocomplete autoActiveFirstOption #autoTechRecruter="matAutocomplete"
+                        [displayWith]="displayFnTechRecruter">
+                        <mat-option *ngFor="let collaborator of filteredCollaborators" [value]="collaborator">
+                            {{collaborator.firstNameCorporateName }}
+                            {{collaborator.lastNameFantasyName}}
+                        </mat-option>
+                    </mat-autocomplete>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" *ngIf="this.visibleTechRecruter === true" fxFlex="35"
+                    class="example-full-width">
+                    <mat-label>{{
+                        'job.job_interview_create.tech_recruter' | translate
+                        }}</mat-label>
+                    <input disabled matInput disableRipple [value]="this.collaboratorControl.value" />
                 </mat-form-field>
                 <mat-form-field fxFlex="30" appearance="outline">
                     <mat-label>{{

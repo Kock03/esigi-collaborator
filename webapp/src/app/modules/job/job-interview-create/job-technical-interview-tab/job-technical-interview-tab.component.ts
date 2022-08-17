@@ -80,7 +80,7 @@ export class JobTechnicalInterviewTabComponent implements OnInit {
 
 
     }
-
+    this.initForm();
     if (sessionStorage.getItem('job_tab') == undefined) {
       sessionStorage.setItem('job_tab', '1');
     }
@@ -138,7 +138,7 @@ export class JobTechnicalInterviewTabComponent implements OnInit {
 
   async getCollaboratorList() {
     this.filteredCollaboratorList = this.collaborators =
-      await this.collaboratorProvider.findGerente();
+      await this.collaboratorProvider.findEvaluator();
   }
 
   private initFilterRequester() {
@@ -169,7 +169,7 @@ export class JobTechnicalInterviewTabComponent implements OnInit {
 
   private async _filterRequester(name: string): Promise<void> {
     const params = `firstNameCorporateName=${name}`;
-    this.filteredCollaborators = await this.collaboratorProvider.findByNameGerente(
+    this.filteredCollaborators = await this.collaboratorProvider.findByNameEvaluator(
       params
     );
 

@@ -45,7 +45,7 @@ export class ResumeApplicationTabComponent implements OnInit {
   ];
 
   applications!: Application[];
-
+  resumeId: any;
   filteredApplicationList!: any[];
 
   applicationForm!: FormGroup;
@@ -55,13 +55,14 @@ export class ResumeApplicationTabComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.resumeId = sessionStorage.getItem('resume_id')
     this.getApplications();
   }
 
   async getApplications() {
     try {
       this.filteredApplicationList = this.applications =
-        await this.jobProvider.findAll();
+        await this.jobProvider.findByResume(this.resumeId);
     } catch (error) {
       console.error(error);
     }
