@@ -3,8 +3,8 @@
     <mat-tab-group animationDuration="0">
       <mat-tab label="Escolaridade">
         <div fxLayout="column">
-          <div fxFlex="60" fxLayoutGap="16px" [formGroup]="jobForm">
-            <mat-form-field fxFlex="100" appearance="outline" style="padding-top:30px">
+          <div fxFlex="100" fxLayoutGap="16px" [formGroup]="jobForm">
+            <mat-form-field  fxFlex="100" appearance="outline" style="padding-top:30px">
               <mat-label>{{'generic.education.schooling.name' | translate}}</mat-label>
               <mat-select matInput disableRipple formControlName="schooling">
                 <mat-option [value]="1">{{'job.job_create.skills.schooling.complete_higher_education' | translate}}
