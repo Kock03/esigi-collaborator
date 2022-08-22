@@ -43,29 +43,34 @@ html {
 // }
 
 .tab {
-  max-width: 1200px;
+  max-width: 1650px;
   margin-top: 24px;
 
   &-group {
     width: 100%;
     max-width: 220px;
+    
+    
   }
 
   &-item {
     cursor: default;
     margin-bottom: 8px !important;
     color: black;
+    
   }
 
   &-border {
-    border-bottom: 4px solid #b8bdbf;
+    border-bottom: 10px solid #b8bdbf;
     border-radius: 4px;
+    
   }
 
 
   .done {
     .tab-border {
       border-color: #ff6a39 !important;
+     
     }
   }
 
