@@ -3,151 +3,258 @@
     <button (click)="listFeedback()" color="primary" mat-button>
       <mat-icon> chevron_left </mat-icon>
     </button>
-    <h2>{{'collaborator.colaborator_create.feedbacks.name'|translate}}</h2>
+    <h2>{{ 'collaborator.colaborator_create.feedbacks.name' | translate }}</h2>
   </div>
 
-  <div fxLayout="column" class="content-scroll" *ngIf="feedbackForm" >
+  <div fxLayout="column" class="content-scroll" *ngIf="feedbackForm">
     <form [formGroup]="feedbackForm" fxLayout="column">
       <div class="form-group-content" fxFlex="100" fxLayoutGap="16px">
         <mat-form-field appearance="outline" fxFlex="25">
-          <mat-label>{{'collaborator.colaborator_create.feedbacks.feedback_type.name'|translate}}</mat-label>
+          <mat-label>{{
+            'collaborator.colaborator_create.feedbacks.feedback_type.name'
+              | translate
+          }}</mat-label>
           <mat-select formControlName="feedbackType">
-            <mat-option [value]="1">{{'collaborator.colaborator_create.feedbacks.feedback_type.unmotivated_professional'|translate}}</mat-option>
-            <mat-option [value]="2">{{'collaborator.colaborator_create.feedbacks.feedback_type.change_of_position'|translate}}</mat-option>
-            <mat-option [value]="3">{{'collaborator.colaborator_create.feedbacks.feedback_type.salary_increase'|translate}}</mat-option>
+            <mat-option [value]="1">{{
+              'collaborator.colaborator_create.feedbacks.feedback_type.unmotivated_professional'
+                | translate
+            }}</mat-option>
+            <mat-option [value]="2">{{
+              'collaborator.colaborator_create.feedbacks.feedback_type.change_of_position'
+                | translate
+            }}</mat-option>
+            <mat-option [value]="3">{{
+              'collaborator.colaborator_create.feedbacks.feedback_type.salary_increase'
+                | translate
+            }}</mat-option>
           </mat-select>
-          <mat-error *ngIf="feedbackForm &&
-          feedbackForm.controls['feedbackType'].hasError('required')">
-                {{'validators.validator-required' |  translate}} </mat-error>
+          <mat-error
+            *ngIf="
+              feedbackForm &&
+              feedbackForm.controls['feedbackType'].hasError('required')
+            ">
+            {{ 'validators.validator-required' | translate }}
+          </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline" fxFlex="25">
-          <mat-label>{{'generic.reason' | translate}}</mat-label>
+          <mat-label>{{ 'generic.reason' | translate }}</mat-label>
           <mat-select formControlName="reason">
-            <mat-option [value]="1">{{'collaborator.colaborator_create.feedbacks.reason.management_request'|translate}}</mat-option>
-            <mat-option [value]="2">{{'collaborator.colaborator_create.feedbacks.reason.customer_request'|translate}}</mat-option>
-            <mat-option [value]="3">{{'collaborator.colaborator_create.feedbacks.reason.contributor_request'|translate}}</mat-option>
+            <mat-option [value]="1">{{
+              'collaborator.colaborator_create.feedbacks.reason.management_request'
+                | translate
+            }}</mat-option>
+            <mat-option [value]="2">{{
+              'collaborator.colaborator_create.feedbacks.reason.customer_request'
+                | translate
+            }}</mat-option>
+            <mat-option [value]="3">{{
+              'collaborator.colaborator_create.feedbacks.reason.contributor_request'
+                | translate
+            }}</mat-option>
           </mat-select>
-          <mat-error *ngIf="feedbackForm &&
-          feedbackForm.controls['reason'].hasError('required')">
-                {{'validators.validator-required' |  translate}} </mat-error>
+          <mat-error
+            *ngIf="
+              feedbackForm &&
+              feedbackForm.controls['reason'].hasError('required')
+            ">
+            {{ 'validators.validator-required' | translate }}
+          </mat-error>
         </mat-form-field>
 
         <mat-form-field
-        fxFlex="30"
-        class="example-full-width"
-        appearance="outline"
-        *ngIf="this.method === 'add'"
-      >
-      <mat-label>{{'generic.project'|translate}}</mat-label>
-      <input
-          type="text"
-          placeholder="Projeto"
-          aria-label="text"
-          #fiilter
-          matInput
-          [matAutocomplete]="autoProject"
-          [formControl]="projectControl"
-        />
-        <mat-autocomplete
-          autoActiveFirstOption
-          #autoProject="matAutocomplete"
-          [displayWith]="displayFnProject"
-        >
-          <mat-option
-            *ngFor="let project of filteredProjects"
-            [value]="project"
-          >
-            {{project.name }}
-          </mat-option>
-        </mat-autocomplete>
-      </mat-form-field>
-
-      <mat-form-field appearance="outline" *ngIf="this.method === 'edit'" fxFlex="25" class="example-full-width">
-        <mat-label>{{'generic.project'|translate}}</mat-label>
-        <input disabled matInput disableRipple [value]="this.projectControl.value" />
-      </mat-form-field>
-
+          fxFlex="30"
+          class="example-full-width"
+          appearance="outline"
+          *ngIf="this.method === 'add'">
+          <mat-label>{{ 'generic.project' | translate }}</mat-label>
+          <input
+            type="text"
+            placeholder="Projeto"
+            aria-label="text"
+            #fiilter
+            matInput
+            [matAutocomplete]="autoProject"
+            [formControl]="projectControl" />
+          <mat-error
+            *ngIf="projectControl && projectControl.hasError('required')">
+            {{ 'validators.validator-required' | translate }}
+          </mat-error>
+          <mat-error
+            *ngIf="
+              projectControl &&
+              !projectControl.hasError('required') &&
+              projectControl.hasError('incorrect')
+            ">
+            {{ 'validators.select-option' | translate }}
+          </mat-error>
+          <mat-autocomplete
+            autoActiveFirstOption
+            #autoProject="matAutocomplete"
+            [displayWith]="displayFnProject">
+            <mat-option
+              *ngFor="let project of filteredProjects"
+              [value]="project">
+              {{ project.name }}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
 
         <mat-form-field
-        fxFlex="30"
-        class="example-full-width"
-        appearance="outline"
-        *ngIf="this.method === 'add'"
-      >
-      <mat-label>{{'collaborator.colaborator_create.feedbacks.manager'|translate}}</mat-label>
-      <input
-          type="text"
-          placeholder="Gerente"
-          aria-label="text"
-          #filter
-          matInput
-          [matAutocomplete]="autoManager"
-          [formControl]="managerControl"
-        />
-        <mat-autocomplete
-          autoActiveFirstOption
-          #autoManager="matAutocomplete"
-          [displayWith]="displayFnManager"
-        >
-          <mat-option
-            *ngFor="let collaborator of filteredCollaborators"
-            [value]="collaborator"
-          >
-            {{collaborator.firstNameCorporateName }}
-            {{collaborator.lastNameFantasyName}}
-          </mat-option>
-        </mat-autocomplete>
-      </mat-form-field>
+          appearance="outline"
+          *ngIf="this.method === 'edit'"
+          fxFlex="25"
+          class="example-full-width">
+          <mat-label>{{ 'generic.project' | translate }}</mat-label>
+          <input
+            disabled
+            matInput
+            disableRipple
+            [value]="this.projectControl.value" />
+        </mat-form-field>
 
-      <mat-form-field appearance="outline" *ngIf="this.method === 'edit'" fxFlex="25" class="example-full-width">
-        <mat-label>{{'collaborator.colaborator_create.feedbacks.manager'|translate}}</mat-label>
-        <input disabled matInput disableRipple [value]="this.managerControl.value" />
-      </mat-form-field>
+        <mat-form-field
+          fxFlex="30"
+          class="example-full-width"
+          appearance="outline"
+          *ngIf="this.method === 'add'">
+          <mat-label>{{
+            'collaborator.colaborator_create.feedbacks.manager' | translate
+          }}</mat-label>
+          <input
+            type="text"
+            placeholder="Gerente"
+            aria-label="text"
+            #filter
+            matInput
+            [matAutocomplete]="autoManager"
+            [formControl]="managerControl" />
+          <mat-error
+            *ngIf="managerControl && managerControl.hasError('required')">
+            {{ 'validators.validator-required' | translate }}
+          </mat-error>
+          <mat-error
+            *ngIf="
+              managerControl &&
+              !managerControl.hasError('required') &&
+              managerControl.hasError('incorrect')
+            ">
+            {{ 'validators.select-option' | translate }}
+          </mat-error>
+          <mat-autocomplete
+            autoActiveFirstOption
+            #autoManager="matAutocomplete"
+            [displayWith]="displayFnManager">
+            <mat-option
+              *ngFor="let collaborator of filteredCollaborators"
+              [value]="collaborator">
+              {{ collaborator.firstNameCorporateName }}
+              {{ collaborator.lastNameFantasyName }}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+
+        <mat-form-field
+          appearance="outline"
+          *ngIf="this.method === 'edit'"
+          fxFlex="25"
+          class="example-full-width">
+          <mat-label>{{
+            'collaborator.colaborator_create.feedbacks.manager' | translate
+          }}</mat-label>
+          <input
+            disabled
+            matInput
+            disableRipple
+            [value]="this.managerControl.value" />
+        </mat-form-field>
       </div>
 
       <div class="formGroup1" fxFlex="100" fxLayoutGap="20px">
         <mat-form-field appearance="outline" fxFlex="20">
-          <mat-label>{{'generic.status' | translate}}</mat-label>
-          <mat-select formControlName="status" (ngModelChange)="onChange($event)">
-            <mat-option [value]="1">{{'collaborator.colaborator_create.feedbacks.status.scheduled'|translate}}</mat-option>
-            <mat-option [value]="2">{{'collaborator.colaborator_create.feedbacks.status.completed'|translate}}</mat-option>
-            <mat-option [value]="3">{{'collaborator.colaborator_create.feedbacks.status.feedback_return'|translate}}</mat-option>
+          <mat-label>{{ 'generic.status' | translate }}</mat-label>
+          <mat-select
+            formControlName="status"
+            (ngModelChange)="onChange($event)">
+            <mat-option [value]="1">{{
+              'collaborator.colaborator_create.feedbacks.status.scheduled'
+                | translate
+            }}</mat-option>
+            <mat-option [value]="2">{{
+              'collaborator.colaborator_create.feedbacks.status.completed'
+                | translate
+            }}</mat-option>
+            <mat-option [value]="3">{{
+              'collaborator.colaborator_create.feedbacks.status.feedback_return'
+                | translate
+            }}</mat-option>
           </mat-select>
-          <mat-error *ngIf="feedbackForm &&
-          feedbackForm.controls['status'].hasError('required')">
-                {{'validators.validator-required' |  translate}} </mat-error>
+          <mat-error
+            *ngIf="
+              feedbackForm &&
+              feedbackForm.controls['status'].hasError('required')
+            ">
+            {{ 'validators.validator-required' | translate }}
+          </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline" fxFlex="20">
-          <mat-label>{{'collaborator.colaborator_create.feedbacks.feedback_date'|translate}}</mat-label>
-          <input matInput mask="00/00/0000" [showMaskTyped]="true" [dropSpecialCharacters]="false"
-          formControlName="feedbackDate" placeholder="Data Feedback" />
-          <mat-error *ngIf="feedbackForm &&
-          feedbackForm.controls['feedbackDate'].hasError('required')">
-                {{'validators.validator-required' |  translate}} </mat-error>
+          <mat-label>{{
+            'collaborator.colaborator_create.feedbacks.feedback_date'
+              | translate
+          }}</mat-label>
+          <input
+            matInput
+            mask="00/00/0000"
+            [showMaskTyped]="true"
+            [dropSpecialCharacters]="false"
+            formControlName="feedbackDate"
+            placeholder="Data Feedback" />
+          <mat-error
+            *ngIf="
+              feedbackForm &&
+              feedbackForm.controls['feedbackDate'].hasError('required')
+            ">
+            {{ 'validators.validator-required' | translate }}
+          </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline" fxFlex="10">
-          <mat-label>{{'collaborator.colaborator_create.feedbacks.hour'|translate}}</mat-label>
+          <mat-label>{{
+            'collaborator.colaborator_create.feedbacks.hour' | translate
+          }}</mat-label>
           <input
             matInput
             disableRipple
             formControlName="hourDate"
             mask="00:00" />
-            <mat-error *ngIf="feedbackForm &&
-          feedbackForm.controls['hourDate'].hasError('required')">
-                {{'validators.validator-required' |  translate}} </mat-error>
+          <mat-error
+            *ngIf="
+              feedbackForm &&
+              feedbackForm.controls['hourDate'].hasError('required')
+            ">
+            {{ 'validators.validator-required' | translate }}
+          </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline" fxFlex="30">
-          <mat-label>{{'collaborator.colaborator_create.feedbacks.feedback_date_retorn'|translate}}</mat-label>
-          <input matInput mask="00/00/0000" [showMaskTyped]="true" [dropSpecialCharacters]="false"
-          formControlName="feedbackDateRetorn" placeholder="Data Retorno Feedback" />
+          <mat-label>{{
+            'collaborator.colaborator_create.feedbacks.feedback_date_retorn'
+              | translate
+          }}</mat-label>
+          <input
+            matInput
+            mask="00/00/0000"
+            [showMaskTyped]="true"
+            [dropSpecialCharacters]="false"
+            formControlName="feedbackDateRetorn"
+            placeholder="Data Retorno Feedback" />
         </mat-form-field>
 
         <mat-form-field appearance="outline" fxFlex="20">
-          <mat-label>{{'collaborator.colaborator_create.feedbacks.hour'|translate}}</mat-label>
+          <mat-label>{{
+            'collaborator.colaborator_create.feedbacks.hour' | translate
+          }}</mat-label>
           <input
             matInput
             disableRipple
@@ -156,10 +263,14 @@
         </mat-form-field>
       </div>
 
-      <h2 class="text-subtitlle" appearance="outline" >{{'collaborator.colaborator_create.feedbacks.management'|translate}}</h2>
+      <h2 class="text-subtitlle" appearance="outline">
+        {{ 'collaborator.colaborator_create.feedbacks.management' | translate }}
+      </h2>
       <div fxFlex="100" fxLayoutGap="20px">
-        <mat-form-field  class="second-column" appearance="outline" fxFlex="50">
-          <mat-label>{{'collaborator.colaborator_create.feedbacks.description'|translate}}</mat-label>
+        <mat-form-field class="second-column" appearance="outline" fxFlex="50">
+          <mat-label>{{
+            'collaborator.colaborator_create.feedbacks.description' | translate
+          }}</mat-label>
           <textarea
             class="text-area"
             matInput
@@ -169,7 +280,10 @@
         </mat-form-field>
 
         <mat-form-field appearance="outline" fxFlex="50">
-          <mat-label>{{'collaborator.colaborator_create.feedbacks.improvement_points'|translate}}</mat-label>
+          <mat-label>{{
+            'collaborator.colaborator_create.feedbacks.improvement_points'
+              | translate
+          }}</mat-label>
           <textarea
             class="text-area"
             matInput
@@ -179,10 +293,12 @@
         </mat-form-field>
       </div>
 
-      <h2 class="text-subtitlle" >{{"sidenav.collaborator" | translate}}</h2>
+      <h2 class="text-subtitlle">{{ 'sidenav.collaborator' | translate }}</h2>
       <div fxFlex="100" fxLayoutGap="20px">
         <mat-form-field appearance="outline" fxFlex="50">
-          <mat-label>{{'collaborator.colaborator_create.feedbacks.description'|translate}}</mat-label>
+          <mat-label>{{
+            'collaborator.colaborator_create.feedbacks.description' | translate
+          }}</mat-label>
           <textarea
             class="text-area"
             matInput
@@ -191,7 +307,9 @@
             rows="5"></textarea>
         </mat-form-field>
         <mat-form-field appearance="outline" fxFlex="50">
-          <mat-label>{{'collaborator.colaborator_create.feedbacks.commitments'|translate}}</mat-label>
+          <mat-label>{{
+            'collaborator.colaborator_create.feedbacks.commitments' | translate
+          }}</mat-label>
           <textarea
             class="text-area"
             matInput
@@ -213,7 +331,7 @@
       color="primary"
       [disabled]="this.feedbackForm?.invalid"
       (click)="saveFeedback()">
-      {{'generic.save_button' | translate}}
+      {{ 'generic.save_button' | translate }}
     </button>
   </div>
   <div
@@ -225,9 +343,9 @@
     <button
       mat-flat-button
       color="primary"
-      [disabled]="this.feedbackForm?.invalid"
+      [disabled]="this.feedbackForm?.invalid || managerControl.invalid || projectControl.invalid"
       (click)="saveEditFeedback()">
-      {{'generic.save_button' | translate}}
+      {{ 'generic.save_button' | translate }}
     </button>
   </div>
 </div>

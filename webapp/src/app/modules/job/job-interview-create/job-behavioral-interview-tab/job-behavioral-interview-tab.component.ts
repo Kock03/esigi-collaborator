@@ -8,6 +8,7 @@ import { ResumeProvider } from 'src/providers/resume-providers/resume.provider';
 import { SnackBarService } from 'src/services/snackbar.service';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { CollaboratorProvider } from 'src/providers/collaborator-providers/collaborator.provider';
+import { RequireMatch } from 'src/services/autocomplete.service';
 
 
 @Component({
@@ -25,7 +26,7 @@ export class JobBehavioralInterviewTabComponent implements OnInit {
   interview: any;
   selectedIndex: number = 0;
   step: number = 1;
-  ResumeControl = new FormControl();
+  ResumeControl = new FormControl('', [Validators.required, RequireMatch]);
   nameCandidate!: any;
   visibleTechRecruter: boolean = false;
   visibleResume: boolean = false;
@@ -35,7 +36,7 @@ export class JobBehavioralInterviewTabComponent implements OnInit {
   resume!: any;
   resumeValid: boolean = false;
   resumeId: any;
-  collaboratorControl = new FormControl();
+  collaboratorControl = new FormControl('', [Validators.required, RequireMatch]);
   collaborators!: any[];
   filteredCollaborators!: any[];
   filteredCollaboratorList: any;

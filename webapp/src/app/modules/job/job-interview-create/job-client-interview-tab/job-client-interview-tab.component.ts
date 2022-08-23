@@ -8,6 +8,7 @@ import { ClientInterviewProvider } from 'src/providers/clientInterview.provider'
 import { CustomerProvider } from 'src/providers/customer.provider';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { ResumeProvider } from 'src/providers/resume-providers/resume.provider';
+import { RequireMatch } from 'src/services/autocomplete.service';
 
 @Component({
   selector: 'app-job-client-interview-tab',
@@ -31,10 +32,10 @@ export class JobClientInterviewTabComponent implements OnInit {
   filteredResumes!: any[];
   filteredResumeList: any;
   resume!: any;
-  ResumeControl = new FormControl();
+  ResumeControl = new FormControl('', [Validators.required, RequireMatch]);
   resumeValid: boolean = false;
   resumeId: any;
-  customerControl = new FormControl();
+  customerControl = new FormControl('', [Validators.required, RequireMatch]);
   customers!: any[];
   filteredCustomers!: any[];
   filteredCustomerList: any;

@@ -23,6 +23,7 @@ import { CollaboratorProvider } from 'src/providers/collaborator-providers/colla
 import { FeedbackProvider } from 'src/providers/feedback.provider';
 import { SnackBarService } from 'src/services/snackbar.service';
 import { ProjectProvider } from 'src/providers/project.provider';
+import { RequireMatch } from 'src/services/autocomplete.service';
 
 export const PICK_FORMATS = {
   parse: { dateInput: { month: 'numeric', year: 'numeric', day: 'numeric' } },
@@ -66,8 +67,8 @@ export class FeedbackCreateComponent implements OnInit {
   get!: any;
   feedbackTab: any;
   collaboratorId!: any;
-  managerControl = new FormControl();
-  projectControl = new FormControl();
+  managerControl = new FormControl('', [Validators.required, RequireMatch]);
+  projectControl = new FormControl('', [Validators.required, RequireMatch]);
   method: any;
 
   filteredCollaborators!: any[];

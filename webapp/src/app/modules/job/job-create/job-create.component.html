@@ -3,49 +3,93 @@
     <button (click)="listJob()" color="primary" mat-button>
       <mat-icon> chevron_left </mat-icon>
     </button>
-    <h2>{{'sidenav.jobs' | translate}}</h2>
+    <h2>{{ 'sidenav.jobs' | translate }}</h2>
   </div>
 
   <div fxLayout="row" class="tab" fxLayoutGap="16px">
-    <div (click)="handleStep(1)" fxLayout="column" class="tab-group" [ngClass]="{ done: step > 0, active: step == 1 }">
-      <p class="tab-item">{{'job.job_create.register' | translate}}</p>
+    <div
+      (click)="handleStep(1)"
+      fxLayout="column"
+      class="tab-group"
+      [ngClass]="{ done: step > 0, active: step == 1 }">
+      <p class="tab-item">{{ 'job.job_create.register' | translate }}</p>
       <span class="tab-border"></span>
     </div>
-    <div (click)="handleStep(2)" fxLayout="column" class="tab-group" [ngClass]="{ done: step > 1, active: step == 2 }">
-      <p class="tab-item">{{'job.job_create.skills.register' | translate}}</p>
+    <div
+      (click)="handleStep(2)"
+      fxLayout="column"
+      class="tab-group"
+      [ngClass]="{ done: step > 1, active: step == 2 }">
+      <p class="tab-item">{{ 'job.job_create.skills.register' | translate }}</p>
       <span class="tab-border"></span>
     </div>
   </div>
 
-  <app-job-register-tab [hidden]="step != 1" [form]="jobForm" [collaborator]="collaboratorControl"
-    [customer]="customerControl" (onChange)="handleChanges($event)">
+  <app-job-register-tab
+    [hidden]="step != 1"
+    [form]="jobForm"
+    [collaborator]="collaboratorControl"
+    [customer]="customerControl"
+    (onChange)="handleChanges($event)">
   </app-job-register-tab>
-  <app-job-skill-tab *ngIf="jobForm" [hidden]="step != 2" [form]="jobForm" (onChange)="handleChanges($event)">
+  <app-job-skill-tab
+    *ngIf="jobForm"
+    [hidden]="step != 2"
+    [form]="jobForm"
+    (onChange)="handleChanges($event)">
   </app-job-skill-tab>
 
-  <div class="navigation-buttons" fxLayoutAlign="center end" fxLayoutGap="16px" *ngIf="jobId === 'novo'">
+  <div
+    class="navigation-buttons"
+    fxLayoutAlign="center end"
+    fxLayoutGap="16px"
+    *ngIf="jobId === 'novo'">
     <button mat-button *ngIf="step != 1" (click)="navigate('back')">
-      {{'generic.back_button' | translate}}
+      {{ 'generic.back_button' | translate }}
     </button>
-    <button mat-flat-button *ngIf="step !== 1 && step !== 2" (click)="navigate('next')" color="primary">
-      {{'generic.continue_button' | translate}}
+    <button
+      mat-flat-button
+      *ngIf="step !== 1 && step !== 2"
+      (click)="navigate('next')"
+      color="primary">
+      {{ 'generic.continue_button' | translate }}
     </button>
-    <button mat-flat-button *ngIf="step == 1" color="primary" (click)="saveJob()" [disabled]="jobForm.invalid">
-      {{'generic.save_button' | translate}}
+    <button
+      mat-flat-button
+      *ngIf="step == 1"
+      color="primary"
+      (click)="saveJob()"
+      [disabled]="jobForm.invalid">
+      {{ 'generic.save_button' | translate }}
     </button>
   </div>
-  <div class="navigation-buttons" fxLayoutAlign="center end" fxLayoutGap="16px" *ngIf="jobId !== 'novo'">
+  <div
+    class="navigation-buttons"
+    fxLayoutAlign="center end"
+    fxLayoutGap="16px"
+    *ngIf="jobId !== 'novo'">
     <button mat-button *ngIf="step != 1" (click)="navigate('back')">
       Voltar
     </button>
 
-    <button mat-flat-button *ngIf="step !== 1 && step !== 2" (click)="navigate('next')" color="primary">
+    <button
+      mat-flat-button
+      *ngIf="step !== 1 && step !== 2"
+      (click)="navigate('next')"
+      color="primary">
       Continuar
     </button>
 
-    <button mat-flat-button (click)="editJob()" color="primary" [disabled]="jobForm?.invalid">
+    <button
+      mat-flat-button
+      (click)="editJob()"
+      color="primary"
+      [disabled]="
+        jobForm?.invalid ||
+        collaboratorControl.invalid ||
+        customerControl.invalid
+      ">
       Salvar
     </button>
   </div>
-
 </div>

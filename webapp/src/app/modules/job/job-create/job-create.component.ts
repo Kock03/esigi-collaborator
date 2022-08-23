@@ -36,6 +36,7 @@ import { SnackBarService } from 'src/services/snackbar.service';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { MustMatch } from 'src/app/validators/min-max-value.validator';
 import { JobProvider } from 'src/providers/job-providers/job.provider';
+import { RequireMatch } from 'src/services/autocomplete.service';
 
 
 @Component({
@@ -48,8 +49,8 @@ export class JobCreateComponent implements OnInit {
   @ViewChild('filter', { static: true }) filter!: ElementRef;
 
 
-  collaboratorControl = new FormControl();
-  customerControl = new FormControl();
+  collaboratorControl = new FormControl('', [Validators.required, RequireMatch]);
+  customerControl = new FormControl('', [Validators.required, RequireMatch]);
 
   Date: any;
   jobForm!: FormGroup;

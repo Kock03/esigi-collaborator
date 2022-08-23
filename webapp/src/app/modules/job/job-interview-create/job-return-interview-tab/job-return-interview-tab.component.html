@@ -7,6 +7,22 @@
                     <mat-label>Nome do Candidato</mat-label>
                     <input type="text" placeholder="Candidato" aria-label="text" #filterResume matInput
                         [matAutocomplete]="autoResume" [formControl]="ResumeControl" />
+                        <mat-error
+                        *ngIf="
+                        ResumeControl && ResumeControl.hasError('required')
+                        "
+                      >
+                        {{ "validators.validator-required" | translate }}
+                      </mat-error>
+                      <mat-error
+                        *ngIf="
+                        ResumeControl &&
+                          !ResumeControl.hasError('required') &&
+                          ResumeControl.hasError('incorrect')
+                        "
+                      >
+                        {{ "validators.select-option" | translate }}
+                      </mat-error>
                     <mat-autocomplete autoActiveFirstOption #autoResume="matAutocomplete"
                         [displayWith]="displayFnResume">
                         <mat-option *ngFor="let resume of filteredResumes" [value]="resume">
@@ -151,7 +167,7 @@
             </div>
             <div fxLayoutAlign="center" fxFlex="20">
                 <button mat-flat-button color="primary" class="save-button" (click)="saveInterview()"
-                    [disabled]="returnForm.invalid">
+                    [disabled]="returnForm.invalid || ResumeControl.invalid">
                     {{ 'generic.save_button' | translate }}
                 </button>
             </div>

@@ -1,398 +1,399 @@
 {
-    "sidenav": {
-        "home": "Início",
-        "collaborator": "Colaborador",
-        "jobs": "Vagas",
-        "resume": "Currículo"
+  "sidenav": {
+    "home": "Início",
+    "collaborator": "Colaborador",
+    "jobs": "Vagas",
+    "resume": "Currículo"
+  },
+  "collaborator": {
+    "colaborator_list": {
+      "collaborators": "Colaboradores",
+      "search_collaborators": "Buscar Colaboradores",
+      "filter": {
+        "name": "Filtro",
+        "all": "Todos",
+        "inactive": "Inativo"
+      }
     },
-    "collaborator": {
-        "colaborator_list": {
-            "collaborators": "Colaboradores",
-            "search_collaborators": "Buscar Colaboradores",
-            "filter": {
-                "name": "Filtro",
-                "all": "Todos",
-                "inactive": "Inativo"
-            }
-        },
-        "colaborator_create": {
-            "corporate_name": "Razão Social",
-            "collaborator_type": {
-                "name": "Tipo de Colaborador",
-                "clt": "CLT",
-                "pj": "PJ",
-                "cooperated": "Cooperado"
-            },
-            "active": "Ativo",
-            "cnpj": "CNPJ",
-            "state_registration": "Inscrição Estadual",
-            "municipal_inscription": "Inscrição Municipal",
-            "photo": "Foto",
-            "dependents": {
-                "name": "Dependentes",
-                "dependent_registration": "Cadastro Dependentes",
-                "type": {
-                    "name": "Tipo",
-                    "spouse": "Cônjuge",
-                    "son": "Filho(a)",
-                    "stepson": "Enteado(a)",
-                    "dad": "Pai",
-                    "mom": "Mãe"
-                }
-            },
-            "bank": {
-                "bank_data": "Dados Bancários",
-                "bank_registration": "Cadastro Bancário",
-                "name": "Banco",
-                "agency": "Agência",
-                "type": {
-                    "name": "Tipo de Conta",
-                    "checking_account": "Conta Corrente",
-                    "salary_account": "Conta Salário",
-                    "savings_account": "Conta Poupança"
-                },
-                "account_number": "Número Conta",
-                "digit": "Digito"
-            },
-            "finance": {
-                "name": "Financeiro",
-                "financial_register": "Cadastro Financeiro",
-                "date_inclusion": " Data de Inclusão",
-                "type": "Tipo de Contrato",
-                "reason": {
-                    "name": "Motivo",
-                    "hiring": "Contratação",
-                    "recognition": "Reconhecimento",
-                    "home_time": "Tempo de casa",
-                    "retention": "Retenção"
-                },
-                "value": "Valor",
-                "monthly_value": "Valor Mensal"
-            },
-            "documents": {
-                "name": "Documentos",
-                "document_registration": "Cadastro de Documento",
-                "read": "Ler",
-                "document_name": "Nome"
-            },
-            "feedbacks": {
-                "name": "Feedback",
-                "feedback_date": "Data Feedback",
-                "feedback_type": {
-                    "name": "Tipo de Feedback",
-                    "unmotivated_professional": "Profissional Desmotivado",
-                    "change_of_position": "Mudança de Cargo",
-                    "salary_increase": "Aumento de Salário",
-                    "scheduled": "Agendado"
-                },
-                "reason": {
-                    "management_request": "Solicitação Gestão",
-                    "customer_request": "Solicitação Cliente",
-                    "contributor_request": "Solicitação Colaborador"
-                },
-                "manager": "Gestor",
-                "status": {
-                    "scheduled": "Agendada",
-                    "completed": "Concluída",
-                    "feedback_return": "Retorno de Feedback"
-                },
-                "hour": "Hora",
-                "feedback_date_retorn": "Data Retorno Feedback",
-                "management": "Gestão",
-                "description": "Descrição",
-                "improvement_points": "Pontos de Melhoria",
-                "commitments": "Compromissos"
-            }
-        }
-    },
-    "job": {
-        "name": "Vaga",
-        "job_description": "Descrição da Vaga",
-        "job_list": {
-            "search_jobs": "Buscar Vagas",
-            "name": "Nome da Vaga"
-        },
-        "job_create": {
-            "register": "Cadastro",
-            "status": {
-                "processed": "Processada",
-                "in_revision": "Em Revisão",
-                "closed": "Fechada",
-                "lost": "Perdida",
-                "completed": "Concluída",
-                "new": "Novo"
-            },
-            "type_of_job": {
-                "name": "Tipo de Vaga",
-                "staff_increase": "Aumento de Quadro",
-                "promotion": "Promoção",
-                "faithfulness": "Fidelidade"
-            },
-            "temporary": "Temporário",
-            "month_time": "Tempo de Contrato",
-            "name": "Nome da Vaga",
-            "start_forecast": "Previsão de Inicio",
-            "job_number": "Número de Vagas",
-            "type_of_contract": "Tipo de Contratação",
-            "workplace": {
-                "name": "Local de Trabalho",
-                "in_loco": "In Loco",
-                "home_office": "Home Office",
-                "hybrid": "híbrido",
-                "envolti": "Envolti"
-            },
-            "working_day": "Jornada de Trabaho",
-            "minimum_value": "Valor Mínimo",
-            "maximum_value": "Valor Máximo",
-            "post_vacancy": "Publicar Vaga",
-            "opening_date": "Data de Abertura",
-            "skills": {
-                "register": "Conhecimentos",
-                "name": "Habilidades",
-                "schooling": {
-                    "complete_higher_education": "Ensino Superior Completo",
-                    "incomplete_higher_education": "Ensino Superior Incompleto",
-                    "complete_high_school": "Ensino Médio Completo"
-                },
-                "collaborator_activities": "Principais atividades que ocolaborador irá exercer",
-                "desired_experience": "Experiência Desejada",
-                "required_behavior": "Comportamento e/ou competências necessárias",
-                "type_of_period": {
-                    "name": "Período",
-                    "year": "ano(s)",
-                    "month": "Mês(s)"
-                }
-            }
-        },
-        "job_interview_list": {
-            "search_jobs": "Buscar Entrevistas",
-            "technical_interview_date": "Data da Entrevista Técnica",
-            "behavioral_interview_date": "Data Entrevista Comportamental"
-        },
-        "job_interview_create": {
-            "interview_registration": "Cadastro de Entrevistas",
-            "interview_follow_up": "Acompanhamento de Entrevistas",
-            "name": "Entrevistas",
-            "name_candidate": "Nome do Candidato",
-            "tech_recruter": "TechRecruter",
-            "hour_interview": "Horário da Entrevista",
-            "presentation": {
-                "name": "Apresentação",
-                "presentable": "Apresentável",
-                "unpresentable": "Não Apresentável"
-            },
-            "salary_expectation": "Pretenção Salarial",
-            "hiring_preference": "Preferência de Contratação",
-            "punctuality": {
-                "name": "Pontualidade",
-                "one_off": "Pontual",
-                "late_5_minutes": "Atrasado 5 minutos",
-                "more_than_5_minutes_late": "Atrasado mais de 5 minutos",
-                "did_not_attend": "Não Compareceu"
-            },
-            "situational": {
-                "name": "Situação",
-                "okay": "Aprovado",
-                "approved_with_reservations": "Aprovado com Ressalvas",
-                "disapproved": "Reprovado",
-                "failed_with_reservations": "Reprovado com Ressalvas"
-            },
-            "comments": "Observações",
-            "availability_of_initialize": "Disponibilidade de Inicio",
-            "evaluator": "Avaliador",
-            "interview_date": "Data da Entrevista",
-            "technical_evaluation": "Avaliação Técnica",
-            "job_profile": "Perfil da Vaga",
-            "date_of_return": "Data da Devolutiva",
-            "behavioral_evaluation": "Avaliação Comportamental",
-            "return_of_candidate": "Retorno do Candidato",
-            "reason": {
-                "wage": "Salário",
-                "hiring_model": "Modelo de Contratação"
-            },
-            "type_od_contract": "Tipo de Contratação",
-            "combined_value": "Valor Fechado",
-            "initial_data": "Data de Inicio"
-        }
-    },
-    "resumes": {
-        "name": "Cadastro do Currículo",
-        "register": "Cadastro",
-        "resume_list": {
-            "search_resumes": "Buscar Currículos",
-            "filter": "Filtro",
-            "all": "Todos",
-            "client": "Cliente",
-            "process": "Processar",
-            "job": "Vaga",
-            "stopped": "Parado"
-        },
-        "resume_experience": {
-            "name": "Experiência",
-            "experience_registration": "Cadastro de experiência",
-            "company_name": "Nome da empresa",
-            "locality": "Localidade",
-            "current_job": "Trabalho atual",
-            "sector": "Setor",
-            "description": "Descrição"
-        },
-        "resume_application": {
-            "job_name": "Nome da Vaga",
-            "name": "Candidaturas"
-        }
-    },
-    "generic": {
-        "marital_status": {
-            "name": "Estado civil",
-            "single": "Solteiro(a)",
-            "married": "Casado(a)",
-            "widower": "Viúvo(a)",
-            "stable_union": "União Estável"
-        },
-        "gender": {
-            "name": "Sexo",
-            "feminine": "Feminino",
-            "masculine": "Masculino",
-            "undefined": "Não Informado"
-        },
-        "address": {
-            "cep": "CEP",
-            "number": "Número",
-            "complement": "Complemento",
-            "street": "Rua",
-            "city": "Cidade",
-            "district": "Bairro",
-            "state": "Estado",
-            "state_list": {
-                "AC": "Acre",
-                "AL": "Alagoas",
-                "AP": "Amapá",
-                "AM": "Amazonas",
-                "BA": "Bahia",
-                "CE": "Ceará",
-                "DF": "Distrito Federal",
-                "ES": "Espírito Santo",
-                "GO": "Goiás",
-                "MA": "Maranhão",
-                "MT": "Mato Grosso",
-                "MS": "Mato Grosso do Sul",
-                "MG": "Minas Gerais",
-                "PA": "Pará",
-                "PB": "Paraíba",
-                "PR": "Paraná",
-                "PE": "Pernambuco",
-                "PI": "Piauí",
-                "RJ": "Rio de Janeiro",
-                "RN": "Rio Grande do Norte",
-                "RS": "Rio Grande do Sul",
-                "RO": "Rondônia",
-                "RR": "Roraima",
-                "SC": "Santa Catarina",
-                "SP": "São Paulo",
-                "SE": "Sergipe",
-                "TO": "Tocantins",
-                "other": "Outro"
-            }
-        },
-        "education": {
-            "name": "Educação",
-            "schooling": {
-                "name": "Escolaridade",
-                "type": {
-                    "elementary_school": "Ensino Fundamental",
-                    "high_school": "Ensino Médio",
-                    "university_education": "Ensino Superior"
-                },
-                "situation": {
-                    "name": "Situação",
-                    "stop": "Parado",
-                    "complete": "Concluído",
-                    "in_progress": "Em Andamento"
-                },
-                "course": "Curso",
-                "institution": "Instituição"
-            },
-            "languages": {
-                "name": "Idiomas",
-                "one_language": "Idioma",
-                "fluency": {
-                    "name": "Grau de Fluência",
-                    "all_options": "Leitura, Escrita e Conversação",
-                    "writing": "Escrita",
-                    "reading": "Leitura",
-                    "conversation": "Conversação",
-                    "writing_and_reading": "Escrita e Leitura",
-                    "writing_and_conversation": "Escrita e Conversação",
-                    "reading_and_conversation": "Leitura e Conversação"
-                }
-            }
-        },
-        "skills": {
-            "skill_registration": "Cadastro de Skill",
-            "name": "Skills",
-            "technology": "Tecnologia",
-            "current_position": "Posição Atual",
-            "time_experience": "Tempo de experiência"
-        },
-        "back_button": "Voltar",
-        "save_button": "Salvar",
-        "cancel_button": "Cancelar",
-        "edit_button": "Editar",
-        "continue_button": "Continuar",
-        "delete_button": "Deletar",
-        "ok_button": "OK",
-        "application_date": "Data Candidatura",
-        "return_date": "Data devolutiva",
-        "responsibility": "Cargo",
-        "requester": "Responsável",
-        "start_date": "Início:",
-        "end_date": "Término:",
-        "start_date_month": "Data de início: mês",
-        "start_date_year": "Data de início: ano",
-        "end_date_month": "Data de término: mês",
-        "end_date_year": "Data de término: ano",
-        "login": "Login",
-        "linkedIn": "LinkedIn",
-        "cpf": "CPF",
-        "name": "Nome",
-        "site": "Site",
-        "active": "Ativo",
-        "admission_date": "Data Admissão",
-        "office": "Posição",
-        "current_client": "Cliente Atual",
-        "status": "Status",
-        "birth_date": "Data Aniversário",
-        "email": "Email",
-        "reason": "Motivo",
-        "phone": {
-            "phone_number": "Telefone",
-            "ddd": "DDD",
-            "ddi": "DDI"
-        },
-        "last_name": "Sobrenome",
-        "project": "Projeto",
-        "register": "Cadastro",
-        "interviews": "Entrevistas",
-        "accompaniment": "Acompanhamento",
-        "client": "Cliente",
+    "colaborator_create": {
+      "corporate_name": "Razão Social",
+      "collaborator_type": {
+        "name": "Tipo de Colaborador",
         "clt": "CLT",
         "pj": "PJ",
-        "cooperated": "Cooperado(a)",
-        "intern": "Estagiário(a)",
-        "request": "Solicitante",
-        "opening_date": "Data de Abertura",
-        "seniority": {
-            "name": "Senioridade",
-            "senior": "Senior",
-            "full": "Pleno",
-            "junior": "Junior",
-            "apprentice": "Aprendiz",
-            "specialist": "Especialista",
-            "architect": "Arquiteto(a)"
+        "cooperated": "Cooperado"
+      },
+      "active": "Ativo",
+      "cnpj": "CNPJ",
+      "state_registration": "Inscrição Estadual",
+      "municipal_inscription": "Inscrição Municipal",
+      "photo": "Foto",
+      "dependents": {
+        "name": "Dependentes",
+        "dependent_registration": "Cadastro Dependentes",
+        "type": {
+          "name": "Tipo",
+          "spouse": "Cônjuge",
+          "son": "Filho(a)",
+          "stepson": "Enteado(a)",
+          "dad": "Pai",
+          "mom": "Mãe"
         }
-    },
-    "validators": {
-        "collaborator-types-validator": "Selecione o tipo de contrato",
-        "validator-required": "Campo obrigatório"
+      },
+      "bank": {
+        "bank_data": "Dados Bancários",
+        "bank_registration": "Cadastro Bancário",
+        "name": "Banco",
+        "agency": "Agência",
+        "type": {
+          "name": "Tipo de Conta",
+          "checking_account": "Conta Corrente",
+          "salary_account": "Conta Salário",
+          "savings_account": "Conta Poupança"
+        },
+        "account_number": "Número Conta",
+        "digit": "Digito"
+      },
+      "finance": {
+        "name": "Financeiro",
+        "financial_register": "Cadastro Financeiro",
+        "date_inclusion": " Data de Inclusão",
+        "type": "Tipo de Contrato",
+        "reason": {
+          "name": "Motivo",
+          "hiring": "Contratação",
+          "recognition": "Reconhecimento",
+          "home_time": "Tempo de casa",
+          "retention": "Retenção"
+        },
+        "value": "Valor",
+        "monthly_value": "Valor Mensal"
+      },
+      "documents": {
+        "name": "Documentos",
+        "document_registration": "Cadastro de Documento",
+        "read": "Ler",
+        "document_name": "Nome"
+      },
+      "feedbacks": {
+        "name": "Feedback",
+        "feedback_date": "Data Feedback",
+        "feedback_type": {
+          "name": "Tipo de Feedback",
+          "unmotivated_professional": "Profissional Desmotivado",
+          "change_of_position": "Mudança de Cargo",
+          "salary_increase": "Aumento de Salário",
+          "scheduled": "Agendado"
+        },
+        "reason": {
+          "management_request": "Solicitação Gestão",
+          "customer_request": "Solicitação Cliente",
+          "contributor_request": "Solicitação Colaborador"
+        },
+        "manager": "Gestor",
+        "status": {
+          "scheduled": "Agendada",
+          "completed": "Concluída",
+          "feedback_return": "Retorno de Feedback"
+        },
+        "hour": "Hora",
+        "feedback_date_retorn": "Data Retorno Feedback",
+        "management": "Gestão",
+        "description": "Descrição",
+        "improvement_points": "Pontos de Melhoria",
+        "commitments": "Compromissos"
+      }
     }
+  },
+  "job": {
+    "name": "Vaga",
+    "job_description": "Descrição da Vaga",
+    "job_list": {
+      "search_jobs": "Buscar Vagas",
+      "name": "Nome da Vaga"
+    },
+    "job_create": {
+      "register": "Cadastro",
+      "status": {
+        "processed": "Processada",
+        "in_revision": "Em Revisão",
+        "closed": "Fechada",
+        "lost": "Perdida",
+        "completed": "Concluída",
+        "new": "Novo"
+      },
+      "type_of_job": {
+        "name": "Tipo de Vaga",
+        "staff_increase": "Aumento de Quadro",
+        "promotion": "Promoção",
+        "faithfulness": "Fidelidade"
+      },
+      "temporary": "Temporário",
+      "month_time": "Tempo de Contrato",
+      "name": "Nome da Vaga",
+      "start_forecast": "Previsão de Inicio",
+      "job_number": "Número de Vagas",
+      "type_of_contract": "Tipo de Contratação",
+      "workplace": {
+        "name": "Local de Trabalho",
+        "in_loco": "In Loco",
+        "home_office": "Home Office",
+        "hybrid": "híbrido",
+        "envolti": "Envolti"
+      },
+      "working_day": "Jornada de Trabaho",
+      "minimum_value": "Valor Mínimo",
+      "maximum_value": "Valor Máximo",
+      "post_vacancy": "Publicar Vaga",
+      "opening_date": "Data de Abertura",
+      "skills": {
+        "register": "Conhecimentos",
+        "name": "Habilidades",
+        "schooling": {
+          "complete_higher_education": "Ensino Superior Completo",
+          "incomplete_higher_education": "Ensino Superior Incompleto",
+          "complete_high_school": "Ensino Médio Completo"
+        },
+        "collaborator_activities": "Principais atividades que ocolaborador irá exercer",
+        "desired_experience": "Experiência Desejada",
+        "required_behavior": "Comportamento e/ou competências necessárias",
+        "type_of_period": {
+          "name": "Período",
+          "year": "ano(s)",
+          "month": "Mês(s)"
+        }
+      }
+    },
+    "job_interview_list": {
+      "search_jobs": "Buscar Entrevistas",
+      "technical_interview_date": "Data da Entrevista Técnica",
+      "behavioral_interview_date": "Data Entrevista Comportamental"
+    },
+    "job_interview_create": {
+      "interview_registration": "Cadastro de Entrevistas",
+      "interview_follow_up": "Acompanhamento de Entrevistas",
+      "name": "Entrevistas",
+      "name_candidate": "Nome do Candidato",
+      "tech_recruter": "TechRecruter",
+      "hour_interview": "Horário da Entrevista",
+      "presentation": {
+        "name": "Apresentação",
+        "presentable": "Apresentável",
+        "unpresentable": "Não Apresentável"
+      },
+      "salary_expectation": "Pretenção Salarial",
+      "hiring_preference": "Preferência de Contratação",
+      "punctuality": {
+        "name": "Pontualidade",
+        "one_off": "Pontual",
+        "late_5_minutes": "Atrasado 5 minutos",
+        "more_than_5_minutes_late": "Atrasado mais de 5 minutos",
+        "did_not_attend": "Não Compareceu"
+      },
+      "situational": {
+        "name": "Situação",
+        "okay": "Aprovado",
+        "approved_with_reservations": "Aprovado com Ressalvas",
+        "disapproved": "Reprovado",
+        "failed_with_reservations": "Reprovado com Ressalvas"
+      },
+      "comments": "Observações",
+      "availability_of_initialize": "Disponibilidade de Inicio",
+      "evaluator": "Avaliador",
+      "interview_date": "Data da Entrevista",
+      "technical_evaluation": "Avaliação Técnica",
+      "job_profile": "Perfil da Vaga",
+      "date_of_return": "Data da Devolutiva",
+      "behavioral_evaluation": "Avaliação Comportamental",
+      "return_of_candidate": "Retorno do Candidato",
+      "reason": {
+        "wage": "Salário",
+        "hiring_model": "Modelo de Contratação"
+      },
+      "type_od_contract": "Tipo de Contratação",
+      "combined_value": "Valor Fechado",
+      "initial_data": "Data de Inicio"
+    }
+  },
+  "resumes": {
+    "name": "Cadastro do Currículo",
+    "register": "Cadastro",
+    "resume_list": {
+      "search_resumes": "Buscar Currículos",
+      "filter": "Filtro",
+      "all": "Todos",
+      "client": "Cliente",
+      "process": "Processar",
+      "job": "Vaga",
+      "stopped": "Parado"
+    },
+    "resume_experience": {
+      "name": "Experiência",
+      "experience_registration": "Cadastro de experiência",
+      "company_name": "Nome da empresa",
+      "locality": "Localidade",
+      "current_job": "Trabalho atual",
+      "sector": "Setor",
+      "description": "Descrição"
+    },
+    "resume_application": {
+      "job_name": "Nome da Vaga",
+      "name": "Candidaturas"
+    }
+  },
+  "generic": {
+    "marital_status": {
+      "name": "Estado civil",
+      "single": "Solteiro(a)",
+      "married": "Casado(a)",
+      "widower": "Viúvo(a)",
+      "stable_union": "União Estável"
+    },
+    "gender": {
+      "name": "Sexo",
+      "feminine": "Feminino",
+      "masculine": "Masculino",
+      "undefined": "Não Informado"
+    },
+    "address": {
+      "cep": "CEP",
+      "number": "Número",
+      "complement": "Complemento",
+      "street": "Rua",
+      "city": "Cidade",
+      "district": "Bairro",
+      "state": "Estado",
+      "state_list": {
+        "AC": "Acre",
+        "AL": "Alagoas",
+        "AP": "Amapá",
+        "AM": "Amazonas",
+        "BA": "Bahia",
+        "CE": "Ceará",
+        "DF": "Distrito Federal",
+        "ES": "Espírito Santo",
+        "GO": "Goiás",
+        "MA": "Maranhão",
+        "MT": "Mato Grosso",
+        "MS": "Mato Grosso do Sul",
+        "MG": "Minas Gerais",
+        "PA": "Pará",
+        "PB": "Paraíba",
+        "PR": "Paraná",
+        "PE": "Pernambuco",
+        "PI": "Piauí",
+        "RJ": "Rio de Janeiro",
+        "RN": "Rio Grande do Norte",
+        "RS": "Rio Grande do Sul",
+        "RO": "Rondônia",
+        "RR": "Roraima",
+        "SC": "Santa Catarina",
+        "SP": "São Paulo",
+        "SE": "Sergipe",
+        "TO": "Tocantins",
+        "other": "Outro"
+      }
+    },
+    "education": {
+      "name": "Educação",
+      "schooling": {
+        "name": "Escolaridade",
+        "type": {
+          "elementary_school": "Ensino Fundamental",
+          "high_school": "Ensino Médio",
+          "university_education": "Ensino Superior"
+        },
+        "situation": {
+          "name": "Situação",
+          "stop": "Parado",
+          "complete": "Concluído",
+          "in_progress": "Em Andamento"
+        },
+        "course": "Curso",
+        "institution": "Instituição"
+      },
+      "languages": {
+        "name": "Idiomas",
+        "one_language": "Idioma",
+        "fluency": {
+          "name": "Grau de Fluência",
+          "all_options": "Leitura, Escrita e Conversação",
+          "writing": "Escrita",
+          "reading": "Leitura",
+          "conversation": "Conversação",
+          "writing_and_reading": "Escrita e Leitura",
+          "writing_and_conversation": "Escrita e Conversação",
+          "reading_and_conversation": "Leitura e Conversação"
+        }
+      }
+    },
+    "skills": {
+      "skill_registration": "Cadastro de Skill",
+      "name": "Skills",
+      "technology": "Tecnologia",
+      "current_position": "Posição Atual",
+      "time_experience": "Tempo de experiência"
+    },
+    "back_button": "Voltar",
+    "save_button": "Salvar",
+    "cancel_button": "Cancelar",
+    "edit_button": "Editar",
+    "continue_button": "Continuar",
+    "delete_button": "Deletar",
+    "ok_button": "OK",
+    "application_date": "Data Candidatura",
+    "return_date": "Data devolutiva",
+    "responsibility": "Cargo",
+    "requester": "Responsável",
+    "start_date": "Início:",
+    "end_date": "Término:",
+    "start_date_month": "Data de início: mês",
+    "start_date_year": "Data de início: ano",
+    "end_date_month": "Data de término: mês",
+    "end_date_year": "Data de término: ano",
+    "login": "Login",
+    "linkedIn": "LinkedIn",
+    "cpf": "CPF",
+    "name": "Nome",
+    "site": "Site",
+    "active": "Ativo",
+    "admission_date": "Data Admissão",
+    "office": "Posição",
+    "current_client": "Cliente Atual",
+    "status": "Status",
+    "birth_date": "Data Aniversário",
+    "email": "Email",
+    "reason": "Motivo",
+    "phone": {
+      "phone_number": "Telefone",
+      "ddd": "DDD",
+      "ddi": "DDI"
+    },
+    "last_name": "Sobrenome",
+    "project": "Projeto",
+    "register": "Cadastro",
+    "interviews": "Entrevistas",
+    "accompaniment": "Acompanhamento",
+    "client": "Cliente",
+    "clt": "CLT",
+    "pj": "PJ",
+    "cooperated": "Cooperado(a)",
+    "intern": "Estagiário(a)",
+    "request": "Solicitante",
+    "opening_date": "Data de Abertura",
+    "seniority": {
+      "name": "Senioridade",
+      "senior": "Senior",
+      "full": "Pleno",
+      "junior": "Junior",
+      "apprentice": "Aprendiz",
+      "specialist": "Especialista",
+      "architect": "Arquiteto(a)"
+    }
+  },
+  "validators": {
+    "collaborator-types-validator": "Selecione o tipo de contrato",
+    "validator-required": "Campo obrigatório",
+    "select-option": "Selecione uma opção"
+  }
 }

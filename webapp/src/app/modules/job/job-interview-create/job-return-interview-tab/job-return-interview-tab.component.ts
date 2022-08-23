@@ -7,6 +7,7 @@ import { DocumentValidator } from 'src/app/validators/document.validator';
 import { ReturnProvider } from 'src/providers/return.provider';
 import { ResumeProvider } from 'src/providers/resume-providers/resume.provider';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
+import { RequireMatch } from 'src/services/autocomplete.service';
 
 
 @Component({
@@ -28,7 +29,7 @@ export class JobReturnInterviewTabComponent implements OnInit {
   filteredResumes!: any[];
   filteredResumeList: any;
   resume!: any;
-  ResumeControl = new FormControl();
+  ResumeControl = new FormControl('', [Validators.required, RequireMatch]);
   resumeValid: boolean = false;
   resumeId: any;
 
