@@ -62,6 +62,7 @@ export class JobTechnicalInterviewTabComponent implements OnInit {
 
   async ngOnInit() {
     this.visible = false;
+    this.initForm();
     this.getCollaboratorList();
     this.initFilterRequester();
     this.interviewId = this.route.snapshot.paramMap.get('id');

@@ -2,7 +2,7 @@
     <div class="content-scroll" *ngIf="returnForm">
         <form [formGroup]="returnForm" fxLayout="column">
             <div fxFlex="100" fxLayoutGap="16px">
-                <mat-form-field fxFlex="30" class="example-full-width" appearance="outline"
+                <mat-form-field fxFlex="40" class="example-full-width" appearance="outline"
                     *ngIf="this.visibleResume === false">
                     <mat-label>Nome do Candidato</mat-label>
                     <input type="text" placeholder="Candidato" aria-label="text" #filterResume matInput
@@ -15,7 +15,7 @@
                         </mat-option>
                     </mat-autocomplete>
                 </mat-form-field>
-                <mat-form-field appearance="outline" *ngIf="this.visibleResume === true" fxFlex="35"
+                <mat-form-field appearance="outline" *ngIf="this.visibleResume === true" fxFlex="40"
                     class="example-full-width">
                     <mat-label>Nome do Candidato</mat-label>
                     <input disabled matInput disableRipple [value]="this.ResumeControl.value" />
