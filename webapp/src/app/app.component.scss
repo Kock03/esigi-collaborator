@@ -1,5 +1,5 @@
 mat-toolbar {
-  background: #3f1870;
+  background: #208fd8;
   color: white;
   height: 64px;
 
@@ -29,25 +29,43 @@ mat-sidenav-container {
   height: 100vh;
 }
 
+.btn-menu{
+  padding-top: 20px;
+}
+
+// .btn-menu{
+//   padding-top: 30px !important;
+// }
+
 .menu-button {
   width: 100%;
+  max-width: 200px;
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  font-size: 1rem;
-
+  font-size: 20px;
+  border-radius: 15px;
+  height: 60px;
+  background-color:  #208fd8;
+  // margin-left: 20px;
+  
   mat-icon {
     margin-right: 8px;
   }
 }
 
+.design{
+  margin-top: 20px;
+}
+
+
 .menu-button:hover:not(.active) {
-  background-color: #3f1870;
+  background-color:  #3f1870;
   transition: background-color 0.3s;
 }
 
 .active {
-  background-color: #208fd8;
+  background-color: #3f1870;
 }
 
 .logout {
@@ -58,24 +76,28 @@ mat-sidenav-container {
 }
 
 .avatar {
-  margin-top: 24px;
-  width: 100px;
-  height: 100px;
+  margin-top: 44px;
+  width: 150px;
+  height: 150px;
   border-radius: 50%;
 }
 
 .name {
-  margin-top: 8px;
-  font-weight: normal;
+  margin-top: 18px;
+  font-size: 22px;
 }
 
 .designation {
   margin-top: 2px;
-  font-size: 0.7rem;
+  font-size: 18px;
   color: lightgrey;
 }
 
 mat-divider {
-  margin: 16px 8px;
+  margin-top: 25px;
+  margin-left: 20px;
+  margin-right: 20px;
   background-color: rgba(239, 244, 250, 0.863);
+  height: 6px;
+  border-radius: 10px;
 }
