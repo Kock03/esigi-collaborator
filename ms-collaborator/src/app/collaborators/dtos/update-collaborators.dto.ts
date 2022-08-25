@@ -119,10 +119,11 @@ export class UpdateCollaboratorsDto {
   @IsOptional()
   @IsString()
   linkedin: string;
-
+  
   @ApiProperty()
   @IsOptional()
-  photo: Buffer;
+  @IsString()
+  photo: string;
 
   @ApiProperty()
   @IsOptional()

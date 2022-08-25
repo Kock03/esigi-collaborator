@@ -126,7 +126,8 @@ export class CreateCollaboratorsDto {
 
   @ApiProperty()
   @IsOptional()
-  photo: Buffer;
+  @IsString()
+  photo: string;
 
   @ApiProperty()
   @IsNotEmpty()

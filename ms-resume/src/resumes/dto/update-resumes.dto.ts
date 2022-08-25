@@ -12,6 +12,7 @@ import { ApiProperty } from '@nestjs/swagger';
 export class UpdateResumesDto {
   @ApiProperty()
   @IsOptional()
+  @IsString()
   photo: string;
 
   @ApiProperty()

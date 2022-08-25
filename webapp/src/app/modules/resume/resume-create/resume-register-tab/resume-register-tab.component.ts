@@ -17,6 +17,7 @@ import {
 } from '@angular/material/core';
 import { ActivatedRoute } from '@angular/router';
 import { DocumentValidator } from 'src/app/validators/document.validator';
+import { ResumeProvider } from 'src/providers/resume-providers/resume.provider';
 import { CepService } from 'src/services/cep.service';
 
 export const PICK_FORMATS = {
@@ -57,24 +58,33 @@ export class ResumeRegisterTabComponent implements OnInit {
   Date: any;
   MaritalStatus: any = ['Solteiro(a)', 'Casado', 'Viúvo', 'União Estável'];
   resumeId!: string | null;
+  file!: any;
   view!: boolean;
+  url: any;
 
   constructor(
     private fb: FormBuilder,
     private cepService: CepService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private httpClient: HttpClient,
+    private resumeProvider: ResumeProvider,
   ) {}
 
-  ngOnInit(): void {
+async  ngOnInit() {
+
     this.resumeId = this.route.snapshot.paramMap.get('id');
     if (this.resumeId == 'novo') {
+      this.url =
+      '../../../../assets/logo/profile-icon.png';
       this.view = true;
       this.resumeForm.valueChanges.subscribe(res => {
         const addressForm = this.resumeForm.controls['Address'] as FormGroup;
         addressForm.controls['cep'].valueChanges.subscribe(res => {});
       });
     }else{
+      let resume = await this.resumeProvider.findOne(this.resumeId);
       this.view = false;
+      this.url = 'http://localhost:3000/' + resume.photo
     }
   }
 
@@ -127,13 +137,27 @@ export class ResumeRegisterTabComponent implements OnInit {
       });
     }
   }
-  fileChanged(file: any) {
-    const reader = new FileReader();
-    reader.onload = () => {
-      this.resumeForm.patchValue({
-        photo: reader.result,
-      });
-    };
-    reader.readAsText(file.target.files[0]);
-  }
+
+  fileChanged(event: any) {
+    const file = event.target.files[0]
+
+
+      const formData = new FormData();
+      formData.append('file', file);
+
+      try {
+        this.httpClient.post('http://localhost:3000', formData)
+          .subscribe(resposta => {
+            if (resposta) {
+              this.file = resposta
+              this.resumeForm.controls['photo'].setValue(this.file.filename)
+              this.url = 'http://localhost:3000/' + this.file.filename
+            }
+          })
+
+      } catch (e) {
+        console.log(e)
+      }
+    }
+
 }

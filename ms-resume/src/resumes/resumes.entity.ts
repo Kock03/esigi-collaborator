@@ -23,7 +23,7 @@ export class ResumesEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ name: 'photo', type: 'blob', nullable: true })
+  @Column({ name: 'photo', nullable: true })
   photo: string;
 
   @Column({ name: 'first_name', length: 70 })

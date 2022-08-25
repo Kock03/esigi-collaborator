@@ -81,7 +81,7 @@ export class CollaboratorsEntity {
   linkedin: string;
 
   @Column({ nullable: true })
-  photo: Buffer;
+  photo: string;
 
   @Column({ nullable: true })
   PermissionId: string;
