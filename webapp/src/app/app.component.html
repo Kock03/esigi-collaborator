@@ -1,3 +1,5 @@
+
+
 <mat-toolbar fxLayoutAlign="space-between center">
   <div>
     <img src="../assets/logo/logo-envolti-branca-roxo.png" alt="" />
@@ -21,34 +23,34 @@
     <img *ngIf="openTree != true"
       class="avatar mat-elevation-z8"
       src="../assets/icons/avatar-astronauta.png" />
-    <h4 *ngIf="openTree != true" class="name">Usuário</h4>
+    <h2 *ngIf="openTree != true" class="name">Usuário</h2>
     <p *ngIf="openTree != true"  class="designation">Função</p>
 
     <mat-divider *ngIf="openTree != true"></mat-divider>
 
-    <div class="design" [ngStyle]="openTree && {'margin-top': '240px'} || {'margin-top': '15px'}" >
+    <div class="design" [ngStyle]="openTree && {'margin-top': '200px'} || {'margin-top': '15px'}" >
     <div class="btn-menu"  
     [ngStyle]="openTree && {'margin-left': '1px'} || {'margin-left': '20px'}"
    >
-    <button  mat-button class="menu-button"  (click)="openApp()">
+    <button class="btn-menu" mat-button class="menu-button"  (click)="openApp()">
       <mat-icon [ngStyle]="openTree && {'margin-left': '15px'} || {'margin-left': '3px'}" >home</mat-icon>
       <span *ngIf="openTree != true" >Início</span>
     </button>
     </div>
     <div class="btn-menu" [ngStyle]="openTree && {'margin-left': '1px'} || {'margin-left': '20px'}">
-    <button class="btn-menu" mat-button class="menu-button"  (click)="openCollaborator()" >
+    <button [ngClass]="{'active': activeMenu == collaborator}" class="btn-menu" mat-button class="menu-button"  (click)="navigator('colaborador')" >
       <mat-icon [ngStyle]="openTree && {'margin-left': '15px'} || {'margin-left': '3px'}">person</mat-icon>
       <span *ngIf="openTree != true" >Colaborador</span>
     </button>
     </div>
     <div class="btn-menu" [ngStyle]="openTree && {'margin-left': '1px'} || {'margin-left': '20px'}">
-    <button class="btn-menu" mat-button class="menu-button"  (click)="openJobs()" >
+    <button [ngClass]="{'active': activeMenu == jobs}" class="btn-menu" mat-button class="menu-button"  (click)="navigator('vaga')" >
       <mat-icon [ngStyle]="openTree && {'margin-left': '15px'} || {'margin-left': '3px'}">work</mat-icon>
       <span *ngIf="openTree != true" >Vagas</span>
     </button>
     </div>
     <div class="btn-menu" [ngStyle]="openTree && {'margin-left': '1px'} || {'margin-left': '20px'}" >
-    <button class="btn-menu" mat-button class="menu-button"  (click)="openResume()" >
+    <button [ngClass]="{'active': activeMenu == resume }" class="btn-menu" mat-button class="menu-button"  (click)="navigator('curriculo')" >
       <mat-icon [ngStyle]="openTree && {'margin-left': '15px'} || {'margin-left': '3px'}">description</mat-icon>
       <span *ngIf="openTree != true" >Currículo</span>
     </button>
@@ -56,7 +58,7 @@
     <div class="btn-menu" [ngStyle]="openTree && {'margin-left': '1px'} || {'margin-left': '20px'}">
     <button class="btn-menu" mat-button class="menu-button-more" (click)=recize() 
     [ngStyle]="openTree && {'margin-left': '5px'} || {'margin-right': '25px'}">
-      <mat-icon [ngStyle]="openTree && {'margin-top': '245px'} || {'margin-top': '150px'}">more_horiz</mat-icon>
+      <mat-icon class="btn-more" [ngStyle]="openTree && {'margin-top': '185px'} || {'margin-top': '90px'}">more_horiz</mat-icon>
     </button>
     </div>
   </div>

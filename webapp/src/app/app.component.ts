@@ -20,6 +20,11 @@ export class AppComponent {
 
   collaboratorId!: string | null;
   openTree: boolean = false;
+  compare!: any
+
+  collaborator: string = 'colaborador';
+  jobs: string = 'vaga';
+  resume: string = 'curriculo';
 
 
   url = window.location.href;
@@ -74,17 +79,21 @@ export class AppComponent {
     location.replace(`http://192.168.8.184:3406/portal`);
   }
 
-  openCollaborator(): void {
-    this.router.navigate(['colaborador/lista']);
-  
-  }
 
-  openJobs(): void {
-    this.router.navigate(['vaga/lista']);
-  }
+  navigator(route: any) {
+    console.log("🚀 ~ file: app.component.ts ~ line 79 ~ AppComponent ~ navigator ~ route", route)
+    switch (route) {
+      case 'colaborador':
+        this.router.navigate(['colaborador/lista']);
+        break;
+      case 'vaga':
+        this.router.navigate(['vaga/lista']);
+        break;
+      case 'curriculo':
+        this.router.navigate(['curriculo/lista']);
+        break;
 
-  openResume(): void {
-    this.router.navigate(['curriculo/lista']);
+    }
   }
 
   logout(): void {
