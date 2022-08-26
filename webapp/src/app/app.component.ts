@@ -27,7 +27,6 @@ export class AppComponent {
   resume: string = 'curriculo';
 
 
-  url = window.location.href;
 
   constructor(
     private observer: BreakpointObserver,
