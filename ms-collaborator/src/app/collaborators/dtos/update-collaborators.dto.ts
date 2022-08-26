@@ -53,6 +53,10 @@ export class UpdateCollaboratorsDto {
 
   @ApiProperty()
   @IsOptional()
+  userId: string;
+
+  @ApiProperty()
+  @IsOptional()
   @IsString()
   @MinLength(1)
   office: string;

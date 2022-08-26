@@ -123,6 +123,7 @@ export class CollaboratorCreateComponent implements OnInit {
       firstNameCorporateName: [null, Validators.required],
       lastNameFantasyName: [null, Validators.required],
       login: [null, Validators.required],
+      userId: [null],
       gender: [null, Validators.required],
       maritalStatus: [null, Validators.required],
       office: ['', Validators.required],
@@ -196,6 +197,16 @@ export class CollaboratorCreateComponent implements OnInit {
       }
       let dataUser = this.userForm.getRawValue();
       const user = await this.userProvider.store(dataUser);
+      this.collaboratorForm.controls['userId'].setValue(user.id)
+      let idUser = this.collaboratorForm.getRawValue();
+      try {
+        await this.collaboratorProvider.update(
+          colaborator.id,
+          idUser
+        );
+      } catch (error: any) {
+        console.log( error);
+      }
       sessionStorage.setItem('collaborator_id', colaborator.id);
       this.router.navigate([`colaborador/${colaborator.id}`]);
       this.method = 'edit'

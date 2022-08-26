@@ -47,6 +47,9 @@ export class CollaboratorsEntity {
   @Column()
   office: string;
 
+  @Column({ nullable: true })
+  userId: string;
+
   @Column()
   collaboratorTypes: CollaboratorTypes;
 
@@ -77,7 +80,7 @@ export class CollaboratorsEntity {
   @Column({ nullable: true })
   site: string;
 
-  @Column({ nullable: true} )
+  @Column({ nullable: true })
   linkedin: string;
 
   @Column({ nullable: true })
@@ -88,63 +91,63 @@ export class CollaboratorsEntity {
 
   @OneToOne(() => AddressEntity, {
     cascade: ['insert', 'update', 'remove'],
-    orphanedRowAction: 'delete'
+    orphanedRowAction: 'delete',
   })
   @JoinColumn()
   Address: AddressEntity;
 
   @OneToMany(() => SkillsEntity, (skills) => skills.Collaborator, {
     cascade: ['insert', 'update', 'remove'],
-    orphanedRowAction: 'delete'
+    orphanedRowAction: 'delete',
   })
   @JoinColumn()
   Skills: SkillsEntity[];
 
   @OneToMany(() => FeedbacksEntity, (feed) => feed.Collaborator, {
     cascade: ['insert', 'update', 'remove'],
-    orphanedRowAction: 'delete'
+    orphanedRowAction: 'delete',
   })
   @JoinColumn()
   Feedbacks: FeedbacksEntity[];
 
   @OneToMany(() => DocumentsEntity, (documents) => documents.Collaborator, {
     cascade: ['insert', 'update', 'remove'],
-    orphanedRowAction: 'delete'
+    orphanedRowAction: 'delete',
   })
   @JoinColumn()
   Documents: DocumentsEntity[];
 
   @OneToMany(() => LanguagesEntity, (languages) => languages.Collaborator, {
     cascade: ['insert', 'update', 'soft-remove'],
-    orphanedRowAction: 'delete'
+    orphanedRowAction: 'delete',
   })
   @JoinColumn()
   Languages: LanguagesEntity[];
 
   @OneToMany(() => EducationsEntity, (educations) => educations.Collaborator, {
     cascade: ['insert', 'update', 'remove'],
-    orphanedRowAction: 'delete'
+    orphanedRowAction: 'delete',
   })
   @JoinColumn()
   Educations: EducationsEntity[];
 
   @OneToOne(() => PhoneEntity, {
     cascade: ['insert', 'update', 'remove'],
-    orphanedRowAction: 'delete'
+    orphanedRowAction: 'delete',
   })
   @JoinColumn()
   Phone: PhoneEntity;
 
   @OneToMany(() => BankDataEntity, (bank) => bank.Collaborator, {
     cascade: ['insert', 'update', 'remove'],
-    orphanedRowAction: 'delete'
+    orphanedRowAction: 'delete',
   })
   @JoinColumn()
   BankData: BankDataEntity[];
 
   @OneToMany(() => FinancialsEntity, (Financials) => Financials.Collaborator, {
     cascade: ['insert', 'update', 'remove'],
-    orphanedRowAction: 'delete'
+    orphanedRowAction: 'delete',
   })
   @JoinColumn()
   Financials: FinancialsEntity[];

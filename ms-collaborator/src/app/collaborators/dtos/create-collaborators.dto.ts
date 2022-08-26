@@ -48,6 +48,10 @@ export class CreateCollaboratorsDto {
   login: string;
 
   @ApiProperty()
+  @IsOptional()
+  userId: string;
+
+  @ApiProperty()
   @IsNotEmpty()
   @IsEnum(Gender)
   gender: Gender;
