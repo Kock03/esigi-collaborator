@@ -89,7 +89,7 @@ export class AppComponent {
         this.router.navigate(['vaga/lista']);
         break;
       case 'curriculo':
-        this.router.navigate(['curriculo/lista']);
+        this.router.navigate(['curriculo/lista']); 
         break;
 
     }
