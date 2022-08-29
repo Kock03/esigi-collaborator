@@ -28,13 +28,13 @@
               {{'validators.validator-required' |  translate}} </mat-error>
           </mat-form-field>
           <br />
-          <mat-checkbox
-            class="checkbox"
-            color="primary"
-            fxFlex="25"
-            formControlName="inactive">
-            Inativo
-          </mat-checkbox>
+
+          <div class="checkbox">
+            <label class="container" formControlName="inactive" fxLayoutAlign="center center">Ativo
+              <input type="checkbox" checked="checked">
+              <span class="checkmark"></span>
+            </label>
+          </div>
         </div>
         <div fxLayout="row" fxFlex="100" fxLayoutGap="16px">
           <mat-form-field fxFlex="75" appearance="outline">

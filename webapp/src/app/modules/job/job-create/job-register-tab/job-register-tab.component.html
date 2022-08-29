@@ -47,7 +47,7 @@
 
       <div fxFlex="100" fxLayoutGap="16px">
 
-        <mat-form-field fxFlex="30" class="example-full-width" appearance="outline" *ngIf="this.method === 'novo'">
+        <mat-form-field fxFlex="40" class="example-full-width" appearance="outline" *ngIf="this.method === 'novo'">
           <mat-label>{{'generic.client' | translate}}</mat-label>
           <input type="text" placeholder="Cliente" aria-label="text" #fiilter matInput [matAutocomplete]="autoCustomer"
             [formControl]="customerControl" />
@@ -61,7 +61,7 @@
           <mat-label>{{'generic.client' | translate}}</mat-label>
           <input disabled matInput disableRipple [value]="this.customerControl.value" />
         </mat-form-field>
-        <mat-form-field fxFlex="20" appearance="outline">
+        <mat-form-field fxFlex="26" appearance="outline">
           <mat-label>{{'job.job_create.type_of_job.name' | translate}}</mat-label>
           <mat-select matInput disableRipple formControlName="typeOfJob">
             <mat-option [value]="1">{{'job.job_create.type_of_job.staff_increase' | translate}}</mat-option>
@@ -82,8 +82,12 @@
             {{'validators.validator-required' | translate}} </mat-error>
         </mat-form-field>
 
-        <mat-checkbox class="checkbox" color="primary" fxFlex="10" formControlName="temporary">
-          {{'job.job_create.temporary' | translate}}</mat-checkbox>
+          <div class="content-box" class="checkbox">
+            <label class="container"  formControlName="temporary" fxLayoutAlign="center center">{{'job.job_create.temporary' | translate}}
+              <input type="checkbox" checked="checked">
+              <span class="checkmark"></span>
+            </label>
+          </div>
 
         <mat-form-field fxFlex="25" appearance="outline" *ngIf="jobForm.controls['temporary'].value == true">
           <mat-label>{{'job.job_create.month_time' | translate}}</mat-label>
@@ -115,16 +119,33 @@
           <section fxLayout="column">
             <span class="text" fxLayoutAlign="start">{{'generic.seniority.name' | translate}}</span>
             <div fxLayout="row" fxLayoutAlign="space-around">
-              <mat-checkbox color="primary" formControlName="intern">{{'generic.intern' | translate}}</mat-checkbox>
+              <div class="checkbox" >
+                <label  class="container" formControlName="intern" fxLayoutAlign="center center">{{'generic.intern' | translate}}
+                  <input type="checkbox" checked="checked">
+                  <span class="checkmark"></span>
+                </label>
+              </div>
 
-              <mat-checkbox color="primary" formControlName="junior">{{'generic.seniority.junior' | translate}}
-              </mat-checkbox>
+              <div class="checkbox" >
+                <label  class="container" formControlName="junior" fxLayoutAlign="center center">{{'generic.seniority.junior' | translate}}
+                  <input type="checkbox" checked="checked">
+                  <span class="checkmark"></span>
+                </label>
+              </div>
 
-              <mat-checkbox color="primary" formControlName="pleno">{{'generic.seniority.full' | translate}}
-              </mat-checkbox>
+              <div class="checkbox" >
+                <label  class="container" formControlName="pleno" fxLayoutAlign="center center">{{'generic.seniority.full' | translate}}
+                  <input type="checkbox" checked="checked">
+                  <span class="checkmark"></span>
+                </label>
+              </div>
 
-              <mat-checkbox color="primary" formControlName="senior">{{'generic.seniority.senior' | translate}}
-              </mat-checkbox>
+              <div class="checkbox" >
+                <label  class="container" formControlName="senior" fxLayoutAlign="center center">{{'generic.seniority.senior' | translate}}
+                  <input type="checkbox" checked="checked">
+                  <span class="checkmark"></span>
+                </label>
+              </div>
             </div>
           </section>
         </div>
@@ -138,7 +159,7 @@
           <input placeholder="Número de Vagas" matInput formControlName="jobNumber" type="number" />
         </mat-form-field>
 
-        <mat-form-field fxFlex="40" appearance="outline">
+        <mat-form-field fxFlex="30" appearance="outline">
           <mat-label>{{'job.job_create.working_day' | translate}}</mat-label>
           <input placeholder="Jornada de Trabaho Semanal" matInput formControlName="workingDay" />
         </mat-form-field>
@@ -159,9 +180,12 @@
           ">O valor máximo deve ser maior que o valor minimo</mat-error>
         </mat-form-field>
 
-        <mat-checkbox class="checkbox" color="primary" fxFlex="15" formControlName="publish">
-          {{'job.job_create.post_vacancy' | translate}}
-        </mat-checkbox>
+        <div  class="checkbox" >
+          <label  class="container" formControlName="publish" fxLayoutAlign="center center">{{'job.job_create.post_vacancy' | translate}}
+            <input type="checkbox" checked="checked">
+            <span class="checkmark"></span>
+          </label>
+        </div>
       </div>
     </form>
   </div>

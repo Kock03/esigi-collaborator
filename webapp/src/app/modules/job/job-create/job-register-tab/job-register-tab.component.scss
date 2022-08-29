@@ -1,9 +1,10 @@
     #jobRegisterTab {
       max-width: 1650px;
 
-      .checkbox {
-        margin-top: 15px;
+      .content-box {
         text-align: center;
+        padding-left: 150px;
+        padding-top: 30px;
       }
 
       .checkbox-section {
@@ -11,4 +12,12 @@
           margin-bottom: 5px;
         }
       }
+
+      .checkbox{
+        margin-top: 15px;
+      }
+
+      // .style-box{
+      //   margin-top: 30px;
+      // }
     }
