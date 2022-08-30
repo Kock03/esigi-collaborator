@@ -128,82 +128,21 @@ html {
   }
 }
 
-.container {
-  display: block;
-  position: relative;
-  padding-left: 30px;
-  margin-bottom: 12px;
-  cursor: pointer;
-  font-size: 13px;
+.checkbox{
+  margin-top: 18px;
 }
 
-/* Esconder o checkbox padrão */
-.container input {
-  margin-top: 1px;
-  position: absolute;
-  opacity: 0;
-  cursor: pointer;
-  height: 0;
-  width: 0;
-
-  .container .checkmark:after {
-  content: "";
-  position: absolute;
-  display: none;
-  left: 9px;
-  top: 5px;
-  width: 5px;
-  height: 10px;
-  border: solid white;
-  border-width: 0 3px 3px 0;
-  -webkit-transform: rotate(45deg);
-  -ms-transform: rotate(45deg);
-  transform: rotate(45deg);
-}
-}
-
-/* Criar o checkbox customizado */
-.checkmark {
-  position: absolute;
-  margin-top: 0;
-  left: 0;
-  height: 25px;
-  width: 25px;
-  background-color: #3f1870;
-  border-radius: 20px;
-
-}
-
-// /* Adicionar uma cor de fundo cinza ao passar o mouse */
-// .container:hover input ~ .checkmark {
-//   background-color: #ccc;
-// }
-
-/* Quando o checkbox é clicado, adicionar um fundo rosa */
-.container input:checked ~ .checkmark {
-  background-color: rgb(219, 214, 214);
-}
-
-/* Criar o ícone de check, escondido quando não estiver selecionado */
-.container .checkmark:after {
-  content: "";
-  position: absolute;
-  display: none;
-  left: 9px;
-  top: 5px;
-  width: 5px;
-  height: 10px;
-  border: solid white;
-  border-width: 0 3px 3px 0;
-  -webkit-transform: rotate(45deg);
-  -ms-transform: rotate(45deg);
-  transform: rotate(45deg);
+.form-checkbox{
+  margin-top: 3px;
 }
 
 
-/* Exibir o ícone quando selecionado */
-.container input:checked ~ .checkmark:after {
-  display: block;
+.custom-frame {
+  & .mat-checkbox-background, .mat-checkbox-frame {
+    border-radius: 70% !important;
+    // width: 20px;
+    // height: 20px;
+  }
 }
 
 
