@@ -3,6 +3,8 @@
 
 @import "../src/app/layout/themes/snack-bar.scss";
 
+
+
 html,
 body {
   margin: 0;
@@ -136,6 +138,14 @@ html {
   margin-top: 3px;
 }
 
+.mat-option:hover{
+  background: #D0E7EF !important;
+}
+
+.mat-selected{
+  background: #D0E7EF !important;
+}
+
 
 .custom-frame {
   & .mat-checkbox-background, .mat-checkbox-frame {
@@ -144,6 +154,9 @@ html {
     // height: 20px;
   }
 }
+
+// #A6D6E5
+// #E30F0F
 
 
 html,
