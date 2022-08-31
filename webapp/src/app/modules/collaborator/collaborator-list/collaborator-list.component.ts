@@ -159,9 +159,6 @@ export class CollaboratorListComponent implements OnInit {
         );
         this.params = this.filter.nativeElement.value;
         this.searchCollaborators();
-        if (this.filter.nativeElement.value === '') {
-          this.getCollaboratorList();
-        }
       });
   }
 
