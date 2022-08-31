@@ -1,6 +1,7 @@
 #collaboratorList {
   max-width: 1700px;
 
+
   .envolti-table {
     margin-top: 20px;
     overflow: auto;
@@ -16,6 +17,11 @@
       white-space: nowrap;
       overflow: hidden;
     }
+    
+  }
+
+  h2{
+    color: #2F3133;
   }
 
   .new-btn {
