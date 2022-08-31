@@ -78,17 +78,14 @@ export class CollaboratorListComponent implements OnInit {
     this.initFilter();
   }
 
-  async searchCollaborators(
-  
-  ) {
+  async searchCollaborators() {
     const data = {
       firstNameCorporateName: this.params,
       status: this.select,
     };
     try {
-      this.collaborators = await this.collaboratorProvider.findByName(
-       data
-      );
+      this.filteredCollaboratorList.data = this.collaborators =
+        await this.collaboratorProvider.findByName(data);
     } catch (error) {
       console.error(error);
     }
