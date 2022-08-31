@@ -151,12 +151,6 @@ export class CollaboratorListComponent implements OnInit {
       .pipe(debounceTime(200), distinctUntilChanged())
 
       .subscribe(res => {
-        this.filteredCollaboratorList.data = this.collaborators.filter(
-          collaborator =>
-            collaborator.firstNameCorporateName
-              .toLocaleLowerCase()
-              .includes(this.filter.nativeElement.value.toLocaleLowerCase())
-        );
         this.params = this.filter.nativeElement.value;
         this.searchCollaborators();
       });
