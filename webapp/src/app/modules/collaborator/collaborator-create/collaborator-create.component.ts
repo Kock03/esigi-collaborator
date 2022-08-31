@@ -183,7 +183,9 @@ export class CollaboratorCreateComponent implements OnInit {
           email: colaborator.email,
           login: colaborator.login,
           password: colaborator.cnpj,
-          collaboratorId: colaborator.id
+          collaboratorId: colaborator.id,
+          office: colaborator.office,
+          inactive: colaborator.inactive,
         })
       } else {
         this.userForm = this.fb.group({
@@ -192,7 +194,9 @@ export class CollaboratorCreateComponent implements OnInit {
           email: colaborator.email,
           login: colaborator.login,
           collaboratorId: colaborator.id,
-          password: colaborator.cpf
+          password: colaborator.cpf,
+          office: colaborator.office,
+          inactive: colaborator.inactive,
         })
       }
       let dataUser = this.userForm.getRawValue();

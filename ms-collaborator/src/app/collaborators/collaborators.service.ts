@@ -89,7 +89,7 @@ export class CollaboratorsService {
 
     if (!firstNameCorporateName) {
       const collaborators = await this.collaboratorsRepository.find({
-        select: ['id', 'firstNameCorporateName', 'lastNameFantasyName', 'email', 'inactive', 'admissionDate', 'office',],
+        select: ['id', 'firstNameCorporateName', 'lastNameFantasyName', 'email', 'inactive', 'admissionDate', 'office', 'login'],
         relations: ['Phone'],
         where: [
           { inactive: inactive }]
@@ -97,7 +97,7 @@ export class CollaboratorsService {
       return await this.requestResource(collaborators)
     } else if (!inactive) {
       const collaborators = await this.collaboratorsRepository.find({
-        select: ['id', 'firstNameCorporateName', 'lastNameFantasyName', 'email', 'inactive', 'admissionDate', 'office',],
+        select: ['id', 'firstNameCorporateName', 'lastNameFantasyName', 'email', 'inactive', 'admissionDate', 'office', 'login'],
         relations: ['Phone'],
         where: [
           { firstNameCorporateName: Like(`%${firstNameCorporateName}%`) }]
@@ -106,7 +106,7 @@ export class CollaboratorsService {
     } else {
       if (inactive === '1') {
         const collaborators = await this.collaboratorsRepository.find({
-          select: ['id', 'firstNameCorporateName', 'lastNameFantasyName', 'email', 'inactive', 'admissionDate', 'office',],
+          select: ['id', 'firstNameCorporateName', 'lastNameFantasyName', 'email', 'inactive', 'admissionDate', 'office', 'login'],
           relations: ['Phone'],
           where: [
             { firstNameCorporateName: Like(`%${firstNameCorporateName}%`), inactive: true }]
@@ -114,7 +114,7 @@ export class CollaboratorsService {
         return await this.requestResource(collaborators)
       } else {
         const collaborators = await this.collaboratorsRepository.find({
-          select: ['id', 'firstNameCorporateName', 'lastNameFantasyName', 'email', 'inactive', 'admissionDate', 'office',],
+          select: ['id', 'firstNameCorporateName', 'lastNameFantasyName', 'email', 'inactive', 'admissionDate', 'office', 'login'],
           relations: ['Phone'],
           where: [
             { firstNameCorporateName: Like(`%${firstNameCorporateName}%`), inactive: false }]
