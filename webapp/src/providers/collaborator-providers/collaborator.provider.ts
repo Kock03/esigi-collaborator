@@ -70,9 +70,9 @@ export class CollaboratorProvider {
     });
   }
 
-  findByName(firstNameCorporateName?: string, inactive?: string): Promise<any> {
+  findByName(body: any): Promise<any> {
     return new Promise((resolve, reject) => {
-      this.apiGateway.get(environment.COLLABORATOR_MS + `collaborators/find/name?` + firstNameCorporateName + '&' + inactive)
+      this.apiGateway.post(environment.COLLABORATOR_MS + 'collaborators/find/name', body)
         .subscribe((response: HttpResponse<any>) => {
           resolve(response.body);
         }, reject);

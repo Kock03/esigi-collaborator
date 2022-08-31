@@ -82,9 +82,9 @@ export class CollaboratorsController {
   }
 
 
-  @Get('find/name')
-  async findByName(@Query('firstNameCorporateName') firstNameCorporateName?: any, @Query('inactive') inactive?: any) {
-    return this.collaboratorsService.findByName(firstNameCorporateName, inactive);
+  @Post('find/name')
+  async findByName(@Body() body: any) {
+    return await this.collaboratorsService.findByName(body.firstNameCorporateName, body.status);
   }
 
   @Get('find/name/gerente')

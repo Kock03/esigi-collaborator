@@ -25,7 +25,7 @@ export class CollaboratorsService {
     @InjectRepository(CollaboratorsEntity)
     private readonly collaboratorsRepository: Repository<CollaboratorsEntity>,
     private httpService: HttpService,
-  ) { }
+  ) {}
 
   async findAll() {
     const options: FindManyOptions = {
@@ -33,26 +33,31 @@ export class CollaboratorsService {
     };
     try {
       const collaborators = await this.collaboratorsRepository.find(options);
-      return await this.requestResource(collaborators)
-
+      return await this.requestResource(collaborators);
     } catch (err) {
       throw new NotFoundException();
     }
-
   }
 
   async findCollaboratorsListById(idList: string[]) {
     return await this.collaboratorsRepository.find({
-      select: ['id', 'firstNameCorporateName', 'lastNameFantasyName', 'office', 'login', 'inactive'],
-      where: { id: In(idList) }
-    })
+      select: [
+        'id',
+        'firstNameCorporateName',
+        'lastNameFantasyName',
+        'office',
+        'login',
+        'inactive',
+      ],
+      where: { id: In(idList) },
+    });
   }
 
   async findCollaboratorById(id: string) {
     return await this.collaboratorsRepository.find({
       select: ['id', 'firstNameCorporateName', 'lastNameFantasyName'],
-      where: { id: id }
-    })
+      where: { id: id },
+    });
   }
 
   async shortListCollaborators() {
@@ -65,7 +70,7 @@ export class CollaboratorsService {
   async shortListCollaboratorsPermission() {
     return await this.collaboratorsRepository
       .createQueryBuilder('collaborators')
-      .leftJoinAndSelect("collaborators.Phone", "Phone")
+      .leftJoinAndSelect('collaborators.Phone', 'Phone')
       .where('collaborators.inactive =false')
       .getMany();
   }
@@ -84,58 +89,121 @@ export class CollaboratorsService {
       .getMany();
   }
 
-
-  async findByName(firstNameCorporateName?: string, inactive?: string) {
-
-    if (!firstNameCorporateName) {
-      const collaborators = await this.collaboratorsRepository.find({
-        select: ['id', 'firstNameCorporateName', 'lastNameFantasyName', 'email', 'inactive', 'admissionDate', 'office', 'login'],
-        relations: ['Phone'],
-        where: [
-          { inactive: inactive }]
-      });
-      return await this.requestResource(collaborators)
-    } else if (!inactive) {
-      const collaborators = await this.collaboratorsRepository.find({
-        select: ['id', 'firstNameCorporateName', 'lastNameFantasyName', 'email', 'inactive', 'admissionDate', 'office', 'login'],
-        relations: ['Phone'],
-        where: [
-          { firstNameCorporateName: Like(`%${firstNameCorporateName}%`) }]
-      });
-      return await this.requestResource(collaborators)
-    } else {
-      if (inactive === '1') {
-        const collaborators = await this.collaboratorsRepository.find({
-          select: ['id', 'firstNameCorporateName', 'lastNameFantasyName', 'email', 'inactive', 'admissionDate', 'office', 'login'],
-          relations: ['Phone'],
-          where: [
-            { firstNameCorporateName: Like(`%${firstNameCorporateName}%`), inactive: true }]
-        });
-        return await this.requestResource(collaborators)
-      } else {
-        const collaborators = await this.collaboratorsRepository.find({
-          select: ['id', 'firstNameCorporateName', 'lastNameFantasyName', 'email', 'inactive', 'admissionDate', 'office', 'login'],
-          relations: ['Phone'],
-          where: [
-            { firstNameCorporateName: Like(`%${firstNameCorporateName}%`), inactive: false }]
-        });
-        return await this.requestResource(collaborators)
+  async findByName(firstNameCorporateName: string, status: number) {
+    let collaborator;
+    if ((firstNameCorporateName = '')) {
+      switch (status) {
+        case 1:
+          collaborator = this.findAll();
+          return collaborator;
+          break;
+        case 2:
+          collaborator = this.findActive();
+          return collaborator;
+          break;
+        case 3:
+          collaborator = this.findInactive();
+          return collaborator;
+          break;
       }
+    } else {
+      switch (status) {
+        case 1:
+          collaborator = await this.collaboratorsRepository.find({
+            select: [
+              'id',
+              'firstNameCorporateName',
+              'lastNameFantasyName',
+              'email',
+              'inactive',
+              'admissionDate',
+              'office',
+              'login',
+            ],
+            relations: ['Phone'],
+            where: [
+              {
+                firstNameCorporateName: Like(`%${firstNameCorporateName}%`),
+              },
+            ],
+          });
+          return await this.requestResource(collaborator);
 
+          break;
+        case 2:
+          collaborator = await this.collaboratorsRepository.find({
+            select: [
+              'id',
+              'firstNameCorporateName',
+              'lastNameFantasyName',
+              'email',
+              'inactive',
+              'admissionDate',
+              'office',
+              'login',
+            ],
+            relations: ['Phone'],
+            where: [
+              {
+                firstNameCorporateName: Like(`%${firstNameCorporateName}%`),
+                inactive: false,
+              },
+            ],
+          });
+          return await this.requestResource(collaborator);
+          break;
+        case 3:
+          collaborator = await this.collaboratorsRepository.find({
+            select: [
+              'id',
+              'firstNameCorporateName',
+              'lastNameFantasyName',
+              'email',
+              'inactive',
+              'admissionDate',
+              'office',
+              'login',
+            ],
+            relations: ['Phone'],
+            where: [
+              {
+                firstNameCorporateName: Like(`%${firstNameCorporateName}%`),
+                inactive: true,
+              },
+            ],
+          });
+          return await this.requestResource(collaborator);
+          break;
+      }
     }
   }
-
 
   async findByNameEvaluator(query) {
     if (query.firstNameCorporateName == '') {
       return await this.collaboratorsRepository
         .createQueryBuilder('collaborators')
-        .where('collaborators.office = "Gerente" or collaborators.office = "Desenvolvedor"')
+        .where(
+          'collaborators.office = "Gerente" or collaborators.office = "Desenvolvedor"',
+        )
         .getMany();
     } else {
       return this.collaboratorsRepository.find({
-        select: ['id', 'firstNameCorporateName', 'lastNameFantasyName', 'office'],
-        where: [{ firstNameCorporateName: Like(`%${query.firstNameCorporateName}%`), office: "Gerente" }, { firstNameCorporateName: Like(`%${query.firstNameCorporateName}%`), office: "Desenvolvedor" }],
+        select: [
+          'id',
+          'firstNameCorporateName',
+          'lastNameFantasyName',
+          'office',
+        ],
+        where: [
+          {
+            firstNameCorporateName: Like(`%${query.firstNameCorporateName}%`),
+            office: 'Gerente',
+          },
+          {
+            firstNameCorporateName: Like(`%${query.firstNameCorporateName}%`),
+            office: 'Desenvolvedor',
+          },
+        ],
       });
     }
   }
@@ -144,16 +212,31 @@ export class CollaboratorsService {
     if (query.firstNameCorporateName == '') {
       return await this.collaboratorsRepository
         .createQueryBuilder('collaborators')
-        .where('collaborators.office = "Tech Recruter" and collaborators.office = "RH"')
+        .where(
+          'collaborators.office = "Tech Recruter" and collaborators.office = "RH"',
+        )
         .getMany();
     } else {
       return this.collaboratorsRepository.find({
-        select: ['id', 'firstNameCorporateName', 'lastNameFantasyName', 'office'],
-        where: [{ firstNameCorporateName: Like(`%${query.firstNameCorporateName}%`), office: "Tech Recruter" }, { firstNameCorporateName: Like(`%${query.firstNameCorporateName}%`), office: "RH" }],
+        select: [
+          'id',
+          'firstNameCorporateName',
+          'lastNameFantasyName',
+          'office',
+        ],
+        where: [
+          {
+            firstNameCorporateName: Like(`%${query.firstNameCorporateName}%`),
+            office: 'Tech Recruter',
+          },
+          {
+            firstNameCorporateName: Like(`%${query.firstNameCorporateName}%`),
+            office: 'RH',
+          },
+        ],
       });
     }
   }
-
 
   async findByNameGerente(query) {
     if (query.firstNameCorporateName == '') {
@@ -163,9 +246,18 @@ export class CollaboratorsService {
         .getMany();
     } else {
       return this.collaboratorsRepository.find({
-        select: ['id', 'firstNameCorporateName', 'lastNameFantasyName', 'office'],
+        select: [
+          'id',
+          'firstNameCorporateName',
+          'lastNameFantasyName',
+          'office',
+        ],
         where: [
-          { firstNameCorporateName: Like(`%${query.firstNameCorporateName}%`), office: "Gerente" }],
+          {
+            firstNameCorporateName: Like(`%${query.firstNameCorporateName}%`),
+            office: 'Gerente',
+          },
+        ],
       });
     }
   }
@@ -177,18 +269,21 @@ export class CollaboratorsService {
       .getMany();
   }
 
-
   async findEvaluator() {
     return await this.collaboratorsRepository
       .createQueryBuilder('collaborators')
-      .where('collaborators.office = "Gerente" and collaborators.office = "Desenvolvedor"')
+      .where(
+        'collaborators.office = "Gerente" and collaborators.office = "Desenvolvedor"',
+      )
       .getMany();
   }
 
   async findTechRecruter() {
     return await this.collaboratorsRepository
       .createQueryBuilder('collaborators')
-      .where('collaborators.office = "Tech Recruter" and collaborators.office = "RH"')
+      .where(
+        'collaborators.office = "Tech Recruter" and collaborators.office = "RH"',
+      )
       .getMany();
   }
 
@@ -196,9 +291,25 @@ export class CollaboratorsService {
     conditions: FindConditions<CollaboratorsEntity>,
     options?: FindOneOptions<CollaboratorsEntity>,
   ) {
-    options = { relations: ['Financials', 'Address', 'BankData', 'Dependents', 'Documents', 'Educations', 'Feedbacks', 'Languages', 'Phone', 'Skills'] };
+    options = {
+      relations: [
+        'Financials',
+        'Address',
+        'BankData',
+        'Dependents',
+        'Documents',
+        'Educations',
+        'Feedbacks',
+        'Languages',
+        'Phone',
+        'Skills',
+      ],
+    };
     try {
-      return await this.collaboratorsRepository.findOneOrFail(conditions, options);
+      return await this.collaboratorsRepository.findOneOrFail(
+        conditions,
+        options,
+      );
     } catch {
       throw new NotFoundException();
     }
@@ -266,7 +377,8 @@ export class CollaboratorsService {
       if (resources.data) {
         collaborators.map((collaborator) => {
           const resource = resources.data.find(
-            (resource) => resource.collaborator_id === collaborator.id);
+            (resource) => resource.collaborator_id === collaborator.id,
+          );
           if (resource) {
             collaborator.resource = {
               projectName: resource.name,
@@ -277,12 +389,11 @@ export class CollaboratorsService {
             };
             return collaborator;
           }
-        })
+        });
         return collaborators;
       } else {
         return collaborators;
       }
-
     } catch (err) {
       throw new NotFoundException();
     }
