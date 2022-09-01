@@ -91,7 +91,7 @@ export class CollaboratorsService {
 
   async findByName(firstNameCorporateName: string, status: number) {
     let collaborator;
-    if ((firstNameCorporateName = '')) {
+    if (firstNameCorporateName === '') {
       switch (status) {
         case 1:
           collaborator = this.findAll();
@@ -127,6 +127,7 @@ export class CollaboratorsService {
               },
             ],
           });
+    
           return await this.requestResource(collaborator);
 
           break;

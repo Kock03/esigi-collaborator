@@ -52,7 +52,7 @@ export class CollaboratorListComponent implements OnInit {
   ];
 
   collaborators!: ICollaborator[];
-  filteredCollaboratorList = new MatTableDataSource();
+  filteredCollaboratorList: any;
   index: any = null;
   Collaborator: any;
   step: number = 1;
@@ -84,7 +84,7 @@ export class CollaboratorListComponent implements OnInit {
       status: this.select,
     };
     try {
-      this.filteredCollaboratorList.data = this.collaborators =
+      this.filteredCollaboratorList = this.collaborators =
         await this.collaboratorProvider.findByName(data);
     } catch (error) {
       console.error(error);
@@ -141,7 +141,7 @@ export class CollaboratorListComponent implements OnInit {
   }
 
   async getCollaboratorList() {
-    this.filteredCollaboratorList.data = this.collaborators =
+    this.filteredCollaboratorList = this.collaborators =
       await this.collaboratorProvider.findAll();
     this.filteredCollaboratorList.sort = this.sort;
   }
@@ -151,8 +151,17 @@ export class CollaboratorListComponent implements OnInit {
       .pipe(debounceTime(200), distinctUntilChanged())
 
       .subscribe(res => {
+        this.filteredCollaboratorList = this.collaborators.filter(
+          (collaborator) =>{
+            collaborator.firstNameCorporateName
+              .toLocaleLowerCase()
+              .includes(this.filter.nativeElement.value.toLocaleLowerCase())
+
+          }
+        );
         this.params = this.filter.nativeElement.value;
         this.searchCollaborators();
+        this.filteredCollaboratorList.sort = this.sort;
       });
   }
 
