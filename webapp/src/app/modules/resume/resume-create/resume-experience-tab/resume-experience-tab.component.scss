@@ -137,6 +137,10 @@
     text-align: center;
   }
 
+  .checkbox{
+    margin-top: 1px;
+  }
+
   .input-description {
     height: 100% !important;
     height: 300px;
@@ -148,17 +152,22 @@
 
   .button-dialog {
     margin-left: 140px;
-    position: fixed;
+    position: relative;
   }
 
   .content-scroll {
-    overflow: auto;
-    height: calc(100vh - 280px);
+    overflow: hidden;
+    height: calc(100vh - 100px);
     margin-left: 15px !important;
-    position: absolute;
+    position: fixed;
   }
 
   .style-list {
     padding: 20px;
+  }
+
+  .checkbox{
+    padding: 16px;
+    padding-left: 35px;
   }
 }

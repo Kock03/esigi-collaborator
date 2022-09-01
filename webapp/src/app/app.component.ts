@@ -17,29 +17,16 @@ export class AppComponent {
   @ViewChild(MatSidenav)
   sidenav!: MatSidenav;
 
-  menuList = [
-    {
-      name: 'sidenav.collaborator',
-      icon: 'person',
-      selected: false,
-      action: 'colaborador/lista',
-    },
-    {
-      name: 'sidenav.jobs',
-      icon: 'work',
-      selected: false,
-      action: 'vaga/lista',
-    },
-
-    {
-      name: 'sidenav.resume',
-      icon: 'description',
-      selected: false,
-      action: 'curriculo/lista',
-    },
-  ];
 
   collaboratorId!: string | null;
+  openTree: boolean = false;
+  compare!: any
+
+  collaborator: string = 'colaborador';
+  jobs: string = 'vaga';
+  resume: string = 'curriculo';
+
+
 
   constructor(
     private observer: BreakpointObserver,
@@ -50,6 +37,8 @@ export class AppComponent {
   ) {
     translateService.addLangs(['en-US', 'pt-BR']);
   }
+
+
 
   ngOnInit(): void {
     this.translateService.setDefaultLang('pt-BR');
@@ -71,8 +60,14 @@ export class AppComponent {
           this.sidenav.mode = 'side';
           this.sidenav.open();
         }
-      });
+      }
+      );
     }, 50);
+  }
+
+  recize() {
+
+    this.openTree = this.openTree === true ? false : true;
   }
 
   navigate(route: string) {
@@ -83,8 +78,26 @@ export class AppComponent {
     location.replace(`http://192.168.8.184:3406/portal`);
   }
 
+
+  navigator(route: any) {
+    console.log("🚀 ~ file: app.component.ts ~ line 79 ~ AppComponent ~ navigator ~ route", route)
+    switch (route) {
+      case 'colaborador':
+        this.router.navigate(['colaborador/lista']);
+        break;
+      case 'vaga':
+        this.router.navigate(['vaga/lista']);
+        break;
+      case 'curriculo':
+        this.router.navigate(['curriculo/lista']); 
+        break;
+
+    }
+  }
+
   logout(): void {
     this.userService.logout();
   }
+
 
 }

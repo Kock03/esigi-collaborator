@@ -4,7 +4,7 @@
       <div fxLayout="row">
         <div class="image-upload">
           <label for="fileInput">
-            <img src="{{ url }}" alt="" />
+            <img src="../assets/icons/avatar-astronauta.png"  alt="" />
           </label>
           <input type="file" id="fileInput" (change)="fileChanged($event)" />
         </div>
@@ -39,9 +39,10 @@
           </mat-form-field>
 
 
-          <mat-checkbox class="checkbox" color="primary" fxFlex="10"
-            formControlName="inactive"
-            fxLayoutAlign="center center">Inativo</mat-checkbox>
+
+          <div class="checkbox" >
+            <mat-checkbox color="primary" class="custom-frame" formControlName="inactive" fxLayoutAlign="start center">Inativo</mat-checkbox>
+          </div>
         </div>
       </div>
 

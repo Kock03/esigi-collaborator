@@ -3,6 +3,8 @@
 
 @import "../src/app/layout/themes/snack-bar.scss";
 
+
+
 html,
 body {
   margin: 0;
@@ -56,7 +58,7 @@ html {
   &-item {
     cursor: default;
     margin-bottom: 8px !important;
-    color: black;
+    color: #2F3133;
     
   }
 
@@ -128,6 +130,37 @@ html {
   }
 }
 
+.checkbox{
+  margin-top: 18px;
+}
+
+.form-checkbox{
+  margin-top: 3px;
+}
+
+.mat-option:hover{
+  background: #D0E7EF !important;
+}
+
+.mat-selected{
+  background: #D0E7EF !important;
+}
+
+.mat-row:hover{
+  background: #D0E7EF !important;
+}
+
+.custom-frame {
+  & .mat-checkbox-background, .mat-checkbox-frame {
+    border-radius: 70% !important;
+    // width: 20px;
+    // height: 20px;
+  }
+}
+
+// #A6D6E5
+// #E30F0F
+
 
 html,
 body {
@@ -138,3 +171,6 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+
+
+
