@@ -30,6 +30,7 @@ export class CollaboratorsService {
   async findAll() {
     const options: FindManyOptions = {
       order: { createdAt: 'DESC' },
+      relations: ['Phone']
     };
     try {
       const collaborators = await this.collaboratorsRepository.find(options);
