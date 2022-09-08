@@ -144,11 +144,21 @@ export class JobsService {
   }
 
 
-  findByName(query): Promise<JobsEntity[]> {
-    return this.jobsRepository.find({
-      where: [
-        { jobName: Like(`%${query.jobName}%`) },]
-    });
+  findByName(name) {
+    let job
+    if(name === ''){
+      job = this.findAll();
+      return job;
+    }else{
+      job  = this.jobsRepository.find({
+        where: [
+          { jobName: Like(`%${name}%`) },]
+      });
+      return this.jobRequest(job);
+      
+    }   
+      
+      
   }
 
   async findOneOrFail(
@@ -170,6 +180,62 @@ export class JobsService {
       throw new NotFoundException();
     }
 
+  }
+
+async jobRequest(jobs: any){
+    try {
+      const collaboratorIdList = jobs.map((job) => {
+        return job.collaboratorRequesterId;
+      });
+
+      const collaborators = await this.httpService
+        .post('http://localhost:3501/api/v1/collaborators/list', {
+          idList: collaboratorIdList,
+        })
+        .toPromise();
+
+      if (collaborators.data) {
+        jobs.map((job) => {
+          const collaborator = collaborators.data.find(
+            (collaborator) => collaborator.id === job.collaboratorRequesterId);
+            if(collaborator){
+              job.collaborator = {
+                firstNameCorporateName: collaborator.firstNameCorporateName,
+                lastNameFantasyName: collaborator.lastNameFantasyName,
+              };
+              return job;
+            }
+            job.collaborator = {
+              firstNameCorporateName: 'Não',
+              lastNameFantasyName: 'definido',
+            };
+            return job;
+        })
+      }
+      const customerIdList = jobs.map((job) => {
+        return job.customerId;
+      });
+
+      const customers = await this.httpService
+        .post('http://localhost:3506/api/v1/customers/list', {
+          idList: customerIdList,
+        })
+        .toPromise();
+      if (customers.data) {
+        jobs.map((job) => {
+          const customer = customers.data.find(
+            (customer) => customer.id === job.customerId);
+
+          job.customer = {
+            corporateName: customer.corporateName,
+          };
+          return job;
+        })
+      }
+      return jobs;
+    } catch (error) {
+      throw new NotFoundException();
+    }
   }
 
 

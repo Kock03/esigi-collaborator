@@ -92,9 +92,12 @@ export class JobListComponent implements OnInit {
     }
   }
 
-  async searchJobs(query?: string) {
+  async searchJobs(name: string) {
+    const data = {
+      jobName: name,
+    };
     try {
-      this.jobs = await this.jobProvider.findByName(query);
+      this.jobs = await this.jobProvider.findByName(data);
     } catch (error) {
       console.error(error);
     }
@@ -125,7 +128,7 @@ export class JobListComponent implements OnInit {
             .toLocaleLowerCase()
             .includes(this.filter.nativeElement.value.toLocaleLowerCase())
         )
-        const params = `jobName=${this.filter.nativeElement.value}`;
+        const params = this.filter.nativeElement.value;
         this.searchJobs(params);
       });
   }
