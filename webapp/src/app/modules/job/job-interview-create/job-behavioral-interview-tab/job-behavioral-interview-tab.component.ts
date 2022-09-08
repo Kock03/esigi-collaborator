@@ -165,10 +165,14 @@ export class JobBehavioralInterviewTabComponent implements OnInit {
   }
 
   private async _filterResume(name: string): Promise<void> {
-    const params = `name=${name}`;
-    this.filteredResumes = await this.resumeProvider.findByName(
-      params
-    );
+    const data = {
+      name: name,
+    };
+    try {
+      this.resumes = await this.resumeProvider.findByName(data);
+    } catch (error) {
+      console.error(error);
+    }
 
   }
 

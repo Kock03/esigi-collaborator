@@ -61,9 +61,12 @@ export class ResumeListComponent implements OnInit {
     this.initFilter();
   }
 
-  async searchResumes(query?: string) {
+  async searchResumes(name: string) {
+    const data = {
+      name: name,
+    };
     try {
-      this.resumes = await this.resumeProvider.findByName(query);
+      this.resumes = await this.resumeProvider.findByName(data);
     } catch (error) {
       console.error(error);
     }
@@ -71,34 +74,7 @@ export class ResumeListComponent implements OnInit {
 
 
   async selectList(ev: any) {
-    if (ev.value == 1) {
-      return (this.filteredResumeList = this.resumes =
-        await this.resumeProvider.findAll());
-    }
-    if (ev.value == 2) {
-      return console.log(
-        'checked 2'
-      ); /*(this.filteredResumeList = this.resumes =
-        await this.resumeProvider.[função de busca]());*/
-    }
-    if (ev.value == 3) {
-      return console.log(
-        'checked 3'
-      ); /*(this.filteredResumeList = this.resumes =
-        await this.resumeProvider.[função de busca]());*/
-    }
-    if (ev.value == 4) {
-      return console.log(
-        'checked 4'
-      ); /*(this.filteredResumeList = this.resumes =
-        await this.resumeProvider.[função de busca]());*/
-    }
-    if (ev.value == 5) {
-      return console.log(
-        'checked 5'
-      ); /*(this.filteredResumeList = this.resumes =
-        await this.resumeProvider.[função de busca]());*/
-    }
+
   }
 
   announceSortChange(sortState: any) {
@@ -166,7 +142,7 @@ export class ResumeListComponent implements OnInit {
             .toLocaleLowerCase()
             .includes(this.filter.nativeElement.value.toLocaleLowerCase())
         )
-        const params = `firstName=${this.filter.nativeElement.value}`;
+        const params = this.filter.nativeElement.value;
         this.searchResumes(params);
       });
   }

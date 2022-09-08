@@ -131,9 +131,11 @@ export class JobTechnicalInterviewTabComponent implements OnInit {
   }
 
   private async _filterResume(name: string): Promise<void> {
-    const params = `name=${name}`;
+    const data = {
+      name: name,
+    };
     this.filteredResumes = await this.resumeProvider.findByName(
-      params
+      data
     );
 
   }
