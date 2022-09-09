@@ -201,7 +201,7 @@ export class CollaboratorCreateComponent implements OnInit {
       this.method = 'edit'
       this.handleStep(2)
 
-      this.snackbarService.successMessage('Colaborador Cadastrado Com Sucesso');
+      this.snackbarService.successMessage('Colaborador cadastrado com sucesso');
 
     } catch (error: any) {
       console.log( error);

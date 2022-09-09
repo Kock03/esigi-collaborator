@@ -118,7 +118,7 @@ export class CollaboratorListComponent implements OnInit {
           this.getCollaboratorList();
 
           this.snackbarService.successMessage(
-            'Colaborador Excluido Com Sucesso'
+            'Colaborador excluido com sucesso'
           );
         } catch (error) {
           console.log('ERROR 132' + error);

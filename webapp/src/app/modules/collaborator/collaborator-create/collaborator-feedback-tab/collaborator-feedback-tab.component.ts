@@ -100,10 +100,10 @@ export class CollaboratorFeedbackTabComponent implements OnInit {
           const jobs = await this.feedbackProvider.destroy(feedbackId);
           this.getFeedback();
 
-          this.snackbarService.successMessage('Vaga Excluída Com Sucesso');
+          this.snackbarService.successMessage('Vaga excluída com sucesso');
         } catch (error) {
           console.log('ERROR 132' + error);
-          this.snackbarService.showError('Falha ao Deletar');
+          this.snackbarService.showError('Falha ao deletar');
         }
       }
     });
