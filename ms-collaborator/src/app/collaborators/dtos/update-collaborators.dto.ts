@@ -53,6 +53,10 @@ export class UpdateCollaboratorsDto {
 
   @ApiProperty()
   @IsOptional()
+  userId: string;
+
+  @ApiProperty()
+  @IsOptional()
   @IsString()
   @MinLength(1)
   office: string;
@@ -119,10 +123,11 @@ export class UpdateCollaboratorsDto {
   @IsOptional()
   @IsString()
   linkedin: string;
-
+  
   @ApiProperty()
   @IsOptional()
-  photo: Buffer;
+  @IsString()
+  photo: string;
 
   @ApiProperty()
   @IsOptional()

@@ -33,9 +33,19 @@ export class ResumesController {
     return await this.resumesService.findOneOrFail({ id });
   }
 
-  @Get('find/name')
+  @Get('generate-pdf/:id')
+  async generatePDF(@Param('id', new ParseUUIDPipe()) id: string) {
+    return await this.resumesService.createPdf(id);
+  }
+
+  @Get('find')
   async findByName(@Query('name') name: any) {
     return this.resumesService.findByName(name);
+  }
+
+  @Post('find')
+  async find(@Body() body: any) {
+    return await this.resumesService.findByName(body.name);
   }
 
   @Post()

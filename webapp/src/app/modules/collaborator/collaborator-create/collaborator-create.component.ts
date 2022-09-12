@@ -123,6 +123,7 @@ export class CollaboratorCreateComponent implements OnInit {
       firstNameCorporateName: [null, Validators.required],
       lastNameFantasyName: [null, Validators.required],
       login: [null, Validators.required],
+      userId: [null],
       gender: [null, Validators.required],
       maritalStatus: [null, Validators.required],
       office: ['', Validators.required],
@@ -182,7 +183,9 @@ export class CollaboratorCreateComponent implements OnInit {
           email: colaborator.email,
           login: colaborator.login,
           password: colaborator.cnpj,
-          collaboratorId: colaborator.id
+          collaboratorId: colaborator.id,
+          office: colaborator.office,
+          inactive: colaborator.inactive,
         })
       } else {
         this.userForm = this.fb.group({
@@ -191,11 +194,23 @@ export class CollaboratorCreateComponent implements OnInit {
           email: colaborator.email,
           login: colaborator.login,
           collaboratorId: colaborator.id,
-          password: colaborator.cpf
+          password: colaborator.cpf,
+          office: colaborator.office,
+          inactive: colaborator.inactive,
         })
       }
       let dataUser = this.userForm.getRawValue();
       const user = await this.userProvider.store(dataUser);
+      this.collaboratorForm.controls['userId'].setValue(user.id)
+      let idUser = this.collaboratorForm.getRawValue();
+      try {
+        await this.collaboratorProvider.update(
+          colaborator.id,
+          idUser
+        );
+      } catch (error: any) {
+        console.log( error);
+      }
       sessionStorage.setItem('collaborator_id', colaborator.id);
       this.router.navigate([`colaborador/${colaborator.id}`]);
       this.method = 'edit'

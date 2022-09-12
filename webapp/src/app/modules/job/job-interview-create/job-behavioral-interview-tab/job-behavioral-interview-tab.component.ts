@@ -7,6 +7,8 @@ import { InterviewsProvider } from 'src/providers/interview.provider';
 import { ResumeProvider } from 'src/providers/resume-providers/resume.provider';
 import { SnackBarService } from 'src/services/snackbar.service';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
+import { CollaboratorProvider } from 'src/providers/collaborator-providers/collaborator.provider';
+import { RequireMatch } from 'src/services/autocomplete.service';
 
 
 @Component({
@@ -16,21 +18,32 @@ import { debounceTime, distinctUntilChanged } from 'rxjs';
 })
 export class JobBehavioralInterviewTabComponent implements OnInit {
   @ViewChild('filter', { static: true }) fiilter!: ElementRef;
+  @ViewChild('filterTech', { static: true }) fiilterTech!: ElementRef;
+
   behavioralInterviewForm!: FormGroup;
   jobId!: any;
   interviewId!: string | null;
   interview: any;
   selectedIndex: number = 0;
   step: number = 1;
-  ResumeControl = new FormControl();
+  ResumeControl = new FormControl('', [Validators.required, RequireMatch]);
   nameCandidate!: any;
-  visible: boolean = false;
+  visibleTechRecruter: boolean = false;
+  visibleResume: boolean = false;
   resumes!: any[];
   filteredResumes!: any[];
   filteredResumeList: any;
   resume!: any;
   resumeValid: boolean = false;
   resumeId: any;
+  collaboratorControl = new FormControl('', [Validators.required, RequireMatch]);
+  collaborators!: any[];
+  filteredCollaborators!: any[];
+  filteredCollaboratorList: any;
+  collaborator!: any;
+  collaboratorValid: boolean = false;
+  collaboratorTechRecruterId!: string | null;
+
 
   constructor(
     private fb: FormBuilder,
@@ -39,6 +52,7 @@ export class JobBehavioralInterviewTabComponent implements OnInit {
     private route: ActivatedRoute,
     private snackbarService: SnackBarService,
     private router: Router,
+    private collaboratorProvider: CollaboratorProvider,
     private resumeProvider: ResumeProvider
   ) {
     const state = this.router.getCurrentNavigation()?.extras.state;
@@ -47,6 +61,8 @@ export class JobBehavioralInterviewTabComponent implements OnInit {
   }
 
   async ngOnInit() {
+    this.collaboratorTechRecruterId = sessionStorage.getItem('collaborator_tech_id');
+    this.visibleTechRecruter = false;
     this.interviewId = this.route.snapshot.paramMap.get('id');
     this.step = JSON.parse(sessionStorage.getItem('job_tab')!);
     this.resumeId = sessionStorage.getItem('resume_name');
@@ -62,7 +78,6 @@ export class JobBehavioralInterviewTabComponent implements OnInit {
       this.behavioralInterviewForm.patchValue(
         this.interview.BehavioralInterviews
       );
-      console.log("🚀 ~ file: job-behavioral-interview-tab.component.ts ~ line 49 ~ JobBehavioralInterviewTabComponent ~ ngOnInit ~    this.interview.BehavioralInterviews", this.interview.BehavioralInterviews)
 
     } else {
       this.initForm();
@@ -78,6 +93,8 @@ export class JobBehavioralInterviewTabComponent implements OnInit {
       this.setFormValue();
     }
 
+    this.getCollaboratorList();
+    this.initFilterTechRecruter();
     this.initFilterResume()
     this.getResumeList()
   }
@@ -86,6 +103,12 @@ export class JobBehavioralInterviewTabComponent implements OnInit {
     this.filteredResumeList = this.resumes =
       await this.resumeProvider.findAll();
   }
+
+  async getCollaboratorList() {
+    this.filteredCollaboratorList = this.collaborators =
+      await this.collaboratorProvider.findTechRecruter();
+  }
+
 
 
   private initFilterResume() {
@@ -97,6 +120,21 @@ export class JobBehavioralInterviewTabComponent implements OnInit {
           this.resumeValid = true;
         } else {
           this.resumeValid = false;
+        }
+
+      });
+
+  }
+
+  private initFilterTechRecruter() {
+    this.collaboratorControl.valueChanges
+      .pipe(debounceTime(350), distinctUntilChanged())
+      .subscribe((res) => {
+        this._filterTechRecruter(res);
+        if (res && res.id) {
+          this.collaboratorValid = true;
+        } else {
+          this.collaboratorValid = false;
         }
 
       });
@@ -115,13 +153,38 @@ export class JobBehavioralInterviewTabComponent implements OnInit {
       : '';
   }
 
+  displayFnTechRecruter(user: any): string {
+    if (typeof user === 'string' && this.collaborators) {
+      return this.collaborators.find(
+        (collaborator) => collaborator.id === user
+      );
+    }
+    return user && user.firstNameCorporateName && user.lastNameFantasyName
+      ? user.firstNameCorporateName + ' ' + user.lastNameFantasyName
+      : '';
+  }
+
   private async _filterResume(name: string): Promise<void> {
-    const params = `name=${name}`;
-    this.filteredResumes = await this.resumeProvider.findByName(
+    const data = {
+      name: name,
+    };
+    try {
+      this.resumes = await this.resumeProvider.findByName(data);
+    } catch (error) {
+      console.error(error);
+    }
+
+  }
+
+
+  private async _filterTechRecruter(name: string): Promise<void> {
+    const params = `firstNameCorporateName=${name}`;
+    this.filteredCollaborators = await this.collaboratorProvider.findByTechRecruter(
       params
     );
 
   }
+
 
 
   getBehavioralInterview() {
@@ -129,7 +192,6 @@ export class JobBehavioralInterviewTabComponent implements OnInit {
       this.interview = this.interviewsProvider.findOne(
         this.interviewId
       );
-      console.log("🚀 ~ file: job-interview-create.component.ts ~ line 103 ~ JobInterviewCreateComponent ~ getCollaborator ~ interview", this.interview)
 
     } catch (error) {
       console.error(error);
@@ -138,12 +200,14 @@ export class JobBehavioralInterviewTabComponent implements OnInit {
 
   setFormValue() {
     if (this.interview) {
-      this.visible = true;
+      this.visibleResume = true;
       this.ResumeControl.patchValue(this.resumeId);
-      if (this.interview.BehavioralInterviews) {
-        this.behavioralInterviewForm.patchValue(this.interview.BehavioralInterviews);
+    }
+    if (this.interview.BehavioralInterviews) {
+      this.visibleTechRecruter = true;
+      this.collaboratorControl.patchValue(this.collaboratorTechRecruterId);
+      this.behavioralInterviewForm.patchValue(this.interview.BehavioralInterviews);
 
-      }
     }
 
   }
@@ -169,7 +233,13 @@ export class JobBehavioralInterviewTabComponent implements OnInit {
       availabilityOfInitialize: ['', Validators.required],
 
     });
-
+    this.collaboratorControl.valueChanges.subscribe((res) => {
+      if (res && res.id) {
+        this.behavioralInterviewForm.controls['techRecruter'].setValue(res.id, {
+          emitEvent: true,
+        });
+      }
+    });
 
 
   };
@@ -177,7 +247,6 @@ export class JobBehavioralInterviewTabComponent implements OnInit {
   onChange(value: number) {
     if (this.behavioralInterviewForm.controls['situational'].value == 5) {
       this.removeValidatorsBehavioral()
-      console.log(this.behavioralInterviewForm)
     }
   }
 
@@ -216,7 +285,6 @@ export class JobBehavioralInterviewTabComponent implements OnInit {
   async saveBehaviroalInterviews() {
     if (this.interviewId == 'novo') {
       let data = this.behavioralInterviewForm.getRawValue();
-      console.log(this.ResumeControl.value.id)
       const interview = { BehavioralInterviews: data, Job: this.jobId, nameCandidate: this.ResumeControl.value.id };
 
       try {

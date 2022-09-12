@@ -27,7 +27,7 @@ export class CollaboratorDocumentDialog {
     private httpClient: HttpClient,
     private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: any
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.method = sessionStorage.getItem('method')!;
@@ -55,15 +55,13 @@ export class CollaboratorDocumentDialog {
       formData.append('file', file);
 
       try {
-     this.httpClient.post('http://localhost:3000', formData)
-      .subscribe(resposta => {
-        if (resposta){
-          this.file = resposta
-          console.log("🚀 ~ file: collaborator-document-dialog.component.ts ~ line 62 ~ CollaboratorDocumentDialog ~ inputFileChanged ~ this.file", this.file)
-          console.log("🚀 ~ file: collaborator-document-dialog.component.ts ~ line 62 ~ CollaboratorDocumentDialog ~ inputFileChanged ~ resposta", resposta)
-        }
-      })
-      
+        this.httpClient.post('http://localhost:3000', formData)
+          .subscribe(resposta => {
+            if (resposta) {
+              this.file = resposta
+            }
+          })
+
       } catch (e) {
         console.log(e)
       }

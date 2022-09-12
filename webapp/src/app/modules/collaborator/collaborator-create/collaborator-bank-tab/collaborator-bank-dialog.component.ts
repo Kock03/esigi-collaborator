@@ -14,7 +14,7 @@ import { CollaboratorBankProvider } from 'src/providers/collaborator-providers/c
   selector: 'collaborator-bank-dialog',
   templateUrl: 'collaborator-bank-dialog.html',
   styleUrls: ['./collaborator-bank-tab.component.scss'],
-    encapsulation: ViewEncapsulation.None,
+  encapsulation: ViewEncapsulation.None,
 })
 export class CollaboratorBankDialog {
   @Input('form') collaboratorForm!: FormGroup;
@@ -31,7 +31,7 @@ export class CollaboratorBankDialog {
     private fb: FormBuilder,
     private collaboratorBankProvider: CollaboratorBankProvider,
     @Inject(MAT_DIALOG_DATA) public data: any
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.method = sessionStorage.getItem('method')!;
@@ -46,7 +46,7 @@ export class CollaboratorBankDialog {
       accountType: [null, Validators.required],
       accountNumber: [null, [Validators.required, Validators.maxLength(5)]],
       digit: [null],
-      bankAccountDigit: [null, Validators.required ],
+      bankAccountDigit: [null, Validators.required],
       inactive: [false],
       Collaborator: { id: this.collaboratorId },
     });
@@ -73,11 +73,10 @@ export class CollaboratorBankDialog {
             this.bankId,
             data
           );
-          console.log(updateBank)
         } catch (error: any) {
           console.log(error);
         }
-      }else{
+      } else {
         const bank = await this.collaboratorBankProvider.store(data);
         sessionStorage.setItem('bank_id', bank.id);
       }
@@ -86,6 +85,6 @@ export class CollaboratorBankDialog {
 
       console.log('ERROR 132' + error);
     }
-   
+
   }
 }

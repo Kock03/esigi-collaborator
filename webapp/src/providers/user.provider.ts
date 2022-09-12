@@ -51,10 +51,10 @@ export class UserProvider {
     });
   }
 
-  destroy(user: any): Promise<any> {
+  destroy(id: any): Promise<any> {
     return new Promise((resolve, reject) => {
       this.apiGateway
-        .delete(environment.AUTH_SERVICE_MS + 'users', user)
+        .delete(environment.AUTH_SERVICE_MS + 'users/' + id)
         .subscribe((response: HttpResponse<any>) => {
           resolve(response.body);
         }, reject);

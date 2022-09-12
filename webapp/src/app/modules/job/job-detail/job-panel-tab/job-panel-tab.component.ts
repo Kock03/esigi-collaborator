@@ -85,7 +85,6 @@ export class JobPanelTabComponent implements OnInit {
       });
 
       this.interviewsTable.renderRows();
-      console.log(this.interviews)
 
     } catch (error) {
       console.error(error);
@@ -100,9 +99,9 @@ export class JobPanelTabComponent implements OnInit {
       const clientData = await this.customerProvider.findOne(interviewData.ClientInterviews.evaluator);
       sessionStorage.setItem('customer_id', clientData.corporateName);
     }
-    if (interviewData.ClientInterviews) {
-      const clientData = await this.customerProvider.findOne(interviewData.ClientInterviews.evaluator);
-      sessionStorage.setItem('customer_id', clientData.corporateName);
+    if (interviewData.BehavioralInterviews) {
+      const collaboratorData = await this.collaboratorProvider.findOne(interviewData.BehavioralInterviews.techRecruter);
+      sessionStorage.setItem('collaborator_tech_id', `${collaboratorData.firstNameCorporateName} ${collaboratorData.lastNameFantasyName}`);
     }
     if (interviewData.TechnicalInterviews) {
       const collaboratorData = await this.collaboratorProvider.findOne(interviewData.TechnicalInterviews.collaboratorRequesterId);

@@ -28,6 +28,7 @@ import { ICollaborator } from 'src/app/interfaces/icollaborator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { UserProvider } from 'src/providers/user.provider';
 
 @Component({
   selector: 'app-collaborator-list',
@@ -51,12 +52,13 @@ export class CollaboratorListComponent implements OnInit {
   ];
 
   collaborators!: ICollaborator[];
-  filteredCollaboratorList = new MatTableDataSource();
+  filteredCollaboratorList: any;
   index: any = null;
   Collaborator: any;
   step: number = 1;
   form!: FormGroup;
-  params!: string;
+  params: string = '';
+  select: number = 1;
   firstNameCorporateName = '';
 
   constructor(
@@ -65,6 +67,7 @@ export class CollaboratorListComponent implements OnInit {
     private collaboratorProvider: CollaboratorProvider,
     private snackbarService: SnackBarService,
     private dialogService: ConfirmDialogService,
+    private userProvider: UserProvider,
     private fb: FormBuilder
   ) {
     this._unsubscribeAll = new Subject();
@@ -73,14 +76,16 @@ export class CollaboratorListComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     await this.getCollaboratorList();
     this.initFilter();
-  
   }
 
-  
-  async searchCollaborators(firstNameCorporateName?: string, inactive?: string) {
+  async searchCollaborators() {
+    const data = {
+      firstNameCorporateName: this.params,
+      status: this.select,
+    };
     try {
-      this.collaborators = await this.collaboratorProvider.findByName(firstNameCorporateName, inactive);
-      console.log(this.collaborators);
+      this.filteredCollaboratorList = this.collaborators =
+        await this.collaboratorProvider.findByName(data);
     } catch (error) {
       console.error(error);
     }
@@ -98,7 +103,7 @@ export class CollaboratorListComponent implements OnInit {
     this.router.navigate(['colaborador/novo']);
   }
 
-  async deleteCollaborator(collaboratorId: any) {
+  async deleteCollaborator(collaboratorId: any, user: any) {
     const options = {
       data: {
         title: 'Atenção',
@@ -115,6 +120,7 @@ export class CollaboratorListComponent implements OnInit {
           const collaborators = await this.collaboratorProvider.destroy(
             collaboratorId
           );
+          await this.userProvider.destroy(user);
           this.getCollaboratorList();
 
           this.snackbarService.successMessage(
@@ -130,73 +136,39 @@ export class CollaboratorListComponent implements OnInit {
   }
 
   async selectList(ev: any) {
-    var params = `inactive=${ev.value}`
-    if (ev.value == 1) {
-      return (this.filteredCollaboratorList = this.collaborators =
-        await this.collaboratorProvider.findAll());
-    }else if(ev.value === undefined){
-      return (this.filteredCollaboratorList = this.collaborators =
-        await this.collaboratorProvider.findByName(this.params));
-    }else if(this.params === undefined){
-      if (ev.value == 2) {
-        params = `inactive=0`
-        return (this.filteredCollaboratorList = this.collaborators =
-          await this.collaboratorProvider.findByName(params));
-      }
-      if (ev.value == 3) {
-        params = `inactive=1`
-        return (this.filteredCollaboratorList = this.collaborators =
-          await this.collaboratorProvider.findByName(params));
-      }
-    }
-    else{
-      if (ev.value == 2) {
-        params = `inactive=0`
-        return (this.filteredCollaboratorList = this.collaborators =
-          await this.collaboratorProvider.findByName(this.params, params));
-      }
-      if (ev.value == 3) {
-        params = `inactive=1`
-        return (this.filteredCollaboratorList = this.collaborators =
-          await this.collaboratorProvider.findByName(this.params, params));
-      }
-    }
-   
+    this.select = ev.value;
+    this.searchCollaborators();
   }
 
   async getCollaboratorList() {
-    this.filteredCollaboratorList.data = this.collaborators =
+    this.filteredCollaboratorList = this.collaborators =
       await this.collaboratorProvider.findAll();
-      console.log(  this.collaborators )
     this.filteredCollaboratorList.sort = this.sort;
   }
-
 
   initFilter() {
     fromEvent(this.filter.nativeElement, 'keyup')
       .pipe(debounceTime(200), distinctUntilChanged())
 
-      .subscribe((res) => {
-        this.filteredCollaboratorList.data = this.collaborators.filter(
-          (collaborator) =>         
-          collaborator.firstNameCorporateName
+      .subscribe(res => {
+        this.filteredCollaboratorList = this.collaborators.filter(
+          (collaborator) =>{
+            collaborator.firstNameCorporateName
               .toLocaleLowerCase()
               .includes(this.filter.nativeElement.value.toLocaleLowerCase())
-              
-        )
-        this.params = `firstNameCorporateName=${this.filter.nativeElement.value}`;
-        this.searchCollaborators(this.params);
-        if (this.filter.nativeElement.value === '') {
-          this.getCollaboratorList();
-        }
+
+          }
+        );
+        this.params = this.filter.nativeElement.value;
+        this.searchCollaborators();
+        this.filteredCollaboratorList.sort = this.sort;
       });
-   
   }
 
   editCollaborator(collaboratorId: any) {
     this.router.navigate([`colaborador/${collaboratorId}`]);
     const method = 'edit';
-    sessionStorage.setItem('collaborator_method', method)
+    sessionStorage.setItem('collaborator_method', method);
     sessionStorage.setItem('collaborator_id', collaboratorId);
   }
 }

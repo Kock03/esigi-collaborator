@@ -33,6 +33,18 @@ export class CollaboratorsController {
     return await this.collaboratorsService.findGerente();
   }
 
+  @Get('list/evaluator')
+  async findEvaluator() {
+    return await this.collaboratorsService.findEvaluator();
+  }
+
+
+  @Get('list/tech-recruter')
+  async findTechRecruter() {
+    return await this.collaboratorsService.findTechRecruter();
+  }
+
+
   @Post('/list')
   async findCollaboratorsListById(@Body() body: ICollaborators) {
     return await this.collaboratorsService.findCollaboratorsListById(body.idList);
@@ -70,14 +82,24 @@ export class CollaboratorsController {
   }
 
 
-  @Get('find/name')
-  async findByName(@Query('firstNameCorporateName') firstNameCorporateName?: any, @Query('inactive') inactive?: any) {
-    return this.collaboratorsService.findByName(firstNameCorporateName, inactive);
+  @Post('find/name')
+  async findByName(@Body() body: any) {
+    return await this.collaboratorsService.findByName(body.firstNameCorporateName, body.status);
   }
 
   @Get('find/name/gerente')
   async findByNameGerente(@Query() query: any) {
     return this.collaboratorsService.findByNameGerente(query);
+  }
+
+  @Get('find/name/gerente/desenvolvedor')
+  async findByNameEvaluator(@Query() query: any) {
+    return this.collaboratorsService.findByNameEvaluator(query);
+  }
+
+  @Get('find/name/tech-recruter')
+  async findByNameTechRecruter(@Query() query: any) {
+    return this.collaboratorsService.findByNameTechRecruter(query);
   }
 
   @Get('list/active')

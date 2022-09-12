@@ -52,7 +52,6 @@ export class CreateReturnsDto {
   returnOfCandidate: ReturnOfCandidate;
 
   @ApiProperty()
-  @IsNotEmpty()
   @IsEnum(Reason)
   reason: Reason;
 

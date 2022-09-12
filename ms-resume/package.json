@@ -31,12 +31,14 @@
     "class-validator": "^0.13.2",
     "fastify-swagger": "^4.15.0",
     "mysql2": "^2.3.3",
+    "pdfmake": "^0.2.5",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^7.5.2",
     "swagger-ui-express": "^4.3.0",
     "typeorm": "^0.2.41",
-    "typeorm-naming-strategies": "^2.0.0"
+    "typeorm-naming-strategies": "^2.0.0",
+    "uuidv4": "^6.2.13"
   },
   "devDependencies": {
     "@nestjs/cli": "^8.2.5",

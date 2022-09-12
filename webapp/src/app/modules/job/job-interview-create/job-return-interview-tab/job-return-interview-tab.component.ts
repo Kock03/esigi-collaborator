@@ -7,6 +7,7 @@ import { DocumentValidator } from 'src/app/validators/document.validator';
 import { ReturnProvider } from 'src/providers/return.provider';
 import { ResumeProvider } from 'src/providers/resume-providers/resume.provider';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
+import { RequireMatch } from 'src/services/autocomplete.service';
 
 
 @Component({
@@ -28,7 +29,7 @@ export class JobReturnInterviewTabComponent implements OnInit {
   filteredResumes!: any[];
   filteredResumeList: any;
   resume!: any;
-  ResumeControl = new FormControl();
+  ResumeControl = new FormControl('', [Validators.required, RequireMatch]);
   resumeValid: boolean = false;
   resumeId: any;
 
@@ -63,7 +64,6 @@ export class JobReturnInterviewTabComponent implements OnInit {
       this.returnForm.patchValue(
         this.interview.Returns
       );
-      console.log("🚀 ~ file: job-return-interview-tab.component.ts ~ line 49 ~ JobReturnInterviewTabComponent ~ ngOnInit ~  this.interview.Returns", this.interview.Returns)
 
     } else {
       this.initForm();
@@ -116,11 +116,14 @@ export class JobReturnInterviewTabComponent implements OnInit {
   }
 
   private async _filterResume(name: string): Promise<void> {
-    const params = `name=${name}`;
-    this.filteredResumes = await this.resumeProvider.findByName(
-      params
-    );
-
+    const data = {
+      name: name,
+    };
+    try {
+      this.resumes = await this.resumeProvider.findByName(data);
+    } catch (error) {
+      console.error(error);
+    }
   }
 
 
@@ -129,7 +132,6 @@ export class JobReturnInterviewTabComponent implements OnInit {
       this.interview = this.interviewsProvider.findOne(
         this.interviewId
       );
-      console.log("🚀 ~ file: job-return-interview-tab.component.ts ~ line 71 ~ JobReturnInterviewTabComponent ~ getInterview ~ this.interviewId", this.interviewId)
 
     } catch (error) {
       console.error(error);
@@ -148,24 +150,23 @@ export class JobReturnInterviewTabComponent implements OnInit {
 
   initForm() {
     this.returnForm = this.fb.group({
-      dateOfReturn: this.fb.control({ value: new Date().toLocaleDateString(), disabled: false }, [DocumentValidator.isValidData(), Validators.required]),
+      dateOfReturn: this.fb.control({ value: new Date().toLocaleDateString(), disabled: false }),
       dateReturn: this.fb.control({ value: ' ', disabled: false }, [DocumentValidator.isValidData(), Validators.required]),
       technicalEvaluation: [null, Validators.required],
       behavioralEvaluation: [null, Validators.required],
       technicalEvaluationComent: ['', Validators.required],
       behavioralEvaluationComent: ['', Validators.required],
       returnOfCandidate: [null],
-      reason: [null, Validators.required],
+      reason: [null],
       typeOdContract: [null, Validators.required],
-      combinedValue: [''],
-      initialData: this.fb.control({ value: ' ', disabled: false }, [DocumentValidator.isValidData()]),
+      combinedValue: [null],
+      initialData: this.fb.control({ value: ' ', disabled: false }),
     });
   }
 
   onChange(value: number) {
-    if (this.returnForm.controls['situational'].value == 5) {
+    if (this.returnForm.controls['technicalEvaluation'].value == 3 && this.returnForm.controls['behavioralEvaluation'].value == 3) {
       this.removeValidators()
-      console.log(this.returnForm)
     }
   }
 
@@ -176,6 +177,13 @@ export class JobReturnInterviewTabComponent implements OnInit {
     this.returnForm.controls['punctuality'].updateValueAndValidity();
     this.returnForm.controls['punctuality'].setErrors(null);
 
+    this.returnForm.controls['reason'].clearValidators();
+    this.returnForm.controls['reason'].updateValueAndValidity();
+    this.returnForm.controls['reason'].setErrors(null);
+
+    this.returnForm.controls['dateOfReturn'].clearValidators();
+    this.returnForm.controls['dateOfReturn'].updateValueAndValidity();
+    this.returnForm.controls['dateOfReturn'].setErrors(null);
 
     this.returnForm.controls['presentation'].clearValidators();
     this.returnForm.controls['presentation'].updateValueAndValidity();

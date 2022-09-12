@@ -29,23 +29,20 @@ export class JobsController {
     return await this.jobsService.findOneOrFail({ id });
   }
 
-  @Get('find/name')
-  async findByName(@Query() query: any) {
-    return this.jobsService.findByName(query);
+  @Get('find/resume/:id')
+  async findByResume(@Param('id', new ParseUUIDPipe()) id: string) {
+    return await this.jobsService.findByResume(id);
   }
 
-  // @Get('interviews/:id')
-  // async findInterviews(@Param('id', new ParseUUIDPipe()) id: string) {
-  //   return await this.jobsService.findInterviewsList({ id });
-  // }
+  @Post('find')
+  async find(@Body() body: any) {
+    return await this.jobsService.findByName(body.jobName);
+  }
 
   @Post()
   async store(@Body() body: CreateJobsDto) {
     return await this.jobsService.store(body);
   }
-
-
-  
 
   @Put(':id')
   async update(

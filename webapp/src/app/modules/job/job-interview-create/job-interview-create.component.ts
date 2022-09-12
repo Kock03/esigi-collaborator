@@ -109,7 +109,12 @@ export class JobInterviewCreateComponent implements OnInit {
     const jobId = sessionStorage.getItem('job_id');
     this.router.navigate([`vaga/detalhe/${jobId}`]);
     sessionStorage.removeItem('job_id');
-    sessionStorage.clear()
+    sessionStorage.removeItem('resume_name');
+    sessionStorage.removeItem('resume_id');
+    sessionStorage.removeItem('method');
+    sessionStorage.removeItem('collaborator_tech_id');
+    sessionStorage.removeItem('customer_id');
+    sessionStorage.removeItem('collaborator_id');
   }
 
   navigate(direction: string) {

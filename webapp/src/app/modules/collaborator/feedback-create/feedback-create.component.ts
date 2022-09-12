@@ -23,6 +23,7 @@ import { CollaboratorProvider } from 'src/providers/collaborator-providers/colla
 import { FeedbackProvider } from 'src/providers/feedback.provider';
 import { SnackBarService } from 'src/services/snackbar.service';
 import { ProjectProvider } from 'src/providers/project.provider';
+import { RequireMatch } from 'src/services/autocomplete.service';
 
 export const PICK_FORMATS = {
   parse: { dateInput: { month: 'numeric', year: 'numeric', day: 'numeric' } },
@@ -66,8 +67,8 @@ export class FeedbackCreateComponent implements OnInit {
   get!: any;
   feedbackTab: any;
   collaboratorId!: any;
-  managerControl = new FormControl();
-  projectControl = new FormControl();
+  managerControl = new FormControl('', [Validators.required, RequireMatch]);
+  projectControl = new FormControl('', [Validators.required, RequireMatch]);
   method: any;
 
   filteredCollaborators!: any[];
@@ -102,7 +103,7 @@ export class FeedbackCreateComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.feedbackId = this.route.snapshot.paramMap.get('id');
-    this.method =  sessionStorage.getItem('feedback_method');
+    this.method = sessionStorage.getItem('feedback_method');
     this.getCollaboratorList();
     this.getProjectList();
     this.initFilterManager();
@@ -128,15 +129,15 @@ export class FeedbackCreateComponent implements OnInit {
   }
 
   async getCollaboratorList() {
-    this.filteredCollaboratorList=this.collaborators =
+    this.filteredCollaboratorList = this.collaborators =
       await this.collaboratorProvider.findGerente();
   }
 
   async getProjectList() {
-    this.filteredProjectList=this.projects =
+    this.filteredProjectList = this.projects =
       await this.projectProvider.findAll();
   }
-  
+
   private initFilterManager() {
     this.managerControl.valueChanges
       .pipe(debounceTime(350), distinctUntilChanged())
@@ -147,7 +148,7 @@ export class FeedbackCreateComponent implements OnInit {
         } else {
           this.collaboratorValid = false;
         }
-        
+
       });
   }
 
@@ -161,7 +162,7 @@ export class FeedbackCreateComponent implements OnInit {
         } else {
           this.projectValid = false;
         }
-        
+
       });
   }
 
@@ -182,10 +183,10 @@ export class FeedbackCreateComponent implements OnInit {
         (project) => project.id === user
       );
     }
-    return user && user.name 
+    return user && user.name
       ? user.name : '';
   }
-  
+
   private async _filterManager(name: string): Promise<void> {
     const params = `firstNameCorporateName=${name}`;
     this.filteredCollaborators = await this.collaboratorProvider.findByNameGerente(
@@ -194,7 +195,6 @@ export class FeedbackCreateComponent implements OnInit {
   }
 
   private async _filterProject(name: string): Promise<void> {
-    console.log(name)
     const params = `name=${name}`;
     this.filteredProjects = await this.projectProvider.find(
       params
@@ -241,18 +241,17 @@ export class FeedbackCreateComponent implements OnInit {
   onChange(value: number) {
     if (this.feedbackForm.controls['status'].value === 1 && value === 1) {
       this.removeValidators()
-      console.log(this.feedbackForm)
     }
   }
 
 
   removeValidators() {
-     this.feedbackForm.controls['feedbackDateRetorn'].clearValidators()
-      this.feedbackForm.controls['feedbackDateRetorn'].updateValueAndValidity()
-      this.feedbackForm.controls['managerDescription'].removeValidators(Validators.required)
-      this.feedbackForm.controls['improvementPoints'].removeValidators(Validators.required)
-      this.feedbackForm.controls['collaboratorDescription'].removeValidators(Validators.required)
-      this.feedbackForm.controls['commitment'].removeValidators(Validators.required)
+    this.feedbackForm.controls['feedbackDateRetorn'].clearValidators()
+    this.feedbackForm.controls['feedbackDateRetorn'].updateValueAndValidity()
+    this.feedbackForm.controls['managerDescription'].removeValidators(Validators.required)
+    this.feedbackForm.controls['improvementPoints'].removeValidators(Validators.required)
+    this.feedbackForm.controls['collaboratorDescription'].removeValidators(Validators.required)
+    this.feedbackForm.controls['commitment'].removeValidators(Validators.required)
   }
   listFeedback() {
     this.router.navigate([`colaborador/${this.collaboratorId}`]);

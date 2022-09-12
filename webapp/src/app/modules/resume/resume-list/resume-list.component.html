@@ -7,16 +7,6 @@
         <input matInput placeholder="Currículo" #filter matInput />
         <mat-icon matSuffix style="cursor: pointer">search</mat-icon>
       </mat-form-field>
-      <mat-form-field fxFlex="20" appearance="outline">
-        <mat-label>Filtro</mat-label>
-        <mat-select (selectionChange)="selectList($event)" matInput disableRipple>
-          <mat-option [value]="1">{{"resumes.resume_list.all" | translate }}</mat-option>
-          <mat-option [value]="2">{{"resumes.resume_list.client" | translate }}</mat-option>
-          <mat-option [value]="3">{{"resumes.resume_list.process" | translate }}</mat-option>
-          <mat-option [value]="4">{{"resumes.resume_list.job" | translate }}</mat-option>
-          <mat-option [value]="5">{{"resumes.resume_list.stopped" | translate }}</mat-option>
-        </mat-select>
-      </mat-form-field>
     </form>
   </div>
   <div class="envolti-table mat-elevation-z8" fxLayout="column">

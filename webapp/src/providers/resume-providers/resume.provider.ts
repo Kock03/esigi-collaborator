@@ -21,9 +21,9 @@ export class ResumeProvider {
     });
   }
 
-  findByName(query: any): Promise<any> {
+  findByName(data: any): Promise<any> {
     return new Promise((resolve, reject) => {
-      this.apiGateway.get(environment.RESUME_MS + `resumes/find/name?${query}`)
+      this.apiGateway.post(environment.RESUME_MS + 'resumes/find', data)
         .subscribe((response: HttpResponse<any>) => {
           resolve(response.body);
         }, reject);

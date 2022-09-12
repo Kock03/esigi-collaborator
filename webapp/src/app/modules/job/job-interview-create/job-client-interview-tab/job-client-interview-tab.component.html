@@ -1,144 +1,227 @@
 <div id="clientlInterviewTab" class="tab">
-    <div class="content-scroll" *ngIf="clientInterviewForm">
-        <form [formGroup]="clientInterviewForm" fxLayout="column">
-            <div fxFlex="100" fxLayoutGap="16px">
-                <mat-form-field fxFlex="30" class="example-full-width" appearance="outline"
-                    *ngIf="this.visibleResume === false">
-                    <mat-label>Nome do Candidato</mat-label>
-                    <input type="text" placeholder="Candidato" aria-label="text" #filterResume matInput
-                        [matAutocomplete]="autoResume" [formControl]="ResumeControl" />
-                    <mat-autocomplete autoActiveFirstOption #autoResume="matAutocomplete"
-                        [displayWith]="displayFnResume">
-                        <mat-option *ngFor="let resume of filteredResumes" [value]="resume">
-                            {{resume.firstName}}
-                            {{resume.lastName}}
-                        </mat-option>
-                    </mat-autocomplete>
-                </mat-form-field>
-                <mat-form-field appearance="outline" *ngIf="this.visibleResume === true" fxFlex="35"
-                    class="example-full-width">
-                    <mat-label>Nome do Candidato</mat-label>
-                    <input disabled matInput disableRipple [value]="this.ResumeControl.value" />
-                </mat-form-field>
+  <div class="content-scroll" *ngIf="clientInterviewForm">
+    <form [formGroup]="clientInterviewForm" fxLayout="column">
+      <div fxFlex="100" fxLayoutGap="16px">
+        <mat-form-field
+          fxFlex="30"
+          class="example-full-width"
+          appearance="outline"
+          *ngIf="this.visibleResume === false">
+          <mat-label>Nome do Candidato</mat-label>
+          <input
+            type="text"
+            placeholder="Candidato"
+            aria-label="text"
+            #filterResume
+            matInput
+            [matAutocomplete]="autoResume"
+            [formControl]="ResumeControl" />
+          <mat-error
+            *ngIf="ResumeControl && ResumeControl.hasError('required')">
+            {{ 'validators.validator-required' | translate }}
+          </mat-error>
+          <mat-error
+            *ngIf="
+              ResumeControl &&
+              !ResumeControl.hasError('required') &&
+              ResumeControl.hasError('incorrect')
+            ">
+            {{ 'validators.select-option' | translate }}
+          </mat-error>
+          <mat-autocomplete
+            autoActiveFirstOption
+            #autoResume="matAutocomplete"
+            [displayWith]="displayFnResume">
+            <mat-option *ngFor="let resume of filteredResumes" [value]="resume">
+              {{ resume.firstName }}
+              {{ resume.lastName }}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+        <mat-form-field
+          appearance="outline"
+          *ngIf="this.visibleResume === true"
+          fxFlex="35"
+          class="example-full-width">
+          <mat-label>Nome do Candidato</mat-label>
+          <input
+            disabled
+            matInput
+            disableRipple
+            [value]="this.ResumeControl.value" />
+        </mat-form-field>
 
-                <mat-form-field fxFlex="35" appearance="outline" *ngIf="this.visible === false">
-                    <mat-label>{{
-                        'job.job_interview_create.evaluator' | translate
-                        }}</mat-label>
-                    <input type="text" placeholder="Cliente" aria-label="text" #fiilter matInput
-                        [matAutocomplete]="autoCustomer" [formControl]="customerControl" />
-                    <mat-autocomplete autoActiveFirstOption #autoCustomer="matAutocomplete"
-                        [displayWith]="displayFnCustomer">
-                        <mat-option *ngFor="let customer of filteredCustomers" [value]="customer">
-                            {{customer.corporateName }}
-                        </mat-option>
-                    </mat-autocomplete>
-                </mat-form-field>
+        <mat-form-field
+          fxFlex="35"
+          appearance="outline"
+          *ngIf="this.visible === false">
+          <mat-label>{{
+            'job.job_interview_create.evaluator' | translate
+          }}</mat-label>
+          <input
+            type="text"
+            placeholder="Cliente"
+            aria-label="text"
+            #fiilter
+            matInput
+            [matAutocomplete]="autoCustomer"
+            [formControl]="customerControl" />
+          <mat-error
+            *ngIf="customerControl && customerControl.hasError('required')">
+            {{ 'validators.validator-required' | translate }}
+          </mat-error>
+          <mat-error
+            *ngIf="
+              customerControl &&
+              !customerControl.hasError('required') &&
+              customerControl.hasError('incorrect')
+            ">
+            {{ 'validators.select-option' | translate }}
+          </mat-error>
+          <mat-autocomplete
+            autoActiveFirstOption
+            #autoCustomer="matAutocomplete"
+            [displayWith]="displayFnCustomer">
+            <mat-option
+              *ngFor="let customer of filteredCustomers"
+              [value]="customer">
+              {{ customer.corporateName }}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
 
-                <mat-form-field appearance="outline" *ngIf="this.visible === true" fxFlex="35"
-                    class="example-full-width">
-                    <mat-label>{{
-                        'job.job_interview_create.evaluator' | translate
-                        }}</mat-label>
-                    <input disabled matInput disableRipple [value]="this.customerControl.value" />
-                </mat-form-field>
+        <mat-form-field
+          appearance="outline"
+          *ngIf="this.visible === true"
+          fxFlex="35"
+          class="example-full-width">
+          <mat-label>{{
+            'job.job_interview_create.evaluator' | translate
+          }}</mat-label>
+          <input
+            disabled
+            matInput
+            disableRipple
+            [value]="this.customerControl.value" />
+        </mat-form-field>
 
+        <mat-form-field fxFlex="30" appearance="outline">
+          <mat-label>{{
+            'job.job_interview_create.interview_date' | translate
+          }}</mat-label>
+          <input
+            matInput
+            mask="00/00/0000"
+            [showMaskTyped]="true"
+            [dropSpecialCharacters]="false"
+            formControlName="clientInterviewDate"
+            placeholder="Data da Entrevista" />
+        </mat-form-field>
+      </div>
+      <div fxFlex="100" fxLayoutGap="16px">
+        <mat-form-field fxFlex="50" appearance="outline">
+          <mat-label>{{
+            'job.job_interview_create.hour_interview' | translate
+          }}</mat-label>
+          <input
+            matInput
+            formControlName="hourInterview"
+            mask="Hh:m0"
+            [leadZeroDateTime]="true" />
+        </mat-form-field>
 
-                <mat-form-field fxFlex="30" appearance="outline">
-                    <mat-label>{{
-                        'job.job_interview_create.interview_date' | translate
-                        }}</mat-label>
-                    <input matInput mask="00/00/0000" [showMaskTyped]="true" [dropSpecialCharacters]="false"
-                        formControlName="clientInterviewDate" placeholder="Data da Entrevista" />
-                </mat-form-field>
-            </div>
-            <div fxFlex="100" fxLayoutGap="16px">
-                <mat-form-field fxFlex="50" appearance="outline">
-                    <mat-label>{{
-                        'job.job_interview_create.hour_interview' | translate
-                        }}</mat-label>
-                    <input matInput formControlName="hourInterview" mask="Hh:m0" [leadZeroDateTime]="true" />
-                </mat-form-field>
+        <mat-form-field fxFlex="50" appearance="outline">
+          <mat-label>{{
+            'job.job_interview_create.punctuality.name' | translate
+          }}</mat-label>
+          <mat-select matInput disableRipple formControlName="punctuality">
+            <mat-option [value]="1">{{
+              'job.job_interview_create.punctuality.one_off' | translate
+            }}</mat-option>
+            <mat-option [value]="2">{{
+              'job.job_interview_create.punctuality.late_5_minutes' | translate
+            }}</mat-option>
+            <mat-option [value]="3">{{
+              'job.job_interview_create.punctuality.more_than_5_minutes_late'
+                | translate
+            }}</mat-option>
+            <mat-option [value]="4">{{
+              'job.job_interview_create.punctuality.did_not_attend' | translate
+            }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
 
-                <mat-form-field fxFlex="50" appearance="outline">
-                    <mat-label>{{
-                        'job.job_interview_create.punctuality.name' | translate
-                        }}</mat-label>
-                    <mat-select matInput disableRipple formControlName="punctuality">
-                        <mat-option [value]="1">{{
-                            'job.job_interview_create.punctuality.one_off' | translate
-                            }}</mat-option>
-                        <mat-option [value]="2">{{
-                            'job.job_interview_create.punctuality.late_5_minutes'
-                            | translate
-                            }}</mat-option>
-                        <mat-option [value]="3">{{
-                            'job.job_interview_create.punctuality.more_than_5_minutes_late'
-                            | translate
-                            }}</mat-option>
-                        <mat-option [value]="4">{{
-                            'job.job_interview_create.punctuality.did_not_attend'
-                            | translate
-                            }}</mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </div>
+      <div fxFlex="100" fxLayoutGap="16px">
+        <mat-form-field fxFlex="50" appearance="outline">
+          <mat-label>{{
+            'job.job_interview_create.technical_evaluation' | translate
+          }}</mat-label>
+          <textarea
+            class="text-area"
+            matInput
+            placeholder="Avaliação Técnica"
+            formControlName="technicalEvaluation"></textarea>
+        </mat-form-field>
+        <mat-form-field fxFlex="50" appearance="outline">
+          <mat-label>{{
+            'job.job_interview_create.comments' | translate
+          }}</mat-label>
+          <textarea
+            class="text-area"
+            matInput
+            placeholder="Observações"
+            formControlName="comments"></textarea>
+        </mat-form-field>
+      </div>
+      <div fxFlex="100" fxLayoutGap="16px">
+        <mat-form-field fxFlex="40" appearance="outline">
+          <mat-label>{{
+            'job.job_interview_create.situational.name' | translate
+          }}</mat-label>
+          <mat-select matInput disableRipple formControlName="situational">
+            <mat-option [value]="1">{{
+              'job.job_interview_create.situational.okay' | translate
+            }}</mat-option>
+            <mat-option [value]="2">{{
+              'job.job_interview_create.situational.approved_with_reservations'
+                | translate
+            }}</mat-option>
+            <mat-option [value]="3">{{
+              'job.job_interview_create.situational.disapproved' | translate
+            }}</mat-option>
+            <mat-option [value]="4">{{
+              'job.job_interview_create.situational.failed_with_reservations'
+                | translate
+            }}</mat-option>
+            <mat-option [value]="5">{{
+              'collaborator.colaborator_create.feedbacks.status.scheduled'
+                | translate
+            }}</mat-option>
+          </mat-select>
+        </mat-form-field>
 
-            <div fxFlex="100" fxLayoutGap="16px">
-                <mat-form-field fxFlex="50" appearance="outline">
-                    <mat-label>{{
-                        'job.job_interview_create.technical_evaluation' | translate
-                        }}</mat-label>
-                    <textarea class="text-area" matInput placeholder="Avaliação Técnica"
-                        formControlName="technicalEvaluation"></textarea>
-                </mat-form-field>
-                <mat-form-field fxFlex="50" appearance="outline">
-                    <mat-label>{{
-                        'job.job_interview_create.comments' | translate
-                        }}</mat-label>
-                    <textarea class="text-area" matInput placeholder="Observações"
-                        formControlName="comments"></textarea>
-                </mat-form-field>
-            </div>
-            <div fxFlex="100" fxLayoutGap="16px">
-                <mat-form-field fxFlex="40" appearance="outline">
-                    <mat-label>{{
-                        'job.job_interview_create.situational.name' | translate
-                        }}</mat-label>
-                    <mat-select matInput disableRipple formControlName="situational">
-                        <mat-option [value]="1">{{
-                            'job.job_interview_create.situational.okay' | translate
-                            }}</mat-option>
-                        <mat-option [value]="2">{{
-                            'job.job_interview_create.situational.approved_with_reservations'
-                            | translate
-                            }}</mat-option>
-                        <mat-option [value]="3">{{
-                            'job.job_interview_create.situational.disapproved' | translate
-                            }}</mat-option>
-                        <mat-option [value]="4">{{
-                            'job.job_interview_create.situational.failed_with_reservations'
-                            | translate
-                            }}</mat-option>
-                        <mat-option [value]="5">{{
-                            'collaborator.colaborator_create.feedbacks.status.scheduled'|translate
-                            }}</mat-option>
-                    </mat-select>
-                </mat-form-field>
+        <div class="job-checkbox" fxFlex="40" fxLayoutAlign="center">
+          <mat-checkbox color="primary" formControlName="jobProfile">{{
+            'job.job_interview_create.job_profile' | translate
+          }}</mat-checkbox>
+        </div>
 
-                <div class="job-checkbox" fxFlex="40" fxLayoutAlign="center">
-                    <mat-checkbox color="primary" formControlName="jobProfile">{{
-                        'job.job_interview_create.job_profile' | translate
-                        }}</mat-checkbox>
-                </div>
-
-                <div fxLayoutAlign="center" fxFlex="20">
-                    <button mat-flat-button color="primary" class="save-button" (click)="saveInterview()"
-                        [disabled]="clientInterviewForm.invalid">
-                        {{ 'generic.save_button' | translate }}
-                    </button>
-                </div>
-            </div>
-        </form>
-    </div>
+        <div fxLayoutAlign="center" fxFlex="20">
+          <button
+            mat-flat-button
+            color="primary"
+            class="save-button"
+            (click)="saveInterview()"
+            [disabled]="
+              clientInterviewForm.invalid ||
+              ResumeControl.invalid ||
+              customerControl.invalid
+            ">
+            {{ 'generic.save_button' | translate }}
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
 </div>

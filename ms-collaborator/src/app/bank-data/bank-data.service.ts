@@ -84,7 +84,6 @@ export class BankDataService {
       } else {
         return await this.bankDataRepository.save({ id: id, ...data });
       }
-      console.log(data)
     } catch (e) {
       console.log(e);
     }

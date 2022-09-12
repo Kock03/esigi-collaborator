@@ -7,9 +7,9 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class JobProvider {
-  constructor(private apiGateway: ApiGateway) {}
+  constructor(private apiGateway: ApiGateway) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   findAll(): Promise<any> {
     return new Promise((resolve, reject) => {
@@ -31,9 +31,9 @@ export class JobProvider {
     });
   }
 
-  findByName(query: any): Promise<any> {
+  findByName(data: any): Promise<any> {
     return new Promise((resolve, reject) => {
-      this.apiGateway.get(environment.JOBS_MS + `jobs/find/name?${query}`)
+      this.apiGateway.post(environment.JOBS_MS + 'jobs/find', data)
         .subscribe((response: HttpResponse<any>) => {
           resolve(response.body);
         }, reject);
@@ -47,6 +47,16 @@ export class JobProvider {
     return new Promise((resolve, reject) => {
       this.apiGateway
         .get(environment.JOBS_MS + 'jobs/:id', { id: id })
+        .subscribe((response: HttpResponse<any>) => {
+          resolve(response.body);
+        }, reject);
+    });
+  }
+
+  findByResume(id: string | null): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.apiGateway
+        .get(environment.JOBS_MS + 'jobs/find/resume/:id', { id: id })
         .subscribe((response: HttpResponse<any>) => {
           resolve(response.body);
         }, reject);

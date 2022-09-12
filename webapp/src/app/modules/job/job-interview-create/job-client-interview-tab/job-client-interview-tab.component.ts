@@ -8,6 +8,7 @@ import { ClientInterviewProvider } from 'src/providers/clientInterview.provider'
 import { CustomerProvider } from 'src/providers/customer.provider';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { ResumeProvider } from 'src/providers/resume-providers/resume.provider';
+import { RequireMatch } from 'src/services/autocomplete.service';
 
 @Component({
   selector: 'app-job-client-interview-tab',
@@ -31,10 +32,10 @@ export class JobClientInterviewTabComponent implements OnInit {
   filteredResumes!: any[];
   filteredResumeList: any;
   resume!: any;
-  ResumeControl = new FormControl();
+  ResumeControl = new FormControl('', [Validators.required, RequireMatch]);
   resumeValid: boolean = false;
   resumeId: any;
-  customerControl = new FormControl();
+  customerControl = new FormControl('', [Validators.required, RequireMatch]);
   customers!: any[];
   filteredCustomers!: any[];
   filteredCustomerList: any;
@@ -78,7 +79,6 @@ export class JobClientInterviewTabComponent implements OnInit {
       this.clientInterviewForm.patchValue(
         this.interview.ClientInterviews
       );
-      console.log("🚀 ~ file: job-client-interview-tab.component.ts ~ line 49 ~ JobClientInterviewTabComponent ~ ngOnInit ~ this.interview.ClientInterviews", this.interview.ClientInterviews)
 
     } else {
       this.initForm();
@@ -132,11 +132,14 @@ export class JobClientInterviewTabComponent implements OnInit {
   }
 
   private async _filterResume(name: string): Promise<void> {
-    const params = `name=${name}`;
-    this.filteredResumes = await this.resumeProvider.findByName(
-      params
-    );
-
+    const data = {
+      name: name,
+    };
+    try {
+      this.resumes = await this.resumeProvider.findByName(data);
+    } catch (error) {
+      console.error(error);
+    }
   }
 
 
@@ -173,10 +176,15 @@ export class JobClientInterviewTabComponent implements OnInit {
   }
 
   private async _filterCustomer(name: string): Promise<void> {
-    const params = `corporateName=${name}`;
+    const data = {
+      corporateName: name,
+      status: 1,
+    };
     this.filteredCustomers = await this.customerProvider.findByName(
-      params
+      data
     );
+
+
 
   }
 
@@ -185,7 +193,6 @@ export class JobClientInterviewTabComponent implements OnInit {
       this.interview = this.interviewsProvider.findOne(
         this.interviewId
       );
-      console.log("🚀 ~ file: job-interview-create.component.ts ~ line 103 ~ JobInterviewCreateComponent ~ getCollaborator ~ interview", this.interview)
 
     } catch (error) {
       console.error(error);
@@ -231,7 +238,6 @@ export class JobClientInterviewTabComponent implements OnInit {
   onChange(value: number) {
     if (this.clientInterviewForm.controls['situational'].value == 5) {
       this.removeValidators()
-      console.log(this.clientInterviewForm)
     }
   }
 

@@ -43,7 +43,7 @@ export class ReturnsEntity {
   @Column({ nullable: true })
   returnOfCandidate: ReturnOfCandidate;
 
-  @Column()
+  @Column({ nullable: true })
   reason: Reason;
 
   @Column()

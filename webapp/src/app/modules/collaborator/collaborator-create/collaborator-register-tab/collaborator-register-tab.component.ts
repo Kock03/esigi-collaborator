@@ -1,4 +1,5 @@
 import { formatDate } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 import {
   Component,
   EventEmitter,
@@ -23,9 +24,8 @@ import {
 } from '@angular/material/core';
 import { ActivatedRoute } from '@angular/router';
 import { ApiGateway } from 'src/api-gateway';
+import { CollaboratorProvider } from 'src/providers/collaborator-providers/collaborator.provider';
 import { CepService } from 'src/services/cep.service';
-
-
 
 @Component({
   selector: 'app-collaborator-register-tab',
@@ -45,36 +45,42 @@ export class CollaboratorRegisterTabComponent implements OnInit {
   typeControl = new FormControl();
   addressForm!: FormGroup;
   phoneForm!: FormGroup;
+  file!: any;
   view!: boolean;
 
   constructor(
     private fb: FormBuilder,
     private cepService: CepService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private httpClient: HttpClient,
+    private collaboratorProvider: CollaboratorProvider,
   ) {}
 
-  ngOnInit(): void {
+ async ngOnInit() {
     this.collaboratorId = this.route.snapshot.paramMap.get('id');
-    this.url =
-      'https://st.depositphotos.com/1734074/4228/v/450/depositphotos_42286141-stock-illustration-vector-man-with-mustache-in.jpg';
     if (this.collaboratorId == 'novo') {
+      this.url = '../../../../assets/logo/profile-icon.png';
       this.view = true;
       this.collaboratorForm.valueChanges.subscribe(res => {
         const addressForm = this.collaboratorForm.controls[
           'Address'
         ] as FormGroup;
-        this.addressForm = addressForm
+        this.addressForm = addressForm;
         addressForm.controls['cep'].valueChanges.subscribe(res => {});
 
-        const phoneForm = this.collaboratorForm.controls[
-          'Phone'
-        ] as FormGroup;
-        this.phoneForm = phoneForm
+        const phoneForm = this.collaboratorForm.controls['Phone'] as FormGroup;
+        this.phoneForm = phoneForm;
         phoneForm.controls['ddi'].valueChanges.subscribe(res => {});
       });
-    }else{
+    } else {
+      let collaborator = await this.collaboratorProvider.findOne(
+        this.collaboratorId
+      );
+      this.url = 'http://localhost:3000/' + collaborator.photo
       this.view = false;
-
+      this.changesType(
+        this.collaboratorForm.controls['collaboratorTypes'].value
+      );
     }
   }
 
@@ -86,28 +92,35 @@ export class CollaboratorRegisterTabComponent implements OnInit {
 
   changesType(value: number) {
     if (this.collaboratorForm.controls['collaboratorTypes'].value === 2) {
-      this.collaboratorForm.controls['cpf'].removeValidators(Validators.required)
-      this.collaboratorForm.controls['cpf'].updateValueAndValidity()
+      this.collaboratorForm.controls['cpf'].removeValidators(
+        Validators.required
+      );
+      this.collaboratorForm.controls['cpf'].updateValueAndValidity();
     } else {
-      this.collaboratorForm.controls['cnpj'].removeValidators(Validators.required)
-      this.collaboratorForm.controls['cnpj'].updateValueAndValidity()
-      this.collaboratorForm.controls['cpf'].addValidators(Validators.required)
-
+      this.collaboratorForm.controls['cnpj'].removeValidators(
+        Validators.required
+      );
+      this.collaboratorForm.controls['cnpj'].updateValueAndValidity();
+      this.collaboratorForm.controls['cpf'].addValidators(Validators.required);
     }
-
   }
 
   setValueLogin() {
     if (this.collaboratorForm.controls['collaboratorTypes'].value === 2) {
-      this.collaboratorForm.controls['login'].setValue(`${this.collaboratorForm.controls['firstNameCorporateName'].value}@Envolti.com.br`);
+      this.collaboratorForm.controls['login'].setValue(
+        `${this.collaboratorForm.controls['firstNameCorporateName'].value}@Envolti.com.br`
+      );
     } else {
-      if (this.collaboratorForm.controls['firstNameCorporateName'].value != null && this.collaboratorForm.controls['lastNameFantasyName'].value != null) {
-
-        this.collaboratorForm.controls['login'].setValue(`${this.collaboratorForm.controls['firstNameCorporateName'].value}.${this.collaboratorForm.controls['lastNameFantasyName'].value}@Envolti.com.br`);
-
+      if (
+        this.collaboratorForm.controls['firstNameCorporateName'].value !=
+          null &&
+        this.collaboratorForm.controls['lastNameFantasyName'].value != null
+      ) {
+        this.collaboratorForm.controls['login'].setValue(
+          `${this.collaboratorForm.controls['firstNameCorporateName'].value}.${this.collaboratorForm.controls['lastNameFantasyName'].value}@Envolti.com.br`
+        );
       }
     }
-
   }
   compareSelect(o1: any, o2: any): boolean {
     if (!o1 || !o2) {
@@ -138,16 +151,29 @@ export class CollaboratorRegisterTabComponent implements OnInit {
     }
   }
 
-  fileChanged(file: any) {
-    const reader = new FileReader();
-    reader.readAsDataURL(file.target.files[0]);
-    reader.onload = _file => {
-      this.url = reader.result;
-      this.collaboratorForm.patchValue({
-        photo: reader.result,
-      });
-    };
+  fileChanged(event: any) {
+    const file = event.target.files[0];
+
+    const formData = new FormData();
+    formData.append('file', file);
+
+    try {
+      this.httpClient
+        .post('http://localhost:3000', formData)
+        .subscribe(resposta => {
+          if (resposta) {
+            this.file = resposta;
+            this.collaboratorForm.controls['photo'].setValue(
+              this.file.filename
+            );
+            this.url = 'http://localhost:3000/' + this.file.filename;
+          }
+        });
+    } catch (e) {
+      console.log(e);
+    }
   }
+
   collaboratorIsActive() {
     if (this.collaborator.active == true) {
       this.collaborator.active = 'inativo';
