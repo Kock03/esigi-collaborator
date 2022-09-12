@@ -135,10 +135,10 @@ export class CollaboratorFinanceTabComponent implements OnInit {
           let deleteFinance = await this.collaboratorFinanceProvider.destroy(id);
           this.getFinanceList();
 
-          this.snackbarService.successMessage('Registro Excluido Com Sucesso');
+          this.snackbarService.successMessage('Registro excluido com sucesso');
         } catch (error) {
           console.log('ERROR 132' + error);
-          this.snackbarService.showError('Falha ao Excluir');
+          this.snackbarService.showError('Falha ao excluir');
         }
       }
     });

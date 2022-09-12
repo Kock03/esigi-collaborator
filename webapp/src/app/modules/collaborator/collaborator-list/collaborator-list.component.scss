@@ -5,7 +5,11 @@
   .envolti-table {
     margin-top: 20px;
     overflow: auto;
-    max-height: calc(100% - 200px);
+    // height: 100%;
+    // max-height: calc(100% - 60px);
+    overflow: auto;
+    position: relative;
+    max-height: 565px;
     width: 100%;
     border-radius: 10px;
 
@@ -48,4 +52,13 @@
   .mat-sort-header-arrow {
     color: white !important;
   }
+
+  // .mat-sort-header-arrow{
+  //   font-size: 35px;
+  // }
+
+  
+
+
+  
 }

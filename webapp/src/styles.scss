@@ -48,6 +48,7 @@ html {
   max-width: 1650px;
   margin-top: 24px;
 
+
   &-group {
     width: 100%;
     max-width: 1000px;
@@ -158,9 +159,36 @@ html {
   }
 }
 
-// #A6D6E5
-// #E30F0F
+h2{
+  color: #2F3133 !important;
+}
 
+.collaborator-box{
+  margin-left: 0px !important;
+}
+
+
+.mat-sort-header-arrow ng-trigger ng-trigger-arrowPosition ng-tns-c284-50 ng-star-inserted{
+  margin-left: 200px !important;
+}
+
+.mat-focus-indicator mat-icon-button mat-button-base{
+  height: 20px !important;
+  width: 20px !important;
+}
+
+// mat-toolbar[_ngcontent-msg-c69] img[_ngcontent-msg-c69] {
+//   margin-top: 0px !important;
+//   width: 128px;
+// }
+
+  .menu-button-logo {
+  margin-top: 8px !important;
+}
+
+th{
+  font-size: 16px !important;
+}
 
 html,
 body {

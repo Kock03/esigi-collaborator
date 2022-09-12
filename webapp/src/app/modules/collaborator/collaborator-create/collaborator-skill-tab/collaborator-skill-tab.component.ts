@@ -120,10 +120,10 @@ export class CollaboratorSkillTabComponent implements OnInit {
         try {
           let deleteSkill = await this.collaboratorSkillProvider.destroy(id);
           this.getSkillList();
-          this.snackbarService.successMessage('Registro Excluido Com Sucesso');
+          this.snackbarService.successMessage('Registro excluido com sucesso');
         } catch (error) {
           console.log('ERROR 132' + error);
-          this.snackbarService.showError('Falha ao Excluir');
+          this.snackbarService.showError('Falha ao excluir');
         }
       }
     });
