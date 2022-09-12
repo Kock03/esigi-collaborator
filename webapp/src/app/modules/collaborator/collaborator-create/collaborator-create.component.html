@@ -1,4 +1,5 @@
-<div id="collaboratorCreate" class="page">
+<div id="collaboratorCreate" class="page" >
+  <div class="collaborator-box">
   <div class="btn-arrow-back" fxLayout="row" fxLayoutAlign="start center">
     <button mat-icon-button    (click)="listCollaborator()">
       <mat-icon>chevron_left</mat-icon>
@@ -60,6 +61,7 @@
       <span class="tab-border"></span>
     </div>
   </div>
+</div>
 
   <app-collaborator-register-tab *ngIf="collaboratorForm" [hidden]="step != 1" [form]="collaboratorForm"
     (onChange)="handleChanges($event)">
