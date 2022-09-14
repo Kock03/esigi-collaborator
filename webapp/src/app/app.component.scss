@@ -1,8 +1,10 @@
 
   mat-toolbar {
+    width: 100%;
     background: #208fd8;
     color: white;
     height: 64px;
+
 
     img {
       margin-top: 16px;
@@ -27,12 +29,7 @@
   }
 
   .menu-button-logout {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
     font-size: 1rem;
-    margin-left: 1445px;
   
     mat-icon {
       margin-right: 8px;
@@ -95,6 +92,11 @@
     bottom: 0;
     margin-bottom: 8px;
     width: 212px;
+  }
+
+  .menu-button-more{
+    height: 22px;
+    margin-top: 50px;
   }
 
   .avatar {
