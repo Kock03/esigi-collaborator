@@ -35,6 +35,7 @@ import { CepService } from 'src/services/cep.service';
 })
 export class CollaboratorRegisterTabComponent implements OnInit {
   @Input('form') collaboratorForm!: FormGroup;
+  @Input('country') countryControl!: FormControl;
   @Output() onChange: EventEmitter<any> = new EventEmitter();
 
   selectedFile: any;
@@ -45,8 +46,10 @@ export class CollaboratorRegisterTabComponent implements OnInit {
   typeControl = new FormControl();
   addressForm!: FormGroup;
   phoneForm!: FormGroup;
+  country!: FormControl;
   file!: any;
   view!: boolean;
+  searchEnabled!: boolean;
 
   constructor(
     private fb: FormBuilder,
@@ -57,6 +60,7 @@ export class CollaboratorRegisterTabComponent implements OnInit {
   ) {}
 
  async ngOnInit() {
+  this.searchEnabled = false;
     this.collaboratorId = this.route.snapshot.paramMap.get('id');
     if (this.collaboratorId == 'novo') {
       this.url = '../../../../assets/logo/profile-icon.png';
@@ -81,7 +85,27 @@ export class CollaboratorRegisterTabComponent implements OnInit {
       this.changesType(
         this.collaboratorForm.controls['collaboratorTypes'].value
       );
+
     }
+  }
+
+  onCountrySelected(country: any) {
+    if(this.collaboratorId == 'novo'){
+      if(country.name === 'Brasil'){
+        this.searchEnabled = true;
+      }else{
+        this.searchEnabled = false;
+      }
+      console.log(this.countryControl)
+      this.collaboratorForm.controls['Address'].patchValue(
+        {
+          country: country.name
+        }
+      )
+    }else{
+      
+    }
+
   }
 
   ngAfterViewInit(): void {}

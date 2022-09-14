@@ -13,6 +13,12 @@ import {
 import { CollaboratorsEntity } from 'src/app/collaborators/collaborators.entity';
 
 export class CreateAddressDto {
+
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsString()
+  country: string;
+
   @ApiProperty()
   @IsNotEmpty()
   @IsString()

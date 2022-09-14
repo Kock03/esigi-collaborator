@@ -94,7 +94,7 @@
                     </button>
                 </th>
                 <td class="button-tab" mat-cell *matCellDef="let collaborator" style="text-align: end">
-                    <button class="table-button" mat-button (click)="editCollaborator(collaborator.id)">
+                    <button class="table-button" mat-button (click)="editCollaborator(collaborator.id, collaborator.Address)">
                         <mat-icon>edit</mat-icon>
                     </button>
                     <button class="table-button" mat-button

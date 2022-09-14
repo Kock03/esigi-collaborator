@@ -8,6 +8,7 @@ import { filter, pairwise } from 'rxjs';
 import { DocumentValidator } from 'src/app/validators/document.validator';
 import { CollaboratorProvider } from 'src/providers/collaborator-providers/collaborator.provider';
 import { UserProvider } from 'src/providers/user.provider';
+import { RequireMatch } from 'src/services/autocomplete.service';
 import { SnackBarService } from 'src/services/snackbar.service';
 
 @Component({
@@ -23,7 +24,8 @@ export class CollaboratorCreateComponent implements OnInit {
   collaboratorId!: string | null;
   collaborator!: any;
   active: boolean = true;
-
+  countryControl = new FormControl('', [Validators.required, RequireMatch]);
+  country: any;
   loginControl = new FormControl();
   method: any;
   Educations: any;
@@ -73,6 +75,7 @@ export class CollaboratorCreateComponent implements OnInit {
       sessionStorage.setItem('collaborator_tab', '1');
     }
 
+    this.country = sessionStorage.getItem('country_value')
     this.collaboratorId = this.route.snapshot.paramMap.get('id');
     this.step = JSON.parse(sessionStorage.getItem('collaborator_tab')!);
 
@@ -150,6 +153,7 @@ export class CollaboratorCreateComponent implements OnInit {
       }),
 
       Address: this.fb.group({
+        country: ['', Validators.required],
         cep: ['', Validators.required],
         number: ['', Validators.required],
         complement: ['', Validators.required],
@@ -160,11 +164,23 @@ export class CollaboratorCreateComponent implements OnInit {
       }),
     });
 
+    this.countryControl.valueChanges.subscribe((res) => {
+      if (res && res.name) {
+        this.collaboratorForm.controls['Address'].patchValue(
+          {
+            country: res.name
+          }
+        )
+      }
+    });
+    console.log(this.countryControl)
+
   }
 
   setFormValue() {
     if (this.collaborator) {
       this.collaboratorForm.patchValue(this.collaborator);
+      this.countryControl.patchValue(this.country);
     }
   }
 

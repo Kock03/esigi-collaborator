@@ -13,6 +13,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { MatListModule } from '@angular/material/list';
+import { MatSelectCountryModule } from '@angular-material-extensions/select-country';
 
 import { NgxMaskModule, IConfig } from 'ngx-mask';
 import { SnackBarComponent } from './components/snack-bar/snack-bar.component';
@@ -30,6 +31,7 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
   declarations: [AppComponent, SnackBarComponent],
   imports: [
     NgxMaskModule.forRoot(),
+    MatSelectCountryModule.forRoot('br'),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
