@@ -57,8 +57,6 @@ export class CollaboratorCreateComponent implements OnInit {
 
   ];
 
-
-
   constructor(
     private fb: FormBuilder,
     private collaboratorProvider: CollaboratorProvider,
@@ -206,17 +204,17 @@ export class CollaboratorCreateComponent implements OnInit {
       try {
         await this.collaboratorProvider.update(
           colaborator.id,
-          idUser
-        );
-      } catch (error: any) {
-        console.log( error);
-      }
-      sessionStorage.setItem('collaborator_id', colaborator.id);
-      this.router.navigate([`colaborador/${colaborator.id}`]);
-      this.method = 'edit'
+          idUser,
+          );
+        } catch (error: any) {
+          console.log( error);
+        }
+        sessionStorage.setItem('collaborator_id', colaborator.id);
+        this.router.navigate([`colaborador/${colaborator.id}`]);
+        this.method = 'edit'
+        this.snackbarService.successMessage('Colaborador cadastrado com sucesso'),
       this.handleStep(2)
 
-      this.snackbarService.successMessage('Colaborador cadastrado com sucesso');
 
     } catch (error: any) {
       console.log( error);
