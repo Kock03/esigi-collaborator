@@ -30,11 +30,11 @@
 
     <mat-divider *ngIf="openTree != true"></mat-divider>
 
-    <div class="design" [ngStyle]="openTree && {'margin-top': '200px'} || {'margin-top': '30px'}" >
+    <div class="design" [ngStyle]="openTree && {'margin-top': '220px'} || {'margin-top': '30px'}" >
     <div class="btn-menu"  
     [ngStyle]="openTree && {'margin-left': '1px'} || {'margin-left': '20px'}"
    >
-    <button class="btn-menu" mat-button class="menu-button"  (click)="openApp()">
+    <button class="btn-menu" mat-button class="menu-button"  (click)="openApp(3406)">
       <mat-icon [ngStyle]="openTree && {'margin-left': '15px'} || {'margin-left': '3px'}" >home</mat-icon>
       <span *ngIf="openTree != true" >Início</span>
     </button>
@@ -57,7 +57,7 @@
       <span *ngIf="openTree != true" >Currículo</span>
     </button>
     </div>
-    <div class="menu-button-more" [ngStyle]="openTree && {'margin-left': '1px', 'margin-top': '300px'} || {'margin-left': '20px', 'margin-top': '180px'}" >
+    <div class="menu-button-more" [ngStyle]="openTree && {'margin-left': '1px', 'margin-top': '200px'} || {'margin-left': '20px', 'margin-top': '100px'}" >
     <button   mat-icon-button   (click)=recize() 
     [ngStyle]="openTree && {'margin-left': '5px'} || {'margin-right': '25px'}">
       <mat-icon >more_horiz</mat-icon>
