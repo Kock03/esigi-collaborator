@@ -19,7 +19,6 @@ import { ResumesEntity } from './resumes.entity';
 import * as fs from 'fs';
 import * as PdfPrinter from 'pdfmake';
 import { v4 } from 'uuid';
-import { ResumeTreatmentModel } from './resume-treatment';
 import { ResumeTemplate } from './resume-template';
 
 @Injectable()
@@ -27,20 +26,19 @@ export class ResumesService {
   constructor(
     @InjectRepository(ResumesEntity)
     private readonly resumesRepository: Repository<ResumesEntity>,
-  ) {}
+  ) { }
 
   async createPdf(id: string) {
     const data = await this.findOneOrFail({ id });
-    const dataTreatment =  new ResumeTreatmentModel(data)
-    const creatorPdf =  new ResumeTemplate(dataTreatment)
-    const printer = await new PdfPrinter(creatorPdf.fontDefinition);
-    console.log(printer)
+    const creatorPdf = new ResumeTemplate(data)
+    const printer = await new PdfPrinter(creatorPdf.Font);
     const options = {};
-    let file_name =  dataTreatment.firstName + dataTreatment.lastName + dataTreatment.birthDate + '.pdf';
-    const pdfDoc =  printer.createPdfKitDocument(creatorPdf.DocDefinition, options);
-    pdfDoc.pipe(fs.createWriteStream(`pdf/${file_name}`));
+    var name = data.firstName + data.lastName + data.cpf + '.pdf';
+    let file_name = 'pdf/' + name;
+    const pdfDoc = await printer.createPdfKitDocument(creatorPdf.DocDefinition, options);
+    pdfDoc.pipe(fs.createWriteStream(file_name));
     pdfDoc.end();
-    return { file_name: file_name };
+    return { file_name: name };
   }
 
   async findAll() {

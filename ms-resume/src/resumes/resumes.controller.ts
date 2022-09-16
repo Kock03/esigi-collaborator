@@ -8,11 +8,14 @@ import {
   Post,
   Put,
   Query,
+  Res,
 } from '@nestjs/common';
 import { IResumes } from 'src/interfaces/iresume.interface';
 import { CreateResumesDto } from './dto/create-resumes.dto';
 import { UpdateResumesDto } from './dto/update-resumes.dto';
 import { ResumesService } from './resumes.service';
+import * as fs from 'fs';
+
 
 @Controller('/api/v1/resumes')
 export class ResumesController {
@@ -36,6 +39,16 @@ export class ResumesController {
   @Get('generate-pdf/:id')
   async generatePDF(@Param('id', new ParseUUIDPipe()) id: string) {
     return await this.resumesService.createPdf(id);
+  }
+
+  @Get('download/:pdfpath')
+  async seeUploadedFile(@Param('pdfpath') pdf: string, @Res() res) {
+    var path = "pdf/" + pdf
+    console.log(pdf)
+    if (fs.existsSync(path)) {
+      console.log(fs.existsSync(path))
+      return await res.download(path)
+    }
   }
 
   @Get('find')

@@ -45,6 +45,7 @@ export class ResumeListComponent implements OnInit {
   step: number = 1;
   form!: FormGroup;
   resume!: any;
+  filename!: string;
 
   constructor(
     private liveAnnouncer: LiveAnnouncer,
@@ -145,5 +146,19 @@ export class ResumeListComponent implements OnInit {
         const params = this.filter.nativeElement.value;
         this.searchResumes(params);
       });
+  }
+
+  async pdfDownload(resumeId: string): Promise<void> {
+    let pdfName = await this.resumeProvider.generatePDF(resumeId);
+    if (pdfName) {
+      this.filename = pdfName.file_name
+      this.resumeProvider.downloadPDF(this.filename).subscribe((res: any) => {
+        let blob: Blob = res.body as Blob;
+        let a = document.createElement('a');
+        a.download = this.filename
+        a.href = window.URL.createObjectURL(blob);
+        a.click()
+      })
+    }
   }
 }
