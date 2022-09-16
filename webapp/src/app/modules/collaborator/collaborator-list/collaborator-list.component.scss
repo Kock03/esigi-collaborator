@@ -44,6 +44,23 @@
     }
   }
 
+  .active {
+    width: 100%;
+    max-width: 100px;
+    background: #5de85d;
+    border-radius: 10px;
+    color: #fff;
+    
+  }
+
+  .inactive {
+    width: 100%;
+    max-width: 100px;
+    background: #ec3535;
+    border-radius: 10px;
+    color: #fff;
+  }
+
   .iconAdd {
     // margin-right: 0!important;
     margin-left: 15px;

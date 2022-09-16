@@ -296,7 +296,6 @@ export class CollaboratorsService {
     options = {
       relations: [
         'Financials',
-        'Address',
         'BankData',
         'Dependents',
         'Documents',
@@ -312,7 +311,7 @@ export class CollaboratorsService {
         conditions,
         options,
       );
-    } catch {
+    } catch(e) {
       throw new NotFoundException();
     }
   }
