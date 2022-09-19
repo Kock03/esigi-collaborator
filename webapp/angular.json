@@ -120,6 +120,7 @@
   },
   "defaultProject": "esigi-collaborator",
   "cli": {
+    "analytics": "d8230f4b-8ded-45a1-bc73-22ad412c798d",
     "defaultCollection": "@angular-eslint/schematics"
   }
 }
