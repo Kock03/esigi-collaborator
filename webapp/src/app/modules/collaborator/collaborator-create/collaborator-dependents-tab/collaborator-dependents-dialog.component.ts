@@ -40,6 +40,7 @@ export class PickDateAdapter extends NativeDateAdapter {
 @Component({
   selector: 'collaborator-dependents-dialog',
   templateUrl: 'collaborator-dependents-dialog.html',
+  styleUrls: ['./collaborator-dependents-dialog.component.scss'],
   providers: [
     { provide: DateAdapter, useClass: PickDateAdapter },
     { provide: MAT_DATE_FORMATS, useValue: PICK_FORMATS },
@@ -113,5 +114,10 @@ export class CollaboratorDependentsDialog {
         console.log('ERROR 132' + error);
       }
     }
+  }
+
+  close() {
+    this.dialogRef.close();
+    sessionStorage.clear;
   }
 }

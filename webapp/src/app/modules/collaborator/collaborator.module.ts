@@ -41,6 +41,8 @@ import { MatSortModule } from '@angular/material/sort';
 import { TranslateModule } from '@ngx-translate/core';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { CollaboratorImageDialog } from './collaborator-create/collaborator-document-tab/collaborator-image-dialog.component';
+import {MatExpansionModule} from '@angular/material/expansion';
+
 
 const routes: Routes = [
   {
@@ -102,6 +104,8 @@ const routes: Routes = [
     MatDialogModule,
     MatSortModule,
     MatAutocompleteModule,
+    MatExpansionModule,
+    
 
   ],
   entryComponents: [

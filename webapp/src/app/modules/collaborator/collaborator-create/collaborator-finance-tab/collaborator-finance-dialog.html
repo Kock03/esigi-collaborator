@@ -1,77 +1,85 @@
 <div id="collaboratorFinanceDialog" class="dialog">
   <div class="content-scroll" *ngIf="financeForm">
-    <h2 mat-dialog-title class="title-dialog">{{'collaborator.colaborator_create.finance.financial_register' |
-      translate}}</h2>
-    <mat-dialog-content class="mat-typography">
-      <form [formGroup]="financeForm" fxLayout="column">
-        <mat-form-field fxFlex="35" appearance="outline">
-          <mat-label>{{'collaborator.colaborator_create.finance.date_inclusion' | translate}}</mat-label>
-          <input matInput mask="00/00/0000" [showMaskTyped]="true" [dropSpecialCharacters]="false"
-            formControlName="dateInclusion" placeholder="Data de Inclusão" />
-
-          <mat-error *ngIf="financeForm &&
-          financeForm.controls['dateInclusion'].hasError('required')">
-            {{'validators.validator-required' | translate}} </mat-error>
-        </mat-form-field>
-
-        <mat-form-field appearance="outline">
-          <mat-label>{{'collaborator.colaborator_create.finance.type' | translate}}</mat-label>
-          <mat-select formControlName="contractType">
-            <mat-option [value]="1">{{'generic.clt' | translate}}</mat-option>
-            <mat-option [value]="2">{{'generic.pj' | translate}}</mat-option>
-            <mat-option [value]="3">{{'generic.cooperated' | translate}}</mat-option>
-            <mat-option [value]="4">{{'generic.intern' | translate}}</mat-option>
-          </mat-select>
-          <mat-error *ngIf="financeForm &&
-          financeForm.controls['contractType'].hasError('required')">
-            {{'validators.validator-required' | translate}} </mat-error>
-        </mat-form-field>
-
-        <mat-form-field appearance="outline">
-          <mat-label>{{'collaborator.colaborator_create.finance.reason.name' | translate}}</mat-label>
-          <mat-select formControlName="reason">
-            <mat-option [value]="1">{{'collaborator.colaborator_create.finance.reason.hiring' | translate}}</mat-option>
-            <mat-option [value]="2">{{'collaborator.colaborator_create.finance.reason.recognition' | translate}}
-            </mat-option>
-            <mat-option [value]="3">{{'collaborator.colaborator_create.finance.reason.home_time' | translate}}
-            </mat-option>
-            <mat-option [value]="4">{{'collaborator.colaborator_create.finance.reason.retention' | translate}}
-            </mat-option>
-          </mat-select>
-          <mat-error *ngIf="financeForm &&
-          financeForm.controls['reason'].hasError('required')">
-            {{'validators.validator-required' | translate}} </mat-error>
-        </mat-form-field>
-
-        <mat-form-field appearance="outline">
-          <mat-label>{{'collaborator.colaborator_create.finance.value' | translate}}</mat-label>
-          <input matInput prefix="R$" type="text" mask="separator.2" thousandSeparator="." separatorLimit="100000000" disableRipple formControlName="value"
-            placeholder="Valor" />
-          <mat-error *ngIf="financeForm &&
-            financeForm.controls['value'].hasError('required')">
-            {{'validators.validator-required' | translate}} </mat-error>
-        </mat-form-field>
-
-        <mat-form-field fxFlex="50" appearance="outline">
-          <mat-label>Data de Pagamento</mat-label>
-          <input matInput mask="00/00/0000" [showMaskTyped]="true" [dropSpecialCharacters]="false"
-          formControlName="payday" placeholder="Data de Pagamento" />
-          <mat-error *ngIf="financeForm &&
-            financeForm.controls['payday'].hasError('required')">
-            {{'validators.validator-required' | translate}} </mat-error>
-        </mat-form-field>
-      </form>
-    </mat-dialog-content>
-    <mat-dialog-actions>
-      <div class="button-dialog">
-        <button mat-flat-button mat-dialog-close (click)="onNoClick()">
-          {{'generic.back_button' | translate}}
+    <div class="content-header" fxLayout="row">
+      <h2 class="title-content" mat-dialog-title>{{'collaborator.colaborator_create.finance.financial_register' |
+        translate}}</h2>
+        <button mat-icon-button class="mat-icon-content" (click)="close()" >
+          <mat-icon >cancel</mat-icon>
         </button>
-        <button color="primary" [disabled]="financeForm.invalid" mat-flat-button [mat-dialog-close]="true"
-          (click)="save()">
-          {{'generic.save_button' | translate}}
-        </button>
-      </div>
-    </mat-dialog-actions>
-  </div>
+    </div>
+  <div class="dialog-content">
+  <mat-dialog-content class="mat-typography">
+    <form [formGroup]="financeForm" fxLayout="column">
+      <mat-form-field fxFlex="35" appearance="outline">
+        <mat-label>{{'collaborator.colaborator_create.finance.date_inclusion' | translate}}</mat-label>
+        <input matInput mask="00/00/0000" [showMaskTyped]="true" [dropSpecialCharacters]="false"
+          formControlName="dateInclusion" placeholder="Data de Inclusão" />
+
+        <mat-error *ngIf="financeForm &&
+        financeForm.controls['dateInclusion'].hasError('required')">
+          {{'validators.validator-required' | translate}} </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>{{'collaborator.colaborator_create.finance.type' | translate}}</mat-label>
+        <mat-select formControlName="contractType">
+          <mat-option [value]="1">{{'generic.clt' | translate}}</mat-option>
+          <mat-option [value]="2">{{'generic.pj' | translate}}</mat-option>
+          <mat-option [value]="3">{{'generic.cooperated' | translate}}</mat-option>
+          <mat-option [value]="4">{{'generic.intern' | translate}}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="financeForm &&
+        financeForm.controls['contractType'].hasError('required')">
+          {{'validators.validator-required' | translate}} </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>{{'collaborator.colaborator_create.finance.reason.name' | translate}}</mat-label>
+        <mat-select formControlName="reason">
+          <mat-option [value]="1">{{'collaborator.colaborator_create.finance.reason.hiring' | translate}}</mat-option>
+          <mat-option [value]="2">{{'collaborator.colaborator_create.finance.reason.recognition' | translate}}
+          </mat-option>
+          <mat-option [value]="3">{{'collaborator.colaborator_create.finance.reason.home_time' | translate}}
+          </mat-option>
+          <mat-option [value]="4">{{'collaborator.colaborator_create.finance.reason.retention' | translate}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="financeForm &&
+        financeForm.controls['reason'].hasError('required')">
+          {{'validators.validator-required' | translate}} </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>{{'collaborator.colaborator_create.finance.value' | translate}}</mat-label>
+        <input matInput prefix="R$" type="text" mask="separator.2" thousandSeparator="." separatorLimit="100000000" disableRipple formControlName="value"
+          placeholder="Valor" />
+        <mat-error *ngIf="financeForm &&
+          financeForm.controls['value'].hasError('required')">
+          {{'validators.validator-required' | translate}} </mat-error>
+      </mat-form-field>
+
+      <mat-form-field fxFlex="50" appearance="outline">
+        <mat-label>Data de Pagamento</mat-label>
+        <input matInput mask="00/00/0000" [showMaskTyped]="true" [dropSpecialCharacters]="false"
+        formControlName="payday" placeholder="Data de Pagamento" />
+        <mat-error *ngIf="financeForm &&
+          financeForm.controls['payday'].hasError('required')">
+          {{'validators.validator-required' | translate}} </mat-error>
+      </mat-form-field>
+    </form>
+  </mat-dialog-content>
+
+  <mat-dialog-actions>
+    <div class="button-dialog">
+      <button mat-flat-button mat-dialog-close (click)="onNoClick()">
+        {{'generic.back_button' | translate}}
+      </button>
+      <button color="primary" [disabled]="financeForm.invalid" mat-flat-button [mat-dialog-close]="true"
+        (click)="save()">
+        {{'generic.save_button' | translate}}
+      </button>
+    </div>
+  </mat-dialog-actions>
+</div>
+</div>
 </div>

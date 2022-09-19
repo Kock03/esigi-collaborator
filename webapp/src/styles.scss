@@ -115,12 +115,14 @@ html {
   }
 }
 
+ 
+
 .confirm-modal {
   mat-dialog-container {
+    border-radius: 10px;
     min-width: 300px;
     max-width: 320px;
     width: 100%;
-    border-radius: 10px;
     border: 2px solid #673ab7;
     p {
       letter-spacing: 0.25px;
@@ -190,6 +192,18 @@ th{
   font-size: 16px !important;
 }
 
+mat-dialog-container{
+  padding: 0 !important;
+  border-radius: 10px !important;
+}
+
+.mat-icon-header{
+    color: white !important;
+    margin-left: 330px !important;
+    margin-top: 15px !important;
+}
+
+s
 html,
 body {
   height: 100%;

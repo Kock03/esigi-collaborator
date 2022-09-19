@@ -73,5 +73,8 @@ export class CollaboratorSkillDialog {
     }
   }
 
-
+  close() {
+    this.dialogRef.close();
+    sessionStorage.clear;
+  }
 }

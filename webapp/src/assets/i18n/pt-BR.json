@@ -30,7 +30,7 @@
           "photo": "Foto",
           "dependents": {
               "name": "Dependentes",
-              "dependent_registration": "Cadastro Dependentes",
+              "dependent_registration": "Cadastro dependentes",
               "type": {
                   "name": "Tipo",
                   "spouse": "Cônjuge",

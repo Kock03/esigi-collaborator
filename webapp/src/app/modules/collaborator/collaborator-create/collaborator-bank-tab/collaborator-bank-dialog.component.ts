@@ -87,4 +87,11 @@ export class CollaboratorBankDialog {
     }
 
   }
+
+  
+  close() {
+    this.dialogRef.close();
+    sessionStorage.clear;
+  }
+
 }

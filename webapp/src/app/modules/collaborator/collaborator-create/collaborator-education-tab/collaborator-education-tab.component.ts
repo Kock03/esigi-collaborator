@@ -100,7 +100,7 @@ export class CollaboratorEducationTabComponent implements OnInit {
     sessionStorage.setItem('method', this.method);
     const dialogRef = this.dialog.open(CollaboratorLanguageDialog, {
       width: '500px',
-      height: '300px',
+      height: '320px',
     });
 
     dialogRef.afterClosed().subscribe(language => {
@@ -115,7 +115,7 @@ export class CollaboratorEducationTabComponent implements OnInit {
     sessionStorage.setItem('method', this.method);
     const dialogRef = this.dialog.open(CollaboratorEducationDialog, {
       width: '500px',
-      height: '470px',
+      height: '400px',
     });
 
     dialogRef.afterClosed().subscribe(education => {
@@ -136,7 +136,7 @@ export class CollaboratorEducationTabComponent implements OnInit {
     sessionStorage.setItem('language_id', this.languageId);
     const dialogRef = this.dialog.open(CollaboratorLanguageDialog, {
       width: '500px',
-      height: '300px',
+      height: '320px',
       data: languageSelected,
     });
 
@@ -180,7 +180,7 @@ export class CollaboratorEducationTabComponent implements OnInit {
     sessionStorage.setItem('education_id', this.educationId);
     const dialogRef = this.dialog.open(CollaboratorEducationDialog, {
       width: '500px',
-      height: '470px',
+      height: '400px',
       data: educationSelected,
     });
     dialogRef.afterClosed().subscribe(async education => {

@@ -98,4 +98,9 @@ export class CollaboratorDocumentDialog {
       }
     }
   }
+
+  close() {
+    this.dialogRef.close();
+    sessionStorage.clear;
+  }
 }

@@ -68,4 +68,9 @@ export class CollaboratorLanguageDialog {
       }
     }
   }
+
+  close() {
+    this.dialogRef.close();
+    sessionStorage.clear;
+  }
 }

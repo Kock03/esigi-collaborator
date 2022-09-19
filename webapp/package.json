@@ -28,6 +28,7 @@
     "@ngx-translate/http-loader": "^7.0.0",
     "angular2-text-mask": "^9.0.0",
     "ngx-mask": "^13.1.1",
+    "ngx-order-pipe": "^2.2.0",
     "rxjs": "~7.4.0",
     "serve": "^13.0.2",
     "tslib": "^2.3.0",

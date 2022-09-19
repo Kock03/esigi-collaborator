@@ -1,44 +1,52 @@
 <div id="collaboratorDocumentDialog" class="dialog">
   <div class="content-scroll" *ngIf="documentForm">
-    <h2 mat-dialog-title class="title-dialog">{{'collaborator.colaborator_create.documents.document_registration'|translate}}</h2>
-    <mat-dialog-content class="mat-typography">
-      <form [formGroup]="documentForm" fxLayout="column">
-        <mat-form-field appearance="outline">
-          <mat-label>{{'collaborator.colaborator_create.documents.document_name'|translate}}</mat-label>
-          <input
-            matInput
-            disableRipple
-            formControlName="name"
-            placeholder="Nome do Documento" />
-            <mat-error *ngIf="documentForm &&
-            documentForm.controls['name'].hasError('required')">
-                  {{'validators.validator-required' |  translate}} </mat-error>
-        </mat-form-field>
+    <div class="content-header" fxLayout="row">
+      <h2 class="title-content" mat-dialog-title>{{'collaborator.colaborator_create.documents.document_registration'|translate}}</h2>
+        <button mat-icon-button class="mat-icon-content"  (click)="close()"> 
+          <mat-icon >cancel</mat-icon>
+        </button>
+    </div>
+  <div class="dialog-content">
+  <mat-dialog-content class="mat-typography">
+    <form [formGroup]="documentForm" fxLayout="column">
+      <mat-form-field appearance="outline">
+        <mat-label>{{'collaborator.colaborator_create.documents.document_name'|translate}}</mat-label>
+        <input
+          matInput
+          disableRipple
+          formControlName="name"
+          placeholder="Nome do Documento" />
+          <mat-error *ngIf="documentForm &&
+          documentForm.controls['name'].hasError('required')">
+                {{'validators.validator-required' |  translate}} </mat-error>
+      </mat-form-field>
 
-        <div class="image-upload">
-          <label for="fileInput"> </label>
-          <input
-            type="file"
-            id="fileInput"
-            (change)="inputFileChanged($event)"
-            #fileUpload />
-        </div>
-      </form>
-    </mat-dialog-content>
-    <mat-dialog-actions>
-      <div class="button-dialog">
-        <button mat-flat-button mat-dialog-close (click)="onNoClick()">
-          {{'generic.cancel_button' | translate}}
-        </button>
-        <button
-          color="primary"
-          [disabled]="documentForm.invalid"
-          mat-flat-button
-          [mat-dialog-close]="true"
-          (click)="save()">
-          {{'generic.save_button' | translate}}
-        </button>
+      <div class="image-upload">
+        <label for="fileInput"> </label>
+        <input
+          type="file"
+          id="fileInput"
+          (change)="inputFileChanged($event)"
+          #fileUpload />
       </div>
-    </mat-dialog-actions>
-  </div>
+    </form>
+  </mat-dialog-content>
+
+  <mat-dialog-actions>
+    <div class="button-dialog">
+      <button mat-flat-button mat-dialog-close (click)="onNoClick()">
+        {{'generic.cancel_button' | translate}}
+      </button>
+      <button
+        color="primary"
+        [disabled]="documentForm.invalid"
+        mat-flat-button
+        [mat-dialog-close]="true"
+        (click)="save()">
+        {{'generic.save_button' | translate}}
+      </button>
+    </div>
+  </mat-dialog-actions>
+</div>
+</div>
 </div>

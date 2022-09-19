@@ -74,7 +74,7 @@ export class CollaboratorDependentsTabComponent implements OnInit {
     sessionStorage.setItem('method', this.method);
     const dialogRef = this.dialog.open(CollaboratorDependentsDialog, {
       width: '500px',
-      height: '650px',
+      height: '570px',
     });
 
     dialogRef.afterClosed().subscribe(dependent => {

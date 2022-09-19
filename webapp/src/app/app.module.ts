@@ -24,6 +24,7 @@ import { ConfirmDialogModule } from './components/confirm-dialog/confirm-dialog.
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import {MatTreeModule} from '@angular/material/tree';
+
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
 
 @NgModule({

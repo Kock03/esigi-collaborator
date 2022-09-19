@@ -84,7 +84,7 @@ export class CollaboratorDocumentTabComponent implements OnInit {
     sessionStorage.setItem('method', this.method);
     const dialogRef = this.dialog.open(CollaboratorDocumentDialog, {
       width: '500px',
-      height: '300px',
+      height: '275px',
     });
 
     dialogRef.afterClosed().subscribe(async document => {

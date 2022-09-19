@@ -73,4 +73,9 @@ export class CollaboratorEducationDialog {
       }
     }
   }
+
+  close() {
+    this.dialogRef.close();
+    sessionStorage.clear;
+  }
 }

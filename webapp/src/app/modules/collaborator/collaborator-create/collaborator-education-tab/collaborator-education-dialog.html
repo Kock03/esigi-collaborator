@@ -1,9 +1,16 @@
 <div id="collaboratorEducationDialog" class="dialog">
   <div class="content-scroll" *ngIf="educationForm">
-    <h2 mat-dialog-title class="title-dialog">{{'generic.education.schooling.name' | translate}}</h2>
-    <mat-dialog-content class="mat-typography">
-      <form [formGroup]="educationForm" fxLayout="column">
-        <mat-form-field appearance="outline">
+    <div class="content-header" fxLayout="row">
+      <h2 class="title-content" mat-dialog-title>{{'generic.education.schooling.name' | translate}}</h2>
+        <button mat-icon-button class="mat-icon-content" (click)="close()" >
+          <mat-icon >cancel</mat-icon>
+        </button>
+    </div>
+  <div class="dialog-content">
+  <mat-dialog-content class="mat-typography">
+    <form [formGroup]="educationForm" fxLayout="column">
+      <div fxFlex="100" fxLayoutGap="16px">
+        <mat-form-field fxFlex="50" appearance="outline">
           <mat-label>{{'generic.education.schooling.name' | translate}}</mat-label>
           <mat-select formControlName="schooling">
             <mat-option [value]="1">{{'generic.education.schooling.type.elementary_school' | translate}}</mat-option>
@@ -15,7 +22,7 @@
               {{'validators.validator-required' |  translate}} </mat-error>
         </mat-form-field>
 
-        <mat-form-field appearance="outline">
+        <mat-form-field fxFlex="50" appearance="outline">
           <mat-label>{{'generic.education.schooling.course' | translate}}</mat-label>
           <input
             matInput
@@ -27,6 +34,7 @@
               {{'validators.validator-required' | translate}}
             </mat-error>
         </mat-form-field>
+      </div>
 
         <mat-form-field appearance="outline">
           <mat-label>{{'generic.education.schooling.institution' | translate}}</mat-label>
@@ -53,26 +61,28 @@
             {{'validators.validator-required' | translate}}
           </mat-error>
         </mat-form-field>
-      </form>
-    </mat-dialog-content>
-    <mat-dialog-actions>
-      <div class="button-dialog">
-        <button
-          fxFlexAlign="center center"
-          mat-flat-button
-          mat-dialog-close
-          (click)="onNoClick()">
-          {{'generic.cancel_button' | translate}}
-        </button>
-        <button
-          [disabled]="educationForm.invalid"
-          mat-flat-button
-          color="primary"
-          [mat-dialog-close]="true"
-          (click)="save()">
-          {{'generic.save_button' | translate}}
-        </button>
-      </div>
-    </mat-dialog-actions>
-  </div>
+    </form>
+  </mat-dialog-content>
+
+  <mat-dialog-actions>
+    <div class="button-dialog">
+      <button
+        fxFlexAlign="center center"
+        mat-flat-button
+        mat-dialog-close
+        (click)="onNoClick()">
+        {{'generic.cancel_button' | translate}}
+      </button>
+      <button
+        [disabled]="educationForm.invalid"
+        mat-flat-button
+        color="primary"
+        [mat-dialog-close]="true"
+        (click)="save()">
+        {{'generic.save_button' | translate}}
+      </button>
+    </div>
+  </mat-dialog-actions>
+</div>
+</div>
 </div>

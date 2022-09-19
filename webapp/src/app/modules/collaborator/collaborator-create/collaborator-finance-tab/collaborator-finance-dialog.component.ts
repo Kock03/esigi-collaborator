@@ -110,4 +110,9 @@ export class CollaboratorFinanceDialog {
       }
     }
   }
+
+  close() {
+    this.dialogRef.close();
+    sessionStorage.clear;
+  }
 }
