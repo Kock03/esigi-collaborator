@@ -13,20 +13,17 @@ import { UserService } from 'src/services/user.service';
 })
 export class AppComponent {
   title = 'esigi-collaborator';
-  activeMenu!: '';
+  activeMenu: string = '';
   @ViewChild(MatSidenav)
   sidenav!: MatSidenav;
 
-
   collaboratorId!: string | null;
   openTree: boolean = false;
-  compare!: any
+  compare!: any;
 
   collaborator: string = 'colaborador';
   jobs: string = 'vaga';
   resume: string = 'curriculo';
-
-
 
   constructor(
     private observer: BreakpointObserver,
@@ -38,15 +35,17 @@ export class AppComponent {
     translateService.addLangs(['en-US', 'pt-BR']);
   }
 
-
-
   ngOnInit(): void {
     this.translateService.setDefaultLang('pt-BR');
     this.translateService.use('pt-BR');
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe((res: any) => {
-        this.activeMenu = res.url.split('/')[1];
+        if (res.url === '/') {
+          this.activeMenu = 'colaborador';
+        } else {
+          this.activeMenu = res.url.split('/')[1];
+        }
       });
   }
 
@@ -60,13 +59,11 @@ export class AppComponent {
           this.sidenav.mode = 'side';
           this.sidenav.open();
         }
-      }
-      );
+      });
     }, 50);
   }
 
   recize() {
-
     this.openTree = this.openTree === true ? false : true;
   }
 
@@ -78,9 +75,7 @@ export class AppComponent {
     location.replace(`http://localhost:${port}`);
   }
 
-
   navigator(route: any) {
-    console.log("🚀 ~ file: app.component.ts ~ line 79 ~ AppComponent ~ navigator ~ route", route)
     switch (route) {
       case 'colaborador':
         this.router.navigate(['colaborador/lista']);
@@ -89,15 +84,12 @@ export class AppComponent {
         this.router.navigate(['vaga/lista']);
         break;
       case 'curriculo':
-        this.router.navigate(['curriculo/lista']); 
+        this.router.navigate(['curriculo/lista']);
         break;
-
     }
   }
 
   logout(): void {
     this.userService.logout();
   }
-
-
 }
