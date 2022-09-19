@@ -13,7 +13,7 @@ import { UserService } from 'src/services/user.service';
 })
 export class AppComponent {
   title = 'esigi-collaborator';
-  activeMenu!: '';
+  activeMenu: string = 'colaborador';
   @ViewChild(MatSidenav)
   sidenav!: MatSidenav;
 

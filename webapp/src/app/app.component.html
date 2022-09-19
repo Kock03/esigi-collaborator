@@ -60,7 +60,7 @@
       <span *ngIf="openTree != true" >Currículo</span>
     </button>
     </div>
-    <div class="menu-button-more" [ngStyle]="openTree && {'margin-left': '1px', 'margin-top': '270px'} || {'margin-left': '20px', 'margin-top': '150px'}" >
+    <div class="menu-button-more" [ngStyle]="openTree && {'margin-left': '1px', 'margin-top': '250px'} || {'margin-left': '20px', 'margin-top': '150px'}" >
     <button   mat-icon-button   (click)=recize() 
     [ngStyle]="openTree && {'margin-left': '5px'} || {'margin-right': '25px'}">
       <mat-icon >more_horiz</mat-icon>
@@ -68,7 +68,7 @@
     </div>
   </div>
   </mat-sidenav>
-  <mat-sidenav-content  [ngStyle]="openTree && {'margin-left': '100px'} || {'margin-left': '250px'}">
+  <mat-sidenav-content  [ngStyle]="openTree && {'margin-left': '150px'} || {'margin-left': '250px'}">
     <div class="content">
       <router-outlet></router-outlet>
     </div>
