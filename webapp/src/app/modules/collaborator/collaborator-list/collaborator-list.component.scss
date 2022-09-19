@@ -13,18 +13,54 @@
     width: 100%;
     border-radius: 10px;
 
-    .mat-column-icon {
-      width: 50px;
-    }
+
 
     .button-tab {
       white-space: nowrap;
       overflow: hidden;
     }
-    
+
+
+    .mat-column-collaborator {
+      width: 20%;
+
+      .mat-sort-header-content {
+        margin-left: 1px !important;
+      }
+    }
+
+    .mat-column-admissionDate {
+      width: 20%;
+    }
+
+    .mat-column-office {
+      width: 20%;
+      .mat-sort-header-content{
+        margin-left: 1px!important;
+      }
+    }
+
+    .mat-column-currentClient {
+      width: 20%;
+      .mat-sort-header-content{
+        margin-left: -1px!important;
+      }
+    }
+
+    .mat-column-status {
+      width: 10%;
+      .mat-sort-header-content{
+        margin-left: 3px!important;
+      }
+    }
+
+
+    .mat-column-icon {
+      width: 10%;
+    }
   }
 
-  h2{
+  h2 {
     color: #2F3133;
   }
 
@@ -39,10 +75,14 @@
     width: 100%;
     max-width: 1650px;
     margin-right: 5px;
+
     mat-form-field {
       width: 100%;
     }
   }
+
+
+
 
   .active {
     width: 100%;
@@ -50,7 +90,7 @@
     background: #5de85d;
     border-radius: 10px;
     color: #fff;
-    
+
   }
 
   .inactive {
@@ -74,8 +114,9 @@
   //   font-size: 35px;
   // }
 
-  
 
 
-  
+
+
+
 }
