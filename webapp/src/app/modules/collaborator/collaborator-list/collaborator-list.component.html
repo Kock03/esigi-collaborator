@@ -108,6 +108,7 @@
         </th>
         <td mat-cell *matCellDef="let collaborator">
           <button
+            disabled
             [ngClass]="collaborator.inactive == 1 ? 'inactive' : 'active'"
             mat-button>
             {{ collaborator.inactive == 1 ? 'Inativo' : 'Ativo' }}
