@@ -1,6 +1,6 @@
 <div id="resumeList" class="page">
   <h2>Currículos</h2>
-  <div fxLayout="row" fxLayoutAlign="space-between"  >
+  <div fxLayout="row" fxLayoutAlign="space-between">
     <form class="search" fxLayoutGap="16px">
       <mat-form-field appearance="outline">
         <mat-label>{{"resumes.resume_list.search_resumes" | translate }}</mat-label>
@@ -23,7 +23,7 @@
         <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by birthDate">Data de
           nascimento</th>
         <td mat-cell *matCellDef="let resume">
-          {{ resume.birthDate  }}
+          {{ resume.birthDate }}
         </td>
       </ng-container>
 
@@ -50,12 +50,13 @@
           <button class="table-button" mat-button (click)="deleteResume(resume.id)">
             <mat-icon>delete</mat-icon>
           </button>
+          <button class="table-button" mat-button (click)="pdfDownload(resume.id)">
+            <mat-icon>
+              cloud_download</mat-icon>
+          </button>
         </td>
       </ng-container>
-
       <tr mat-header-row *matHeaderRowDef="displayedResume; sticky: true"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedResume"></tr>
     </table>
-
-
   </div>
