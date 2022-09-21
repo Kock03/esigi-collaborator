@@ -173,4 +173,9 @@ export class CollaboratorListComponent implements OnInit {
     sessionStorage.setItem('country_value', address.country);
     sessionStorage.setItem('collaborator_id', collaboratorId);
   }
+
+
+  goHome(port: number): void {
+    location.replace(`http://localhost:${port}/portal`);
+  }
 }

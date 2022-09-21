@@ -177,7 +177,7 @@
         <mat-select-country appearance="outline"  placeHolder= "País" label="País" (onCountrySelected)="onCountrySelected($event)" [formControl]="countryControl" >
         </mat-select-country>
 
-        <mat-form-field fxFlex="25" appearance="outline" *ngIf="searchEnabled === true">
+        <mat-form-field fxFlex="20" appearance="outline" *ngIf="searchEnabled === true">
           <mat-label>{{'generic.address.cep'|translate}} </mat-label>
           <input matInput placeholder="CEP" formControlName="cep" type="text" mask="99999-999" />
           <mat-icon matSuffix style="cursor: pointer" (click)="getAddress()">
@@ -188,7 +188,7 @@
             {{'validators.validator-required' | translate}} </mat-error>
         </mat-form-field>
 
-        <mat-form-field fxFlex="25" appearance="outline" *ngIf="searchEnabled === false">
+        <mat-form-field fxFlex="20" appearance="outline" *ngIf="searchEnabled === false">
           <mat-label>{{'generic.address.zip_code'|translate}} </mat-label>
           <input matInput placeholder="Zip Code" formControlName="cep" type="text" mask="0||00||000||0000||00000||00000-0||00000-00||00000-000" />
           <mat-error *ngIf="addressForm &&
@@ -196,7 +196,7 @@
             {{'validators.validator-required' | translate}} </mat-error>
         </mat-form-field>
 
-        <mat-form-field fxFlex="30" appearance="outline">
+        <mat-form-field fxFlex="25" appearance="outline">
           <mat-label>{{'generic.address.street'|translate}}</mat-label>
           <input matInput placeholder="Rua" formControlName="street" />
           <mat-error *ngIf="addressForm &&
@@ -213,7 +213,7 @@
           </mat-error>
         </mat-form-field>
 
-        <mat-form-field fxFlex="45" appearance="outline">
+        <mat-form-field fxFlex="40" appearance="outline">
           <mat-label>{{'generic.address.complement'|translate}}</mat-label>
           <input matInput placeholder="Complemento" formControlName="complement" />
           <mat-error *ngIf="addressForm &&
