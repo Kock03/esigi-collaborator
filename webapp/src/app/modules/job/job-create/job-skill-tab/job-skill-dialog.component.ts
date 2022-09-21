@@ -13,6 +13,7 @@ import { JobKnowledgeProvider } from 'src/providers/job-providers/job-knowledges
 @Component({
   selector: 'job-dialog-skill',
   templateUrl: 'job-dialog-skill.html',
+  styleUrls: ['job-skill-dialog.scss'],
 })
 export class JobDialogSkill implements OnInit {
   @Input('form') jobForm!: FormGroup;
@@ -77,5 +78,10 @@ export class JobDialogSkill implements OnInit {
         console.log(error);
       }
     }
+  }
+
+  close(){
+    this.dialogRef.close();
+    sessionStorage.clear;
   }
 }

@@ -1,30 +1,45 @@
-<div id="jobSkillDialog" mat-dialog-content>
-    <form [formGroup]="languageForm" fxLayout="column">
-        <div fxFlex="90" fxLayoutGap="16px" fxLayout="row">
-            <mat-form-field fxFlex="50" appearance="outline">
-                <mat-label>{{'generic.education.languages.name' | translate}}</mat-label>
-                <input placeholder="Idioma" matInput formControlName="languageName" />
-            </mat-form-field>
-            <mat-form-field fxFlex="45" appearance="outline">
-                <mat-label>{{'generic.education.languages.fluency.name' | translate}}</mat-label>
-                <mat-select matInput disableRipple formControlName="degreeOfInfluence">
-                    <mat-option [value]="1">{{'generic.education.languages.fluency.reading_and_conversation' |
-                        translate}}
-                    </mat-option>
-                    <mat-option [value]="2">{{'generic.education.languages.fluency.writing_and_conversation' |
-                        translate}}
-                    </mat-option>
-                    <mat-option [value]="3">{{'generic.education.languages.fluency.writing_and_reading' | translate}}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-        </div>
-        <div mat-dialog-actions fxLayout="row" fxFlexAlign="center">
-            <button mat-flat-button (click)="onNoClick()">Cancelar</button>
-            <button mat-flat-button color="primary" [mat-dialog-close]="true" [disabled]="languageForm.invalid"
-                (click)="saveLanguage()">
-                Salvar
-            </button>
-        </div>
-    </form>
-</div>
+<div id="jobLanguageDialog" class="dialog">
+    <div class="content-scroll" *ngIf="languageForm">
+      <div class="content-header" fxLayout="row">
+        <h2 class="title-content" mat-dialog-title>{{'generic.education.languages.name' | translate}}</h2>
+        <button mat-icon-button class="mat-icon-content" (click)="close()">
+          <mat-icon>cancel</mat-icon>
+        </button>
+      </div>
+      <div class="dialog-content">
+        <mat-dialog-content class="mat-typography">
+            <form [formGroup]="languageForm" fxLayout="column">
+                <div fxFlex="90" fxLayoutGap="16px" fxLayout="row">
+                    <mat-form-field fxFlex="50" appearance="outline">
+                        <mat-label>{{'generic.education.languages.name' | translate}}</mat-label>
+                        <input placeholder="Idioma" matInput formControlName="languageName" />
+                    </mat-form-field>
+                    <mat-form-field fxFlex="45" appearance="outline">
+                        <mat-label>{{'generic.education.languages.fluency.name' | translate}}</mat-label>
+                        <mat-select matInput disableRipple formControlName="degreeOfInfluence">
+                            <mat-option [value]="1">{{'generic.education.languages.fluency.reading_and_conversation' |
+                                translate}}
+                            </mat-option>
+                            <mat-option [value]="2">{{'generic.education.languages.fluency.writing_and_conversation' |
+                                translate}}
+                            </mat-option>
+                            <mat-option [value]="3">{{'generic.education.languages.fluency.writing_and_reading' | translate}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </form>
+        </mat-dialog-content>
+  
+        <mat-dialog-actions>
+            <div class="buttom-dialog" mat-dialog-actions fxLayout="row" fxFlexAlign="center">
+                <button mat-flat-button (click)="onNoClick()">Cancelar</button>
+                <button mat-flat-button color="primary" [mat-dialog-close]="true" [disabled]="languageForm.invalid"
+                    (click)="saveLanguage()">
+                    Salvar
+                </button>
+            </div>
+        </mat-dialog-actions>
+      </div>
+    </div>
+  </div>

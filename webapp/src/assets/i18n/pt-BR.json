@@ -313,6 +313,7 @@
               "institution": "Instituição"
           },
           "languages": {
+             "register_skill": "Skill",
               "name": "Idiomas",
               "one_language": "Idioma",
               "fluency": {

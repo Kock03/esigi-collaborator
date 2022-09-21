@@ -1,4 +1,5 @@
 #jobPanel {
+  width: 100%;
   max-width: 1650px;
 
   .envolti-table {
@@ -14,8 +15,6 @@
       white-space: nowrap;
       overflow: hidden;
     }
-
-
   }
 
   .search {

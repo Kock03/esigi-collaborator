@@ -99,7 +99,7 @@ export class JobSkillTabComponent implements OnInit {
     sessionStorage.setItem('method_knowledge', this.methodKnowledge);
     const dialogRef = this.dialog.open(JobDialogSkill, {
       width: '450px',
-      height: '200px',
+      height: '250px',
     });
 
     dialogRef.afterClosed().subscribe(knowledge => {
@@ -114,7 +114,7 @@ export class JobSkillTabComponent implements OnInit {
     sessionStorage.setItem('method_language', this.methodLanguage);
     const dialogRef = this.dialog.open(JobDialogLanguage, {
       width: '450px',
-      height: '200px',
+      height: '250px',
     });
 
     dialogRef.afterClosed().subscribe(language => {

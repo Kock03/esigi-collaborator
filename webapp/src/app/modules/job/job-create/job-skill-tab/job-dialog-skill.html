@@ -1,31 +1,45 @@
-<div id="jobSkillDialog" mat-dialog-content>
-  <form [formGroup]="knowledgeForm" fxLayout="column">
-    <div fxFlex="90" fxLayoutGap="16px" fxLayout="row">
-      <mat-form-field appearance="outline" fxFlex="50">
-        <mat-label>{{'job.job_create.skills.name' | translate}}</mat-label>
-        <input matInput placeholder="Habilidade" formControlName="name" />
-      </mat-form-field>
-
-      <mat-form-field appearance="outline" fxFlex="20">
-        <mat-label>{{'generic.skills.time_experience' | translate}}</mat-label>
-        <input matInput placeholder="Tempo de Experiencia" mask="0||00" formControlName="yearsExperience" />
-      </mat-form-field>
-
-      <mat-form-field fxFlex="20" appearance="outline">
-        <mat-label>{{'job.job_create.skills.type_of_period.name' | translate}}</mat-label>
-        <mat-select matInput disableRipple formControlName="typeOfPeriod">
-          <mat-option [value]="1">{{'job.job_create.skills.type_of_period.month' | translate}}</mat-option>
-          <mat-option [value]="2">{{'job.job_create.skills.type_of_period.year' | translate}}</mat-option>
-        </mat-select>
-      </mat-form-field>
+<div id="jobSkillDialog" class="dialog">
+    <div class="content-scroll" *ngIf="knowledgeForm">
+      <div class="content-header" fxLayout="row">
+        <h2 class="title-content" mat-dialog-title>{{'generic.education.languages.register_skill' | translate}}</h2>
+        <button mat-icon-button class="mat-icon-content" (click)="close()">
+          <mat-icon>cancel</mat-icon>
+        </button>
+      </div>
+      <div class="dialog-content">
+        <mat-dialog-content class="mat-typography">
+          <form [formGroup]="knowledgeForm" fxLayout="column">
+            <div fxFlex="90" fxLayoutGap="16px" fxLayout="row">
+              <mat-form-field appearance="outline" fxFlex="40">
+                <mat-label>{{'job.job_create.skills.name' | translate}}</mat-label>
+                <input matInput placeholder="Habilidade" formControlName="name" />
+              </mat-form-field>
+        
+              <mat-form-field appearance="outline" fxFlex="30">
+                <mat-label>{{'generic.skills.time_experience' | translate}}</mat-label>
+                <input matInput placeholder="Tempo de Experiencia" mask="0||00" formControlName="yearsExperience" />
+              </mat-form-field>
+        
+              <mat-form-field fxFlex="20" appearance="outline">
+                <mat-label>{{'job.job_create.skills.type_of_period.name' | translate}}</mat-label>
+                <mat-select matInput disableRipple formControlName="typeOfPeriod">
+                  <mat-option [value]="1">{{'job.job_create.skills.type_of_period.month' | translate}}</mat-option>
+                  <mat-option [value]="2">{{'job.job_create.skills.type_of_period.year' | translate}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </form>
+        </mat-dialog-content>
+  
+        <mat-dialog-actions>
+          <div class="buttom-dialog" mat-dialog-actions fxLayout="row" fxFlexAlign="center">
+            <button mat-flat-button (click)="onNoClick()">Cancelar</button>
+            <button mat-flat-button color="primary" [mat-dialog-close]="true" [disabled]="knowledgeForm.invalid"
+              (click)="saveKnowledge()">
+              Salvar
+            </button>
+          </div>
+        </mat-dialog-actions>
+      </div>
     </div>
-
-    <div mat-dialog-actions fxLayout="row" fxFlexAlign="center">
-      <button mat-flat-button (click)="onNoClick()">Cancelar</button>
-      <button mat-flat-button color="primary" [mat-dialog-close]="true" [disabled]="knowledgeForm.invalid"
-        (click)="saveKnowledge()">
-        Salvar
-      </button>
-    </div>
-  </form>
-</div>
+  </div>

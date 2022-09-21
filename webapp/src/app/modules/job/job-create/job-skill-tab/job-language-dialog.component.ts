@@ -13,6 +13,7 @@ import { JobLanguageProvider } from 'src/providers/job-providers/job-languages.p
 @Component({
     selector: 'job-dialog-languague',
     templateUrl: 'job-dialog-language.html',
+    styleUrls: ['job-dialog-language.scss'],
 })
 export class JobDialogLanguage implements OnInit {
     @Input('form') jobForm!: FormGroup;
@@ -75,4 +76,9 @@ export class JobDialogLanguage implements OnInit {
             }
         }
     }
+
+      close(){
+        this.dialogRef.close();
+        sessionStorage.clear;
+      }
 }
