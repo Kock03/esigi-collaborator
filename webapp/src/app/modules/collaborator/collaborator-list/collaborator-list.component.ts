@@ -167,7 +167,6 @@ export class CollaboratorListComponent implements OnInit {
   }
 
   editCollaborator(collaboratorId: any, address: any) {
-    console.log(address.country)
     this.router.navigate([`colaborador/${collaboratorId}`]);
     const method = 'edit';
     sessionStorage.setItem('collaborator_method', method);

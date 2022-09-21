@@ -109,7 +109,6 @@ export class JobListComponent implements OnInit {
   }
 
   editJob(jobId: any, customerId: any, collaboratorRequesterId: any) {
-    console.log(customerId)
     sessionStorage.setItem('customer_id', customerId);
     sessionStorage.setItem('collaboratorRequester_id', collaboratorRequesterId);
     this.method = sessionStorage.setItem('job_method', 'edit');

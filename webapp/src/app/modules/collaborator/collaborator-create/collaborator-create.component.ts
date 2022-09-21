@@ -165,7 +165,6 @@ export class CollaboratorCreateComponent implements OnInit {
     });
 
     this.countryControl.valueChanges.subscribe((res) => {
-      console.log(res)
       if (res && res.name) {
         this.collaboratorForm.controls['Address'].patchValue(
           {

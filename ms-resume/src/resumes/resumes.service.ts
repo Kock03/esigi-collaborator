@@ -118,7 +118,6 @@ export class ResumesService {
     });
 
     data.Educations.forEach(function (education) {
-      console.log(education.situation);
       educationList.push({
         text: `Escolaridade: ${education.schooling}`,
         margin: [0, 6, 4, 0],

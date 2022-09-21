@@ -96,7 +96,6 @@ export class CollaboratorRegisterTabComponent implements OnInit {
       }else{
         this.searchEnabled = false;
       }
-      console.log(this.countryControl)
       this.collaboratorForm.controls['Address'].patchValue(
         {
           country: country.name
