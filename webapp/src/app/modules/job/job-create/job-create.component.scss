@@ -12,12 +12,12 @@
   }
 
   .content-scroll {
-    overflow: none;
-    height: calc(100vh - 64px);
+    overflow: auto;
+    height: calc(100vh - 280px);
   }
 
   .navigation-buttons {
-    margin-top: 8px;
+    margin-top: 8px; 
   }
 
   h2 {

@@ -14,7 +14,7 @@
 
   .content-scroll {
     overflow: auto;
-    height: calc(100vh - 280px);
+    height: calc(100vh - 290px);
 
   }
   .title{
@@ -22,7 +22,7 @@
   }
 
   .navigation-buttons {
-    margin-top: 0px;
+    margin-bottom: 10px !important;
   }
 }
 
