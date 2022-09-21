@@ -63,7 +63,7 @@
   </div>
 </div>
 
-  <app-collaborator-register-tab *ngIf="collaboratorForm" [hidden]="step != 1" [form]="collaboratorForm"
+  <app-collaborator-register-tab *ngIf="collaboratorForm" [hidden]="step != 1" [form]="collaboratorForm" [country]="countryControl"
     (onChange)="handleChanges($event)">
   </app-collaborator-register-tab>
 

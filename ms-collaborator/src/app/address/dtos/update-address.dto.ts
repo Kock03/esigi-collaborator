@@ -11,6 +11,11 @@ export class UpdateAddressDto {
   @ApiProperty()
   @IsOptional()
   @IsString()
+  country: string;
+
+  @ApiProperty()
+  @IsOptional()
+  @IsString()
   @MinLength(8)
   @MaxLength(8)
   cep: string;

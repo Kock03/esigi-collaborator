@@ -144,6 +144,7 @@ export class CollaboratorListComponent implements OnInit {
     this.filteredCollaboratorList = this.collaborators =
       await this.collaboratorProvider.findAll();
     this.filteredCollaboratorList.sort = this.sort;
+    console.log(this.filteredCollaboratorList )
   }
 
   initFilter() {
@@ -165,10 +166,11 @@ export class CollaboratorListComponent implements OnInit {
       });
   }
 
-  editCollaborator(collaboratorId: any) {
+  editCollaborator(collaboratorId: any, address: any) {
     this.router.navigate([`colaborador/${collaboratorId}`]);
     const method = 'edit';
     sessionStorage.setItem('collaborator_method', method);
+    sessionStorage.setItem('country_value', address.country);
     sessionStorage.setItem('collaborator_id', collaboratorId);
   }
 }

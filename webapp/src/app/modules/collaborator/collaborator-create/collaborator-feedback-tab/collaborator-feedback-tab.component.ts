@@ -121,7 +121,6 @@ export class CollaboratorFeedbackTabComponent implements OnInit {
     );
     sessionStorage.setItem('manager_id', managerId);
     sessionStorage.setItem('project_id', projectId);
-    console.log(managerId, projectId )
     this.method =  sessionStorage.setItem('feedback_method', 'edit');
   }
 }
