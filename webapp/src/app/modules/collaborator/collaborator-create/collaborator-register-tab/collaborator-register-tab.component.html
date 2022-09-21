@@ -137,9 +137,10 @@
           <mat-label>{{'generic.marital_status.name'|translate}}</mat-label>
           <mat-select matInput formControlName="maritalStatus">
             <mat-option [value]="1">{{'generic.marital_status.single'|translate}}</mat-option>
-            <mat-option [value]="2">{{'generic.marital_status.married'|translate}}</mat-option>
-            <mat-option [value]="3">{{'generic.marital_status.widower'|translate}}</mat-option>
-            <mat-option [value]="4">{{'generic.marital_status.stable_union'|translate}}</mat-option>
+            <mat-option [value]="2">{{'generic.marital_status.stable_union'|translate}}</mat-option>
+            <mat-option [value]="3">{{'generic.marital_status.married'|translate}}</mat-option>
+            <mat-option [value]="4">{{'generic.marital_status.divorced'|translate}}</mat-option>
+            <mat-option [value]="5">{{'generic.marital_status.widower'|translate}}</mat-option>
           </mat-select>
           <mat-error *ngIf="collaboratorForm &&
             collaboratorForm.controls['maritalStatus'].hasError('required')">

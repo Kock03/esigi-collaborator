@@ -12,23 +12,21 @@
   }
 
   .content-scroll {
-    overflow: auto;
-    height: calc(100vh - 280px);
-
+    overflow: none;
+    height: calc(100vh - 64px);
   }
 
   .navigation-buttons {
     margin-top: 8px;
   }
 
-  h2{
-    color: #2F3133;
+  h2 {
+    color: #2f3133;
   }
 }
 
 #jobSkillDialog {
   height: 150px;
-
 }
 
 .page {

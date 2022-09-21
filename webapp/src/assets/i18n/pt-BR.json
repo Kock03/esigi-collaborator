@@ -118,7 +118,8 @@
               "in_revision": "Em Revisão",
               "closed": "Fechada",
               "lost": "Perdida",
-              "completed": "Concluída"
+              "completed": "Concluída",
+              "new": "Novo"
           },
           "type_of_job": {
               "name": "Tipo de Vaga",
@@ -245,7 +246,8 @@
           "single": "Solteiro(a)",
           "married": "Casado(a)",
           "widower": "Viúvo(a)",
-          "stable_union": "União Estável"
+          "stable_union": "União Estável",
+          "divorced": "Divorciado"
       },
       "gender": {
           "name": "Sexo",
@@ -391,6 +393,7 @@
   },
   "validators": {
       "collaborator-types-validator": "Selecione o tipo de contrato",
-      "validator-required": "Campo obrigatório"
+      "validator-required": "Campo obrigatório",
+      "select-option": "Selecione uma opção"
   }
 }

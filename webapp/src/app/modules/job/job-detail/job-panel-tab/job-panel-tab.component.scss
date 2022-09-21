@@ -1,9 +1,9 @@
 #jobPanel {
-  max-width: 1220px;
+  max-width: 1650px;
 
   .envolti-table {
     overflow: auto;
-    max-height: 350px;
+    max-height: 625px;
     border-radius: 10px;
 
     .mat-column-icon {
@@ -20,7 +20,7 @@
 
   .search {
     width: 100%;
-    max-width: 1220px;
+    max-width: 1650px;
     margin-right: 5px;
 
     mat-form-field {

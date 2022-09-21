@@ -1,9 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
-@import "../src/app/layout/themes/table.scss";
+@import '../src/app/layout/themes/table.scss';
 
-@import "../src/app/layout/themes/snack-bar.scss";
-
-
+@import '../src/app/layout/themes/snack-bar.scss';
 
 html,
 body {
@@ -48,32 +46,25 @@ html {
   max-width: 1650px;
   margin-top: 24px;
 
-
   &-group {
     width: 100%;
     max-width: 1000px;
-    
-    
   }
 
   &-item {
     cursor: default;
     margin-bottom: 8px !important;
-    color: #2F3133;
-    
+    color: #2f3133;
   }
 
   &-border {
     border-bottom: 10px solid #b8bdbf;
     border-radius: 4px;
-    
   }
-
 
   .done {
     .tab-border {
       border-color: #ff6a39 !important;
-     
     }
   }
 
@@ -111,11 +102,9 @@ html {
   height: 100%;
 
   mat-icon {
-    color: #753BBD;
+    color: #753bbd;
   }
 }
-
- 
 
 .confirm-modal {
   mat-dialog-container {
@@ -133,48 +122,52 @@ html {
   }
 }
 
-.checkbox{
+.checkbox {
   margin-top: 18px;
 }
 
-.form-checkbox{
+.form-checkbox {
   margin-top: 3px;
 }
 
-.mat-option:hover{
-  background: #D0E7EF !important;
+.mat-option:hover {
+  background: #d0e7ef !important;
 }
 
-.mat-selected{
-  background: #D0E7EF !important;
+.mat-selected {
+  background: #d0e7ef !important;
 }
 
-.mat-row:hover{
-  background: #D0E7EF !important;
+.mat-row:hover {
+  background: #d0e7ef !important;
 }
 
 .custom-frame {
-  & .mat-checkbox-background, .mat-checkbox-frame {
+  & .mat-checkbox-background,
+  .mat-checkbox-frame {
     border-radius: 70% !important;
     // width: 20px;
     // height: 20px;
   }
 }
 
-h2{
-  color: #2F3133 !important;
+h2 {
+  color: #2f3133 !important;
 }
 
-.collaborator-box{
+.collaborator-box {
   margin-left: 0px !important;
 }
 
-
-.mat-sort-header-arrow ng-trigger ng-trigger-arrowPosition ng-tns-c284-50 ng-star-inserted{
+.mat-sort-header-arrow
+  ng-trigger
+  ng-trigger-arrowPosition
+  ng-tns-c284-50
+  ng-star-inserted {
   margin-left: 200px !important;
 }
 
-.mat-focus-indicator mat-icon-button mat-button-base{
+.mat-focus-indicator mat-icon-button mat-button-base {
   height: 20px !important;
   width: 20px !important;
 }
@@ -184,35 +177,31 @@ h2{
 //   width: 128px;
 // }
 
-  .menu-button-logo {
+.menu-button-logo {
   margin-top: 8px !important;
 }
 
-th{
+th {
   font-size: 16px !important;
 }
 
-mat-dialog-container{
+mat-dialog-container {
   padding: 0 !important;
   border-radius: 10px !important;
 }
 
-.mat-icon-header{
-    color: white !important;
-    margin-left: 330px !important;
-    margin-top: 15px !important;
+.mat-icon-header {
+  color: white !important;
+  margin-left: 330px !important;
+  margin-top: 15px !important;
 }
 
-s
-html,
+s html,
 body {
   height: 100%;
 }
 
 body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
 }
-
-
-
