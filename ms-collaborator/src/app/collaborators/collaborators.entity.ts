@@ -92,7 +92,6 @@ export class CollaboratorsEntity {
   @OneToOne(() => AddressEntity, {
     cascade: ['insert', 'update', 'remove'],
     orphanedRowAction: 'delete',
-    eager: true,
   })
   @JoinColumn()
   Address: AddressEntity;

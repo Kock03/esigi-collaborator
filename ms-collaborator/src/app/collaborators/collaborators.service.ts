@@ -30,7 +30,7 @@ export class CollaboratorsService {
   async findAll() {
     const options: FindManyOptions = {
       order: { createdAt: 'DESC' },
-      relations: ['Phone']
+      relations: ['Phone', 'Address',],
     };
     try {
       const collaborators = await this.collaboratorsRepository.find(options);
@@ -128,7 +128,7 @@ export class CollaboratorsService {
               },
             ],
           });
-    
+
           return await this.requestResource(collaborator);
 
           break;
@@ -304,6 +304,7 @@ export class CollaboratorsService {
         'Languages',
         'Phone',
         'Skills',
+        'Address'
       ],
     };
     try {
@@ -311,7 +312,7 @@ export class CollaboratorsService {
         conditions,
         options,
       );
-    } catch(e) {
+    } catch (e) {
       throw new NotFoundException();
     }
   }
@@ -344,9 +345,16 @@ export class CollaboratorsService {
 
   async update(id: string, data: UpdateCollaboratorsDto) {
     try {
-      const collaborator = await this.collaboratorsRepository.findOneOrFail({
-        id,
-      });
+      const collaborator = await this.collaboratorsRepository.findOneOrFail(
+        {
+          id,
+        },
+        { relations: ['Phone', 'Address'] },
+      );
+      
+       data.Address.id = collaborator.Address.id;
+       data.Phone.id = collaborator.Phone.id;
+
     } catch {
       throw new NotFoundException();
     }
