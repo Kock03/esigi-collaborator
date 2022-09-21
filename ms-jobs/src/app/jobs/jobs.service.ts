@@ -75,7 +75,6 @@ export class JobsService {
       }
       return jobs;
     } catch (error) {
-    console.log("🚀 ~ file: jobs.service.ts ~ line 72 ~ JobsService ~ findAll ~ error", error)
       
       throw new NotFoundException();
     }
