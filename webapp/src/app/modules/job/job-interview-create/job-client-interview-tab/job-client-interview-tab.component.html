@@ -175,7 +175,7 @@
         </mat-form-field>
       </div>
       <div fxFlex="100" fxLayoutGap="16px">
-        <mat-form-field fxFlex="40" appearance="outline">
+        <mat-form-field fxFlex="50" appearance="outline">
           <mat-label>{{
             'job.job_interview_create.situational.name' | translate
           }}</mat-label>
@@ -201,26 +201,25 @@
           </mat-select>
         </mat-form-field>
 
-        <div class="job-checkbox" fxFlex="40" fxLayoutAlign="center">
-          <mat-checkbox color="primary" formControlName="jobProfile">{{
+        <div class="job-checkbox" fxFlex="50" fxLayoutAlign="center">
+          <mat-checkbox class="custom-frame"  color="primary" formControlName="jobProfile">{{
             'job.job_interview_create.job_profile' | translate
           }}</mat-checkbox>
         </div>
-
-        <div fxLayoutAlign="center" fxFlex="20">
-          <button
-            mat-flat-button
-            color="primary"
-            class="save-button"
-            (click)="saveInterview()"
-            [disabled]="
-              clientInterviewForm.invalid ||
-              ResumeControl.invalid ||
-              customerControl.invalid
-            ">
-            {{ 'generic.save_button' | translate }}
-          </button>
-        </div>
+      </div>
+      <div fxLayoutAlign="center" fxFlex="20">
+        <button
+          mat-flat-button
+          color="primary"
+          class="save-button"
+          (click)="saveInterview()"
+          [disabled]="
+            clientInterviewForm.invalid ||
+            ResumeControl.invalid ||
+            customerControl.invalid
+          ">
+          {{ 'generic.save_button' | translate }}
+        </button>
       </div>
     </form>
   </div>

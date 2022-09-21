@@ -192,19 +192,19 @@
               fxLayout="row"
               fxLayoutAlign="space-around"
               formGroupName="hiringPreference">
-              <mat-checkbox color="primary" formControlName="intern">{{
+              <mat-checkbox class="custom-frame"  color="primary" formControlName="intern">{{
                 'generic.intern' | translate
               }}</mat-checkbox>
 
-              <mat-checkbox color="primary" formControlName="naturalPerson"
+              <mat-checkbox class="custom-frame"  color="primary" formControlName="naturalPerson"
                 >{{ 'generic.clt' | translate }}
               </mat-checkbox>
 
-              <mat-checkbox color="primary" formControlName="legalPerson">{{
+              <mat-checkbox class="custom-frame"  color="primary" formControlName="legalPerson">{{
                 'generic.pj' | translate
               }}</mat-checkbox>
 
-              <mat-checkbox color="primary" formControlName="cooperative">{{
+              <mat-checkbox class="custom-frame"  color="primary" formControlName="cooperative">{{
                 'generic.cooperated' | translate
               }}</mat-checkbox>
             </div>
@@ -235,7 +235,7 @@
         </mat-form-field>
       </div>
       <div fxFlex="100" fxLayoutGap="16px">
-        <mat-form-field fxFlex="40" appearance="outline">
+        <mat-form-field fxFlex="50" appearance="outline">
           <mat-label>{{
             'job.job_interview_create.situational.name' | translate
           }}</mat-label>
@@ -267,26 +267,26 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field fxFlex="40" appearance="outline">
+        <mat-form-field fxFlex="50" appearance="outline">
           <mat-label>{{
             'job.job_interview_create.availability_of_initialize' | translate
           }}</mat-label>
           <input matInput formControlName="availabilityOfInitialize" />
         </mat-form-field>
-        <div fxLayoutAlign="center" fxFlex="20">
-          <button
-            mat-flat-button
-            color="primary"
-            class="save-button"
-            (click)="saveInterview()"
-            [disabled]="
-              behavioralInterviewForm.invalid ||
-              ResumeControl.invalid ||
-              collaboratorControl.invalid
-            ">
-            {{ 'generic.save_button' | translate }}
-          </button>
-        </div>
+      </div>
+      <div fxLayoutAlign="center" fxFlex="20">
+        <button
+          mat-flat-button
+          color="primary"
+          class="save-button"
+          (click)="saveInterview()"
+          [disabled]="
+            behavioralInterviewForm.invalid ||
+            ResumeControl.invalid ||
+            collaboratorControl.invalid
+          ">
+          {{ 'generic.save_button' | translate }}
+        </button>
       </div>
     </form>
   </div>
