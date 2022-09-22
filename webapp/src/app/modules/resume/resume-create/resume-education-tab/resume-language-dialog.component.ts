@@ -69,4 +69,9 @@ export class ResumeLanguageDialog {
       }
     }
   }
+
+  close(){
+    this.dialogRef.close();
+    sessionStorage.clear();
+  }
 }

@@ -102,7 +102,7 @@ export class ResumeEducationTabComponent implements OnInit {
     sessionStorage.setItem('method', this.method);
     const dialogRef = this.dialog.open(ResumeLanguageDialog, {
       width: '500px',
-      height: '300px',
+      height: '320px',
     });
 
     dialogRef.afterClosed().subscribe(async language => {
