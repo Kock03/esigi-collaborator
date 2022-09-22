@@ -83,7 +83,7 @@ export class ResumeExperienceTabComponent implements OnInit {
     sessionStorage.setItem('method', this.method);
     const dialogRef = this.dialog.open(ResumeDialogExperience, {
       width: '500px',
-      height: '650px',
+      height: '640px',
     });
 
     dialogRef.afterClosed().subscribe(async experience => {

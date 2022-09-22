@@ -70,7 +70,7 @@ export class ResumeSkillsTabComponent implements OnInit {
     sessionStorage.setItem('method', this.method);
     const dialogRef = this.dialog.open(ResumeSkillDialog, {
       width: '500px',
-      height: '540px',
+      height: '570px',
     });
 
     dialogRef.afterClosed().subscribe(async skill => {
