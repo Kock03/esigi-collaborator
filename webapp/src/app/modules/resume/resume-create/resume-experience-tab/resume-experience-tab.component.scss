@@ -133,41 +133,33 @@
 }
 
 #resumeExperiencDialog {
-  .title {
-    text-align: center;
+  .dialog-content{
+    padding-left: 30px !important;
+    padding-right: 30px !important;
+    padding-top: 20px !important;
+    padding-bottom: 20px !important;
   }
 
-  .checkbox{
-    margin-top: 1px;
-  }
-
-  .input-description {
-    height: 100% !important;
-    height: 300px;
-    overflow: auto !important;
-    width: 100% !important;
-    max-width: 400px;
-    white-space: wrap;
-  }
-
-  .button-dialog {
-    margin-left: 140px;
-    position: relative;
-  }
-
-  .content-scroll {
-    overflow: hidden;
-    height: calc(100vh - 100px);
-    margin-left: 15px !important;
-    position: fixed;
-  }
-
-  .style-list {
-    padding: 20px;
-  }
-
-  .checkbox{
-    padding: 16px;
+  h2{
+    color: white !important;
+    padding-top: 20px !important;
     padding-left: 35px;
+  }
+
+  .content-header{
+      background-color: #208fd8;
+      height: 100% !important;
+      height: 70px !important;
+  }
+
+  .mat-icon-content{
+    color: white !important;
+    margin-left: 190px !important;
+    margin-top: 15px;
+  }
+
+  textarea{
+    height: 100% !important;
+    max-height: 200px !important;
   }
 }

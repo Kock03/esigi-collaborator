@@ -78,4 +78,9 @@ export class ResumeDialogExperience {
       }
     }
   }
+
+  close(){
+    this.dialogRef.close();
+    sessionStorage.clear();
+  }
 }

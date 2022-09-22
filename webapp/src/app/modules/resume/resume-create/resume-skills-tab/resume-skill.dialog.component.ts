@@ -72,4 +72,9 @@ export class ResumeSkillDialog {
       }
     }
   }
+
+  close(){
+    this.dialogRef.close();
+    sessionStorage.clear();
+  }
 }
