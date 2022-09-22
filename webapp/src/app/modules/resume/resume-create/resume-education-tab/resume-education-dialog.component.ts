@@ -73,4 +73,9 @@ export class ResumeEducationDialog {
       }
     }
   }
+
+  close(){
+    this.dialogRef.close();
+    sessionStorage.clear();
+  }
 }
