@@ -9,6 +9,7 @@ import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { CollaboratorProvider } from 'src/providers/collaborator-providers/collaborator.provider';
 import { ResumeProvider } from 'src/providers/resume-providers/resume.provider';
 import { RequireMatch } from 'src/services/autocomplete.service';
+import { DateValidator } from 'src/app/validators/date.validator';
 
 
 @Component({
@@ -207,7 +208,7 @@ export class JobTechnicalInterviewTabComponent implements OnInit {
   initForm() {
     this.technicalInterviewForm = this.fb.group({
       collaboratorRequesterId: ['', Validators.required],
-      technicalInterviewDate: this.fb.control({ value: ' ', disabled: false }, [DocumentValidator.isValidData(), Validators.required]),
+      technicalInterviewDate: this.fb.control({ value: ' ', disabled: false }, [DateValidator.isValidData(), Validators.required]),
       hourInterview: ['', Validators.required],
       punctuality: [null, Validators.required],
       jobProfile: [true, Validators.required],

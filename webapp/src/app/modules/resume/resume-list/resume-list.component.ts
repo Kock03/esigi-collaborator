@@ -90,10 +90,12 @@ export class ResumeListComponent implements OnInit {
     this.router.navigate(['curriculo/novo']);
   }
 
-  editResume(resumeId: any) {
+  editResume(resumeId: any, address: any) {
     this.router.navigate([`curriculo/${resumeId}`]);
     const method = 'edit';
     sessionStorage.setItem('resume_method', method)
+    sessionStorage.setItem('country_value', address.country);
+    sessionStorage.setItem('flag_value', address.flag);
     sessionStorage.setItem('resume_id', resumeId);
   }
 

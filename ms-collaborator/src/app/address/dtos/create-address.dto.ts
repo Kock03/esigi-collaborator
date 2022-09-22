@@ -22,7 +22,11 @@ export class CreateAddressDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
-  @MinLength(8)
+  flag: string;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsString()
   @MaxLength(8)
   cep: string;
 

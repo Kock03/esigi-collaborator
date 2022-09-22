@@ -49,7 +49,7 @@
         </th>
         <th mat-header-cell *matHeaderCellDef></th>
         <td class="button-tab" mat-cell *matCellDef="let resume">
-          <button class="table-button" mat-button (click)="editResume(resume.id)">
+          <button class="table-button" mat-button (click)="editResume(resume.id, resume.Address)">
             <mat-icon>edit</mat-icon>
           </button>
           <button class="table-button" mat-button (click)="deleteResume(resume.id)">

@@ -256,7 +256,8 @@
             "undefined": "Não Informado"
         },
         "address": {
-            "zip_code": "CEP",
+            "cep": "CEP",
+            "zip_code": "Zip Code",
             "number": "Número",
             "complement": "Complemento",
             "street": "Rua",

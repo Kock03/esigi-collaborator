@@ -37,6 +37,7 @@ import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { MustMatch } from 'src/app/validators/min-max-value.validator';
 import { JobProvider } from 'src/providers/job-providers/job.provider';
 import { RequireMatch } from 'src/services/autocomplete.service';
+import { DateValidator } from 'src/app/validators/date.validator';
 
 
 @Component({
@@ -147,14 +148,14 @@ export class JobCreateComponent implements OnInit {
           Validators.required,
           Validators.minLength(2),],
       ],
-      startForecast: this.fb.control({ value: ' ', disabled: false }, [DocumentValidator.isValidData(), Validators.required]),
+      startForecast: this.fb.control({ value: ' ', disabled: false }, [DateValidator.isValidData(), Validators.required]),
       jobNumber: ['', Validators.required],
       typeOfContract: [''],
       workplace: [''],
       workingDay: ['', Validators.required],
       minimumValue: [null],
       maximumValue: [null],
-      openingDate: this.fb.control({ value: new Date().toLocaleDateString(), disabled: false }, [DocumentValidator.isValidData(), Validators.required]),
+      openingDate: this.fb.control({ value: new Date().toLocaleDateString(), disabled: false }, [DateValidator.isValidData(), Validators.required]),
       schooling: [null],
       acquirements: [''],
       collaboratorActivities: [''],

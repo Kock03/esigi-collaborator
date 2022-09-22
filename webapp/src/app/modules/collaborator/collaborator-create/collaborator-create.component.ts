@@ -4,6 +4,7 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@ang
 import { MatTable } from '@angular/material/table';
 import { ActivatedRoute, Router, RoutesRecognized } from '@angular/router';
 import { filter, pairwise } from 'rxjs';
+import { DateValidator } from 'src/app/validators/date.validator';
 
 import { DocumentValidator } from 'src/app/validators/document.validator';
 import { CollaboratorProvider } from 'src/providers/collaborator-providers/collaborator.provider';
@@ -133,8 +134,8 @@ export class CollaboratorCreateComponent implements OnInit {
       cpf: this.fb.control({ value: null, disabled: false }, [
         DocumentValidator.isValidCpf(), Validators.required
       ]),
-      birthDate: this.fb.control({ value: ' ', disabled: false }, [DocumentValidator.isValidData(), Validators.required]),
-      admissionDate: this.fb.control({ value: new Date().toLocaleDateString(), disabled: false }, [DocumentValidator.isValidData(), Validators.required]),
+      birthDate: this.fb.control({ value: ' ', disabled: false }, [DateValidator.isValidData(), Validators.required]),
+      admissionDate: this.fb.control({ value: new Date().toLocaleDateString(), disabled: false }, [DateValidator.isValidData(), Validators.required]),
       email: [null, [Validators.email, Validators.required]],
       cnpj: this.fb.control({ value: null, disabled: false }, [
         DocumentValidator.isValidCnpj(), Validators.required
@@ -152,6 +153,7 @@ export class CollaboratorCreateComponent implements OnInit {
 
       Address: this.fb.group({
         country: ['', Validators.required],
+        flag: ['', Validators.required],
         cep: ['', Validators.required],
         number: ['', Validators.required],
         complement: ['', Validators.required],
@@ -162,22 +164,12 @@ export class CollaboratorCreateComponent implements OnInit {
       }),
     });
 
-    this.countryControl.valueChanges.subscribe((res) => {
-      if (res && res.name) {
-        this.collaboratorForm.controls['Address'].patchValue(
-          {
-            country: res.name
-          }
-        )
-      }
-    });
 
   }
 
   setFormValue() {
     if (this.collaborator) {
       this.collaboratorForm.patchValue(this.collaborator);
-      this.countryControl.patchValue(this.country);
     }
   }
 

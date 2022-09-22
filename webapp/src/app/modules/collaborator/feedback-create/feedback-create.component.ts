@@ -24,6 +24,7 @@ import { FeedbackProvider } from 'src/providers/feedback.provider';
 import { SnackBarService } from 'src/services/snackbar.service';
 import { ProjectProvider } from 'src/providers/project.provider';
 import { RequireMatch } from 'src/services/autocomplete.service';
+import { DateValidator } from 'src/app/validators/date.validator';
 
 export const PICK_FORMATS = {
   parse: { dateInput: { month: 'numeric', year: 'numeric', day: 'numeric' } },
@@ -212,9 +213,9 @@ export class FeedbackCreateComponent implements OnInit {
       collaboratorDescription: [' ', Validators.required],
       commitment: [' ', Validators.required],
       collaboratorManagerId: ['', Validators.required],
-      feedbackDate: this.fb.control({ value: ' ', disabled: false }, [DocumentValidator.isValidData(), Validators.required]),
+      feedbackDate: this.fb.control({ value: ' ', disabled: false }, [DateValidator.isValidData(), Validators.required]),
       hourDate: ['', Validators.required],
-      feedbackDateRetorn: this.fb.control({ value: ' ', disabled: false }, [DocumentValidator.isValidData(), Validators.required]),
+      feedbackDateRetorn: this.fb.control({ value: ' ', disabled: false }, [DateValidator.isValidData(), Validators.required]),
       hourDateRetorn: [''],
       Collaborator: sessionStorage.getItem('collaborator_id'),
     });

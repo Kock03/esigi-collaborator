@@ -12,6 +12,7 @@ import { ResumeProvider } from 'src/providers/resume-providers/resume.provider';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SnackBarService } from 'src/services/snackbar.service';
 import { ThisReceiver } from '@angular/compiler';
+import { DateValidator } from 'src/app/validators/date.validator';
 
 @Component({
   selector: 'app-resume-create',
@@ -86,14 +87,16 @@ export class ResumeCreateComponent implements OnInit {
        [  DocumentValidator.isValidCpf(), Validators.required]
       ),
 
-      birthDate:  this.fb.control({ value: ' ', disabled: false },[ DocumentValidator.isValidData(), Validators.required]),
+      birthDate:  this.fb.control({ value: ' ', disabled: false },[ DateValidator.isValidData(), Validators.required]),
       gender: [1, Validators.required],
       maritalStatus: [1, Validators.required],
       photo: [null],
 
       Address: this.fb.group({
+        country: ['', Validators.required],
+        flag: ['', Validators.required],
         cep: ['', Validators.required],
-        number: [''],
+        number: ['', Validators.required],
         complement: [''],
         street: ['', Validators.required],
         state: ['', Validators.required],

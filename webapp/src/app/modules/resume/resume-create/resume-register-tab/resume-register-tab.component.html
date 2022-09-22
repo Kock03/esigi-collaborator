@@ -82,42 +82,71 @@
       </div>
 
       <div fxFlex="100" fxLayoutGap="16px" formGroupName="Address">
-        <mat-form-field fxFlex="25" appearance="outline">
+        <mat-select-country appearance="outline" placeHolder="País" label="País"
+        (onCountrySelected)="onCountrySelected($event)"  [value]="defaultValue" validator="required">
+      </mat-select-country>
+        <mat-form-field fxFlex="25" appearance="outline" *ngIf="searchEnabled === true">
           <mat-label>{{ 'generic.address.cep' | translate }} </mat-label>
           <input matInput placeholder="CEP" formControlName="cep" type="text" mask="99999-999" />
           <mat-icon matSuffix style="cursor: pointer" (click)="getAddress()">
             search
           </mat-icon>
+          <mat-error *ngIf="addressForm &&
+            addressForm.controls['cep'].hasError('required')">
+            {{'validators.validator-required' | translate}} </mat-error>
+        </mat-form-field>
+
+        
+        <mat-form-field fxFlex="20" appearance="outline" *ngIf="searchEnabled === false">
+          <mat-label>{{'generic.address.zip_code'|translate}} </mat-label>
+          <input matInput placeholder="Zip Code" formControlName="cep" type="text"
+            mask="0||00||000||0000||00000||00000-0||00000-00||00000-000" />
+            <mat-error *ngIf="addressForm &&
+            addressForm.controls['cep'].hasError('required')">
+            {{'validators.validator-required' | translate}} </mat-error>
         </mat-form-field>
 
 
         <mat-form-field fxFlex="40" appearance="outline">
           <mat-label>{{ 'generic.address.street' | translate }}</mat-label>
           <input matInput placeholder="Rua" formControlName="street" />
+          <mat-error *ngIf="addressForm &&
+            addressForm.controls['street'].hasError('required')">
+            {{'validators.validator-required' | translate}} </mat-error>
         </mat-form-field>
 
         <mat-form-field fxFlex="15" appearance="outline">
           <mat-label>{{ 'generic.address.number' | translate }}</mat-label>
           <input matInput placeholder="Número" formControlName="number" mask="0||00||000||0000" />
+          <mat-error *ngIf="addressForm &&
+          addressForm.controls['number'].hasError('required')">
+          {{'validators.validator-required' | translate}} </mat-error>
         </mat-form-field>
 
         <mat-form-field fxFlex="45" appearance="outline">
           <mat-label>{{ 'generic.address.complement' | translate }}</mat-label>
           <input matInput placeholder="Complemento" formControlName="complement" />
+          <mat-error *ngIf="addressForm &&
+          addressForm.controls['complement'].hasError('required')">
+          {{'validators.validator-required' | translate}} </mat-error>
         </mat-form-field>
       </div>
 
       <div fxFlex="100" fxLayoutGap="16px" formGroupName="Address">
-
-
         <mat-form-field fxFlex="20" appearance="outline">
           <mat-label>{{ 'generic.address.district' | translate }}</mat-label>
           <input matInput placeholder="Bairro" formControlName="district" />
+          <mat-error *ngIf="addressForm &&
+          addressForm.controls['district'].hasError('required')">
+          {{'validators.validator-required' | translate}} </mat-error>
         </mat-form-field>
 
         <mat-form-field fxFlex="40" appearance="outline">
           <mat-label>{{ 'generic.address.city' | translate }}</mat-label>
           <input matInput placeholder="Cidade" formControlName="city" />
+          <mat-error *ngIf="addressForm &&
+          addressForm.controls['city'].hasError('required')">
+          {{'validators.validator-required' | translate}} </mat-error>
         </mat-form-field>
 
 
@@ -153,11 +182,49 @@
             <mat-option [value]="'TO'">{{'generic.address.state_list.TO'|translate}}</mat-option>
             <mat-option [value]="'Outro'">{{'generic.address.state_list.other'|translate}}</mat-option>
           </mat-select>
+
         </mat-form-field>
 
-        <mat-form-field fxFlex="45" appearance="outline" *ngIf="this.view === false">
+        <mat-form-field fxFlex="40" appearance="outline" *ngIf="this.view === false">
           <mat-label>Estado</mat-label>
           <input matInput placeholder="Nome" formControlName="state" />
+        </mat-form-field>
+     
+      </div>
+      <div fxFlex="100" fxLayoutGap="16px">
+        <div formGroupName="Phone" fxFlex="100" fxLayoutGap="16px">
+          <mat-form-field fxFlex="30" appearance="outline">
+            <mat-label>{{ 'generic.phone.ddi' | translate }}</mat-label>
+            <input matInput placeholder="DDI" formControlName="ddi" mask="+00" />
+            <mat-error *ngIf="phoneForm &&
+            phoneForm.controls['ddi'].hasError('required')">
+            {{'validators.validator-required' | translate}}
+          </mat-error>
+          </mat-form-field>
+
+          <mat-form-field fxFlex="35" appearance="outline">
+            <mat-label>{{ 'generic.phone.ddd' | translate }}</mat-label>
+            <input matInput placeholder="DDD" formControlName="ddd" mask="(00)" />
+            <mat-error *ngIf="phoneForm &&
+            phoneForm.controls['ddd'].hasError('required')">
+            {{'validators.validator-required' | translate}}
+          </mat-error>
+          </mat-form-field>
+
+          <mat-form-field fxFlex="35" appearance="outline">
+            <mat-label>{{
+              'generic.phone.phone_number' | translate
+              }}</mat-label>
+            <input matInput placeholder="Telefone" formControlName="phoneNumber" mask="0000-0000||00000-0000" />
+            <mat-error *ngIf="phoneForm &&
+            phoneForm.controls['phoneNumber'].hasError('required')">
+            {{'validators.validator-required' | translate}}
+          </mat-error>
+          </mat-form-field>
+        </div>
+        <mat-form-field fxFlex="50" appearance="outline">
+          <mat-label>{{ 'generic.linkedIn' | translate }}</mat-label>
+          <input matInput placeholder="Linkedin" formControlName="linkedin" />
         </mat-form-field>
       </div>
 
@@ -173,31 +240,6 @@
         <mat-form-field fxFlex="50" appearance="outline">
           <mat-label>{{ 'generic.site' | translate }}</mat-label>
           <input matInput placeholder="Site" formControlName="site" />
-        </mat-form-field>
-      </div>
-
-      <div fxFlex="100" fxLayoutGap="16px">
-        <div formGroupName="Phone" fxFlex="100" fxLayoutGap="16px">
-          <mat-form-field fxFlex="30" appearance="outline">
-            <mat-label>{{ 'generic.phone.ddi' | translate }}</mat-label>
-            <input matInput placeholder="DDI" formControlName="ddi" mask="+00" />
-          </mat-form-field>
-
-          <mat-form-field fxFlex="35" appearance="outline">
-            <mat-label>{{ 'generic.phone.ddd' | translate }}</mat-label>
-            <input matInput placeholder="DDD" formControlName="ddd" mask="(00)" />
-          </mat-form-field>
-
-          <mat-form-field fxFlex="35" appearance="outline">
-            <mat-label>{{
-              'generic.phone.phone_number' | translate
-              }}</mat-label>
-            <input matInput placeholder="Telefone" formControlName="phoneNumber" mask="0000-0000||00000-0000" />
-          </mat-form-field>
-        </div>
-        <mat-form-field fxFlex="50" appearance="outline">
-          <mat-label>{{ 'generic.linkedIn' | translate }}</mat-label>
-          <input matInput placeholder="Linkedin" formControlName="linkedin" />
         </mat-form-field>
       </div>
     </form>

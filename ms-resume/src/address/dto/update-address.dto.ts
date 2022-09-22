@@ -21,6 +21,20 @@ export class UpdateAddressDto {
 
   @ApiProperty()
   @IsOptional()
+  @IsString()
+  @MinLength(1)
+  @IsString()
+  country: string;
+
+  @ApiProperty()
+  @IsOptional()
+  @IsString()
+  @MinLength(1)
+  @IsString()
+  flag: string;
+
+  @ApiProperty()
+  @IsOptional()
   @MinLength(1)
   @IsString()
   street: string;

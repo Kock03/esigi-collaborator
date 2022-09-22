@@ -14,6 +14,7 @@ import {
   MAT_DATE_FORMATS,
 } from '@angular/material/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { DateValidator } from 'src/app/validators/date.validator';
 import { DocumentValidator } from 'src/app/validators/document.validator';
 import { CollaboratorDependentsProvider } from 'src/providers/collaborator-providers/collaborator-dependents.provider';
 
@@ -74,7 +75,7 @@ export class CollaboratorDependentsDialog {
       lastName: [null, Validators.required],
       gender: [null, Validators.required],
       cpf: [null, [DocumentValidator.isValidCpf()]],
-      birthDate:  this.fb.control({ value: ' ', disabled: false },[ DocumentValidator.isValidData(), Validators.required]),
+      birthDate:  this.fb.control({ value: ' ', disabled: false },[ DateValidator.isValidData(), Validators.required]),
       ddi: [null],
       ddd: [null],
       phoneNumber: [null],

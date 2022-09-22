@@ -9,6 +9,7 @@ import { CustomerProvider } from 'src/providers/customer.provider';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { ResumeProvider } from 'src/providers/resume-providers/resume.provider';
 import { RequireMatch } from 'src/services/autocomplete.service';
+import { DateValidator } from 'src/app/validators/date.validator';
 
 @Component({
   selector: 'app-job-client-interview-tab',
@@ -216,7 +217,7 @@ export class JobClientInterviewTabComponent implements OnInit {
   initForm() {
     this.clientInterviewForm = this.fb.group({
       evaluator: ['', Validators.required],
-      clientInterviewDate: this.fb.control({ value: ' ', disabled: false }, [DocumentValidator.isValidData(), Validators.required]),
+      clientInterviewDate: this.fb.control({ value: ' ', disabled: false }, [DateValidator.isValidData(), Validators.required]),
       hourInterview: ['', Validators.required],
       punctuality: [null, Validators.required],
       jobProfile: [true, Validators.required],

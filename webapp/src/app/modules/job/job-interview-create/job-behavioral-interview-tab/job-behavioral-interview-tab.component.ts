@@ -9,6 +9,7 @@ import { SnackBarService } from 'src/services/snackbar.service';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { CollaboratorProvider } from 'src/providers/collaborator-providers/collaborator.provider';
 import { RequireMatch } from 'src/services/autocomplete.service';
+import { DateValidator } from 'src/app/validators/date.validator';
 
 
 @Component({
@@ -216,7 +217,7 @@ export class JobBehavioralInterviewTabComponent implements OnInit {
     this.behavioralInterviewForm = this.fb.group({
       id: null,
       techRecruter: ['', Validators.required],
-      behavioralInterviewDate: this.fb.control({ value: ' ', disabled: false }, [DocumentValidator.isValidData(), Validators.required]),
+      behavioralInterviewDate: this.fb.control({ value: ' ', disabled: false }, [DateValidator.isValidData(), Validators.required]),
       hourInterview: ['', Validators.required],
       punctuality: [null, Validators.required],
       presentation: [null, Validators.required],

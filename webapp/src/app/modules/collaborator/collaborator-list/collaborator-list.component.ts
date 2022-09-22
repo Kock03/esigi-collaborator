@@ -171,6 +171,7 @@ export class CollaboratorListComponent implements OnInit {
     const method = 'edit';
     sessionStorage.setItem('collaborator_method', method);
     sessionStorage.setItem('country_value', address.country);
+    sessionStorage.setItem('flag_value', address.flag);
     sessionStorage.setItem('collaborator_id', collaboratorId);
   }
 

@@ -46,10 +46,11 @@ export class CollaboratorRegisterTabComponent implements OnInit {
   typeControl = new FormControl();
   addressForm!: FormGroup;
   phoneForm!: FormGroup;
-  country!: FormControl;
+  Country!: any;
   file!: any;
   view!: boolean;
   searchEnabled!: boolean;
+  defaultValue: any;
 
   constructor(
     private fb: FormBuilder,
@@ -57,10 +58,10 @@ export class CollaboratorRegisterTabComponent implements OnInit {
     private route: ActivatedRoute,
     private httpClient: HttpClient,
     private collaboratorProvider: CollaboratorProvider,
-  ) {}
+  ) { }
 
- async ngOnInit() {
-  this.searchEnabled = false;
+  async ngOnInit() {
+    this.searchEnabled = false;
     this.collaboratorId = this.route.snapshot.paramMap.get('id');
     if (this.collaboratorId == 'novo') {
       this.url = '../../../../assets/logo/profile-icon.png';
@@ -70,11 +71,11 @@ export class CollaboratorRegisterTabComponent implements OnInit {
           'Address'
         ] as FormGroup;
         this.addressForm = addressForm;
-        addressForm.controls['cep'].valueChanges.subscribe(res => {});
+        addressForm.controls['cep'].valueChanges.subscribe(res => { });
 
         const phoneForm = this.collaboratorForm.controls['Phone'] as FormGroup;
         this.phoneForm = phoneForm;
-        phoneForm.controls['ddi'].valueChanges.subscribe(res => {});
+        phoneForm.controls['ddi'].valueChanges.subscribe(res => { });
       });
     } else {
       let collaborator = await this.collaboratorProvider.findOne(
@@ -86,28 +87,49 @@ export class CollaboratorRegisterTabComponent implements OnInit {
         this.collaboratorForm.controls['collaboratorTypes'].value
       );
 
+      this.defaultValue = {
+        name: sessionStorage.getItem('country_value'),
+        alpha2Code: sessionStorage.getItem('flag_value')
+
+      };
+
     }
   }
 
   onCountrySelected(country: any) {
-    if(this.collaboratorId == 'novo'){
-      if(country.name === 'Brasil'){
+    console.log(country)
+    if (this.collaboratorId == 'novo') {
+      if (country.name === 'Brasil') {
+        this.view = true;
         this.searchEnabled = true;
-      }else{
+      } else {
+        this.view = false;
         this.searchEnabled = false;
       }
+
       this.collaboratorForm.controls['Address'].patchValue(
         {
-          country: country.name
+          country: country.name,
+          flag: country.alpha2Code
         }
       )
-    }else{
-      
-    }
+    } else {
+      this.defaultValue = {
+        name: country.name,
+        alpha2Code: country.alpha2Code
 
+      };
+      console.log(this.defaultValue + " d")
+      this.collaboratorForm.controls['Address'].patchValue(
+        {
+          country: this.defaultValue.name,
+          flag: this.defaultValue.alpha2Code
+        }
+      )
+    }
   }
 
-  ngAfterViewInit(): void {}
+  ngAfterViewInit(): void { }
 
   next() {
     this.onChange.next(true);
@@ -136,7 +158,7 @@ export class CollaboratorRegisterTabComponent implements OnInit {
     } else {
       if (
         this.collaboratorForm.controls['firstNameCorporateName'].value !=
-          null &&
+        null &&
         this.collaboratorForm.controls['lastNameFantasyName'].value != null
       ) {
         this.collaboratorForm.controls['login'].setValue(

@@ -24,6 +24,20 @@ export class CreateAddressDto {
   @IsString()
   @MinLength(1)
   @IsString()
+  country: string;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsString()
+  @MinLength(1)
+  @IsString()
+  flag: string;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsString()
+  @MinLength(1)
+  @IsString()
   street: string;
 
   @ApiProperty()

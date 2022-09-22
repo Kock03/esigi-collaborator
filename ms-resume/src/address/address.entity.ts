@@ -5,8 +5,14 @@ export class AddressEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ name: 'cep', length: 8 })
+  @Column()
   cep: string;
+
+  @Column()
+  country: string;
+
+  @Column()
+  flag: string;
 
   @Column({ name: 'street', length: 60 })
   street: string;

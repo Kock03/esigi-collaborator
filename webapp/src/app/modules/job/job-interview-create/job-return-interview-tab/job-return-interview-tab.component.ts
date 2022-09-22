@@ -8,6 +8,7 @@ import { ReturnProvider } from 'src/providers/return.provider';
 import { ResumeProvider } from 'src/providers/resume-providers/resume.provider';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { RequireMatch } from 'src/services/autocomplete.service';
+import { DateValidator } from 'src/app/validators/date.validator';
 
 
 @Component({
@@ -151,7 +152,7 @@ export class JobReturnInterviewTabComponent implements OnInit {
   initForm() {
     this.returnForm = this.fb.group({
       dateOfReturn: this.fb.control({ value: new Date().toLocaleDateString(), disabled: false }),
-      dateReturn: this.fb.control({ value: ' ', disabled: false }, [DocumentValidator.isValidData(), Validators.required]),
+      dateReturn: this.fb.control({ value: ' ', disabled: false }, [DateValidator.isValidData(), Validators.required]),
       technicalEvaluation: [null, Validators.required],
       behavioralEvaluation: [null, Validators.required],
       technicalEvaluationComent: ['', Validators.required],

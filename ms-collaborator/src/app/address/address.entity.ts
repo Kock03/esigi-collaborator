@@ -18,6 +18,9 @@ export class AddressEntity {
   country: string;
 
   @Column()
+  flag: string;
+
+  @Column()
   cep: string;
 
   @Column()

@@ -34,6 +34,7 @@ import { ResumeEducationDialog } from './resume-create/resume-education-tab/resu
 import { ResumeLanguageDialog } from './resume-create/resume-education-tab/resume-language-dialog.component';
 import { MatSortModule } from '@angular/material/sort';
 import { TranslateModule } from '@ngx-translate/core';
+import { MatSelectCountryModule } from '@angular-material-extensions/select-country';
 
 const routes: Routes = [
   {
@@ -64,6 +65,7 @@ const routes: Routes = [
   ],
   imports: [
     CommonModule,
+    MatSelectCountryModule,
     RouterModule.forChild(routes),
     MatTabsModule,
     MatButtonModule,
