@@ -13,10 +13,15 @@ import { LanguagesModule } from './app/languages/languages.module';
 import { CollaboratorsModule } from './app/collaborators/collaborators.module';
 import { DependentsModule } from './app/dependents/dependents.module';
 import { FeedbacksModule } from './app/feedbacks/feedbacks.module';
+import { APP_GUARD } from '@nestjs/core';
+import { AuthGuard } from './guards/auth.guard';
+import { HttpModule } from '@nestjs/axios';
 
 @Module({
   imports: [
-    ConfigModule.forRoot(), TypeOrmModule.forRoot({
+    ConfigModule.forRoot(),
+    HttpModule,
+    TypeOrmModule.forRoot({
       type: process.env.TYPEORM_CONNECTION,
       host: process.env.TYPEORM_HOST,
       port: process.env.TYPEORM_PORT,
@@ -25,7 +30,7 @@ import { FeedbacksModule } from './app/feedbacks/feedbacks.module';
       database: process.env.TYPEORM_DATABASE,
       entities: [__dirname + '/**/*.entity{.js,.ts}'],
       synchronize: true,
-      namingStrategy: new SnakeNamingStrategy()
+      namingStrategy: new SnakeNamingStrategy(),
     } as TypeOrmModuleOptions),
     BankDataModule,
     PhoneModule,
@@ -40,6 +45,11 @@ import { FeedbacksModule } from './app/feedbacks/feedbacks.module';
     FeedbacksModule,
   ],
   controllers: [],
-  providers: [],
+  providers: [
+    {
+      provide: APP_GUARD,
+      useClass: AuthGuard,
+    },
+  ],
 })
-export class AppModule { }
+export class AppModule {}

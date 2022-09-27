@@ -16,10 +16,15 @@ import { AddressEntity } from './address/address.entity';
 import { ExperiencesModule } from './experiences/experiences.module';
 import { ConfigModule } from '@nestjs/config';
 import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
+import { HttpModule } from '@nestjs/axios';
+import { APP_GUARD } from '@nestjs/core';
+import { AuthGuard } from './guards/auth.guard';
 
 @Module({
   imports: [
-    ConfigModule.forRoot(), TypeOrmModule.forRoot({
+    ConfigModule.forRoot(),
+    HttpModule,
+    TypeOrmModule.forRoot({
       type: process.env.TYPEORM_CONNECTION,
       host: process.env.TYPEORM_HOST,
       port: process.env.TYPEORM_PORT,
@@ -28,7 +33,7 @@ import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
       database: process.env.TYPEORM_DATABASE,
       entities: [__dirname + '/**/*.entity{.js,.ts}'],
       synchronize: true,
-      namingStrategy: new SnakeNamingStrategy()
+      namingStrategy: new SnakeNamingStrategy(),
     } as TypeOrmModuleOptions),
     EducationsModule,
     ExperiencesModule,
@@ -39,6 +44,11 @@ import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
     AddressModule,
   ],
   controllers: [],
-  providers: [],
+  providers: [
+    {
+      provide: APP_GUARD,
+      useClass: AuthGuard,
+    },
+  ],
 })
 export class AppModule {}

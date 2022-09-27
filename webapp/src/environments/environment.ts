@@ -11,6 +11,7 @@ export const environment = {
   AUTH_SERVICE_MS: 'localhost:3500/api/v1/',
   CUSTOMER_MS: 'localhost:3506/api/v1/',
   PROJECT_MS: 'localhost:3505/api/v1/',
+  portal: 'http://localhost:3406/login',
 
 
   message: 'LOCAL',

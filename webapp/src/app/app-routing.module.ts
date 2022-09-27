@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ValidateTokenComponent } from './components/validate-token/validate-token.component';
 import { FeedbackCreateComponent } from './modules/collaborator/feedback-create/feedback-create.component';
 import { JobInterviewCreateComponent } from './modules/job/job-interview-create/job-interview-create.component';
 
@@ -18,6 +19,10 @@ const routes: Routes = [
       import('./modules/collaborator/collaborator.module').then(
         m => m.CollaboratorModule
       ),
+  },
+  {
+    path: 'validate/:id',
+    component: ValidateTokenComponent,
   },
   {
     path: 'vaga',

@@ -12,9 +12,13 @@ import { TechnicalInterviewsModule } from './app/technical-interviews/technical-
 import { ReturnsModule } from './app/returns/returns.module';
 import { HiringPreferencesModule } from './app/hiring-preferences/hiring-preferences.module';
 import { InterviewsModule } from './app/interviews/interviews.module';
+import { APP_GUARD } from '@nestjs/core';
+import { AuthGuard } from './guards/auth.guard';
+import { HttpModule } from '@nestjs/axios';
 @Module({
   imports: [
     ConfigModule.forRoot(),
+    HttpModule,
     TypeOrmModule.forRoot({
       type: process.env.TYPEORM_CONNECTION,
       host: process.env.TYPEORM_HOST,
@@ -38,6 +42,11 @@ import { InterviewsModule } from './app/interviews/interviews.module';
     InterviewsModule,
   ],
   controllers: [],
-  providers: [],
+  providers: [
+    {
+      provide: APP_GUARD,
+      useClass: AuthGuard,
+    },
+  ],
 })
 export class AppModule {}
