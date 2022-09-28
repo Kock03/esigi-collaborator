@@ -17,35 +17,44 @@ export class FeedbacksService {
     @InjectRepository(FeedbacksEntity)
     private readonly feedbacksRepository: Repository<FeedbacksEntity>,
     private httpService: HttpService,
+  ) {}
 
-  ) { }
-
-  async findByCollaborator(id: string) {
-    let feedbacks: any[]
-    feedbacks = await this.feedbacksRepository.query(`select * from feedbacks where collaborator_id="${id}"`)
+  async findByCollaborator(id: string, token: string) {
+    let feedbacks: any[];
+    feedbacks = await this.feedbacksRepository.query(
+      `select * from feedbacks where collaborator_id="${id}"`,
+    );
 
     const collaboratorIdList = feedbacks.map((feedback) => {
       return feedback.collaborator_manager_id;
     });
 
-
     const collaborators = await this.httpService
-      .post('http://localhost:3501/api/v1/collaborators/list', {
-        idList: collaboratorIdList,
-      })
+      .post(
+        'http://localhost:3501/api/v1/collaborators/list',
+        {
+          idList: collaboratorIdList,
+        },
+        {
+          headers: {
+            authorization: token,
+          },
+        },
+      )
       .toPromise();
 
     if (collaborators.data) {
       feedbacks.map((feedback) => {
         if (feedback.collaborator_manager_id != undefined) {
           const collaborator = collaborators.data.find(
-            (collaborator) => collaborator.id === feedback.collaborator_manager_id);
+            (collaborator) =>
+              collaborator.id === feedback.collaborator_manager_id,
+          );
           if (collaborator) {
             feedback.collaborator = {
               firstNameCorporateName: collaborator.firstNameCorporateName,
               lastNameFantasyName: collaborator.lastNameFantasyName,
             };
-
           } else {
             feedback.collaborator_manager_id = 'indefinido';
           }
@@ -54,7 +63,7 @@ export class FeedbacksService {
         } else {
           return feedback;
         }
-      })
+      });
     } else {
       return feedbacks;
     }
@@ -63,16 +72,25 @@ export class FeedbacksService {
     });
 
     const projects = await this.httpService
-      .post('http://localhost:3505/api/v1/projects/list', {
-        idList: projectIdList,
-      })
+      .post(
+        'http://localhost:3505/api/v1/projects/list',
+        {
+          idList: projectIdList,
+        },
+        {
+          headers: {
+            authorization: token,
+          },
+        },
+      )
       .toPromise();
 
     if (projects.data) {
       feedbacks.map((feedback) => {
         if (feedback.project_id != undefined) {
           const project = projects.data.find(
-            (project) => project.id === feedback.project_id);
+            (project) => project.id === feedback.project_id,
+          );
           if (project) {
             feedback.project = {
               name: project.name,
@@ -85,12 +103,11 @@ export class FeedbacksService {
         } else {
           return feedback;
         }
-      })
+      });
     } else {
       return feedbacks;
     }
     return feedbacks;
-
   }
 
   async findAll() {

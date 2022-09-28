@@ -27,14 +27,14 @@ export class CollaboratorsService {
     private httpService: HttpService,
   ) {}
 
-  async findAll() {
+  async findAll(token: string) {
     const options: FindManyOptions = {
       order: { createdAt: 'DESC' },
       relations: ['Phone', 'Address',],
     };
     try {
       const collaborators = await this.collaboratorsRepository.find(options);
-      return await this.requestResource(collaborators);
+      return await this.requestResource(collaborators, token);
     } catch (err) {
       throw new NotFoundException();
     }
@@ -90,12 +90,12 @@ export class CollaboratorsService {
       .getMany();
   }
 
-  async findByName(firstNameCorporateName: string, status: number) {
+  async findByName(firstNameCorporateName: string, status: number, token: string) {
     let collaborator;
     if (firstNameCorporateName === '') {
       switch (status) {
         case 1:
-          collaborator = this.findAll();
+          collaborator = this.findAll(token);
           return collaborator;
           break;
         case 2:
@@ -129,7 +129,7 @@ export class CollaboratorsService {
             ],
           });
 
-          return await this.requestResource(collaborator);
+          return await this.requestResource(collaborator, token);
 
           break;
         case 2:
@@ -152,7 +152,7 @@ export class CollaboratorsService {
               },
             ],
           });
-          return await this.requestResource(collaborator);
+          return await this.requestResource(collaborator, token);
           break;
         case 3:
           collaborator = await this.collaboratorsRepository.find({
@@ -174,7 +174,7 @@ export class CollaboratorsService {
               },
             ],
           });
-          return await this.requestResource(collaborator);
+          return await this.requestResource(collaborator, token);
           break;
       }
     }
@@ -371,16 +371,22 @@ export class CollaboratorsService {
     return await this.collaboratorsRepository.softDelete({ id });
   }
 
-  async requestResource(collaborators: any[]) {
+  async requestResource(collaborators: any[], token: string) {
     try {
       const collaboratorIdList = collaborators.map((collaborator) => {
         return collaborator.id;
       });
 
       const resources = await this.httpService
-        .post('http://localhost:3505/api/v1/resources/list', {
+        .post('http://localhost:3505/api/v1/resources/list', 
+        
+        {
           idList: collaboratorIdList,
-        })
+        } ,  {
+          headers: {
+            authorization: token,
+          },
+        },)
         .toPromise();
 
       if (resources.data) {

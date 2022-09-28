@@ -7,6 +7,7 @@ import {
   HttpStatus,
   Param,
   ParseUUIDPipe,
+  Headers,
   Post,
   Put,
   Query,
@@ -20,8 +21,8 @@ export class JobsController {
   constructor(private readonly jobsService: JobsService) {}
 
   @Get()
-  async index() {
-    return await this.jobsService.findAll();
+  async index(@Headers() headers) {
+    return await this.jobsService.findAll(headers.authorization);
   }
 
   @Get(':id')
@@ -30,13 +31,13 @@ export class JobsController {
   }
 
   @Get('find/resume/:id')
-  async findByResume(@Param('id', new ParseUUIDPipe()) id: string) {
-    return await this.jobsService.findByResume(id);
+  async findByResume(@Param('id', new ParseUUIDPipe()) id: string, @Headers() headers) {
+    return await this.jobsService.findByResume(id, headers.authorization);
   }
 
   @Post('find')
-  async find(@Body() body: any) {
-    return await this.jobsService.findByName(body.jobName);
+  async find(@Body() body: any, @Headers() headers) {
+    return await this.jobsService.findByName(body.jobName, headers.authorization);
   }
 
   @Post()
