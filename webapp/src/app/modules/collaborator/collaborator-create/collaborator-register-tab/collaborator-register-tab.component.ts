@@ -47,6 +47,7 @@ export class CollaboratorRegisterTabComponent implements OnInit {
   addressForm!: FormGroup;
   phoneForm!: FormGroup;
   Country!: any;
+  token!: string;
   file!: any;
   view!: boolean;
   searchEnabled!: boolean;
@@ -61,10 +62,11 @@ export class CollaboratorRegisterTabComponent implements OnInit {
   ) { }
 
   async ngOnInit() {
+    this.token = localStorage.getItem('token')!;
     this.searchEnabled = false;
     this.collaboratorId = this.route.snapshot.paramMap.get('id');
     if (this.collaboratorId == 'novo') {
-      this.url = '../../../../assets/logo/profile-icon.png';
+      this.url = '../assets/icons/avatar-astronauta.png';
       this.view = true;
       this.collaboratorForm.valueChanges.subscribe(res => {
         const addressForm = this.collaboratorForm.controls[
@@ -81,7 +83,7 @@ export class CollaboratorRegisterTabComponent implements OnInit {
       let collaborator = await this.collaboratorProvider.findOne(
         this.collaboratorId
       );
-      this.url = 'http://localhost:3000/' + collaborator.photo
+      this.url = `http://localhost:3000/${collaborator.photo}` 
       this.view = false;
       this.changesType(
         this.collaboratorForm.controls['collaboratorTypes'].value
@@ -94,6 +96,19 @@ export class CollaboratorRegisterTabComponent implements OnInit {
       };
 
     }
+  // this.url =  this.httpClient
+  //   .get(`http://localhost:3000/permiss%C3%83%C2%B5es_1664382905117.png.${this.token}`, {
+  //     headers: {
+  //       authorization: `Bearer ${this.token}`,
+  //     },
+  //   },)
+  //   .subscribe(resposta => {
+  //     if (resposta) {
+  //     console.log("🚀 ~ file: collaborator-register-tab.component.ts ~ line 107 ~ CollaboratorRegisterTabComponent ~ ngOnInit ~ resposta", resposta)
+      
+  //     }
+  //   });
+  // console.log("🚀 ~ file: collaborator-register-tab.component.ts ~ line 111 ~ CollaboratorRegisterTabComponent ~ ngOnInit ~  this.url = ",  this.url )
   }
 
   onCountrySelected(country: any) {
@@ -204,7 +219,11 @@ export class CollaboratorRegisterTabComponent implements OnInit {
 
     try {
       this.httpClient
-        .post('http://localhost:3000', formData)
+        .post('http://localhost:3000', formData, {
+          headers: {
+            authorization: `Bearer ${this.token}`,
+          },
+        },)
         .subscribe(resposta => {
           if (resposta) {
             this.file = resposta;

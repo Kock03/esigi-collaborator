@@ -5,6 +5,7 @@ import {
   Get,
   HttpCode,
   HttpStatus,
+  Headers,
   Param,
   ParseUUIDPipe,
   Post,
@@ -24,8 +25,8 @@ export class InterviewsController {
   }
 
   @Get('follow-up-interviews/:id')
-  async findListInterviews(@Param('id', new ParseUUIDPipe()) id: string) {
-    return await this.interviewsService.getFollowUpInterviews(id);
+  async findListInterviews(@Param('id', new ParseUUIDPipe()) id: string, @Headers() headers) {
+    return await this.interviewsService.getFollowUpInterviews(id, headers.authorization);
   }
 
   @Get(':id')

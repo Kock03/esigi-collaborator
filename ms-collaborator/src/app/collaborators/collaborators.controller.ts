@@ -10,6 +10,7 @@ import {
   Post,
   Put,
   Query,
+  Headers,
   Req,
 } from '@nestjs/common';
 import { Observable } from 'rxjs';
@@ -19,13 +20,14 @@ import { UpdateCollaboratorsDto } from './dtos/update-collaborators.dto';
 import { UpdatePermissionDto } from './dtos/update-permission.dto';
 import { ICollaborator, ICollaborators } from './interfaces/i-collaborators.interfaces';
 
+
 @Controller('/api/v1/collaborators')
 export class CollaboratorsController {
   constructor(private readonly collaboratorsService: CollaboratorsService) { }
 
   @Get()
-  async index() {
-    return await this.collaboratorsService.findAll();
+  async index(@Headers() headers) {
+    return await this.collaboratorsService.findAll(headers.authorization);
   }
 
   @Get('list/gerente')
@@ -83,8 +85,8 @@ export class CollaboratorsController {
 
 
   @Post('find/name')
-  async findByName(@Body() body: any) {
-    return await this.collaboratorsService.findByName(body.firstNameCorporateName, body.status);
+  async findByName(@Body() body: any, @Headers() headers) {
+    return await this.collaboratorsService.findByName(body.firstNameCorporateName, body.status, headers.authorization);
   }
 
   @Get('find/name/gerente')

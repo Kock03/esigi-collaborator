@@ -26,16 +26,19 @@ export class ResumesService {
   constructor(
     @InjectRepository(ResumesEntity)
     private readonly resumesRepository: Repository<ResumesEntity>,
-  ) { }
+  ) {}
 
   async createPdf(id: string) {
     const data = await this.findOneOrFail({ id });
-    const creatorPdf = new ResumeTemplate(data)
+    const creatorPdf = new ResumeTemplate(data);
     const printer = await new PdfPrinter(creatorPdf.Font);
     const options = {};
     var name = data.firstName + data.lastName + data.cpf + '.pdf';
     let file_name = 'pdf/' + name;
-    const pdfDoc = await printer.createPdfKitDocument(creatorPdf.DocDefinition, options);
+    const pdfDoc = await printer.createPdfKitDocument(
+      creatorPdf.DocDefinition,
+      options,
+    );
     pdfDoc.pipe(fs.createWriteStream(file_name));
     pdfDoc.end();
     return { file_name: name };
@@ -44,6 +47,7 @@ export class ResumesService {
   async findAll() {
     const options: FindManyOptions = {
       order: { createdAt: 'DESC' },
+     relations: ['Phone', 'Address'],
     };
     return await this.resumesRepository.find(options);
   }
@@ -60,7 +64,7 @@ export class ResumesService {
     options?: FindOneOptions<ResumesEntity>,
   ) {
     options = {
-      relations: ['Educations', 'Skills', 'Experiences', 'Languages'],
+      relations: ['Educations', 'Skills', 'Experiences', 'Languages', 'Phone', 'Address',],
     };
     try {
       return await this.resumesRepository.findOneOrFail(conditions, options);
@@ -75,7 +79,7 @@ export class ResumesService {
     } else {
       return this.resumesRepository.find({
         select: ['id', 'firstName', 'lastName', 'birthDate'],
-        relations: ['Phone'],
+        relations: ['Phone', 'Address',],
         where: [{ firstName: Like(`%${name}%`) }],
       });
     }
@@ -107,8 +111,14 @@ export class ResumesService {
 
   async update(id: string, data: UpdateResumesDto) {
     try {
-      const resume = await this.resumesRepository.findOneOrFail({ id });
-    } catch {
+      const resume = await this.resumesRepository.findOneOrFail(
+        { id },
+        { relations: ['Phone', 'Address'] },
+      );
+      data.Address.id = resume.Address.id;
+      data.Phone.id = resume.Phone.id;
+
+    } catch (err) {
       throw new NotFoundException();
     }
     return await this.resumesRepository.save({ id: id, ...data });

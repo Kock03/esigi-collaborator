@@ -5,6 +5,7 @@ import {
   Get,
   Param,
   ParseUUIDPipe,
+  Headers,
   Post,
   Put,
 } from '@nestjs/common';
@@ -28,8 +29,8 @@ export class FeedbacksController {
   }
 
   @Get('collaborator/:id')
-  async findByCollaborator(@Param('id', new ParseUUIDPipe()) id: string){
-    return await this.feedbacksService.findByCollaborator(id)
+  async findByCollaborator(@Param('id', new ParseUUIDPipe()) id: string, @Headers() headers){
+    return await this.feedbacksService.findByCollaborator(id, headers.authorization)
   }
 
   @Post()
