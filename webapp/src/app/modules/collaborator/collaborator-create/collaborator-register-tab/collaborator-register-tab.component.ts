@@ -96,6 +96,19 @@ export class CollaboratorRegisterTabComponent implements OnInit {
       };
 
     }
+  // this.url =  this.httpClient
+  //   .get(`http://localhost:3000/permiss%C3%83%C2%B5es_1664382905117.png.${this.token}`, {
+  //     headers: {
+  //       authorization: `Bearer ${this.token}`,
+  //     },
+  //   },)
+  //   .subscribe(resposta => {
+  //     if (resposta) {
+  //     console.log("🚀 ~ file: collaborator-register-tab.component.ts ~ line 107 ~ CollaboratorRegisterTabComponent ~ ngOnInit ~ resposta", resposta)
+      
+  //     }
+  //   });
+  // console.log("🚀 ~ file: collaborator-register-tab.component.ts ~ line 111 ~ CollaboratorRegisterTabComponent ~ ngOnInit ~  this.url = ",  this.url )
   }
 
   onCountrySelected(country: any) {

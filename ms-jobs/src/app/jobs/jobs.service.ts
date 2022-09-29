@@ -158,7 +158,11 @@ export class JobsService {
 
   async update(id: string, data: UpdateJobsDto) {
     try {
-      const job = await this.jobsRepository.findOneOrFail({ id });
+      const job = await this.jobsRepository.findOneOrFail(
+        { id },
+        { relations: ['Seniorities'] },
+      );
+      data.Seniorities.id = job.Seniorities.id;
     } catch {
       throw new NotFoundException();
     }
