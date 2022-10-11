@@ -41,6 +41,9 @@ export class JobsEntity {
   status: Status;
 
   @Column()
+  reason: string;
+
+  @Column()
   publish: boolean;
 
   @Column()

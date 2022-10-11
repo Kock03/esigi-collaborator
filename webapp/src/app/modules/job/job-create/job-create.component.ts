@@ -200,6 +200,8 @@ export class JobCreateComponent implements OnInit {
 
   async saveJob() {
     let data = this.jobForm.getRawValue();
+    console.log("🚀 ~ file: job-create.component.ts ~ line 203 ~ JobCreateComponent ~ saveJob ~ data", data)
+    
 
     try {
       const job = await this.jobProvider.store(data);

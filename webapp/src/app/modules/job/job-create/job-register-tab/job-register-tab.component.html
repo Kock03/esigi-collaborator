@@ -4,78 +4,43 @@
       <div fxFlex="100" fxLayoutGap="16px">
         <mat-form-field fxFlex="30" appearance="outline">
           <mat-label>{{ 'job.job_create.name' | translate }}</mat-label>
-          <input
-            placeholder="Nome da Vaga"
-            matInput
-            formControlName="jobName"
-            type="text" />
-          <mat-error
-            *ngIf="jobForm && jobForm.controls['jobName'].hasError('required')">
+          <input placeholder="Nome da Vaga" matInput formControlName="jobName" type="text" />
+          <mat-error *ngIf="jobForm && jobForm.controls['jobName'].hasError('required')">
             {{ 'validators.validator-required' | translate }}
           </mat-error>
         </mat-form-field>
-        <mat-form-field
-          fxFlex="30"
-          class="example-full-width"
-          appearance="outline"
-          *ngIf="this.method === 'novo'">
+        <mat-form-field fxFlex="30" class="example-full-width" appearance="outline" *ngIf="this.method === 'novo'">
           <mat-label>{{ 'generic.request' | translate }}</mat-label>
-          <input
-            type="text"
-            placeholder="Solicitante"
-            aria-label="text"
-            #filter
-            matInput
-            [matAutocomplete]="autoRequester"
-            [formControl]="collaboratorControl" />
-          <mat-error
-            *ngIf="
+          <input type="text" placeholder="Solicitante" aria-label="text" #filter matInput
+            [matAutocomplete]="autoRequester" [formControl]="collaboratorControl" />
+          <mat-error *ngIf="
               collaboratorControl && collaboratorControl.hasError('required')
             ">
             {{ 'validators.validator-required' | translate }}
           </mat-error>
-          <mat-error
-            *ngIf="
+          <mat-error *ngIf="
               collaboratorControl &&
               !collaboratorControl.hasError('required') &&
               collaboratorControl.hasError('incorrect')
             ">
             {{ 'validators.select-option' | translate }}
           </mat-error>
-          <mat-autocomplete
-            autoActiveFirstOption
-            #autoRequester="matAutocomplete"
-            [displayWith]="displayFnRequester">
-            <mat-option
-              *ngFor="let collaborator of filteredCollaborators"
-              [value]="collaborator">
+          <mat-autocomplete autoActiveFirstOption #autoRequester="matAutocomplete" [displayWith]="displayFnRequester">
+            <mat-option *ngFor="let collaborator of filteredCollaborators" [value]="collaborator">
               {{ collaborator.firstNameCorporateName }}
               {{ collaborator.lastNameFantasyName }}
             </mat-option>
           </mat-autocomplete>
         </mat-form-field>
-        <mat-form-field
-          appearance="outline"
-          *ngIf="this.method === 'edit'"
-          fxFlex="40"
-          class="example-full-width">
+        <mat-form-field appearance="outline" *ngIf="this.method === 'edit'" fxFlex="40" class="example-full-width">
           <mat-label>{{ 'generic.request' | translate }}</mat-label>
-          <input
-            disabled
-            matInput
-            disableRipple
-            [value]="this.collaboratorControl.value" />
+          <input disabled matInput disableRipple [value]="this.collaboratorControl.value" />
         </mat-form-field>
 
         <mat-form-field fxFlex="20" appearance="outline">
           <mat-label>{{ 'generic.opening_date' | translate }}</mat-label>
-          <input
-            matInput
-            mask="00/00/0000"
-            [showMaskTyped]="true"
-            [dropSpecialCharacters]="false"
-            formControlName="openingDate"
-            placeholder="Data de Abertura" />
+          <input matInput mask="00/00/0000" [showMaskTyped]="true" [dropSpecialCharacters]="false"
+            formControlName="openingDate" placeholder="Data de Abertura" />
         </mat-form-field>
 
         <mat-form-field fxFlex="20" appearance="outline">
@@ -83,108 +48,74 @@
           <mat-select matInput disableRipple formControlName="status">
             <mat-option [value]="1">{{
               'job.job_create.status.new' | translate
-            }}</mat-option>
+              }}</mat-option>
             <mat-option [value]="2">{{
               'job.job_create.status.in_revision' | translate
-            }}</mat-option>
+              }}</mat-option>
             <mat-option [value]="3">{{
               'job.job_create.status.closed' | translate
-            }}</mat-option>
+              }}</mat-option>
             <mat-option [value]="4">{{
               'job.job_create.status.lost' | translate
-            }}</mat-option>
+              }}</mat-option>
             <mat-option [value]="5">{{
               'job.job_create.status.completed' | translate
-            }}</mat-option>
+              }}</mat-option>
             <mat-option [value]="6">{{
               'job.job_create.status.processed' | translate
-            }}</mat-option>
+              }}</mat-option>
           </mat-select>
         </mat-form-field>
       </div>
 
       <div fxFlex="100" fxLayoutGap="16px">
-        <mat-form-field
-          appearance="outline"
-          fxFlex="40"
-          class="example-full-width">
+        <mat-form-field *ngIf="jobForm.controls['status'].value == 4"  appearance="outline" fxFlex="40" class="example-full-width">
           <mat-label>Motivo da perda</mat-label>
-          <input
-          *ngIf="status.value === 4'"
-            matInput
-            disableRipple
-            formControlName="reason"
-             />
+          <input matInput disableRipple formControlName="reason" />
         </mat-form-field>
 
-        <mat-form-field
-          fxFlex="40"
-          class="example-full-width"
-          appearance="outline"
-          *ngIf="this.method === 'novo'">
+        <mat-form-field fxFlex="40" class="example-full-width" appearance="outline" *ngIf="this.method === 'novo'">
           <mat-label>{{ 'generic.client' | translate }}</mat-label>
-          <input
-            type="text"
-            placeholder="Cliente"
-            aria-label="text"
-            #fiilter
-            matInput
-            [matAutocomplete]="autoCustomer"
+          <input type="text" placeholder="Cliente" aria-label="text" #fiilter matInput [matAutocomplete]="autoCustomer"
             [formControl]="customerControl" />
-          <mat-error
-            *ngIf="customerControl && customerControl.hasError('required')">
+          <mat-error *ngIf="customerControl && customerControl.hasError('required')">
             {{ 'validators.validator-required' | translate }}
           </mat-error>
-          <mat-error
-            *ngIf="
+          <mat-error *ngIf="
               customerControl &&
               !customerControl.hasError('required') &&
               customerControl.hasError('incorrect')
             ">
             {{ 'validators.select-option' | translate }}
           </mat-error>
-          <mat-autocomplete
-            autoActiveFirstOption
-            #autoCustomer="matAutocomplete"
-            [displayWith]="displayFnCustomer">
-            <mat-option
-              *ngFor="let customer of filteredCustomers"
-              [value]="customer">
+          <mat-autocomplete autoActiveFirstOption #autoCustomer="matAutocomplete" [displayWith]="displayFnCustomer">
+            <mat-option *ngFor="let customer of filteredCustomers" [value]="customer">
               {{ customer.corporateName }}
             </mat-option>
           </mat-autocomplete>
         </mat-form-field>
-        <mat-form-field
-          appearance="outline"
-          *ngIf="this.method === 'edit'"
-          fxFlex="15"
-          class="example-full-width">
+        <mat-form-field appearance="outline" *ngIf="this.method === 'edit'" fxFlex="15" class="example-full-width">
           <mat-label>{{ 'generic.client' | translate }}</mat-label>
-          <input
-            disabled
-            matInput
-            disableRipple
-            [value]="this.customerControl.value" />
+          <input disabled matInput disableRipple [value]="this.customerControl.value" />
         </mat-form-field>
 
         <mat-form-field fxFlex="26" appearance="outline">
           <mat-label>{{
             'job.job_create.type_of_job.name' | translate
-          }}</mat-label>
+            }}</mat-label>
 
           <mat-select matInput disableRipple formControlName="typeOfJob">
             <mat-option [value]="1">{{
               'job.job_create.type_of_job.staff_increase' | translate
-            }}</mat-option>
+              }}</mat-option>
             <mat-option [value]="2">{{
               'job.job_create.type_of_job.promotion' | translate
-            }}</mat-option>
+              }}</mat-option>
             <mat-option [value]="3">{{
               'job.job_create.type_of_job.faithfulness' | translate
-            }}</mat-option>
+              }}</mat-option>
           </mat-select>
-          <mat-error
-            *ngIf="
+          <mat-error *ngIf="
               jobForm && jobForm.controls['typeOfJob'].hasError('required')
             ">
             {{ 'validators.validator-required' | translate }}
@@ -194,16 +125,10 @@
         <mat-form-field fxFlex="20" appearance="outline">
           <mat-label>{{
             'job.job_create.start_forecast' | translate
-          }}</mat-label>
-          <input
-            matInput
-            mask="00/00/0000"
-            [showMaskTyped]="true"
-            [dropSpecialCharacters]="false"
-            formControlName="startForecast"
-            placeholder="Previsão de Início" />
-          <mat-error
-            *ngIf="
+            }}</mat-label>
+          <input matInput mask="00/00/0000" [showMaskTyped]="true" [dropSpecialCharacters]="false"
+            formControlName="startForecast" placeholder="Previsão de Início" />
+          <mat-error *ngIf="
               jobForm && jobForm.controls['startForecast'].hasError('required')
             ">
             {{ 'validators.validator-required' | translate }}
@@ -211,58 +136,46 @@
         </mat-form-field>
 
         <div class="checkbox">
-          <mat-checkbox
-            color="primary"
-            class="custom-frame"
-            formControlName="temporary"
-            fxLayoutAlign="center center"
-            >{{ 'job.job_create.temporary' | translate }}</mat-checkbox
-          >
+          <mat-checkbox color="primary" class="custom-frame" formControlName="temporary" fxLayoutAlign="center center">
+            {{ 'job.job_create.temporary' | translate }}</mat-checkbox>
         </div>
 
-        <mat-form-field
-          fxFlex="25"
-          appearance="outline"
-          *ngIf="jobForm.controls['temporary'].value == true">
+        <mat-form-field fxFlex="25" appearance="outline" *ngIf="jobForm.controls['temporary'].value == true">
           <mat-label>{{ 'job.job_create.month_time' | translate }}</mat-label>
-          <input
-            placeholder="Tempo de Contrato"
-            matInput
-            formControlName="monthTime"
-            type="text" />
+          <input placeholder="Tempo de Contrato" matInput formControlName="monthTime" type="text" />
         </mat-form-field>
       </div>
       <div fxFlex="100" fxLayoutGap="16px">
         <mat-form-field fxFlex="20" appearance="outline">
           <mat-label>{{
             'job.job_create.type_of_contract' | translate
-          }}</mat-label>
+            }}</mat-label>
           <mat-select matInput disableRipple formControlName="typeOfContract">
             <mat-option [value]="1">{{ 'generic.clt' | translate }}</mat-option>
             <mat-option [value]="2">{{ 'generic.pj' | translate }}</mat-option>
             <mat-option [value]="3">{{
               'generic.cooperated' | translate
-            }}</mat-option>
+              }}</mat-option>
           </mat-select>
         </mat-form-field>
 
         <mat-form-field fxFlex="25" appearance="outline">
           <mat-label>{{
             'job.job_create.workplace.name' | translate
-          }}</mat-label>
+            }}</mat-label>
           <mat-select matInput disableRipple formControlName="workplace">
             <mat-option [value]="1">{{
               'job.job_create.workplace.in_loco' | translate
-            }}</mat-option>
+              }}</mat-option>
             <mat-option [value]="2">{{
               'job.job_create.workplace.home_office' | translate
-            }}</mat-option>
+              }}</mat-option>
             <mat-option [value]="3">{{
               'job.job_create.workplace.hybrid' | translate
-            }}</mat-option>
+              }}</mat-option>
             <mat-option [value]="4">{{
               'job.job_create.workplace.envolti' | translate
-            }}</mat-option>
+              }}</mat-option>
           </mat-select>
         </mat-form-field>
 
@@ -270,49 +183,26 @@
           <section fxLayout="column">
             <span fxLayoutAlign="start">{{
               'generic.seniority.name' | translate
-            }}</span>
-            <div
-              class="form-checkbox"
-              fxLayout="row"
-              fxLayoutAlign="space-around">
+              }}</span>
+            <div class="form-checkbox" fxLayout="row" fxLayoutAlign="space-around">
               <div>
-                <mat-checkbox
-                  color="primary"
-                  class="custom-frame"
-                  formControlName="intern"
-                  fxLayoutAlign="center center"
-                  >{{ 'generic.intern' | translate }}</mat-checkbox
-                >
+                <mat-checkbox color="primary" class="custom-frame" formControlName="intern"
+                  fxLayoutAlign="center center">{{ 'generic.intern' | translate }}</mat-checkbox>
               </div>
 
               <div>
-                <mat-checkbox
-                  color="primary"
-                  class="custom-frame"
-                  formControlName="junior"
-                  fxLayoutAlign="center center"
-                  >{{ 'generic.seniority.junior' | translate }}</mat-checkbox
-                >
+                <mat-checkbox color="primary" class="custom-frame" formControlName="junior"
+                  fxLayoutAlign="center center">{{ 'generic.seniority.junior' | translate }}</mat-checkbox>
               </div>
 
               <div>
-                <mat-checkbox
-                  color="primary"
-                  class="custom-frame"
-                  formControlName="pleno"
-                  fxLayoutAlign="center center"
-                  >{{ 'generic.seniority.full' | translate }}</mat-checkbox
-                >
+                <mat-checkbox color="primary" class="custom-frame" formControlName="pleno"
+                  fxLayoutAlign="center center">{{ 'generic.seniority.full' | translate }}</mat-checkbox>
               </div>
 
               <div>
-                <mat-checkbox
-                  color="primary"
-                  class="custom-frame"
-                  formControlName="senior"
-                  fxLayoutAlign="center center"
-                  >{{ 'generic.seniority.senior' | translate }}</mat-checkbox
-                >
+                <mat-checkbox color="primary" class="custom-frame" formControlName="senior"
+                  fxLayoutAlign="center center">{{ 'generic.seniority.senior' | translate }}</mat-checkbox>
               </div>
             </div>
           </section>
@@ -322,67 +212,36 @@
       <div fxFlex="100" fxLayoutGap="16px">
         <mat-form-field fxFlex="15" appearance="outline">
           <mat-label>{{ 'job.job_create.job_number' | translate }}</mat-label>
-          <input
-            placeholder="Número de Vagas"
-            matInput
-            formControlName="jobNumber"
-            type="number" />
+          <input placeholder="Número de Vagas" matInput formControlName="jobNumber" type="number" />
         </mat-form-field>
 
         <mat-form-field fxFlex="30" appearance="outline">
           <mat-label>{{ 'job.job_create.working_day' | translate }}</mat-label>
-          <input
-            placeholder="Jornada de Trabaho Semanal"
-            matInput
-            formControlName="workingDay" />
+          <input placeholder="Jornada de Trabaho Semanal" matInput formControlName="workingDay" />
         </mat-form-field>
 
         <mat-form-field fxFlex="20" appearance="outline">
           <mat-label>{{
             'job.job_create.minimum_value' | translate
-          }}</mat-label>
-          <input
-            type="number"
-            placeholder="Valor Minimo"
-            matInput
-            prefix="R$"
-            type="text"
-            mask="separator.2"
-            thousandSeparator="."
-            separatorLimit="1000000000"
-            formControlName="minimumValue" />
+            }}</mat-label>
+          <input type="number" placeholder="Valor Minimo" matInput prefix="R$" type="text" mask="separator.2"
+            thousandSeparator="." separatorLimit="1000000000" formControlName="minimumValue" />
         </mat-form-field>
 
         <mat-form-field fxFlex="20" appearance="outline">
           <mat-label>{{
             'job.job_create.maximum_value' | translate
-          }}</mat-label>
-          <input
-            type="number"
-            placeholder="Valor Maximo"
-            matInput
-            prefix="R$"
-            type="text"
-            mask="separator.2"
-            thousandSeparator="."
-            separatorLimit="1000000000"
-            formControlName="maximumValue" />
-          <mat-error
-            *ngIf="
+            }}</mat-label>
+          <input type="number" placeholder="Valor Maximo" matInput prefix="R$" type="text" mask="separator.2"
+            thousandSeparator="." separatorLimit="1000000000" formControlName="maximumValue" />
+          <mat-error *ngIf="
               jobForm && jobForm.controls['maximumValue'].hasError('mustMatch')
-            "
-            >O valor máximo deve ser maior que o valor minimo</mat-error
-          >
+            ">O valor máximo deve ser maior que o valor minimo</mat-error>
         </mat-form-field>
 
         <div class="checkbox">
-          <mat-checkbox
-            color="primary"
-            class="custom-frame"
-            formControlName="publish"
-            fxLayoutAlign="center center"
-            >{{ 'job.job_create.post_vacancy' | translate }}</mat-checkbox
-          >
+          <mat-checkbox color="primary" class="custom-frame" formControlName="publish" fxLayoutAlign="center center">{{
+            'job.job_create.post_vacancy' | translate }}</mat-checkbox>
         </div>
       </div>
     </form>
