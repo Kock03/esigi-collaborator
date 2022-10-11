@@ -9,8 +9,8 @@
       </button>
     </div>
   
-    <mat-list role="list" #experiencesList class="list-group"  >
-      <mat-list-item  *ngFor="let experience of data; let i = index" class="list-group-item" fxLayoutAlign="start start">
+    <mat-list role="list" #experiencesList class="list-group" fxLayout="row" fxLayoutGap="25px">
+      <mat-list-item  *ngFor="let experience of data; let i = index" class="list-group-item"  >
         <div class="list-item" fxLayout="column">
           <div fxLayout="row">
             <h2 class="label-office">

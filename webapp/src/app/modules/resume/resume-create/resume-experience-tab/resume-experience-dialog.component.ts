@@ -2,6 +2,7 @@ import { Component, Input, Output, EventEmitter, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ResumeExperienceProvider } from 'src/providers/resume-providers/resume-experience.provider';
+import { DateValidator } from 'src/app/validators/date.validator';
 
 @Component({
   selector: 'resume-dialog-experience',
@@ -35,10 +36,10 @@ export class ResumeDialogExperience {
       companyName: ['', Validators.required],
       locality: [''],
       active: [false],
-      startMonth: ['', Validators.required],
+      startMonth: ['',Validators.required],
       startYear: ['', Validators.required],
       terminusMonth: [''],
-      terminusYear: [''],
+      terminusYear: ['' ],
       sector: ['', Validators.required],
       description: ['', Validators.required],
       Resume: { id: this.resumeId },
@@ -57,6 +58,7 @@ export class ResumeDialogExperience {
 
   async saveExperience() {
     const data = this.experienceForm.getRawValue();
+    console.log("🚀 ~ file: resume-experience-dialog.component.ts ~ line 60 ~ ResumeDialogExperience ~ saveExperience ~ experienceForm", this.experienceForm)
     if (this.method === 'add') {
       try {
         const experience = await this.resumeExperienceProvider.store(data);

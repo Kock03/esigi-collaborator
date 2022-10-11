@@ -1,7 +1,8 @@
 #resumeExperienceTab {
   max-width: 1650px;
+  // overflow-y: hidden;
   .add-button {
-    border-style: groove;
+    border-style: solid;
     border-radius: 10px;
     border-color: #753bbd;
     border-width: 3px;
@@ -12,14 +13,12 @@
   }
 
   .experience {
-    // margin-top: 190px;
     width: 100%;
     margin-left: 390px;
-    // float: right;
   }
 
   .resume-button {
-    margin-left: 390px !important;
+    margin-left: 360px !important;
     margin-top: 4px;
     margin-right: 1px !important;
     position: absolute;
@@ -32,11 +31,6 @@
     overflow-wrap: break-word;
   }
 
-  // .list-content-item{
-  //   width: 100%;
-  //   max-width: 515px;
-    
-  // }
 
   .label-gray {
     color: rgb(125, 123, 123);
@@ -48,14 +42,9 @@
     width: 100%;
   }
 
-  // .content-scroll {
-  //   overflow: auto;
-  //   height: calc(100vh - 280px);
-  //   margin-right: 10px !important;
-  // }
-
   .list-group {
     margin-top: 10px;
+    flex-wrap: wrap;
   }
 
   .label-office {
@@ -65,10 +54,6 @@
     margin-left: 2px;
   }
 
-  // .label-gray {
-  //   color: rgb(125, 123, 123);
-  //   font-size: 15px;
-  // }
 
   .mat-list-base .mat-list-item .mat-list-item-content,
   .mat-list-base .mat-list-option .mat-list-item-conten {
@@ -77,22 +62,19 @@
     max-height: 500px;
   }
 
-  .mat-list-item-content{
-    // max-height: 100px !important;
-    // height: inherit !important;
-  }
-
   .list-group-item {
-    border-style: groove;
+    border-style: solid;
     border-radius: 10px;
     border-color: #ff6a39;
-    width: 45% !important;
+    width: 100%;
+    max-width: 503px;
     padding: 30px;
     margin-bottom: 60px !important;
     height: 100% !important;
-    max-height: 250px;
-    min-height: 250px;
+    max-height: 300px;
+    min-height: 300px;
     position: static;
+    
     
   }
 
@@ -101,10 +83,6 @@
     max-width: 1200px;
   }
 
-  // mat-list{
-  //   max-height: 600px;
-  //   height: 100%;
-  // }
 
   mat-list-item {
     padding: 0 !important;

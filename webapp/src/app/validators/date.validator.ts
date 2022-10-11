@@ -38,5 +38,16 @@ import { ValidatorFn, AbstractControl, Validators } from "@angular/forms";
     
         }
       }
+
+      static isValidMonth(): ValidatorFn {
+        return (control: AbstractControl): Validators => {
+          var data = control.value;
+          console.log("🚀 ~ file: date.validator.ts ~ line 45 ~ DateValidator ~ return ~ data", data)
+          // var mes = data.substr(3, 2);
+          // console.log("🚀 ~ file: date.validator.ts ~ line 47 ~ DateValidator ~ return ~ mes", mes)
+          if (data > 12) return  {dataNotValid: true};
+          return true;
+        }
+      }
     
   }  
