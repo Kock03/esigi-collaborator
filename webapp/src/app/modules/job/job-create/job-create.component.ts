@@ -132,6 +132,7 @@ export class JobCreateComponent implements OnInit {
         ],
       ],
       status: [1],
+      reason: [],
       publish: [false],
       customerId: [
         '',

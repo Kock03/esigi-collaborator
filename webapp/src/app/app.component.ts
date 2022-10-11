@@ -50,6 +50,15 @@ export class AppComponent {
             location.replace(environment.portal);
           }
         }
+
+
+          // let valid = res.url.indexOf('validate');
+        // if (valid === -1) {
+        // this.token = localStorage.getItem('token')!;
+        //   if (!this.token) {
+        //     location.replace(environment.portal);
+        //   }
+        // }
         if (res.url === '/') {
           this.activeMenu = 'colaborador';
         } else {

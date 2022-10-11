@@ -36,6 +36,9 @@ export class UpdateJobsDto {
   @IsEnum(Status)
   status: Status;
 
+  @IsOptional()
+  reason: string;
+
   @ApiProperty()
   @IsOptional()
   @IsBoolean()

@@ -41,6 +41,9 @@ export class CreateJobsDto {
   @IsEnum(Status)
   status: Status;
 
+  @IsOptional()
+  reason: string;
+
   @ApiProperty()
   @IsNotEmpty()
   @IsBoolean()

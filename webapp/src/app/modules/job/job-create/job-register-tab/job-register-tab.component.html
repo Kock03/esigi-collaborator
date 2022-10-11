@@ -105,6 +105,19 @@
 
       <div fxFlex="100" fxLayoutGap="16px">
         <mat-form-field
+          appearance="outline"
+          fxFlex="40"
+          class="example-full-width">
+          <mat-label>Motivo da perda</mat-label>
+          <input
+          *ngIf="status.value === 4'"
+            matInput
+            disableRipple
+            formControlName="reason"
+             />
+        </mat-form-field>
+
+        <mat-form-field
           fxFlex="40"
           class="example-full-width"
           appearance="outline"

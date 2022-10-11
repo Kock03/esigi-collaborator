@@ -30,7 +30,7 @@ export class CollaboratorCreateComponent implements OnInit {
   loginControl = new FormControl();
   method: any;
   Educations: any;
-  Languages: any;
+  Languages: any; 
   BankData: any;
   Financials: any;
   Skills: any;
