@@ -70,7 +70,7 @@ export class CollaboratorFinanceDialog {
 
   initForm(): void {
     this.financeForm = this.fb.group({
-      dateInclusion: this.fb.control({ value: ' ', disabled: false },[ DateValidator.isValidData(), Validators.required]),
+      dateInclusion:  this.fb.control({ value: new Date().toLocaleDateString(), disabled: true }, [DateValidator.isValidData(), Validators.required]),
       contractType: [null, Validators.required],
       reason: [null, Validators.required],
       value: ['', Validators.required],
