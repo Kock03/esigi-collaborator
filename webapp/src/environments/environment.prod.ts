@@ -8,6 +8,7 @@ export const environment = {
   CUSTOMER_MS: '192.168.8.16:3506/api/v1/',
   AUTH_SERVICE_MS: '192.168.8.16:3500/api/v1/',
   PROJECT_MS: '192.168.8.16:3505/api/v1/',
+  port: '192.168.8.16:',
   message: '',
   protocol: 'http',
 };

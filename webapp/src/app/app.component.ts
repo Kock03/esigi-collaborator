@@ -90,7 +90,7 @@ export class AppComponent {
   }
 
   openApp(port: number): void {
-    location.replace(`http://localhost:${port}/validate/${this.token}`);
+    location.replace(environment.port + `${port}/validate/${this.token}`);
   }
 
   navigator(route: any) {
