@@ -114,6 +114,12 @@
             <mat-option [value]="3">{{
               'job.job_create.type_of_job.faithfulness' | translate
               }}</mat-option>
+              <mat-option [value]="4">{{
+                'job.job_create.type_of_job.new_client' | translate
+                }}</mat-option>
+                <mat-option [value]="5">{{
+                  'job.job_create.type_of_job.employee_replacement' | translate
+                  }}</mat-option>
           </mat-select>
           <mat-error *ngIf="
               jobForm && jobForm.controls['typeOfJob'].hasError('required')

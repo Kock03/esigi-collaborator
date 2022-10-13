@@ -1,5 +1,7 @@
 export enum Type{
-    employeeReplacement =1,
-    frameIncrease = 2,
-    faithfulness = 3
+    staffIncrease =1,
+    promotion = 2,
+    faithfulness = 3,
+    new_client = 4,
+    employeeReplacement = 5
 }

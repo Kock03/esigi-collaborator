@@ -125,7 +125,9 @@
                 "name": "Tipo de Vaga",
                 "staff_increase": "Aumento de Quadro",
                 "promotion": "Promoção",
-                "faithfulness": "Fidelidade"
+                "faithfulness": "Fidelidade",
+                "new_client": "Cliente Novo",
+                "employee_replacement": "Substituição de colaborador" 
             },
             "temporary": "Temporário",
             "month_time": "Tempo de Contrato",
@@ -372,6 +374,7 @@
             "ddi": "DDI"
         },
         "last_name": "Sobrenome",
+        "age": "Idade",
         "project": "Projeto",
         "register": "Cadastro",
         "interviews": "Entrevistas",
