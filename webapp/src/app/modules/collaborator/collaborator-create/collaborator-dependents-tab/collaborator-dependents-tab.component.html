@@ -24,7 +24,8 @@
           <ng-container matColumnDef="firstName">
             <th mat-header-cell *matHeaderCellDef>{{'generic.name' | translate}}</th>
             <td mat-cell *matCellDef="let Dependent">
-              {{ Dependent.firstName + ' ' + Dependent.lastLame }}
+              {{ Dependent.firstName }}
+              {{ Dependent.lastName }}
             </td>
           </ng-container>
 
@@ -50,8 +51,8 @@
 
           <ng-container matColumnDef="birthDate">
             <th mat-header-cell *matHeaderCellDef>{{'generic.birth_date' | translate}}</th>
-            <td mat-cell *matCellDef="let Dependent">
-              {{ Dependent.birthDate }}
+            <td mat-cell *matCellDef="let Dependent" >
+              {{ Dependent.birthDate | mask: 'd0/M0/0000' }}
             </td>
           </ng-container>
 
