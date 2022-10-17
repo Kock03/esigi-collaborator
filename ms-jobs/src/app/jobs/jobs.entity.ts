@@ -53,6 +53,9 @@ export class JobsEntity {
   typeOfJob: Type;
 
   @Column()
+  replacement: string;
+
+  @Column()
   temporary: boolean;
 
   @Column()

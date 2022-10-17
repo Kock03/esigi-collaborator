@@ -69,7 +69,8 @@
       </div>
 
       <div fxFlex="100" fxLayoutGap="16px">
-        <mat-form-field *ngIf="jobForm.controls['status'].value == 4"  appearance="outline" fxFlex="40" class="example-full-width">
+        <mat-form-field *ngIf="jobForm.controls['status'].value == 4" appearance="outline" fxFlex="40"
+          class="example-full-width">
           <mat-label>Motivo da perda</mat-label>
           <input matInput disableRipple formControlName="reason" />
         </mat-form-field>
@@ -114,12 +115,12 @@
             <mat-option [value]="3">{{
               'job.job_create.type_of_job.faithfulness' | translate
               }}</mat-option>
-              <mat-option [value]="4">{{
-                'job.job_create.type_of_job.new_client' | translate
-                }}</mat-option>
-                <mat-option [value]="5">{{
-                  'job.job_create.type_of_job.employee_replacement' | translate
-                  }}</mat-option>
+            <mat-option [value]="4">{{
+              'job.job_create.type_of_job.new_client' | translate
+              }}</mat-option>
+            <mat-option [value]="5">{{
+              'job.job_create.type_of_job.employee_replacement' | translate
+              }}</mat-option>
           </mat-select>
           <mat-error *ngIf="
               jobForm && jobForm.controls['typeOfJob'].hasError('required')
@@ -127,6 +128,22 @@
             {{ 'validators.validator-required' | translate }}
           </mat-error>
         </mat-form-field>
+
+        <mat-form-field *ngIf="jobForm.controls['typeOfJob'].value == 3" appearance="outline" fxFlex="20"
+          class="example-full-width">
+          <mat-label>{{
+            'job.job_create.replacement' | translate
+            }}</mat-label>
+          <input matInput disableRipple  #filter [matAutocomplete]="autoRequesterReplacement"
+            [formControl]="collaboratorControl" />
+            <mat-autocomplete autoActiveFirstOption #autoRequesterReplacement="matAutocomplete" [displayWith]="displayFnRequester">
+              <mat-option *ngFor="let collaborator of filteredCollaborators" [value]="collaborator">
+                {{ collaborator.firstNameCorporateName }}
+                {{ collaborator.lastNameFantasyName }}
+              </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+        
 
         <mat-form-field fxFlex="20" appearance="outline">
           <mat-label>{{

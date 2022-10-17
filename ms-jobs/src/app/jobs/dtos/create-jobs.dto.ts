@@ -61,6 +61,10 @@ export class CreateJobsDto {
   typeOfJob: Type;
 
   @ApiProperty()
+  @IsOptional()
+  replacement: string;
+
+  @ApiProperty()
   @IsNotEmpty()
   @IsBoolean()
   temporary: boolean;

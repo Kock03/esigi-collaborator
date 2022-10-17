@@ -132,7 +132,7 @@ export class JobCreateComponent implements OnInit {
         ],
       ],
       status: [1],
-      reason: [],
+      reason: [''],
       publish: [false],
       customerId: [
         '',
@@ -141,6 +141,7 @@ export class JobCreateComponent implements OnInit {
         ],
       ],
       typeOfJob: ['', Validators.required],
+      replacement: [''],
       temporary: [false],
       monthTime: [''],
       jobName: [

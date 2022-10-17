@@ -112,6 +112,7 @@
             "name": "Nome da Vaga"
         },
         "job_create": {
+            "replacement": "Substituição",
             "register": "Cadastro",
             "status": {
                 "processed": "Processada",
