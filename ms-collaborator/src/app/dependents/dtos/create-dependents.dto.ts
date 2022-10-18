@@ -49,6 +49,10 @@ export class CreatedependentsDto {
   birthDate: Date;
 
   @ApiProperty()
+  @IsOptional()
+  age: string;
+
+  @ApiProperty()
   @IsNotEmpty()
   @IsString()
   @MinLength(9)

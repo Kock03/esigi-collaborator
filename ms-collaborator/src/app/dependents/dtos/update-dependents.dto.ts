@@ -49,6 +49,10 @@ export class UpdateDependentsDto {
 
   @ApiProperty()
   @IsOptional()
+  age: string;
+
+  @ApiProperty()
+  @IsOptional()
   @IsString()
   @MinLength(9)
   @MaxLength(9)

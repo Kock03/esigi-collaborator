@@ -28,6 +28,10 @@ export class DependentsEntity {
     birthDate: Date;
 
     @Column()
+    age: string;
+
+
+    @Column()
     phoneNumber: string;
 
     @Column({ name: 'ddd', length: 2 })
