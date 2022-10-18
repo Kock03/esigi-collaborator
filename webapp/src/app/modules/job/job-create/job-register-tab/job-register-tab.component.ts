@@ -27,43 +27,58 @@ export class JobRegisterTabComponent implements OnInit {
   @Input('form') jobForm!: FormGroup;
   @Input('collaborator') collaboratorControl!: FormControl;
   @Input('customer') customerControl!: FormControl;
+  @Input('replace') collaboratorReplaceControl!: FormControl;
   @Output() onChange: EventEmitter<any> = new EventEmitter();
   @ViewChild('filter', { static: true }) filter!: ElementRef;
   @ViewChild('fiilter', { static: true }) fiilter!: ElementRef;
+  @ViewChild('fiiilter', { static: true }) fiiilter!: ElementRef;
 
   date: any;
   method: any;
 
-  collaborators!:  any[];
+  collaborators!: any[];
   filteredCollaborators!: any[];
   filteredCollaboratorList: any;
   collaborator!: any;
   collaboratorValid: boolean = false;
 
-  customers!:  any[];
+  customers!: any[];
   filteredCustomers!: any[];
   filteredCustomerList: any;
   customer!: any;
   customerValid: boolean = false;
 
-  constructor(private collaboratorProvider: CollaboratorProvider, private customerProvider: CustomerProvider) {}
+  replacements!: any[];
+  filteredReplacements!: any[];
+  filteredReplacementList: any;
+  replacement!: any;
+  replacementValid: boolean = false;
 
-  ngOnInit(){
+  constructor(private collaboratorProvider: CollaboratorProvider, private customerProvider: CustomerProvider) { }
+
+  ngOnInit() {
     const customeer = sessionStorage.getItem('customer_name')
-    this.method =  sessionStorage.getItem('job_method');
+    this.method = sessionStorage.getItem('job_method');
     this.getCollaboratorList();
     this.getCustomerList();
+    this.getReplacementList();
     this.initFilterRequester();
     this.initFilterCustomer();
+    this.initFilterReplacement();
   }
 
   async getCollaboratorList() {
-    this.filteredCollaboratorList=this.collaborators =
+    this.filteredCollaboratorList = this.collaborators =
       await this.collaboratorProvider.findGerente();
   }
   async getCustomerList() {
-    this.filteredCustomerList=this.customers =
+    this.filteredCustomerList = this.customers =
       await this.customerProvider.shortListCustomers();
+  }
+
+  async getReplacementList() {
+    this.filteredReplacementList = this.replacements =
+      await this.collaboratorProvider.findActive();
   }
 
   private initFilterRequester() {
@@ -76,13 +91,14 @@ export class JobRegisterTabComponent implements OnInit {
         } else {
           this.collaboratorValid = false;
         }
-        
+
       });
+    console.log("🚀 ~ file: job-register-tab.component.ts ~ line 96 ~ JobRegisterTabComponent ~ initFilterRequester ~ collaboratorControl", this.collaboratorControl)
 
   }
 
   private initFilterCustomer() {
-      this.customerControl.valueChanges
+    this.customerControl.valueChanges
       .pipe(debounceTime(350), distinctUntilChanged())
       .subscribe((res) => {
         this._filterCustomer(res);
@@ -91,10 +107,25 @@ export class JobRegisterTabComponent implements OnInit {
         } else {
           this.customerValid = false;
         }
-        
+
       });
 
   }
+
+  private initFilterReplacement() {
+    this.collaboratorReplaceControl.valueChanges
+      .pipe(debounceTime(350), distinctUntilChanged())
+      .subscribe((res) => {
+        this._filterReplacement(res);
+        if (res && res.id) {
+          this.replacementValid = true;
+        } else {
+          this.replacementValid = false;
+        }
+
+      });
+  }
+
 
   displayFnRequester(user: any): string {
     if (typeof user === 'string' && this.collaborators) {
@@ -114,8 +145,23 @@ export class JobRegisterTabComponent implements OnInit {
       );
     }
     return user && user.corporateName
-      ? user.corporateName 
+      ? user.corporateName
       : '';
+  }
+
+
+  displayFnReplacement(user: any): string {
+    console.log("🚀 ~ file: job-register-tab.component.ts ~ line 159 ~ JobRegisterTabComponent ~ displayFnReplacement ~ replacements", this.replacements)
+    if (typeof user === 'string' && this.replacements) {
+      return this.replacements.find(
+        
+        (collaborator) => collaborator.id === user
+      );
+    }
+    return user && user.firstNameCorporateName && user.lastNameFantasyName
+      ? user.firstNameCorporateName + ' ' + user.lastNameFantasyName
+      : '';
+
   }
 
   private async _filterRequester(name: string): Promise<void> {
@@ -123,10 +169,10 @@ export class JobRegisterTabComponent implements OnInit {
     this.filteredCollaborators = await this.collaboratorProvider.findByNameGerente(
       params
     );
-
   }
 
-  
+
+
   private async _filterCustomer(name: string): Promise<void> {
     const data = {
       corporateName: name,
@@ -136,6 +182,18 @@ export class JobRegisterTabComponent implements OnInit {
       data
     );
 
+  }
+
+  private async _filterReplacement(name: string): Promise<void> {
+    const data = {
+      firstNameCorporateName: name,
+      status: 2,
+    };
+    this.filteredReplacements = await this.collaboratorProvider.findByName(
+      data
+    );
 
   }
+
+
 }

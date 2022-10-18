@@ -62,7 +62,7 @@ export class CreateJobsDto {
 
   @ApiProperty()
   @IsOptional()
-  replacement: string;
+  replacementId: string;
 
   @ApiProperty()
   @IsNotEmpty()

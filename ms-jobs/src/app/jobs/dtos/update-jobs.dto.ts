@@ -57,7 +57,7 @@ export class UpdateJobsDto {
 
   @ApiProperty()
   @IsOptional()
-  replacement: string;
+  replacementId: string;
 
   @ApiProperty()
   @IsOptional()

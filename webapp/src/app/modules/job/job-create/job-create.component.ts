@@ -52,6 +52,7 @@ export class JobCreateComponent implements OnInit {
 
   collaboratorControl = new FormControl('', [Validators.required, RequireMatch]);
   customerControl = new FormControl('', [Validators.required, RequireMatch]);
+  collaboratorReplaceControl = new FormControl('', [Validators.required, RequireMatch]);
 
   Date: any;
   jobForm!: FormGroup;
@@ -68,6 +69,8 @@ export class JobCreateComponent implements OnInit {
   customerId!: string | null;
   collaboratorRequesterId!: string | null;
   job!: any;
+  replacementId!: string | null;
+
 
   validations = [
     ['jobName'],
@@ -102,6 +105,7 @@ export class JobCreateComponent implements OnInit {
     this.jobId = this.route.snapshot.paramMap.get('id');
     this.customerId = sessionStorage.getItem('customer_id');
     this.collaboratorRequesterId = sessionStorage.getItem('collaboratorRequester_id');
+    this.replacementId = sessionStorage.getItem('replacement_id');
 
     if (this.jobId !== 'novo') {
       await this.getJob();
@@ -141,7 +145,7 @@ export class JobCreateComponent implements OnInit {
         ],
       ],
       typeOfJob: ['', Validators.required],
-      replacement: [''],
+      replacementId: [''],
       temporary: [false],
       monthTime: [''],
       jobName: [
@@ -189,6 +193,15 @@ export class JobCreateComponent implements OnInit {
         });
       }
     });
+
+    this.collaboratorReplaceControl.valueChanges.subscribe((res) => {
+      if (res && res.id) {
+        this.jobForm.controls['replacementId'].setValue(res.id, {
+          emitEvent: true,
+        });
+        console.log("🚀 ~ file: job-create.component.ts ~ line 202 ~ JobCreateComponent ~ this.collaboratorReplaceControl.valueChanges.subscribe ~ replacementId", this.replacementId)
+      }
+    });
   }
 
   setFormValue() {
@@ -196,6 +209,7 @@ export class JobCreateComponent implements OnInit {
       this.jobForm.patchValue(this.job);
       this.customerControl.patchValue(this.customerId);
       this.collaboratorControl.patchValue(this.collaboratorRequesterId);
+      this.collaboratorReplaceControl.patchValue(this.replacementId);
     }
   }
 

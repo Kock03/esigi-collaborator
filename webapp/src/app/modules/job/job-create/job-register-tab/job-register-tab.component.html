@@ -129,21 +129,27 @@
           </mat-error>
         </mat-form-field>
 
-        <mat-form-field *ngIf="jobForm.controls['typeOfJob'].value == 3" appearance="outline" fxFlex="20"
+        <mat-form-field *ngIf="jobForm.controls['typeOfJob'].value == 3 " appearance="outline" fxFlex="20"
           class="example-full-width">
           <mat-label>{{
             'job.job_create.replacement' | translate
             }}</mat-label>
-          <input matInput disableRipple  #filter [matAutocomplete]="autoRequesterReplacement"
-            [formControl]="collaboratorControl" />
-            <mat-autocomplete autoActiveFirstOption #autoRequesterReplacement="matAutocomplete" [displayWith]="displayFnRequester">
-              <mat-option *ngFor="let collaborator of filteredCollaborators" [value]="collaborator">
-                {{ collaborator.firstNameCorporateName }}
-                {{ collaborator.lastNameFantasyName }}
+          <input type="text" aria-label="text" matInput disableRipple  #fiiilter [matAutocomplete]="autoReplacement"
+            [formControl]="collaboratorReplaceControl" />
+            <mat-autocomplete autoActiveFirstOption #autoReplacement="matAutocomplete" [displayWith]="displayFnReplacement">
+              <mat-option *ngFor="let replacement of filteredReplacements" [value]="replacement">
+                {{ replacement.firstNameCorporateName }}
+                {{ replacement.lastNameFantasyName }}
               </mat-option>
             </mat-autocomplete>
         </mat-form-field>
-        
+
+        <!-- <mat-form-field appearance="outline" *ngIf="this.method === 'edit'" fxFlex="20" class="example-full-width">
+          <mat-label>{{
+            'job.job_create.replacement' | translate
+            }}</mat-label>
+          <input disabled matInput disableRipple [value]="this.collaboratorReplaceControl.value" />
+        </mat-form-field> -->
 
         <mat-form-field fxFlex="20" appearance="outline">
           <mat-label>{{

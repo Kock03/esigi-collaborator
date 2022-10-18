@@ -40,6 +40,16 @@ export class CollaboratorProvider {
     });
   }
 
+  findActive(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.apiGateway
+        .get(environment.COLLABORATOR_MS + 'collaborators/list/active')
+        .subscribe((response: HttpResponse<any>) => {
+          resolve(response.body);
+        }, reject);
+    });
+  }
+
   findEvaluator(): Promise<any> {
     return new Promise((resolve, reject) => {
       this.apiGateway
@@ -60,15 +70,6 @@ export class CollaboratorProvider {
     });
   }
 
-  findActive(): Promise<any> {
-    return new Promise((resolve, reject) => {
-      this.apiGateway
-        .get(environment.COLLABORATOR_MS + 'collaborators/list/active')
-        .subscribe((response: HttpResponse<any>) => {
-          resolve(response.body);
-        }, reject);
-    });
-  }
 
   findByName(body: any): Promise<any> {
     return new Promise((resolve, reject) => {
