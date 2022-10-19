@@ -70,11 +70,11 @@ export class CollaboratorFinanceDialog {
 
   initForm(): void {
     this.financeForm = this.fb.group({
-      dateInclusion: new FormControl ({ value: new Date().toLocaleDateString(), disabled: true }, [DateValidator.isValidData(), Validators.required]),
+      dateInclusion:  this.fb.control ({ value: new Date().toLocaleDateString(), disabled: true }, [DateValidator.isValidData(), Validators.required]),
       contractType: [null, Validators.required],
       reason: [null, Validators.required],
       value: ['', Validators.required],
-      payday:new FormControl  ({ value: ' ', disabled: false },[ DateValidator.isValidData(), DateValidator.isDateGreaterThanToday(), Validators.required]),
+      payday: this.fb.control  ({ value: ' ', disabled: false },[ DateValidator.isValidData(), DateValidator.isDateGreaterThanToday(), Validators.required]),
       Collaborator: { id: this.collaboratorId },
     });
     if (this.data) {
