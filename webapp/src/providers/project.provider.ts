@@ -20,10 +20,20 @@ export class ProjectProvider {
     });
   }
 
-  find(name: string, status?: string): Promise<any> {
+  findByName(data: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+        this.apiGateway.post(environment.PROJECT_MS + 'projects/find/name', data)
+            .subscribe((response: HttpResponse<any>) => {
+                resolve(response.body);
+            }, reject);
+    });
+}
+
+
+  find(body: any): Promise<any> {
     return new Promise((resolve, reject) => {
       this.apiGateway
-        .get(environment.PROJECT_MS + 'projects/find/?' + name + '&' + status)
+        .get(environment.PROJECT_MS +  'projects/find', body)
         .subscribe((response: HttpResponse<any>) => {
           resolve(response.body);
         }, reject);
