@@ -27,6 +27,7 @@
     "@angular/router": "~13.0.0",
     "@ngx-translate/core": "^14.0.0",
     "@ngx-translate/http-loader": "^7.0.0",
+    "angular-input-masks": "^4.4.1",
     "angular2-text-mask": "^9.0.0",
     "moment": "^2.29.4",
     "ngx-mask": "^13.1.1",

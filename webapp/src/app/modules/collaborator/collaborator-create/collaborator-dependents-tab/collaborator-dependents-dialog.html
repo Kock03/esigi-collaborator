@@ -71,7 +71,7 @@
 
             <mat-form-field fxFlex="30" appearance="outline">
               <mat-label>{{ 'generic.birth_date' | translate }}</mat-label>
-              <input matInput mask="00/00/0000" [showMaskTyped]="true" [dropSpecialCharacters]="false"
+              <input matInput mask="d0/M0/0000" [showMaskTyped]="true" [dropSpecialCharacters]="false"
                 placeholder="Data de aniversário" formControlName="birthDate" (change)="setValueYears()" />
             </mat-form-field>
 
@@ -80,12 +80,7 @@
               <input matInput disableRipple formControlName="age" placeholder="Idade" />
             </mat-form-field>
 
-             <!-- <div style="font-weight:bold;">{{calculateDiff(data)}}</div> -->
           </div>
-
-          <!-- <button mat-flat-button (click)="calculateDiff(data)" color="primary">
-            Calcular
-          </button> -->
 
           <div fxFlex="100" fxLayoutGap="16px">
             <mat-form-field fxFlex="20" appearance="outline">

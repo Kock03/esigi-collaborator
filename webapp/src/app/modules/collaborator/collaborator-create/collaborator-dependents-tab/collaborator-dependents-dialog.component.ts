@@ -120,12 +120,11 @@ export class CollaboratorDependentsDialog {
           this.dependentId,
           data
         );
+        console.log(updateDependent)
       } catch (error: any) {
-        console.log('ERROR 132' + error);
+        console.log(error);
       }
     }
-
-    let date = this.dependentForm.controls['birthDate'].value
     
   }
 
@@ -140,23 +139,13 @@ export class CollaboratorDependentsDialog {
     if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
         age--;
     }
-
-    if(data === undefined) {
+    if(data === NaN || age === NaN) {
       age = 0
     }
-    console.log(age);
-
     this.dependentForm.controls['age'].setValue(
       age
     );
 
-
-  }
-
-
-  calculateDiff(data: any){
-  
-    // return days;
 
   }
 
