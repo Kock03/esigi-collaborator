@@ -72,7 +72,7 @@
             <mat-form-field fxFlex="30" appearance="outline">
               <mat-label>{{ 'generic.birth_date' | translate }}</mat-label>
               <input matInput mask="00/00/0000" [showMaskTyped]="true" [dropSpecialCharacters]="false"
-                placeholder="Data de aniversário" formControlName="birthDate" />
+                placeholder="Data de aniversário" formControlName="birthDate" (change)="setValueYears()" />
             </mat-form-field>
 
             <mat-form-field fxFlex="22" appearance="outline">

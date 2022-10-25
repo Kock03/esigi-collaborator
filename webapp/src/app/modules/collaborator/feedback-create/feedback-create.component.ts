@@ -196,9 +196,11 @@ export class FeedbackCreateComponent implements OnInit {
   }
 
   private async _filterProject(name: string): Promise<void> {
-    const params = `name=${name}`;
-    this.filteredProjects = await this.projectProvider.find(
-      params
+    const data = {
+      name: name
+    };    
+    this.filteredProjects = await this.projectProvider.findByName(
+      data
     );
   }
 

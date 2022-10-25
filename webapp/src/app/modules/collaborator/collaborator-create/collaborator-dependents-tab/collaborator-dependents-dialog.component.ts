@@ -126,21 +126,39 @@ export class CollaboratorDependentsDialog {
     }
 
     let date = this.dependentForm.controls['birthDate'].value
-    let timeDiff = Math.abs(Date.now() - date.getTime());
-    let age = Math.floor((timeDiff / (1000 * 3600 * 24)) / 365.25);
-    console.log("🚀 ~ file: collaborator-dependents-dialog.component.ts ~ line 131 ~ CollaboratorDependentsDialog ~ save ~ age", age)
+    
+  }
+
+  setValueYears() {
+    let data = this.dependentForm.controls['birthDate'].value
+
+    const today = new Date();
+    const birthDate = new Date(data);
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const m = today.getMonth() - birthDate.getMonth();
+    
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+    }
+
+    if(data === undefined) {
+      age = 0
+    }
+    console.log(age);
+
+    this.dependentForm.controls['age'].setValue(
+      age
+    );
+
 
   }
 
-  // calculateDiff(data: any){
-  //   const date = new Date(data.sent);
-  //   const currentDate = new Date();
 
-  //   const days = Math.floor((currentDate.getTime() - date.getTime()) / 1000 / 60 / 60 / 24);
-  //   console.log("🚀 ~ file: collaborator-dependents-dialog.component.ts ~ line 130 ~ CollaboratorDependentsDialog ~ calculateDiff ~ days", days)
-  //   // return days;
+  calculateDiff(data: any){
+  
+    // return days;
 
-  // }
+  }
 
 
   close() {
@@ -148,3 +166,4 @@ export class CollaboratorDependentsDialog {
     sessionStorage.clear;
   }
 }
+

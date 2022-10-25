@@ -88,6 +88,8 @@ export class CollaboratorDependentsTabComponent implements OnInit {
     this.onChange.next(true);
   }
 
+  
+
   getDependents(dependentsSelected: any, id: string) {
     this.method = 'edit';
     sessionStorage.setItem('method', this.method);

@@ -54,6 +54,7 @@ export class CollaboratorsController {
 
   @Post('/list/collaborator')
   async findCollaboratorById(@Body() body: any) {
+    console.log(body)
     return await this.collaboratorsService.findCollaboratorsListById(body.id);
   }
 
