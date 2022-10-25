@@ -126,9 +126,6 @@
         <mat-form-field fxFlex="45" appearance="outline">
           <mat-label>{{ 'generic.address.complement' | translate }}</mat-label>
           <input matInput placeholder="Complemento" formControlName="complement" />
-          <mat-error *ngIf="addressForm &&
-          addressForm.controls['complement'].hasError('required')">
-          {{'validators.validator-required' | translate}} </mat-error>
         </mat-form-field>
       </div>
 
