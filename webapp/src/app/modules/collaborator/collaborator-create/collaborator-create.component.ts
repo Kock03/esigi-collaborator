@@ -156,7 +156,7 @@ export class CollaboratorCreateComponent implements OnInit {
         flag: ['', Validators.required],
         cep: ['', Validators.required],
         number: ['', Validators.required],
-        complement: ['', Validators.required],
+        complement: [''],
         street: ['', Validators.required],
         state: ['', Validators.required],
         city: ['', Validators.required],

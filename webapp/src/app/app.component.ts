@@ -43,16 +43,7 @@ export class AppComponent {
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe((res: any) => {
-        let valid = res.url.indexOf('validate');
-        if (valid === -1) {
-        this.token = localStorage.getItem('token')!;
-          if (!this.token) {
-            location.replace(environment.portal);
-          }
-        }
-
-
-          // let valid = res.url.indexOf('validate');
+        // let valid = res.url.indexOf('validate');
         // if (valid === -1) {
         // this.token = localStorage.getItem('token')!;
         //   if (!this.token) {

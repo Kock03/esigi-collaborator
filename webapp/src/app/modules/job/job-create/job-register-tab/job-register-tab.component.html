@@ -241,12 +241,12 @@
       <div fxFlex="100" fxLayoutGap="16px">
         <mat-form-field fxFlex="15" appearance="outline">
           <mat-label>{{ 'job.job_create.job_number' | translate }}</mat-label>
-          <input placeholder="Número de Vagas" matInput formControlName="jobNumber" type="number" />
+          <input placeholder="Número de Vagas" min="1" matInput formControlName="jobNumber" type="number" />
         </mat-form-field>
 
         <mat-form-field fxFlex="30" appearance="outline">
           <mat-label>{{ 'job.job_create.working_day' | translate }}</mat-label>
-          <input placeholder="Jornada de Trabaho Semanal" matInput formControlName="workingDay" />
+          <input placeholder="Jornada de Trabalho Semanal" matInput formControlName="workingDay" />
         </mat-form-field>
 
         <mat-form-field fxFlex="20" appearance="outline">

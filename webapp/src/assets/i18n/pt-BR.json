@@ -140,10 +140,10 @@
                 "name": "Local de Trabalho",
                 "in_loco": "In Loco",
                 "home_office": "Home Office",
-                "hybrid": "híbrido",
+                "hybrid": "Híbrido",
                 "envolti": "Envolti"
             },
-            "working_day": "Jornada de Trabaho",
+            "working_day": "Jornada de Trabalho",
             "minimum_value": "Valor Mínimo",
             "maximum_value": "Valor Máximo",
             "post_vacancy": "Publicar Vaga",
