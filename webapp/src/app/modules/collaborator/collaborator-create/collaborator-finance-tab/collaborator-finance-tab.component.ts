@@ -104,7 +104,7 @@ export class CollaboratorFinanceTabComponent implements OnInit {
     this.method = 'edit';
     sessionStorage.setItem('method', this.method);
     this.fnanceId = id;
-    sessionStorage.setItem('skill_id', this.fnanceId);
+    sessionStorage.setItem('finance_id', this.fnanceId);
     const dialogRef = this.dialog.open(CollaboratorFinanceDialog, {
       width: '500px',
       height: '550px',
