@@ -24,15 +24,18 @@ export class SkillsEntity {
   @Column({ type: 'int' })
   seniority: Seniority;
 
-  
+
   @Column({ type: 'int' })
   typeOfPeriod: TypeOfPeriod;
-  
+
   @Column()
   yearsExperience: number;
 
   @Column()
   currentPosition: boolean;
+
+  @Column()
+  inactive: boolean;
 
   @ManyToOne(() => CollaboratorsEntity, (collaborators) => collaborators.Skills)
   Collaborator: CollaboratorsEntity;

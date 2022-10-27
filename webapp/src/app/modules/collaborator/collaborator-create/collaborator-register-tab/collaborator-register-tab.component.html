@@ -43,7 +43,7 @@
 
           <div class="checkbox">
             <mat-checkbox color="primary" class="custom-frame" formControlName="inactive" fxLayoutAlign="start center">
-              Inativo</mat-checkbox>
+              {{'generic.inactive'|translate}}</mat-checkbox>
           </div>
         </div>
       </div>
@@ -173,7 +173,7 @@
       </div>
       <div fxFlex="100" fxLayoutGap="16px" formGroupName="Address">
         <mat-select-country appearance="outline" placeHolder="País" label="País"
-          (onCountrySelected)="onCountrySelected($event)"  [value]="defaultValue">
+          (onCountrySelected)="onCountrySelected($event)" [value]="defaultValue">
         </mat-select-country>
 
         <mat-form-field fxFlex="20" appearance="outline" *ngIf="searchEnabled === true">
