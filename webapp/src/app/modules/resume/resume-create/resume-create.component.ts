@@ -134,7 +134,7 @@ export class ResumeCreateComponent implements OnInit {
       sessionStorage.setItem('resume_method',this.resumeMethod );
       sessionStorage.setItem('resume_id', resume.id);
       this.handleStep(2);
-      this.snackbarService.successMessage('Vaga Cadastrada Com Sucesso');
+      this.snackbarService.successMessage('Currículo cadastrado com sucesso');
     } catch (error: any) {
       console.log('ERROR 132' + error);
       this.snackbarService.showError('Falha ao Cadastrar');
