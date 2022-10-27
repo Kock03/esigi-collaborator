@@ -64,41 +64,41 @@ export class ResumeRegisterTabComponent implements OnInit {
   view!: boolean;
   url: any;
   searchEnabled!: boolean;
-  defaultValue:any;
-
+  defaultValue: any;
+  filename!: string;
   constructor(
     private fb: FormBuilder,
     private cepService: CepService,
     private route: ActivatedRoute,
     private httpClient: HttpClient,
     private resumeProvider: ResumeProvider,
-  ) {}
+  ) { }
 
-async  ngOnInit() {
+  async ngOnInit() {
 
     this.resumeId = this.route.snapshot.paramMap.get('id');
     if (this.resumeId == 'novo') {
       this.url =
-      '../../../../assets/logo/profile-icon.png';
+        '../../../../assets/logo/profile-icon.png';
       this.view = true;
       this.resumeForm.valueChanges.subscribe(res => {
         const addressForm = this.resumeForm.controls['Address'] as FormGroup;
         this.addressForm = addressForm;
-        addressForm.controls['cep'].valueChanges.subscribe(res => {});
+        addressForm.controls['cep'].valueChanges.subscribe(res => { });
 
         const phoneForm = this.resumeForm.controls['Phone'] as FormGroup;
         this.phoneForm = phoneForm;
         phoneForm.controls['ddi'].valueChanges.subscribe(res => { });
       });
-    }else{
+    } else {
       let resume = await this.resumeProvider.findOne(this.resumeId);
       this.view = false;
       this.url = 'http://localhost:3000/' + resume.photo
       this.defaultValue = {
         name: sessionStorage.getItem('country_value'),
-        alpha2Code:  sessionStorage.getItem('flag_value')
+        alpha2Code: sessionStorage.getItem('flag_value')
 
-     };
+      };
 
     }
   }
@@ -119,31 +119,31 @@ async  ngOnInit() {
           flag: country.alpha2Code
         }
       )
-    }else{
+    } else {
       this.defaultValue = {
-        name:  country.name,
+        name: country.name,
         alpha2Code: country.alpha2Code
 
-     };
-     console.log(this.defaultValue+" d")
-     this.resumeForm.controls['Address'].patchValue(
-      {
-        country:  this.defaultValue.name,
-        flag:  this.defaultValue.alpha2Code
-      }
-    )
+      };
+      console.log(this.defaultValue + " d")
+      this.resumeForm.controls['Address'].patchValue(
+        {
+          country: this.defaultValue.name,
+          flag: this.defaultValue.alpha2Code
+        }
+      )
     }
   }
 
 
   setValueLogin() {
 
-      if (this.resumeForm.controls['firstName'].value != null && this.resumeForm.controls['lastName'].value != null) {
+    if (this.resumeForm.controls['firstName'].value != null && this.resumeForm.controls['lastName'].value != null) {
 
-        this.resumeForm.controls['login'].setValue(`${this.resumeForm.controls['firstName'].value}.${this.resumeForm.controls['lastName'].value}@Envolti.com.br`);
+      this.resumeForm.controls['login'].setValue(`${this.resumeForm.controls['firstName'].value}.${this.resumeForm.controls['lastName'].value}@Envolti.com.br`);
 
-      }
     }
+  }
 
   next() {
     this.onChange.next(true);
@@ -189,22 +189,24 @@ async  ngOnInit() {
     const file = event.target.files[0]
 
 
-      const formData = new FormData();
-      formData.append('file', file);
+    const formData = new FormData();
+    formData.append('file', file);
 
-      try {
-        this.httpClient.post('http://localhost:3000', formData)
-          .subscribe(resposta => {
-            if (resposta) {
-              this.file = resposta
-              this.resumeForm.controls['photo'].setValue(this.file.filename)
-              this.url = 'http://localhost:3000/' + this.file.filename
-            }
-          })
+    try {
+      this.httpClient.post('http://localhost:3000', formData)
+        .subscribe(resposta => {
+          if (resposta) {
+            this.file = resposta
+            this.resumeForm.controls['photo'].setValue(this.file.filename)
+            this.url = 'http://localhost:3000/' + this.file.filename
+          }
+        })
 
-      } catch (e) {
-        console.log(e)
-      }
+    } catch (e) {
+      console.log(e)
     }
+  }
+
+
 
 }
