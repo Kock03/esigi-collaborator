@@ -26,6 +26,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ApiGateway } from 'src/api-gateway';
 import { CollaboratorProvider } from 'src/providers/collaborator-providers/collaborator.provider';
 import { CepService } from 'src/services/cep.service';
+import {StatesAndCities} from 'src/services/states-cities.service'
 
 @Component({
   selector: 'app-collaborator-register-tab',
@@ -52,6 +53,7 @@ export class CollaboratorRegisterTabComponent implements OnInit {
   view!: boolean;
   searchEnabled!: boolean;
   defaultValue: any;
+  cityList: Array<any> = []
 
   constructor(
     private fb: FormBuilder,
@@ -59,6 +61,7 @@ export class CollaboratorRegisterTabComponent implements OnInit {
     private route: ActivatedRoute,
     private httpClient: HttpClient,
     private collaboratorProvider: CollaboratorProvider,
+    private statesAndCities: StatesAndCities
   ) { }
 
   async ngOnInit() {
@@ -243,6 +246,29 @@ export class CollaboratorRegisterTabComponent implements OnInit {
       this.collaborator.active = 'inativo';
     } else {
       this.collaborator.active = 'ativo';
+    }
+  }
+
+  searchCities(e: any){
+    const city = document.querySelector("#cities") as HTMLSelectElement;
+    let state_number = this.statesAndCities.json_cities.estados.length;
+    let j_index = -1
+    for(var x=0; x<state_number; x++){
+      if(this.statesAndCities.json_cities.estados[x].sigla == e.value){
+        j_index = x;
+      }
+    }
+    let line = {}
+    let arrayCity = Array<any>()
+    if(j_index != -1){
+      this.statesAndCities.json_cities.estados[j_index].cidades.forEach(cidades => {
+        line = cidades
+        arrayCity.push(line)
+        
+      })
+      this.cityList = arrayCity;
+    }else{
+      city.innerHTML = '';
     }
   }
 }

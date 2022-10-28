@@ -36,7 +36,7 @@ export class ResumeListComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort = new MatSort();
   @ViewChild('filter', { static: true }) filter!: ElementRef;
   private _unsubscribeAll: Subject<any>;
-  displayedResume: string[] = ['name', 'birthDate', 'phoneNumber', 'icon'];
+  displayedResume: string[] = ['name', 'client', 'resumeName', 'openingDate', 'status', 'icon'];
 
   resumes!: Resume[];
   filteredResumeList = new MatTableDataSource();
