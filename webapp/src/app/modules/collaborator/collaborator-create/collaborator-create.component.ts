@@ -41,6 +41,7 @@ export class CollaboratorCreateComponent implements OnInit {
   url!: string;
   urlStep!: number;
   valid!: boolean;
+  typeOfContract!: any;
   validations = [
     [
       'admissionDate',
@@ -90,8 +91,11 @@ export class CollaboratorCreateComponent implements OnInit {
   async getCollaborator() {
     try {
       this.collaborator = await this.collaboratorProvider.findOne(
-        this.collaboratorId
-      );
+        this.collaboratorId 
+        );
+        sessionStorage.setItem('type', this.collaborator.collaboratorTypes)
+        console.log("🚀 ~ file: collaborator-create.component.ts ~ line 97 ~ CollaboratorCreateComponent ~ getCollaborator ~ collaborator.collaboratorTypes", this.collaborator.collaboratorTypes)
+        
     } catch (error) {
       console.error(error);
     }
@@ -217,6 +221,8 @@ export class CollaboratorCreateComponent implements OnInit {
           console.log( error);
         }
         sessionStorage.setItem('collaborator_id', colaborator.id);
+        sessionStorage.setItem('type', colaborator.collaboratorTypes);
+        console.log("🚀 ~ file: collaborator-create.component.ts ~ line 221 ~ CollaboratorCreateComponent ~ saveCollaborator ~ colaborator.collaboratorTypes", colaborator.collaboratorTypes)
         this.router.navigate([`colaborador/${colaborator.id}`]);
         this.method = 'edit'
         this.snackbarService.successMessage('Colaborador cadastrado com sucesso'),

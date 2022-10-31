@@ -17,6 +17,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DateValidator } from 'src/app/validators/date.validator';
 import { DocumentValidator } from 'src/app/validators/document.validator';
 import { CollaboratorFinanceProvider } from 'src/providers/collaborator-providers/collaborator-finance.provider';
+import { CollaboratorProvider } from 'src/providers/collaborator-providers/collaborator.provider';
 
 export const PICK_FORMATS = {
   parse: { dateInput: { month: 'numeric', year: 'numeric', day: 'numeric' } },
@@ -54,27 +55,32 @@ export class CollaboratorFinanceDialog {
   Date: any;
   method!: string | null;
   financeId!: string | null;
+  typeOfContract!: any;
+  type!: any;
 
   constructor(
     public dialogRef: MatDialogRef<CollaboratorFinanceDialog>,
     private fb: FormBuilder,
     private collaboratorFinanceProvider: CollaboratorFinanceProvider,
+    private collaboratorProvider: CollaboratorProvider,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) { }
 
-  ngOnInit(): void {
+  async ngOnInit() {
     this.method = sessionStorage.getItem('method')!;
+    this.type = Number(sessionStorage.getItem('type'));
     this.collaboratorId = sessionStorage.getItem('collaborator_id')!;
+    console.log('teste ' + this.type)
     this.initForm();
   }
 
   initForm(): void {
     this.financeForm = this.fb.group({
-      dateInclusion:  this.fb.control ({ value: new Date().toLocaleDateString(), disabled: true }, [DateValidator.isValidData(), Validators.required]),
-      contractType: [null, Validators.required],
+      dateInclusion: this.fb.control({ value: new Date().toLocaleDateString(), disabled: true }, [DateValidator.isValidData(), Validators.required]),
+      contractType: [{value: this.type, disabled: true}],
       reason: [null, Validators.required],
       value: ['', Validators.required],
-      payday: this.fb.control  ({ value: ' ', disabled: false },[ DateValidator.isValidData(), DateValidator.isDateGreaterThanToday(), Validators.required]),
+      payday: this.fb.control({ value: ' ', disabled: false }, [DateValidator.isValidData(), DateValidator.isDateGreaterThanToday(), Validators.required]),
       Collaborator: { id: this.collaboratorId },
     });
     if (this.data) {
