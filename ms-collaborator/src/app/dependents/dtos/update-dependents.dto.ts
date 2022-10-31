@@ -45,7 +45,7 @@ export class UpdateDependentsDto {
 
   @ApiProperty()
   @IsOptional()
-  birthDate: Date;
+  birthDate: string;
 
   @ApiProperty()
   @IsOptional()
@@ -77,5 +77,10 @@ export class UpdateDependentsDto {
   @IsEmail()
   @MinLength(1)
   email: string;
+
+  @ApiProperty()
+  @IsOptional()
+  @IsObject()
+  Collaborator: CollaboratorsEntity;
 
 }

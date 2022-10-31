@@ -101,14 +101,14 @@ export class CollaboratorFinanceDialog {
     if (this.method === 'add') {
       try {
         const finance = await this.collaboratorFinanceProvider.store(data);
-        sessionStorage.setItem('fnance_id', finance.id);
+        sessionStorage.setItem('finance_id', finance.id);
       } catch (error: any) {
         console.log('ERROR 132' + error);
       }
     }
     if (this.method === 'edit') {
       try {
-        this.financeId = sessionStorage.getItem('fnance_id');
+        this.financeId = sessionStorage.getItem('finance_id');
         const updateFinance = await this.collaboratorFinanceProvider.update(
           this.financeId,
           data

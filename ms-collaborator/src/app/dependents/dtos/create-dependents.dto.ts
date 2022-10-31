@@ -46,7 +46,7 @@ export class CreatedependentsDto {
 
   @ApiProperty()
   @IsNotEmpty()
-  birthDate: Date;
+  birthDate:string;
 
   @ApiProperty()
   @IsOptional()

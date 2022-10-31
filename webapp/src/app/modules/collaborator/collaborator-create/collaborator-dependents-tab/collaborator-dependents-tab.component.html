@@ -52,7 +52,7 @@
           <ng-container matColumnDef="birthDate">
             <th mat-header-cell *matHeaderCellDef>{{'generic.birth_date' | translate}}</th>
             <td mat-cell *matCellDef="let Dependent" >
-              {{ Dependent.birthDate | date: 'dd/MM/yyyy' }}
+              {{ Dependent.birthDate | mask: 'd0/Mm/0000'  }}
             </td>
           </ng-container>
 

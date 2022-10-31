@@ -25,7 +25,7 @@ export class DependentsEntity {
     cpf: string;
 
     @Column()
-    birthDate: Date;
+    birthDate: string;
 
     @Column()
     age: string;
