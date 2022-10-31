@@ -30,7 +30,7 @@ export class CollaboratorCreateComponent implements OnInit {
   loginControl = new FormControl();
   method: any;
   Educations: any;
-  Languages: any; 
+  Languages: any;
   BankData: any;
   Financials: any;
   Skills: any;
@@ -92,6 +92,8 @@ export class CollaboratorCreateComponent implements OnInit {
       this.collaborator = await this.collaboratorProvider.findOne(
         this.collaboratorId
       );
+      sessionStorage.setItem('type', this.collaborator.collaboratorTypes)
+
     } catch (error) {
       console.error(error);
     }
@@ -212,19 +214,20 @@ export class CollaboratorCreateComponent implements OnInit {
         await this.collaboratorProvider.update(
           colaborator.id,
           idUser,
-          );
-        } catch (error: any) {
-          console.log( error);
-        }
-        sessionStorage.setItem('collaborator_id', colaborator.id);
-        this.router.navigate([`colaborador/${colaborator.id}`]);
-        this.method = 'edit'
-        this.snackbarService.successMessage('Colaborador cadastrado com sucesso'),
-      this.handleStep(2)
+        );
+      } catch (error: any) {
+        console.log(error);
+      }
+      sessionStorage.setItem('collaborator_id', colaborator.id);
+      sessionStorage.setItem('type', colaborator.collaboratorTypes)
+      this.router.navigate([`colaborador/${colaborator.id}`]);
+      this.method = 'edit'
+      this.snackbarService.successMessage('Colaborador cadastrado com sucesso'),
+        this.handleStep(2)
 
 
     } catch (error: any) {
-      console.log( error);
+      console.log(error);
     }
   }
 

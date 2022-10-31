@@ -10,15 +10,18 @@ import { CollaboratorDocumentProvider } from 'src/providers/collaborator-provide
 })
 export class CollaboratorImageDialog {
 
-   fileName!: string
+  fileName!: string
 
   constructor(
     public dialogRef: MatDialogRef<CollaboratorImageDialog>,
     @Inject(MAT_DIALOG_DATA) public data: any
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.fileName = 'http://localhost:3000/' + this.data
+    if (this.fileName === '.pdf') {
+      console.log('deu certo')
+    }
   }
 
 }
