@@ -26,7 +26,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ApiGateway } from 'src/api-gateway';
 import { CollaboratorProvider } from 'src/providers/collaborator-providers/collaborator.provider';
 import { CepService } from 'src/services/cep.service';
-import {StatesAndCities} from 'src/services/states-cities.service'
+import { StatesAndCities } from 'src/services/states-cities.service';
 
 @Component({
   selector: 'app-collaborator-register-tab',
@@ -53,7 +53,9 @@ export class CollaboratorRegisterTabComponent implements OnInit {
   view!: boolean;
   searchEnabled!: boolean;
   defaultValue: any;
-  cityList: Array<any> = []
+  cityList: Array<any> = [];
+  data!: any;
+  isDisabled: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -62,7 +64,7 @@ export class CollaboratorRegisterTabComponent implements OnInit {
     private httpClient: HttpClient,
     private collaboratorProvider: CollaboratorProvider,
     private statesAndCities: StatesAndCities
-  ) { }
+  ) {}
 
   async ngOnInit() {
     this.token = localStorage.getItem('token')!;
@@ -76,17 +78,17 @@ export class CollaboratorRegisterTabComponent implements OnInit {
           'Address'
         ] as FormGroup;
         this.addressForm = addressForm;
-        addressForm.controls['cep'].valueChanges.subscribe(res => { });
+        addressForm.controls['cep'].valueChanges.subscribe(res => {});
 
         const phoneForm = this.collaboratorForm.controls['Phone'] as FormGroup;
         this.phoneForm = phoneForm;
-        phoneForm.controls['ddi'].valueChanges.subscribe(res => { });
+        phoneForm.controls['ddi'].valueChanges.subscribe(res => {});
       });
     } else {
       let collaborator = await this.collaboratorProvider.findOne(
         this.collaboratorId
       );
-      this.url = `http://localhost:3000/${collaborator.photo}` 
+      this.url = `http://localhost:3000/${collaborator.photo}`;
       this.view = false;
       this.changesType(
         this.collaboratorForm.controls['collaboratorTypes'].value
@@ -94,28 +96,26 @@ export class CollaboratorRegisterTabComponent implements OnInit {
 
       this.defaultValue = {
         name: sessionStorage.getItem('country_value'),
-        alpha2Code: sessionStorage.getItem('flag_value')
-
+        alpha2Code: sessionStorage.getItem('flag_value'),
       };
-
     }
-  // this.url =  this.httpClient
-  //   .get(`http://localhost:3000/permiss%C3%83%C2%B5es_1664382905117.png.${this.token}`, {
-  //     headers: {
-  //       authorization: `Bearer ${this.token}`,
-  //     },
-  //   },)
-  //   .subscribe(resposta => {
-  //     if (resposta) {
-  //     console.log("🚀 ~ file: collaborator-register-tab.component.ts ~ line 107 ~ CollaboratorRegisterTabComponent ~ ngOnInit ~ resposta", resposta)
-      
-  //     }
-  //   });
-  // console.log("🚀 ~ file: collaborator-register-tab.component.ts ~ line 111 ~ CollaboratorRegisterTabComponent ~ ngOnInit ~  this.url = ",  this.url )
+    // this.url =  this.httpClient
+    //   .get(`http://localhost:3000/permiss%C3%83%C2%B5es_1664382905117.png.${this.token}`, {
+    //     headers: {
+    //       authorization: `Bearer ${this.token}`,
+    //     },
+    //   },)
+    //   .subscribe(resposta => {
+    //     if (resposta) {
+    //     console.log("🚀 ~ file: collaborator-register-tab.component.ts ~ line 107 ~ CollaboratorRegisterTabComponent ~ ngOnInit ~ resposta", resposta)
+
+    //     }
+    //   });
+    // console.log("🚀 ~ file: collaborator-register-tab.component.ts ~ line 111 ~ CollaboratorRegisterTabComponent ~ ngOnInit ~  this.url = ",  this.url )
   }
 
   onCountrySelected(country: any) {
-    console.log(country)
+    console.log("🚀 ~ file: collaborator-register-tab.component.ts ~ line 117 ~ CollaboratorRegisterTabComponent ~ onCountrySelected ~ country", country)
     if (this.collaboratorId == 'novo') {
       if (country.name === 'Brasil') {
         this.view = true;
@@ -124,30 +124,26 @@ export class CollaboratorRegisterTabComponent implements OnInit {
         this.view = false;
         this.searchEnabled = false;
       }
-
-      this.collaboratorForm.controls['Address'].patchValue(
-        {
-          country: country.name,
-          flag: country.alpha2Code
-        }
-      )
+      this.collaboratorForm.controls['Phone'].patchValue({
+        ddi: country.callingCode})
+      this.collaboratorForm.controls['Address'].patchValue({
+        country: country.name,
+        flag: country.alpha2Code,
+      });
     } else {
       this.defaultValue = {
         name: country.name,
-        alpha2Code: country.alpha2Code
-
+        alpha2Code: country.alpha2Code,
       };
-      console.log(this.defaultValue + " d")
-      this.collaboratorForm.controls['Address'].patchValue(
-        {
-          country: this.defaultValue.name,
-          flag: this.defaultValue.alpha2Code
-        }
-      )
+      console.log(this.defaultValue + ' d');
+      this.collaboratorForm.controls['Address'].patchValue({
+        country: this.defaultValue.name,
+        flag: this.defaultValue.alpha2Code,
+      });
     }
   }
 
-  ngAfterViewInit(): void { }
+  ngAfterViewInit(): void {}
 
   next() {
     this.onChange.next(true);
@@ -176,7 +172,7 @@ export class CollaboratorRegisterTabComponent implements OnInit {
     } else {
       if (
         this.collaboratorForm.controls['firstNameCorporateName'].value !=
-        null &&
+          null &&
         this.collaboratorForm.controls['lastNameFantasyName'].value != null
       ) {
         this.collaboratorForm.controls['login'].setValue(
@@ -214,6 +210,21 @@ export class CollaboratorRegisterTabComponent implements OnInit {
     }
   }
 
+ async searchCep() {
+    this.data = await this.cepService.searchCep(this.addressForm.controls['cep'].value);
+    this.collaboratorForm.controls['Address'].patchValue({
+      cep: this.data.cep,
+      city: this.data.localidade,
+      street: this.data.logradouro,
+      state: this.data.uf,
+      district: this.data.bairro,
+    });
+    this.searchCities({value: this.data.uf})
+    if(this.data.erro == true){
+      window.alert('Cep inválido');
+    }
+  }
+
   fileChanged(event: any) {
     const file = event.target.files[0];
 
@@ -226,7 +237,7 @@ export class CollaboratorRegisterTabComponent implements OnInit {
           headers: {
             authorization: `Bearer ${this.token}`,
           },
-        },)
+        })
         .subscribe(resposta => {
           if (resposta) {
             this.file = resposta;
@@ -249,25 +260,26 @@ export class CollaboratorRegisterTabComponent implements OnInit {
     }
   }
 
-  searchCities(e: any){
-    const city = document.querySelector("#cities") as HTMLSelectElement;
+  searchCities(e: any) {
+    const city = document.querySelector('#cities') as HTMLSelectElement;
     let state_number = this.statesAndCities.json_cities.estados.length;
-    let j_index = -1
-    for(var x=0; x<state_number; x++){
-      if(this.statesAndCities.json_cities.estados[x].sigla == e.value){
+    let j_index = -1;
+    for (var x = 0; x < state_number; x++) {
+      if (this.statesAndCities.json_cities.estados[x].sigla == e.value) {
         j_index = x;
       }
     }
-    let line = {}
-    let arrayCity = Array<any>()
-    if(j_index != -1){
-      this.statesAndCities.json_cities.estados[j_index].cidades.forEach(cidades => {
-        line = cidades
-        arrayCity.push(line)
-        
-      })
+    let line = {};
+    let arrayCity = Array<any>();
+    if (j_index != -1) {
+      this.statesAndCities.json_cities.estados[j_index].cidades.forEach(
+        cities => {
+          line = cities;
+          arrayCity.push(line);
+        }
+      );
       this.cityList = arrayCity;
-    }else{
+    } else {
       city.innerHTML = '';
     }
   }

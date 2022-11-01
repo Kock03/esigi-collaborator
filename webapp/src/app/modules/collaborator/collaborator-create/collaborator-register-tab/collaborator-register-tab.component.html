@@ -141,7 +141,7 @@
           </mat-form-field>
           <mat-form-field fxFlex="15" appearance="outline" formGroupName="Phone">
             <mat-label>{{'generic.phone.ddi'|translate}}</mat-label>
-            <input matInput placeholder="DDI" formControlName="ddi" mask="+00" />
+            <input [disabled]="true" matInput placeholder="DDI" formControlName="ddi"  />
             <mat-error *ngIf="phoneForm &&
               phoneForm.controls['ddi'].hasError('required')">
               {{'validators.validator-required' | translate}}
@@ -179,7 +179,7 @@
         <mat-form-field fxFlex="20" appearance="outline" *ngIf="searchEnabled === true">
           <mat-label>{{'generic.address.cep'|translate}} </mat-label>
           <input matInput placeholder="CEP" formControlName="cep" type="text" mask="99999-999" />
-          <mat-icon matSuffix style="cursor: pointer" (click)="getAddress()">
+          <mat-icon matSuffix style="cursor: pointer" (click)="searchCep()">
             search
           </mat-icon>
           <mat-error *ngIf="addressForm &&
@@ -284,7 +284,7 @@
       </mat-form-field> -->
       <mat-form-field fxFlex="40" appearance="outline">
         <mat-label>{{'generic.address.city'|translate}}</mat-label>
-        <mat-select id="cities" placeholder="Cidade" matInput disableRipple >
+        <mat-select id="cities" placeholder="Cidade" matInput disableRipple formControlName="city">
           <mat-option *ngFor="let cities of cityList" [value]="cities">
             {{cities}}
           </mat-option>
