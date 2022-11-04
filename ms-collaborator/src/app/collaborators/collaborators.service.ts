@@ -25,7 +25,7 @@ export class CollaboratorsService {
     @InjectRepository(CollaboratorsEntity)
     private readonly collaboratorsRepository: Repository<CollaboratorsEntity>,
     private httpService: HttpService,
-  ) {}
+  ) { }
 
   async findAll(token: string) {
     const options: FindManyOptions = {
@@ -185,7 +185,7 @@ export class CollaboratorsService {
       return await this.collaboratorsRepository
         .createQueryBuilder('collaborators')
         .where(
-          'collaborators.office = "Gerente" or collaborators.office = "Desenvolvedor"',
+          'collaborators.office = "Gerente" or collaborators.office = "Desenvolvedor" and collaborators.inactive = false',
         )
         .getMany();
     } else {
@@ -200,10 +200,13 @@ export class CollaboratorsService {
           {
             firstNameCorporateName: Like(`%${query.firstNameCorporateName}%`),
             office: 'Gerente',
+            inactive: false
           },
           {
             firstNameCorporateName: Like(`%${query.firstNameCorporateName}%`),
             office: 'Desenvolvedor',
+            inactive: false
+
           },
         ],
       });
@@ -230,10 +233,14 @@ export class CollaboratorsService {
           {
             firstNameCorporateName: Like(`%${query.firstNameCorporateName}%`),
             office: 'Tech Recruter',
+            inactive: false
+
           },
           {
             firstNameCorporateName: Like(`%${query.firstNameCorporateName}%`),
             office: 'RH',
+            inactive: false
+
           },
         ],
       });
@@ -244,7 +251,7 @@ export class CollaboratorsService {
     if (query.firstNameCorporateName == '') {
       return await this.collaboratorsRepository
         .createQueryBuilder('collaborators')
-        .where('collaborators.office = "Gerente"')
+        .where('collaborators.office = "Gerente" and collaborators.inactive = false')
         .getMany();
     } else {
       return this.collaboratorsRepository.find({
@@ -258,6 +265,7 @@ export class CollaboratorsService {
           {
             firstNameCorporateName: Like(`%${query.firstNameCorporateName}%`),
             office: 'Gerente',
+            inactive: false
           },
         ],
       });
@@ -267,7 +275,7 @@ export class CollaboratorsService {
   async findGerente() {
     return await this.collaboratorsRepository
       .createQueryBuilder('collaborators')
-      .where('collaborators.office = "Gerente"')
+      .where('collaborators.office = "Gerente" and collaborators.inactive = false')
       .getMany();
   }
 
@@ -275,7 +283,7 @@ export class CollaboratorsService {
     return await this.collaboratorsRepository
       .createQueryBuilder('collaborators')
       .where(
-        'collaborators.office = "Gerente" and collaborators.office = "Desenvolvedor"',
+        'collaborators.office = "Gerente" and collaborators.office = "Desenvolvedor" and collaborators.inactive = false',
       )
       .getMany();
   }
@@ -284,7 +292,7 @@ export class CollaboratorsService {
     return await this.collaboratorsRepository
       .createQueryBuilder('collaborators')
       .where(
-        'collaborators.office = "Tech Recruter" and collaborators.office = "RH"',
+        'collaborators.office = "Tech Recruter" and collaborators.office = "RH" and collaborators.inactive = false',
       )
       .getMany();
   }
@@ -351,9 +359,9 @@ export class CollaboratorsService {
         },
         { relations: ['Phone', 'Address'] },
       );
-      
-       data.Address.id = collaborator.Address.id;
-       data.Phone.id = collaborator.Phone.id;
+
+      data.Address.id = collaborator.Address.id;
+      data.Phone.id = collaborator.Phone.id;
 
     } catch {
       throw new NotFoundException();
@@ -378,11 +386,11 @@ export class CollaboratorsService {
       });
 
       const resources = await this.httpService
-        .post('http://localhost:3505/api/v1/resources/list', 
-        
-        {
-          idList: collaboratorIdList,
-        } ,  {
+        .post('http://localhost:3505/api/v1/resources/list',
+
+          {
+            idList: collaboratorIdList,
+          }, {
           headers: {
             authorization: token,
           },
