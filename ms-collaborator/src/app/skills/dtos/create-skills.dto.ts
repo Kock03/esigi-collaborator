@@ -27,9 +27,9 @@ export class CreateSkillsDto {
 
   @ApiProperty()
   @IsNotEmpty()
-    yearsExperience: number;
+  yearsExperience: number;
 
-  
+
   @ApiProperty()
   @IsNotEmpty()
   @IsEnum(TypeOfPeriod)
@@ -40,6 +40,11 @@ export class CreateSkillsDto {
   @IsNotEmpty()
   @IsBoolean()
   currentPosition: boolean;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsBoolean()
+  inactive: boolean;
 
   @ApiProperty()
   @IsNotEmpty()

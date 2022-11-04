@@ -54,6 +54,7 @@ export class CollaboratorFinanceDialog {
   Date: any;
   method!: string | null;
   financeId!: string | null;
+  type!: number;
 
   constructor(
     public dialogRef: MatDialogRef<CollaboratorFinanceDialog>,
@@ -64,21 +65,26 @@ export class CollaboratorFinanceDialog {
 
   ngOnInit(): void {
     this.method = sessionStorage.getItem('method')!;
+    this.type = Number(sessionStorage.getItem('type'))
+    console.log(this.type)
     this.collaboratorId = sessionStorage.getItem('collaborator_id')!;
     this.initForm();
   }
 
   initForm(): void {
     this.financeForm = this.fb.group({
-      dateInclusion:  this.fb.control ({ value: new Date().toLocaleDateString(), disabled: true }, [DateValidator.isValidData(), Validators.required]),
-      contractType: [null, Validators.required],
+      dateInclusion: this.fb.control({ value: new Date().toLocaleDateString(), disabled: true }, [DateValidator.isValidData(), Validators.required]),
+      contractType: [this.type, Validators.required],
       reason: [null, Validators.required],
       value: ['', Validators.required],
-      payday: this.fb.control  ({ value: ' ', disabled: false },[ DateValidator.isValidData(), DateValidator.isDateGreaterThanToday(), Validators.required]),
+      payday: this.fb.control({ value: ' ', disabled: false }, [DateValidator.isValidData(), DateValidator.isDateGreaterThanToday(), Validators.required]),
       Collaborator: { id: this.collaboratorId },
     });
     if (this.data) {
       this.financeForm.patchValue(this.data);
+    } else {
+      this.financeForm.controls['contractType'].setValue(this.type)
+
     }
   }
 
