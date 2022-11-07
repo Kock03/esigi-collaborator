@@ -87,13 +87,13 @@ export class AppComponent {
         location.replace(`http://192.168.8.184:3406/validate/${this.token}`);
       break;
       case 'colaborador':
-        location.replace(`http://192.168.8.184:3401/validate/${this.token}`) 
+        this.router.navigate(['colaborador/lista']); 
         break;
       case 'vaga':
-        location.replace(`http://192.168.8.184:3401/vaga/lista/validate/${this.token}`)
+        this.router.navigate(['vaga/lista']);
         break;
       case 'curriculo':
-        location.replace(`http://192.168.8.184:3401/curriculo/lista/validate/${this.token}`)
+        this.router.navigate(['curriculo/lista']);
         break;
     }
   }
