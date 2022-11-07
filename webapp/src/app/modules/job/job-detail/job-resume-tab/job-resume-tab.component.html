@@ -100,9 +100,19 @@
             <span class="label-gray" >
               <b>{{'generic.education.languages.name' | translate}}:</b>
               <p *ngFor="let languages of resume.Languages">
-                {{
-                languages.languageName
-                }}
+                {{languages.languageName}}
+              </p>
+            </span>
+            <span class="label-gray" fxLayout="column" >
+              <b>{{'resumes.resume_experience.name' | translate}}:</b>
+              <p *ngFor="let experience of resume.Experiences">
+                {{experience.companyName}} <br>
+                {{experience.office}} <br>
+                {{experience.startMonth}} /
+                {{experience.startYear}} -
+                {{experience.terminusMonth}} /
+                {{experience.terminusYear}}
+
               </p>
             </span>
             <span class="label-gray" >
