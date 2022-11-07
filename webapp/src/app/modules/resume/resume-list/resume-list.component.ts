@@ -36,7 +36,7 @@ export class ResumeListComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort = new MatSort();
   @ViewChild('filter', { static: true }) filter!: ElementRef;
   private _unsubscribeAll: Subject<any>;
-  displayedResume: string[] = ['name', 'birthDate', 'phoneNumber', 'icon'];
+  displayedResume: string[] = ['name', 'client', 'resumeName', 'openingDate', 'status', 'icon'];
 
   resumes!: Resume[];
   filteredResumeList = new MatTableDataSource();
@@ -46,6 +46,7 @@ export class ResumeListComponent implements OnInit {
   form!: FormGroup;
   resume!: any;
   filename!: string;
+  token!: string;
 
   constructor(
     private liveAnnouncer: LiveAnnouncer,
@@ -164,7 +165,7 @@ export class ResumeListComponent implements OnInit {
     }
   }
 
-  goHome(port: number): void {
-    location.replace(`http://localhost:${port}/portal`);
+  goHome(): void {
+    location.replace(`http://192.168.8.184:3406/validate/${this.token}`);
   }
 }

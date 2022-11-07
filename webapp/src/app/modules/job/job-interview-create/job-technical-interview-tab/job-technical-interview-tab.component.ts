@@ -174,8 +174,8 @@ export class JobTechnicalInterviewTabComponent implements OnInit {
 
   private async _filterRequester(name: string): Promise<void> {
     const params = `firstNameCorporateName=${name}`;
-    this.filteredCollaborators = await this.collaboratorProvider.findByNameEvaluator(
-      params
+    this.filteredCollaborators = await this.collaboratorProvider.findAll(
+      
     );
 
   }

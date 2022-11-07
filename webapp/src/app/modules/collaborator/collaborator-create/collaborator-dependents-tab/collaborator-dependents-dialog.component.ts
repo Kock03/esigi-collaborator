@@ -129,7 +129,7 @@ export class CollaboratorDependentsDialog {
   }
 
   setValueYears() {
-    let data = this.dependentForm.controls['birthDate'].value
+    let data = this.dependentForm.controls['birthDate'].value.split('/').reverse().join('/')
 
     const today = new Date();
     const birthDate = new Date(data);
