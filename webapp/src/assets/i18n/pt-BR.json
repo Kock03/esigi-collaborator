@@ -169,7 +169,8 @@
         "job_interview_list": {
             "search_jobs": "Buscar Entrevistas",
             "technical_interview_date": "Data da Entrevista Técnica",
-            "behavioral_interview_date": "Data Entrevista Comportamental"
+            "behavioral_interview_date": "Data Entrevista Comportamental",
+            "client_interview_date": "Data Entrevista com Cliente"
         },
         "job_interview_create": {
             "interview_registration": "Cadastro de Entrevistas",
@@ -215,6 +216,12 @@
             "type_od_contract": "Tipo de Contratação",
             "combined_value": "Valor Fechado",
             "initial_data": "Data de Inicio"
+        },
+        "job_interview_resume": {
+            "name_candidate":"Nome do Candidato",
+            "candidacy_date": "Data de Candidatura",
+            "origin": "Origem",
+            "status": "Status"
         }
     },
     "resumes": {
@@ -379,6 +386,7 @@
         "project": "Projeto",
         "register": "Cadastro",
         "interviews": "Entrevistas",
+        "curriculum": "Currículos",
         "accompaniment": "Acompanhamento",
         "client": "Cliente",
         "clt": "CLT",

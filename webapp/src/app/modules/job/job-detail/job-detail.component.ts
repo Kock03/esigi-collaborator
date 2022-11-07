@@ -33,7 +33,7 @@ export class JobDetailComponent implements OnInit {
   navigate(direction: string) {
     if (this.step > 1 && direction === 'back') {
       this.step -= 1;
-    } else if (this.step < 2 && direction === 'next') {
+    } else if (this.step < 3 && direction === 'next') {
       this.step += 1;
     }
   }

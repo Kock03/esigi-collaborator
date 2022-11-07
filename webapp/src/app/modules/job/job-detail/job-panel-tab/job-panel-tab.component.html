@@ -40,6 +40,14 @@
           </td>
         </ng-container>
 
+        <ng-container matColumnDef="clientInterviewDate" *ngIf="viewColumn">
+          <th mat-header-cell *matHeaderCellDef>{{'job.job_interview_list.client_interview_date' | translate}}</th>
+          <td mat-cell *matCellDef="let interviews">
+            {{ interviews.clientInterviewDate == null ? "Entrevista não agendada" : interviews.clientInterviewDate
+            }}
+          </td>
+        </ng-container>
+
         <ng-container matColumnDef="responsible">
           <th mat-header-cell *matHeaderCellDef>{{'generic.requester' | translate}}</th>
           <td mat-cell *matCellDef="let interviews">

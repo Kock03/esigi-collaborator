@@ -40,6 +40,7 @@ import { JobReturnInterviewTabComponent } from './job-interview-create/job-retur
 import { JobResumeInterviewTabComponent } from './job-interview-create/job-resume-interview-tab/job-resume-interview-tab.component';
 import { MatCardModule } from '@angular/material/card';
 import { JobDialogLanguage } from './job-create/job-skill-tab/job-language-dialog.component';
+import { JobResumeTabComponent } from './job-detail/job-resume-tab/job-resume-tab.component';
 
 const routes: Routes = [
   {
@@ -75,6 +76,7 @@ const routes: Routes = [
     JobClientInterviewTabComponent,
     JobReturnInterviewTabComponent,
     JobResumeInterviewTabComponent,
+    JobResumeTabComponent,
   ],
   imports: [
     RouterModule.forChild(routes),

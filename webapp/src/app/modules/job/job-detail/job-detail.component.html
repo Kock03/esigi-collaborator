@@ -25,6 +25,14 @@
       <p class="tab-item">{{'generic.interviews' | translate}}</p>
       <span class="tab-border"></span>
     </div>
+    <div
+      fxLayout="column"
+      class="tab-group"
+      (click)="handleStep(3)"
+      [ngClass]="{ done: step > 2, active: step == 3 }">
+      <p class="tab-item">{{'generic.curriculum' | translate}}</p>
+      <span class="tab-border"></span>
+    </div>
   </div>
 
   <app-job-detail-list-tab
@@ -33,18 +41,20 @@
   </app-job-detail-list-tab>
   <app-job-panel-tab [hidden]="step != 2" (onChange)="handleChanges($event)">
   </app-job-panel-tab>
+  <app-job-resume-tab [hidden]="step != 3" (onChange)="handleChanges($event)">
+  </app-job-resume-tab>
 
   <div class="navigation-buttons" fxLayoutAlign="center end" fxLayoutGap="16px">
     <button
       mat-flat-button
-      *ngIf="step == 2"
+      *ngIf="step != 1"
       (click)="navigate('back')"
       color="primary">
       {{'generic.back_button' | translate}}
     </button>
     <button
       mat-flat-button
-      *ngIf="step != 2"
+      *ngIf="step != 3"
       (click)="navigate('next')"
       color="primary">
       {{'generic.continue_button' | translate}}

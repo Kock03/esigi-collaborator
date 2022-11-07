@@ -1,0 +1,128 @@
+<div id="jobResume" class="tab" *ngIf="viewResume == false">
+    <div class="content-scroll">
+  
+      <div class="envolti-table mat-elevation-z8" fxLayout="column">
+        <table mat-table [dataSource]="interviews" #interviewsTable>
+          <ng-container matColumnDef="nameCandidate">
+            <th mat-header-cell *matHeaderCellDef>{{'job.job_interview_resume.name_candidate' | translate}}</th>
+            <td mat-cell *matCellDef="let interviews; let i = index">
+                <button class="candidate-button" (click)="getResume(i)">
+                    {{
+                    interviews.resume.firstName
+                    }}
+                    {{
+                    interviews.resume.lastName
+                    }}
+                </button>
+            </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="candidacyDate">
+            <th mat-header-cell *matHeaderCellDef>
+              {{'job.job_interview_resume.candidacy_date' | translate}}
+            </th>
+            <td mat-cell *matCellDef="let interviews">
+                
+            </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="origin">
+            <th mat-header-cell *matHeaderCellDef>{{'job.job_interview_resume.origin' | translate}}</th>
+            <td mat-cell *matCellDef="let interviews">
+              
+              
+            </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef>{{'job.job_interview_resume.status' | translate}}</th>
+            <td mat-cell *matCellDef="let interviews" id="statusInterview">
+                {{ interviews.behavioralInterviewDate != null && interviews.technicalInterviewDate != null && interviews.clientInterviewDate != null ? "Entrevistas Concluídas" : ''}}
+                {{ interviews.behavioralInterviewDate != null && interviews.technicalInterviewDate == null && interviews.clientInterviewDate == null ? "Entrevistas Comportamental" : ''}}
+                {{ interviews.behavioralInterviewDate != null && interviews.technicalInterviewDate != null && interviews.clientInterviewDate == null ? "Entrevistas Técnica" : ''}}
+                {{ interviews.behavioralInterviewDate == null && interviews.technicalInterviewDate != null && interviews.clientInterviewDate == null ? "Entrevistas Técnica" : ''}}
+                {{ interviews.behavioralInterviewDate == null && interviews.technicalInterviewDate == null && interviews.clientInterviewDate != null ? "Entrevistas Cliente" : ''}}
+                {{ interviews.behavioralInterviewDate != null && interviews.technicalInterviewDate == null && interviews.clientInterviewDate != null ? "Entrevistas Cliente" : ''}}
+                {{ interviews.behavioralInterviewDate == null && interviews.technicalInterviewDate != null && interviews.clientInterviewDate != null ? "Entrevistas Cliente" : ''}}
+            </td>
+          </ng-container>
+  
+          <tr mat-header-row *matHeaderRowDef="displayedJob; sticky: true"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedJob"></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div id="jobList" *ngIf="viewResume">
+    <div class="content-scroll">
+      <mat-list role="list" #experiencesList *ngIf="job" class="list-group">
+        <mat-list-item class="list-group-item" fxLayout="row" fxFlex="100">
+          <div class="text-div" fxLayout="column">
+            <span class="label-office" >
+              <mat-icon class="backList" (click)="backList()">chevron_left</mat-icon>
+              <br>
+              {{ job.jobName }}
+            </span>
+            <span class="label-gray" *ngIf="resume">
+              <b>{{'generic.name' | translate}}:</b>
+              {{ resume.firstName }}
+              {{resume.lastName}}
+            </span>
+            <span class="label-gray" *ngIf="resume">
+              <b>{{'generic.birth_date' | translate}}:</b>
+              {{ resume.birthDate }}
+            </span>
+            <span class="label-gray">
+              <b>{{'generic.address.city' | translate}}:</b>
+              {{ resume.Address.city }}
+            </span>
+            <span class="label-gray">
+              <b>{{'generic.address.state' | translate}}:</b>
+              {{
+              resume.Address.state
+              }}
+            </span>
+            <span class="label-gray">
+              <b>{{'generic.phone.phone_number' | translate}}:</b>
+              +{{resume.Phone.ddi}}
+              {{resume.Phone.ddd}}
+              {{resume.Phone.phoneNumber}}
+            </span>
+            <span class="label-gray" >
+              <b>{{'generic.education.schooling.name' | translate}}:</b>
+              <p *ngFor="let schooling of resume.Educations">
+                {{ schooling.schooling == 1 ? 'Ensino Fundamental' : 
+                schooling.schooling == 2 ? 'Ensino Médio' : 
+                'Ensino Superior' }} - {{ schooling.course }} - {{ schooling.institution }}
+              </p>
+            </span>
+            <span class="label-gray" >
+              <b>{{'generic.education.languages.name' | translate}}:</b>
+              <p *ngFor="let languages of resume.Languages">
+                {{
+                languages.languageName
+                }}
+              </p>
+            </span>
+            <span class="label-gray" >
+              <b>{{'generic.skills.technology' | translate}}s:</b>
+              <p *ngFor="let skills of resume.Skills; let i = index">
+                {{skills.technology}} - {{ skills.yearsExperience }}
+                {{skills.typeOfPeriod == 1 && skills.yearsExperience != '1' ? 'meses' : 
+                skills.typeOfPeriod == 1 && skills.yearsExperience == '1' ? 'mês' : 
+                skills.typeOfPeriod == 2 && skills.yearsExperience == "1" ? 'ano' : 
+                skills.typeOfPeriod == 2 && skills.yearsExperience != "1" ? 'anos' : ''}} -
+                {{skills.seniority == 1 ? 'Senior' : 
+                skills.seniority == 2 ? 'Pleno' : 
+                skills.seniority == 3 ? 'Junior' : 
+                skills.seniority == 4 ? 'Aprendiz' : 
+                skills.seniority == 5 ? 'Especialista' : 
+                'Arquiteto(a)'}}
+              </p>
+            </span>
+          </div>
+        </mat-list-item>
+      </mat-list>
+    </div>
+  </div>

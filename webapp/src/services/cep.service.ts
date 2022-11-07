@@ -25,7 +25,8 @@ export class CepService {
   }
 
   searchCep(cep: any): Promise<any> {
-  return new Promise((resolve, reject) => { this.http
+  return new Promise((resolve, reject) => { 
+      this.http
       .get(`https://viacep.com.br/ws/${cep}/json/`)
       .subscribe(data => {
         resolve(data)

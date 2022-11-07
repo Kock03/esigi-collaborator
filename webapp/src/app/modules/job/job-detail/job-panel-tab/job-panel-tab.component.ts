@@ -54,6 +54,7 @@ export class JobPanelTabComponent implements OnInit {
   jobId!: string | null;
   data: any;
   Id!: string | null;
+  viewColumn: boolean = false;
 
   constructor(
     private snackbarService: SnackBarService,
@@ -82,6 +83,7 @@ export class JobPanelTabComponent implements OnInit {
       );
       interviews.map((interview: any) => {
         this.interviews.push(new JobPanelModel(interview));
+        console.log("🚀 ~ file: job-panel-tab.component.ts ~ line 86 ~ JobPanelTabComponent ~ interviews.map ~  this.interviews",  this.interviews)
       });
 
       this.interviewsTable.renderRows();

@@ -99,7 +99,7 @@ export class JobTechnicalInterviewTabComponent implements OnInit {
   }
 
   async getResumeList() {
-    this.filteredResumeList = this.resumes =
+    this.filteredResumes = this.resumes =
       await this.resumeProvider.findAll();
   }
 

@@ -4,6 +4,7 @@ export class JobPanelModel {
   nameCandidateTec!: string;
   behavioralInterviewDate!: string;
   technicalInterviewDate!: string;
+  clientInterviewDate!: string;
   collaborator!: string;
   resume!: string;
   status!: number;
@@ -14,6 +15,7 @@ export class JobPanelModel {
     this.nameCandidate = jobPanel.name_candidate;
     this.behavioralInterviewDate = jobPanel.behavioral_interview_date;
     this.technicalInterviewDate = jobPanel.technical_interview_date;
+    this.clientInterviewDate = jobPanel.client_interview_date;
     this.collaborator = jobPanel.collaborator;
     this.resume = jobPanel.resume;
 
