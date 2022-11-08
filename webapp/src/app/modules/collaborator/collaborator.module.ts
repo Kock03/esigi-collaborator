@@ -44,7 +44,6 @@ import { CollaboratorImageDialog } from './collaborator-create/collaborator-docu
 import {MatExpansionModule} from '@angular/material/expansion';
 import { MatSelectCountryModule } from '@angular-material-extensions/select-country';
 
-
 const routes: Routes = [
   {
     path: 'lista',

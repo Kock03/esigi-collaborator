@@ -101,7 +101,7 @@ export class JobBehavioralInterviewTabComponent implements OnInit {
   }
 
   async getResumeList() {
-    this.filteredResumeList = this.resumes =
+    this.filteredResumes = this.resumes =
       await this.resumeProvider.findAll();
   }
 
@@ -109,8 +109,6 @@ export class JobBehavioralInterviewTabComponent implements OnInit {
     this.filteredCollaboratorList = this.collaborators =
       await this.collaboratorProvider.findTechRecruter();
   }
-
-
 
   private initFilterResume() {
     this.ResumeControl.valueChanges
@@ -180,8 +178,8 @@ export class JobBehavioralInterviewTabComponent implements OnInit {
 
   private async _filterTechRecruter(name: string): Promise<void> {
     const params = `firstNameCorporateName=${name}`;
-    this.filteredCollaborators = await this.collaboratorProvider.findByTechRecruter(
-      params
+    this.filteredCollaborators = await this.collaboratorProvider.findAll(
+      
     );
 
   }

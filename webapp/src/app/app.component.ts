@@ -23,6 +23,7 @@ export class AppComponent {
   openTree: boolean = false;
   compare!: any;
 
+  home: string = 'portal'
   collaborator: string = 'colaborador';
   jobs: string = 'vaga';
   resume: string = 'curriculo';
@@ -43,13 +44,13 @@ export class AppComponent {
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe((res: any) => {
-        // let valid = res.url.indexOf('validate');
-        // if (valid === -1) {
-        // this.token = localStorage.getItem('token')!;
-        //   if (!this.token) {
-        //     location.replace(environment.portal);
-        //   }
-        // }
+        let valid = res.url.indexOf('validate');
+        if (valid === -1) {
+        this.token = localStorage.getItem('token')!;
+          if (!this.token) {
+            location.replace(`http://192.168.8.184:3406/validate/${this.token}`);
+          }
+        }
         if (res.url === '/') {
           this.activeMenu = 'colaborador';
         } else {
@@ -80,14 +81,13 @@ export class AppComponent {
     this.router.navigate([route]);
   }
 
-  openApp(port: number): void {
-    location.replace(environment.port + `${port}/validate/${this.token}`);
-  }
-
   navigator(route: any) {
     switch (route) {
+      case 'portal':
+        location.replace(`http://192.168.8.184:3406/validate/${this.token}`);
+      break;
       case 'colaborador':
-        this.router.navigate(['colaborador/lista']);
+        this.router.navigate(['colaborador/lista']); 
         break;
       case 'vaga':
         this.router.navigate(['vaga/lista']);

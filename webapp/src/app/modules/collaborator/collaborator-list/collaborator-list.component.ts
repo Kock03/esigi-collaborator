@@ -60,6 +60,7 @@ export class CollaboratorListComponent implements OnInit {
   params: string = '';
   select: number = 1;
   firstNameCorporateName = '';
+  token!: string;
 
   constructor(
     private liveAnnouncer: LiveAnnouncer,
@@ -89,6 +90,10 @@ export class CollaboratorListComponent implements OnInit {
     } catch (error) {
       console.error(error);
     }
+  }
+
+  goHome(): void {
+    location.replace(`http://192.168.8.184:3406/validate/${this.token}`);
   }
 
   announceSortChange(sortState: any) {
@@ -176,7 +181,6 @@ export class CollaboratorListComponent implements OnInit {
   }
 
 
-  goHome(port: number): void {
-    location.replace(`http://localhost:${port}/portal`);
-  }
+ 
+  
 }

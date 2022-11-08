@@ -26,6 +26,7 @@ export class ResumeCreateComponent implements OnInit {
   resume!: any;
   resumeId!: string | null;
   resumeMethod!: string;
+  filename!: string;
 
   Experience: any;
 
@@ -35,7 +36,7 @@ export class ResumeCreateComponent implements OnInit {
       'lastName',
       'login',
       'birthDate',
-      'gender', 
+      'gender',
       'maritalStatus',
       'Address',
       'Phone',
@@ -50,7 +51,7 @@ export class ResumeCreateComponent implements OnInit {
     private snackbarService: SnackBarService,
     private http: HttpClient,
     private route: ActivatedRoute
-  ) {}
+  ) { }
 
   async ngOnInit(): Promise<void> {
     if (sessionStorage.getItem('resume_tab') == undefined) {
@@ -84,10 +85,10 @@ export class ResumeCreateComponent implements OnInit {
 
       cpf: this.fb.control(
         { value: null, disabled: false },
-       [  DocumentValidator.isValidCpf(), Validators.required]
+        [DocumentValidator.isValidCpf(), Validators.required]
       ),
 
-      birthDate:  this.fb.control({ value: ' ', disabled: false },[ DateValidator.isValidData(), Validators.required]),
+      birthDate: this.fb.control({ value: ' ', disabled: false }, [DateValidator.isValidData(), Validators.required]),
       gender: [1, Validators.required],
       maritalStatus: [1, Validators.required],
       photo: [null],
@@ -112,12 +113,12 @@ export class ResumeCreateComponent implements OnInit {
       email: ['', Validators.email],
       site: [''],
       linkedin: [''],
-      
+
     });
   }
 
   setFormValue() {
-    if(this.resume){
+    if (this.resume) {
       this.resumeForm.patchValue(this.resume);
     }
 
@@ -131,12 +132,12 @@ export class ResumeCreateComponent implements OnInit {
       const resume = await this.resumeProvider.store(data);
       this.router.navigate([`curriculo/${resume.id}`]);
       this.resumeMethod = 'edit'
-      sessionStorage.setItem('resume_method',this.resumeMethod );
+      sessionStorage.setItem('resume_method', this.resumeMethod);
       sessionStorage.setItem('resume_id', resume.id);
       this.handleStep(2);
-      this.snackbarService.successMessage('Vaga Cadastrada Com Sucesso');
+      this.snackbarService.successMessage('Currículo cadastrado com sucesso');
     } catch (error: any) {
-      console.log('ERROR 132' + error);
+      console.log( error);
       this.snackbarService.showError('Falha ao Cadastrar');
     }
   }
@@ -156,7 +157,7 @@ export class ResumeCreateComponent implements OnInit {
     sessionStorage.clear();
   }
 
-  handleStep(number: number): void { 
+  handleStep(number: number): void {
     if (this.step - number < 1) {
       this.step = number;
       sessionStorage.setItem('resume_tab', this.step.toString());
@@ -166,7 +167,7 @@ export class ResumeCreateComponent implements OnInit {
     }
   }
 
-  handleChanges(value: any): void {}
+  handleChanges(value: any): void { }
 
   async saveEditResume() {
     let data = this.resumeForm.getRawValue();
@@ -179,16 +180,30 @@ export class ResumeCreateComponent implements OnInit {
     }
   }
 
-    checkValid(): boolean {
-      let isValid = true;
-      const validations = this.validations[0];
-      for (let index = 0; index < validations.length; index++) {
-        if (this.resumeForm.controls[validations[index]].invalid) {
-          isValid = false;
-    
-          this.resumeForm.markAllAsTouched();
-        }
+  checkValid(): boolean {
+    let isValid = true;
+    const validations = this.validations[0];
+    for (let index = 0; index < validations.length; index++) {
+      if (this.resumeForm.controls[validations[index]].invalid) {
+        isValid = false;
+
+        this.resumeForm.markAllAsTouched();
       }
-      return isValid;
+    }
+    return isValid;
+  }
+
+  async pdfDownload(): Promise<void> {
+    let pdfName = await this.resumeProvider.generatePDF(this.resumeId);
+    if (pdfName) {
+      this.filename = pdfName.file_name
+      this.resumeProvider.downloadPDF(this.filename).subscribe((res: any) => {
+        let blob: Blob = res.body as Blob;
+        let a = document.createElement('a');
+        a.download = this.filename
+        a.href = window.URL.createObjectURL(blob);
+        a.click()
+      })
     }
   }
+}

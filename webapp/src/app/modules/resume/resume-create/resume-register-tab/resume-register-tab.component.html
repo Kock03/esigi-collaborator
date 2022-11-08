@@ -12,25 +12,26 @@
         <div fxFlex="100" fxLayoutGap="16px" fxFlexAlign="end">
           <mat-form-field fxFlex="33" appearance="outline">
             <mat-label>{{ 'generic.name' | translate }}</mat-label>
-            <input matInput placeholder="Nome" formControlName="firstName"   (change)="setValueLogin()" />
+            <input matInput placeholder="Nome" formControlName="firstName" (change)="setValueLogin()" />
             <mat-error *ngIf="resumeForm &&
             resumeForm.controls['firstName'].hasError('required')">
-            {{'validators.validator-required' | translate}} </mat-error>
+              {{'validators.validator-required' | translate}} </mat-error>
           </mat-form-field>
           <mat-form-field fxFlex="33" appearance="outline">
             <mat-label>{{ 'generic.last_name' | translate }}</mat-label>
-            <input matInput placeholder="Sobrenome" formControlName="lastName"   (change)="setValueLogin()"/>
+            <input matInput placeholder="Sobrenome" formControlName="lastName" (change)="setValueLogin()" />
             <mat-error *ngIf="resumeForm &&
             resumeForm.controls['lastName'].hasError('required')">
-            {{'validators.validator-required' | translate}} </mat-error>
+              {{'validators.validator-required' | translate}} </mat-error>
           </mat-form-field>
           <mat-form-field fxFlex="34" appearance="outline">
             <mat-label>{{ 'generic.login' | translate }}</mat-label>
-            <input matInput placeholder="Login" formControlName="login"   readonly />
+            <input matInput placeholder="Login" formControlName="login" readonly />
             <mat-error *ngIf="resumeForm &&
             resumeForm.controls['login'].hasError('required')">
-            {{'validators.validator-required' | translate}} </mat-error>
+              {{'validators.validator-required' | translate}} </mat-error>
           </mat-form-field>
+
         </div>
       </div>
 
@@ -40,14 +41,15 @@
           <input matInput placeholder="CPF" formControlName="cpf" mask="000.000.000-00" />
           <mat-error *ngIf="resumeForm &&
           resumeForm.controls['cpf'].hasError('required')">
-          {{'validators.validator-required' | translate}} </mat-error>
+            {{'validators.validator-required' | translate}} </mat-error>
         </mat-form-field>
         <mat-form-field fxFlex="25" appearance="outline">
           <mat-label>{{ 'generic.birth_date' | translate }}</mat-label>
-          <input matInput  formControlName="birthDate" placeholder="Data de aniversário" mask="00/00/0000" [showMaskTyped]="true" [dropSpecialCharacters]="false"/>
+          <input matInput formControlName="birthDate" placeholder="Data de aniversário" mask="00/00/0000"
+            [showMaskTyped]="true" [dropSpecialCharacters]="false" />
           <mat-error *ngIf="resumeForm &&
           resumeForm.controls['birthDate'].hasError('required')">
-          {{'validators.validator-required' | translate}} </mat-error>
+            {{'validators.validator-required' | translate}} </mat-error>
         </mat-form-field>
         <mat-form-field fxFlex="25" appearance="outline">
           <mat-label>Sexo</mat-label>
@@ -57,7 +59,7 @@
           </mat-select>
           <mat-error *ngIf="resumeForm &&
           resumeForm.controls['gender'].hasError('required')">
-          {{'validators.validator-required' | translate}} </mat-error>
+            {{'validators.validator-required' | translate}} </mat-error>
         </mat-form-field>
         <mat-form-field fxFlex="25" appearance="outline">
           <mat-label>Estado Civil</mat-label>
@@ -77,14 +79,14 @@
           </mat-select>
           <mat-error *ngIf="resumeForm &&
           resumeForm.controls['maritalStatus'].hasError('required')">
-          {{'validators.validator-required' | translate}} </mat-error>
+            {{'validators.validator-required' | translate}} </mat-error>
         </mat-form-field>
       </div>
 
       <div fxFlex="100" fxLayoutGap="16px" formGroupName="Address">
         <mat-select-country appearance="outline" placeHolder="País" label="País"
-        (onCountrySelected)="onCountrySelected($event)"  [value]="defaultValue" validator="required">
-      </mat-select-country>
+          (onCountrySelected)="onCountrySelected($event)" [value]="defaultValue" validator="required">
+        </mat-select-country>
         <mat-form-field fxFlex="25" appearance="outline" *ngIf="searchEnabled === true">
           <mat-label>{{ 'generic.address.cep' | translate }} </mat-label>
           <input matInput placeholder="CEP" formControlName="cep" type="text" mask="99999-999" />
@@ -96,12 +98,12 @@
             {{'validators.validator-required' | translate}} </mat-error>
         </mat-form-field>
 
-        
+
         <mat-form-field fxFlex="20" appearance="outline" *ngIf="searchEnabled === false">
           <mat-label>{{'generic.address.zip_code'|translate}} </mat-label>
           <input matInput placeholder="Zip Code" formControlName="cep" type="text"
             mask="0||00||000||0000||00000||00000-0||00000-00||00000-000" />
-            <mat-error *ngIf="addressForm &&
+          <mat-error *ngIf="addressForm &&
             addressForm.controls['cep'].hasError('required')">
             {{'validators.validator-required' | translate}} </mat-error>
         </mat-form-field>
@@ -120,7 +122,7 @@
           <input matInput placeholder="Número" formControlName="number" mask="0||00||000||0000" />
           <mat-error *ngIf="addressForm &&
           addressForm.controls['number'].hasError('required')">
-          {{'validators.validator-required' | translate}} </mat-error>
+            {{'validators.validator-required' | translate}} </mat-error>
         </mat-form-field>
 
         <mat-form-field fxFlex="45" appearance="outline">
@@ -135,7 +137,7 @@
           <input matInput placeholder="Bairro" formControlName="district" />
           <mat-error *ngIf="addressForm &&
           addressForm.controls['district'].hasError('required')">
-          {{'validators.validator-required' | translate}} </mat-error>
+            {{'validators.validator-required' | translate}} </mat-error>
         </mat-form-field>
 
         <mat-form-field fxFlex="40" appearance="outline">
@@ -143,11 +145,11 @@
           <input matInput placeholder="Cidade" formControlName="city" />
           <mat-error *ngIf="addressForm &&
           addressForm.controls['city'].hasError('required')">
-          {{'validators.validator-required' | translate}} </mat-error>
+            {{'validators.validator-required' | translate}} </mat-error>
         </mat-form-field>
 
 
-        <mat-form-field fxFlex="40" appearance="outline"  *ngIf="this.view">
+        <mat-form-field fxFlex="40" appearance="outline" *ngIf="this.view">
           <mat-label>{{ 'generic.address.state' | translate }}</mat-label>
           <mat-select matInput disableRipple placeholder="Estado" formControlName="state">
             <mat-option [value]="'AC'">{{'generic.address.state_list.AC'|translate}}</mat-option>
@@ -186,7 +188,7 @@
           <mat-label>Estado</mat-label>
           <input matInput placeholder="Nome" formControlName="state" />
         </mat-form-field>
-     
+
       </div>
       <div fxFlex="100" fxLayoutGap="16px">
         <div formGroupName="Phone" fxFlex="100" fxLayoutGap="16px">
@@ -195,8 +197,8 @@
             <input matInput placeholder="DDI" formControlName="ddi" mask="+00" />
             <mat-error *ngIf="phoneForm &&
             phoneForm.controls['ddi'].hasError('required')">
-            {{'validators.validator-required' | translate}}
-          </mat-error>
+              {{'validators.validator-required' | translate}}
+            </mat-error>
           </mat-form-field>
 
           <mat-form-field fxFlex="35" appearance="outline">
@@ -204,8 +206,8 @@
             <input matInput placeholder="DDD" formControlName="ddd" mask="(00)" />
             <mat-error *ngIf="phoneForm &&
             phoneForm.controls['ddd'].hasError('required')">
-            {{'validators.validator-required' | translate}}
-          </mat-error>
+              {{'validators.validator-required' | translate}}
+            </mat-error>
           </mat-form-field>
 
           <mat-form-field fxFlex="35" appearance="outline">
@@ -215,8 +217,8 @@
             <input matInput placeholder="Telefone" formControlName="phoneNumber" mask="0000-0000||00000-0000" />
             <mat-error *ngIf="phoneForm &&
             phoneForm.controls['phoneNumber'].hasError('required')">
-            {{'validators.validator-required' | translate}}
-          </mat-error>
+              {{'validators.validator-required' | translate}}
+            </mat-error>
           </mat-form-field>
         </div>
         <mat-form-field fxFlex="50" appearance="outline">
@@ -231,13 +233,15 @@
           <input matInput placeholder="Email" formControlName="email" />
           <mat-error *ngIf="resumeForm &&
           resumeForm.controls['email'].hasError('required')">
-          {{'validators.validator-required' | translate}} </mat-error>
+            {{'validators.validator-required' | translate}} </mat-error>
         </mat-form-field>
 
         <mat-form-field fxFlex="50" appearance="outline">
           <mat-label>{{ 'generic.site' | translate }}</mat-label>
           <input matInput placeholder="Site" formControlName="site" />
         </mat-form-field>
+
+
       </div>
     </form>
   </div>

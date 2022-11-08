@@ -41,6 +41,11 @@ export class UpdateSkillsDto {
   @IsBoolean()
   currentPosition: boolean;
 
+  @ApiProperty()
+  @IsOptional()
+  @IsBoolean()
+  inactive: boolean;
+
   @IsOptional()
   Collaborator: CollaboratorsEntity;
 

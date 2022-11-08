@@ -74,7 +74,6 @@
             aria-label="text"
             #fiilter
             matInput
-            [matAutocomplete]="autoProject"
             [formControl]="projectControl" />
           <mat-error
             *ngIf="projectControl && projectControl.hasError('required')">
@@ -127,7 +126,6 @@
             aria-label="text"
             #filter
             matInput
-            [matAutocomplete]="autoManager"
             [formControl]="managerControl" />
           <mat-error
             *ngIf="managerControl && managerControl.hasError('required')">

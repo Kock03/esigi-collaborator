@@ -11,8 +11,7 @@
             "search_collaborators": "Buscar Colaboradores",
             "filter": {
                 "name": "Filtro",
-                "all": "Todos",
-                "inactive": "Inativo"
+                "all": "Todos"
             }
         },
         "colaborator_create": {
@@ -128,7 +127,7 @@
                 "promotion": "Promoção",
                 "faithfulness": "Fidelidade",
                 "new_client": "Cliente Novo",
-                "employee_replacement": "Substituição de colaborador" 
+                "employee_replacement": "Substituição de colaborador"
             },
             "temporary": "Temporário",
             "month_time": "Tempo de Contrato",
@@ -244,6 +243,7 @@
         }
     },
     "generic": {
+        "inactive": "Inativo",
         "marital_status": {
             "name": "Estado civil",
             "single": "Solteiro(a)",
