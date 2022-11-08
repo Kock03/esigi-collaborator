@@ -38,10 +38,10 @@ export class TechnicalInterviewsEntity {
   @Column()
   jobProfile: boolean;
 
-  @Column({ nullable: true })
+  @Column({ length: '30000', nullable: true })
   technicalEvaluation: string;
 
-  @Column({ nullable: true })
+  @Column({ length: '30000', nullable: true })
   comments: string;
 
   @Column()

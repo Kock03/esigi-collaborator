@@ -41,10 +41,10 @@ export class BehavioralInterviewsEntity {
   @Column()
   salaryExpectation: string;
 
-  @Column({ nullable: true })
+  @Column({ length: '30000', nullable: true })
   behavioralAssessment: string;
 
-  @Column({ nullable: true })
+  @Column({ length: '30000', nullable: true })
   comments: string;
 
   @Column()
