@@ -55,11 +55,11 @@
 
   <div id="jobList" *ngIf="viewResume" class="tab">
     <div class="content-scroll">
-      <mat-list role="list" #experiencesList *ngIf="job" class="list-group" >
+      <mat-list *ngIf="job" class="list-group" >
         <mat-list-item class="list-group-item" fxFlex="100">
-          <div class="text-div" fxLayout="column" fxFlex="33">
-            <mat-icon class="backList" (click)="backList()">chevron_left</mat-icon>
-            <span class="label-office" >
+          <mat-icon class="backList" (click)="backList()" >chevron_left</mat-icon>
+          <div class="text-div" fxLayout="column">
+            <span class="label-office">
               {{ job.jobName }}
             </span>
             <span class="label-gray" *ngIf="resume">
@@ -101,9 +101,7 @@
                 {{languages.languageName}}
               </p>
             </span>
-          </div>
-          <div class="job-text" fxLayout="column" fxLayoutAlign="start center" fxFlex="33">
-            <div fxLayout="column" class="example-card">
+            <div class="media-query">
               <span class="label-gray" >
                 <b>{{'resumes.resume_experience.name' | translate}}:</b>
                 <p class="experience" *ngFor="let experience of resume?.Experiences">
@@ -115,10 +113,6 @@
                   {{experience.terminusYear}}
                 </p>
               </span>
-            </div>
-          </div>
-          <div class="job-text" fxLayout="column" fxLayoutAlign="start center" fxFlex="33">
-            <div fxLayout="column" class="example-card">
               <span class="label-gray" >
                 <b>{{'generic.skills.technology' | translate}}s:</b>
                 <li *ngFor="let skills of resume?.Skills">
@@ -135,6 +129,46 @@
                   'Arquiteto(a)'}}
                 </li>
               </span>
+            </div>
+          </div>
+          <div class="job-text" fxLayout="column" fxLayoutAlign="start center" >
+            <div class="example-card">
+              <span class="label-gray" >
+                <b>{{'resumes.resume_experience.name' | translate}}:</b>
+                <p class="experience" *ngFor="let experience of resume?.Experiences">
+                  {{experience.companyName}} <br>
+                  {{experience.office}} <br>
+                  {{experience.startMonth}} /
+                  {{experience.startYear}} -
+                  {{experience.terminusMonth}} /
+                  {{experience.terminusYear}}
+                </p>
+              </span>
+            </div>
+          </div>
+          <div class="job-text" fxLayout="column" fxLayoutAlign="start center" >
+            <div class="example-card">
+              <span class="label-gray" >
+                <b>{{'generic.skills.technology' | translate}}s:</b>
+                <li *ngFor="let skills of resume?.Skills">
+                  {{skills.technology}} - {{ skills.yearsExperience }}
+                  {{skills.typeOfPeriod == 1 && skills.yearsExperience != '1' ? 'meses' : 
+                  skills.typeOfPeriod == 1 && skills.yearsExperience == '1' ? 'mês' : 
+                  skills.typeOfPeriod == 2 && skills.yearsExperience == "1" ? 'ano' : 
+                  skills.typeOfPeriod == 2 && skills.yearsExperience != "1" ? 'anos' : ''}} -
+                  {{skills.seniority == 1 ? 'Senior' : 
+                  skills.seniority == 2 ? 'Pleno' : 
+                  skills.seniority == 3 ? 'Junior' : 
+                  skills.seniority == 4 ? 'Aprendiz' : 
+                  skills.seniority == 5 ? 'Especialista' : 
+                  'Arquiteto(a)'}}
+                </li>
+              </span>
+            </div>
+            <div class="buttons-experience" fxLayoutAlign="end end">
+              <button class="table-button" mat-button routerLink="/curriculo/{{resume?.id}}">
+                <mat-icon>edit</mat-icon>
+              </button>
             </div>
           </div>
         </mat-list-item>
