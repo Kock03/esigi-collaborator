@@ -36,10 +36,10 @@ export class ClientInterviewsEntity {
   @Column()
   jobProfile: boolean;
 
-  @Column({ length: '30000', nullable: true })
+  @Column({ length: '1600', nullable: true })
   technicalEvaluation: string;
 
-  @Column({ length: '30000', nullable: true })
+  @Column({ length: '1600', nullable: true })
   comments: string;
 
   @Column()

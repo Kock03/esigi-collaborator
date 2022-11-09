@@ -34,10 +34,10 @@ export class ReturnsEntity {
   @Column()
   technicalEvaluation: Situation;
 
-  @Column({ length: '30000', nullable: true })
+  @Column({ length: '1600', nullable: true })
   behavioralEvaluationComent: string;
 
-  @Column({ length: '30000', nullable: true })
+  @Column({ length: '1600', nullable: true })
   technicalEvaluationComent: string;
 
   @Column({ nullable: true })
