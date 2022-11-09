@@ -215,7 +215,7 @@ export class JobBehavioralInterviewTabComponent implements OnInit {
     this.behavioralInterviewForm = this.fb.group({
       id: null,
       techRecruter: ['', Validators.required],
-      behavioralInterviewDate: this.fb.control({ value: ' ', disabled: false }, [DateValidator.isValidData(), Validators.required]),
+      behavioralInterviewDate: this.fb.control({ value: ' ', disabled: false }, [DateValidator.isValidData(), DateValidator.isDateMinorThanToday(), Validators.required]),
       hourInterview: ['', Validators.required],
       punctuality: [null, Validators.required],
       presentation: [null, Validators.required],

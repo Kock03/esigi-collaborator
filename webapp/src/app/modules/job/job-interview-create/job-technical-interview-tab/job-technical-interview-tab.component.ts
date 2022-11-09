@@ -208,7 +208,7 @@ export class JobTechnicalInterviewTabComponent implements OnInit {
   initForm() {
     this.technicalInterviewForm = this.fb.group({
       collaboratorRequesterId: ['', Validators.required],
-      technicalInterviewDate: this.fb.control({ value: ' ', disabled: false }, [DateValidator.isValidData(), Validators.required]),
+      technicalInterviewDate: this.fb.control({ value: ' ', disabled: false }, [DateValidator.isValidData(), DateValidator.isDateMinorThanToday(), Validators.required]),
       hourInterview: ['', Validators.required],
       punctuality: [null, Validators.required],
       jobProfile: [true, Validators.required],

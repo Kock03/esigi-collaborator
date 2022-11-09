@@ -154,7 +154,7 @@ export class JobCreateComponent implements OnInit {
           Validators.required,
           Validators.minLength(2),],
       ],
-      startForecast: this.fb.control({ value: ' ', disabled: false }, [DateValidator.isValidData(), Validators.required]),
+      startForecast: this.fb.control({ value: ' ', disabled: false }, [DateValidator.isValidData(), DateValidator.isDateGreaterThanToday(), Validators.required]),
       jobNumber: ['', Validators.required],
       typeOfContract: [''],
       workplace: [''],
@@ -175,7 +175,7 @@ export class JobCreateComponent implements OnInit {
       }),
     },
       {
-        validator: [MustMatch('minimumValue', 'maximumValue')],
+        validator: [MustMatch('minimumValue', 'maximumValue'), ],
       });
 
     this.collaboratorControl.valueChanges.subscribe((res) => {

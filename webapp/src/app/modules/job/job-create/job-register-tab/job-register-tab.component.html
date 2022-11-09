@@ -155,13 +155,12 @@
           <mat-label>{{
             'job.job_create.start_forecast' | translate
             }}</mat-label>
-          <input matInput mask="00/00/0000" [showMaskTyped]="true" [dropSpecialCharacters]="false"
+          <input matInput mask="00/00/0000" [showMaskTyped]="false" [dropSpecialCharacters]="false"
             formControlName="startForecast" placeholder="Previsão de Início" />
-          <mat-error *ngIf="
-              jobForm && jobForm.controls['startForecast'].hasError('required')
-            ">
-            {{ 'validators.validator-required' | translate }}
-          </mat-error>
+            <mat-error *ngIf="jobForm && jobForm.controls['startForecast'].hasError('isDateGreaterThanToday')">
+              <!-- {{ 'validators.validator-required' | translate }} -->
+              Data não pode ser superior ao dia atual!
+            </mat-error>
         </mat-form-field>
 
         <div class="checkbox">

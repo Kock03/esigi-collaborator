@@ -53,9 +53,23 @@ export class DateValidator {
   static isDateGreaterThanToday(): ValidatorFn {
     return (control: AbstractControl): Validators => {
 
-      var data = control.value;
-      const today = new Date().toLocaleDateString();
+      //transforma a data em formato americano para fazer a comparação entre elas
+      var data = control.value.split('/').reverse().join('/');
+      const today = new Date().toLocaleDateString().split('/').reverse().join('/');
       if (data < today ) {
+        return {dataNotValid: true};
+      } 
+      return true;
+    }
+  }
+
+  static isDateMinorThanToday(): ValidatorFn {
+    return (control: AbstractControl): Validators => {
+
+      //transforma a data em formato americano para fazer a comparação entre elas
+      var data = control.value.split('/').reverse().join('/');
+      const today = new Date().toLocaleDateString().split('/').reverse().join('/');
+      if (data > today ) {
         return {dataNotValid: true};
       } 
       return true;
