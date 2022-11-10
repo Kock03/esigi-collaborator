@@ -119,6 +119,9 @@
             [dropSpecialCharacters]="false"
             formControlName="behavioralInterviewDate"
             placeholder="Data da Entrevista" />
+            <mat-error *ngIf="behavioralInterviewForm && behavioralInterviewForm.controls['behavioralInterviewDate'].hasError('dataNotValid')">
+              Data não pode ser superior ao dia atual!
+            </mat-error>
         </mat-form-field>
       </div>
       <div fxFlex="100" fxLayoutGap="16px">

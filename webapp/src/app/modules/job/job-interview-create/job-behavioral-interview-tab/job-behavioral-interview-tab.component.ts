@@ -10,7 +10,7 @@ import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { CollaboratorProvider } from 'src/providers/collaborator-providers/collaborator.provider';
 import { RequireMatch } from 'src/services/autocomplete.service';
 import { DateValidator } from 'src/app/validators/date.validator';
-
+import { isDateMinorThanToday } from 'src/app/validators/date-compare.validator';
 
 @Component({
   selector: 'app-job-behavioral-interview-tab',
@@ -231,7 +231,10 @@ export class JobBehavioralInterviewTabComponent implements OnInit {
       situational: [null, Validators.required],
       availabilityOfInitialize: ['', Validators.required],
 
-    });
+    },
+      {
+        validator: [isDateMinorThanToday('behavioralInterviewDate')]
+      });
     this.collaboratorControl.valueChanges.subscribe((res) => {
       if (res && res.id) {
         this.behavioralInterviewForm.controls['techRecruter'].setValue(res.id, {

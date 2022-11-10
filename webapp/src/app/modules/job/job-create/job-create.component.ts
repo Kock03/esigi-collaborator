@@ -38,7 +38,7 @@ import { MustMatch } from 'src/app/validators/min-max-value.validator';
 import { JobProvider } from 'src/providers/job-providers/job.provider';
 import { RequireMatch } from 'src/services/autocomplete.service';
 import { DateValidator } from 'src/app/validators/date.validator';
-
+import { isDateGreaterThanToday } from 'src/app/validators/date-compare.validator';
 
 @Component({
   selector: 'app-job-create',
@@ -154,7 +154,7 @@ export class JobCreateComponent implements OnInit {
           Validators.required,
           Validators.minLength(2),],
       ],
-      startForecast: this.fb.control({ value: ' ', disabled: false }, [DateValidator.isValidData(), DateValidator.isDateGreaterThanToday(), Validators.required]),
+      startForecast: this.fb.control({ value: ' ', disabled: false }, [DateValidator.isValidData(), Validators.required]),
       jobNumber: ['', Validators.required],
       typeOfContract: [''],
       workplace: [''],
@@ -175,7 +175,7 @@ export class JobCreateComponent implements OnInit {
       }),
     },
       {
-        validator: [MustMatch('minimumValue', 'maximumValue'), ],
+        validator: [MustMatch('minimumValue', 'maximumValue'), isDateGreaterThanToday('startForecast')],
       });
 
     this.collaboratorControl.valueChanges.subscribe((res) => {

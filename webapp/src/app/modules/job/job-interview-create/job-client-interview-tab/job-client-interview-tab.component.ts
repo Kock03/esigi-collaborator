@@ -10,6 +10,7 @@ import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { ResumeProvider } from 'src/providers/resume-providers/resume.provider';
 import { RequireMatch } from 'src/services/autocomplete.service';
 import { DateValidator } from 'src/app/validators/date.validator';
+import { isDateMinorThanToday } from 'src/app/validators/date-compare.validator';
 
 @Component({
   selector: 'app-job-client-interview-tab',
@@ -225,7 +226,10 @@ export class JobClientInterviewTabComponent implements OnInit {
       comments: ['', Validators.required],
       situational: [null, Validators.required],
       //Job: { id: this.jobId },
-    });
+    },
+      {
+        validator: [isDateMinorThanToday('clientInterviewDate')]
+      });
 
     this.customerControl.valueChanges.subscribe((res) => {
       if (res && res.id) {

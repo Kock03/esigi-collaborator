@@ -10,6 +10,7 @@ import { CollaboratorProvider } from 'src/providers/collaborator-providers/colla
 import { ResumeProvider } from 'src/providers/resume-providers/resume.provider';
 import { RequireMatch } from 'src/services/autocomplete.service';
 import { DateValidator } from 'src/app/validators/date.validator';
+import { isDateMinorThanToday } from 'src/app/validators/date-compare.validator';
 
 
 @Component({
@@ -216,7 +217,10 @@ export class JobTechnicalInterviewTabComponent implements OnInit {
       comments: ['', Validators.required],
       situational: [null, Validators.required],
       //Job: { id: this.jobId },
-    });
+    },
+      {
+        validator: [isDateMinorThanToday('technicalInterviewDate')]
+      });
 
     this.collaboratorControl.valueChanges.subscribe((res) => {
       if (res && res.id) {

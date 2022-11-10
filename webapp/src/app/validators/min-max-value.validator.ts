@@ -2,7 +2,9 @@ import { FormGroup } from '@angular/forms';
 
 
 export function MustMatch(minValue: string, maxValue: string) {
+    console.log("🚀 ~ file: min-max-value.validator.ts ~ line 5 ~ MustMatch ~ maxValue", maxValue)
     return (formGroup: FormGroup) => {
+        console.log("🚀 ~ file: min-max-value.validator.ts ~ line 5 ~ MustMatch ~ maxValue", maxValue)
         const control = formGroup.controls[minValue];
         const matchingControl = formGroup.controls[maxValue];
 
