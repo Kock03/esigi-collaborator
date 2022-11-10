@@ -218,7 +218,7 @@ export class JobClientInterviewTabComponent implements OnInit {
   initForm() {
     this.clientInterviewForm = this.fb.group({
       evaluator: ['', Validators.required],
-      clientInterviewDate: this.fb.control({ value: ' ', disabled: false }, [DateValidator.isValidData(), DateValidator.isDateMinorThanToday(), Validators.required]),
+      clientInterviewDate: this.fb.control({ value: ' ', disabled: false }, [DateValidator.isValidData(), Validators.required]),
       hourInterview: ['', Validators.required],
       punctuality: [null, Validators.required],
       jobProfile: [true, Validators.required],
