@@ -3,7 +3,7 @@ import { InterviewsService } from './interviews.service';
 import { InterviewsController } from './interviews.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { InterviewsEnitiy } from './interviews.entity';
-import { HttpModule } from '@nestjs/common';
+import { HttpModule } from '@nestjs/axios';
 
 @Module({
   imports: [TypeOrmModule.forFeature([InterviewsEnitiy]), HttpModule],
