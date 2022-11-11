@@ -60,9 +60,7 @@
       *ngIf="step == 1"
       color="primary"
       (click)="saveJob()"
-      [disabled]="jobForm.invalid ||
-      collaboratorControl.invalid ||
-      customerControl.invalid">
+      [disabled]="jobForm.invalid">
       {{ 'generic.save_button' | translate }}
     </button>
   </div>
