@@ -216,8 +216,8 @@
       </div>
       <div fxLayoutAlign="center" fxFlex="20">
         <button
-        
-          mat-flat*ngIf="interviewId === 'novo'"-button
+        *ngIf="interviewId === 'novo'"
+          mat-flat-button
           color="primary"
           class="save-button"
           (click)="saveInterview()"
@@ -230,7 +230,8 @@
         </button>
         <button
         
-        mat-flat*ngIf="interviewId !== 'novo'"-button
+        mat-flat-button
+         *ngIf="interviewId !== 'novo'"
         color="primary"
         class="save-button"
         (click)="saveInterview()"
