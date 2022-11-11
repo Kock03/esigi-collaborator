@@ -276,6 +276,7 @@
       </div>
       <div fxLayoutAlign="center" fxFlex="20">
         <button
+         *ngIf="interviewId === 'novo'"
           mat-flat-button
           color="primary"
           class="save-button"
@@ -287,6 +288,17 @@
           ">
           {{ 'generic.save_button' | translate }}
         </button>
+        <button
+        *ngIf="interviewId !== 'novo'"
+        mat-flat-button
+        color="primary"
+        class="save-button"
+        (click)="saveInterview()"
+        [disabled]="
+          behavioralInterviewForm.invalid 
+        ">
+        {{ 'generic.save_button' | translate }}
+      </button>
       </div>
     </form>
   </div>
