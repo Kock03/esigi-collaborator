@@ -62,15 +62,13 @@ html {
     border-radius: 4px;
   }
 
-  .done {
-    .tab-border {
-      border-color: #ff6a39 !important;
-    }
-  }
-
   .active {
     p {
       color: #ff6a39;
+    }
+
+    .tab-border {
+      border-color: #ff6a39 !important;
     }
   }
 
