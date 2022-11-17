@@ -1,10 +1,10 @@
 import { IsNotEmpty } from "class-validator";
 
-export class UpdateLanguagesDto{
-     
+export class UpdateLanguagesDto {
+
     @IsNotEmpty()
     languageName: string;
-  
+
     @IsNotEmpty()
-    degreeOfInfluence: degreeOfInfluence;
+    degreeOfInfluence: string;
 }

@@ -9,7 +9,6 @@ import {
   OneToOne,
   JoinColumn,
 } from 'typeorm';
-import { AccountTypes } from './dtos/account-types.enum';
 
 @Entity({ name: 'bank_data' })
 export class BankDataEntity {
@@ -22,8 +21,8 @@ export class BankDataEntity {
   @Column({ name: 'agency' })
   agency: string;
 
-  @Column({ name: 'account_typet' })
-  accountType: AccountTypes;
+  @Column()
+  accountType: string;
 
   @Column({ name: 'account_number', type: 'int' })
   accountNumber: number;

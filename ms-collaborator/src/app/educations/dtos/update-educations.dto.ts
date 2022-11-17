@@ -1,16 +1,16 @@
 import { IsNotEmpty } from "class-validator";
 
-export class UpdateEducationsDto{
-     
+export class UpdateEducationsDto {
+
     @IsNotEmpty()
     course: string;
-  
+
     @IsNotEmpty()
-    schooling: Schooling
+    schooling: string
 
     @IsNotEmpty()
     institution: string;
 
     @IsNotEmpty()
-    situation: Situation;
+    situation: string;
 }

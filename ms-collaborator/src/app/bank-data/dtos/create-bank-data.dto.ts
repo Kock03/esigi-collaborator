@@ -1,12 +1,11 @@
 import { IsNotEmpty } from 'class-validator';
 import { CollaboratorsEntity } from 'src/app/collaborators/collaborators.entity';
-import { AccountTypes } from './account-types.enum';
 
 export class CreateBankDataDto {
- 
+
   @IsNotEmpty()
   bank: string;
-  
+
   @IsNotEmpty()
   agency: string;
 
@@ -14,13 +13,13 @@ export class CreateBankDataDto {
   digit: number;
 
   @IsNotEmpty()
-  accountType: AccountTypes;
+  accountType: string;
 
   @IsNotEmpty()
   accountNumber: number;
 
   @IsNotEmpty()
-  bankAccountDigit:number;
+  bankAccountDigit: number;
 
   @IsNotEmpty()
   collaborator: CollaboratorsEntity;

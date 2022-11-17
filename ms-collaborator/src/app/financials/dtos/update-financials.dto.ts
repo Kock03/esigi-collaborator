@@ -2,7 +2,7 @@ import { IsNotEmpty } from 'class-validator';
 import { ContractTypes } from './contract-types.enum';
 
 export class UpdateFinancialsDto {
-  
+
   @IsNotEmpty()
   contractType: ContractTypes;
 
@@ -10,7 +10,7 @@ export class UpdateFinancialsDto {
   value: number;
 
   @IsNotEmpty()
-  reason: Reasons;
+  reason: string;
 
   @IsNotEmpty()
   dateInclusion: Date;

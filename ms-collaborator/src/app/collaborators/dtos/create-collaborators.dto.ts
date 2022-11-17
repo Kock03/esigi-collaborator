@@ -22,14 +22,17 @@ export class CreateCollaboratorsDto {
   login: string;
 
   @IsNotEmpty()
-  gender: Gender;
+  gender: string;
+
+  @IsNotEmpty()
+  maritalStatus: string;
 
   @IsNotEmpty()
   office: string;
-  
+
   @IsNotEmpty()
   collaboratorTypes: CollaboratorTypes;
-  
+
   @IsOptional()
   cpf: string;
 
@@ -50,7 +53,7 @@ export class CreateCollaboratorsDto {
 
   @IsNotEmpty()
   site: string;
-  
+
   @IsOptional()
   photo: string;
 
@@ -65,7 +68,7 @@ export class CreateCollaboratorsDto {
 
   @IsOptional()
   Skills: SkillsEntity[];
-  
+
   @IsOptional()
   Documents: DocumentsEntity[];
 

@@ -4,9 +4,9 @@ export class UpdateSkillsDto {
 
   @IsNotEmpty()
   tecnology: string;
-  
+
   @IsNotEmpty()
-  seniority: Senioridade;
+  seniority: string;
 
   @IsNotEmpty()
   yearsExperience: number;

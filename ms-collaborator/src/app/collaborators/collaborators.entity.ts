@@ -33,8 +33,11 @@ export class CollaboratorsEntity {
   @Column({ name: 'login' })
   login: string;
 
-  @Column({ name: 'gender', type: 'int' })
-  gender: Gender;
+  @Column()
+  gender: string;
+
+  @Column()
+  maritalStatus: string;
 
   @Column({ name: 'office' })
   office: string;
@@ -42,7 +45,7 @@ export class CollaboratorsEntity {
   @Column({ name: 'collaborator_types' })
   collaboratorTypes: CollaboratorTypes;
 
-  @Column({ name: 'cpf', unique: true, length: 11})
+  @Column({ name: 'cpf', unique: true, length: 11 })
   cpf: string;
 
   @Column({ name: 'birth_date' })
@@ -63,7 +66,7 @@ export class CollaboratorsEntity {
   @Column({ name: 'site' })
   site: string;
 
-  @Column({ name: 'linkedin'})
+  @Column({ name: 'linkedin' })
   linkedin: string;
 
   @Column({ name: 'photo', type: 'blob', nullable: true })

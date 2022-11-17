@@ -7,7 +7,7 @@ export class CreateLanguagesDto {
     languageName: string;
 
     @IsNotEmpty()
-    degreeOfInfluence: degreeOfInfluence;
+    degreeOfInfluence: string;
 
     @IsOptional()
     Collaborator: CollaboratorsEntity;

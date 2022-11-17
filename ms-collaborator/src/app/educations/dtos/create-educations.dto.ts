@@ -1,19 +1,19 @@
 import { IsNotEmpty } from "class-validator";
 import { CollaboratorsEntity } from "src/app/collaborators/collaborators.entity";
 
-export class CreateEducationsDto{
-     
+export class CreateEducationsDto {
+
     @IsNotEmpty()
     course: string;
-  
+
     @IsNotEmpty()
-    schooling: Schooling
+    schooling: string
 
     @IsNotEmpty()
     institution: string;
 
     @IsNotEmpty()
-    situation: Situation;
+    situation: string;
 
     @IsNotEmpty()
     collaborator: CollaboratorsEntity;

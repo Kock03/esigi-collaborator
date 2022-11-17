@@ -20,7 +20,7 @@ export class PhoneEntity {
   @Column({ name: 'ddd', length: 2 })
   ddd: string;
 
-  @Column({ name: 'ddi', length: 3 })
+  @Column({ name: 'ddi' })
   ddi: string;
 
   @OneToOne(() => CollaboratorsEntity, collaborator => collaborator.Phone) // specify inverse side as a second parameter

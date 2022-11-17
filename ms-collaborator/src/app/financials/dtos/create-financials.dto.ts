@@ -11,7 +11,7 @@ export class CreateFinancialsDto {
   value: number;
 
   @IsNotEmpty()
-  reason: Reasons;
+  reason: string;
 
   @IsNotEmpty()
   dateInclusion: Date;

@@ -17,8 +17,8 @@ export class SkillsEntity {
   @Column({ name: 'tecnology' })
   tecnology: string;
 
-  @Column({ type:'int'})
-  seniority: Senioridade;
+  @Column()
+  seniority: string;
 
   @Column({ name: 'years_experience' })
   yearsExperience: number;

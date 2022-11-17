@@ -21,7 +21,10 @@ export class UpdateCollaboratorsDto {
   login: string;
 
   @IsNotEmpty()
-  gender: Gender;
+  gender: string;
+
+  @IsNotEmpty()
+  maritalStatus: string;
 
   @IsNotEmpty()
   office: string;
@@ -61,10 +64,10 @@ export class UpdateCollaboratorsDto {
 
   @IsOptional()
   Phone: PhoneEntity;
-  
+
   @IsOptional()
   Skills: SkillsEntity[];
-  
+
   @IsOptional()
   Documents: DocumentsEntity[];
 

@@ -2,12 +2,12 @@ import { IsNotEmpty } from "class-validator";
 import { CollaboratorsEntity } from "src/app/collaborators/collaborators.entity";
 
 export class CreateSkillsDto {
-  
+
   @IsNotEmpty()
   tecnology: string;
-  
+
   @IsNotEmpty()
-  seniority: Senioridade;
+  seniority: string;
 
   @IsNotEmpty()
   yearsExperience: number;
