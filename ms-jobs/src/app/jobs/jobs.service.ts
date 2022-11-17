@@ -1,7 +1,7 @@
 import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { errorMonitor } from 'mysql2/typings/mysql/lib/Connection';
+// import { errorMonitor } from 'mysql2/typings/mysql/lib/Connection';
 import { FindManyOptions, Like } from 'typeorm';
 import { FindConditions } from 'typeorm/find-options/FindConditions';
 import { FindOneOptions } from 'typeorm/find-options/FindOneOptions';

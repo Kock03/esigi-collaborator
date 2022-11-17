@@ -167,10 +167,14 @@
             </div>
             <div></div>
             <div fxLayoutAlign="center" fxFlex="20">
-                <button mat-flat-button color="primary" class="save-button" (click)="saveInterview()"
+                <button *ngIf="interviewId === 'novo'" mat-flat-button color="primary" class="save-button" (click)="saveInterview()"
                     [disabled]="returnForm.invalid || ResumeControl.invalid">
                     {{ 'generic.save_button' | translate }}
                 </button>
+                <button *ngIf="interviewId !== 'novo'" mat-flat-button color="primary" class="save-button" (click)="saveInterview()"
+                [disabled]="returnForm.invalid">
+                {{ 'generic.save_button' | translate }}
+            </button>
             </div>
         </form>
     </div>

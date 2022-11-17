@@ -89,7 +89,11 @@ export class JobInterviewCreateComponent implements OnInit {
   setFormValue() {
     if (this.interview) {
       this.behavioralInterviewForm.patchValue(this.interview.BehavioralInterviews);
+      this.technicalInterviewForm.patchValue(this.interview.TechnicalInterviews);
+      this.clientInterviewForm.patchValue(this.interview.ClientInterviews);
+
     }
+
   }
 
 
