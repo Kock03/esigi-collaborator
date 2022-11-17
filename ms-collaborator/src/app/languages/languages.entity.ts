@@ -1,6 +1,5 @@
 import { Column, CreateDateColumn, DeleteDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 import { CollaboratorsEntity } from '../collaborators/collaborators.entity';
-import { degreeOfInfluence } from './dtos/degree-of-influence.enum';
 
 @Entity({ name: 'languages' })
 export class LanguagesEntity {
@@ -10,8 +9,8 @@ export class LanguagesEntity {
   @Column()
   languageName: string;
 
-  @Column({ type: 'int' })
-  degreeOfInfluence: degreeOfInfluence;
+  @Column()
+  degreeOfInfluence: string;
 
   @CreateDateColumn()
   dateInclusion: Date;

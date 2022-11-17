@@ -14,6 +14,7 @@ import {
 import { MatTable } from '@angular/material/table';
 import { CollaboratorDependentsProvider } from 'src/providers/collaborator-providers/collaborator-dependents.provider';
 import { CollaboratorProvider } from 'src/providers/collaborator-providers/collaborator.provider';
+import { ConfigProvider } from 'src/providers/config-provider';
 import { ConfirmDialogService } from 'src/services/confirn-dialog.service';
 import { SnackBarService } from 'src/services/snackbar.service';
 import { CollaboratorDependentsDialog } from './collaborator-dependents-dialog.component';
@@ -40,7 +41,11 @@ export class CollaboratorDependentsTabComponent implements OnInit {
     'icon',
   ];
 
-  data: [] = [];
+  gender: any[] = []
+  ddi: any[] = []
+  type: any[] = []
+
+  data: any[] = [];
   dependentForm!: FormGroup;
   method!: string;
   collaboratorId!: any;
@@ -50,21 +55,75 @@ export class CollaboratorDependentsTabComponent implements OnInit {
   constructor(
     public dialog: MatDialog,
     private dialogService: ConfirmDialogService,
+    private configProvider: ConfigProvider,
+
     private collaboratorDependentsProvider: CollaboratorDependentsProvider,
     private collaboratorProvider: CollaboratorProvider,
     private snackbarService: SnackBarService
   ) { }
 
   ngOnInit(): void {
+    this.getKeysCollaborator();
+    this.getKeysGeneric();
     this.collaboratorMethod = sessionStorage.getItem('collaborator_method')!;
     if (this.collaboratorMethod === 'edit') {
+      this.getKeysCollaborator();
+      this.getKeysGeneric();
       this.getDependentsList();
     }
   }
 
+  async getKeysGeneric() {
+    let data = {
+      key: ["ddi"]
+    }
+    const arrays = await this.configProvider.findKeys('generic', data)
+
+    const keyList = arrays.reduce(function (array: any, register: any) {
+      array[register.key] = array[register.key] || [];
+      array[register.key].push({ id: register.id, value: register.value });
+      return array;
+    }, Object.create(null));
+    this.ddi = keyList['ddi'];
+
+  }
+
+  async getKeysCollaborator() {
+    let data = {
+      key: ["gender", "depentents"]
+    }
+    const arrays = await this.configProvider.findKeys('collaborator', data)
+
+    const keyList = arrays.reduce(function (array: any, register: any) {
+      array[register.key] = array[register.key] || [];
+      array[register.key].push({ id: register.id, value: register.value });
+      return array;
+    }, Object.create(null));
+    this.gender = keyList['gender'];
+    this.type = keyList['depentents']
+  }
+
+
   async getDependentsList() {
     this.collaboratorId = sessionStorage.getItem('collaborator_id');
     this.data = await this.collaboratorDependentsProvider.findByCollaborator(this.collaboratorId);
+    for (let i = 0; i < this.data.length; i++) {
+      for (let j = 0; j < this.gender.length; j++) {
+        if (this.data[i].gender === this.gender[j].id) {
+          this.data[i].gender = this.gender[j].value
+        }
+      }
+      for (let j = 0; j < this.type.length; j++) {
+        if (this.data[i].type === this.type[j].id) {
+          this.data[i].type = this.type[j].value
+        }
+      }
+      for (let j = 0; j < this.ddi.length; j++) {
+        if (this.data[i].ddi === this.ddi[j].id) {
+          this.data[i].ddi = this.ddi[j].value
+        }
+      }
+    }
   }
 
 
@@ -88,20 +147,24 @@ export class CollaboratorDependentsTabComponent implements OnInit {
     this.onChange.next(true);
   }
 
-  
 
-  getDependents(dependentsSelected: any, id: string) {
+
+  async getDependents(dependentsSelected: any, id: string) {
     this.method = 'edit';
     sessionStorage.setItem('method', this.method);
     this.dependentId = id;
+    const dependent = await this.collaboratorDependentsProvider.findOne(id);
+
     sessionStorage.setItem('dependent_id', this.dependentId);
     const dialogRef = this.dialog.open(CollaboratorDependentsDialog, {
       width: '500px',
       height: '650px',
-      data: dependentsSelected,
+      data: dependent,
     });
     dialogRef.afterClosed().subscribe(dependent => {
       if (dependent) {
+        this.getKeysCollaborator();
+        this.getKeysGeneric();
         this.getDependentsList();
       }
     });

@@ -12,8 +12,7 @@ import {
   BeforeUpdate,
   JoinColumn,
 } from 'typeorm';
-import { EventListenerTypes } from 'typeorm/metadata/types/EventListenerTypes';
-import { AccountTypes } from './dtos/account-types.enum';
+
 
 @Entity({ name: 'bank_data' })
 export class BankDataEntity {
@@ -27,12 +26,12 @@ export class BankDataEntity {
   agency: string;
 
   @Column()
-  accountType: AccountTypes;
+  accountType: string;
 
   @Column()
   accountNumber: string;
 
-  @Column({nullable: true})
+  @Column({ nullable: true })
   digit: string;
 
   @Column()

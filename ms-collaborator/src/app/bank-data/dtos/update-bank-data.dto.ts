@@ -12,14 +12,11 @@ import {
   MinLength,
 } from 'class-validator';
 import { CollaboratorsEntity } from 'src/app/collaborators/collaborators.entity';
-import { AccountTypes } from './account-types.enum';
 
 export class UpdateBankDataDto {
   @ApiProperty()
   @IsOptional()
   @IsString()
-  @MinLength(3)
-  @MaxLength(30)
   bank: string;
 
   @ApiProperty()
@@ -36,8 +33,7 @@ export class UpdateBankDataDto {
 
   @ApiProperty()
   @IsOptional()
-  @IsEnum(AccountTypes)
-  accountType: AccountTypes;
+  accountType: string;
 
   @ApiProperty()
   @IsOptional()

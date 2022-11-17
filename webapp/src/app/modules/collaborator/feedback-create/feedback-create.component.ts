@@ -25,6 +25,7 @@ import { SnackBarService } from 'src/services/snackbar.service';
 import { ProjectProvider } from 'src/providers/project.provider';
 import { RequireMatch } from 'src/services/autocomplete.service';
 import { DateValidator } from 'src/app/validators/date.validator';
+import { ConfigProvider } from 'src/providers/config-provider';
 
 export const PICK_FORMATS = {
   parse: { dateInput: { month: 'numeric', year: 'numeric', day: 'numeric' } },
@@ -62,6 +63,8 @@ export class FeedbackCreateComponent implements OnInit {
   @ViewChild('fiilter', { static: true }) fiilter!: ElementRef;
 
   feedbackForm!: FormGroup;
+  reasons: any[] = [];
+
   Date: any;
   step: number = 1;
   collaborators!: any[];
@@ -94,6 +97,8 @@ export class FeedbackCreateComponent implements OnInit {
     private collaboratorProvider: CollaboratorProvider,
     private projectProvider: ProjectProvider,
     private router: Router,
+    private configProvider: ConfigProvider,
+
     private feedbackProvider: FeedbackProvider,
     private snackBarService: SnackBarService,
     private route: ActivatedRoute
@@ -103,6 +108,8 @@ export class FeedbackCreateComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
+    this.getKeysCollaborator();
+
     this.feedbackId = this.route.snapshot.paramMap.get('id');
     this.method = sessionStorage.getItem('feedback_method');
     this.getCollaboratorList();
@@ -128,6 +135,21 @@ export class FeedbackCreateComponent implements OnInit {
 
     this.setFormValue();
   }
+
+  async getKeysCollaborator() {
+    let data = {
+      key: ["reason_for_feedback"]
+    }
+    const arrays = await this.configProvider.findKeys('collaborator', data)
+
+    const keyList = arrays.reduce(function (array: any, register: any) {
+      array[register.key] = array[register.key] || [];
+      array[register.key].push({ id: register.id, value: register.value });
+      return array;
+    }, Object.create(null));
+    this.reasons = keyList['reason_for_feedback']
+  }
+
 
   async getCollaboratorList() {
     this.filteredCollaboratorList = this.collaborators =
@@ -198,7 +220,7 @@ export class FeedbackCreateComponent implements OnInit {
   private async _filterProject(name: string): Promise<void> {
     const data = {
       name: name
-    };    
+    };
     this.filteredProjects = await this.projectProvider.findByName(
       data
     );

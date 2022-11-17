@@ -10,7 +10,6 @@ import {
   MinLength,
 } from 'class-validator';
 import { CollaboratorsEntity } from 'src/app/collaborators/collaborators.entity';
-import { degreeOfInfluence } from './degree-of-influence.enum';
 
 export class CreateLanguagesDto {
   @ApiProperty()
@@ -21,8 +20,7 @@ export class CreateLanguagesDto {
 
   @ApiProperty()
   @IsNotEmpty()
-  @IsEnum(degreeOfInfluence)
-  degreeOfInfluence: degreeOfInfluence;
+  degreeOfInfluence: string;
 
   @ApiProperty()
   @IsNotEmpty()

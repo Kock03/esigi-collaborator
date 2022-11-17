@@ -23,6 +23,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
 import { CollaboratorFinanceProvider } from 'src/providers/collaborator-providers/collaborator-finance.provider';
 import { CollaboratorProvider } from 'src/providers/collaborator-providers/collaborator.provider';
+import { ConfigProvider } from 'src/providers/config-provider';
 import { ConfirmDialogService } from 'src/services/confirn-dialog.service';
 import { SnackBarService } from 'src/services/snackbar.service';
 import { CollaboratorFinanceDialog } from './collaborator-finance-dialog.component';
@@ -46,7 +47,7 @@ export class CollaboratorFinanceTabComponent implements OnInit {
     'icon',
   ];
 
-  data: [] = [];
+  data: any[] = [];
 
   selectedIndex = 0;
 
@@ -57,26 +58,54 @@ export class CollaboratorFinanceTabComponent implements OnInit {
   collaboratorId!: any;
   fnanceId!: string;
   collaboratorMethod!: string;
+  reasons: any[] = [];
 
   constructor(
     private fb: FormBuilder,
     public dialog: MatDialog,
+    private configProvider: ConfigProvider,
+
     private collaboratorFinanceProvider: CollaboratorFinanceProvider,
     private dialogService: ConfirmDialogService, private snackbarService: SnackBarService,
     private collaboratorProvider: CollaboratorProvider,
   ) { }
 
   ngOnInit(): void {
+    this.getKeysCollaborator();
     this.collaboratorMethod = sessionStorage.getItem('collaborator_method')!;
     if (this.collaboratorMethod === 'edit') {
+      this.getKeysCollaborator();
+
       this.getFinanceList();
     }
   }
+
+  async getKeysCollaborator() {
+    let data = {
+      key: ["payment_reason"]
+    }
+    const arrays = await this.configProvider.findKeys('collaborator', data)
+
+    const keyList = arrays.reduce(function (array: any, register: any) {
+      array[register.key] = array[register.key] || [];
+      array[register.key].push({ id: register.id, value: register.value });
+      return array;
+    }, Object.create(null));
+    this.reasons = keyList['payment_reason']
+  }
+
 
 
   async getFinanceList() {
     this.collaboratorId = sessionStorage.getItem('collaborator_id');
     this.data = await this.collaboratorFinanceProvider.findByCollaborator(this.collaboratorId);
+    for (let i = 0; i < this.data.length; i++) {
+      for (let j = 0; j < this.reasons.length; j++) {
+        if (this.data[i].reason === this.reasons[j].id) {
+          this.data[i].reason = this.reasons[j].value
+        }
+      }
+    }
   }
 
 
@@ -100,15 +129,16 @@ export class CollaboratorFinanceTabComponent implements OnInit {
     this.onChange.next(true);
   }
 
-  getFinance(financeSelected: any, id: string) {
+  async getFinance(financeSelected: any, id: string) {
     this.method = 'edit';
     sessionStorage.setItem('method', this.method);
     this.fnanceId = id;
+    const finance = await this.collaboratorFinanceProvider.findOne(id)
     sessionStorage.setItem('finance_id', this.fnanceId);
     const dialogRef = this.dialog.open(CollaboratorFinanceDialog, {
       width: '500px',
       height: '550px',
-      data: financeSelected,
+      data: finance,
     });
 
     dialogRef.afterClosed().subscribe(finance => {

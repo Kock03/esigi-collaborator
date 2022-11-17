@@ -36,13 +36,7 @@
           <mat-form-field appearance="outline">
             <mat-label>{{'collaborator.colaborator_create.finance.reason.name' | translate}}</mat-label>
             <mat-select formControlName="reason">
-              <mat-option [value]="1">{{'collaborator.colaborator_create.finance.reason.hiring' | translate}}
-              </mat-option>
-              <mat-option [value]="2">{{'collaborator.colaborator_create.finance.reason.recognition' | translate}}
-              </mat-option>
-              <mat-option [value]="3">{{'collaborator.colaborator_create.finance.reason.home_time' | translate}}
-              </mat-option>
-              <mat-option [value]="4">{{'collaborator.colaborator_create.finance.reason.retention' | translate}}
+              <mat-option *ngFor="let reason of reasons" [value]="reason.id">{{ reason.value }}
               </mat-option>
             </mat-select>
             <mat-error *ngIf="financeForm &&

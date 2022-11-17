@@ -17,6 +17,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DateValidator } from 'src/app/validators/date.validator';
 import { DocumentValidator } from 'src/app/validators/document.validator';
 import { CollaboratorDependentsProvider } from 'src/providers/collaborator-providers/collaborator-dependents.provider';
+import { ConfigProvider } from 'src/providers/config-provider';
 
 export const PICK_FORMATS = {
   parse: { dateInput: { month: 'numeric', year: 'numeric', day: 'numeric' } },
@@ -51,7 +52,9 @@ export class CollaboratorDependentsDialog {
   @Output() onChange: EventEmitter<any> = new EventEmitter();
 
 
-
+  gender: any[] = []
+  ddi: any[] = []
+  type: any[] = []
   dependentForm!: FormGroup;
   Date: any;
   collaboratorId!: string | null;
@@ -60,11 +63,15 @@ export class CollaboratorDependentsDialog {
   constructor(
     public dialogRef: MatDialogRef<CollaboratorDependentsDialog>,
     private fb: FormBuilder,
+    private configProvider: ConfigProvider,
+
     private collaboratorDependentsProvider: CollaboratorDependentsProvider,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) { }
 
   ngOnInit(): void {
+    this.getKeysCollaborator();
+    this.getKeysGeneric();
     this.method = sessionStorage.getItem('method')!;
     this.collaboratorId = sessionStorage.getItem('collaborator_id')!;
     this.initForm();
@@ -72,14 +79,14 @@ export class CollaboratorDependentsDialog {
 
   initForm(): void {
     this.dependentForm = this.fb.group({
-      type: [null, Validators.required],
+      type: ['', Validators.required],
       firstName: [null, Validators.required],
       lastName: [null, Validators.required],
-      gender: [null, Validators.required],
+      gender: ["", Validators.required],
       cpf: [null, [DocumentValidator.isValidCpf()]],
       birthDate: this.fb.control({ value: ' ', disabled: false }, [DateValidator.isValidData(), Validators.required]),
       age: this.fb.control({ value: ' ', disabled: true }),
-      ddi: [null],
+      ddi: [""],
       ddd: [null],
       phoneNumber: [null],
       email: [null, [Validators.email]],
@@ -88,10 +95,36 @@ export class CollaboratorDependentsDialog {
     if (this.data) {
       this.dependentForm.patchValue(this.data);
     }
+  }
 
+  async getKeysGeneric() {
+    let data = {
+      key: ["ddi"]
+    }
+    const arrays = await this.configProvider.findKeys('generic', data)
 
+    const keyList = arrays.reduce(function (array: any, register: any) {
+      array[register.key] = array[register.key] || [];
+      array[register.key].push({ id: register.id, value: register.value });
+      return array;
+    }, Object.create(null));
+    this.ddi = keyList['ddi'];
 
+  }
 
+  async getKeysCollaborator() {
+    let data = {
+      key: ["gender", "depentents"]
+    }
+    const arrays = await this.configProvider.findKeys('collaborator', data)
+
+    const keyList = arrays.reduce(function (array: any, register: any) {
+      array[register.key] = array[register.key] || [];
+      array[register.key].push({ id: register.id, value: register.value });
+      return array;
+    }, Object.create(null));
+    this.gender = keyList['gender'];
+    this.type = keyList['depentents']
   }
 
 
@@ -125,7 +158,7 @@ export class CollaboratorDependentsDialog {
         console.log(error);
       }
     }
-    
+
   }
 
   setValueYears() {
@@ -135,11 +168,11 @@ export class CollaboratorDependentsDialog {
     const birthDate = new Date(data);
     let age = today.getFullYear() - birthDate.getFullYear();
     const m = today.getMonth() - birthDate.getMonth();
-    
+
     if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-        age--;
+      age--;
     }
-    if(data === NaN || age === NaN) {
+    if (data === NaN || age === NaN) {
       age = 0
     }
     this.dependentForm.controls['age'].setValue(

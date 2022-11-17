@@ -9,8 +9,7 @@ import {
   MinLength,
 } from 'class-validator';
 import { CollaboratorsEntity } from 'src/app/collaborators/collaborators.entity';
-import { Schooling } from './schooling.enum';
-import { Situation } from './situation.enum';
+
 
 export class UpdateEducationsDto {
   @ApiProperty()
@@ -20,8 +19,7 @@ export class UpdateEducationsDto {
 
   @ApiProperty()
   @IsOptional()
-  @IsEnum(Schooling)
-  schooling: Schooling;
+  schooling: string;
 
   @ApiProperty()
   @IsOptional()
@@ -30,8 +28,7 @@ export class UpdateEducationsDto {
 
   @ApiProperty()
   @IsOptional()
-  @IsEnum(Situation)
-  situation: Situation;
+  situation: string;
 
   @ApiProperty()
   @IsOptional()

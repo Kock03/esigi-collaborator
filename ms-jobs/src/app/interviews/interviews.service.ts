@@ -1,4 +1,5 @@
-import { HttpService } from '@nestjs/common';
+// import { HttpService } from '@nestjs/common';
+import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { join } from 'path/posix';
@@ -21,7 +22,7 @@ export class InterviewsService {
     @InjectRepository(InterviewsEnitiy)
     private readonly interviewsRepository: Repository<InterviewsEnitiy>,
     private httpService: HttpService,
-  ) {}
+  ) { }
 
   async findAll() {
     const options: FindManyOptions = {
@@ -47,10 +48,10 @@ export class InterviewsService {
     try {
       const interviews = await this.interviewsRepository.query(
         'select interviews_enitiy.id,interviews_enitiy.name_candidate, b.behavioral_interview_date,t.technical_interview_date, j.collaborator_requester_id, j.status from interviews_enitiy left join behavioral_interviews_entity b on interviews_enitiy.behavioral_interviews_id = b.id left join technical_interviews_entity t on interviews_enitiy.technical_interviews_id = t.id left join jobs_entity j on interviews_enitiy.job_id = j.id where interviews_enitiy.job_id = ' +
-          '"' +
-          id +
-          '"' +
-          'and interviews_enitiy.deleted_at is null ',
+        '"' +
+        id +
+        '"' +
+        'and interviews_enitiy.deleted_at is null ',
       );
       const collaboratorIdList = interviews.map((interview) => {
         return interview.collaborator_requester_id;

@@ -11,14 +11,11 @@ import {
   MinLength,
 } from 'class-validator';
 import { CollaboratorsEntity } from 'src/app/collaborators/collaborators.entity';
-import { Gender } from 'src/app/collaborators/dtos/gender.enum';
-import { Type } from './type.enum';
 
 export class UpdateDependentsDto {
   @ApiProperty()
   @IsOptional()
-  @IsEnum(Type)
-  type: Type;
+  type: string;
 
   @ApiProperty()
   @IsOptional()
@@ -34,8 +31,7 @@ export class UpdateDependentsDto {
 
   @ApiProperty()
   @IsOptional()
-  @IsEnum(Gender)
-  gender: Gender;
+  gender: string;
 
   @ApiProperty()
   @IsOptional()
@@ -68,8 +64,7 @@ export class UpdateDependentsDto {
   @ApiProperty()
   @IsOptional()
   @IsString()
-  @MinLength(2)
-  @MaxLength(2)
+
   ddi: string;
 
   @ApiProperty()

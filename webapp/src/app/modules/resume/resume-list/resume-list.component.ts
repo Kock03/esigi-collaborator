@@ -46,6 +46,7 @@ export class ResumeListComponent implements OnInit {
   form!: FormGroup;
   resume!: any;
   filename!: string;
+  token!: string;
 
   constructor(
     private liveAnnouncer: LiveAnnouncer,
@@ -164,7 +165,7 @@ export class ResumeListComponent implements OnInit {
     }
   }
 
-  goHome(port: number): void {
-    location.replace(`http://localhost:${port}/portal`);
+  goHome(): void {
+    location.replace(`http://192.168.8.184:3406/validate/${this.token}`);
   }
 }

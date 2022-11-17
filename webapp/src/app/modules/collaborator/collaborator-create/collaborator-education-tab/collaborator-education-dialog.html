@@ -2,87 +2,69 @@
   <div class="content-scroll" *ngIf="educationForm">
     <div class="content-header" fxLayout="row">
       <h2 class="title-content" mat-dialog-title>{{'generic.education.schooling.name' | translate}}</h2>
-        <button mat-icon-button class="mat-icon-content" (click)="close()" >
-          <mat-icon >cancel</mat-icon>
-        </button>
+      <button mat-icon-button class="mat-icon-content" (click)="close()">
+        <mat-icon>cancel</mat-icon>
+      </button>
     </div>
-  <div class="dialog-content">
-  <mat-dialog-content class="mat-typography">
-    <form [formGroup]="educationForm" fxLayout="column">
-      <div fxFlex="100" fxLayoutGap="16px">
-        <mat-form-field fxFlex="50" appearance="outline">
-          <mat-label>{{'generic.education.schooling.name' | translate}}</mat-label>
-          <mat-select formControlName="schooling">
-            <mat-option [value]="1">{{'generic.education.schooling.type.elementary_school' | translate}}</mat-option>
-            <mat-option [value]="2">{{'generic.education.schooling.type.high_school' | translate}}</mat-option>
-            <mat-option [value]="3">{{'generic.education.schooling.type.university_education' | translate}}</mat-option>
-          </mat-select>
-          <mat-error *ngIf="educationForm &&
+    <div class="dialog-content">
+      <mat-dialog-content class="mat-typography">
+        <form [formGroup]="educationForm" fxLayout="column">
+          <div fxFlex="100" fxLayoutGap="16px">
+            <mat-form-field fxFlex="50" appearance="outline">
+              <mat-label>{{'generic.education.schooling.name' | translate}}</mat-label>
+              <mat-select matInput disableRipple formControlName="schooling">
+                <mat-option *ngFor="let schooling of schooling" [value]="schooling.id">{{ schooling.value }}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="educationForm &&
             educationForm.controls['schooling'].hasError('required')">
-              {{'validators.validator-required' |  translate}} </mat-error>
-        </mat-form-field>
+                {{'validators.validator-required' | translate}} </mat-error>
+            </mat-form-field>
 
-        <mat-form-field fxFlex="50" appearance="outline">
-          <mat-label>{{'generic.education.schooling.course' | translate}}</mat-label>
-          <input
-            matInput
-            disableRipple
-            formControlName="course"
-            placeholder="Curso" />
-            <mat-error *ngIf="educationForm &&
+            <mat-form-field fxFlex="50" appearance="outline">
+              <mat-label>{{'generic.education.schooling.course' | translate}}</mat-label>
+              <input matInput disableRipple formControlName="course" placeholder="Curso" />
+              <mat-error *ngIf="educationForm &&
             educationForm.controls['course'].hasError('required')">
-              {{'validators.validator-required' | translate}}
-            </mat-error>
-        </mat-form-field>
-      </div>
+                {{'validators.validator-required' | translate}}
+              </mat-error>
+            </mat-form-field>
+          </div>
 
-        <mat-form-field appearance="outline">
-          <mat-label>{{'generic.education.schooling.institution' | translate}}</mat-label>
-          <input
-            matInput
-            disableRipple
-            formControlName="institution"
-            placeholder="Instituição" />
+          <mat-form-field appearance="outline">
+            <mat-label>{{'generic.education.schooling.institution' | translate}}</mat-label>
+            <input matInput disableRipple formControlName="institution" placeholder="Instituição" />
             <mat-error *ngIf="educationForm &&
             educationForm.controls['institution'].hasError('required')">
               {{'validators.validator-required' | translate}}
             </mat-error>
-        </mat-form-field>
+          </mat-form-field>
 
-        <mat-form-field appearance="outline">
-          <mat-label>{{'generic.education.schooling.situation.name' | translate}}</mat-label>
-          <mat-select formControlName="situation">
-            <mat-option [value]="1">{{'generic.education.schooling.situation.stop' | translate}}</mat-option>
-            <mat-option [value]="2">{{'generic.education.schooling.situation.complete' | translate}}</mat-option>
-            <mat-option [value]="3">{{'generic.education.schooling.situation.in_progress' | translate}}</mat-option>
-          </mat-select>
-          <mat-error *ngIf="educationForm &&
+          <mat-form-field appearance="outline">
+            <mat-label>{{'generic.education.schooling.situation.name' | translate}}</mat-label>
+            <mat-select formControlName="situation">
+              <mat-option *ngFor="let situation of situation" [value]="situation.id">{{ situation.value }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="educationForm &&
           educationForm.controls['situation'].hasError('required')">
-            {{'validators.validator-required' | translate}}
-          </mat-error>
-        </mat-form-field>
-    </form>
-  </mat-dialog-content>
+              {{'validators.validator-required' | translate}}
+            </mat-error>
+          </mat-form-field>
+        </form>
+      </mat-dialog-content>
 
-  <mat-dialog-actions>
-    <div class="button-dialog">
-      <button
-        fxFlexAlign="center center"
-        mat-flat-button
-        mat-dialog-close
-        (click)="onNoClick()">
-        {{'generic.cancel_button' | translate}}
-      </button>
-      <button
-        [disabled]="educationForm.invalid"
-        mat-flat-button
-        color="primary"
-        [mat-dialog-close]="true"
-        (click)="save()">
-        {{'generic.save_button' | translate}}
-      </button>
+      <mat-dialog-actions>
+        <div class="button-dialog">
+          <button fxFlexAlign="center center" mat-flat-button mat-dialog-close (click)="onNoClick()">
+            {{'generic.cancel_button' | translate}}
+          </button>
+          <button [disabled]="educationForm.invalid" mat-flat-button color="primary" [mat-dialog-close]="true"
+            (click)="save()">
+            {{'generic.save_button' | translate}}
+          </button>
+        </div>
+      </mat-dialog-actions>
     </div>
-  </mat-dialog-actions>
-</div>
-</div>
+  </div>
 </div>

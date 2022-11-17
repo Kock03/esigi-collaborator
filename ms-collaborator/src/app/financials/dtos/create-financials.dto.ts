@@ -9,7 +9,6 @@ import {
   MinLength,
 } from 'class-validator';
 import { CollaboratorsEntity } from 'src/app/collaborators/collaborators.entity';
-import { Reasons } from './contract-reasons.enum';
 import { ContractTypes } from './contract-types.enum';
 
 export class CreateFinancialsDto {
@@ -24,8 +23,7 @@ export class CreateFinancialsDto {
 
   @ApiProperty()
   @IsNotEmpty()
-  @IsEnum(Reasons)
-  reason: Reasons;
+  reason: string;
 
   @ApiProperty()
   @IsNotEmpty()

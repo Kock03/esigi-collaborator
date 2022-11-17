@@ -2,6 +2,7 @@ import { Component, Input, Output, EventEmitter, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CollaboratorEducationProvider } from 'src/providers/collaborator-providers/collaborator-education.provider';
+import { ConfigProvider } from 'src/providers/config-provider';
 
 @Component({
   selector: 'collaborator-education-dialog',
@@ -16,15 +17,20 @@ export class CollaboratorEducationDialog {
   method!: string;
   collaboratorId!: string | null;
   educationId!: string | null;
+  schooling: any[] = [];
+  situation: any[] = [];
 
   constructor(
     public dialogRef: MatDialogRef<CollaboratorEducationDialog>,
     private collaboratorEducationProvider: CollaboratorEducationProvider,
+    private configProvider: ConfigProvider,
+
     private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) { }
 
   ngOnInit(): void {
+    this.getKeysCollaborator();
     this.method = sessionStorage.getItem('method')!;
     this.collaboratorId = sessionStorage.getItem('collaborator_id')!;
     this.initForm();
@@ -32,8 +38,8 @@ export class CollaboratorEducationDialog {
 
   initForm(): void {
     this.educationForm = this.fb.group({
-      schooling: [null, Validators.required],
-      situation: [null, Validators.required],
+      schooling: ["", Validators.required],
+      situation: ["", Validators.required],
       course: [null, [Validators.required, Validators.maxLength(100)]],
       institution: [null, [Validators.required, Validators.maxLength(100)]],
       Collaborator: { id: this.collaboratorId },
@@ -41,6 +47,22 @@ export class CollaboratorEducationDialog {
     if (this.data) {
       this.educationForm.patchValue(this.data);
     }
+  }
+
+
+  async getKeysCollaborator() {
+    let data = {
+      key: ["schooling", "status_instruction"]
+    }
+    const arrays = await this.configProvider.findKeys('collaborator', data)
+
+    const keyList = arrays.reduce(function (array: any, register: any) {
+      array[register.key] = array[register.key] || [];
+      array[register.key].push({ id: register.id, value: register.value });
+      return array;
+    }, Object.create(null));
+    this.schooling = keyList['schooling'];
+    this.situation = keyList['status_instruction']
   }
 
   ngAfterViewInit(): void { }

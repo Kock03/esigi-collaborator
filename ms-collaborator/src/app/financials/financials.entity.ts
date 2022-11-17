@@ -12,7 +12,6 @@ import {
   BeforeInsert,
   BeforeUpdate,
 } from 'typeorm';
-import { Reasons } from './dtos/contract-reasons.enum';
 import { ContractTypes } from './dtos/contract-types.enum';
 
 @Entity()
@@ -26,8 +25,8 @@ export class FinancialsEntity {
   @Column()
   value: number;
 
-  @Column({ type: 'int' })
-  reason: Reasons;
+  @Column()
+  reason: string;
 
   @Column()
   payday: string;
@@ -41,7 +40,7 @@ export class FinancialsEntity {
   @ManyToOne(
     () => CollaboratorsEntity,
     (collaborator) => collaborator.Financials,
-    { onDelete: 'CASCADE'},
+    { onDelete: 'CASCADE' },
   )
   Collaborator: CollaboratorsEntity;
 

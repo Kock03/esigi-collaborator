@@ -9,6 +9,7 @@ import {
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CollaboratorBankProvider } from 'src/providers/collaborator-providers/collaborator-bank.provider';
+import { ConfigProvider } from 'src/providers/config-provider';
 
 @Component({
   selector: 'collaborator-bank-dialog',
@@ -20,6 +21,8 @@ export class CollaboratorBankDialog {
   @Input('form') collaboratorForm!: FormGroup;
   @Output() onChange: EventEmitter<any> = new EventEmitter();
 
+  banks: any[] = [];
+  type: any[] = [];
   bankForm!: FormGroup;
   collaborator!: any;
   collaboratorId!: string | null;
@@ -29,11 +32,15 @@ export class CollaboratorBankDialog {
   constructor(
     public dialogRef: MatDialogRef<CollaboratorBankDialog>,
     private fb: FormBuilder,
+    private configProvider: ConfigProvider,
+
     private collaboratorBankProvider: CollaboratorBankProvider,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) { }
 
   ngOnInit(): void {
+    this.getKeysCollaborator();
+
     this.method = sessionStorage.getItem('method')!;
     this.collaboratorId = sessionStorage.getItem('collaborator_id')!;
     this.initForm();
@@ -41,9 +48,9 @@ export class CollaboratorBankDialog {
 
   initForm(): void {
     this.bankForm = this.fb.group({
-      bank: [null, [Validators.required, Validators.maxLength(50)]],
+      bank: ["", [Validators.required, Validators.maxLength(50)]],
       agency: [null, [Validators.required, Validators.maxLength(4)]],
-      accountType: [null, Validators.required],
+      accountType: ["", Validators.required],
       accountNumber: [null, [Validators.required, Validators.maxLength(5)]],
       digit: [null],
       bankAccountDigit: [null, Validators.required],
@@ -54,6 +61,21 @@ export class CollaboratorBankDialog {
     if (this.data) {
       this.bankForm.patchValue(this.data);
     }
+  }
+
+  async getKeysCollaborator() {
+    let data = {
+      key: ["banks", "account_types"]
+    }
+    const arrays = await this.configProvider.findKeys('collaborator', data)
+
+    const keyList = arrays.reduce(function (array: any, register: any) {
+      array[register.key] = array[register.key] || [];
+      array[register.key].push({ id: register.id, value: register.value });
+      return array;
+    }, Object.create(null));
+    this.banks = keyList['banks'];
+    this.type = keyList['account_types']
   }
 
   onNoClick(): void {
@@ -88,7 +110,7 @@ export class CollaboratorBankDialog {
 
   }
 
-  
+
   close() {
     this.dialogRef.close();
     sessionStorage.clear;

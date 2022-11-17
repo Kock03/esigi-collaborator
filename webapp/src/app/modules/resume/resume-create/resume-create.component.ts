@@ -137,7 +137,7 @@ export class ResumeCreateComponent implements OnInit {
       this.handleStep(2);
       this.snackbarService.successMessage('Currículo cadastrado com sucesso');
     } catch (error: any) {
-      console.log('ERROR 132' + error);
+      console.log( error);
       this.snackbarService.showError('Falha ao Cadastrar');
     }
   }

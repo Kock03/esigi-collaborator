@@ -18,6 +18,7 @@ import { DateValidator } from 'src/app/validators/date.validator';
 import { DocumentValidator } from 'src/app/validators/document.validator';
 import { CollaboratorFinanceProvider } from 'src/providers/collaborator-providers/collaborator-finance.provider';
 import { CollaboratorProvider } from 'src/providers/collaborator-providers/collaborator.provider';
+import { ConfigProvider } from 'src/providers/config-provider';
 
 export const PICK_FORMATS = {
   parse: { dateInput: { month: 'numeric', year: 'numeric', day: 'numeric' } },
@@ -56,16 +57,19 @@ export class CollaboratorFinanceDialog {
   method!: string | null;
   financeId!: string | null;
   type!: number;
+  reasons: any[] = [];
 
   constructor(
     public dialogRef: MatDialogRef<CollaboratorFinanceDialog>,
     private fb: FormBuilder,
+    private configProvider: ConfigProvider,
     private collaboratorFinanceProvider: CollaboratorFinanceProvider,
     private collaboratorProvider: CollaboratorProvider,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) { }
 
   async ngOnInit() {
+    this.getKeysCollaborator();
     this.method = sessionStorage.getItem('method')!;
     this.type = Number(sessionStorage.getItem('type'))
     console.log(this.type)
@@ -91,6 +95,19 @@ export class CollaboratorFinanceDialog {
     }
   }
 
+  async getKeysCollaborator() {
+    let data = {
+      key: ["payment_reason"]
+    }
+    const arrays = await this.configProvider.findKeys('collaborator', data)
+
+    const keyList = arrays.reduce(function (array: any, register: any) {
+      array[register.key] = array[register.key] || [];
+      array[register.key].push({ id: register.id, value: register.value });
+      return array;
+    }, Object.create(null));
+    this.reasons = keyList['payment_reason']
+  }
 
   onNoClick(): void {
     this.dialogRef.close();
