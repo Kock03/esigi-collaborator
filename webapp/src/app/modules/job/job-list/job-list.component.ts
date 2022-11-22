@@ -52,6 +52,7 @@ export class JobListComponent implements OnInit {
   filteredJobList = new MatTableDataSource();
   method: any;
   token!: string;
+  job!: any;
 
   constructor(
     private liveAnnouncer: LiveAnnouncer,
@@ -109,7 +110,7 @@ export class JobListComponent implements OnInit {
 
   }
 
-  editJob(jobId: any, customerId: any, collaboratorRequesterId: any) {
+  async editJob(jobId: any, customerId: any, collaboratorRequesterId: any) {
     sessionStorage.setItem('customer_id', customerId);
     sessionStorage.setItem('collaboratorRequester_id', collaboratorRequesterId);
     this.method = sessionStorage.setItem('job_method', 'edit');
@@ -160,7 +161,8 @@ export class JobListComponent implements OnInit {
   }
 
   goHome(): void {
-    location.replace(`http://192.168.8.184:3406/validate/${this.token}`);
+    // location.replace(`http://192.168.8.184:3406/validate/${this.token}`);
+    location.replace(`http://localhost:3406/validate/${this.token}`)
   }
 
 }
