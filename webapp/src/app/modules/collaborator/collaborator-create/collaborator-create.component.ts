@@ -188,6 +188,7 @@ export class CollaboratorCreateComponent implements OnInit {
         state: this.collaborator?.Address.state,
         city: this.collaborator?.Address.city,
         street: this.collaborator?.Address.street,
+        number: this.collaborator?.Address.number,
         district: this.collaborator?.Address.district,
       })
       this.searchCities({ value: this.collaborator?.Address.state })

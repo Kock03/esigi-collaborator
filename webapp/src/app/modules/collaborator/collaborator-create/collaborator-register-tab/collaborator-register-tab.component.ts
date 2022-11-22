@@ -188,27 +188,28 @@ export class CollaboratorRegisterTabComponent implements OnInit {
     return o1.id === o2.id;
   }
 
-  async getAddress() {
-    const address = this.collaboratorForm.controls['Address'].value;
-    const district = await this.cepService.findDistrict(
-      address.cep.replace('-', '')
-    );
+  // async getAddress() {
+  //   const address = this.collaboratorForm.controls['Address'].value;
+  //   const district = await this.cepService.findDistrict(
+  //     address.cep.replace('-', '')
+  //   );
 
-    if (district.erro) {
-      window.alert('Cep inválido');
-      this.collaboratorForm.controls['Address'].reset();
-      this.view = true;
-    } else {
-      this.view = false;
-      this.collaboratorForm.controls['Address'].patchValue({
-        cep: district.cep,
-        city: district.localidade,
-        street: district.logradouro,
-        state: district.uf,
-        district: district.bairro,
-      });
-    }
-  }
+  //   if (district.erro) {
+  //     window.alert('Cep inválido');
+  //     this.collaboratorForm.controls['Address'].reset();
+  //     this.view = true;
+  //   } else {
+  //     this.view = false;
+  //     this.collaboratorForm.controls['Address'].patchValue({
+  //       cep: district.cep,
+  //       city: district.localidade,
+  //       street: district.logradouro,
+  //       state: district.state,
+  //       district: district.bairro,
+  //     });
+  //     this.searchCities({value: this.data.state})
+  //   }
+  // }
 
  async searchCep() {
     this.data = await this.cepService.searchCep(this.addressForm.controls['cep'].value);
@@ -216,10 +217,10 @@ export class CollaboratorRegisterTabComponent implements OnInit {
       cep: this.data.cep,
       city: this.data.localidade,
       street: this.data.logradouro,
-      state: this.data.uf,
+      state: this.data.state,
       district: this.data.bairro,
     });
-    this.searchCities({value: this.data.uf})
+    this.searchCities({value: this.data.state})
     if(this.data.erro == true){
       window.alert('Cep inválido');
     }
