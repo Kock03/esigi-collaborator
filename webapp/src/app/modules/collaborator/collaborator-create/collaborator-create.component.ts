@@ -10,7 +10,9 @@ import { DocumentValidator } from 'src/app/validators/document.validator';
 import { CollaboratorProvider } from 'src/providers/collaborator-providers/collaborator.provider';
 import { UserProvider } from 'src/providers/user.provider';
 import { RequireMatch } from 'src/services/autocomplete.service';
+import { CepService } from 'src/services/cep.service';
 import { SnackBarService } from 'src/services/snackbar.service';
+import { StatesAndCities } from 'src/services/states-cities.service';
 
 @Component({
   selector: 'app-collaborator-create',
@@ -28,6 +30,7 @@ export class CollaboratorCreateComponent implements OnInit {
   countryControl = new FormControl('', [Validators.required, RequireMatch]);
   country: any;
   loginControl = new FormControl();
+  cityControl = new FormControl('', [Validators.required, RequireMatch]);
   method: any;
   Educations: any;
   Languages: any;
@@ -42,6 +45,10 @@ export class CollaboratorCreateComponent implements OnInit {
   urlStep!: number;
   valid!: boolean;
   typeOfContract!: any;
+  city!: string | null;
+  view!: boolean;
+  addressForm!: FormGroup;
+  data!: any;
   validations = [
     [
       'admissionDate',
@@ -60,6 +67,7 @@ export class CollaboratorCreateComponent implements OnInit {
     ],
 
   ];
+  cityList: Array<any> = [];;
 
   constructor(
     private fb: FormBuilder,
@@ -67,7 +75,9 @@ export class CollaboratorCreateComponent implements OnInit {
     private userProvider: UserProvider,
     private router: Router,
     private snackbarService: SnackBarService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private cepService: CepService,
+    private statesAndCities: StatesAndCities
   ) { }
 
   async ngOnInit(): Promise<void> {
@@ -93,7 +103,9 @@ export class CollaboratorCreateComponent implements OnInit {
       this.collaborator = await this.collaboratorProvider.findOne(
         this.collaboratorId
       );
+      console.log("🚀 ~ file: collaborator-create.component.ts ~ line 96 ~ CollaboratorCreateComponent ~ getCollaborator ~ collaborator", this.collaborator)
       sessionStorage.setItem('type', this.collaborator.collaboratorTypes)
+      // this.collaboratorForm.controls['city'].setValue(this.collaborator.city)
 
     } catch (error) {
       console.error(error);
@@ -123,7 +135,7 @@ export class CollaboratorCreateComponent implements OnInit {
     }
   }
 
-  initForm() {
+  async initForm() {
     this.collaboratorForm = this.fb.group({
       firstNameCorporateName: [null, Validators.required],
       lastNameFantasyName: [null, Validators.required],
@@ -166,13 +178,89 @@ export class CollaboratorCreateComponent implements OnInit {
         district: ['', Validators.required],
       }),
     });
-
-
   }
 
   setFormValue() {
     if (this.collaborator) {
       this.collaboratorForm.patchValue(this.collaborator);
+      this.collaboratorForm.controls['Address'].patchValue({
+        cep: this.collaborator?.Address.cep,
+        state: this.collaborator?.Address.state,
+        city: this.collaborator?.Address.city,
+        street: this.collaborator?.Address.street,
+        number: this.collaborator?.Address.number,
+        district: this.collaborator?.Address.district,
+      })
+      this.searchCities({ value: this.collaborator?.Address.state })
+
+      // this.collaboratorForm.patchValue(this.city);
+      console.log("🚀 ~ file: collaborator-create.component.ts ~ line 176 ~ CollaboratorCreateComponent ~ setFormValue ~ collaborator", this.collaborator)
+    }
+  }
+
+  // async getAddress() {
+  //   const address = this.collaboratorForm.controls['Address'].value;
+  //   console.log("🚀 ~ file: collaborator-create.component.ts ~ line 195 ~ CollaboratorCreateComponent ~ getAddress ~ address", address)
+  //   // const district = await this.cepService.findDistrict(
+  //   //   address.cep.replace('-', '')
+  //   // );
+  //   // this.collaboratorForm.controls['Address'].patchValue({
+  //   //   cep: address.cep,
+  //   //   city: address.localidade,
+  //   //   street: address.logradouro,
+  //   //   state: address.uf,
+  //   //   district: address.bairro,
+  //   //   });
+  //   //   this.searchCities({value: address.uf})
+  //   this.data = await this.cepService.searchCep(address.cep);
+  //   console.log("🚀 ~ file: collaborator-create.component.ts ~ line 208 ~ CollaboratorCreateComponent ~ getAddress ~ this.data", this.data)
+  //   if (this.data.erro) {
+  //     window.alert('Cep inválido');
+  //     this.collaboratorForm.controls['Address'].reset();
+  //     this.view = true;
+  //   } else {
+  //     this.view = false;
+  //     // this.collaboratorForm.controls['Address'].patchValue({
+  //     //   cep: district.cep,
+  //     //   city: district.localidade,
+  //     //   street: district.logradouro,
+  //     //   state: district.uf,
+  //     //   district: district.bairro,
+  //     // this.data = await this.cepService.searchCep(this.addressForm.controls['cep'].value);
+  //     this.collaboratorForm.controls['Address'].patchValue({
+  //       cep: this.data.cep,
+  //       city: this.data.localidade,
+  //       street: this.data.logradouro,
+  //       state: this.data.uf,
+  //       district: this.data.bairro,
+  //     });
+  //     this.searchCities({ value: this.data.uf })
+  //     console.log("🚀 ~ file: collaborator-register-tab.component.ts ~ line 219 ~ CollaboratorRegisterTabComponent ~ getAddress ~ data", this.data)
+
+  //   }
+  // }
+
+  searchCities(e: any) {
+    const city = document.querySelector('#cities') as HTMLSelectElement;
+    let state_number = this.statesAndCities.json_cities.estados.length;
+    let j_index = -1;
+    for (var x = 0; x < state_number; x++) {
+      if (this.statesAndCities.json_cities.estados[x].sigla == e.value) {
+        j_index = x;
+      }
+    }
+    let line = {};
+    let arrayCity = Array<any>();
+    if (j_index != -1) {
+      this.statesAndCities.json_cities.estados[j_index].cidades.forEach(
+        cities => {
+          line = cities;
+          arrayCity.push(line);
+        }
+      );
+      this.cityList = arrayCity;
+    } else {
+      city.innerHTML = '';
     }
   }
 
@@ -272,7 +360,7 @@ export class CollaboratorCreateComponent implements OnInit {
     }
     return isValid;
   }
-  
+
 }
 
 
