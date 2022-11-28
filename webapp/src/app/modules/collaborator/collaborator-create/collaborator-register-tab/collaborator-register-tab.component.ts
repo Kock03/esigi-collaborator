@@ -84,12 +84,20 @@ export class CollaboratorRegisterTabComponent implements OnInit {
         this.phoneForm = phoneForm;
         phoneForm.controls['ddi'].valueChanges.subscribe(res => {});
       });
-    } else {
+    }else {
+      this.searchEnabled = true,
+    console.log("🚀 ~ file: collaborator-register-tab.component.ts ~ line 133 ~ CollaboratorRegisterTabComponent ~ onCountrySelected ~ this.searchEnabled", this.searchEnabled)
+
       let collaborator = await this.collaboratorProvider.findOne(
         this.collaboratorId
-      );
+        );
+      this.collaboratorForm.patchValue(collaborator);
+      this.searchCities({ value: collaborator?.Address.state });
+      
       this.url = `http://localhost:3000/${collaborator.photo}`;
       this.view = false;
+
+      
       this.changesType(
         this.collaboratorForm.controls['collaboratorTypes'].value
       );
@@ -99,23 +107,9 @@ export class CollaboratorRegisterTabComponent implements OnInit {
         alpha2Code: sessionStorage.getItem('flag_value'),
       };
     }
-    // this.url =  this.httpClient
-    //   .get(`http://localhost:3000/permiss%C3%83%C2%B5es_1664382905117.png.${this.token}`, {
-    //     headers: {
-    //       authorization: `Bearer ${this.token}`,
-    //     },
-    //   },)
-    //   .subscribe(resposta => {
-    //     if (resposta) {
-    //     console.log("🚀 ~ file: collaborator-register-tab.component.ts ~ line 107 ~ CollaboratorRegisterTabComponent ~ ngOnInit ~ resposta", resposta)
-
-    //     }
-    //   });
-    // console.log("🚀 ~ file: collaborator-register-tab.component.ts ~ line 111 ~ CollaboratorRegisterTabComponent ~ ngOnInit ~  this.url = ",  this.url )
   }
 
   onCountrySelected(country: any) {
-    console.log("🚀 ~ file: collaborator-register-tab.component.ts ~ line 117 ~ CollaboratorRegisterTabComponent ~ onCountrySelected ~ country", country)
     if (this.collaboratorId == 'novo') {
       if (country.name === 'Brasil') {
         this.view = true;

@@ -141,7 +141,7 @@
           </mat-form-field>
           <mat-form-field fxFlex="15" appearance="outline" formGroupName="Phone">
             <mat-label>{{'generic.phone.ddi'|translate}}</mat-label>
-            <input [disabled]="true" matInput placeholder="DDI" formControlName="ddi"  />
+            <input  matInput placeholder="DDI" formControlName="ddi"  />
             <mat-error *ngIf="phoneForm &&
               phoneForm.controls['ddi'].hasError('required')">
               {{'validators.validator-required' | translate}}
