@@ -26,7 +26,5 @@ export class UpdatePhoneDto {
   @ApiProperty()
   @IsOptional()
   @IsString()
-  @MinLength(2)
-  @MaxLength(2)
   ddi: string;
 }

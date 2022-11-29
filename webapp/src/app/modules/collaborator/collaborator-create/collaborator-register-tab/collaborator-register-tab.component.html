@@ -83,8 +83,8 @@
         <mat-form-field fxFlex="25" appearance="outline">
           <mat-label>{{'generic.gender.name'|translate}}</mat-label>
           <mat-select matInput disableRipple formControlName="gender">
-            <mat-option [value]="1">{{'generic.gender.feminine'|translate}}</mat-option>
-            <mat-option [value]="2">{{'generic.gender.masculine'|translate}}</mat-option>
+            <mat-option *ngFor="let gender of gender" [value]="gender.id">{{ gender.value }}</mat-option>
+
           </mat-select>
           <mat-error *ngIf="collaboratorForm &&
             collaboratorForm.controls['gender'].hasError('required')">
@@ -128,11 +128,11 @@
           </mat-form-field>
           <mat-form-field fxFlex="35" appearance="outline">
             <mat-label>{{'generic.marital_status.name'|translate}}</mat-label>
-            <mat-select matInput formControlName="maritalStatus">
-              <mat-option [value]="1">{{'generic.marital_status.single'|translate}}</mat-option>
-              <mat-option [value]="2">{{'generic.marital_status.married'|translate}}</mat-option>
-              <mat-option [value]="3">{{'generic.marital_status.widower'|translate}}</mat-option>
-              <mat-option [value]="4">{{'generic.marital_status.stable_union'|translate}}</mat-option>
+            <mat-select matInput disableRipple formControlName="maritalStatus">
+              <mat-option *ngFor="let maritalStatus of maritalStatus" [value]="maritalStatus.id">{{ maritalStatus.value
+                }}
+              </mat-option>
+
             </mat-select>
             <mat-error *ngIf="collaboratorForm &&
             collaboratorForm.controls['maritalStatus'].hasError('required')">
@@ -141,7 +141,9 @@
           </mat-form-field>
           <mat-form-field fxFlex="15" appearance="outline" formGroupName="Phone">
             <mat-label>{{'generic.phone.ddi'|translate}}</mat-label>
-            <input  matInput placeholder="DDI" formControlName="ddi"  />
+            <mat-select matInput disableRipple formControlName="ddi">
+              <mat-option *ngFor="let ddi of ddi" [value]="ddi.id">{{ ddi.value }}</mat-option>
+            </mat-select>
             <mat-error *ngIf="phoneForm &&
               phoneForm.controls['ddi'].hasError('required')">
               {{'validators.validator-required' | translate}}
@@ -227,8 +229,8 @@
           </mat-error>
         </mat-form-field>
 
-        
-        <mat-form-field fxFlex="40" appearance="outline" *ngIf="this.view">
+
+        <mat-form-field fxFlex="40" appearance="outline"  *ngIf="searchEnabled === true">
           <mat-label>{{'generic.address.state'|translate}}</mat-label>
           <mat-select matInput disableRipple placeholder="Estado" formControlName="state" id="state"  (selectionChange)="searchCities($event)" >
             <mat-option [value]="'AC'">{{'generic.address.state_list.AC'|translate}}</mat-option>
@@ -248,7 +250,7 @@
             <mat-option [value]="'PB'">{{'generic.address.state_list.PB'|translate}}</mat-option>
             <mat-option [value]="'PR'">{{'generic.address.state_list.PR'|translate}}</mat-option>
             <mat-option [value]="'PE'">{{'generic.address.state_list.PE'|translate}}</mat-option>
-            <mat-option [value]="'PI'">{{'generic.address.state_list.PI'|translate}}</mat-option>
+            <mat-option [value]="'PI'">{{'generic.d.state_list.PI'|translate}}</mat-option>
             <mat-option [value]="'RJ'">{{'generic.address.state_list.RJ'|translate}}</mat-option>
             <mat-option [value]="'RN'">{{'generic.address.state_list.RN'|translate}}</mat-option>
             <mat-option [value]="'RS'">{{'generic.address.state_list.RS'|translate}}</mat-option>
@@ -264,31 +266,32 @@
           {{'validators.validator-required' | translate}}
         </mat-error>
       </mat-form-field>
-      <mat-form-field fxFlex="45" appearance="outline" *ngIf="this.view === false">
-        <mat-label>Estado</mat-label>
-        <input matInput placeholder="Nome" formControlName="state" />
-      </mat-form-field>
 
-      <!-- <mat-form-field fxFlex="40" appearance="outline" *ngIf="this.view">
-        <mat-label>{{'generic.address.city'|translate}}</mat-label>
-        <select matInput disableRipple id="cities" placeholder="Cidade" formControlName="city"></select>
-        <input style="display: none;" matInput placeholder="Nome" formControlName="city" />
+      <mat-form-field fxFlex="40" appearance="outline" *ngIf="searchEnabled === false">
+        <mat-label>{{'generic.address.state'|translate}}</mat-label>
+        <input matInput placeholder="Estado" formControlName="state" />
         <mat-error *ngIf="addressForm &&
-          addressForm.controls['city'].hasError('required')">
+          addressForm.controls['state'].hasError('required')">
           {{'validators.validator-required' | translate}}
         </mat-error>
       </mat-form-field>
-      <mat-form-field fxFlex="45" appearance="outline" *ngIf="this.view === false">
-        <mat-label>Cidade</mat-label>
-        <input matInput placeholder="Nome" formControlName="city" />
-      </mat-form-field> -->
-      <mat-form-field fxFlex="40" appearance="outline">
+
+      <mat-form-field fxFlex="40" appearance="outline" *ngIf="searchEnabled === true">
         <mat-label>{{'generic.address.city'|translate}}</mat-label>
         <mat-select id="cities" placeholder="Cidade" matInput disableRipple formControlName="city">
           <mat-option *ngFor="let cities of cityList" [value]="cities">
             {{cities}}
           </mat-option>
         </mat-select>
+        <mat-error *ngIf="addressForm &&
+          addressForm.controls['city'].hasError('required')">
+          {{'validators.validator-required' | translate}}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field fxFlex="40" appearance="outline" *ngIf="searchEnabled === false">
+        <mat-label>{{'generic.address.city'|translate}}</mat-label>
+        <input matInput placeholder="Cidade" formControlName="city" />
         <mat-error *ngIf="addressForm &&
           addressForm.controls['city'].hasError('required')">
           {{'validators.validator-required' | translate}}

@@ -1,6 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import {
   IsNotEmpty,
+  IsOptional,
   IsString,
   Length,
   MaxLength,
@@ -25,9 +26,7 @@ export class CreatePhoneDto {
   ddd: string;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
-  @MinLength(2)
-  @MaxLength(2)
   ddi: string;
 }

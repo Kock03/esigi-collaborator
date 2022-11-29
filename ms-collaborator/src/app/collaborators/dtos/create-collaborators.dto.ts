@@ -22,11 +22,9 @@ import { LanguagesEntity } from 'src/app/languages/languages.entity';
 import { PhoneEntity } from 'src/app/phone/phone.entity';
 import { SkillsEntity } from 'src/app/skills/skills.entity';
 import { CollaboratorTypes } from './types.enum';
-import { MaritalStatus } from './Marital-status.enum';
 import { DependentsEntity } from 'src/app/dependents/dependents.entity';
 import { FeedbacksEntity } from 'src/app/feedbacks/feedbacks.entity';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { Gender } from './gender.enum';
 
 export class CreateCollaboratorsDto {
   @ApiProperty()
@@ -48,13 +46,11 @@ export class CreateCollaboratorsDto {
   login: string;
 
   @ApiProperty()
-  @IsOptional()
   userId: string;
 
   @ApiProperty()
-  @IsNotEmpty()
-  @IsEnum(Gender)
-  gender: Gender;
+  @IsOptional()
+  gender: string;
 
   @ApiProperty()
   @IsNotEmpty()
@@ -75,8 +71,7 @@ export class CreateCollaboratorsDto {
 
   @ApiProperty()
   @IsNotEmpty()
-  @IsEnum(MaritalStatus)
-  maritalStatus: MaritalStatus;
+  maritalStatus: string;
 
   @ApiProperty()
   @IsOptional()
