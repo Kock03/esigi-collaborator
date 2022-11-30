@@ -142,7 +142,7 @@ export class CollaboratorCreateComponent implements OnInit {
       lastNameFantasyName: [null, Validators.required],
       login: [null, Validators.required],
       userId: [null],
-      gender: [null, Validators.required],
+      gender: [null],
       maritalStatus: [null, Validators.required],
       office: ['', Validators.required],
       collaboratorTypes: [null, Validators.required],
@@ -164,7 +164,7 @@ export class CollaboratorCreateComponent implements OnInit {
       Phone: this.fb.group({
         phoneNumber: [null, [Validators.required, Validators.maxLength(9)]],
         ddd: [null, [Validators.required, Validators.maxLength(2)]],
-        ddi: [null, Validators.required],
+        ddi: [null],
       }),
 
       Address: this.fb.group({
@@ -198,48 +198,6 @@ export class CollaboratorCreateComponent implements OnInit {
       console.log("🚀 ~ file: collaborator-create.component.ts ~ line 176 ~ CollaboratorCreateComponent ~ setFormValue ~ collaborator", this.collaborator)
     }
   }
-
-  // async getAddress() {
-  //   const address = this.collaboratorForm.controls['Address'].value;
-  //   console.log("🚀 ~ file: collaborator-create.component.ts ~ line 195 ~ CollaboratorCreateComponent ~ getAddress ~ address", address)
-  //   // const district = await this.cepService.findDistrict(
-  //   //   address.cep.replace('-', '')
-  //   // );
-  //   // this.collaboratorForm.controls['Address'].patchValue({
-  //   //   cep: address.cep,
-  //   //   city: address.localidade,
-  //   //   street: address.logradouro,
-  //   //   state: address.uf,
-  //   //   district: address.bairro,
-  //   //   });
-  //   //   this.searchCities({value: address.uf})
-  //   this.data = await this.cepService.searchCep(address.cep);
-  //   console.log("🚀 ~ file: collaborator-create.component.ts ~ line 208 ~ CollaboratorCreateComponent ~ getAddress ~ this.data", this.data)
-  //   if (this.data.erro) {
-  //     window.alert('Cep inválido');
-  //     this.collaboratorForm.controls['Address'].reset();
-  //     this.view = true;
-  //   } else {
-  //     this.view = false;
-  //     // this.collaboratorForm.controls['Address'].patchValue({
-  //     //   cep: district.cep,
-  //     //   city: district.localidade,
-  //     //   street: district.logradouro,
-  //     //   state: district.uf,
-  //     //   district: district.bairro,
-  //     // this.data = await this.cepService.searchCep(this.addressForm.controls['cep'].value);
-  //     this.collaboratorForm.controls['Address'].patchValue({
-  //       cep: this.data.cep,
-  //       city: this.data.localidade,
-  //       street: this.data.logradouro,
-  //       state: this.data.uf,
-  //       district: this.data.bairro,
-  //     });
-  //     this.searchCities({ value: this.data.uf })
-  //     console.log("🚀 ~ file: collaborator-register-tab.component.ts ~ line 219 ~ CollaboratorRegisterTabComponent ~ getAddress ~ data", this.data)
-
-  //   }
-  // }
 
   searchCities(e: any) {
     const city = document.querySelector('#cities') as HTMLSelectElement;
@@ -361,5 +319,4 @@ export class CollaboratorCreateComponent implements OnInit {
     }
     return isValid;
   }
-
 }

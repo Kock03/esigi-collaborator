@@ -12,14 +12,11 @@ import {
   MinLength,
 } from 'class-validator';
 import { CollaboratorsEntity } from 'src/app/collaborators/collaborators.entity';
-import { Gender } from 'src/app/collaborators/dtos/gender.enum';
-import { Type } from './type.enum';
 
 export class CreatedependentsDto {
   @ApiProperty()
   @IsNotEmpty()
-  @IsEnum(Type)
-  type: Type;
+  type: string;
 
   @ApiProperty()
   @IsNotEmpty()
@@ -35,8 +32,7 @@ export class CreatedependentsDto {
 
   @ApiProperty()
   @IsNotEmpty()
-  @IsEnum(Gender)
-  gender: Gender;
+  gender: string;
 
   @ApiProperty()
   @IsNotEmpty()
@@ -46,7 +42,7 @@ export class CreatedependentsDto {
 
   @ApiProperty()
   @IsNotEmpty()
-  birthDate:string;
+  birthDate: string;
 
   @ApiProperty()
   @IsOptional()
@@ -69,8 +65,7 @@ export class CreatedependentsDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
-  @MinLength(2)
-  @MaxLength(2)
+
   ddi: string;
 
   @ApiProperty()

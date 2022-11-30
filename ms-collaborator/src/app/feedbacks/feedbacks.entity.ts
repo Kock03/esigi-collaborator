@@ -10,7 +10,6 @@ import {
 } from 'typeorm';
 import { CollaboratorsEntity } from '../collaborators/collaborators.entity';
 import { FeedbackTypes } from './enums/feedback-types.enum';
-import { Reason } from './enums/reason.enum';
 import { Status } from './enums/status.enum';
 import { ICollaborator } from './_model/collaborator.model';
 import { IProject } from './_model/project.model';
@@ -23,8 +22,8 @@ export class FeedbacksEntity {
   @Column({ type: 'int' })
   feedbackType: FeedbackTypes;
 
-  @Column({ type: 'int' })
-  reason: Reason;
+  @Column()
+  reason: string;
 
   @Column()
   projectId: string;
@@ -47,16 +46,16 @@ export class FeedbacksEntity {
   @Column()
   collaboratorManagerId: string;
 
-  @Column({nullable: true})
+  @Column({ nullable: true })
   managerDescription: string;
 
-  @Column({nullable: true})
+  @Column({ nullable: true })
   improvementPoints: string;
 
-  @Column({nullable: true})
+  @Column({ nullable: true })
   collaboratorDescription: string;
 
-  @Column({nullable: true})
+  @Column({ nullable: true })
   commitment: string;
 
   project: IProject;

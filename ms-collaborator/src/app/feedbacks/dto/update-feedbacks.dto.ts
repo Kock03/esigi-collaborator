@@ -9,7 +9,6 @@ import {
 } from 'class-validator';
 import { CollaboratorsEntity } from 'src/app/collaborators/collaborators.entity';
 import { FeedbackTypes } from '../enums/feedback-types.enum';
-import { Reason } from '../enums/reason.enum';
 import { Status } from '../enums/status.enum';
 
 export class UpdateFeedbacksDto {
@@ -20,8 +19,7 @@ export class UpdateFeedbacksDto {
 
   @ApiProperty()
   @IsOptional()
-  @IsEnum(Reason)
-  reason: Reason;
+  reason: string;
 
   @ApiProperty()
   @IsOptional()
@@ -76,7 +74,7 @@ export class UpdateFeedbacksDto {
   @IsString()
   commitment: string;
 
-  
+
   @ApiPropertyOptional()
   @IsOptional()
   Collaborator: CollaboratorsEntity;

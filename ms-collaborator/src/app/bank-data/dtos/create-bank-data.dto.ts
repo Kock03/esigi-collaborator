@@ -13,14 +13,11 @@ import {
 } from 'class-validator';
 import { CollaboratorsEntity } from 'src/app/collaborators/collaborators.entity';
 import { ConnectionIsNotSetError } from 'typeorm';
-import { AccountTypes } from './account-types.enum';
 
 export class CreateBankDataDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
-  @MinLength(3)
-  @MaxLength(30)
   bank: string;
 
   @ApiProperty()
@@ -36,8 +33,7 @@ export class CreateBankDataDto {
 
   @ApiProperty()
   @IsNotEmpty()
-  @IsEnum(AccountTypes)
-  accountType: AccountTypes;
+  accountType: string;
 
   @ApiProperty()
   @IsNotEmpty()

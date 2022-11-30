@@ -18,10 +18,8 @@ import { FinancialsEntity } from 'src/app/financials/financials.entity';
 import { DocumentsEntity } from '../documents/documents.entity';
 import { LanguagesEntity } from '../languages/languages.entity';
 import { EducationsEntity } from '../educations/educations.entity';
-import { MaritalStatus } from './dtos/Marital-status.enum';
 import { DependentsEntity } from '../dependents/dependents.entity';
 import { FeedbacksEntity } from '../feedbacks/feedbacks.entity';
-import { Gender } from './dtos/gender.enum';
 import { IResource } from './_model/resource.model';
 
 @Entity({ name: 'collaborators' })
@@ -38,11 +36,11 @@ export class CollaboratorsEntity {
   @Column()
   login: string;
 
-  @Column({ type: 'int' })
-  gender: Gender;
+  @Column()
+  gender: string;
 
-  @Column({ type: 'int' })
-  maritalStatus: MaritalStatus;
+  @Column()
+  maritalStatus: string;
 
   @Column()
   office: string;

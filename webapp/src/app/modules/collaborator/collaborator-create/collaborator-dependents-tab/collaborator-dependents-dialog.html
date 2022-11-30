@@ -14,15 +14,7 @@
             <mat-form-field fxFlex="50" appearance="outline">
               <mat-label>{{'collaborator.colaborator_create.dependents.type.name' | translate}}</mat-label>
               <mat-select formControlName="type">
-                <mat-option [value]="1">{{'collaborator.colaborator_create.dependents.type.spouse' | translate}}
-                </mat-option>
-                <mat-option [value]="2">{{'collaborator.colaborator_create.dependents.type.son' | translate}}
-                </mat-option>
-                <mat-option [value]="3">{{'collaborator.colaborator_create.dependents.type.stepson' | translate}}
-                </mat-option>
-                <mat-option [value]="4">{{'collaborator.colaborator_create.dependents.type.dad' | translate}}
-                </mat-option>
-                <mat-option [value]="5">{{'collaborator.colaborator_create.dependents.type.mom' | translate}}
+                <mat-option *ngFor="let type of type" [value]="type.id">{{ type.value }}
                 </mat-option>
               </mat-select>
               <mat-error *ngIf="dependentForm &&
@@ -32,10 +24,9 @@
 
             <mat-form-field fxFlex="50" appearance="outline">
               <mat-label>{{'generic.gender.name' | translate}}</mat-label>
-              <mat-select formControlName="gender">
-                <mat-option [value]="1">{{'generic.gender.feminine' | translate}}</mat-option>
-                <mat-option [value]="2">{{'generic.gender.masculine' | translate}}</mat-option>
-                <mat-option [value]="3">{{'generic.gender.undefined' | translate}}</mat-option>
+              <mat-select matInput disableRipple formControlName="gender">
+                <mat-option *ngFor="let gender of gender" [value]="gender.id">{{ gender.value }}</mat-option>
+
               </mat-select>
               <mat-error *ngIf="dependentForm &&
           dependentForm.controls['gender'].hasError('required')">
@@ -85,7 +76,9 @@
           <div fxFlex="100" fxLayoutGap="16px">
             <mat-form-field fxFlex="20" appearance="outline">
               <mat-label>{{'generic.phone.ddi' | translate}}</mat-label>
-              <input matInput disableRipple formControlName="ddi" mask="+00" placeholder="DDI" />
+              <mat-select matInput disableRipple formControlName="ddi">
+                <mat-option *ngFor="let ddi of ddi" [value]="ddi.id">{{ ddi.value }}</mat-option>
+              </mat-select>
             </mat-form-field>
 
             <mat-form-field fxFlex="20" appearance="outline">

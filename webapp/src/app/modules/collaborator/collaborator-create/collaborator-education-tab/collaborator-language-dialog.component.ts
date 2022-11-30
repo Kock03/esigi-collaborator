@@ -2,6 +2,7 @@ import { Component, Input, Output, EventEmitter, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CollaboratorLanguageProvider } from 'src/providers/collaborator-providers/collaborator-language.provider';
+import { ConfigProvider } from 'src/providers/config-provider';
 
 @Component({
   selector: 'collaborator-language-dialog',
@@ -15,15 +16,19 @@ export class CollaboratorLanguageDialog {
   method!: string;
   collaboratorId!: string | null;
   languageId!: string | null;
+  language: any[] = [];
+  degreeOfInfluence: any[] = [];
 
   constructor(
     public dialogRef: MatDialogRef<CollaboratorLanguageDialog>,
     private fb: FormBuilder,
+    private configProvider: ConfigProvider,
     private collaboratorLanguageProvider: CollaboratorLanguageProvider,
     @Inject(MAT_DIALOG_DATA) public data: any
-  ) {}
+  ) { }
 
   ngOnInit(): void {
+    this.getKeysGeneric();
     this.method = sessionStorage.getItem('method')!;
     this.collaboratorId = sessionStorage.getItem('collaborator_id')!;
     this.initForm();
@@ -40,13 +45,28 @@ export class CollaboratorLanguageDialog {
     }
   }
 
+  async getKeysGeneric() {
+    let data = {
+      key: ["language_level", "fluency_degree"]
+    }
+    const arrays = await this.configProvider.findKeys('generic', data)
+
+    const keyList = arrays.reduce(function (array: any, register: any) {
+      array[register.key] = array[register.key] || [];
+      array[register.key].push({ id: register.id, value: register.value });
+      return array;
+    }, Object.create(null));
+    this.language = keyList['language_level'];
+    this.degreeOfInfluence = keyList['fluency_degree']
+  }
+
   onNoClick(): void {
     this.dialogRef.close();
     sessionStorage.removeItem('language_id');
     sessionStorage.removeItem('method');
   }
 
- async save() {
+  async save() {
     const data = this.languageForm.getRawValue();
     if (this.method === 'add') {
       try {
@@ -64,7 +84,7 @@ export class CollaboratorLanguageDialog {
           data
         );
       } catch (error: any) {
-        console.log( error);
+        console.log(error);
       }
     }
   }

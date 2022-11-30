@@ -11,7 +11,10 @@
         <form [formGroup]="skillForm" fxLayout="column">
           <mat-form-field appearance="outline">
             <mat-label>{{'generic.skills.technology'|translate}}</mat-label>
-            <input matInput disableRipple formControlName="technology" placeholder="Tecnologia" />
+            <mat-select formControlName="technology">
+              <mat-option *ngFor="let technologies of technologies" [value]="technologies.id">{{ technologies.value }}
+              </mat-option>
+            </mat-select>
             <mat-error *ngIf="skillForm &&
           skillForm.controls['technology'].hasError('required')">
               {{'validators.validator-required' | translate}} </mat-error>
@@ -20,12 +23,8 @@
           <mat-form-field appearance="outline">
             <mat-label>{{'generic.seniority.name'|translate}}</mat-label>
             <mat-select formControlName="seniority">
-              <mat-option [value]="1">{{'generic.seniority.senior'|translate}}</mat-option>
-              <mat-option [value]="2">{{'generic.seniority.full'|translate}}</mat-option>
-              <mat-option [value]="3">{{'generic.seniority.junior'|translate}}</mat-option>
-              <mat-option [value]="4">{{'generic.seniority.apprentice'|translate}}</mat-option>
-              <mat-option [value]="5">{{'generic.seniority.specialist'|translate}}</mat-option>
-              <mat-option [value]="6">{{'generic.seniority.architect'|translate}}</mat-option>
+              <mat-option *ngFor="let seniority of seniority" [value]="seniority.id">{{ seniority.value }}
+              </mat-option>
             </mat-select>
             <mat-error *ngIf="skillForm &&
         skillForm.controls['seniority'].hasError('required')">

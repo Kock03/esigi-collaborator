@@ -10,4 +10,4 @@ import { HttpModule } from '@nestjs/axios';
   controllers: [InterviewsController],
   providers: [InterviewsService],
 })
-export class InterviewsModule {}
+export class InterviewsModule { }

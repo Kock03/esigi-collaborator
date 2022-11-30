@@ -2,6 +2,7 @@ import { Component, Input, Output, EventEmitter, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CollaboratorSkillProvider } from 'src/providers/collaborator-providers/collaborator-skill.provider';
+import { ConfigProvider } from 'src/providers/config-provider';
 import { SnackBarService } from 'src/services/snackbar.service';
 
 @Component({
@@ -16,15 +17,21 @@ export class CollaboratorSkillDialog {
   method!: string;
   collaboratorId!: string | null;
   skillId!: string | null;
+  seniority: any[] = [];
+  technologies: any[] = [];
+
 
   constructor(
     public dialogRef: MatDialogRef<CollaboratorSkillDialog>,
     private fb: FormBuilder,
+    private configProvider: ConfigProvider,
+
     private collaboratorSkillProvider: CollaboratorSkillProvider,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) { }
 
   ngOnInit(): void {
+    this.getKeysCollaborator()
     this.method = sessionStorage.getItem('method')!;
     this.collaboratorId = sessionStorage.getItem('collaborator_id')!;
     this.initForm();
@@ -43,6 +50,22 @@ export class CollaboratorSkillDialog {
     if (this.data) {
       this.skillForm.patchValue(this.data);
     }
+  }
+
+  async getKeysCollaborator() {
+    let data = {
+      key: ["seniority", "technologies"]
+    }
+    const arrays = await this.configProvider.findKeys('collaborator', data)
+
+    const keyList = arrays.reduce(function (array: any, register: any) {
+      array[register.key] = array[register.key] || [];
+      array[register.key].push({ id: register.id, value: register.value });
+      return array;
+    }, Object.create(null));
+    this.seniority = keyList['seniority']
+    this.technologies = keyList['technologies']
+
   }
 
   onNoClick(): void {

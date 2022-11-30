@@ -12,7 +12,6 @@ import {
   MinLength,
 } from 'class-validator';
 import { CollaboratorsEntity } from 'src/app/collaborators/collaborators.entity';
-import { Seniority } from './seniority.enun';
 import { TypeOfPeriod } from './type-of-period.enum';
 
 export class UpdateSkillsDto {
@@ -24,8 +23,7 @@ export class UpdateSkillsDto {
 
   @ApiProperty()
   @IsOptional()
-  @IsEnum(Seniority)
-  seniority: Seniority;
+  seniority: string;
 
   @ApiProperty()
   @IsOptional()

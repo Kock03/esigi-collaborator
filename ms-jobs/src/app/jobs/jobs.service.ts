@@ -17,7 +17,7 @@ export class JobsService {
     @InjectRepository(JobsEntity)
     private readonly jobsRepository: Repository<JobsEntity>,
     private httpService: HttpService,
-  ) {}
+  ) { }
 
   async findAll(token: string) {
     const options: FindManyOptions = {
@@ -40,7 +40,7 @@ export class JobsService {
       left join returns_entity r on i.returns_id = r.id where i.name_candidate = "${id}"`);
 
       return await this.jobRequest(jobs, token);
-    } catch (error) {}
+    } catch (error) { }
   }
 
   findByName(name: string, token: string) {

@@ -20,7 +20,7 @@ export class PhoneEntity {
   @Column({ length: 2 })
   ddd: string;
 
-  @Column({ length: 3 })
+  @Column()
   ddi: string;
 
   @OneToOne(() => CollaboratorsEntity, (collaborator) => collaborator.Phone)

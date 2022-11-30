@@ -8,16 +8,15 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { CollaboratorsEntity } from '../collaborators/collaborators.entity';
-import { Schooling } from './dtos/schooling.enum';
-import { Situation } from './dtos/situation.enum';
+
 
 @Entity({ name: 'educations' })
 export class EducationsEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ type: 'int' })
-  schooling: Schooling;
+  @Column()
+  schooling: string;
 
   @Column()
   course: string;
@@ -25,8 +24,8 @@ export class EducationsEntity {
   @Column()
   institution: string;
 
-  @Column({ type: 'int' })
-  situation: Situation;
+  @Column()
+  situation: string;
 
   @ManyToOne(
     () => CollaboratorsEntity,

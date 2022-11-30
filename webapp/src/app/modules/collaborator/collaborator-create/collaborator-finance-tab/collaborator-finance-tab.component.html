@@ -31,13 +31,7 @@
             </th>
             <td mat-cell *matCellDef="let finance">
               {{
-              finance.reason == 1
-              ? 'Contratação'
-              : finance.reason == 2
-              ? 'Reconhecimento'
-              : finance.reason == 3
-              ? 'Tempo de Casa'
-              : 'Retenção'
+              finance.reason 
               }}
             </td>
           </ng-container>

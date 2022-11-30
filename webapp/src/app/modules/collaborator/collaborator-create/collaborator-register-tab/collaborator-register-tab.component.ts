@@ -72,6 +72,8 @@ export class CollaboratorRegisterTabComponent implements OnInit {
   ) {}
 
   async ngOnInit() {
+    this.getKeysGeneric();
+    this.getKeysCollaborator();
     this.token = localStorage.getItem('token')!;
     this.searchEnabled = false;
     this.collaboratorId = this.route.snapshot.paramMap.get('id');
@@ -91,6 +93,7 @@ export class CollaboratorRegisterTabComponent implements OnInit {
       });
     } else {
       this.searchEnabled = true,
+     
     console.log("🚀 ~ file: collaborator-register-tab.component.ts ~ line 133 ~ CollaboratorRegisterTabComponent ~ onCountrySelected ~ this.searchEnabled", this.searchEnabled)
 
       let collaborator = await this.collaboratorProvider.findOne(
@@ -113,6 +116,51 @@ export class CollaboratorRegisterTabComponent implements OnInit {
       };
     }
   }
+
+  async getKeysGeneric() {
+    let data = {
+      key: ["ddi"]
+    }
+    const arrays = await this.configProvider.findKeys('generic', data)
+
+    const keyList = arrays.reduce(function (array: any, register: any) {
+      array[register.key] = array[register.key] || [];
+      array[register.key].push({ id: register.id, value: register.value });
+      return array;
+    }, Object.create(null));
+    this.ddi = keyList['ddi'];
+
+  }
+
+  async getKeysCollaborator() {
+    let data = {
+      key: ["gender", "marital_status"]
+    }
+    const arrays = await this.configProvider.findKeys('collaborator', data)
+
+    const keyList = arrays.reduce(function (array: any, register: any) {
+      array[register.key] = array[register.key] || [];
+      array[register.key].push({ id: register.id, value: register.value });
+      return array;
+    }, Object.create(null));
+    this.maritalStatus = keyList['marital_status'];
+    this.gender = keyList['gender'];
+  }
+
+  // async getKeysCollaborator() {
+  //   let data = {
+  //     key: ["gender", "marital_status"]
+  //   }
+  //   const arrays = await this.configProvider.findKeys('collaborator', data)
+
+  //   const keyList = arrays.reduce(function (array: any, register: any) {
+  //     array[register.key] = array[register.key] || [];
+  //     array[register.key].push({ id: register.id, value: register.value });
+  //     return array;
+  //   }, Object.create(null));
+  //   this.maritalStatus = keyList['marital_status'];
+  //   this.gender = keyList['gender'];
+  // }
 
   async onCountrySelected(country: any) {
     if (this.collaboratorId == 'novo') {
@@ -148,21 +196,6 @@ export class CollaboratorRegisterTabComponent implements OnInit {
     this.onChange.next(true);
   }
 
-  async getKeysCollaborator() {
-    let data = {
-      key: ["gender", "marital_status"]
-    }
-    const arrays = await this.configProvider.findKeys('collaborator', data)
-
-    const keyList = arrays.reduce(function (array: any, register: any) {
-      array[register.key] = array[register.key] || [];
-      array[register.key].push({ id: register.id, value: register.value });
-      return array;
-    }, Object.create(null));
-    this.maritalStatus = keyList['marital_status'];
-    this.gender = keyList['gender'];
-  }
-
   changesType(value: number) {
     if (this.collaboratorForm.controls['collaboratorTypes'].value === 2) {
       this.collaboratorForm.controls['cpf'].removeValidators(
@@ -186,7 +219,7 @@ export class CollaboratorRegisterTabComponent implements OnInit {
     } else {
       if (
         this.collaboratorForm.controls['firstNameCorporateName'].value !=
-          null &&
+        null &&
         this.collaboratorForm.controls['lastNameFantasyName'].value != null
       ) {
         this.collaboratorForm.controls['login'].setValue(
@@ -195,6 +228,8 @@ export class CollaboratorRegisterTabComponent implements OnInit {
       }
     }
   }
+
+  
   compareSelect(o1: any, o2: any): boolean {
     if (!o1 || !o2) {
       return false;
@@ -232,11 +267,11 @@ export class CollaboratorRegisterTabComponent implements OnInit {
       cep: this.data.cep,
       city: this.data.localidade,
       street: this.data.logradouro,
-      state: this.data.state,
+      state: this.data.uf,
       district: this.data.bairro,
     });
     console.log("🚀 ~ file: collaborator-register-tab.component.ts ~ line 238 ~ CollaboratorRegisterTabComponent ~ searchCepEdit ~ this.data.localidade", this.data.localidade),
-    this.searchCities({value: this.data.state})
+    this.searchCities({value: this.data.uf})
     if(this.data.erro == true){
       window.alert('Cep inválido');
     }

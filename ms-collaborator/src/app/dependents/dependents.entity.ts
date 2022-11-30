@@ -1,7 +1,5 @@
 import { Column, CreateDateColumn, DeleteDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { CollaboratorsEntity } from "../collaborators/collaborators.entity";
-import { Gender } from "../collaborators/dtos/gender.enum";
-import { Type } from "./dtos/type.enum";
 
 @Entity({ name: 'dependents' })
 export class DependentsEntity {
@@ -10,7 +8,7 @@ export class DependentsEntity {
     id: string;
 
     @Column()
-    type: Type;
+    type: string;
 
     @Column()
     firstName: string;
@@ -18,8 +16,8 @@ export class DependentsEntity {
     @Column()
     lastName: string;
 
-    @Column({ type: 'int' })
-    gender: Gender;
+    @Column()
+    gender: string;
 
     @Column({ unique: true, length: 11 })
     cpf: string;
@@ -37,7 +35,7 @@ export class DependentsEntity {
     @Column({ name: 'ddd', length: 2 })
     ddd: string;
 
-    @Column({ name: 'ddi', length: 3 })
+    @Column()
     ddi: string;
 
     @Column()
