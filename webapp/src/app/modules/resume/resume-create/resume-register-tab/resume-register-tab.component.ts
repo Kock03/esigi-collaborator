@@ -93,7 +93,7 @@ export class ResumeRegisterTabComponent implements OnInit {
     } else {
       let resume = await this.resumeProvider.findOne(this.resumeId);
       this.view = false;
-      this.url = 'http://localhost:3000/' + resume.photo
+      this.url = 'http://44.198.33.18:3000/' + resume.photo
       this.defaultValue = {
         name: sessionStorage.getItem('country_value'),
         alpha2Code: sessionStorage.getItem('flag_value')
@@ -193,12 +193,12 @@ export class ResumeRegisterTabComponent implements OnInit {
     formData.append('file', file);
 
     try {
-      this.httpClient.post('http://localhost:3000', formData)
+      this.httpClient.post('http://44.198.33.18:3000', formData)
         .subscribe(resposta => {
           if (resposta) {
             this.file = resposta
             this.resumeForm.controls['photo'].setValue(this.file.filename)
-            this.url = 'http://localhost:3000/' + this.file.filename
+            this.url = 'http://44.198.33.18:3000/' + this.file.filename
           }
         })
 
