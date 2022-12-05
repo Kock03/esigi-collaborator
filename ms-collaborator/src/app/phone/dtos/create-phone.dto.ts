@@ -20,7 +20,6 @@ export class CreatePhoneDto {
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
-  @IsString()
   @MinLength(2)
   @MaxLength(2)
   ddd: string;

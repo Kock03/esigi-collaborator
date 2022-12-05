@@ -46,6 +46,7 @@ export class UpdateCollaboratorsDto {
 
   @ApiProperty()
   @IsOptional()
+  @IsString()
   gender: string;
 
   @ApiProperty()
@@ -71,6 +72,7 @@ export class UpdateCollaboratorsDto {
 
   @ApiProperty()
   @IsOptional()
+  @IsString()
   maritalStatus: string;
 
   @ApiProperty()

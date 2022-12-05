@@ -255,6 +255,7 @@ export class CollaboratorCreateComponent implements OnInit {
         })
       }
       let dataUser = this.userForm.getRawValue();
+      console.log(dataUser)
       const user = await this.userProvider.store(dataUser);
       this.collaboratorForm.controls['userId'].setValue(user.id)
       let idUser = this.collaboratorForm.getRawValue();
@@ -276,6 +277,7 @@ export class CollaboratorCreateComponent implements OnInit {
 
     } catch (error: any) {
       console.log(error);
+      console.log(data);
     }
   }
 

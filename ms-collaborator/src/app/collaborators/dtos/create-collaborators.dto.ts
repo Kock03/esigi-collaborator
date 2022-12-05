@@ -50,6 +50,7 @@ export class CreateCollaboratorsDto {
 
   @ApiProperty()
   @IsOptional()
+  @IsString()
   gender: string;
 
   @ApiProperty()
@@ -71,6 +72,7 @@ export class CreateCollaboratorsDto {
 
   @ApiProperty()
   @IsNotEmpty()
+  @IsString()
   maritalStatus: string;
 
   @ApiProperty()
@@ -114,13 +116,11 @@ export class CreateCollaboratorsDto {
   @ApiProperty()
   @IsOptional()
   @IsString()
-
   site: string;
 
   @ApiProperty()
   @IsOptional()
   @IsString()
-
   linkedin: string;
 
   @ApiProperty()
