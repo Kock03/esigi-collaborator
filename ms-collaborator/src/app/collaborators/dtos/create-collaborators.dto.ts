@@ -46,6 +46,7 @@ export class CreateCollaboratorsDto {
   login: string;
 
   @ApiProperty()
+  @IsOptional()
   userId: string;
 
   @ApiProperty()

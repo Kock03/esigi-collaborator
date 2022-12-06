@@ -259,6 +259,7 @@ export class CollaboratorCreateComponent implements OnInit {
       const user = await this.userProvider.store(dataUser);
       this.collaboratorForm.controls['userId'].setValue(user.id)
       let idUser = this.collaboratorForm.getRawValue();
+      console.log(idUser)
       try {
         await this.collaboratorProvider.update(
           colaborator.id,
