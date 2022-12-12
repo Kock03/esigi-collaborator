@@ -213,14 +213,15 @@ export class CollaboratorRegisterTabComponent implements OnInit {
 
  async searchCep() {
     this.data = await this.cepService.searchCep(this.addressForm.controls['cep'].value);
+    console.log("🚀 ~ file: collaborator-register-tab.component.ts:216 ~ CollaboratorRegisterTabComponent ~ searchCep ~ this.data", this.data)
     this.collaboratorForm.controls['Address'].patchValue({
       cep: this.data.cep,
       city: this.data.localidade,
       street: this.data.logradouro,
-      state: this.data.state,
+      state: this.data.uf,
       district: this.data.bairro,
     });
-    this.searchCities({value: this.data.state})
+    this.searchCities({value: this.data.uf})
     if(this.data.erro == true){
       window.alert('Cep inválido');
     }

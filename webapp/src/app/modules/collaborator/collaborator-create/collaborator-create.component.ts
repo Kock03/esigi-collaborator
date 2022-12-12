@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatTable } from '@angular/material/table';
@@ -49,6 +48,7 @@ export class CollaboratorCreateComponent implements OnInit {
   view!: boolean;
   addressForm!: FormGroup;
   data!: any;
+  token!: string;
   validations = [
     [
       'admissionDate',
@@ -77,7 +77,7 @@ export class CollaboratorCreateComponent implements OnInit {
     private snackbarService: SnackBarService,
     private route: ActivatedRoute,
     private cepService: CepService,
-    private statesAndCities: StatesAndCities
+    private statesAndCities: StatesAndCities,
   ) { }
 
   async ngOnInit(): Promise<void> {
@@ -93,6 +93,8 @@ export class CollaboratorCreateComponent implements OnInit {
       await this.getCollaborator();
       this.initForm();
       this.setFormValue();
+      // this.searchCities({value: this.collaboratorForm.controls['state'].setValue(this.collaborator.Address.state)});
+      // console.log("🚀 ~ file: collaborator-create.component.ts ~ line 99 ~ CollaboratorCreateComponent ~ ngOnInit ~ this.data.state", this.data.state)
     } else {
       this.initForm();
     }
@@ -105,7 +107,6 @@ export class CollaboratorCreateComponent implements OnInit {
       );
       console.log("🚀 ~ file: collaborator-create.component.ts ~ line 96 ~ CollaboratorCreateComponent ~ getCollaborator ~ collaborator", this.collaborator)
       sessionStorage.setItem('type', this.collaborator.collaboratorTypes)
-      // this.collaboratorForm.controls['city'].setValue(this.collaborator.city)
 
     } catch (error) {
       console.error(error);
@@ -198,47 +199,47 @@ export class CollaboratorCreateComponent implements OnInit {
     }
   }
 
-  // async getAddress() {
-  //   const address = this.collaboratorForm.controls['Address'].value;
-  //   console.log("🚀 ~ file: collaborator-create.component.ts ~ line 195 ~ CollaboratorCreateComponent ~ getAddress ~ address", address)
-  //   // const district = await this.cepService.findDistrict(
-  //   //   address.cep.replace('-', '')
-  //   // );
-  //   // this.collaboratorForm.controls['Address'].patchValue({
-  //   //   cep: address.cep,
-  //   //   city: address.localidade,
-  //   //   street: address.logradouro,
-  //   //   state: address.uf,
-  //   //   district: address.bairro,
-  //   //   });
-  //   //   this.searchCities({value: address.uf})
-  //   this.data = await this.cepService.searchCep(address.cep);
-  //   console.log("🚀 ~ file: collaborator-create.component.ts ~ line 208 ~ CollaboratorCreateComponent ~ getAddress ~ this.data", this.data)
-  //   if (this.data.erro) {
-  //     window.alert('Cep inválido');
-  //     this.collaboratorForm.controls['Address'].reset();
-  //     this.view = true;
-  //   } else {
-  //     this.view = false;
-  //     // this.collaboratorForm.controls['Address'].patchValue({
-  //     //   cep: district.cep,
-  //     //   city: district.localidade,
-  //     //   street: district.logradouro,
-  //     //   state: district.uf,
-  //     //   district: district.bairro,
-  //     // this.data = await this.cepService.searchCep(this.addressForm.controls['cep'].value);
-  //     this.collaboratorForm.controls['Address'].patchValue({
-  //       cep: this.data.cep,
-  //       city: this.data.localidade,
-  //       street: this.data.logradouro,
-  //       state: this.data.uf,
-  //       district: this.data.bairro,
-  //     });
-  //     this.searchCities({ value: this.data.uf })
-  //     console.log("🚀 ~ file: collaborator-register-tab.component.ts ~ line 219 ~ CollaboratorRegisterTabComponent ~ getAddress ~ data", this.data)
+  async getAddress() {
+    const address = this.collaboratorForm.controls['Address'].value;
+    console.log("🚀 ~ file: collaborator-create.component.ts ~ line 195 ~ CollaboratorCreateComponent ~ getAddress ~ address", address)
+    // const district = await this.cepService.findDistrict(
+    //   address.cep.replace('-', '')
+    // );
+    // this.collaboratorForm.controls['Address'].patchValue({
+    //   cep: address.cep,
+    //   city: address.localidade,
+    //   street: address.logradouro,
+    //   state: address.uf,
+    //   district: address.bairro,
+    //   });
+    //   this.searchCities({value: address.uf})
+    this.data = await this.cepService.searchCep(address.cep);
+    console.log("🚀 ~ file: collaborator-create.component.ts ~ line 208 ~ CollaboratorCreateComponent ~ getAddress ~ this.data", this.data)
+    if (this.data.erro) {
+      window.alert('Cep inválido');
+      this.collaboratorForm.controls['Address'].reset();
+      this.view = true;
+    } else {
+      this.view = false;
+      // this.collaboratorForm.controls['Address'].patchValue({
+      //   cep: district.cep,
+      //   city: district.localidade,
+      //   street: district.logradouro,
+      //   state: district.uf,
+      //   district: district.bairro,
+      // this.data = await this.cepService.searchCep(this.addressForm.controls['cep'].value);
+      this.collaboratorForm.controls['Address'].patchValue({
+        cep: this.data.cep,
+        city: this.data.localidade,
+        street: this.data.logradouro,
+        state: this.data.uf,
+        district: this.data.bairro,
+      });
+      this.searchCities({ value: this.data.uf })
+      console.log("🚀 ~ file: collaborator-register-tab.component.ts ~ line 219 ~ CollaboratorRegisterTabComponent ~ getAddress ~ data", this.data)
 
-  //   }
-  // }
+    }
+  }
 
   searchCities(e: any) {
     const city = document.querySelector('#cities') as HTMLSelectElement;
@@ -307,7 +308,7 @@ export class CollaboratorCreateComponent implements OnInit {
       } catch (error: any) {
         console.log(error);
       }
-      sessionStorage.setItem('collaborator_id', colaborator.id);
+      sessionStorage.setItem('collaborator_state', colaborator.id);
       sessionStorage.setItem('type', colaborator.collaboratorTypes)
       this.router.navigate([`colaborador/${colaborator.id}`]);
       this.method = 'edit'
