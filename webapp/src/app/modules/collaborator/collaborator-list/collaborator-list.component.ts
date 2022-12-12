@@ -94,7 +94,9 @@ export class CollaboratorListComponent implements OnInit {
 
   goHome(): void {
     // location.replace(`http://192.168.8.184:3406/validate/${this.token}`);
-    location.replace(`http://localhost:3406/validate/${this.token}`)
+    this.token = localStorage.getItem('token')!;
+    location.replace(`http://localhost:3406/validate/${this.token}`);
+    
   }
 
   announceSortChange(sortState: any) {
