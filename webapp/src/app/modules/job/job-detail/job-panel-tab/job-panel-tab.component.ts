@@ -24,6 +24,7 @@ import { TechnicalInterviewProvider } from 'src/providers/technicalInterview.pro
 import { ClientInterviewProvider } from 'src/providers/clientInterview.provider';
 import { CustomerProvider } from 'src/providers/customer.provider';
 import { CollaboratorProvider } from 'src/providers/collaborator-providers/collaborator.provider';
+import { ContactProvider } from 'src/providers/contact.provier';
 
 
 @Component({
@@ -58,6 +59,8 @@ export class JobPanelTabComponent implements OnInit {
   constructor(
     private snackbarService: SnackBarService,
     private router: Router,
+    private contactProvider: ContactProvider,
+
     private route: ActivatedRoute,
     private JobProvider: JobProvider,
     private dialogService: ConfirmDialogService,
@@ -96,8 +99,8 @@ export class JobPanelTabComponent implements OnInit {
   async editInterview(interviewId: any, nameCandidate?: any, resumeId?: any) {
     const interviewData = await this.InterviewsProvider.findOne(interviewId);
     if (interviewData.ClientInterviews) {
-      const clientData = await this.customerProvider.findOne(interviewData.ClientInterviews.evaluator);
-      sessionStorage.setItem('customer_id', clientData.corporateName);
+      const clientData = await this.contactProvider.findOne(interviewData.ClientInterviews.evaluator);
+      sessionStorage.setItem('customer_id', clientData.name);
     }
     if (interviewData.BehavioralInterviews) {
       const collaboratorData = await this.collaboratorProvider.findOne(interviewData.BehavioralInterviews.techRecruter);
