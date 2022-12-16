@@ -76,9 +76,7 @@
           <div fxFlex="100" fxLayoutGap="16px">
             <mat-form-field fxFlex="20" appearance="outline">
               <mat-label>{{'generic.phone.ddi' | translate}}</mat-label>
-              <mat-select matInput disableRipple formControlName="ddi">
-                <mat-option *ngFor="let ddi of ddi" [value]="ddi.id">{{ ddi.value }}</mat-option>
-              </mat-select>
+              <input matInput disableRipple formControlName="ddi" mask="+00" placeholder="DDI" />
             </mat-form-field>
 
             <mat-form-field fxFlex="20" appearance="outline">

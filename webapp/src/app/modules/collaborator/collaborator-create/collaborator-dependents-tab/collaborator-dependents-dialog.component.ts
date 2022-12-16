@@ -53,7 +53,6 @@ export class CollaboratorDependentsDialog {
 
 
   gender: any[] = []
-  ddi: any[] = []
   type: any[] = []
   dependentForm!: FormGroup;
   Date: any;
@@ -71,7 +70,6 @@ export class CollaboratorDependentsDialog {
 
   ngOnInit(): void {
     this.getKeysCollaborator();
-    this.getKeysGeneric();
     this.method = sessionStorage.getItem('method')!;
     this.collaboratorId = sessionStorage.getItem('collaborator_id')!;
     this.initForm();
@@ -95,21 +93,6 @@ export class CollaboratorDependentsDialog {
     if (this.data) {
       this.dependentForm.patchValue(this.data);
     }
-  }
-
-  async getKeysGeneric() {
-    let data = {
-      key: ["ddi"]
-    }
-    const arrays = await this.configProvider.findKeys('generic', data)
-
-    const keyList = arrays.reduce(function (array: any, register: any) {
-      array[register.key] = array[register.key] || [];
-      array[register.key].push({ id: register.id, value: register.value });
-      return array;
-    }, Object.create(null));
-    this.ddi = keyList['ddi'];
-
   }
 
   async getKeysCollaborator() {
