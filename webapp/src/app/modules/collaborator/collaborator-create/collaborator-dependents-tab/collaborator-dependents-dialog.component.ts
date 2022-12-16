@@ -84,7 +84,7 @@ export class CollaboratorDependentsDialog {
       birthDate: this.fb.control({ value: ' ', disabled: false }, [DateValidator.isValidData(), Validators.required]),
       age: this.fb.control({ value: ' ', disabled: true }),
       ddi: [null],
-      ddd: [null],
+      ddd: [this.ddd, null],
       phoneNumber: [null],
       email: [null, [Validators.email]],
       Collaborator: { id: this.collaboratorId },
