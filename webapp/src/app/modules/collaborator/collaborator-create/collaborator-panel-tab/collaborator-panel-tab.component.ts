@@ -75,18 +75,18 @@ export class CollaboratorPanelTabComponent implements OnInit {
 
   async ngOnInit() {
     this.collaboratorId = this.route.snapshot.paramMap.get('id');
-    this.getPanelList();
+    // this.getPanelList();
   }
 
-  async getPanelList() {
-    try {
+  // async getPanelList() {
+  //   try {
        
-      this.filteredPanelList.data = this.projects = await this.projectProvider.findByProject(this.collaboratorId);
+  //     this.filteredPanelList.data = this.projects = await this.projectProvider.findByProject(this.collaboratorId);
 
-    } catch (error) {
-      console.error(error);
-    }
-  }
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // }
 
   getPaper(paper: number) {
     switch (paper) {

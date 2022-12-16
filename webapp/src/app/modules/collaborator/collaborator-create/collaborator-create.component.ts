@@ -49,6 +49,9 @@ export class CollaboratorCreateComponent implements OnInit {
   view!: boolean;
   addressForm!: FormGroup;
   data!: any;
+
+  ddd!: number;
+
   validations = [
     [
       'admissionDate',
@@ -90,11 +93,11 @@ export class CollaboratorCreateComponent implements OnInit {
     this.step = JSON.parse(sessionStorage.getItem('collaborator_tab')!);
 
     if (this.collaboratorId !== 'novo') {
+      this.ddd = Number(sessionStorage.getItem('ddd'))
       await this.getCollaborator();
       this.initForm();
       this.setFormValue();
-      // this.searchCities({value: this.collaboratorForm.controls['state'].setValue(this.collaborator.Address.state)});
-      // console.log("🚀 ~ file: collaborator-create.component.ts ~ line 99 ~ CollaboratorCreateComponent ~ ngOnInit ~ this.data.state", this.data.state)
+
     } else {
       this.initForm();
     }
@@ -107,6 +110,7 @@ export class CollaboratorCreateComponent implements OnInit {
       );
       console.log("🚀 ~ file: collaborator-create.component.ts ~ line 96 ~ CollaboratorCreateComponent ~ getCollaborator ~ collaborator", this.collaborator)
       sessionStorage.setItem('type', this.collaborator.collaboratorTypes)
+      sessionStorage.setItem('ddd', this.collaborator.Phone.ddd)
 
     } catch (error) {
       console.error(error);
@@ -270,6 +274,7 @@ export class CollaboratorCreateComponent implements OnInit {
       }
       sessionStorage.setItem('collaborator_state', colaborator.id);
       sessionStorage.setItem('type', colaborator.collaboratorTypes)
+      sessionStorage.setItem('ddd', colaborator.Phone.ddd)
       this.router.navigate([`colaborador/${colaborator.id}`]);
       this.method = 'edit'
       this.snackbarService.successMessage('Colaborador cadastrado com sucesso'),

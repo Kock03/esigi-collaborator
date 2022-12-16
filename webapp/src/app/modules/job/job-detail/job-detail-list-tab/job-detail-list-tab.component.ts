@@ -6,6 +6,7 @@ import { IJob } from 'src/app/interfaces/ijob';
 import { CollaboratorProvider } from 'src/providers/collaborator-providers/collaborator.provider';
 import { ResumeProvider } from 'src/providers/resume-providers/resume.provider';
 import { CustomerProvider } from 'src/providers/customer.provider';
+import { ContactProvider } from 'src/providers/contact.provier';
 
 export interface ICollaborator {
   firstNameCorporateName: string;
@@ -37,6 +38,8 @@ export class JobDetailListTabComponent implements OnInit {
     private jobProvider: JobProvider,
     private customerProvider: CustomerProvider,
     private collaboratorProvider: CollaboratorProvider,
+    private contactProvider: ContactProvider
+
   ) { }
 
   ngOnInit(): void {
@@ -48,6 +51,7 @@ export class JobDetailListTabComponent implements OnInit {
   async getJob() {
     try {
       this.job = await this.jobProvider.findOne(this.jobId);
+      sessionStorage.setItem('customer_id', this.job.customerId)
       this.collaborator = await this.collaboratorProvider.findOne(this.job.collaboratorRequesterId);
       this.customer = await this.customerProvider.findOne(this.job.customerId);
     } catch (error) {

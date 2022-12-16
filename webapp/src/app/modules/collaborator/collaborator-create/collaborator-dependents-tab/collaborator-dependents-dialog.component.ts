@@ -59,6 +59,7 @@ export class CollaboratorDependentsDialog {
   collaboratorId!: string | null;
   method!: string | null;
   dependentId!: string | null;
+  ddd!: number;
   constructor(
     public dialogRef: MatDialogRef<CollaboratorDependentsDialog>,
     private fb: FormBuilder,
@@ -72,10 +73,13 @@ export class CollaboratorDependentsDialog {
     this.getKeysCollaborator();
     this.method = sessionStorage.getItem('method')!;
     this.collaboratorId = sessionStorage.getItem('collaborator_id')!;
+    this.ddd = Number(sessionStorage.getItem('ddd'))
+    console.log(this.ddd)
     this.initForm();
   }
 
   initForm(): void {
+    console.log(this.ddd)
     this.dependentForm = this.fb.group({
       type: ['', Validators.required],
       firstName: [null, Validators.required],
@@ -92,6 +96,9 @@ export class CollaboratorDependentsDialog {
     });
     if (this.data) {
       this.dependentForm.patchValue(this.data);
+    } else {
+      this.dependentForm.controls['ddd'].setValue(this.ddd)
+
     }
   }
 
@@ -155,7 +162,7 @@ export class CollaboratorDependentsDialog {
     if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
       age--;
     }
-    if (data === NaN || age === NaN) {
+    if (Number.isNaN(data) || Number.isNaN(age)) {
       age = 0
     }
     this.dependentForm.controls['age'].setValue(

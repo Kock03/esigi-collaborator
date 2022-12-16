@@ -10,6 +10,7 @@ import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { ResumeProvider } from 'src/providers/resume-providers/resume.provider';
 import { RequireMatch } from 'src/services/autocomplete.service';
 import { DateValidator } from 'src/app/validators/date.validator';
+import { ContactProvider } from 'src/providers/contact.provier';
 
 @Component({
   selector: 'app-job-client-interview-tab',
@@ -52,7 +53,8 @@ export class JobClientInterviewTabComponent implements OnInit {
     private route: ActivatedRoute,
     private snackbarService: SnackBarService,
     private router: Router,
-    private resumeProvider: ResumeProvider
+    private resumeProvider: ResumeProvider,
+    private contactProvider: ContactProvider
 
   ) {
     const state = this.router.getCurrentNavigation()?.extras.state;
@@ -62,12 +64,13 @@ export class JobClientInterviewTabComponent implements OnInit {
 
   async ngOnInit() {
     this.visible = false
-    this.getCustomerList();
-    this.initFilterCustomer();
+
     this.interviewId = this.route.snapshot.paramMap.get('id');
     this.step = JSON.parse(sessionStorage.getItem('job_tab')!);
     this.resumeId = sessionStorage.getItem('resume_name');
     this.customerId = sessionStorage.getItem('customer_id');
+    this.initFilterCustomer();
+    this.getCustomerList();
     if (this.jobId !== undefined) {
       sessionStorage.setItem('job_id', this.jobId.id);
     }
@@ -146,9 +149,20 @@ export class JobClientInterviewTabComponent implements OnInit {
 
 
   async getCustomerList() {
-    this.filteredCustomerList = this.customers =
-      await this.customerProvider.shortListCustomers();
+    console.log(this.customerId)
+    const data = {
+      id: this.customerId,
+      name: ""
+    };
+
+    this.filteredCustomers = this.customers =
+      await this.contactProvider.findByName(
+        data
+      );
+
+    console.log(this.filteredCustomerList)
   }
+
 
   private initFilterCustomer() {
     this.customerControl.valueChanges
@@ -171,22 +185,19 @@ export class JobClientInterviewTabComponent implements OnInit {
         (customer) => customer.id === user
       );
     }
-    return user && user.corporateName
-      ? user.corporateName
+    return user && user.name
+      ? user.name
       : '';
   }
 
   private async _filterCustomer(name: string): Promise<void> {
     const data = {
-      corporateName: name,
+      name: name,
       status: 1,
     };
-    this.filteredCustomers = await this.customerProvider.findByName(
+    this.filteredCustomers = await this.contactProvider.findByName(
       data
     );
-
-
-
   }
 
   getInterview() {
