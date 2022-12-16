@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatTable } from '@angular/material/table';
@@ -48,7 +49,7 @@ export class CollaboratorCreateComponent implements OnInit {
   view!: boolean;
   addressForm!: FormGroup;
   data!: any;
-  token!: string;
+  ddd!: number;
   validations = [
     [
       'admissionDate',
@@ -90,6 +91,7 @@ export class CollaboratorCreateComponent implements OnInit {
     this.step = JSON.parse(sessionStorage.getItem('collaborator_tab')!);
 
     if (this.collaboratorId !== 'novo') {
+      this.ddd = Number(sessionStorage.getItem('ddd'))
       await this.getCollaborator();
       this.initForm();
       this.setFormValue();
@@ -107,6 +109,7 @@ export class CollaboratorCreateComponent implements OnInit {
       );
       console.log("🚀 ~ file: collaborator-create.component.ts ~ line 96 ~ CollaboratorCreateComponent ~ getCollaborator ~ collaborator", this.collaborator)
       sessionStorage.setItem('type', this.collaborator.collaboratorTypes)
+      sessionStorage.setItem('ddd', this.collaborator.Phone.ddd)
 
     } catch (error) {
       console.error(error);
@@ -142,7 +145,7 @@ export class CollaboratorCreateComponent implements OnInit {
       lastNameFantasyName: [null, Validators.required],
       login: [null, Validators.required],
       userId: [null],
-      gender: [null, Validators.required],
+      gender: [null],
       maritalStatus: [null, Validators.required],
       office: ['', Validators.required],
       collaboratorTypes: [null, Validators.required],
@@ -164,7 +167,7 @@ export class CollaboratorCreateComponent implements OnInit {
       Phone: this.fb.group({
         phoneNumber: [null, [Validators.required, Validators.maxLength(9)]],
         ddd: [null, [Validators.required, Validators.maxLength(2)]],
-        ddi: [null, Validators.required],
+        ddi: [null],
       }),
 
       Address: this.fb.group({
@@ -196,48 +199,6 @@ export class CollaboratorCreateComponent implements OnInit {
 
       // this.collaboratorForm.patchValue(this.city);
       console.log("🚀 ~ file: collaborator-create.component.ts ~ line 176 ~ CollaboratorCreateComponent ~ setFormValue ~ collaborator", this.collaborator)
-    }
-  }
-
-  async getAddress() {
-    const address = this.collaboratorForm.controls['Address'].value;
-    console.log("🚀 ~ file: collaborator-create.component.ts ~ line 195 ~ CollaboratorCreateComponent ~ getAddress ~ address", address)
-    // const district = await this.cepService.findDistrict(
-    //   address.cep.replace('-', '')
-    // );
-    // this.collaboratorForm.controls['Address'].patchValue({
-    //   cep: address.cep,
-    //   city: address.localidade,
-    //   street: address.logradouro,
-    //   state: address.uf,
-    //   district: address.bairro,
-    //   });
-    //   this.searchCities({value: address.uf})
-    this.data = await this.cepService.searchCep(address.cep);
-    console.log("🚀 ~ file: collaborator-create.component.ts ~ line 208 ~ CollaboratorCreateComponent ~ getAddress ~ this.data", this.data)
-    if (this.data.erro) {
-      window.alert('Cep inválido');
-      this.collaboratorForm.controls['Address'].reset();
-      this.view = true;
-    } else {
-      this.view = false;
-      // this.collaboratorForm.controls['Address'].patchValue({
-      //   cep: district.cep,
-      //   city: district.localidade,
-      //   street: district.logradouro,
-      //   state: district.uf,
-      //   district: district.bairro,
-      // this.data = await this.cepService.searchCep(this.addressForm.controls['cep'].value);
-      this.collaboratorForm.controls['Address'].patchValue({
-        cep: this.data.cep,
-        city: this.data.localidade,
-        street: this.data.logradouro,
-        state: this.data.uf,
-        district: this.data.bairro,
-      });
-      this.searchCities({ value: this.data.uf })
-      console.log("🚀 ~ file: collaborator-register-tab.component.ts ~ line 219 ~ CollaboratorRegisterTabComponent ~ getAddress ~ data", this.data)
-
     }
   }
 
@@ -297,9 +258,11 @@ export class CollaboratorCreateComponent implements OnInit {
         })
       }
       let dataUser = this.userForm.getRawValue();
+      console.log(dataUser)
       const user = await this.userProvider.store(dataUser);
       this.collaboratorForm.controls['userId'].setValue(user.id)
       let idUser = this.collaboratorForm.getRawValue();
+      console.log(idUser)
       try {
         await this.collaboratorProvider.update(
           colaborator.id,
@@ -310,6 +273,7 @@ export class CollaboratorCreateComponent implements OnInit {
       }
       sessionStorage.setItem('collaborator_state', colaborator.id);
       sessionStorage.setItem('type', colaborator.collaboratorTypes)
+      sessionStorage.setItem('ddd', colaborator.Phone.ddd)
       this.router.navigate([`colaborador/${colaborator.id}`]);
       this.method = 'edit'
       this.snackbarService.successMessage('Colaborador cadastrado com sucesso'),
@@ -318,6 +282,7 @@ export class CollaboratorCreateComponent implements OnInit {
 
     } catch (error: any) {
       console.log(error);
+      console.log(data);
     }
   }
 
@@ -361,7 +326,4 @@ export class CollaboratorCreateComponent implements OnInit {
     }
     return isValid;
   }
-
 }
-
-

@@ -57,6 +57,7 @@ export class CollaboratorDependentsDialog {
   collaboratorId!: string | null;
   method!: string | null;
   dependentId!: string | null;
+  ddd!: number;
   constructor(
     public dialogRef: MatDialogRef<CollaboratorDependentsDialog>,
     private fb: FormBuilder,
@@ -67,10 +68,13 @@ export class CollaboratorDependentsDialog {
   ngOnInit(): void {
     this.method = sessionStorage.getItem('method')!;
     this.collaboratorId = sessionStorage.getItem('collaborator_id')!;
+    this.ddd = Number(sessionStorage.getItem('ddd'))
+    console.log(this.ddd)
     this.initForm();
   }
 
   initForm(): void {
+    console.log(this.ddd)
     this.dependentForm = this.fb.group({
       type: [null, Validators.required],
       firstName: [null, Validators.required],
@@ -87,11 +91,10 @@ export class CollaboratorDependentsDialog {
     });
     if (this.data) {
       this.dependentForm.patchValue(this.data);
+    }else {
+      this.dependentForm.controls['ddd'].setValue(this.ddd)
+
     }
-
-
-
-
   }
 
 

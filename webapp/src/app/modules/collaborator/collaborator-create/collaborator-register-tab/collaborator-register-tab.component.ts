@@ -82,7 +82,7 @@ export class CollaboratorRegisterTabComponent implements OnInit {
 
         const phoneForm = this.collaboratorForm.controls['Phone'] as FormGroup;
         this.phoneForm = phoneForm;
-        phoneForm.controls['ddi'].valueChanges.subscribe(res => {});
+
       });
     } else {
       let collaborator = await this.collaboratorProvider.findOne(

@@ -75,6 +75,7 @@ export class CollaboratorFinanceDialog {
   }
 
   initForm(): void {
+    this.type = Number(sessionStorage.getItem('type'))
     this.financeForm = this.fb.group({
       dateInclusion: this.fb.control({ value: new Date().toLocaleDateString(), disabled: true }, [DateValidator.isValidData(), Validators.required]),
       contractType: [this.type, Validators.required],
