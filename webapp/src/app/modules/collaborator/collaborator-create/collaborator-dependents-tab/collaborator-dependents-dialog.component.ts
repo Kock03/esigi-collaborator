@@ -74,7 +74,6 @@ export class CollaboratorDependentsDialog {
     this.method = sessionStorage.getItem('method')!;
     this.collaboratorId = sessionStorage.getItem('collaborator_id')!;
     this.ddd = Number(sessionStorage.getItem('ddd'))
-    console.log(this.ddd)
     this.initForm();
   }
 
@@ -88,8 +87,9 @@ export class CollaboratorDependentsDialog {
       cpf: [null, [DocumentValidator.isValidCpf()]],
       birthDate: this.fb.control({ value: ' ', disabled: false }, [DateValidator.isValidData(), Validators.required]),
       age: this.fb.control({ value: ' ', disabled: true }),
-      ddi: [""],
-      ddd: [null],
+
+      ddi: [null],
+      ddd: [this.ddd, null],
       phoneNumber: [null],
       email: [null, [Validators.email]],
       Collaborator: { id: this.collaboratorId },
