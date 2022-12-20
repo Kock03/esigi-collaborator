@@ -102,7 +102,7 @@ export class CollaboratorRegisterTabComponent implements OnInit {
       this.collaboratorForm.patchValue(collaborator);
       this.searchCities({ value: collaborator?.Address.state });
       
-      this.url = `http://localhost:3000/${collaborator.photo}`;
+      this.url = `http://192.168.8.184:3000/${collaborator.photo}`;
       this.view = false;
 
       
@@ -285,7 +285,7 @@ export class CollaboratorRegisterTabComponent implements OnInit {
 
     try {
       this.httpClient
-        .post('http://localhost:3000', formData, {
+        .post('http://192.168.8.184:3000', formData, {
           headers: {
             authorization: `Bearer ${this.token}`,
           },
@@ -296,7 +296,7 @@ export class CollaboratorRegisterTabComponent implements OnInit {
             this.collaboratorForm.controls['photo'].setValue(
               this.file.filename
             );
-            this.url = 'http://localhost:3000/' + this.file.filename;
+            this.url = 'http://192.168.8.184:3000/' + this.file.filename;
           }
         });
     } catch (e) {

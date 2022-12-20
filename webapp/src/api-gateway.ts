@@ -79,6 +79,7 @@ export class ApiGateway {
     options.method = RequestMethod.Post;
     options.url = url;
     options.params = params;
+    
     options.data = data;
     return this.request(options);
   }

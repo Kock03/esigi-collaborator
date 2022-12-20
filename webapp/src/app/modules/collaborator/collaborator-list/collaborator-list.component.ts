@@ -29,6 +29,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { UserProvider } from 'src/providers/user.provider';
+import { CollaboratorRegisterProvider } from 'src/providers/collaborator-providers/collaborator-register.provider';
 
 @Component({
   selector: 'app-collaborator-list',
@@ -66,6 +67,7 @@ export class CollaboratorListComponent implements OnInit {
     private liveAnnouncer: LiveAnnouncer,
     private router: Router,
     private collaboratorProvider: CollaboratorProvider,
+    private collaboratorRegister: CollaboratorRegisterProvider,
     private snackbarService: SnackBarService,
     private dialogService: ConfirmDialogService,
     private userProvider: UserProvider,
@@ -74,9 +76,12 @@ export class CollaboratorListComponent implements OnInit {
     this._unsubscribeAll = new Subject();
   }
 
-  async ngOnInit(): Promise<void> {
-    await this.getCollaboratorList();
+  ngOnInit() {
+    this.getCollaboratorList();
     this.initFilter();
+    console.log("pegou")
+    console.log("🚀 ~ file: collaborator-list.component.ts:152 ~ CollaboratorListComponent ~ getCollaboratorList ~ this.collaboratorProvider.findAll()", this.collaboratorRegister.findAll())
+
   }
 
   async searchCollaborators() {
@@ -93,6 +98,7 @@ export class CollaboratorListComponent implements OnInit {
   }
 
   goHome(): void {
+    this.token = localStorage.getItem('token')!;
     location.replace(`http://192.168.8.184:3406/validate/${this.token}`);
   }
 
@@ -147,7 +153,7 @@ export class CollaboratorListComponent implements OnInit {
 
   async getCollaboratorList() {
     this.filteredCollaboratorList = this.collaborators =
-      await this.collaboratorProvider.findAll();
+    await this.collaboratorProvider.findAll();
     this.filteredCollaboratorList.sort = this.sort;
     console.log(this.filteredCollaboratorList )
   }
