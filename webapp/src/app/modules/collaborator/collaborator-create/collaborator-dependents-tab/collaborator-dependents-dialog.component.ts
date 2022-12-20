@@ -53,13 +53,13 @@ export class CollaboratorDependentsDialog {
 
 
   gender: any[] = []
-  ddi: any[] = []
   type: any[] = []
   dependentForm!: FormGroup;
   Date: any;
   collaboratorId!: string | null;
   method!: string | null;
   dependentId!: string | null;
+  ddd!: number;
   constructor(
     public dialogRef: MatDialogRef<CollaboratorDependentsDialog>,
     private fb: FormBuilder,
@@ -71,13 +71,14 @@ export class CollaboratorDependentsDialog {
 
   ngOnInit(): void {
     this.getKeysCollaborator();
-    this.getKeysGeneric();
     this.method = sessionStorage.getItem('method')!;
     this.collaboratorId = sessionStorage.getItem('collaborator_id')!;
+    this.ddd = Number(sessionStorage.getItem('ddd'))
     this.initForm();
   }
 
   initForm(): void {
+    console.log(this.ddd)
     this.dependentForm = this.fb.group({
       type: ['', Validators.required],
       firstName: [null, Validators.required],
@@ -86,30 +87,19 @@ export class CollaboratorDependentsDialog {
       cpf: [null, [DocumentValidator.isValidCpf()]],
       birthDate: this.fb.control({ value: ' ', disabled: false }, [DateValidator.isValidData(), Validators.required]),
       age: this.fb.control({ value: ' ', disabled: true }),
-      ddi: [""],
-      ddd: [null],
+
+      ddi: [null],
+      ddd: [this.ddd, null],
       phoneNumber: [null],
       email: [null, [Validators.email]],
       Collaborator: { id: this.collaboratorId },
     });
     if (this.data) {
       this.dependentForm.patchValue(this.data);
+    } else {
+      this.dependentForm.controls['ddd'].setValue(this.ddd)
+
     }
-  }
-
-  async getKeysGeneric() {
-    let data = {
-      key: ["ddi"]
-    }
-    const arrays = await this.configProvider.findKeys('generic', data)
-
-    const keyList = arrays.reduce(function (array: any, register: any) {
-      array[register.key] = array[register.key] || [];
-      array[register.key].push({ id: register.id, value: register.value });
-      return array;
-    }, Object.create(null));
-    this.ddi = keyList['ddi'];
-
   }
 
   async getKeysCollaborator() {
@@ -172,7 +162,7 @@ export class CollaboratorDependentsDialog {
     if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
       age--;
     }
-    if (data === NaN || age === NaN) {
+    if (Number.isNaN(data) || Number.isNaN(age)) {
       age = 0
     }
     this.dependentForm.controls['age'].setValue(

@@ -17,10 +17,12 @@ export class ValidateTokenComponent implements OnInit {
     this.token = this.route.snapshot.paramMap.get('id')!;
 
     if (!this.token) {
-      location.replace(`http://192.168.8.184:3406/portal`)
+      location.replace(`http://localhost:3406/portal`)
+      // location.replace(`http://192.168.8.184:3406/portal`)
     } else {
       localStorage.setItem('token', this.token);
-      location.replace(`http://192.168.8.184:3401/colaborador/lista`)
+      // location.replace(`http://192.168.8.184:3401/colaborador/lista`)
+      location.replace(`http://localhost:3401/colaborador/lista`)
     }
   }
 }

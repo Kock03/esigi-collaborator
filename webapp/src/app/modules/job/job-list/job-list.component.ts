@@ -52,6 +52,7 @@ export class JobListComponent implements OnInit {
   filteredJobList = new MatTableDataSource();
   method: any;
   token!: string;
+  job!: any;
 
   constructor(
     private liveAnnouncer: LiveAnnouncer,
@@ -109,7 +110,7 @@ export class JobListComponent implements OnInit {
 
   }
 
-  editJob(jobId: any, customerId: any, collaboratorRequesterId: any) {
+  async editJob(jobId: any, customerId: any, collaboratorRequesterId: any) {
     sessionStorage.setItem('customer_id', customerId);
     sessionStorage.setItem('collaboratorRequester_id', collaboratorRequesterId);
     this.method = sessionStorage.setItem('job_method', 'edit');
