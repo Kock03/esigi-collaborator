@@ -26,10 +26,11 @@ export class ResumesService {
   constructor(
     @InjectRepository(ResumesEntity)
     private readonly resumesRepository: Repository<ResumesEntity>,
-  ) {}
+  ) { }
 
   async createPdf(id: string) {
     const data = await this.findOneOrFail({ id });
+    console.log(data)
     const creatorPdf = new ResumeTemplate(data);
     const printer = await new PdfPrinter(creatorPdf.Font);
     const options = {};
@@ -47,7 +48,7 @@ export class ResumesService {
   async findAll() {
     const options: FindManyOptions = {
       order: { createdAt: 'DESC' },
-     relations: ['Phone', 'Address'],
+      relations: ['Phone', 'Address'],
     };
     return await this.resumesRepository.find(options);
   }

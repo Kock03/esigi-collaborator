@@ -25,6 +25,8 @@ export class ResumeDataModel {
         this.maritalStatus = this.maritalStatusTreatment(data.maritalStatus);
         this.cpf = data.cpf;
         this.phone = this.phoneTratment(data.Phone);
+        console.log(data.phone);
+        console.log(this.phone);
         this.Address = this.addressTratment(data.Address);
         this.educationsTratment(data.Educations);
         this.languagesTratment(data.Languages);
@@ -59,7 +61,7 @@ export class ResumeDataModel {
     }
 
     phoneTratment(Phone: any) {
-        return this.phone = `(${Phone.ddd}) +${Phone.ddi} ${Phone.phoneNumber}`
+        return this.phone = ` +${Phone.ddi} (${Phone.ddd}) ${Phone.phoneNumber}`
     }
 
     addressTratment(Address: any) {

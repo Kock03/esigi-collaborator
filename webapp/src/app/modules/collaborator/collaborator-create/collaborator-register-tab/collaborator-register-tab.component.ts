@@ -53,7 +53,7 @@ export class CollaboratorRegisterTabComponent implements OnInit {
   Country!: any;
   token!: string;
   file!: any;
-  view!: boolean;
+  view: boolean = false;
   searchEnabled!: boolean;
   defaultValue: any;
   cityList: Array<any> = [];
@@ -138,7 +138,7 @@ export class CollaboratorRegisterTabComponent implements OnInit {
 
   onCountrySelected(country: any) {
     console.log("🚀 ~ file: collaborator-register-tab.component.ts ~ line 117 ~ CollaboratorRegisterTabComponent ~ onCountrySelected ~ country", country)
-    if (this.collaboratorId == 'novo') {
+    if (this.collaboratorId === 'novo') {
       if (country.name === 'Brasil') {
         this.view = true;
         this.searchEnabled = true;

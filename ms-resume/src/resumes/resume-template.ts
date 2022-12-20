@@ -254,7 +254,7 @@ export class ResumeTemplate {
           margin: [0, 0, 4, 0],
           text: [
             { text: ' Telefone: ', fontSize: 14 },
-            { text: `${data.Phone}`, margin: [0, 6, 4, 0], fontSize: 13 },
+            { text: `${data.phone}`, margin: [0, 6, 4, 0], fontSize: 13 },
           ]
         },
         {
