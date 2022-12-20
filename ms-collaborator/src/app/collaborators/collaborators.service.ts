@@ -386,7 +386,7 @@ export class CollaboratorsService {
       });
 
       const resources = await this.httpService
-        .post('http://localhost:3505/api/v1/resources/list',
+        .post('http://192.168.8.184:3505/api/v1/resources/list',
 
           {
             idList: collaboratorIdList,

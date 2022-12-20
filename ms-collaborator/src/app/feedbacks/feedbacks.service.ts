@@ -1,4 +1,5 @@
-import { HttpService, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
+import { HttpService } from '@nestjs/axios';
 import { InjectRepository } from '@nestjs/typeorm';
 import {
   FindConditions,
@@ -31,7 +32,7 @@ export class FeedbacksService {
 
     const collaborators = await this.httpService
       .post(
-        'http://localhost:3501/api/v1/collaborators/list',
+        'http://192.168.8.184:3501/api/v1/collaborators/list',
         {
           idList: collaboratorIdList,
         },
@@ -73,7 +74,7 @@ export class FeedbacksService {
 
     const projects = await this.httpService
       .post(
-        'http://localhost:3505/api/v1/projects/list',
+        'http://192.168.8.184:3505/api/v1/projects/list',
         {
           idList: projectIdList,
         },

@@ -18,7 +18,7 @@ export class CollaboratorImageDialog {
   ) { }
 
   ngOnInit(): void {
-    this.fileName = 'http://localhost:3000/' + this.data
+    this.fileName = 'http://192.168.8.184:3000/' + this.data
     if (this.fileName === '.pdf') {
       console.log('deu certo')
     }

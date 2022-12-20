@@ -59,7 +59,7 @@ export class InterviewsService {
 
       const collaborators = await this.httpService
         .post(
-          'http://localhost:3501/api/v1/collaborators/list',
+          'http://192.168.8.184:3501/api/v1/collaborators/list',
           {
             idList: collaboratorIdList,
           },
@@ -91,7 +91,7 @@ export class InterviewsService {
 
       const resumes = await this.httpService
         .post(
-          'http://localhost:3502/api/v1/resumes/list',
+          'http://192.168.8.184:3502/api/v1/resumes/list',
           {
             idList: resumeIdList,
           },
