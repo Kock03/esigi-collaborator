@@ -1,8 +1,19 @@
 export const environment = {
-  production: false,
+  production: true,
   COLLABORATOR_MS: '44.205.159.254:3501/api/v1/',
   RESUME_MS: '44.205.159.254:3502/api/v1/',
   JOBS_MS: '44.205.159.254:3503/api/v1/',
-  message: 'LOCAL',
-  protocol: 'http'
+  SETTING_MS: '44.205.159.254:3504/api/v1/',
+  CONFIG_MS: '44.205.159.254:3508/api/v1/registers/',
+
+  AUTH_SERVICE_MS: '44.205.159.254:3500/api/v1/',
+  CUSTOMER_MS: '44.205.159.254:3506/api/v1/',
+  PROJECT_MS: '44.205.159.254:3505/api/v1/',
+  portal: 'https://aws-amplify.d3tee2p1a2jxch.amplifyapp.com/login',
+  port: '44.205.159.254:',
+
+
+
+  message: '',
+  protocol: 'http',
 };
