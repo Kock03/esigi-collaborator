@@ -48,7 +48,7 @@ export class AppComponent {
         if (valid === -1) {
         this.token = localStorage.getItem('token')!;
           if (!this.token) {
-            location.replace(`http://192.168.8.184:3406/validate/${this.token}`);
+            location.replace(`https://aws-amplify.d3tee2p1a2jxch.amplifyapp.com/validate/${this.token}`);
           }
         }
         if (res.url === '/') {
@@ -84,7 +84,7 @@ export class AppComponent {
   navigator(route: any) {
     switch (route) {
       case 'portal':
-        location.replace(`http://192.168.8.184:3406/validate/${this.token}`);
+        location.replace(`https://aws-amplify.d3tee2p1a2jxch.amplifyapp.com/validate/${this.token}`);
       break;
       case 'colaborador':
         this.router.navigate(['colaborador/lista']); 

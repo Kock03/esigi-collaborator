@@ -32,7 +32,7 @@ export class FeedbacksService {
 
     const collaborators = await this.httpService
       .post(
-        'http://192.168.8.184:3501/api/v1/collaborators/list',
+        'http://44.205.159.254:3501/api/v1/collaborators/list',
         {
           idList: collaboratorIdList,
         },
@@ -74,7 +74,7 @@ export class FeedbacksService {
 
     const projects = await this.httpService
       .post(
-        'http://192.168.8.184:3505/api/v1/projects/list',
+        'http://44.205.159.254:3505/api/v1/projects/list',
         {
           idList: projectIdList,
         },

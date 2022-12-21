@@ -1,10 +1,10 @@
 module.exports = {
   name: 'default',
   type: 'mysql',
-  host: '192.168.8.184',
+  host: '44.205.159.254',
   port: '3306',
   username: 'root',
-  password: '1234',
+  password: 'Evt#2022',
   database: 'esigi_resume',
   entities: ['dist/**/*.entity.js'],
 };

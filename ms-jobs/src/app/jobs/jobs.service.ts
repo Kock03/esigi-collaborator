@@ -86,7 +86,7 @@ export class JobsService {
 
       const collaborators = await this.httpService
         .post(
-          'http://192.168.8.184:3501/api/v1/collaborators/list',
+          'http://44.205.159.254:3501/api/v1/collaborators/list',
           {
             idList: collaboratorIdList,
           },
@@ -123,7 +123,7 @@ export class JobsService {
 
       const customers = await this.httpService
         .post(
-          'http://192.168.8.184:3506/api/v1/customers/list',
+          'http://44.205.159.254:3506/api/v1/customers/list',
           {
             idList: customerIdList,
           },
