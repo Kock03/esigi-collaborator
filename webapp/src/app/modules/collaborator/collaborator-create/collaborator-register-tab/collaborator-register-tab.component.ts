@@ -97,7 +97,7 @@ export class CollaboratorRegisterTabComponent implements OnInit {
       this.collaboratorForm.patchValue(collaborator);
       this.searchCities({ value: collaborator?.Address.state });
       
-      this.url = `http://44.205.159.254:3000/${collaborator.photo}`;
+      this.url = `http://https://viniciuskock.com:3000/${collaborator.photo}`;
       this.view = false;
       this.changesType(
         this.collaboratorForm.controls['collaboratorTypes'].value
@@ -261,7 +261,7 @@ export class CollaboratorRegisterTabComponent implements OnInit {
 
     try {
       this.httpClient
-        .post('http://44.205.159.254:3000', formData, {
+        .post('http://https://viniciuskock.com:3000', formData, {
           headers: {
             authorization: `Bearer ${this.token}`,
           },
@@ -272,7 +272,7 @@ export class CollaboratorRegisterTabComponent implements OnInit {
             this.collaboratorForm.controls['photo'].setValue(
               this.file.filename
             );
-            this.url = 'http://44.205.159.254:3000/' + this.file.filename;
+            this.url = 'http://https://viniciuskock.com:3000/' + this.file.filename;
           }
         });
     } catch (e) {

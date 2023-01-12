@@ -55,7 +55,7 @@ export class CollaboratorDocumentDialog {
       formData.append('file', file);
 
       try {
-        this.httpClient.post('http://44.205.159.254:3000', formData)
+        this.httpClient.post('http://https://viniciuskock.com:3000', formData)
           .subscribe(resposta => {
             if (resposta) {
               this.file = resposta
