@@ -1,7 +1,7 @@
 module.exports = {
   name: 'default',
   type: 'mysql',
-  host: 'https://viniciuskock.com',
+  host: 'https://esigi.envolti.com.br',
   port: '3306',
   username: 'root',
   password: 'Evt#2022',
