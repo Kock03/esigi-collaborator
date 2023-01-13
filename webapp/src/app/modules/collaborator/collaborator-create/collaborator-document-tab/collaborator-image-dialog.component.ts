@@ -18,7 +18,7 @@ export class CollaboratorImageDialog {
   ) { }
 
   ngOnInit(): void {
-    this.fileName = 'http://https://esigi.envolti.com.br:3000/' + this.data
+    this.fileName = 'https://esigi.envolti.com.br:3000/' + this.data
     if (this.fileName === '.pdf') {
       console.log('deu certo')
     }

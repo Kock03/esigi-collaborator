@@ -386,7 +386,7 @@ export class CollaboratorsService {
       });
 
       const resources = await this.httpService
-        .post('http://https://esigi.envolti.com.br:3505/api/v1/resources/list',
+        .post('https://esigi.envolti.com.br:3505/api/v1/resources/list',
 
           {
             idList: collaboratorIdList,
