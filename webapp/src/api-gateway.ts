@@ -163,13 +163,14 @@ export class ApiGateway {
 
     let requestOptions = {
       method: options.method,
-      url: `${options.url}`,
+      url: `${environment.protocol}://${options.url}`,
       headers: options.headers,
       search: this.buildUrlSearchParams(options.params),
       body: JSON.stringify(options.data),
-
+      
       observe: 'response' as 'response',
     };
+    console.log("🚀 ~ file: api-gateway.ts:168 ~ ApiGateway ~ options.url", options.url)
 
     let isCommand =
       showLoading === true || options.method !== RequestMethod.Get;
