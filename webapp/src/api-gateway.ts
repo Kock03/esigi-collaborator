@@ -268,7 +268,9 @@ export class ApiGateway {
       }
       return '';
     });
+    console.log("🚀 ~ file: api-gateway.ts:271 ~ ApiGateway ~ options.url=options.url.replace ~ options.url", options.url)
     options.url = options.url.replace(/\/{2,}/g, '/');
+    console.log("🚀 ~ file: api-gateway.ts:273 ~ ApiGateway ~ interpolateUrl ~  options.url",  options.url)
 
     return options;
   }
