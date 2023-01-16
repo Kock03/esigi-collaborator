@@ -59,7 +59,7 @@ export class InterviewsService {
 
       const collaborators = await this.httpService
         .post(
-          'https://esigi.envolti.com.br:3501/coll/api/v1/collaborators/list',
+          'https://esigi.envolti.com.br/coll/api/v1/collaborators/list',
           {
             idList: collaboratorIdList,
           },

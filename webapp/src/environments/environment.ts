@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  COLLABORATOR_MS: 'https://esigi.envolti.com.br:3501/coll/api/v1/',
+  COLLABORATOR_MS: 'https://esigi.envolti.com.br/coll/api/v1/',
   RESUME_MS: 'https://esigi.envolti.com.br:3502/resume/api/v1/',
   JOBS_MS: 'https://esigi.envolti.com.br:3503/jobs/api/v1/',
   SETTING_MS: 'https://esigi.envolti.com.br:3504/setting/api/v1/',
