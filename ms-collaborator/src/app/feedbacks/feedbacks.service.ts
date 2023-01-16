@@ -32,7 +32,7 @@ export class FeedbacksService {
 
     const collaborators = await this.httpService
       .post(
-        'https://esigi.envolti.com.br:3501/api/v1/collaborators/list',
+        'https://esigi.envolti.com.br:3501/coll/api/v1/collaborators/list',
         {
           idList: collaboratorIdList,
         },
@@ -74,7 +74,7 @@ export class FeedbacksService {
 
     const projects = await this.httpService
       .post(
-        'https://esigi.envolti.com.br:3505/api/v1/projects/list',
+        'https://esigi.envolti.com.br:3505/projects/api/v1/projects/list',
         {
           idList: projectIdList,
         },

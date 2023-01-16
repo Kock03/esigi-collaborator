@@ -14,7 +14,7 @@ import { CreateFinancialsDto } from './dtos/create-financials.dto';
 import { UpdateFinancialsDto } from './dtos/update-financials.dto';
 import { FinancialsService } from './financials.service';
 
-@Controller('/api/v1/financials')
+@Controller('/coll/api/v1/financials')
 export class FinancialsController {
   constructor(private readonly financialsService: FinancialsService) { }
 

@@ -14,7 +14,7 @@ import { DependentsService } from './dependents.service';
 import { CreatedependentsDto } from './dtos/create-dependents.dto';
 import { UpdateDependentsDto } from './dtos/update-dependents.dto';
 
-@Controller('/api/v1/dependents')
+@Controller('/coll/api/v1/dependents')
 export class DependentsController {
     constructor(private readonly dependentsService: DependentsService) { }
 

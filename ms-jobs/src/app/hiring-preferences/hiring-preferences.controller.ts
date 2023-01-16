@@ -14,7 +14,7 @@ import { CreateHiringPreferencesDto } from './dtos/create-hiring-preferences.dto
 import { UpdateHiringPreferencesDto } from './dtos/update-hiring-preferences.dto';
 import { HiringPreferencesService } from './hiring-preferences.service';
 
-@Controller('/api/v1/hiring-preferences')
+@Controller('/coll/api/v1/hiring-preferences')
 export class HiringPreferencesController {
   constructor(
     private readonly hiringPreferencesService: HiringPreferencesService,

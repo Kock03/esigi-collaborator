@@ -15,7 +15,7 @@ import { CreateInterviewsDto } from './dtos/create-interviews.dto';
 import { UpdateInterviewsDto } from './dtos/update-interviews.dto';
 import { InterviewsService } from './interviews.service';
 
-@Controller('api/v1/interviews')
+@Controller('coll/api/v1/interviews')
 export class InterviewsController {
   constructor(private readonly interviewsService: InterviewsService) {}
 

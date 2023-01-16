@@ -3,7 +3,7 @@ import { CreateKnowledgesDto } from './dtos/create-knowledges.dto';
 import { UpdateKnowledgesDto } from './dtos/update-knowledges.dto';
 import { KnowledgesService } from './knowledges.service';
 
-@Controller('/api/v1/knowledges')
+@Controller('/coll/api/v1/knowledges')
 export class KnowledgesController {
     constructor(private readonly KnowledgesService: KnowledgesService) { }
 

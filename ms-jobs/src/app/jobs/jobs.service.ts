@@ -86,7 +86,7 @@ export class JobsService {
 
       const collaborators = await this.httpService
         .post(
-          'https://esigi.envolti.com.br:3501/api/v1/collaborators/list',
+          'https://esigi.envolti.com.br:3501/coll/api/v1/collaborators/list',
           {
             idList: collaboratorIdList,
           },
@@ -123,7 +123,7 @@ export class JobsService {
 
       const customers = await this.httpService
         .post(
-          'https://esigi.envolti.com.br:3506/api/v1/customers/list',
+          'https://esigi.envolti.com.br:3506/customer/api/v1/customers/list',
           {
             idList: customerIdList,
           },

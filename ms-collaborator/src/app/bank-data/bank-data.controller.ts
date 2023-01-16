@@ -14,7 +14,7 @@ import { BankDataService } from './bank-data.service';
 import { CreateBankDataDto } from './dtos/create-bank-data.dto';
 import { UpdateBankDataDto } from './dtos/update-bank-data.dto';
 
-@Controller('/api/v1/bank')
+@Controller('/coll/api/v1/bank')
 export class BankDataController {
   constructor(private readonly bankDataService: BankDataService) {}
 

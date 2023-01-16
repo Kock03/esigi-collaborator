@@ -14,7 +14,7 @@ import { UpdateFeedbacksDto } from './dto/update-feedbacks.dto';
 import { FeedbacksEntity } from './feedbacks.entity';
 import { FeedbacksService } from './feedbacks.service';
 
-@Controller('api/v1/feedbacks')
+@Controller('coll/api/v1/feedbacks')
 export class FeedbacksController {
   constructor(private readonly feedbacksService: FeedbacksService) {}
 
