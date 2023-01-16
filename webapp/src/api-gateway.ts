@@ -149,6 +149,7 @@ export class ApiGateway {
   ): Observable<any> {
     options.method = options.method || RequestMethod.Get;
     options.url = options.url || '';
+    console.log("🚀 ~ file: api-gateway.ts:152 ~ ApiGateway ~ options.url", options.url)
     options.headers = options.headers || new HttpHeaders();
     options.params = options.params || {};
     options.data = options.data || {};
@@ -269,7 +270,7 @@ export class ApiGateway {
       return '';
     });
     console.log("🚀 ~ file: api-gateway.ts:271 ~ ApiGateway ~ options.url=options.url.replace ~ options.url", options.url)
-    options.url = options.url.replace(/\/{2,}/g, '/');
+    options.url = options.url;
     console.log("🚀 ~ file: api-gateway.ts:273 ~ ApiGateway ~ interpolateUrl ~  options.url",  options.url)
 
     return options;
