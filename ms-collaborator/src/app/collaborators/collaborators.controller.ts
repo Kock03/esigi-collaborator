@@ -21,7 +21,7 @@ import { UpdatePermissionDto } from './dtos/update-permission.dto';
 import { ICollaborator, ICollaborators } from './interfaces/i-collaborators.interfaces';
 
 
-@Controller('/coll/api/v1/collaborators/')
+@Controller('/coll/api/v1/collaborators')
 export class CollaboratorsController {
   constructor(private readonly collaboratorsService: CollaboratorsService) { }
 
