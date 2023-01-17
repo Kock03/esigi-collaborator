@@ -91,7 +91,7 @@ export class InterviewsService {
 
       const resumes = await this.httpService
         .post(
-          'https://esigi.envolti.com.br:3502/resume/api/v1/resumes/list',
+          'https://esigi.envolti.com.br/resume/api/v1/resumes/list',
           {
             idList: resumeIdList,
           },
