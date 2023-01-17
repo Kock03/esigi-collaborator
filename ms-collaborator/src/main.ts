@@ -24,14 +24,14 @@ async function bootstrap() {
   );
 
   app.enableCors();
-  await app.listen(3501);
+  // await app.listen(3501);
   const cors = require('cors');
   var corsOptions = {
     origin: 'https://aws-amplify.d26nj5ra7tr3nr.amplifyapp.com/',
     optionsSuccessStatus: 200
   }
   app.use(cors(corsOptions));
-  app.use((req, res, next) => {
+  await app.use((req, res, next) => {
     //Qual site tem permissão de realizar a conexão, no exemplo abaixo está o "*" indicando que qualquer site pode fazer a conexão
       res.header("Access-Control-Allow-Origin", "https://aws-amplify.d26nj5ra7tr3nr.amplifyapp.com");
     //Quais são os métodos que a conexão pode realizar na API
