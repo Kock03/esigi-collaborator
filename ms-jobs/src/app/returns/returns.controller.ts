@@ -12,7 +12,7 @@ import { CreateReturnsDto } from './dtos/create-returns.dto';
 import { UpdateReturnsDto } from './dtos/update-returns.dto';
 import { ReturnsService } from './returns.service';
 
-@Controller('/coll/api/v1/returns')
+@Controller('/jobs/api/v1/returns')
 export class ReturnsController {
   constructor(private readonly returnsService: ReturnsService) {}
 

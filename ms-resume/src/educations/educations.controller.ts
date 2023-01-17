@@ -12,7 +12,7 @@ import { CreateEducationsDto } from './dto/create-educations.dto';
 import { UpdateEducationsingDto } from './dto/update-educations.dto';
 import { EducationsService } from './educations.service';
 
-@Controller('coll/api/v1/educations')
+@Controller('resume/api/v1/educations')
 export class EducationsController {
   constructor(private readonly educationsService: EducationsService) { }
 

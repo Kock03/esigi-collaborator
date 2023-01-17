@@ -4,7 +4,7 @@ import { UpdateSenioritiesDto } from './dtos/update-seniorities.dto';
 import { SenioritiesService } from './seniorities.service';
 
 
-@Controller('/coll/api/v1/seniorities')
+@Controller('/jobs/api/v1/seniorities')
 export class SenioritiesController {
     constructor(private readonly senioritiesService: SenioritiesService){ }
 

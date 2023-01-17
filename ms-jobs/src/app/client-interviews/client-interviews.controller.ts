@@ -12,7 +12,7 @@ import { ClientInterviewsService } from './client-interviews.service';
 import { CreateClientInterviewsDto } from './dtos/create-client-interviews.dto';
 import { UpdateClientInterviewsDto } from './dtos/update-client-interviews.dto';
 
-@Controller('coll//api/v1/client-interviews')
+@Controller('jobs/api/v1/client-interviews')
 export class ClientInterviewsController {
   constructor(
     private readonly clientInterviewsService: ClientInterviewsService,

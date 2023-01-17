@@ -12,7 +12,7 @@ import { CreateLanguagesDto } from './dto/create-languages.dto';
 import { UpdateLanguagesDto } from './dto/update-languages.dto';
 import { LanguagesService } from './languages.service';
 
-@Controller('coll/api/v1/languages')
+@Controller('resume/api/v1/languages')
 export class LanguagesController {
   constructor(private readonly languagesService: LanguagesService) { }
 

@@ -17,7 +17,7 @@ import { ResumesService } from './resumes.service';
 import * as fs from 'fs';
 
 
-@Controller('/coll/api/v1/resumes')
+@Controller('/resume/api/v1/resumes')
 export class ResumesController {
   constructor(private readonly resumesService: ResumesService) { }
 

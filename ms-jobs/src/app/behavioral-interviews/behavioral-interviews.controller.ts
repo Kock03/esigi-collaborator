@@ -14,7 +14,7 @@ import { BehavioralInterviewsService } from './behavioral-interviews.service';
 import { CreateBehaviorInterviewsDto } from './dtos/create-behavioral-interviews.dto';
 import { UpdateBehaviorInterviewsDto } from './dtos/update-behavioral-interviews.dto';
 
-@Controller('coll//api/v1/behaviroal-interviews')
+@Controller('jobs/api/v1/behaviroal-interviews')
 export class BehavioralInterviewsController {
   constructor(
     private readonly behavioralInterviewsService: BehavioralInterviewsService,
