@@ -23,7 +23,7 @@ async function bootstrap() {
     new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }),
   );
 
-  app.enableCors();
+  // app.enableCors();
   // await app.listen(3501);
   const cors = require('cors');
   app.use((req, res, next) => {
