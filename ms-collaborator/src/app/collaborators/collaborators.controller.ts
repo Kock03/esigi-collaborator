@@ -26,12 +26,9 @@ export class CollaboratorsController {
   constructor(private readonly collaboratorsService: CollaboratorsService) { }
 
   @Get()
-  async findAll() {
-    return await this.collaboratorsService.findGerente();
+  async index(@Headers() headers) {
+    return await this.collaboratorsService.findAll(headers.authorization);
   }
-  // async index(@Headers() headers) {
-  //   return await this.collaboratorsService.findAll(headers.authorization);
-  // }
 
   @Get('list/gerente')
   async findGerente() {
