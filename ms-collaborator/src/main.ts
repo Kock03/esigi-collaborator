@@ -24,7 +24,7 @@ async function bootstrap() {
   );
 
   app.enableCors();
-  // await app.listen(3501);
+  await app.listen(3501);
   const cors = require('cors');
   var corsOptions = {
     origin: 'https://aws-amplify.d26nj5ra7tr3nr.amplifyapp.com/',
