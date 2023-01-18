@@ -25,7 +25,7 @@ import { ICollaborator, ICollaborators } from './interfaces/i-collaborators.inte
 export class CollaboratorsController {
   constructor(private readonly collaboratorsService: CollaboratorsService) { }
 
-  @Get()
+  @Get('all')
   async index(@Headers() headers) {
     return await this.collaboratorsService.findAll(headers.authorization);
   }
