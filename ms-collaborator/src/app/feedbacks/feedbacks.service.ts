@@ -74,7 +74,7 @@ export class FeedbacksService {
 
     const projects = await this.httpService
       .post(
-        'https://esigi.envolti.com.br:3505/projects/api/v1/projects/list',
+        'https://esigi.envolti.com.br/projects/api/v1/projects/list',
         {
           idList: projectIdList,
         },
