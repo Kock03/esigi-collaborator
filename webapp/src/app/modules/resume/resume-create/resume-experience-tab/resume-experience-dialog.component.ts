@@ -58,7 +58,6 @@ export class ResumeDialogExperience {
 
   async saveExperience() {
     const data = this.experienceForm.getRawValue();
-    console.log("🚀 ~ file: resume-experience-dialog.component.ts ~ line 60 ~ ResumeDialogExperience ~ saveExperience ~ experienceForm", this.experienceForm)
     if (this.method === 'add') {
       try {
         const experience = await this.resumeExperienceProvider.store(data);

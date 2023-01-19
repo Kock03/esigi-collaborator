@@ -79,8 +79,6 @@ export class CollaboratorListComponent implements OnInit {
   ngOnInit() {
     this.getCollaboratorList();
     this.initFilter();
-    console.log("pegou")
-    console.log("🚀 ~ file: collaborator-list.component.ts:152 ~ CollaboratorListComponent ~ getCollaboratorList ~ this.collaboratorProvider.findAll()", this.collaboratorRegister.findAll())
 
   }
 

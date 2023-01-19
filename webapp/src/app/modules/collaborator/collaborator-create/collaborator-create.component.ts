@@ -108,7 +108,6 @@ export class CollaboratorCreateComponent implements OnInit {
       this.collaborator = await this.collaboratorProvider.findOne(
         this.collaboratorId
       );
-      console.log("🚀 ~ file: collaborator-create.component.ts ~ line 96 ~ CollaboratorCreateComponent ~ getCollaborator ~ collaborator", this.collaborator)
       sessionStorage.setItem('type', this.collaborator.collaboratorTypes)
       sessionStorage.setItem('ddd', this.collaborator.Phone.ddd)
 
@@ -199,7 +198,6 @@ export class CollaboratorCreateComponent implements OnInit {
       this.searchCities({ value: this.collaborator?.Address.state })
 
       // this.collaboratorForm.patchValue(this.city);
-      console.log("🚀 ~ file: collaborator-create.component.ts ~ line 176 ~ CollaboratorCreateComponent ~ setFormValue ~ collaborator", this.collaborator)
     }
   }
 

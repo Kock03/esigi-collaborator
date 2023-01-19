@@ -140,7 +140,6 @@ export class CollaboratorRegisterTabComponent implements OnInit {
 
 
   onCountrySelected(country: any) {
-    console.log("🚀 ~ file: collaborator-register-tab.component.ts ~ line 117 ~ CollaboratorRegisterTabComponent ~ onCountrySelected ~ country", country)
     if (this.collaboratorId === 'novo') {
       if (country.name === 'Brasil') {
         this.view = true;
@@ -239,7 +238,6 @@ export class CollaboratorRegisterTabComponent implements OnInit {
 
   async searchCep() {
     this.data = await this.cepService.searchCep(this.addressForm.controls['cep'].value);
-    console.log("🚀 ~ file: collaborator-register-tab.component.ts:216 ~ CollaboratorRegisterTabComponent ~ searchCep ~ this.data", this.data)
     this.collaboratorForm.controls['Address'].patchValue({
       cep: this.data.cep,
       city: this.data.localidade,

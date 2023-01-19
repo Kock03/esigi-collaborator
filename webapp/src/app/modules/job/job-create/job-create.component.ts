@@ -199,7 +199,6 @@ export class JobCreateComponent implements OnInit {
         this.jobForm.controls['replacementId'].setValue(res.id, {
           emitEvent: true,
         });
-        console.log("🚀 ~ file: job-create.component.ts ~ line 202 ~ JobCreateComponent ~ this.collaboratorReplaceControl.valueChanges.subscribe ~ replacementId", this.replacementId)
       }
     });
   }
@@ -215,7 +214,6 @@ export class JobCreateComponent implements OnInit {
 
   async saveJob() {
     let data = this.jobForm.getRawValue();
-    console.log("🚀 ~ file: job-create.component.ts ~ line 203 ~ JobCreateComponent ~ saveJob ~ data", data)
     
 
     try {

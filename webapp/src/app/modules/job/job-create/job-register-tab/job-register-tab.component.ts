@@ -93,7 +93,6 @@ export class JobRegisterTabComponent implements OnInit {
         }
 
       });
-    console.log("🚀 ~ file: job-register-tab.component.ts ~ line 96 ~ JobRegisterTabComponent ~ initFilterRequester ~ collaboratorControl", this.collaboratorControl)
 
   }
 
@@ -151,7 +150,6 @@ export class JobRegisterTabComponent implements OnInit {
 
 
   displayFnReplacement(user: any): string {
-    console.log("🚀 ~ file: job-register-tab.component.ts ~ line 159 ~ JobRegisterTabComponent ~ displayFnReplacement ~ replacements", this.replacements)
     if (typeof user === 'string' && this.replacements) {
       return this.replacements.find(
         
