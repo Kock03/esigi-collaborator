@@ -19,6 +19,7 @@ import { ActivatedRoute } from '@angular/router';
 import { DocumentValidator } from 'src/app/validators/document.validator';
 import { ResumeProvider } from 'src/providers/resume-providers/resume.provider';
 import { CepService } from 'src/services/cep.service';
+import { StatesAndCities } from 'src/services/states-cities.service';
 
 export const PICK_FORMATS = {
   parse: { dateInput: { month: 'numeric', year: 'numeric', day: 'numeric' } },
@@ -66,12 +67,16 @@ export class ResumeRegisterTabComponent implements OnInit {
   searchEnabled!: boolean;
   defaultValue: any;
   filename!: string;
+  cityList: Array<any> = [];
+  data!: any;
+
   constructor(
     private fb: FormBuilder,
     private cepService: CepService,
     private route: ActivatedRoute,
     private httpClient: HttpClient,
     private resumeProvider: ResumeProvider,
+    private statesAndCities: StatesAndCities,
   ) { }
 
   async ngOnInit() {
@@ -204,6 +209,45 @@ export class ResumeRegisterTabComponent implements OnInit {
 
     } catch (e) {
       console.log(e)
+    }
+  }
+
+  async searchCep() {
+    this.data = await this.cepService.searchCep(this.addressForm.controls['cep'].value);
+    this.resumeForm.controls['Address'].patchValue({
+      cep: this.data.cep,
+      city: this.data.localidade,
+      street: this.data.logradouro,
+      state: this.data.uf,
+      district: this.data.bairro,
+    });
+    this.searchCities({ value: this.data.uf })
+    if (this.data.erro == true) {
+      window.alert('Cep inválido');
+    }
+  }
+
+  searchCities(e: any) {
+    const city = document.querySelector('#cities') as HTMLSelectElement;
+    let state_number = this.statesAndCities.json_cities.estados.length;
+    let j_index = -1;
+    for (var x = 0; x < state_number; x++) {
+      if (this.statesAndCities.json_cities.estados[x].sigla == e.value) {
+        j_index = x;
+      }
+    }
+    let line = {};
+    let arrayCity = Array<any>();
+    if (j_index != -1) {
+      this.statesAndCities.json_cities.estados[j_index].cidades.forEach(
+        cities => {
+          line = cities;
+          arrayCity.push(line);
+        }
+      );
+      this.cityList = arrayCity;
+    } else {
+      city.innerHTML = '';
     }
   }
 
