@@ -97,7 +97,7 @@ export class CollaboratorRegisterTabComponent implements OnInit {
       this.collaboratorForm.patchValue(collaborator);
       this.searchCities({ value: collaborator?.Address.state });
       
-      this.url = `https://esigi.envolti.com.br:3000/${collaborator.photo}`;
+      this.url = `https://esigi.envolti.com.br/auth/${collaborator.photo}`;
       this.view = false;
       this.changesType(
         this.collaboratorForm.controls['collaboratorTypes'].value
@@ -259,7 +259,7 @@ export class CollaboratorRegisterTabComponent implements OnInit {
 
     try {
       this.httpClient
-        .post('https://esigi.envolti.com.br:3000', formData, {
+        .post('https://esigi.envolti.com.br/auth', formData, {
           headers: {
             authorization: `Bearer ${this.token}`,
           },
@@ -270,7 +270,7 @@ export class CollaboratorRegisterTabComponent implements OnInit {
             this.collaboratorForm.controls['photo'].setValue(
               this.file.filename
             );
-            this.url = 'https://esigi.envolti.com.br:3000/' + this.file.filename;
+            this.url = 'https://esigi.envolti.com.br/auth/' + this.file.filename;
           }
         });
     } catch (e) {

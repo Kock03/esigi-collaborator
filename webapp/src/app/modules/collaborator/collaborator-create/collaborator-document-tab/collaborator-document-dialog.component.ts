@@ -55,7 +55,7 @@ export class CollaboratorDocumentDialog {
       formData.append('file', file);
 
       try {
-        this.httpClient.post('https://esigi.envolti.com.br:3000', formData)
+        this.httpClient.post('https://esigi.envolti.com.br/auth', formData)
           .subscribe(resposta => {
             if (resposta) {
               this.file = resposta
