@@ -50,7 +50,7 @@ export class ResumeProvider {
   }
 
   downloadPDF(pdfpath: string) {
-    return this.http.get('http://' + environment.RESUME_MS + 'resumes/download/' + pdfpath, { observe: 'response', responseType: 'blob' })
+    return this.http.get(environment.RESUME_MS + 'resumes/download/' + pdfpath, { observe: 'response', responseType: 'blob' })
   }
 
   update(id: string | null, resume: any): Promise<any> {
